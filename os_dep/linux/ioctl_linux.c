@@ -23,7 +23,7 @@
 
 //#ifdef CONFIG_MP_INCLUDED
 #include <rtw_mp_ioctl.h>
-#include "../../hal/OUTSRC/odm_precomp.h"
+#include "../../hal/odm_precomp.h"
 //#endif
 
 #if defined(CONFIG_RTL8723A)

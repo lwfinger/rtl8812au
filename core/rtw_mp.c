@@ -25,7 +25,7 @@
 #include <sys/unistd.h>		/* for RFHIGHPID */
 #endif
 
-#include "../hal/OUTSRC/odm_precomp.h"		
+#include "../hal/odm_precomp.h"		
 #if (defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8723B))
 #include <rtw_bt_mp.h>
 #endif

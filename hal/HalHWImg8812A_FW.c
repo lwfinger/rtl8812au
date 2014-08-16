@@ -18,7 +18,7 @@
 * 
 ******************************************************************************/
 
-#include "../odm_precomp.h"
+#include "odm_precomp.h"
 
 #if (RTL8812A_SUPPORT == 1)
 u1Byte Array_MP_8812A_FW_NIC[] = {

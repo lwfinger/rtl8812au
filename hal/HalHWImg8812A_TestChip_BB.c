@@ -18,7 +18,7 @@
 * 
 ******************************************************************************/
 
-#include "../odm_precomp.h"
+#include "odm_precomp.h"
 
 #if (RTL8812A_SUPPORT == 1)
 static BOOLEAN
@@ -56,7 +56,7 @@ CheckCondition(
 *                           AGC_TAB.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8812A_AGC_TAB[] = { 
+u4Byte Array_TC_8812A_AGC_TAB[] = { 
 	0xFF0F07D8, 0xABCD,
 		0x81C, 0xFF000001,
 		0x81C, 0xFF020001,
@@ -227,20 +227,20 @@ u4Byte Array_MP_8812A_AGC_TAB[] = {
 		0x81C, 0x67C60001,
 		0x81C, 0x66C80001,
 		0x81C, 0x65CA0001,
-		0x81C, 0x64CC0001,
-		0x81C, 0x47CE0001,
-		0x81C, 0x46D00001,
-		0x81C, 0x45D20001,
-		0x81C, 0x44D40001,
-		0x81C, 0x43D60001,
-		0x81C, 0x42D80001,
-		0x81C, 0x08DA0001,
-		0x81C, 0x07DC0001,
-		0x81C, 0x06DE0001,
-		0x81C, 0x05E00001,
-		0x81C, 0x04E20001,
-		0x81C, 0x03E40001,
-		0x81C, 0x02E60001,
+		0x81C, 0x47CC0001,
+		0x81C, 0x46CE0001,
+		0x81C, 0x45D00001,
+		0x81C, 0x44D20001,
+		0x81C, 0x43D40001,
+		0x81C, 0x42D60001,
+		0x81C, 0x08D80001,
+		0x81C, 0x07DA0001,
+		0x81C, 0x06DC0001,
+		0x81C, 0x05DE0001,
+		0x81C, 0x04E00001,
+		0x81C, 0x03E20001,
+		0x81C, 0x02E40001,
+		0x81C, 0x01E60001,
 		0x81C, 0x01E80001,
 		0x81C, 0x01EA0001,
 		0x81C, 0x01EC0001,
@@ -292,20 +292,20 @@ u4Byte Array_MP_8812A_AGC_TAB[] = {
 		0x81C, 0x67C60001,
 		0x81C, 0x66C80001,
 		0x81C, 0x65CA0001,
-		0x81C, 0x64CC0001,
-		0x81C, 0x47CE0001,
-		0x81C, 0x46D00001,
-		0x81C, 0x45D20001,
-		0x81C, 0x44D40001,
-		0x81C, 0x43D60001,
-		0x81C, 0x42D80001,
-		0x81C, 0x08DA0001,
-		0x81C, 0x07DC0001,
-		0x81C, 0x06DE0001,
-		0x81C, 0x05E00001,
-		0x81C, 0x04E20001,
-		0x81C, 0x03E40001,
-		0x81C, 0x02E60001,
+		0x81C, 0x47CC0001,
+		0x81C, 0x46CE0001,
+		0x81C, 0x45D00001,
+		0x81C, 0x44D20001,
+		0x81C, 0x43D40001,
+		0x81C, 0x42D60001,
+		0x81C, 0x08D80001,
+		0x81C, 0x07DA0001,
+		0x81C, 0x06DC0001,
+		0x81C, 0x05DE0001,
+		0x81C, 0x04E00001,
+		0x81C, 0x03E20001,
+		0x81C, 0x02E40001,
+		0x81C, 0x01E60001,
 		0x81C, 0x01E80001,
 		0x81C, 0x01EA0001,
 		0x81C, 0x01EC0001,
@@ -357,20 +357,20 @@ u4Byte Array_MP_8812A_AGC_TAB[] = {
 		0x81C, 0x67C60001,
 		0x81C, 0x66C80001,
 		0x81C, 0x65CA0001,
-		0x81C, 0x64CC0001,
-		0x81C, 0x47CE0001,
-		0x81C, 0x46D00001,
-		0x81C, 0x45D20001,
-		0x81C, 0x44D40001,
-		0x81C, 0x43D60001,
-		0x81C, 0x42D80001,
-		0x81C, 0x08DA0001,
-		0x81C, 0x07DC0001,
-		0x81C, 0x06DE0001,
-		0x81C, 0x05E00001,
-		0x81C, 0x04E20001,
-		0x81C, 0x03E40001,
-		0x81C, 0x02E60001,
+		0x81C, 0x47CC0001,
+		0x81C, 0x46CE0001,
+		0x81C, 0x45D00001,
+		0x81C, 0x44D20001,
+		0x81C, 0x43D40001,
+		0x81C, 0x42D60001,
+		0x81C, 0x08D80001,
+		0x81C, 0x07DA0001,
+		0x81C, 0x06DC0001,
+		0x81C, 0x05DE0001,
+		0x81C, 0x04E00001,
+		0x81C, 0x03E20001,
+		0x81C, 0x02E40001,
+		0x81C, 0x01E60001,
 		0x81C, 0x01E80001,
 		0x81C, 0x01EA0001,
 		0x81C, 0x01EC0001,
@@ -427,20 +427,20 @@ u4Byte Array_MP_8812A_AGC_TAB[] = {
 		0x81C, 0x67D00001,
 		0x81C, 0x66D20001,
 		0x81C, 0x65D40001,
-		0x81C, 0x64D60001,
-		0x81C, 0x47D80001,
-		0x81C, 0x46DA0001,
-		0x81C, 0x45DC0001,
-		0x81C, 0x44DE0001,
-		0x81C, 0x43E00001,
-		0x81C, 0x42E20001,
-		0x81C, 0x08E40001,
-		0x81C, 0x07E60001,
-		0x81C, 0x06E80001,
-		0x81C, 0x05EA0001,
-		0x81C, 0x04EC0001,
-		0x81C, 0x03EE0001,
-		0x81C, 0x02F00001,
+		0x81C, 0x47D60001,
+		0x81C, 0x46D80001,
+		0x81C, 0x45DA0001,
+		0x81C, 0x44DC0001,
+		0x81C, 0x43DE0001,
+		0x81C, 0x42E00001,
+		0x81C, 0x08E20001,
+		0x81C, 0x07E40001,
+		0x81C, 0x06E60001,
+		0x81C, 0x05E80001,
+		0x81C, 0x04EA0001,
+		0x81C, 0x03EC0001,
+		0x81C, 0x02EE0001,
+		0x81C, 0x01F00001,
 		0x81C, 0x01F20001,
 		0x81C, 0x01F40001,
 		0x81C, 0x01F60001,
@@ -449,15 +449,11 @@ u4Byte Array_MP_8812A_AGC_TAB[] = {
 		0x81C, 0x01FC0001,
 		0x81C, 0x01FE0001,
 	0xFF0F0780, 0xDEAD,
-		0xC50, 0x00000022,
-		0xC50, 0x00000020,
-		0xE50, 0x00000022,
-		0xE50, 0x00000020,
 
 };
 
 void
-ODM_ReadAndConfig_MP_8812A_AGC_TAB(
+ODM_ReadAndConfig_TC_8812A_AGC_TAB(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
@@ -470,15 +466,15 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB(
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_AGC_TAB)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8812A_AGC_TAB;
+	u4Byte     ArrayLen    = sizeof(Array_TC_8812A_AGC_TAB)/sizeof(u4Byte);
+	pu4Byte    Array       = Array_TC_8812A_AGC_TAB;
 
 
 	hex += board;
 	hex += _interface << 8;
 	hex += platform << 16;
 	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8812A_AGC_TAB, hex = 0x%X\n", hex));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_TC_8812A_AGC_TAB, hex = 0x%X\n", hex));
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
@@ -530,9 +526,8 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB(
 *                           AGC_TAB_DIFF.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8812A_AGC_TAB_DIFF_LB[] = { 
-	0xFF0F0780, 0xABCD,
-		0x81C, 0x47CE0001,
+u4Byte Array_TC_8812A_AGC_TAB_DIFF_MB[] = { 
+		0x111, 0x47CE0003,
 		0x81C, 0x46D00001,
 		0x81C, 0x45D20001,
 		0x81C, 0x44D40001,
@@ -544,114 +539,45 @@ u4Byte Array_MP_8812A_AGC_TAB_DIFF_LB[] = {
 		0x81C, 0x05E00001,
 		0x81C, 0x04E20001,
 		0x81C, 0x03E40001,
-		0x81C, 0x02E60001,
-	0xFF0F07C0, 0xCDEF,
-		0x81C, 0x47CE0001,
-		0x81C, 0x46D00001,
-		0x81C, 0x45D20001,
-		0x81C, 0x44D40001,
-		0x81C, 0x43D60001,
-		0x81C, 0x42D80001,
-		0x81C, 0x08DA0001,
-		0x81C, 0x07DC0001,
-		0x81C, 0x06DE0001,
-		0x81C, 0x05E00001,
-		0x81C, 0x04E20001,
-		0x81C, 0x03E40001,
-		0x81C, 0x02E60001,
-	0xFF0F07D8, 0xCDEF,
-		0x81C, 0x47CE0001,
-		0x81C, 0x46D00001,
-		0x81C, 0x45D20001,
-		0x81C, 0x44D40001,
-		0x81C, 0x43D60001,
-		0x81C, 0x42D80001,
-		0x81C, 0x08DA0001,
-		0x81C, 0x07DC0001,
-		0x81C, 0x06DE0001,
-		0x81C, 0x05E00001,
-		0x81C, 0x04E20001,
-		0x81C, 0x03E40001,
-		0x81C, 0x02E60001,
-	0xCDCDCDCD, 0xCDCD,
-		0x81C, 0x47D80001,
-		0x81C, 0x46DA0001,
-		0x81C, 0x45DC0001,
-		0x81C, 0x44DE0001,
-		0x81C, 0x43E00001,
-		0x81C, 0x42E20001,
-		0x81C, 0x08E40001,
-		0x81C, 0x07E60001,
-		0x81C, 0x06E80001,
-		0x81C, 0x05EA0001,
-		0x81C, 0x04EC0001,
-		0x81C, 0x03EE0001,
-		0x81C, 0x02F00001,
-	0xFF0F0780, 0xDEAD,
+		0x222, 0x02E60001,
 };
 
-u4Byte Array_MP_8812A_AGC_TAB_DIFF_HB[] = { 
-	0xFF0F0780, 0xABCD,
-		0x81C, 0x45CE0001,
-		0x81C, 0x44D00001,
-		0x81C, 0x43D20001,
-		0x81C, 0x42D40001,
-		0x81C, 0x08D60001,
-		0x81C, 0x07D80001,
-		0x81C, 0x06DA0001,
-		0x81C, 0x05DC0001,
-		0x81C, 0x04DE0001,
-		0x81C, 0x03E00001,
-		0x81C, 0x02E20001,
-		0x81C, 0x01E40001,
-		0x81C, 0x01E60001,
-	0xFF0F07C0, 0xCDEF,
-		0x81C, 0x45CE0001,
-		0x81C, 0x44D00001,
-		0x81C, 0x43D20001,
-		0x81C, 0x42D40001,
-		0x81C, 0x08D60001,
-		0x81C, 0x07D80001,
-		0x81C, 0x06DA0001,
-		0x81C, 0x05DC0001,
-		0x81C, 0x04DE0001,
-		0x81C, 0x03E00001,
-		0x81C, 0x02E20001,
-		0x81C, 0x01E40001,
-		0x81C, 0x01E60001,
-	0xFF0F07D8, 0xCDEF,
-		0x81C, 0x45CE0001,
-		0x81C, 0x44D00001,
-		0x81C, 0x43D20001,
-		0x81C, 0x42D40001,
-		0x81C, 0x08D60001,
-		0x81C, 0x07D80001,
-		0x81C, 0x06DA0001,
-		0x81C, 0x05DC0001,
-		0x81C, 0x04DE0001,
-		0x81C, 0x03E00001,
-		0x81C, 0x02E20001,
-		0x81C, 0x01E40001,
-		0x81C, 0x01E60001,
+u4Byte Array_TC_8812A_AGC_TAB_DIFF_HB[] = { 
+		0x333, 0x47CE0003,
+		0x81C, 0x46D00001,
+		0x81C, 0x45D20001,
+		0x81C, 0x44D40001,
+		0x81C, 0x43D60001,
+		0x81C, 0x42D80001,
+		0x81C, 0x08DA0001,
+		0x81C, 0x07DC0001,
+		0x81C, 0x06DE0001,
+		0x81C, 0x05E00001,
+		0x81C, 0x04E20001,
+		0x81C, 0x03E40001,
+		0x444, 0x02E60001,
+};
+
+u4Byte Array_TC_8812A_AGC_TAB_DIFF_LB[] = { 
+		0x555, 0x08DA0001,
+		0x81B, 0x07DC0001,
+		0x81C, 0x06DE0001,
+		0x666, 0x05E00001,
+	0xFF0F07D8, 0xABCD,
+		0x81C, 0xFF000001,
+	0xFF0F0708, 0xCDEF,
+		0x81C, 0xFF000002,
 	0xCDCDCDCD, 0xCDCD,
-		0x81C, 0x45D80001,
-		0x81C, 0x44DA0001,
-		0x81C, 0x43DC0001,
-		0x81C, 0x42DE0001,
-		0x81C, 0x08E00001,
-		0x81C, 0x07E20001,
-		0x81C, 0x06E40001,
-		0x81C, 0x05E60001,
-		0x81C, 0x04E80001,
-		0x81C, 0x03EA0001,
-		0x81C, 0x02EC0001,
-		0x81C, 0x01EE0001,
-		0x81C, 0x01F00001,
-	0xFF0F0780, 0xDEAD,
+		0x81C, 0xFF000003,
+	0xFF0F07D8, 0xDEAD,
+		0x777, 0x08DA0001,
+		0x81C, 0x07DC0001,
+		0x81C, 0x06DE0001,
+		0x888, 0x05E00001,
 };
 
 void
-ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF(
+ODM_ReadAndConfig_TC_8812A_AGC_TAB_DIFF(
  	IN   PDM_ODM_T  pDM_Odm,
  	IN   u4Byte  	Array[],
  	IN   u4Byte  	ArrayLen 
@@ -671,7 +597,7 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF(
 	hex += _interface << 8;
 	hex += platform << 16;
 	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF, hex = 0x%X\n", hex));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_TC_8812A_AGC_TAB_DIFF, hex = 0x%X\n", hex));
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
@@ -723,7 +649,7 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF(
 *                           PHY_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8812A_PHY_REG[] = { 
+u4Byte Array_TC_8812A_PHY_REG[] = { 
 		0x800, 0x8020D010,
 		0x804, 0x080112E0,
 		0x808, 0x0E028233,
@@ -762,7 +688,7 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 		0x8B0, 0x00000600,
 		0x8B4, 0x000FC080,
 		0x8B8, 0x7C0057FF,
-		0x8BC, 0x4CA520A3,
+		0x8BC, 0x8CA520A3,
 		0x8C0, 0x27F00020,
 		0x8C4, 0x00000000,
 		0x8C8, 0x00013169,
@@ -799,11 +725,11 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 		0x980, 0x00000000,
 		0x984, 0x00000000,
 		0x988, 0x00000000,
-		0x9A4, 0x00080080,
+		0x9A4, 0x00000080,
 		0x9A8, 0x00000000,
 		0x9AC, 0x00000000,
 		0x9B0, 0x01081008,
-		0x9B4, 0x00000000,
+		0x9B4, 0x01081008,
 		0x9B8, 0x01081008,
 		0x9BC, 0x01081008,
 		0x9D0, 0x00000000,
@@ -823,14 +749,14 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 		0xA20, 0x1A1B0000,
 		0xA24, 0x090E1317,
 		0xA28, 0x00000204,
-		0xA2C, 0x00900000,
+		0xA2C, 0x00910000,
 		0xA70, 0x101FFF00,
 		0xA74, 0x00000008,
 		0xA78, 0x00000900,
 		0xA7C, 0x225B0606,
 		0xA80, 0x218075B2,
 		0xA84, 0x001F8C80,
-		0xB00, 0x03100000,
+		0xB00, 0x03100200,
 		0xB04, 0x0000B000,
 		0xB08, 0xAE0201EB,
 		0xB0C, 0x01003207,
@@ -874,7 +800,7 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 		0xC48, 0x12121212,
 		0xC4C, 0x12121212,
 		0xC50, 0x00000020,
-		0xC54, 0x0008121C,
+		0xC54, 0x001C1208,
 		0xC58, 0x30000C1C,
 		0xC5C, 0x00000058,
 		0xC60, 0x34344443,
@@ -924,7 +850,7 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 		0xE48, 0x12121212,
 		0xE4C, 0x12121212,
 		0xE50, 0x00000020,
-		0xE54, 0x0008121C,
+		0xE54, 0x001C1208,
 		0xE58, 0x30000C1C,
 		0xE5C, 0x00000058,
 		0xE60, 0x34344443,
@@ -958,7 +884,7 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 };
 
 void
-ODM_ReadAndConfig_MP_8812A_PHY_REG(
+ODM_ReadAndConfig_TC_8812A_PHY_REG(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
@@ -971,15 +897,15 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG(
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_PHY_REG)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8812A_PHY_REG;
+	u4Byte     ArrayLen    = sizeof(Array_TC_8812A_PHY_REG)/sizeof(u4Byte);
+	pu4Byte    Array       = Array_TC_8812A_PHY_REG;
 
 
 	hex += board;
 	hex += _interface << 8;
 	hex += platform << 16;
 	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8812A_PHY_REG, hex = 0x%X\n", hex));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_TC_8812A_PHY_REG, hex = 0x%X\n", hex));
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
@@ -1031,15 +957,13 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG(
 *                           PHY_REG_MP.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8812A_PHY_REG_MP[] = { 
+u4Byte Array_TC_8812A_PHY_REG_MP[] = { 
 		0x800, 0x8020D410,
-		0x830, 0x2EAA8EB6,
-		0xC90, 0x01E00000,
 
 };
 
 void
-ODM_ReadAndConfig_MP_8812A_PHY_REG_MP(
+ODM_ReadAndConfig_TC_8812A_PHY_REG_MP(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
@@ -1052,15 +976,15 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_MP(
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_PHY_REG_MP)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8812A_PHY_REG_MP;
+	u4Byte     ArrayLen    = sizeof(Array_TC_8812A_PHY_REG_MP)/sizeof(u4Byte);
+	pu4Byte    Array       = Array_TC_8812A_PHY_REG_MP;
 
 
 	hex += board;
 	hex += _interface << 8;
 	hex += platform << 16;
 	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8812A_PHY_REG_MP, hex = 0x%X\n", hex));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_TC_8812A_PHY_REG_MP, hex = 0x%X\n", hex));
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
@@ -1112,7 +1036,7 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_MP(
 *                           PHY_REG_PG.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8812A_PHY_REG_PG[] = { 
+u4Byte Array_TC_8812A_PHY_REG_PG[] = { 
 		0xC20, 0x00000000, 0x34363840,
 		0xC24, 0x00000000, 0x42424444,
 		0xC28, 0x00000000, 0x30323638,
@@ -1153,7 +1077,7 @@ u4Byte Array_MP_8812A_PHY_REG_PG[] = {
 };
 
 void
-ODM_ReadAndConfig_MP_8812A_PHY_REG_PG(
+ODM_ReadAndConfig_TC_8812A_PHY_REG_PG(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
@@ -1164,8 +1088,8 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_PG(
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_PHY_REG_PG)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8812A_PHY_REG_PG;
+	u4Byte     ArrayLen    = sizeof(Array_TC_8812A_PHY_REG_PG)/sizeof(u4Byte);
+	pu4Byte    Array       = Array_TC_8812A_PHY_REG_PG;
 
 	pDM_Odm->PhyRegPgValueType = PHY_REG_PG_EXACT_VALUE;
 	hex += board;
@@ -1205,234 +1129,6 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_PG(
 }
 
 
-
-/******************************************************************************
-*                           PHY_REG_PG_ASUS.TXT
-******************************************************************************/
-
-u4Byte Array_MP_8812A_PHY_REG_PG_ASUS[] = { 
-		0xC20, 0x00000000, 0x34343434,
-		0xC24, 0x00000000, 0x32323232,
-		0xC28, 0x00000000, 0x28303232,
-		0xC2C, 0x00000000, 0x32323232,
-		0xC30, 0x00000000, 0x24283032,
-		0xC34, 0x00000000, 0x32323232,
-		0xC38, 0x00000000, 0x24283032,
-		0xE20, 0x00000000, 0x34343434,
-		0xE24, 0x00000000, 0x32323232,
-		0xE28, 0x00000000, 0x28303232,
-		0xE2C, 0x00000000, 0x32323232,
-		0xE30, 0x00000000, 0x24283032,
-		0xE34, 0x00000000, 0x32323232,
-		0xE38, 0x00000000, 0x24283032,
-		0xC24, 0x00000000, 0x32323232,
-		0xC28, 0x00000000, 0x28303232,
-		0xC2C, 0x00000000, 0x32323232,
-		0xC30, 0x00000000, 0x24283032,
-		0xC34, 0x00000000, 0x32323232,
-		0xC38, 0x00000000, 0x24283032,
-		0xC3C, 0x00000000, 0x32323232,
-		0xC40, 0x00000000, 0x24283032,
-		0xC44, 0x00000000, 0x32322222,
-		0xC48, 0x00000000, 0x30323232,
-		0xC4C, 0x00000000, 0x22222428,
-		0xE24, 0x00000000, 0x32323232,
-		0xE28, 0x00000000, 0x28303232,
-		0xE2C, 0x00000000, 0x32323232,
-		0xE30, 0x00000000, 0x24283032,
-		0xE34, 0x00000000, 0x32323232,
-		0xE38, 0x00000000, 0x24283032,
-		0xE3C, 0x00000000, 0x32323232,
-		0xE40, 0x00000000, 0x24283032,
-		0xE44, 0x00000000, 0x32322222,
-		0xE48, 0x00000000, 0x30323232,
-		0xE4C, 0x00000000, 0x22222428,
-
-};
-
-void
-ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_ASUS(
- 	IN   PDM_ODM_T  pDM_Odm
- 	)
-{
-	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
-
-	u4Byte     hex         = 0;
-	u4Byte     i           = 0;
-	u2Byte     count       = 0;
-	pu4Byte    ptr_array   = NULL;
-	u1Byte     platform    = pDM_Odm->SupportPlatform;
-	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_PHY_REG_PG_ASUS)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8812A_PHY_REG_PG_ASUS;
-
-
-	hex += board;
-	hex += _interface << 8;
-	hex += platform << 16;
-	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_ASUS, hex = 0x%X\n", hex));
-
-	for (i = 0; i < ArrayLen; i += 2 )
-	{
-	    u4Byte v1 = Array[i];
-	    u4Byte v2 = Array[i+1];
-	
-	    // This (offset, data) pair meets the condition.
-	    if ( v1 < 0xCDCDCDCD )
-	    {
-		   	odm_ConfigBB_PHY_8812A(pDM_Odm, v1, bMaskDWord, v2);
-		    continue;
-	 	}
-		else
-		{ // This line is the start line of branch.
-		    if ( !CheckCondition(Array[i], hex) )
-		    { // Discard the following (offset, data) pairs.
-		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
-		               v2 != 0xCDCD && i < ArrayLen -2)
-		        {
-		            READ_NEXT_PAIR(v1, v2, i);
-		        }
-		        i -= 2; // prevent from for-loop += 2
-		    }
-		    else // Configure matched pairs and skip to end of if-else.
-		    {
-		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
-		               v2 != 0xCDCD && i < ArrayLen -2)
-		        {
-		   			odm_ConfigBB_PHY_8812A(pDM_Odm, v1, bMaskDWord, v2);
-		            READ_NEXT_PAIR(v1, v2, i);
-		        }
-
-		        while (v2 != 0xDEAD && i < ArrayLen -2)
-		        {
-		            READ_NEXT_PAIR(v1, v2, i);
-		        }
-		        
-		    }
-		}	
-	}
-
-}
-
-/******************************************************************************
-*                           PHY_REG_PG_NEC.TXT
-******************************************************************************/
-
-u4Byte Array_MP_8812A_PHY_REG_PG_NEC[] = { 
-		0xC20, 0x00000000, 0x32323232,
-		0xC24, 0x00000000, 0x32343434,
-		0xC28, 0x00000000, 0x24262830,
-		0xC2C, 0x00000000, 0x32343434,
-		0xC30, 0x00000000, 0x24262830,
-		0xC34, 0x00000000, 0x32343434,
-		0xC38, 0x00000000, 0x24262830,
-		0xE20, 0x00000000, 0x32323232,
-		0xE24, 0x00000000, 0x32343434,
-		0xE28, 0x00000000, 0x24262830,
-		0xE2C, 0x00000000, 0x32343434,
-		0xE30, 0x00000000, 0x24262830,
-		0xE34, 0x00000000, 0x32343434,
-		0xE38, 0x00000000, 0x24262830,
-		0xC24, 0x00000000, 0x32343434,
-		0xC28, 0x00000000, 0x24262830,
-		0xC2C, 0x00000000, 0x32343434,
-		0xC30, 0x00000000, 0x24262830,
-		0xC34, 0x00000000, 0x28282828,
-		0xC38, 0x00000000, 0x24262828,
-		0xC3C, 0x00000000, 0x32343434,
-		0xC40, 0x00000000, 0x24262830,
-		0xC44, 0x00000000, 0x28282022,
-		0xC48, 0x00000000, 0x28282828,
-		0xC4C, 0x00000000, 0x20222426,
-		0xE24, 0x00000000, 0x32343434,
-		0xE28, 0x00000000, 0x24262830,
-		0xE2C, 0x00000000, 0x32343434,
-		0xE30, 0x00000000, 0x24262830,
-		0xE34, 0x00000000, 0x28282828,
-		0xE38, 0x00000000, 0x24262828,
-		0xE3C, 0x00000000, 0x32343434,
-		0xE40, 0x00000000, 0x24262830,
-		0xE44, 0x00000000, 0x28282022,
-		0xE48, 0x00000000, 0x28282828,
-		0xE4C, 0x00000000, 0x20222426,
-
-};
-
-void
-ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_NEC(
- 	IN   PDM_ODM_T  pDM_Odm
- 	)
-{
-	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
-
-	u4Byte     hex         = 0;
-	u4Byte     i           = 0;
-	u2Byte     count       = 0;
-	pu4Byte    ptr_array   = NULL;
-	u1Byte     platform    = pDM_Odm->SupportPlatform;
-	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_PHY_REG_PG_NEC)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8812A_PHY_REG_PG_NEC;
-
-
-	hex += board;
-	hex += _interface << 8;
-	hex += platform << 16;
-	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_NEC, hex = 0x%X\n", hex));
-
-	for (i = 0; i < ArrayLen; i += 2 )
-	{
-	    u4Byte v1 = Array[i];
-	    u4Byte v2 = Array[i+1];
-	
-	    // This (offset, data) pair meets the condition.
-	    if ( v1 < 0xCDCDCDCD )
-	    {
-		   	odm_ConfigBB_PHY_8812A(pDM_Odm, v1, bMaskDWord, v2);
-		    continue;
-	 	}
-		else
-		{ // This line is the start line of branch.
-		    if ( !CheckCondition(Array[i], hex) )
-		    { // Discard the following (offset, data) pairs.
-		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
-		               v2 != 0xCDCD && i < ArrayLen -2)
-		        {
-		            READ_NEXT_PAIR(v1, v2, i);
-		        }
-		        i -= 2; // prevent from for-loop += 2
-		    }
-		    else // Configure matched pairs and skip to end of if-else.
-		    {
-		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
-		               v2 != 0xCDCD && i < ArrayLen -2)
-		        {
-		   			odm_ConfigBB_PHY_8812A(pDM_Odm, v1, bMaskDWord, v2);
-		            READ_NEXT_PAIR(v1, v2, i);
-		        }
-
-		        while (v2 != 0xDEAD && i < ArrayLen -2)
-		        {
-		            READ_NEXT_PAIR(v1, v2, i);
-		        }
-		        
-		    }
-		}	
-	}
-
-}
 
 #endif // end of HWIMG_SUPPORT
 

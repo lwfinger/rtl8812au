@@ -19,7 +19,7 @@
 ******************************************************************************/
 
 
-#include "../odm_precomp.h"
+#include "odm_precomp.h"
 
 #if (RTL8812A_SUPPORT == 1)
 static BOOLEAN

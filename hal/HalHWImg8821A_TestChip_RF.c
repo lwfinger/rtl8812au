@@ -19,7 +19,7 @@
 ******************************************************************************/
 
 //#include "Mp_Precomp.h"
-#include "../odm_precomp.h"
+#include "odm_precomp.h"
 
 #if (RTL8821A_SUPPORT == 1)
 static BOOLEAN
@@ -57,12 +57,12 @@ CheckCondition(
 *                           RadioA.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8821A_RadioA[] = { 
+u4Byte Array_TC_8821A_RadioA[] = { 
 		0x018, 0x0001712A,
 		0x056, 0x00051CF2,
 		0x066, 0x00040000,
-		0x000, 0x00010000,
-		0x01E, 0x00080000,
+		0x01C, 0x000739D2,
+		0x01E, 0x000F8000,
 		0x082, 0x00000830,
 		0x083, 0x00021800,
 		0x084, 0x00028000,
@@ -88,134 +88,54 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x03F, 0x000A0018,
 		0x0EF, 0x00000000,
 		0x018, 0x0001712A,
-		0x089, 0x00000080,
-		0x08B, 0x00080180,
 		0x0EF, 0x00001000,
-		0x03A, 0x00000244,
-		0x03B, 0x00038027,
-		0x03C, 0x00082000,
-		0x03A, 0x00000244,
-		0x03B, 0x00030113,
-		0x03C, 0x00082000,
-		0x03A, 0x0000014C,
-		0x03B, 0x00028027,
-		0x03C, 0x00082000,
-		0x03A, 0x000000CC,
-		0x03B, 0x00027027,
-		0x03C, 0x00042000,
-		0x03A, 0x0000014C,
-		0x03B, 0x0001F913,
-		0x03C, 0x00042000,
-		0x03A, 0x0000010C,
-		0x03B, 0x00017F10,
-		0x03C, 0x00012000,
-		0x03A, 0x000000D0,
-		0x03B, 0x00008027,
-		0x03C, 0x000CA000,
-		0x03A, 0x00000244,
-		0x03B, 0x00078027,
-		0x03C, 0x00082000,
-		0x03A, 0x00000244,
-		0x03B, 0x00070113,
-		0x03C, 0x00082000,
-		0x03A, 0x0000014C,
-		0x03B, 0x00068027,
-		0x03C, 0x00082000,
-		0x03A, 0x000000CC,
-		0x03B, 0x00067027,
-		0x03C, 0x00042000,
-		0x03A, 0x0000014C,
-		0x03B, 0x0005F913,
-		0x03C, 0x00042000,
-		0x03A, 0x0000010C,
-		0x03B, 0x00057F10,
-		0x03C, 0x00012000,
-		0x03A, 0x000000D0,
-		0x03B, 0x00048027,
-		0x03C, 0x000CA000,
-		0x03A, 0x00000244,
-		0x03B, 0x000B8027,
-		0x03C, 0x00082000,
-		0x03A, 0x00000244,
-		0x03B, 0x000B0113,
-		0x03C, 0x00082000,
-		0x03A, 0x0000014C,
-		0x03B, 0x000A8027,
-		0x03C, 0x00082000,
-		0x03A, 0x000000CC,
-		0x03B, 0x000A7027,
-		0x03C, 0x00042000,
-		0x03A, 0x0000014C,
-		0x03B, 0x0009F913,
-		0x03C, 0x00042000,
-		0x03A, 0x0000010C,
-		0x03B, 0x00097F10,
-		0x03C, 0x00012000,
-		0x03A, 0x000000D0,
-		0x03B, 0x00088027,
-		0x03C, 0x000CA000,
+		0x03A, 0x000000C4,
+		0x03B, 0x0003A000,
+		0x03A, 0x000001FC,
+		0x03B, 0x00032000,
+		0x03A, 0x000001B4,
+		0x03B, 0x0002A000,
+		0x03A, 0x000001C4,
+		0x03B, 0x000221C8,
+		0x03A, 0x00000188,
+		0x03B, 0x0001A001,
+		0x03A, 0x000000C4,
+		0x03B, 0x0007A000,
+		0x03A, 0x000001FC,
+		0x03B, 0x00072000,
+		0x03A, 0x000001B4,
+		0x03B, 0x0006A000,
+		0x03A, 0x000001C4,
+		0x03B, 0x000621C8,
+		0x03A, 0x00000188,
+		0x03B, 0x0005A001,
+		0x03A, 0x000000C4,
+		0x03B, 0x000BA000,
+		0x03A, 0x000001FC,
+		0x03B, 0x000B2000,
+		0x03A, 0x000001B4,
+		0x03B, 0x000AA000,
+		0x03A, 0x000001C4,
+		0x03B, 0x000A21C8,
+		0x03A, 0x00000188,
+		0x03B, 0x0009A001,
 		0x0EF, 0x00000000,
 		0x0EF, 0x00001100,
-	0xFF0F0104, 0xABCD,
-		0x034, 0x0004ADF3,
-		0x034, 0x00049DF0,
-	0xFF0F0204, 0xCDEF,
-		0x034, 0x0004ADF3,
-		0x034, 0x00049DF0,
-	0xFF0F0404, 0xCDEF,
-		0x034, 0x0004ADF3,
-		0x034, 0x00049DF0,
-	0xFF0F0200, 0xCDEF,
-		0x034, 0x0004ADF5,
-		0x034, 0x00049DF2,
-	0xFF0F02C0, 0xCDEF,
-		0x034, 0x0004A0F3,
-		0x034, 0x000490B1,
+	0xFF0F02C0, 0xABCD,
+		0x034, 0x0004A8B1,
+		0x034, 0x000498AE,
+		0x034, 0x000484AE,
+		0x034, 0x000474AB,
+		0x034, 0x0004648E,
+		0x034, 0x0004548B,
+		0x034, 0x0004408D,
+		0x034, 0x0004308A,
+		0x034, 0x00042087,
+		0x034, 0x00041084,
+		0x034, 0x00040081,
 	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x0004ADF7,
 		0x034, 0x00049DF3,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x034, 0x00048DED,
-		0x034, 0x00047DEA,
-		0x034, 0x00046DE7,
-		0x034, 0x00045CE9,
-		0x034, 0x00044CE6,
-		0x034, 0x000438C6,
-		0x034, 0x00042886,
-		0x034, 0x00041486,
-		0x034, 0x00040447,
-	0xFF0F0204, 0xCDEF,
-		0x034, 0x00048DED,
-		0x034, 0x00047DEA,
-		0x034, 0x00046DE7,
-		0x034, 0x00045CE9,
-		0x034, 0x00044CE6,
-		0x034, 0x000438C6,
-		0x034, 0x00042886,
-		0x034, 0x00041486,
-		0x034, 0x00040447,
-	0xFF0F0404, 0xCDEF,
-		0x034, 0x00048DED,
-		0x034, 0x00047DEA,
-		0x034, 0x00046DE7,
-		0x034, 0x00045CE9,
-		0x034, 0x00044CE6,
-		0x034, 0x000438C6,
-		0x034, 0x00042886,
-		0x034, 0x00041486,
-		0x034, 0x00040447,
-	0xFF0F02C0, 0xCDEF,
-		0x034, 0x000480AE,
-		0x034, 0x000470AB,
-		0x034, 0x0004608B,
-		0x034, 0x00045069,
-		0x034, 0x00044048,
-		0x034, 0x00043045,
-		0x034, 0x00042026,
-		0x034, 0x00041023,
-		0x034, 0x00040002,
-	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x00048DEF,
 		0x034, 0x00047DEC,
 		0x034, 0x00046DE9,
@@ -225,68 +145,22 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x034, 0x0004248A,
 		0x034, 0x0004108D,
 		0x034, 0x0004008A,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0200, 0xABCD,
-		0x034, 0x0002ADF4,
-	0xFF0F02C0, 0xCDEF,
-		0x034, 0x0002A0F3,
+	0xFF0F02C0, 0xDEAD,
+	0xFF0F02C0, 0xABCD,
+		0x034, 0x0002A8F0,
+		0x034, 0x000298AF,
+		0x034, 0x000284AF,
+		0x034, 0x000274AC,
+		0x034, 0x0002648E,
+		0x034, 0x0002548B,
+		0x034, 0x0002408D,
+		0x034, 0x0002308A,
+		0x034, 0x00022087,
+		0x034, 0x00021084,
+		0x034, 0x00020081,
 	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x0002ADF7,
-	0xFF0F0200, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x034, 0x00029DF4,
-	0xFF0F0204, 0xCDEF,
-		0x034, 0x00029DF4,
-	0xFF0F0404, 0xCDEF,
-		0x034, 0x00029DF4,
-	0xFF0F0200, 0xCDEF,
-		0x034, 0x00029DF1,
-	0xFF0F02C0, 0xCDEF,
-		0x034, 0x000290F0,
-	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x00029DF2,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x034, 0x00028DF1,
-		0x034, 0x00027DEE,
-		0x034, 0x00026DEB,
-		0x034, 0x00025CEC,
-		0x034, 0x00024CE9,
-		0x034, 0x000238CA,
-		0x034, 0x00022889,
-		0x034, 0x00021489,
-		0x034, 0x0002044A,
-	0xFF0F0204, 0xCDEF,
-		0x034, 0x00028DF1,
-		0x034, 0x00027DEE,
-		0x034, 0x00026DEB,
-		0x034, 0x00025CEC,
-		0x034, 0x00024CE9,
-		0x034, 0x000238CA,
-		0x034, 0x00022889,
-		0x034, 0x00021489,
-		0x034, 0x0002044A,
-	0xFF0F0404, 0xCDEF,
-		0x034, 0x00028DF1,
-		0x034, 0x00027DEE,
-		0x034, 0x00026DEB,
-		0x034, 0x00025CEC,
-		0x034, 0x00024CE9,
-		0x034, 0x000238CA,
-		0x034, 0x00022889,
-		0x034, 0x00021489,
-		0x034, 0x0002044A,
-	0xFF0F02C0, 0xCDEF,
-		0x034, 0x000280AF,
-		0x034, 0x000270AC,
-		0x034, 0x0002608B,
-		0x034, 0x00025069,
-		0x034, 0x00024048,
-		0x034, 0x00023045,
-		0x034, 0x00022026,
-		0x034, 0x00021023,
-		0x034, 0x00020002,
-	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x00028DEE,
 		0x034, 0x00027DEB,
 		0x034, 0x00026CCD,
@@ -296,51 +170,24 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x034, 0x00022849,
 		0x034, 0x00021449,
 		0x034, 0x0002004D,
-	0xFF0F0104, 0xDEAD,
+	0xFF0F02C0, 0xDEAD,
 	0xFF0F02C0, 0xABCD,
-		0x034, 0x0000A0D7,
-		0x034, 0x000090D3,
-		0x034, 0x000080B1,
-		0x034, 0x000070AE,
+		0x034, 0x0000A9EF,
+		0x034, 0x000098EF,
+		0x034, 0x000088AE,
+		0x034, 0x000074AE,
+		0x034, 0x000064AB,
+		0x034, 0x0000548E,
+		0x034, 0x0000448B,
+		0x034, 0x0000308D,
+		0x034, 0x0000208A,
+		0x034, 0x00001087,
+		0x034, 0x00000084,
 	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x0000ADF7,
 		0x034, 0x00009DF4,
 		0x034, 0x00008DF1,
 		0x034, 0x00007DEE,
-	0xFF0F02C0, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x034, 0x00006DEB,
-		0x034, 0x00005CEC,
-		0x034, 0x00004CE9,
-		0x034, 0x000038CA,
-		0x034, 0x00002889,
-		0x034, 0x00001489,
-		0x034, 0x0000044A,
-	0xFF0F0204, 0xCDEF,
-		0x034, 0x00006DEB,
-		0x034, 0x00005CEC,
-		0x034, 0x00004CE9,
-		0x034, 0x000038CA,
-		0x034, 0x00002889,
-		0x034, 0x00001489,
-		0x034, 0x0000044A,
-	0xFF0F0404, 0xCDEF,
-		0x034, 0x00006DEB,
-		0x034, 0x00005CEC,
-		0x034, 0x00004CE9,
-		0x034, 0x000038CA,
-		0x034, 0x00002889,
-		0x034, 0x00001489,
-		0x034, 0x0000044A,
-	0xFF0F02C0, 0xCDEF,
-		0x034, 0x0000608D,
-		0x034, 0x0000506B,
-		0x034, 0x0000404A,
-		0x034, 0x00003047,
-		0x034, 0x00002044,
-		0x034, 0x00001025,
-		0x034, 0x00000004,
-	0xCDCDCDCD, 0xCDCD,
 		0x034, 0x00006DCD,
 		0x034, 0x00005CCD,
 		0x034, 0x00004CCA,
@@ -348,41 +195,10 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x034, 0x00002888,
 		0x034, 0x00001488,
 		0x034, 0x00000486,
-	0xFF0F0104, 0xDEAD,
+	0xFF0F02C0, 0xDEAD,
 		0x0EF, 0x00000000,
 		0x018, 0x0001712A,
 		0x0EF, 0x00000040,
-	0xFF0F0104, 0xABCD,
-		0x035, 0x00000187,
-		0x035, 0x00008187,
-		0x035, 0x00010187,
-		0x035, 0x00020188,
-		0x035, 0x00028188,
-		0x035, 0x00030188,
-		0x035, 0x00040188,
-		0x035, 0x00048188,
-		0x035, 0x00050188,
-	0xFF0F0204, 0xCDEF,
-		0x035, 0x00000187,
-		0x035, 0x00008187,
-		0x035, 0x00010187,
-		0x035, 0x00020188,
-		0x035, 0x00028188,
-		0x035, 0x00030188,
-		0x035, 0x00040188,
-		0x035, 0x00048188,
-		0x035, 0x00050188,
-	0xFF0F0404, 0xCDEF,
-		0x035, 0x00000187,
-		0x035, 0x00008187,
-		0x035, 0x00010187,
-		0x035, 0x00020188,
-		0x035, 0x00028188,
-		0x035, 0x00030188,
-		0x035, 0x00040188,
-		0x035, 0x00048188,
-		0x035, 0x00050188,
-	0xCDCDCDCD, 0xCDCD,
 		0x035, 0x00000145,
 		0x035, 0x00008145,
 		0x035, 0x00010145,
@@ -392,50 +208,9 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x035, 0x000401C7,
 		0x035, 0x000481C7,
 		0x035, 0x000501C7,
-	0xFF0F0104, 0xDEAD,
 		0x0EF, 0x00000000,
 		0x018, 0x0001712A,
 		0x0EF, 0x00000010,
-	0xFF0F0104, 0xABCD,
-		0x036, 0x00085733,
-		0x036, 0x0008D733,
-		0x036, 0x00095733,
-		0x036, 0x0009D733,
-		0x036, 0x000A64B4,
-		0x036, 0x000AE4B4,
-		0x036, 0x000B64B4,
-		0x036, 0x000BE4B4,
-		0x036, 0x000C64B4,
-		0x036, 0x000CE4B4,
-		0x036, 0x000D64B4,
-		0x036, 0x000DE4B4,
-	0xFF0F0204, 0xCDEF,
-		0x036, 0x00085733,
-		0x036, 0x0008D733,
-		0x036, 0x00095733,
-		0x036, 0x0009D733,
-		0x036, 0x000A64B4,
-		0x036, 0x000AE4B4,
-		0x036, 0x000B64B4,
-		0x036, 0x000BE4B4,
-		0x036, 0x000C64B4,
-		0x036, 0x000CE4B4,
-		0x036, 0x000D64B4,
-		0x036, 0x000DE4B4,
-	0xFF0F0404, 0xCDEF,
-		0x036, 0x00085733,
-		0x036, 0x0008D733,
-		0x036, 0x00095733,
-		0x036, 0x0009D733,
-		0x036, 0x000A64B4,
-		0x036, 0x000AE4B4,
-		0x036, 0x000B64B4,
-		0x036, 0x000BE4B4,
-		0x036, 0x000C64B4,
-		0x036, 0x000CE4B4,
-		0x036, 0x000D64B4,
-		0x036, 0x000DE4B4,
-	0xCDCDCDCD, 0xCDCD,
 		0x036, 0x000056B3,
 		0x036, 0x0000D6B3,
 		0x036, 0x000156B3,
@@ -448,121 +223,43 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x036, 0x0004E7B4,
 		0x036, 0x000567B4,
 		0x036, 0x0005E7B4,
-	0xFF0F0104, 0xDEAD,
 		0x0EF, 0x00000000,
 		0x0EF, 0x00000008,
-	0xFF0F0104, 0xABCD,
-		0x03C, 0x000001C8,
-		0x03C, 0x00000492,
-	0xFF0F0204, 0xCDEF,
-		0x03C, 0x000001C8,
-		0x03C, 0x00000492,
-	0xFF0F0404, 0xCDEF,
-		0x03C, 0x000001C8,
-		0x03C, 0x00000492,
-	0xCDCDCDCD, 0xCDCD,
 		0x03C, 0x0000022A,
 		0x03C, 0x00000594,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x03C, 0x00000800,
-	0xFF0F0204, 0xCDEF,
-		0x03C, 0x00000800,
-	0xFF0F0404, 0xCDEF,
-		0x03C, 0x00000800,
-	0xFF0F02C0, 0xCDEF,
+	0xFF0F02C0, 0xABCD,
 		0x03C, 0x00000820,
 	0xCDCDCDCD, 0xCDCD,
 		0x03C, 0x00000900,
-	0xFF0F0104, 0xDEAD,
+	0xFF0F02C0, 0xDEAD,
 		0x0EF, 0x00000000,
 		0x018, 0x0001712A,
 		0x0EF, 0x00000002,
-	0xFF0F0104, 0xABCD,
-		0x008, 0x0004E400,
-	0xFF0F0204, 0xCDEF,
-		0x008, 0x0004E400,
-	0xFF0F0404, 0xCDEF,
-		0x008, 0x0004E400,
-	0xCDCDCDCD, 0xCDCD,
 		0x008, 0x00002000,
-	0xFF0F0104, 0xDEAD,
 		0x0EF, 0x00000000,
 		0x0DF, 0x000000C0,
 		0x01F, 0x00040064,
-	0xFF0F0104, 0xABCD,
-		0x058, 0x000A7284,
-		0x059, 0x000600EC,
-	0xFF0F0204, 0xCDEF,
-		0x058, 0x000A7284,
-		0x059, 0x000600EC,
-	0xFF0F0404, 0xCDEF,
-		0x058, 0x000A7284,
-		0x059, 0x000600EC,
-	0xCDCDCDCD, 0xCDCD,
 		0x058, 0x00081184,
 		0x059, 0x0006016C,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x061, 0x000E8D73,
-		0x062, 0x00093FC5,
-	0xFF0F0204, 0xCDEF,
-		0x061, 0x000E8D73,
-		0x062, 0x00093FC5,
-	0xFF0F0404, 0xCDEF,
-		0x061, 0x000E8D73,
-		0x062, 0x00093FC5,
-	0xCDCDCDCD, 0xCDCD,
 		0x061, 0x000EAD53,
 		0x062, 0x00093BC4,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x063, 0x000110E9,
-	0xFF0F0204, 0xCDEF,
-		0x063, 0x000110E9,
-	0xFF0F0404, 0xCDEF,
-		0x063, 0x000110E9,
-	0xFF0F0200, 0xCDEF,
-		0x063, 0x000710E9,
-	0xFF0F02C0, 0xCDEF,
-		0x063, 0x000110E9,
-	0xCDCDCDCD, 0xCDCD,
 		0x063, 0x000714E9,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0104, 0xABCD,
-		0x064, 0x0001C27C,
-	0xFF0F0204, 0xCDEF,
-		0x064, 0x0001C27C,
-	0xFF0F0404, 0xCDEF,
-		0x064, 0x0001C27C,
-	0xCDCDCDCD, 0xCDCD,
 		0x064, 0x0001C67C,
-	0xFF0F0104, 0xDEAD,
-	0xFF0F0200, 0xABCD,
-		0x065, 0x00093016,
-	0xFF0F02C0, 0xCDEF,
-		0x065, 0x00093015,
+	0xFF0F02C0, 0xABCD,
+		0x065, 0x00091011,
 	0xCDCDCDCD, 0xCDCD,
 		0x065, 0x00091016,
-	0xFF0F0200, 0xDEAD,
+	0xFF0F02C0, 0xDEAD,
 		0x018, 0x00000006,
 		0x0EF, 0x00002000,
-		0x03B, 0x0003824B,
-		0x03B, 0x0003024B,
-		0x03B, 0x0002884B,
-		0x03B, 0x00020F4B,
-		0x03B, 0x00018F4B,
-		0x03B, 0x000104B2,
-		0x03B, 0x00008049,
-		0x03B, 0x00000148,
-		0x03B, 0x0007824B,
-		0x03B, 0x0007024B,
-		0x03B, 0x0006824B,
-		0x03B, 0x00060F4B,
-		0x03B, 0x00058F4B,
-		0x03B, 0x000504B2,
-		0x03B, 0x00048049,
-		0x03B, 0x00040148,
+		0x03B, 0x00039258,
+		0x03B, 0x00031258,
+		0x03B, 0x00029258,
+		0x03B, 0x00027A58,
+		0x03B, 0x0001FA58,
+		0x03B, 0x00012590,
+		0x03B, 0x00008248,
+		0x03B, 0x00000A40,
 		0x0EF, 0x00000000,
 		0x0EF, 0x00000100,
 		0x034, 0x0000ADF2,
@@ -629,6 +326,11 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x051, 0x00000C01,
 		0x052, 0x000006D6,
 		0x053, 0x000FC649,
+	0xFF0F0104, 0xABCD,
+		0x0DD, 0x00000060,
+	0xCDCDCDCD, 0xCDCD,
+		0x0DD, 0x00000040,
+	0xFF0F0104, 0xDEAD,
 		0x070, 0x00049661,
 		0x071, 0x0007843E,
 		0x072, 0x00000382,
@@ -649,19 +351,21 @@ u4Byte Array_MP_8821A_RadioA[] = {
 		0x046, 0x00010124,
 		0x046, 0x00018124,
 		0x0DF, 0x00000088,
-		0x0B3, 0x000F0E18,
-		0x0B4, 0x0001214C,
-		0x0B7, 0x0003000C,
-		0x01C, 0x000539D2,
+		0x0B3, 0x000F0618,
+		0x0B4, 0x00013E4C,
+		0x0B7, 0x00030008,
 		0x018, 0x0001F12A,
 		0x0FE, 0x00000000,
 		0x0FE, 0x00000000,
-		0x018, 0x0001712A,
+		0x0FE, 0x00000000,
+		0x0FE, 0x00000000,
+		0x0B3, 0x000F0E18,
+		0x0B4, 0x0001364C,
 
 };
 
 void
-ODM_ReadAndConfig_MP_8821A_RadioA(
+ODM_ReadAndConfig_TC_8821A_RadioA(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
@@ -674,15 +378,15 @@ ODM_ReadAndConfig_MP_8821A_RadioA(
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;  
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_RadioA)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_MP_8821A_RadioA;
+	u4Byte     ArrayLen    = sizeof(Array_TC_8821A_RadioA)/sizeof(u4Byte);
+	pu4Byte    Array       = Array_TC_8821A_RadioA;
 
 
 	hex += board;
 	hex += _interface << 8;
 	hex += platform << 16;
 	hex += 0xFF000000;
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8821A_RadioA, hex = 0x%X\n", hex));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_TC_8821A_RadioA, hex = 0x%X\n", hex));
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
@@ -734,184 +438,184 @@ ODM_ReadAndConfig_MP_8821A_RadioA(
 *                           TxPowerTrack_AP.TXT
 ******************************************************************************/
 
-u1Byte gDeltaSwingTableIdx_MP_5GB_N_TxPowerTrack_AP_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GB_N__8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 4, 5, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 11, 12, 12, 13, 13, 14, 14, 14, 14, 14, 14, 14},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17, 18, 18, 19, 19, 20, 20, 20},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17, 18, 18, 19, 20, 21, 21, 21},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GB_P_TxPowerTrack_AP_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GB_P__8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 19, 20, 20, 20},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17, 18, 18, 19, 19, 20, 20, 20},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17, 18, 18, 19, 20, 21, 21, 21},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GA_N_TxPowerTrack_AP_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GA_N__8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 2, 3, 3, 4, 4, 5, 5, 6,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 14, 14, 14, 14},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 6,  7,  7,  8,  8,  9, 10, 11, 11, 12, 13, 13, 14, 15, 16, 16, 16, 16, 16, 16, 16},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 10, 11, 11, 12, 13, 14, 14, 15, 15, 16, 16, 16, 16, 16, 16, 16},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GA_P_TxPowerTrack_AP_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GA_P__8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 4, 5, 5, 6,  7,  8,  8,  9, 10, 11, 11, 12, 13, 14, 14, 15, 15, 16, 16, 17, 18, 19, 19, 19},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17, 18, 18, 19, 20, 21, 21, 21},
 	{0, 1, 2, 3, 3, 4, 5, 6, 6, 7,  8,  9,  9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17, 18, 18, 19, 20, 21, 21, 21},
 };
-u1Byte gDeltaSwingTableIdx_MP_2GB_N_TxPowerTrack_AP_8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GB_P_TxPowerTrack_AP_8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
-u1Byte gDeltaSwingTableIdx_MP_2GA_N_TxPowerTrack_AP_8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GA_P_TxPowerTrack_AP_8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKB_N_TxPowerTrack_AP_8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKB_P_TxPowerTrack_AP_8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKA_N_TxPowerTrack_AP_8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_AP_8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GB_N__8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GB_P__8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GA_N__8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GA_P__8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKB_N__8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKB_P__8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKA_N__8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKA_P__8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
 
 void
-ODM_ReadAndConfig_MP_8821A_TxPowerTrack_AP(
+ODM_ReadAndConfig_TC_8821A_TxPowerTrack_AP(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_MP_8821A\n"));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_TC_8821A\n"));
 
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_P, gDeltaSwingTableIdx_MP_2GA_P_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_N, gDeltaSwingTableIdx_MP_2GA_N_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_P, gDeltaSwingTableIdx_MP_2GB_P_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_N, gDeltaSwingTableIdx_MP_2GB_N_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_P, gDeltaSwingTableIdx_TC_2GA_P__8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_N, gDeltaSwingTableIdx_TC_2GA_N__8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_P, gDeltaSwingTableIdx_TC_2GB_P__8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_N, gDeltaSwingTableIdx_TC_2GB_N__8821A, DELTA_SWINGIDX_SIZE);
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_P, gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_N, gDeltaSwingTableIdx_MP_2GCCKA_N_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_P, gDeltaSwingTableIdx_MP_2GCCKB_P_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_N, gDeltaSwingTableIdx_MP_2GCCKB_N_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_P, gDeltaSwingTableIdx_TC_2GCCKA_P__8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_N, gDeltaSwingTableIdx_TC_2GCCKA_N__8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_P, gDeltaSwingTableIdx_TC_2GCCKB_P__8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_N, gDeltaSwingTableIdx_TC_2GCCKB_N__8821A, DELTA_SWINGIDX_SIZE);
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_P, gDeltaSwingTableIdx_MP_5GA_P_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_N, gDeltaSwingTableIdx_MP_5GA_N_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P, gDeltaSwingTableIdx_MP_5GB_P_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N, gDeltaSwingTableIdx_MP_5GB_N_TxPowerTrack_AP_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_P, gDeltaSwingTableIdx_TC_5GA_P__8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_N, gDeltaSwingTableIdx_TC_5GA_N__8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P, gDeltaSwingTableIdx_TC_5GB_P__8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N, gDeltaSwingTableIdx_TC_5GB_N__8821A, DELTA_SWINGIDX_SIZE*3);
 }
 
 /******************************************************************************
 *                           TxPowerTrack_PCIE.TXT
 ******************************************************************************/
 
-u1Byte gDeltaSwingTableIdx_MP_5GB_N_TxPowerTrack_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GB_N_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 2, 3, 3, 4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  9,  9,  9, 10, 10, 11, 11, 12, 12, 13},
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  5,  5,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GB_P_TxPowerTrack_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GB_P_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  5,  5,  6,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  5,  5,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GA_N_TxPowerTrack_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GA_N_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  4,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 12, 13, 13, 13},
 	{0, 1, 1, 2, 2, 2, 3, 3, 4,  4,  5,  5,  6,  6,  7,  8,  9,  9, 10, 10, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13},
 	{0, 1, 1, 2, 2, 3, 3, 4, 5,  6,  7,  8,  8,  9, 10, 11, 12, 13, 14, 14, 15, 15, 15, 16, 16, 16, 17, 17, 18, 18},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GA_P_TxPowerTrack_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GA_P_PCIE_8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  4,  4,  5,  5,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 2, 3, 3, 4, 4,  4,  5,  5,  6,  6,  7,  7,  8,  9,  9, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 3, 3, 4, 4, 5,  6,  6,  7,  7,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 };
-u1Byte gDeltaSwingTableIdx_MP_2GB_N_TxPowerTrack_PCIE_8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GB_P_TxPowerTrack_PCIE_8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
-u1Byte gDeltaSwingTableIdx_MP_2GA_N_TxPowerTrack_PCIE_8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GA_P_TxPowerTrack_PCIE_8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKB_N_TxPowerTrack_PCIE_8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKB_P_TxPowerTrack_PCIE_8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKA_N_TxPowerTrack_PCIE_8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_PCIE_8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GB_N_PCIE_8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GB_P_PCIE_8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GA_N_PCIE_8821A[]    = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GA_P_PCIE_8821A[]    = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKB_N_PCIE_8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  9,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKB_P_PCIE_8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKA_N_PCIE_8821A[] = {0, 1, 1, 1, 2, 2, 2, 3, 3,  3,  4,  4,  5,  5,  5,  6,  6,  6,  7,  8,  8,  9,  9,  9, 10, 10, 10, 10, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKA_P_PCIE_8821A[] = {0, 0, 1, 1, 2, 2, 2, 2, 3,  3,  3,  4,  4,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9,  9};
 
 void
-ODM_ReadAndConfig_MP_8821A_TxPowerTrack_PCIE(
+ODM_ReadAndConfig_TC_8821A_TxPowerTrack_PCIE(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_MP_8821A\n"));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_TC_8821A\n"));
 
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_P, gDeltaSwingTableIdx_MP_2GA_P_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_N, gDeltaSwingTableIdx_MP_2GA_N_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_P, gDeltaSwingTableIdx_MP_2GB_P_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_N, gDeltaSwingTableIdx_MP_2GB_N_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_P, gDeltaSwingTableIdx_TC_2GA_P_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_N, gDeltaSwingTableIdx_TC_2GA_N_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_P, gDeltaSwingTableIdx_TC_2GB_P_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_N, gDeltaSwingTableIdx_TC_2GB_N_PCIE_8821A, DELTA_SWINGIDX_SIZE);
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_P, gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_N, gDeltaSwingTableIdx_MP_2GCCKA_N_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_P, gDeltaSwingTableIdx_MP_2GCCKB_P_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_N, gDeltaSwingTableIdx_MP_2GCCKB_N_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_P, gDeltaSwingTableIdx_TC_2GCCKA_P_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_N, gDeltaSwingTableIdx_TC_2GCCKA_N_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_P, gDeltaSwingTableIdx_TC_2GCCKB_P_PCIE_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_N, gDeltaSwingTableIdx_TC_2GCCKB_N_PCIE_8821A, DELTA_SWINGIDX_SIZE);
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_P, gDeltaSwingTableIdx_MP_5GA_P_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_N, gDeltaSwingTableIdx_MP_5GA_N_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P, gDeltaSwingTableIdx_MP_5GB_P_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N, gDeltaSwingTableIdx_MP_5GB_N_TxPowerTrack_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_P, gDeltaSwingTableIdx_TC_5GA_P_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_N, gDeltaSwingTableIdx_TC_5GA_N_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P, gDeltaSwingTableIdx_TC_5GB_P_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N, gDeltaSwingTableIdx_TC_5GB_N_PCIE_8821A, DELTA_SWINGIDX_SIZE*3);
 }
 
 /******************************************************************************
 *                           TxPowerTrack_USB.TXT
 ******************************************************************************/
 
-u1Byte gDeltaSwingTableIdx_MP_5GB_N_TxPowerTrack_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GB_N_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 14, 14, 14, 14},
 	{0, 1, 1, 2, 3, 3, 4, 5, 5,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 3, 3, 4, 5, 6,  7,  7,  8,  8,  9,  9, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GB_P_TxPowerTrack_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
+u1Byte gDeltaSwingTableIdx_TC_5GB_P_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
 	{0, 1, 1, 2, 2, 3, 3, 4, 5,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 3, 3, 4, 5, 5,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 	{0, 1, 1, 2, 3, 3, 4, 5, 6,  7,  7,  8,  8,  9,  9, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GA_N_TxPowerTrack_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
-	{0, 0, 0, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 15, 15},
-	{0, 0, 0, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 15, 15},
-	{0, 0, 0, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 15, 15},
+u1Byte gDeltaSwingTableIdx_TC_5GA_N_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
+	{0, 1, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 15, 15, 15},
+	{0, 1, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 15, 15, 15},
+	{0, 1, 1, 2, 2, 3, 4, 5, 6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 15, 15, 15, 15, 15},
 };
-u1Byte gDeltaSwingTableIdx_MP_5GA_P_TxPowerTrack_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
-	{1, 2, 3, 4, 5, 6, 7, 8, 9,  10, 11, 12,  13,  14, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16},
-	{1, 2, 3, 4, 5, 6, 7, 8, 9,  10, 11, 12,  13,  14, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16},
-	{1, 2, 3, 4, 5, 6, 7, 8, 9,  10, 11, 12,  13,  14, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16},
+u1Byte gDeltaSwingTableIdx_TC_5GA_P_USB_8821A[][DELTA_SWINGIDX_SIZE] = {
+	{0, 1, 1, 2, 2, 3, 4, 5, 6,  7,  7,  8,  8,  9, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
+	{0, 1, 1, 2, 3, 3, 4, 5, 6,  7,  7,  8,  8,  9, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
+	{0, 1, 1, 2, 3, 3, 4, 5, 6,  7,  7,  8,  8,  9, 10, 11, 11, 12, 12, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11},
 };
-u1Byte gDeltaSwingTableIdx_MP_2GB_N_TxPowerTrack_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  5,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GB_P_TxPowerTrack_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
-u1Byte gDeltaSwingTableIdx_MP_2GA_N_TxPowerTrack_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  9, 10, 10, 10, 10, 10, 10};
-u1Byte gDeltaSwingTableIdx_MP_2GA_P_TxPowerTrack_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKB_N_TxPowerTrack_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  5,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKB_P_TxPowerTrack_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKA_N_TxPowerTrack_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  9, 10, 10, 10, 10, 10, 10};
-u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
+u1Byte gDeltaSwingTableIdx_TC_2GB_N_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  5,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GB_P_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
+u1Byte gDeltaSwingTableIdx_TC_2GA_N_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  9, 10, 10, 10, 10, 10, 10};
+u1Byte gDeltaSwingTableIdx_TC_2GA_P_USB_8821A[]    = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKB_N_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  5,  5,  5,  6,  6,  7,  7,  8,  8,  9,  9, 10, 10, 11, 11, 11, 11, 11, 11};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKB_P_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKA_N_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  8,  8,  9, 10, 10, 10, 10, 10, 10};
+u1Byte gDeltaSwingTableIdx_TC_2GCCKA_P_USB_8821A[] = {0, 1, 1, 2, 2, 2, 3, 3, 3,  4,  4,  4,  5,  5,  5,  6,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7};
 
 void
-ODM_ReadAndConfig_MP_8821A_TxPowerTrack_USB(
+ODM_ReadAndConfig_TC_8821A_TxPowerTrack_USB(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_MP_8821A\n"));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_TC_8821A\n"));
 
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_P, gDeltaSwingTableIdx_MP_2GA_P_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_N, gDeltaSwingTableIdx_MP_2GA_N_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_P, gDeltaSwingTableIdx_MP_2GB_P_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_N, gDeltaSwingTableIdx_MP_2GB_N_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_P, gDeltaSwingTableIdx_TC_2GA_P_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GA_N, gDeltaSwingTableIdx_TC_2GA_N_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_P, gDeltaSwingTableIdx_TC_2GB_P_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GB_N, gDeltaSwingTableIdx_TC_2GB_N_USB_8821A, DELTA_SWINGIDX_SIZE);
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_P, gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_N, gDeltaSwingTableIdx_MP_2GCCKA_N_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_P, gDeltaSwingTableIdx_MP_2GCCKB_P_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_N, gDeltaSwingTableIdx_MP_2GCCKB_N_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_P, gDeltaSwingTableIdx_TC_2GCCKA_P_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKA_N, gDeltaSwingTableIdx_TC_2GCCKA_N_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_P, gDeltaSwingTableIdx_TC_2GCCKB_P_USB_8821A, DELTA_SWINGIDX_SIZE);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_2GCCKB_N, gDeltaSwingTableIdx_TC_2GCCKB_N_USB_8821A, DELTA_SWINGIDX_SIZE);
 
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_P, gDeltaSwingTableIdx_MP_5GA_P_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_N, gDeltaSwingTableIdx_MP_5GA_N_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P, gDeltaSwingTableIdx_MP_5GB_P_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE*3);
-	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N, gDeltaSwingTableIdx_MP_5GB_N_TxPowerTrack_USB_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_P, gDeltaSwingTableIdx_TC_5GA_P_USB_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GA_N, gDeltaSwingTableIdx_TC_5GA_N_USB_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P, gDeltaSwingTableIdx_TC_5GB_P_USB_8821A, DELTA_SWINGIDX_SIZE*3);
+	ODM_MoveMemory(pDM_Odm, pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N, gDeltaSwingTableIdx_TC_5GB_N_USB_8821A, DELTA_SWINGIDX_SIZE*3);
 }
 
 /******************************************************************************
 *                           TXPWR_LMT.TXT
 ******************************************************************************/
 
-pu1Byte Array_MP_8821A_TXPWR_LMT[] = { 
+pu1Byte Array_TC_8821A_TXPWR_LMT[] = { 
 	"FCC", "2.4G", "20M", "CCK", "1T", "01", "34", 
 	"ETSI", "2.4G", "20M", "CCK", "1T", "01", "32", 
 	"MKK", "2.4G", "20M", "CCK", "1T", "01", "32",
@@ -1479,16 +1183,16 @@ pu1Byte Array_MP_8821A_TXPWR_LMT[] = {
 };
 
 void
-ODM_ReadAndConfig_MP_8821A_TXPWR_LMT(
+ODM_ReadAndConfig_TC_8821A_TXPWR_LMT(
  	IN   PDM_ODM_T  pDM_Odm
  	)
 {
 	u4Byte     i           = 0;
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_TXPWR_LMT)/sizeof(pu1Byte);
-	pu1Byte    *Array      = Array_MP_8821A_TXPWR_LMT;
+	u4Byte     ArrayLen    = sizeof(Array_TC_8821A_TXPWR_LMT)/sizeof(pu1Byte);
+	pu1Byte    *Array      = Array_TC_8821A_TXPWR_LMT;
 
 
-	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_MP_8821A_TXPWR_LMT\n"));
+	ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> ODM_ReadAndConfig_TC_8821A_TXPWR_LMT\n"));
 
 	for (i = 0; i < ArrayLen; i += 7 )
 	{

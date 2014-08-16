@@ -21,7 +21,7 @@
 
 #include <drv_types.h>
 #include <rtw_mp_ioctl.h>
-#include "../hal/OUTSRC/odm_precomp.h"
+#include "../hal/odm_precomp.h"
 
 //****************  oid_rtl_seg_81_85   section start ****************
 NDIS_STATUS oid_rt_wireless_mode_hdl(struct oid_par_priv *poid_par_priv)
