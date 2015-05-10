@@ -317,7 +317,7 @@ static int	rtw_proc_cnt = 0;
 #define RTW_PROC_NAME DRV_NAME
 
 #if(LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,0))
-typedef ssize_t (*read_proc_t) (struct file *, char __user *, ssize_t, loff_t *);
+typedef ssize_t (*read_proc_t) (struct file *, char __user *, size_t, loff_t *);
 static inline struct proc_dir_entry *create_proc_read_entry(const char *name,
         mode_t mode, struct proc_dir_entry *base,
         read_proc_t *read_proc, void * data)
