@@ -15,6 +15,16 @@ functions in favor of the new `proc_create()` function.
 
 ### Building
 
+The Makefile is preconfigured to handle most x86/PC versions.  If you are compiling for something other than an intel x86 architecture, you need to first select the platform, e.g. for the Raspberry Pi, you need to set the I386 to n and the ARM_RPI to y:
+```sh
+...
+CONFIG_PLATFORM_I386_PC = n
+...
+CONFIG_PLATFORM_ARM_RPI = y
+```
+
+There are many other platforms supported and some other advanced options, e.g. PCI instead of USB, but most won't be needed.
+
 The driver is built by running `make`, and can be tested by loading the
 built module using `insmod`:
 
@@ -36,6 +46,33 @@ $ sudo depmod
 ```
 
 The driver module should now be loaded automatically.
+
+### DKMS
+
+Automatically rebuilds and installs on kernel updates. DKMS is in official sources of Ubuntu, for installation do:
+
+```sh
+$ sudo apt-get install build-essential dkms 
+```
+
+The driver source mus be copied to /usr/src/8812au-4.2.2
+
+Then add it to DKMS:
+
+```sh
+$ sudo dkms add -m 8812au -v 4.2.2
+$ sudo dkms build -m 8812au -v 4.2.2
+$ sudo dkms install -m 8812au -v 4.2.2
+```
+
+Check with:
+```sh
+$ sudo dkms status
+```
+Eventually remove from DKMS with:
+```sh
+$ sudo dkms remove -m 8812au -v 4.2.2 --all
+```
 
 ### References
 
