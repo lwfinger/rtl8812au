@@ -600,6 +600,7 @@ void Hal_SetAntenna(PADAPTER pAdapter)
 	u8	r_rx_antenna_ofdm = 0, r_ant_select_cck_val = 0;
 	u8	chgTx = 0, chgRx = 0;
 	u32	r_ant_sel_cck_val = 0, r_ant_select_ofdm_val = 0, r_ofdm_tx_en_val = 0;
+	u32 reg0xC50 = 0;
 
 
 	p_ofdm_tx = (R_ANTENNA_SELECT_OFDM *)&r_ant_select_ofdm_val;
@@ -635,43 +636,38 @@ void Hal_SetAntenna(PADAPTER pAdapter)
 			break;
 	}
 
-	switch (pAdapter->mppriv.antenna_rx)
-	{
-		u32 reg0xC50 = 0;
-		case ANTENNA_A:
-			PHY_SetBBReg(pAdapter, rRxPath_Jaguar, bMaskByte0, 0x11);	
-			PHY_SetRFReg(pAdapter, ODM_RF_PATH_B, RF_AC_Jaguar, 0xF0000, 0x1); // RF_B_0x0[19:16] = 1, Standby mode
-            PHY_SetBBReg(pAdapter, rCCK_RX_Jaguar, bCCK_RX_Jaguar, 0x0);	   
-            PHY_SetRFReg(pAdapter, ODM_RF_PATH_A, RF_AC_Jaguar, BIT19|BIT18|BIT17|BIT16, 0x3); 
+	switch (pAdapter->mppriv.antenna_rx) {
+	case ANTENNA_A:
+		PHY_SetBBReg(pAdapter, rRxPath_Jaguar, bMaskByte0, 0x11);	
+		PHY_SetRFReg(pAdapter, ODM_RF_PATH_B, RF_AC_Jaguar, 0xF0000, 0x1); // RF_B_0x0[19:16] = 1, Standby mode
+		PHY_SetBBReg(pAdapter, rCCK_RX_Jaguar, bCCK_RX_Jaguar, 0x0);	   
+     		PHY_SetRFReg(pAdapter, ODM_RF_PATH_A, RF_AC_Jaguar, BIT19|BIT18|BIT17|BIT16, 0x3); 
 
-			// <20121101, Kordan> To prevent gain table from not switched, asked by Ynlin.
-			reg0xC50 = PHY_QueryBBReg(pAdapter, rA_IGI_Jaguar, bMaskByte0);
-			PHY_SetBBReg(pAdapter, rA_IGI_Jaguar, bMaskByte0, reg0xC50+2);	   
-			PHY_SetBBReg(pAdapter, rA_IGI_Jaguar, bMaskByte0, reg0xC50);			
-			break;
+		// <20121101, Kordan> To prevent gain table from not switched, asked by Ynlin.
+		reg0xC50 = PHY_QueryBBReg(pAdapter, rA_IGI_Jaguar, bMaskByte0);
+		PHY_SetBBReg(pAdapter, rA_IGI_Jaguar, bMaskByte0, reg0xC50+2);	   
+		PHY_SetBBReg(pAdapter, rA_IGI_Jaguar, bMaskByte0, reg0xC50);			
+		break;
+	case ANTENNA_B:
+		PHY_SetBBReg(pAdapter, rRxPath_Jaguar, bMaskByte0, 0x22);	
+		PHY_SetRFReg(pAdapter, ODM_RF_PATH_A, RF_AC_Jaguar, 0xF0000, 0x1); // RF_A_0x0[19:16] = 1, Standby mode			
+		PHY_SetBBReg(pAdapter, rCCK_RX_Jaguar, bCCK_RX_Jaguar, 0x1);	
+		PHY_SetRFReg(pAdapter, ODM_RF_PATH_B, RF_AC_Jaguar, BIT19|BIT18|BIT17|BIT16, 0x3); 
 
-		case ANTENNA_B:
-			PHY_SetBBReg(pAdapter, rRxPath_Jaguar, bMaskByte0, 0x22);	
-			PHY_SetRFReg(pAdapter, ODM_RF_PATH_A, RF_AC_Jaguar, 0xF0000, 0x1); // RF_A_0x0[19:16] = 1, Standby mode			
-            PHY_SetBBReg(pAdapter, rCCK_RX_Jaguar, bCCK_RX_Jaguar, 0x1);	
-            PHY_SetRFReg(pAdapter, ODM_RF_PATH_B, RF_AC_Jaguar, BIT19|BIT18|BIT17|BIT16, 0x3); 
-
-			// <20121101, Kordan> To prevent gain table from not switched, asked by Ynlin.
-			reg0xC50 = PHY_QueryBBReg(pAdapter, rB_IGI_Jaguar, bMaskByte0);
-			PHY_SetBBReg(pAdapter, rB_IGI_Jaguar, bMaskByte0, reg0xC50+2);	   
-			PHY_SetBBReg(pAdapter, rB_IGI_Jaguar, bMaskByte0, reg0xC50);						
-			break;
-
-		case ANTENNA_AB:
-			PHY_SetBBReg(pAdapter, rRxPath_Jaguar, bMaskByte0, 0x33);	
-			PHY_SetRFReg(pAdapter, ODM_RF_PATH_B, RF_AC_Jaguar, 0xF0000, 0x3); // RF_B_0x0[19:16] = 3, Rx mode
-            PHY_SetBBReg(pAdapter, rCCK_RX_Jaguar, bCCK_RX_Jaguar, 0x0);	
-				break;
-
-			default:
-			DBG_871X("Unknown Rx antenna.\n");
-				break;
-		}
+		// <20121101, Kordan> To prevent gain table from not switched, asked by Ynlin.
+		reg0xC50 = PHY_QueryBBReg(pAdapter, rB_IGI_Jaguar, bMaskByte0);
+		PHY_SetBBReg(pAdapter, rB_IGI_Jaguar, bMaskByte0, reg0xC50+2);	   
+		PHY_SetBBReg(pAdapter, rB_IGI_Jaguar, bMaskByte0, reg0xC50);						
+		break;
+	case ANTENNA_AB:
+		PHY_SetBBReg(pAdapter, rRxPath_Jaguar, bMaskByte0, 0x33);	
+		PHY_SetRFReg(pAdapter, ODM_RF_PATH_B, RF_AC_Jaguar, 0xF0000, 0x3); // RF_B_0x0[19:16] = 3, Rx mode
+		PHY_SetBBReg(pAdapter, rCCK_RX_Jaguar, bCCK_RX_Jaguar, 0x0);	
+		break;
+	default:
+		DBG_871X("Unknown Rx antenna.\n");
+		break;
+	}
 
 	RT_TRACE(_module_mp_, _drv_notice_, ("-SwitchAntenna: finished\n"));
 }
