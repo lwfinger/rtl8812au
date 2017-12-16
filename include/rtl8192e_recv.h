@@ -32,7 +32,7 @@
 		//#define MAX_RECVBUF_SZ (20480) //20K
 		#define MAX_RECVBUF_SZ (10240) //10K  - 92E RX BUF :16K
 		//#define MAX_RECVBUF_SZ (15360) // 15k < 16k
-		//#define MAX_RECVBUF_SZ (8192+1024) // 8K+1k		
+		//#define MAX_RECVBUF_SZ (8192+1024) // 8K+1k
 	#endif
 #endif
 
@@ -69,11 +69,11 @@
 #define GET_RX_STATUS_DESC_EOR_92E(__pRxStatusDesc)				LE_BITS_TO_4BYTE( __pRxStatusDesc, 30, 1)
 
 //DWORD 1
-#define GET_RX_STATUS_DESC_MACID_92E(__pRxDesc) 					LE_BITS_TO_4BYTE(__pRxDesc+4, 0, 7)
-#define GET_RX_STATUS_DESC_TID_92E(__pRxDesc) 					LE_BITS_TO_4BYTE(__pRxDesc+4, 8, 4)
-#define GET_RX_STATUS_DESC_MACID_VLD_92E(__pRxDesc) 				LE_BITS_TO_4BYTE(__pRxDesc+4, 12, 1)
-#define GET_RX_STATUS_DESC_AMSDU_92E(__pRxDesc) 					LE_BITS_TO_4BYTE(__pRxDesc+4, 13, 1)
-#define GET_RX_STATUS_DESC_RXID_MATCH_92E(__pRxDesc) 			LE_BITS_TO_4BYTE(__pRxDesc+4, 14, 1)
+#define GET_RX_STATUS_DESC_MACID_92E(__pRxDesc)						LE_BITS_TO_4BYTE(__pRxDesc+4, 0, 7)
+#define GET_RX_STATUS_DESC_TID_92E(__pRxDesc)					LE_BITS_TO_4BYTE(__pRxDesc+4, 8, 4)
+#define GET_RX_STATUS_DESC_MACID_VLD_92E(__pRxDesc)				LE_BITS_TO_4BYTE(__pRxDesc+4, 12, 1)
+#define GET_RX_STATUS_DESC_AMSDU_92E(__pRxDesc)						LE_BITS_TO_4BYTE(__pRxDesc+4, 13, 1)
+#define GET_RX_STATUS_DESC_RXID_MATCH_92E(__pRxDesc)			LE_BITS_TO_4BYTE(__pRxDesc+4, 14, 1)
 #define GET_RX_STATUS_DESC_PAGGR_92E(__pRxStatusDesc)			LE_BITS_TO_4BYTE( __pRxStatusDesc+4, 15, 1)
 #define GET_RX_STATUS_DESC_A1_FITS_92E(__pRxStatusDesc)			LE_BITS_TO_4BYTE( __pRxStatusDesc+4, 16, 4)
 #define GET_RX_STATUS_DESC_TCPOFFLOAD_CHKERR_92E(__pRxStatusDesc)			LE_BITS_TO_4BYTE( __pRxStatusDesc+4, 20, 1)
@@ -113,10 +113,10 @@
 //DWORD 5
 #define GET_RX_STATUS_DESC_TSFL_92E(__pRxStatusDesc)				LE_BITS_TO_4BYTE( __pRxStatusDesc+20, 0, 32)
 
-#define GET_RX_STATUS_DESC_BUFF_ADDR_92E(__pRxDesc) 		LE_BITS_TO_4BYTE(__pRxDesc+24, 0, 32)
-#define GET_RX_STATUS_DESC_BUFF_ADDR64_92E(__pRxDesc) 		LE_BITS_TO_4BYTE(__pRxDesc+28, 0, 32)
+#define GET_RX_STATUS_DESC_BUFF_ADDR_92E(__pRxDesc)		LE_BITS_TO_4BYTE(__pRxDesc+24, 0, 32)
+#define GET_RX_STATUS_DESC_BUFF_ADDR64_92E(__pRxDesc)		LE_BITS_TO_4BYTE(__pRxDesc+28, 0, 32)
 
-#define SET_RX_STATUS_DESC_BUFF_ADDR_92E(__pRxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pRxDesc+24, 0, 32, __Value)
+#define SET_RX_STATUS_DESC_BUFF_ADDR_92E(__pRxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pRxDesc+24, 0, 32, __Value)
 
 
 #ifdef CONFIG_SDIO_HCI
@@ -144,4 +144,3 @@ void rtl8192e_query_rx_desc_status(union recv_frame *precvframe, u8 *pdesc);
 void rtl8192e_query_rx_phy_status(union recv_frame *prframe, u8 *pphy_stat);
 
 #endif
-

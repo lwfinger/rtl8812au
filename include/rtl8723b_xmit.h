@@ -40,7 +40,7 @@
 #define BMC		BIT(24)
 #define LSG		BIT(26)
 #define FSG		BIT(27)
-#define OWN 		BIT(31)
+#define OWN		BIT(31)
 
 
 //OFFSET 4
@@ -105,8 +105,8 @@ typedef struct txdesc_8723b
 	u32 cca_rts:2;
 	u32 agg_en:1;
 	u32 rd_en:1;
-	u32 null_0:1;	
-	u32 null_1:1;	
+	u32 null_0:1;
+	u32 null_1:1;
 	u32 bk:1;
 	u32 morefrag:1;
 	u32 raw:1;
@@ -133,14 +133,14 @@ typedef struct txdesc_8723b
 	u32 max_agg_num:5;
 	u32 ndpa:2;
 	u32 ampdu_max_time:8;
-	
+
 	//16
 	u32 datarate:7;
 	u32 try_rate:1;
 	u32 data_ratefb_lmt:5;
 	u32 rts_ratefb_lmt:4;
 	u32 rty_lmt_en:1;
-	u32 data_rt_lmt:6;	
+	u32 data_rt_lmt:6;
 	u32 rtsrate:5;
 	u32 pcts_en:1;
 	u32 pcts_mask_idx:2;
@@ -158,7 +158,7 @@ typedef struct txdesc_8723b
 	u32 tx_antl:4;
 	u32 txpwr_ofset:3;
 	u32 rsvd2031:1;
-	
+
 	//24
 	u32 sw_def:12;
 	u32 rsvd2412:4;
@@ -172,7 +172,7 @@ typedef struct txdesc_8723b
 	u32 checksum:16;
 	u32 rsvd2816:8;
 	u32 usb_txagg_num:8;
-	
+
 	//32
 	u32 rts_rc:6;
 	u32 bar_rty_th:2;
@@ -181,7 +181,7 @@ typedef struct txdesc_8723b
 	u32 hwseq_en:1;
 	u32 nextheadpage:8;
 	u32 tailpage:8;
-	
+
 	//36
 	u32 padding_len:11;
 	u32 txbf_path:1;
@@ -209,4 +209,3 @@ s32 rtl8723bu_xmit_buf_handler(PADAPTER padapter);
 #define hal_xmit_handler rtl8723bu_xmit_buf_handler
 #endif
 #endif
-

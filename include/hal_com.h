@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -27,7 +27,7 @@
 #include "hal_com_reg.h"
 #include "hal_com_phycfg.h"
 
-/*------------------------------ Tx Desc definition Macro ------------------------*/ 
+/*------------------------------ Tx Desc definition Macro ------------------------*/
 //#pragma mark -- Tx Desc related definition. --
 //----------------------------------------------------------------------------
 //-----------------------------------------------------------
@@ -92,7 +92,7 @@
 
 enum{
 	UP_LINK,
-	DOWN_LINK,	
+	DOWN_LINK,
 };
 typedef enum _RT_MEDIA_STATUS {
 	RT_MEDIA_DISCONNECT = 0,
@@ -158,4 +158,3 @@ s32 c2h_evt_read(_adapter *adapter, u8 *buf);
 u8 rtw_hal_networktype_to_raid(_adapter *adapter,unsigned char network_type);
 u8 rtw_get_mgntframe_raid(_adapter *adapter,unsigned char network_type);
 #endif //__HAL_COMMON_H__
-

@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -33,12 +33,12 @@
 #define DYNAMIC_FUNC_BT BIT(0)
 
 typedef	enum _BT_CurState{
-	BT_OFF		= 0,	
+	BT_OFF		= 0,
 	BT_ON		= 1,
 } BT_CurState, *PBT_CurState;
 
 typedef	enum _BT_ServiceType{
-	BT_SCO		= 0,	
+	BT_SCO		= 0,
 	BT_A2DP		= 1,
 	BT_HID		= 2,
 	BT_HID_Idle	= 3,
@@ -102,4 +102,3 @@ void rtl8192c_InitHalDm(	IN	PADAPTER	Adapter);
 void rtl8192c_HalDmWatchDog(IN PADAPTER Adapter);
 
 #endif	//__HAL8190PCIDM_H__
-

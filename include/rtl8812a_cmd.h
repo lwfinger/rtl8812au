@@ -20,7 +20,7 @@
 #ifndef __RTL8812A_CMD_H__
 #define __RTL8812A_CMD_H__
 
-typedef enum _RTL8812_H2C_CMD 
+typedef enum _RTL8812_H2C_CMD
 {
 	H2C_8812_RSVDPAGE = 0,
 	H2C_8812_MSRRPT = 1,
@@ -28,12 +28,12 @@ typedef enum _RTL8812_H2C_CMD
 	H2C_8812_KEEP_ALIVE_CTRL = 3,
 	H2C_8812_DISCONNECT_DECISION = 4,
 
-	H2C_8812_INIT_OFFLOAD = 6,		
+	H2C_8812_INIT_OFFLOAD = 6,
 	H2C_8812_AP_OFFLOAD = 8,
 	H2C_8812_BCN_RSVDPAGE = 9,
 	H2C_8812_PROBERSP_RSVDPAGE = 10,
-	
-	H2C_8812_SETPWRMODE = 0x20,		
+
+	H2C_8812_SETPWRMODE = 0x20,
 	H2C_8812_PS_TUNING_PARA = 0x21,
 	H2C_8812_PS_TUNING_PARA2 = 0x22,
 	H2C_8812_PS_LPS_PARA = 0x23,
@@ -166,5 +166,3 @@ void rtl8812a_set_wowlan_cmd(_adapter* padapter, u8 enable);
 void SetFwRelatedForWoWLAN8812(_adapter* padapter, u8 bHostIsGoingtoSleep);
 #endif//CONFIG_WOWLAN
 #endif//__RTL8188E_CMD_H__
-
-

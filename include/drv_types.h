@@ -174,7 +174,7 @@ struct registry_priv
 	u8	network_mode;	//infra, ad-hoc, auto
 	u8	channel;//ad-hoc support requirement
 	u8	wireless_mode;//A, B, G, auto
-	u8 	scan_mode;//active, passive
+	u8	scan_mode;//active, passive
 	u8	radio_enable;
 	u8	preamble;//long, short, auto
 	u8	vrtl_carrier_sense;//Enable, Disable, Auto
@@ -215,7 +215,7 @@ struct registry_priv
 	// 0x21 means enable 2.4G 40MHz & 5G 80MHz
 	u8	bw_mode;
 	u8	ampdu_enable;//for tx
-	u8 	rx_stbc;
+	u8	rx_stbc;
 	u8	ampdu_amsdu;//A-MPDU Supports A-MSDU is permitted
 	// Short GI support Bit Map
 	// BIT0 - 20MHz, 1: support, 0: non-support
@@ -473,10 +473,10 @@ struct dvobj_priv
 	u8	const_hwsw_rfoff_d3;
 	u8	const_support_pciaspm;
 	// pci-e bridge */
-	u8 	const_hostpci_aspm_setting;
+	u8	const_hostpci_aspm_setting;
 	// pci-e device */
-	u8 	const_devicepci_aspm_setting;
-	u8 	b_support_aspm; // If it supports ASPM, Offset[560h] = 0x40, otherwise Offset[560h] = 0x00.
+	u8	const_devicepci_aspm_setting;
+	u8	b_support_aspm; // If it supports ASPM, Offset[560h] = 0x40, otherwise Offset[560h] = 0x00.
 	u8	b_support_backdoor;
 	u8 bdma64;
 #endif//PLATFORM_LINUX
@@ -557,7 +557,7 @@ struct _ADAPTER{
 	int	DriverState;// for disable driver using module, use dongle to replace module.
 	int	pid[3];//process id from UI, 0:wps, 1:hostapd, 2:dhcpcd
 	int	bDongle;//build-in module or external dongle
-	u16 	chip_type;
+	u16	chip_type;
 	u16	HardwareType;
 	u16	interface_type;//USB,SDIO,SPI,PCI
 
@@ -567,14 +567,14 @@ struct _ADAPTER{
 	struct	cmd_priv	cmdpriv;
 	struct	evt_priv	evtpriv;
 	//struct	io_queue	*pio_queue;
-	struct 	io_priv	iopriv;
+	struct	io_priv	iopriv;
 	struct	xmit_priv	xmitpriv;
 	struct	recv_priv	recvpriv;
 	struct	sta_priv	stapriv;
 	struct	security_priv	securitypriv;
 	struct	registry_priv	registrypriv;
 	struct	pwrctrl_priv	pwrctrlpriv;
-	struct 	eeprom_priv eeprompriv;
+	struct	eeprom_priv eeprompriv;
 	struct	led_priv	ledpriv;
 
 #ifdef CONFIG_MP_INCLUDED
@@ -795,4 +795,3 @@ __inline static u8 *myid(struct eeprom_priv *peepriv)
 
 
 #endif //__DRV_TYPES_H__
-

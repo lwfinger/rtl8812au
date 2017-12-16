@@ -44,4 +44,3 @@ PHY_RF6052SetOFDMTxPower8192E(
 	IN	u8			Channel);
 
 #endif//__RTL8192E_RF_H__
-

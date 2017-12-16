@@ -1,21 +1,21 @@
-/****************************************************************************** 
-* 
-* Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved. 
-* 
-* This program is free software; you can redistribute it and/or modify it 
-* under the terms of version 2 of the GNU General Public License as 
-* published by the Free Software Foundation. 
-* 
-* This program is distributed in the hope that it will be useful, but WITHOUT 
-* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for 
-* more details. 
-* 
-* You should have received a copy of the GNU General Public License along with 
-* this program; if not, write to the Free Software Foundation, Inc., 
-* 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA 
-* 
-* 
+/******************************************************************************
+*
+* Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of version 2 of the GNU General Public License as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along with
+* this program; if not, write to the Free Software Foundation, Inc.,
+* 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+*
+*
 ******************************************************************************/
 
 //#include "Mp_Precomp.h"
@@ -57,7 +57,7 @@ CheckCondition(
 *                           MAC_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8821A_MAC_REG[] = { 
+u4Byte Array_MP_8821A_MAC_REG[] = {
 		0x428, 0x0000000A,
 		0x429, 0x00000010,
 		0x430, 0x00000000,
@@ -159,8 +159,8 @@ u4Byte Array_MP_8821A_MAC_REG[] = {
 
 void
 ODM_ReadAndConfig_MP_8821A_MAC_REG(
- 	IN   PDM_ODM_T  pDM_Odm
- 	)
+	IN   PDM_ODM_T  pDM_Odm
+	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
@@ -170,7 +170,7 @@ ODM_ReadAndConfig_MP_8821A_MAC_REG(
 	pu4Byte    ptr_array   = NULL;
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;  
+	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_MAC_REG)/sizeof(u4Byte);
 	pu4Byte    Array       = Array_MP_8821A_MAC_REG;
 
@@ -185,20 +185,20 @@ ODM_ReadAndConfig_MP_8821A_MAC_REG(
 	{
 	    u4Byte v1 = Array[i];
 	    u4Byte v2 = Array[i+1];
-	
+
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
 	    {
-	 		odm_ConfigMAC_8821A(pDM_Odm, v1, (u1Byte)v2);
+			odm_ConfigMAC_8821A(pDM_Odm, v1, (u1Byte)v2);
 		    continue;
-	 	}
+		}
 		else
 		{ // This line is the start line of branch.
 		    if ( !CheckCondition(Array[i], hex) )
 		    { // Discard the following (offset, data) pairs.
 		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
+		        while (v2 != 0xDEAD &&
+		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
 		            READ_NEXT_PAIR(v1, v2, i);
@@ -208,11 +208,11 @@ ODM_ReadAndConfig_MP_8821A_MAC_REG(
 		    else // Configure matched pairs and skip to end of if-else.
 		    {
 		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
+		        while (v2 != 0xDEAD &&
+		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
-	 				odm_ConfigMAC_8821A(pDM_Odm, v1, (u1Byte)v2);
+					odm_ConfigMAC_8821A(pDM_Odm, v1, (u1Byte)v2);
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
 
@@ -220,12 +220,11 @@ ODM_ReadAndConfig_MP_8821A_MAC_REG(
 		        {
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
-		        
+
 		    }
-		}	
+		}
 	}
 
 }
 
 #endif // end of HWIMG_SUPPORT
-

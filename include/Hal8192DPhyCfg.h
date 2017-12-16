@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -22,18 +22,18 @@
  * Module:	__INC_HAL8192DPHYCFG_H
  *
  *
- * Note:	
- *			
+ * Note:
+ *
  *
  * Export:	Constants, macro, functions(API), global variables(None).
  *
- * Abbrev:	
+ * Abbrev:
  *
  * History:
- *		Data		Who		Remark 
- *      08/07/2007  MHC    	1. Porting from 9x series PHYCFG.h.
+ *		Data		Who		Remark
+ *      08/07/2007  MHC		1. Porting from 9x series PHYCFG.h.
  *							2. Reorganize code architecture.
- * 
+ *
  *****************************************************************************/
  /* Check to see if the file has been included already.  */
 #ifndef __INC_HAL8192DPHYCFG_H
@@ -74,7 +74,7 @@
 /*--------------------------Define Parameters-------------------------------*/
 
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 #define	CHANNEL_GROUP_MAX_2G		3
 #define	CHANNEL_GROUP_IDX_5GL		3
@@ -97,7 +97,7 @@ typedef enum _MACPHY_MODE_CHANGE_ACTION{
 
 /* BB/RF related */
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /*------------------------Export global variable----------------------------*/
@@ -140,7 +140,7 @@ extern	int	PHY_BBConfig8192D(	IN	PADAPTER	Adapter	);
 extern	int	PHY_RFConfig8192D(	IN	PADAPTER	Adapter	);
 /* RF config */
 int	rtl8192d_PHY_ConfigRFWithParaFile(	IN	PADAPTER	Adapter,
-												IN	u8* 			pFileName,
+												IN	u8*			pFileName,
 												IN	u8			eRFPath);
 int	rtl8192d_PHY_ConfigRFWithHeaderFile(	IN	PADAPTER		Adapter,
 												IN	RF_CONTENT		Content,
@@ -155,21 +155,21 @@ void	rtl8192d_PHY_GetHWRegOriginalValue(	IN	PADAPTER		Adapter	);
 //
 // RF Power setting
 //
-//extern	BOOLEAN	PHY_SetRFPowerState(IN	PADAPTER			Adapter, 
+//extern	BOOLEAN	PHY_SetRFPowerState(IN	PADAPTER			Adapter,
 //									IN	RT_RF_POWER_STATE	eRFPowerState);
 
 //
 // BB TX Power R/W
 //
 void	PHY_GetTxPowerLevel8192D(	IN	PADAPTER		Adapter,
-											OUT u32*    		powerlevel	);
+											OUT u32*		powerlevel	);
 void	PHY_SetTxPowerLevel8192D(	IN	PADAPTER		Adapter,
 											IN	u8			channel	);
 BOOLEAN	PHY_UpdateTxPowerDbm8192D(	IN	PADAPTER	Adapter,
 											IN	int		powerInDbm	);
 
 //
-VOID 
+VOID
 PHY_ScanOperationBackup8192D(IN	PADAPTER	Adapter,
 										IN	u8		Operation	);
 
@@ -210,7 +210,7 @@ PHY_SetSwChnlBWMode8192D(
 	IN	u8					Offset40,
 	IN	u8					Offset80
 );
-	
+
 //
 // BB/MAC/RF other monitor API
 //
@@ -224,7 +224,7 @@ BOOLEAN	PHY_CheckIsLegalRfPath8192D(IN	PADAPTER	pAdapter,
 //
 // Modify the value of the hw register when beacon interval be changed.
 //
-void	
+void
 rtl8192d_PHY_SetBeaconHwReg(	IN	PADAPTER		Adapter,
 					IN	u16			BeaconInterval	);
 
@@ -242,7 +242,7 @@ PHY_EnableHostClkReq(
 BOOLEAN
 SetAntennaConfig92C(
 	IN	PADAPTER	Adapter,
-	IN	u8		DefaultAnt	
+	IN	u8		DefaultAnt
 	);
 
 VOID
@@ -253,7 +253,7 @@ PHY_UpdateBBRFConfiguration8192D(
 
 VOID PHY_ReadMacPhyMode92D(
 	IN PADAPTER	Adapter,
-	IN BOOLEAN 	AutoloadFail	
+	IN BOOLEAN	AutoloadFail
 );
 
 VOID PHY_ConfigMacPhyMode92D(
@@ -274,7 +274,7 @@ rtl8192d_PHY_InitRxSetting(
 );
 
 
-VOID 
+VOID
 rtl8192d_PHY_SetRFPathSwitch(IN	PADAPTER	pAdapter, IN	BOOLEAN		bMain);
 
 VOID
@@ -283,11 +283,10 @@ HalChangeCCKStatus8192D(
 	IN	BOOLEAN		bCCKDisable
 );
 
-VOID 
+VOID
 PHY_InitPABias92D(IN	PADAPTER Adapter);
 
 /*--------------------------Exported Function prototype---------------------*/
 
 #define PHY_SetBBReg1Byte(Adapter, RegAddr, BitMask, Data) PHY_SetBBReg1Byte8192D((Adapter), (RegAddr), (BitMask), (Data))
 #endif	// __INC_HAL8192SPHYCFG_H
-

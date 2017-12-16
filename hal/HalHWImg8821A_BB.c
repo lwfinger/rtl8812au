@@ -1,21 +1,21 @@
-/****************************************************************************** 
-* 
-* Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved. 
-* 
-* This program is free software; you can redistribute it and/or modify it 
-* under the terms of version 2 of the GNU General Public License as 
-* published by the Free Software Foundation. 
-* 
-* This program is distributed in the hope that it will be useful, but WITHOUT 
-* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for 
-* more details. 
-* 
-* You should have received a copy of the GNU General Public License along with 
-* this program; if not, write to the Free Software Foundation, Inc., 
-* 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA 
-* 
-* 
+/******************************************************************************
+*
+* Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of version 2 of the GNU General Public License as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along with
+* this program; if not, write to the Free Software Foundation, Inc.,
+* 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+*
+*
 ******************************************************************************/
 
 //#include "Mp_Precomp.h"
@@ -57,7 +57,7 @@ CheckCondition(
 *                           AGC_TAB.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8821A_AGC_TAB[] = { 
+u4Byte Array_MP_8821A_AGC_TAB[] = {
 		0x81C, 0xBF000001,
 		0x81C, 0xBF020001,
 		0x81C, 0xBF040001,
@@ -254,8 +254,8 @@ u4Byte Array_MP_8821A_AGC_TAB[] = {
 
 void
 ODM_ReadAndConfig_MP_8821A_AGC_TAB(
- 	IN   PDM_ODM_T  pDM_Odm
- 	)
+	IN   PDM_ODM_T  pDM_Odm
+	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
@@ -265,7 +265,7 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 	pu4Byte    ptr_array   = NULL;
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;  
+	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_AGC_TAB)/sizeof(u4Byte);
 	pu4Byte    Array       = Array_MP_8821A_AGC_TAB;
 
@@ -280,20 +280,20 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 	{
 	    u4Byte v1 = Array[i];
 	    u4Byte v2 = Array[i+1];
-	
+
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
 	    {
 		    odm_ConfigBB_AGC_8821A(pDM_Odm, v1, bMaskDWord, v2);
 		    continue;
-	 	}
+		}
 		else
 		{ // This line is the start line of branch.
 		    if ( !CheckCondition(Array[i], hex) )
 		    { // Discard the following (offset, data) pairs.
 		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
+		        while (v2 != 0xDEAD &&
+		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
 		            READ_NEXT_PAIR(v1, v2, i);
@@ -303,11 +303,11 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 		    else // Configure matched pairs and skip to end of if-else.
 		    {
 		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
+		        while (v2 != 0xDEAD &&
+		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
-		     		odm_ConfigBB_AGC_8821A(pDM_Odm, v1, bMaskDWord, v2);
+				odm_ConfigBB_AGC_8821A(pDM_Odm, v1, bMaskDWord, v2);
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
 
@@ -315,9 +315,9 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 		        {
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
-		        
+
 		    }
-		}	
+		}
 	}
 
 }
@@ -326,7 +326,7 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 *                           PHY_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8821A_PHY_REG[] = { 
+u4Byte Array_MP_8821A_PHY_REG[] = {
 		0x800, 0x0020D090,
 		0x804, 0x080112E0,
 		0x808, 0x0E028211,
@@ -499,8 +499,8 @@ u4Byte Array_MP_8821A_PHY_REG[] = {
 
 void
 ODM_ReadAndConfig_MP_8821A_PHY_REG(
- 	IN   PDM_ODM_T  pDM_Odm
- 	)
+	IN   PDM_ODM_T  pDM_Odm
+	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
@@ -510,7 +510,7 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 	pu4Byte    ptr_array   = NULL;
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;  
+	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_PHY_REG)/sizeof(u4Byte);
 	pu4Byte    Array       = Array_MP_8821A_PHY_REG;
 
@@ -525,20 +525,20 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 	{
 	    u4Byte v1 = Array[i];
 	    u4Byte v2 = Array[i+1];
-	
+
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
 	    {
-		   	odm_ConfigBB_PHY_8821A(pDM_Odm, v1, bMaskDWord, v2);
+			odm_ConfigBB_PHY_8821A(pDM_Odm, v1, bMaskDWord, v2);
 		    continue;
-	 	}
+		}
 		else
 		{ // This line is the start line of branch.
 		    if ( !CheckCondition(Array[i], hex) )
 		    { // Discard the following (offset, data) pairs.
 		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
+		        while (v2 != 0xDEAD &&
+		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
 		            READ_NEXT_PAIR(v1, v2, i);
@@ -548,11 +548,11 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 		    else // Configure matched pairs and skip to end of if-else.
 		    {
 		        READ_NEXT_PAIR(v1, v2, i);
-		        while (v2 != 0xDEAD && 
-		               v2 != 0xCDEF && 
+		        while (v2 != 0xDEAD &&
+		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
-		   			odm_ConfigBB_PHY_8821A(pDM_Odm, v1, bMaskDWord, v2);
+					odm_ConfigBB_PHY_8821A(pDM_Odm, v1, bMaskDWord, v2);
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
 
@@ -560,9 +560,9 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 		        {
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
-		        
+
 		    }
-		}	
+		}
 	}
 
 }
@@ -571,7 +571,7 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 *                           PHY_REG_PG.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8821A_PHY_REG_PG[] = { 
+u4Byte Array_MP_8821A_PHY_REG_PG[] = {
 		0xC20, 0x00000000, 0x32343638,
 		0xC24, 0x00000000, 0x36363838,
 		0xC28, 0x00000000, 0x28303234,
@@ -613,8 +613,8 @@ u4Byte Array_MP_8821A_PHY_REG_PG[] = {
 
 void
 ODM_ReadAndConfig_MP_8821A_PHY_REG_PG(
- 	IN   PDM_ODM_T  pDM_Odm
- 	)
+	IN   PDM_ODM_T  pDM_Odm
+	)
 {
 	u4Byte     hex = 0;
 	u4Byte     i           = 0;
@@ -622,7 +622,7 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG_PG(
 	pu4Byte    ptr_array   = NULL;
 	u1Byte     platform    = pDM_Odm->SupportPlatform;
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;  
+	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_PHY_REG_PG)/sizeof(u4Byte);
 	pu4Byte    Array       = Array_MP_8821A_PHY_REG_PG;
 
@@ -640,8 +640,8 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG_PG(
 	    // this line is a line of pure_body
 	    if ( v1 < 0xCDCDCDCD )
 	    {
-		 	 odm_ConfigBB_PHY_REG_PG_8821A(pDM_Odm, v1, v2, v3);
-		 	 continue;
+			 odm_ConfigBB_PHY_REG_PG_8821A(pDM_Odm, v1, v2, v3);
+			 continue;
 	    }
 	    else
 	    { // this line is the start of branch
@@ -666,4 +666,3 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG_PG(
 
 
 #endif // end of HWIMG_SUPPORT
-

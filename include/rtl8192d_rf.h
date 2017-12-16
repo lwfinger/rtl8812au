@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -24,11 +24,11 @@
 //
 // RF RL6052 Series API
 //
-void		rtl8192d_RF_ChangeTxPath(	IN	PADAPTER	Adapter, 
+void		rtl8192d_RF_ChangeTxPath(	IN	PADAPTER	Adapter,
 										IN	u16		DataRate);
-void		rtl8192d_PHY_RF6052SetBandwidth(	
+void		rtl8192d_PHY_RF6052SetBandwidth(
 										IN	PADAPTER				Adapter,
-										IN	CHANNEL_WIDTH		Bandwidth);	
+										IN	CHANNEL_WIDTH		Bandwidth);
 VOID	rtl8192d_PHY_RF6052SetCckTxPower(
 										IN	PADAPTER	Adapter,
 										IN	u8*		pPowerlevel);
@@ -47,4 +47,3 @@ void	rtl8192d_PHY_PowerDownAnotherPHY(IN PADAPTER Adapter, IN BOOLEAN bMac0);
 
 
 #endif/* End of HalRf.h */
-

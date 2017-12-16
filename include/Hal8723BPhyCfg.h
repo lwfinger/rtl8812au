@@ -84,7 +84,7 @@ s32 PHY_MACConfig8723B(PADAPTER padapter);
 int
 PHY_ConfigRFWithParaFile_8723B(
 	IN	PADAPTER			Adapter,
-	IN	u8* 				pFileName,
+	IN	u8*				pFileName,
 	RF_PATH				eRFPath
 );
 int
@@ -96,7 +96,7 @@ PHY_ConfigRFWithHeaderFile_8723B(
 int
 PHY_ConfigRFWithTxPwrTrackParaFile(
 	IN	PADAPTER			Adapter,
-	IN	s8 			* pFileName
+	IN	s8			* pFileName
 );
 
 VOID
@@ -139,4 +139,3 @@ PHY_SetSwChnlBWMode8723B(
 /*--------------------------Exported Function prototype End---------------------*/
 
 #endif
-

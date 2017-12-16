@@ -36,4 +36,3 @@ PHY_SetSwChnlBWMode8723A(
 );
 
 #endif
-

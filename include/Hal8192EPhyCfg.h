@@ -37,11 +37,11 @@
 
 /*--------------------------Define Parameters-------------------------------*/
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 /* BB/RF related */
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /*------------------------Export global variable----------------------------*/
@@ -86,7 +86,7 @@ PHY_InitPowerLimitTable(
 	IN	PDM_ODM_T	pDM_Odm
 	);
 
-VOID 
+VOID
 PHY_ConvertPowerLimitToPowerIndex(
 	IN	PADAPTER			Adapter
 	);
@@ -99,7 +99,7 @@ PHY_SetPowerLimitTableValue(
 	IN	s8*				Bandwidth,
 	IN	s8*				RateSection,
 	IN	s8*				RfPath,
-	IN	s8* 				Channel,
+	IN	s8*				Channel,
 	IN	s8*				PowerLimit
 	);
 
@@ -174,4 +174,3 @@ storePwrIndexDiffRateOffset(
 
 /*--------------------------Exported Function prototype---------------------*/
 #endif	// __INC_HAL8192CPHYCFG_H
-

@@ -34,4 +34,3 @@ void	AntDivCompare8188E(PADAPTER Adapter, WLAN_BSSID_EX *dst, WLAN_BSSID_EX *src
 u8 AntDivBeforeLink8188E(PADAPTER Adapter );
 #endif
 #endif
-

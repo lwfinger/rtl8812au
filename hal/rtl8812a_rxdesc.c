@@ -46,7 +46,7 @@ static void process_rssi(_adapter *padapter,union recv_frame *prframe)
 	//DBG_8192C("process_rssi=> pattrib->rssil(%d) signal_strength(%d)\n ",pattrib->RecvSignalPower,pattrib->signal_strength);
 	//if(pRfd->Status.bPacketToSelf || pRfd->Status.bPacketBeacon)
 	{
-	
+
 	#ifdef CONFIG_NEW_SIGNAL_STAT_PROCESS
 		if(signal_stat->update_req) {
 			signal_stat->total_num = 0;
@@ -56,9 +56,9 @@ static void process_rssi(_adapter *padapter,union recv_frame *prframe)
 
 		signal_stat->total_num++;
 		signal_stat->total_val  += pattrib->phy_info.SignalStrength;
-		signal_stat->avg_val = signal_stat->total_val / signal_stat->total_num;		
+		signal_stat->avg_val = signal_stat->total_val / signal_stat->total_num;
 	#else //CONFIG_NEW_SIGNAL_STAT_PROCESS
-	
+
 		//Adapter->RxStats.RssiCalculateCnt++;	//For antenna Test
 		if(padapter->recvpriv.signal_strength_data.total_num++ >= PHY_RSSI_SLID_WIN_MAX)
 		{
@@ -74,7 +74,7 @@ static void process_rssi(_adapter *padapter,union recv_frame *prframe)
 
 
 		tmp_val = padapter->recvpriv.signal_strength_data.total_val/padapter->recvpriv.signal_strength_data.total_num;
-		
+
 		if(padapter->recvpriv.is_signal_dbg) {
 			padapter->recvpriv.signal_strength= padapter->recvpriv.signal_strength_dbg;
 			padapter->recvpriv.rssi=(s8)translate2dbm((u8)padapter->recvpriv.signal_strength_dbg);
@@ -94,7 +94,7 @@ static void process_rssi(_adapter *padapter,union recv_frame *prframe)
 static void process_link_qual(_adapter *padapter,union recv_frame *prframe)
 {
 	u32	last_evm=0, tmpVal;
- 	struct rx_pkt_attrib *pattrib;
+	struct rx_pkt_attrib *pattrib;
 #ifdef CONFIG_NEW_SIGNAL_STAT_PROCESS
 	struct signal_stat * signal_stat;
 #endif //CONFIG_NEW_SIGNAL_STAT_PROCESS
@@ -120,7 +120,7 @@ static void process_link_qual(_adapter *padapter,union recv_frame *prframe)
 	signal_stat->total_num++;
 	signal_stat->total_val  += pattrib->phy_info.SignalQuality;
 	signal_stat->avg_val = signal_stat->total_val / signal_stat->total_num;
-	
+
 #else //CONFIG_NEW_SIGNAL_STAT_PROCESS
 	if(pattrib->phy_info.SignalQuality != 0)
 	{
@@ -165,7 +165,7 @@ static void process_phy_info(_adapter *padapter, void *prframe)
 	//
 	// Check PWDB.
 	//
-	//process_PWDB(padapter, precvframe); 
+	//process_PWDB(padapter, precvframe);
 
 	//UpdateRxSignalStatistics8192C(Adapter, pRfd);
 	//
@@ -222,23 +222,23 @@ void rtl8812_query_rx_desc_status(union recv_frame *precvframe, u8 *pdesc)
  */
 void rtl8812_query_rx_phy_status(
 	union recv_frame	*precvframe,
-	u8 				*pphy_status)
+	u8				*pphy_status)
 {
-	PADAPTER 			padapter = precvframe->u.hdr.adapter;
+	PADAPTER			padapter = precvframe->u.hdr.adapter;
 	struct rx_pkt_attrib	*pattrib = &precvframe->u.hdr.attrib;
-	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(padapter);	
-	PODM_PHY_INFO_T 	pPHYInfo  = (PODM_PHY_INFO_T)(&pattrib->phy_info);
+	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(padapter);
+	PODM_PHY_INFO_T		pPHYInfo  = (PODM_PHY_INFO_T)(&pattrib->phy_info);
 	u8					*wlanhdr;
 	ODM_PACKET_INFO_T	pkt_info;
 	u8 *sa;
 	struct sta_priv *pstapriv;
 	struct sta_info *psta;
 	//_irqL		irqL;
-	
+
 	pkt_info.bPacketMatchBSSID =_FALSE;
 	pkt_info.bPacketToSelf = _FALSE;
 	pkt_info.bPacketBeacon = _FALSE;
-	
+
 	wlanhdr = get_recvframe_data(precvframe);
 
 	pkt_info.bPacketMatchBSSID = ((!IsFrameTypeCtrl(wlanhdr)) &&
@@ -250,12 +250,12 @@ void rtl8812_query_rx_phy_status(
 	pkt_info.bPacketBeacon = pkt_info.bPacketMatchBSSID && (GetFrameSubType(wlanhdr) == WIFI_BEACON);
 
 	if(pkt_info.bPacketBeacon){
-		if(check_fwstate(&padapter->mlmepriv, WIFI_STATION_STATE) == _TRUE){				
+		if(check_fwstate(&padapter->mlmepriv, WIFI_STATION_STATE) == _TRUE){
 			sa = padapter->mlmepriv.cur_network.network.MacAddress;
 			#if 0
-			{					
+			{
 				DBG_8192C("==> rx beacon from AP[%02x:%02x:%02x:%02x:%02x:%02x]\n",
-					sa[0],sa[1],sa[2],sa[3],sa[4],sa[5]);					
+					sa[0],sa[1],sa[2],sa[3],sa[4],sa[5]);
 			}
 			#endif
 		}
@@ -263,44 +263,43 @@ void rtl8812_query_rx_phy_status(
 	}
 	else{
 		sa = get_sa(wlanhdr);
-	}	
-	
+	}
+
 	pstapriv = &padapter->stapriv;
 	pkt_info.StationID = 0xFF;
 	psta = rtw_get_stainfo(pstapriv, sa);
 	if (psta)
 	{
-		pkt_info.StationID = psta->mac_id;		
+		pkt_info.StationID = psta->mac_id;
 		//DBG_8192C("%s ==> StationID(%d)\n",__FUNCTION__,pkt_info.StationID);
-	}			
-	pkt_info.DataRate = pattrib->data_rate;	
+	}
+	pkt_info.DataRate = pattrib->data_rate;
 	//rtl8188e_query_rx_phy_status(precvframe, pphy_status);
 
-	//_enter_critical_bh(&pHalData->odm_stainfo_lock, &irqL);	
+	//_enter_critical_bh(&pHalData->odm_stainfo_lock, &irqL);
 	ODM_PhyStatusQuery(&pHalData->odmpriv,pPHYInfo,pphy_status,&(pkt_info));
 	//_exit_critical_bh(&pHalData->odm_stainfo_lock, &irqL);
 
 	precvframe->u.hdr.psta = NULL;
 	if (pkt_info.bPacketMatchBSSID &&
 		(check_fwstate(&padapter->mlmepriv, WIFI_AP_STATE) == _TRUE))
-	{		
+	{
 		if (psta)
-		{			
+		{
 			precvframe->u.hdr.psta = psta;
 			process_phy_info(padapter, precvframe);
-			
-		}		
+
+		}
 	}
 	else if (pkt_info.bPacketToSelf || pkt_info.bPacketBeacon)
 	{
 		if (check_fwstate(&padapter->mlmepriv, WIFI_ADHOC_STATE|WIFI_ADHOC_MASTER_STATE) == _TRUE)
-		{		
+		{
 			if (psta)
-			{				
+			{
 				precvframe->u.hdr.psta = psta;
 			}
 		}
-		process_phy_info(padapter, precvframe);		
+		process_phy_info(padapter, precvframe);
 	}
 }
-

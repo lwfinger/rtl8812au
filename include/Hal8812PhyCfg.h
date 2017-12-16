@@ -38,12 +38,12 @@
 
 /*--------------------------Define Parameters-------------------------------*/
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /* BB/RF related */
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /*------------------------Export global variable----------------------------*/
@@ -89,7 +89,7 @@ PHY_InitPowerLimitTable(
 	IN	PDM_ODM_T	pDM_Odm
 	);
 
-VOID 
+VOID
 PHY_ConvertPowerLimitToPowerIndex(
 	IN	PADAPTER			Adapter
 	);
@@ -102,7 +102,7 @@ PHY_SetPowerLimitTableValue(
 	IN	s8*				Bandwidth,
 	IN	s8*				RateSection,
 	IN	s8*				RfPath,
-	IN	s8* 				Channel,
+	IN	s8*				Channel,
 	IN	s8*				PowerLimit
 	);
 
@@ -134,14 +134,14 @@ BOOLEAN	PHY_UpdateTxPowerDbm8812( IN PADAPTER	Adapter, IN int	powerInDbm	);
 u32 PHY_GetTxPowerIndex_8812A(
 	IN	PADAPTER			pAdapter,
 	IN	u8					RFPath,
-	IN	u8					Rate,	
-	IN	CHANNEL_WIDTH		BandWidth,	
+	IN	u8					Rate,
+	IN	CHANNEL_WIDTH		BandWidth,
 	IN	u8					Channel
 	);
 
 u32 PHY_GetTxBBSwing_8812A(
 	IN	PADAPTER	Adapter,
-	IN	BAND_TYPE 	Band,
+	IN	BAND_TYPE	Band,
 	IN	u8			RFPath
 	);
 
@@ -149,7 +149,7 @@ VOID
 PHY_SetTxPowerIndex_8812A(
 	IN	PADAPTER			Adapter,
 	IN	u4Byte				PowerIndex,
-	IN	u1Byte				RFPath, 
+	IN	u1Byte				RFPath,
 	IN	u1Byte				Rate
 	);
 //
@@ -201,4 +201,3 @@ storePwrIndexDiffRateOffset(
 
 /*--------------------------Exported Function prototype---------------------*/
 #endif	// __INC_HAL8192CPHYCFG_H
-

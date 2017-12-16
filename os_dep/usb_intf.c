@@ -55,17 +55,17 @@ static void rtw_dev_remove(struct usb_interface *pusb_intf);
 
 #if (LINUX_VERSION_CODE<=KERNEL_VERSION(2,6,23))
 /* Some useful macros to use to create struct usb_device_id */
- #define USB_DEVICE_ID_MATCH_VENDOR 			 0x0001
+ #define USB_DEVICE_ID_MATCH_VENDOR			 0x0001
  #define USB_DEVICE_ID_MATCH_PRODUCT			 0x0002
- #define USB_DEVICE_ID_MATCH_DEV_LO 			 0x0004
- #define USB_DEVICE_ID_MATCH_DEV_HI 			 0x0008
+ #define USB_DEVICE_ID_MATCH_DEV_LO			 0x0004
+ #define USB_DEVICE_ID_MATCH_DEV_HI			 0x0008
  #define USB_DEVICE_ID_MATCH_DEV_CLASS			 0x0010
  #define USB_DEVICE_ID_MATCH_DEV_SUBCLASS		 0x0020
  #define USB_DEVICE_ID_MATCH_DEV_PROTOCOL		 0x0040
  #define USB_DEVICE_ID_MATCH_INT_CLASS			 0x0080
  #define USB_DEVICE_ID_MATCH_INT_SUBCLASS		 0x0100
  #define USB_DEVICE_ID_MATCH_INT_PROTOCOL		 0x0200
- #define USB_DEVICE_ID_MATCH_INT_NUMBER 		 0x0400
+ #define USB_DEVICE_ID_MATCH_INT_NUMBER			 0x0400
 
 
 #define USB_DEVICE_ID_MATCH_INT_INFO \
@@ -333,7 +333,7 @@ struct rtw_usb_drv usb_drv = {
 	.usbdrv.suspend =  rtw_suspend,
 	.usbdrv.resume = rtw_resume,
 	#if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 22))
-  	.usbdrv.reset_resume   = rtw_resume,
+	.usbdrv.reset_resume   = rtw_resume,
 	#endif
 	#ifdef CONFIG_AUTOSUSPEND
 	.usbdrv.supports_autosuspend = 1,
@@ -357,7 +357,7 @@ static inline int RT_usb_endpoint_xfer_int(const struct usb_endpoint_descriptor 
 
 static inline int RT_usb_endpoint_xfer_bulk(const struct usb_endpoint_descriptor *epd)
 {
- 	return ((epd->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK) == USB_ENDPOINT_XFER_BULK);
+	return ((epd->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK) == USB_ENDPOINT_XFER_BULK);
 }
 
 static inline int RT_usb_endpoint_is_bulk_in(const struct usb_endpoint_descriptor *epd)
@@ -427,7 +427,7 @@ static struct dvobj_priv *usb_dvobj_init(struct usb_interface *usb_intf)
 	u8	val8;
 	int	status = _FAIL;
 	struct dvobj_priv *pdvobjpriv;
-	struct usb_device_descriptor 	*pdev_desc;
+	struct usb_device_descriptor	*pdev_desc;
 	struct usb_host_config			*phost_conf;
 	struct usb_config_descriptor		*pconf_desc;
 	struct usb_host_interface		*phost_iface;
@@ -895,7 +895,7 @@ int rtw_hw_suspend(_adapter *padapter )
 	struct usb_interface *pusb_intf = adapter_to_dvobj(padapter)->pusbintf;
 	struct net_device *pnetdev = padapter->pnetdev;
 
-	
+
 
 	if((!padapter->bup) || (padapter->bDriverStopped)||(padapter->bSurpriseRemoved))
 	{
@@ -958,7 +958,7 @@ int rtw_hw_suspend(_adapter *padapter )
 	else
 		goto error_exit;
 
-	
+
 	return 0;
 
 error_exit:
@@ -973,7 +973,7 @@ int rtw_hw_resume(_adapter *padapter)
 	struct usb_interface *pusb_intf = adapter_to_dvobj(padapter)->pusbintf;
 	struct net_device *pnetdev = padapter->pnetdev;
 
-	
+
 
 	if(padapter)//system resume
 	{
@@ -992,7 +992,7 @@ int rtw_hw_resume(_adapter *padapter)
 		netif_carrier_on(pnetdev);
 
 		if(!rtw_netif_queue_stopped(pnetdev))
-      			rtw_netif_start_queue(pnetdev);
+			rtw_netif_start_queue(pnetdev);
 		else
 			rtw_netif_wake_queue(pnetdev);
 
@@ -1009,7 +1009,7 @@ int rtw_hw_resume(_adapter *padapter)
 		goto error_exit;
 	}
 
-	
+
 
 	return 0;
 error_exit:
@@ -1033,7 +1033,7 @@ static int rtw_suspend(struct usb_interface *pusb_intf, pm_message_t message)
 	int ret = 0;
 	u32 start_time = rtw_get_current_time();
 
-	
+
 
 	DBG_871X("==> %s (%s:%d)\n",__FUNCTION__, current->comm, current->pid);
 
@@ -1132,7 +1132,7 @@ exit:
 	DBG_871X("<===  %s return %d.............. in %dms\n", __FUNCTION__
 		, ret, rtw_get_passing_time_ms(start_time));
 
-	
+
 	return ret;
 }
 
@@ -1145,7 +1145,7 @@ static int rtw_resume(struct usb_interface *pusb_intf)
 	 int ret = 0;
 
 	if(pwrpriv->bInternalAutoSuspend ){
- 		ret = rtw_resume_process(padapter);
+		ret = rtw_resume_process(padapter);
 	} else {
 #ifdef CONFIG_RESUME_IN_WORKQUEUE
 		rtw_resume_in_workqueue(pwrpriv);
@@ -1176,7 +1176,7 @@ int rtw_resume_process(_adapter *padapter)
 #ifdef CONFIG_BT_COEXIST
 	u8 pm_cnt;
 #endif	//#ifdef CONFIG_BT_COEXIST
-	
+
 
 	DBG_871X("==> %s (%s:%d)\n",__FUNCTION__, current->comm, current->pid);
 
@@ -1215,7 +1215,7 @@ int rtw_resume_process(_adapter *padapter)
 		_exit_pwrlock(&pwrpriv->lock);
 		goto exit;
 	}
-	
+
 	netif_device_attach(pnetdev);
 	netif_carrier_on(pnetdev);
 
@@ -1286,7 +1286,7 @@ exit:
 	DBG_871X("<===  %s return %d.............. in %dms\n", __FUNCTION__
 		, ret, rtw_get_passing_time_ms(start_time));
 
-	
+
 
 	return ret;
 }
@@ -1467,7 +1467,7 @@ _adapter *rtw_usb_if1_init(struct dvobj_priv *dvobj,
 	padapter->iface_type = IFACE_PORT0;
 	#else
 	padapter->iface_type = IFACE_PORT1;
-	#endif	
+	#endif
 #endif
 
 	//step 1-1., decide the chip_type via driver_info
@@ -1530,7 +1530,7 @@ _adapter *rtw_usb_if1_init(struct dvobj_priv *dvobj,
 #ifdef CONFIG_AUTOSUSPEND
 	if( padapter->registrypriv.power_mgnt != PS_MODE_ACTIVE )
 	{
-		if(padapter->registrypriv.usbss_enable ){ 	/* autosuspend (2s delay) */
+		if(padapter->registrypriv.usbss_enable ){	/* autosuspend (2s delay) */
 			#if (LINUX_VERSION_CODE>=KERNEL_VERSION(2,6,38))
 			dvobj->pusbdev->dev.power.autosuspend_delay = 0 * HZ;//15 * HZ; idle-delay time
 			#else
@@ -1677,7 +1677,7 @@ static void dump_usb_interface(struct usb_interface *usb_intf)
 	u8	val8;
 
 	struct usb_device				*udev = interface_to_usbdev(usb_intf);
-	struct usb_device_descriptor 	*dev_desc = &udev->descriptor;
+	struct usb_device_descriptor	*dev_desc = &udev->descriptor;
 
 	struct usb_host_config			*act_conf = udev->actconfig;
 	struct usb_config_descriptor	*act_conf_desc = &act_conf->desc;
@@ -2045,4 +2045,3 @@ _adapter  *rtw_usb_get_sw_pointer(void)
 }
 EXPORT_SYMBOL(rtw_usb_get_sw_pointer);
 #endif	//CONFIG_INTEL_PROXIM
-

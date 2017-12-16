@@ -45,4 +45,3 @@ void rtl8723b_HalDmWatchDog(PADAPTER padapter);
 
 
 #endif
-

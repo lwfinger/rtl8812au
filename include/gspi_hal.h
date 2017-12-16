@@ -37,4 +37,3 @@ void rtl8723bs_set_hal_ops(PADAPTER padapter);
 #endif
 
 #endif //__GSPI_HAL_H__
-

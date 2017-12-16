@@ -816,8 +816,8 @@ uint loadparam( _adapter *padapter,  _nic_hdl	pnetdev)
 	registry_par->radio_enable = (u8)rtw_radio_enable;
 	registry_par->long_retry_lmt = (u8)rtw_long_retry_lmt;
 	registry_par->short_retry_lmt = (u8)rtw_short_retry_lmt;
-  	registry_par->busy_thresh = (u16)rtw_busy_thresh;
-  	//registry_par->qos_enable = (u8)rtw_qos_enable;
+	registry_par->busy_thresh = (u16)rtw_busy_thresh;
+	//registry_par->qos_enable = (u8)rtw_qos_enable;
 	registry_par->ack_policy = (u8)rtw_ack_policy;
 	registry_par->mp_mode = (u8)rtw_mp_mode;
 	registry_par->software_encrypt = (u8)rtw_software_encrypt;
@@ -1065,7 +1065,7 @@ int rtw_init_netdev_name(struct net_device *pnetdev, const char *ifname)
 #ifdef CONFIG_EASY_REPLACEMENT
 	struct net_device	*TargetNetdev = NULL;
 	_adapter			*TargetAdapter = NULL;
-	struct net 		*devnet = NULL;
+	struct net		*devnet = NULL;
 
 	if(padapter->bDongle == 1)
 	{
@@ -1162,7 +1162,7 @@ struct net_device *rtw_init_netdev(_adapter *old_padapter)
 #endif
 
 	//step 2.
-   	loadparam(padapter, pnetdev);
+	loadparam(padapter, pnetdev);
 
 	return pnetdev;
 
@@ -1507,7 +1507,7 @@ exit:
 
 	RT_TRACE(_module_os_intfs_c_,_drv_info_,("-rtw_init_drv_sw\n"));
 
-	
+
 
 	return ret8;
 
@@ -1676,7 +1676,7 @@ int _netdev_vir_if_open(struct net_device *pnetdev)
 		int i;
 
 		padapter->bDriverStopped = _FALSE;
-	 	padapter->bSurpriseRemoved = _FALSE;
+		padapter->bSurpriseRemoved = _FALSE;
 		padapter->bCardDisableWOHSM = _FALSE;
 
 		rtw_hal_clone_data(padapter, primary_padapter);
@@ -2044,7 +2044,7 @@ int _netdev_if2_open(struct net_device *pnetdev)
 		int i;
 
 		padapter->bDriverStopped = _FALSE;
-	 	padapter->bSurpriseRemoved = _FALSE;
+		padapter->bSurpriseRemoved = _FALSE;
 		padapter->bCardDisableWOHSM = _FALSE;
 
 //		_rtw_memcpy(padapter->HalData, primary_padapter->HalData, padapter->hal_data_sz);
@@ -2488,7 +2488,7 @@ int _netdev_open(struct net_device *pnetdev)
 	if(padapter->bup == _FALSE)
 	{
 		padapter->bDriverStopped = _FALSE;
-	 	padapter->bSurpriseRemoved = _FALSE;
+		padapter->bSurpriseRemoved = _FALSE;
 		padapter->bCardDisableWOHSM = _FALSE;
 
 		status = rtw_hal_init(padapter);
@@ -2618,7 +2618,7 @@ int  ips_netdrv_open(_adapter *padapter)
 	}
 
 	rtw_set_pwr_state_check_timer(&padapter->pwrctrlpriv);
-  	_set_timer(&padapter->mlmepriv.dynamic_chk_timer,5000);
+	_set_timer(&padapter->mlmepriv.dynamic_chk_timer,5000);
 
 	 return _SUCCESS;
 
@@ -2641,7 +2641,7 @@ int rtw_ips_pwr_up(_adapter *padapter)
 
 	rtw_led_control(padapter, LED_CTL_NO_LINK);
 
- 	DBG_871X("<===  rtw_ips_pwr_up.............. in %dms\n", rtw_get_passing_time_ms(start_time));
+	DBG_871X("<===  rtw_ips_pwr_up.............. in %dms\n", rtw_get_passing_time_ms(start_time));
 	return result;
 
 }
@@ -2789,4 +2789,3 @@ void rtw_ndev_destructor(struct net_device *ndev)
 #endif
 	free_netdev(ndev);
 }
-

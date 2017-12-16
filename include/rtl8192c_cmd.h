@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -22,7 +22,7 @@
 
 
 enum cmd_msg_element_id
-{	
+{
 	NONE_CMDMSG_EID,
 	AP_OFFLOAD_EID=0,
 	SET_PWRMODE_EID=1,
@@ -49,13 +49,13 @@ struct cmd_msg_parm {
 };
 
 typedef struct _SETPWRMODE_PARM{
-	u8 	Mode;
-	u8 	SmartPS;
+	u8	Mode;
+	u8	SmartPS;
 	u8	BcnPassTime;	// unit: 100ms
 }SETPWRMODE_PARM, *PSETPWRMODE_PARM;
 
 struct H2C_SS_RFOFF_PARAM{
-	u8 	ROFOn; // 1: on, 0:off
+	u8	ROFOn; // 1: on, 0:off
 	u16	gpio_period; // unit: 1024 us
 }__attribute__ ((packed));
 
@@ -65,8 +65,8 @@ typedef struct JOINBSSRPT_PARM_92C{
 }JOINBSSRPT_PARM_92C, *PJOINBSSRPT_PARM_92C;
 
 typedef struct _RSVDPAGE_LOC_92C{
-	u8 	LocProbeRsp;
-	u8 	LocPsPoll;
+	u8	LocProbeRsp;
+	u8	LocPsPoll;
 	u8	LocNullData;
 }RSVDPAGE_LOC_92C, *PRSVDPAGE_LOC_92C;
 
@@ -96,4 +96,3 @@ int reset_tsf(PADAPTER Adapter, u8 reset_port );
 #endif	// CONFIG_TSF_RESET_OFFLOAD
 
 #endif	// __RTL8192C_CMD_H_
-

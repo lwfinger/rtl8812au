@@ -83,7 +83,7 @@ typedef struct rxreport_8723b
 	u32 patternwake:1;
 	u32 unicastwake:1;
 	u32 magicwake:1;
-	
+
 	//DWORD 4
 	u32 splcp:1;
 	u32 ldpc:1;
@@ -159,4 +159,3 @@ void update_recvframe_attrib(PADAPTER padapter, union recv_frame *precvframe, st
 void update_recvframe_phyinfo(union recv_frame *precvframe, struct phy_stat *pphy_info);
 #endif
 #endif
-

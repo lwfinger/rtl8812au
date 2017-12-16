@@ -53,7 +53,7 @@
 //	0x0100h ~ 0x01FFh	MACTOP General Configuration
 //
 //-----------------------------------------------------
-#define REG_PKTBUF_DBG_ADDR 			(REG_PKTBUF_DBG_CTRL)
+#define REG_PKTBUF_DBG_ADDR			(REG_PKTBUF_DBG_CTRL)
 #define REG_RXPKTBUF_DBG				(REG_PKTBUF_DBG_CTRL+2)
 #define REG_TXPKTBUF_DBG				(REG_PKTBUF_DBG_CTRL+3)
 #define REG_WOWLAN_WAKE_REASON		REG_MCUTST_WOWLAN
@@ -94,7 +94,7 @@
 //
 //-----------------------------------------------------
 //----------------------------------------------------------------------------
-//       88E Driver Initialization Offload REG_FDHM0(Offset 0x88, 8 bits)  
+//       88E Driver Initialization Offload REG_FDHM0(Offset 0x88, 8 bits)
 //----------------------------------------------------------------------------
 //IOL config for REG_FDHM0(Reg0x88)
 #define CMD_INIT_LLT					BIT0
@@ -144,4 +144,3 @@
 #define EFUSE_ACCESS_OFF			0x00	// For RTL8723 only.
 
 #endif //__RTL8188E_SPEC_H__
-

@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -21,18 +21,18 @@
  * Module:	__INC_HAL8192CPHYCFG_H
  *
  *
- * Note:	
- *			
+ * Note:
+ *
  *
  * Export:	Constants, macro, functions(API), global variables(None).
  *
- * Abbrev:	
+ * Abbrev:
  *
  * History:
- *		Data		Who		Remark 
- *      08/07/2007  MHC    	1. Porting from 9x series PHYCFG.h.
+ *		Data		Who		Remark
+ *      08/07/2007  MHC		1. Porting from 9x series PHYCFG.h.
  *							2. Reorganize code architecture.
- * 
+ *
  *****************************************************************************/
  /* Check to see if the file has been included already.  */
 #ifndef __INC_HAL8192CPHYCFG_H
@@ -79,12 +79,12 @@
 /*--------------------------Define Parameters-------------------------------*/
 
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /* BB/RF related */
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /*------------------------Export global variable----------------------------*/
@@ -125,7 +125,7 @@ int	PHY_BBConfig8192C(	IN	PADAPTER	Adapter	);
 int	PHY_RFConfig8192C(	IN	PADAPTER	Adapter	);
 /* RF config */
 int	rtl8192c_PHY_ConfigRFWithParaFile(	IN	PADAPTER	Adapter,
-												IN	u8* 			pFileName,
+												IN	u8*			pFileName,
 												IN	u8			eRFPath);
 int	rtl8192c_PHY_ConfigRFWithHeaderFile(	IN	PADAPTER	Adapter,
 												IN	u8			eRFPath);
@@ -140,21 +140,21 @@ void	rtl8192c_PHY_GetHWRegOriginalValue(	IN	PADAPTER		Adapter	);
 //
 // RF Power setting
 //
-//extern	BOOLEAN	PHY_SetRFPowerState(IN	PADAPTER			Adapter, 
+//extern	BOOLEAN	PHY_SetRFPowerState(IN	PADAPTER			Adapter,
 //									IN	RT_RF_POWER_STATE	eRFPowerState);
 
 //
 // BB TX Power R/W
 //
 void	PHY_GetTxPowerLevel8192C(	IN	PADAPTER		Adapter,
-											OUT u32*    		powerlevel	);
+											OUT u32*		powerlevel	);
 void	PHY_SetTxPowerLevel8192C(	IN	PADAPTER		Adapter,
 											IN	u8			channel	);
 BOOLEAN	PHY_UpdateTxPowerDbm8192C(	IN	PADAPTER	Adapter,
 											IN	int		powerInDbm	);
 
 //
-VOID 
+VOID
 PHY_ScanOperationBackup8192C(IN	PADAPTER	Adapter,
 										IN	u8		Operation	);
 
@@ -195,7 +195,7 @@ PHY_SetSwChnlBWMode8192C(
 	IN	u8					Offset40,
 	IN	u8					Offset80
 );
-				
+
 //
 // BB/MAC/RF other monitor API
 //
@@ -211,7 +211,7 @@ VOID rtl8192c_PHY_SetRFPathSwitch(IN	PADAPTER	pAdapter, IN	BOOLEAN		bMain);
 //
 // Modify the value of the hw register when beacon interval be changed.
 //
-void	
+void
 rtl8192c_PHY_SetBeaconHwReg(	IN	PADAPTER		Adapter,
 					IN	u16			BeaconInterval	);
 
@@ -229,7 +229,7 @@ PHY_EnableHostClkReq(
 BOOLEAN
 SetAntennaConfig92C(
 	IN	PADAPTER	Adapter,
-	IN	u8		DefaultAnt	
+	IN	u8		DefaultAnt
 	);
 
 #ifdef RTL8192C_RECONFIG_TO_1T1R
@@ -238,4 +238,3 @@ extern void	PHY_Reconfig_To_1T1R(_adapter *padapter);
 /*--------------------------Exported Function prototype---------------------*/
 
 #endif	// __INC_HAL8192CPHYCFG_H
-

@@ -52,9 +52,9 @@
 	#define RTL8723B_PHY_REG					"rtl8723B\\PHY_REG_1T.txt"
 	#define RTL8723B_PHY_RADIO_A				"rtl8723B\\radio_a_1T.txt"
 	#define RTL8723B_PHY_RADIO_B				"rtl8723B\\radio_b_1T.txt"
-	#define RTL8723B_TXPWR_TRACK				"rtl8723B\\TxPowerTrack.txt" 
+	#define RTL8723B_TXPWR_TRACK				"rtl8723B\\TxPowerTrack.txt"
 	#define RTL8723B_AGC_TAB					"rtl8723B\\AGC_TAB_1T.txt"
-	#define RTL8723B_PHY_MACREG 				"rtl8723B\\MAC_REG.txt"
+	#define RTL8723B_PHY_MACREG				"rtl8723B\\MAC_REG.txt"
 	#define RTL8723B_PHY_REG_PG				"rtl8723B\\PHY_REG_PG.txt"
 	#define RTL8723B_PHY_REG_MP				"rtl8723B\\PHY_REG_MP.txt"
 
@@ -67,7 +67,7 @@
 	//#define Rtl8723B_FwWoWImageArray			Array_MP_8723B_FW_WoWLAN
 	//#define Rtl8723B_FwWoWImgArrayLength		ArrayLength_MP_8723B_FW_WoWLAN
 
-	#define Rtl8723B_PHY_REG_Array_PG 			Rtl8723SPHY_REG_Array_PG
+	#define Rtl8723B_PHY_REG_Array_PG			Rtl8723SPHY_REG_Array_PG
 	#define Rtl8723B_PHY_REG_Array_PGLength	Rtl8723SPHY_REG_Array_PGLength
 
 #if MP_DRIVER == 1
@@ -94,9 +94,9 @@
 	#define RTL8723B_PHY_REG					"rtl8723B\\PHY_REG_1T.txt"
 	#define RTL8723B_PHY_RADIO_A				"rtl8723B\\radio_a_1T.txt"
 	#define RTL8723B_PHY_RADIO_B				"rtl8723B\\radio_b_1T.txt"
-	#define RTL8723B_TXPWR_TRACK				"rtl8723B\\TxPowerTrack.txt" 
+	#define RTL8723B_TXPWR_TRACK				"rtl8723B\\TxPowerTrack.txt"
 	#define RTL8723B_AGC_TAB					"rtl8723B\\AGC_TAB_1T.txt"
-	#define RTL8723B_PHY_MACREG 				"rtl8723B\\MAC_REG.txt"
+	#define RTL8723B_PHY_MACREG				"rtl8723B\\MAC_REG.txt"
 	#define RTL8723B_PHY_REG_PG				"rtl8723B\\PHY_REG_PG.txt"
 	#define RTL8723B_PHY_REG_MP				"rtl8723B\\PHY_REG_MP.txt"
 
@@ -111,7 +111,7 @@
 	//#define Rtl8723B_ImgArrayLength				Rtl8723UImgArrayLength
 	//#define Rtl8723B_UMCBCutImgArrayLength		Rtl8723UUMCBCutImgArrayLength
 
-	//#define Rtl8723B_PHY_REG_Array_PG 			Rtl8723UPHY_REG_Array_PG
+	//#define Rtl8723B_PHY_REG_Array_PG			Rtl8723UPHY_REG_Array_PG
 	//#define Rtl8723B_PHY_REG_Array_PGLength	Rtl8723UPHY_REG_Array_PGLength
 
 #if MP_DRIVER == 1
@@ -250,7 +250,7 @@ typedef struct _RT_8723B_FIRMWARE_HDR
 #include "HalVerDef.h"
 #include "hal_com.h"
 
-#define EFUSE_OOB_PROTECT_BYTES 		15
+#define EFUSE_OOB_PROTECT_BYTES			15
 
 #define HAL_EFUSE_MEMORY
 
@@ -260,7 +260,7 @@ typedef struct _RT_8723B_FIRMWARE_HDR
 #define EFUSE_MAX_SECTION_8723B			64
 
 #define EFUSE_IC_ID_OFFSET			506	//For some inferiority IC purpose. added by Roger, 2009.09.02.
-#define AVAILABLE_EFUSE_ADDR(addr) 	(addr < EFUSE_REAL_CONTENT_LEN_8723B)
+#define AVAILABLE_EFUSE_ADDR(addr)	(addr < EFUSE_REAL_CONTENT_LEN_8723B)
 
 #define EFUSE_ACCESS_ON			0x69	// For RTL8723 only.
 #define EFUSE_ACCESS_OFF			0x00	// For RTL8723 only.
@@ -362,4 +362,3 @@ s32 c2h_id_filter_ccx_8723b(u8 id);
 s32 c2h_handler_8723b(PADAPTER padapter, struct c2h_evt_hdr *pC2hEvent);
 
 #endif
-

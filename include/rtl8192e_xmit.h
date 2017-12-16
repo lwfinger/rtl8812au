@@ -36,7 +36,7 @@ typedef struct txdescriptor_8192e
 
 	//Offset 4
 	u32 macid:6;
-	u32 rsvd0406:2;	
+	u32 rsvd0406:2;
 	u32 qsel:5;
 	u32 rd_nav_ext:1;
 	u32 lsig_txop_en:1;
@@ -86,7 +86,7 @@ typedef struct txdescriptor_8192e
 	u32 cts2self:1;
 	u32 rtsen:1;
 	u32 hw_rts_en:1;
-	u32 port_id:1;	
+	u32 port_id:1;
 	u32 pwr_status:3;
 	u32 wait_dcts:1;
 	u32 cts2ap_en:1;
@@ -125,7 +125,7 @@ typedef struct txdescriptor_8192e
 	u32 mcsg5_max_len:4;
 	u32 mcsg6_max_len:4;
 	u32 mcs15_sgi_max_len:4;
-}TXDESC_8192E, *PTXDESC_8192E; 
+}TXDESC_8192E, *PTXDESC_8192E;
 
 //
 // Queue Select Value in TxDesc
@@ -160,7 +160,7 @@ typedef struct txdescriptor_8192e
 #define BMC		BIT(24)
 #define LSG		BIT(26)
 #define FSG		BIT(27)
-#define OWN 		BIT(31)
+#define OWN		BIT(31)
 
 
 //OFFSET 4
@@ -168,7 +168,7 @@ typedef struct txdescriptor_8192e
 #define QSEL_SHT			8
 #define RATE_ID_SHT			16
 #define NAVUSEHDR			BIT(20)
-#define SEC_TYPE_SHT 		22
+#define SEC_TYPE_SHT		22
 #define PKT_OFFSET_SHT		26
 
 //OFFSET 8
@@ -186,17 +186,17 @@ typedef struct txdescriptor_8192e
 #define EN_HWSEQ			BIT(31)
 
 //OFFSET 16
-#define 	QOS                          BIT(6)
+#define		QOS                          BIT(6)
 #define	HW_SSN				BIT(7)
-#define 	USERATE			BIT(8)
-#define 	DISDATAFB			BIT(10)
+#define		USERATE			BIT(8)
+#define		DISDATAFB			BIT(10)
 #define   CTS_2_SELF			BIT(11)
 #define	RTS_EN				BIT(12)
 #define	HW_RTS_EN			BIT(13)
-#define 	DATA_SHORT			BIT(24)
-#define 	PWR_STATUS_SHT	15
-#define 	DATA_SC_SHT		20
-#define 	DATA_BW			BIT(25)
+#define		DATA_SHORT			BIT(24)
+#define		PWR_STATUS_SHT	15
+#define		DATA_SC_SHT		20
+#define		DATA_BW			BIT(25)
 
 //OFFSET 20
 #define	RTY_LMT_EN			BIT(17)
@@ -227,27 +227,27 @@ typedef struct txdescriptor_8192e
 #define SET_TX_DESC_RATE_ID_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 16, 5, __Value)
 #define SET_TX_DESC_EN_DESC_ID_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 21, 1, __Value)
 #define SET_TX_DESC_SEC_TYPE_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 22, 2, __Value)
-#define SET_TX_DESC_PKT_OFFSET_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 24, 5, __Value)
-#define SET_TX_DESC_MORE_DATA_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 29, 1, __Value)
-#define SET_TX_DESC_TXOP_PS_CAP_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 30, 1, __Value)
-#define SET_TX_DESC_TXOP_PS_MODE_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 31, 1, __Value)
+#define SET_TX_DESC_PKT_OFFSET_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 24, 5, __Value)
+#define SET_TX_DESC_MORE_DATA_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 29, 1, __Value)
+#define SET_TX_DESC_TXOP_PS_CAP_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 30, 1, __Value)
+#define SET_TX_DESC_TXOP_PS_MODE_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 31, 1, __Value)
 
 
 // Dword 2
-#define SET_TX_DESC_PAID_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 0,  9, __Value) 
+#define SET_TX_DESC_PAID_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 0,  9, __Value)
 #define SET_TX_DESC_CCA_RTS_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 10, 2, __Value)
-#define SET_TX_DESC_AGG_ENABLE_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 12, 1, __Value)
-#define SET_TX_DESC_RDG_ENABLE_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 13, 1, __Value)
-#define SET_TX_DESC_NULL_0_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 14, 1, __Value)
-#define SET_TX_DESC_NULL_1_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 15, 1, __Value)
-#define SET_TX_DESC_BK_92E(__pTxDesc, __Value) 				SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 16, 1, __Value)
+#define SET_TX_DESC_AGG_ENABLE_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 12, 1, __Value)
+#define SET_TX_DESC_RDG_ENABLE_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 13, 1, __Value)
+#define SET_TX_DESC_NULL_0_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 14, 1, __Value)
+#define SET_TX_DESC_NULL_1_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 15, 1, __Value)
+#define SET_TX_DESC_BK_92E(__pTxDesc, __Value)				SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 16, 1, __Value)
 #define SET_TX_DESC_MORE_FRAG_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 17, 1, __Value)
 #define SET_TX_DESC_RAW_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 18, 1, __Value)
 #define GET_TX_DESC_MORE_FRAG_92E(__pTxDesc)				LE_BITS_TO_4BYTE( __pTxDesc+8, 17, 1)
 #define SET_TX_DESC_SPE_RPT_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 19, 1, __Value)
 #define SET_TX_DESC_AMPDU_DENSITY_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 20, 3, __Value)
-#define SET_TX_DESC_BT_NULL_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 23, 1, __Value)
-#define SET_TX_DESC_GID_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 24, 6, __Value)
+#define SET_TX_DESC_BT_NULL_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 23, 1, __Value)
+#define SET_TX_DESC_GID_92E(__pTxDesc, __Value)				SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 24, 6, __Value)
 
 
 // Dword 3
@@ -265,8 +265,8 @@ typedef struct txdescriptor_8192e
 #define SET_TX_DESC_NAV_USE_HDR_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 15, 1, __Value)
 #define SET_TX_DESC_USE_MAX_LEN_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 16, 1, __Value)
 #define SET_TX_DESC_MAX_AGG_NUM_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 17, 5, __Value)
-#define SET_TX_DESC_NDPA_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 22, 2, __Value)
-#define SET_TX_DESC_AMPDU_MAX_TIME_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 24, 8, __Value)
+#define SET_TX_DESC_NDPA_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 22, 2, __Value)
+#define SET_TX_DESC_AMPDU_MAX_TIME_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 24, 8, __Value)
 
 // Dword 4
 #define SET_TX_DESC_TX_RATE_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+16, 0, 7, __Value)
@@ -282,7 +282,7 @@ typedef struct txdescriptor_8192e
 
 // Dword 5
 #define SET_TX_DESC_DATA_SC_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 0, 4, __Value)
-#define SET_TX_DESC_DATA_SHORT_92E(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 4, 1, __Value)
+#define SET_TX_DESC_DATA_SHORT_92E(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 4, 1, __Value)
 #define SET_TX_DESC_DATA_BW_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 5, 2, __Value)
 #define SET_TX_DESC_DATA_LDPC_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 7, 1, __Value)
 #define SET_TX_DESC_DATA_STBC_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 8, 2, __Value)
@@ -302,41 +302,41 @@ typedef struct txdescriptor_8192e
 
 // Dword 7
 #if(DEV_BUS_TYPE == RT_PCI_INTERFACE)
-#define SET_TX_DESC_TX_BUFFER_SIZE_92E(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
+#define SET_TX_DESC_TX_BUFFER_SIZE_92E(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
 #else
 #define SET_TX_DESC_TX_DESC_CHECKSUM_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
 #endif
 #define SET_TX_DESC_USB_TXAGG_NUM_92E(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 24, 8, __Value)
 
 
-//#define SET_TX_DESC_HWSEQ_EN_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
+//#define SET_TX_DESC_HWSEQ_EN_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
 // Dword 8
 
-#define SET_TX_DESC_RTS_RC_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 0, 6, __Value)
-#define SET_TX_DESC_BAR_RTY_TH_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 6, 2, __Value)
-#define SET_TX_DESC_DATA_RC_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 8, 6, __Value)
-#define SET_TX_DESC_EN_HWSEQ_92E(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
-#define SET_TX_DESC_NEXT_HEAD_PAGE_92E(__pTxDesc,__Value)(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 16, 8, __Value)
-#define SET_TX_DESC_TAIL_PAGE_92E(__pTxDesc,__Value)(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 24, 8, __Value)
+#define SET_TX_DESC_RTS_RC_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 0, 6, __Value)
+#define SET_TX_DESC_BAR_RTY_TH_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 6, 2, __Value)
+#define SET_TX_DESC_DATA_RC_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 8, 6, __Value)
+#define SET_TX_DESC_EN_HWSEQ_92E(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
+#define SET_TX_DESC_NEXT_HEAD_PAGE_92E(__pTxDesc,__Value)(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 16, 8, __Value)
+#define SET_TX_DESC_TAIL_PAGE_92E(__pTxDesc,__Value)(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 24, 8, __Value)
 
 // Dword 9
-#define SET_TX_DESC_PADDING_LENGTH_92E(__pTxDesc, __Value) 					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 0, 11, __Value)
-#define SET_TX_DESC_TXBF_PATH_92E(__pTxDesc, __Value) 					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 11, 1, __Value)
-#define SET_TX_DESC_SEQ_92E(__pTxDesc, __Value) 					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 12, 12, __Value)
-#define SET_TX_DESC_FINAL_DATA_RATE_92E(__pTxDesc, __Value) 					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 24, 8, __Value)
+#define SET_TX_DESC_PADDING_LENGTH_92E(__pTxDesc, __Value)					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 0, 11, __Value)
+#define SET_TX_DESC_TXBF_PATH_92E(__pTxDesc, __Value)					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 11, 1, __Value)
+#define SET_TX_DESC_SEQ_92E(__pTxDesc, __Value)						SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 12, 12, __Value)
+#define SET_TX_DESC_FINAL_DATA_RATE_92E(__pTxDesc, __Value)					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 24, 8, __Value)
 // Dword 10
-#define SET_TX_DESC_TX_BUFFER_ADDRESS_92E(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+40, 0, 32, __Value)
+#define SET_TX_DESC_TX_BUFFER_ADDRESS_92E(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+40, 0, 32, __Value)
 
 
 // Dword 11
-#define SET_TX_DESC_NEXT_DESC_ADDRESS_92E(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+48, 0, 32, __Value)
+#define SET_TX_DESC_NEXT_DESC_ADDRESS_92E(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+48, 0, 32, __Value)
 
 #define SET_EARLYMODE_PKTNUM_92E(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr, 0, 4, __Value)
-#define SET_EARLYMODE_LEN0_92E(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr, 4, 15, __Value)
-#define SET_EARLYMODE_LEN1_1_92E(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr, 19, 13, __Value)
-#define SET_EARLYMODE_LEN1_2_92E(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr+4, 0, 2, __Value)
-#define SET_EARLYMODE_LEN2_92E(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr+4, 2, 15,  __Value)
-#define SET_EARLYMODE_LEN3_92E(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr+4, 17, 15, __Value)
+#define SET_EARLYMODE_LEN0_92E(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr, 4, 15, __Value)
+#define SET_EARLYMODE_LEN1_1_92E(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr, 19, 13, __Value)
+#define SET_EARLYMODE_LEN1_2_92E(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr+4, 0, 2, __Value)
+#define SET_EARLYMODE_LEN2_92E(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr+4, 2, 15,  __Value)
+#define SET_EARLYMODE_LEN3_92E(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr+4, 17, 15, __Value)
 
 
 
@@ -416,4 +416,3 @@ u8	BWMapping_92E(PADAPTER Adapter, struct pkt_attrib *pattrib);
 u8	SCMapping_92E(PADAPTER Adapter, struct pkt_attrib	*pattrib);
 
 #endif //__RTL8192E_XMIT_H__
-

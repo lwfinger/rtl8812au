@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2012 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -60,7 +60,7 @@ void rtw_hal_dm_deinit(_adapter *padapter)
 {
 	// cancel dm  timer
 	if(padapter->HalFunc.dm_deinit)
-		padapter->HalFunc.dm_deinit(padapter);	
+		padapter->HalFunc.dm_deinit(padapter);
 }
 void	rtw_hal_sw_led_init(_adapter *padapter)
 {
@@ -82,7 +82,7 @@ u32 rtw_hal_power_on(_adapter *padapter)
 }
 
 
-uint	 rtw_hal_init(_adapter *padapter) 
+uint	 rtw_hal_init(_adapter *padapter)
 {
 	uint	status = _SUCCESS;
 
@@ -103,12 +103,12 @@ uint	 rtw_hal_init(_adapter *padapter)
 		}
 		else
 		{
-			status = 	padapter->HalFunc.hal_init(padapter->pbuddy_adapter);
+			status =	padapter->HalFunc.hal_init(padapter->pbuddy_adapter);
 			if(status == _SUCCESS){
 				padapter->pbuddy_adapter->hw_init_completed = _TRUE;
 			}
 			else{
-			 	padapter->pbuddy_adapter->hw_init_completed = _FALSE;
+				padapter->pbuddy_adapter->hw_init_completed = _FALSE;
 				RT_TRACE(_module_hal_init_c_,_drv_err_,("rtw_hal_init: hal__init fail(pbuddy_adapter)\n"));
 				DBG_871X("rtw_hal_init: hal__init fail(pbuddy_adapter)\n");
 				return status;
@@ -123,7 +123,7 @@ uint	 rtw_hal_init(_adapter *padapter)
 
 	if(status == _SUCCESS){
 		padapter->hw_init_completed = _TRUE;
-			
+
 		if (padapter->registrypriv.notch_filter == 1)
 			rtw_hal_notch_filter(padapter, 1);
 
@@ -132,7 +132,7 @@ uint	 rtw_hal_init(_adapter *padapter)
 		rtw_led_control(padapter, LED_CTL_POWER_ON);
 	}
 	else{
-	 	padapter->hw_init_completed = _FALSE;
+		padapter->hw_init_completed = _FALSE;
 		DBG_871X("rtw_hal_init: hal__init fail\n");
 	}
 
@@ -140,12 +140,12 @@ uint	 rtw_hal_init(_adapter *padapter)
 
 	return status;
 
-}	
+}
 
 uint rtw_hal_deinit(_adapter *padapter)
 {
 	uint	status = _SUCCESS;
-	
+
 
 
 	status = padapter->HalFunc.hal_deinit(padapter);
@@ -160,7 +160,7 @@ uint rtw_hal_deinit(_adapter *padapter)
 	}
 
 
-	
+
 	return status;
 }
 
@@ -177,17 +177,17 @@ void rtw_hal_get_hwreg(_adapter *padapter, u8 variable, u8 *val)
 }
 
 u8 rtw_hal_set_def_var(_adapter *padapter, HAL_DEF_VARIABLE eVariable, PVOID pValue)
-{	
+{
 	if(padapter->HalFunc.SetHalDefVarHandler)
 		return padapter->HalFunc.SetHalDefVarHandler(padapter,eVariable,pValue);
 	return _FAIL;
 }
 u8 rtw_hal_get_def_var(_adapter *padapter, HAL_DEF_VARIABLE eVariable, PVOID pValue)
-{	
+{
 	if(padapter->HalFunc.GetHalDefVarHandler)
 		return padapter->HalFunc.GetHalDefVarHandler(padapter,eVariable,pValue);
-	return _FAIL;	
-}	
+	return _FAIL;
+}
 
 void rtw_hal_set_odm_var(_adapter *padapter, HAL_ODM_VARIABLE eVariable, PVOID pValue1,BOOLEAN bSet)
 {
@@ -204,43 +204,43 @@ void rtw_hal_enable_interrupt(_adapter *padapter)
 {
 	if (padapter->HalFunc.enable_interrupt)
 		padapter->HalFunc.enable_interrupt(padapter);
-	else 
+	else
 		DBG_871X("%s: HalFunc.enable_interrupt is NULL!\n", __FUNCTION__);
-	
+
 }
 void rtw_hal_disable_interrupt(_adapter *padapter)
 {
 	if (padapter->HalFunc.disable_interrupt)
 		padapter->HalFunc.disable_interrupt(padapter);
-	else 
+	else
 		DBG_871X("%s: HalFunc.disable_interrupt is NULL!\n", __FUNCTION__);
-	
+
 }
 
 
 u32	rtw_hal_inirp_init(_adapter *padapter)
 {
 	u32 rst = _FAIL;
-	if(padapter->HalFunc.inirp_init)	
-		rst = padapter->HalFunc.inirp_init(padapter);	
-	else		
-		DBG_871X(" %s HalFunc.inirp_init is NULL!!!\n",__FUNCTION__);		
+	if(padapter->HalFunc.inirp_init)
+		rst = padapter->HalFunc.inirp_init(padapter);
+	else
+		DBG_871X(" %s HalFunc.inirp_init is NULL!!!\n",__FUNCTION__);
 	return rst;
 }
-	
+
 u32	rtw_hal_inirp_deinit(_adapter *padapter)
 {
-	
+
 	if(padapter->HalFunc.inirp_deinit)
 		return padapter->HalFunc.inirp_deinit(padapter);
 
 	return _FAIL;
-		
+
 }
 
 u8	rtw_hal_intf_ps_func(_adapter *padapter,HAL_INTF_PS_FUNC efunc_id, u8* val)
-{	
-	if(padapter->HalFunc.interface_ps_func)	
+{
+	if(padapter->HalFunc.interface_ps_func)
 		return padapter->HalFunc.interface_ps_func(padapter,efunc_id,val);
 	return _FAIL;
 }
@@ -250,7 +250,7 @@ s32	rtw_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe)
 	if(padapter->HalFunc.hal_xmitframe_enqueue)
 		return padapter->HalFunc.hal_xmitframe_enqueue(padapter, pxmitframe);
 
-	return _FALSE;	
+	return _FALSE;
 }
 
 s32	rtw_hal_xmit(_adapter *padapter, struct xmit_frame *pxmitframe)
@@ -258,7 +258,7 @@ s32	rtw_hal_xmit(_adapter *padapter, struct xmit_frame *pxmitframe)
 	if(padapter->HalFunc.hal_xmit)
 		return padapter->HalFunc.hal_xmit(padapter, pxmitframe);
 
-	return _FALSE;	
+	return _FALSE;
 }
 
 s32	rtw_hal_mgnt_xmit(_adapter *padapter, struct xmit_frame *pmgntframe)
@@ -266,14 +266,14 @@ s32	rtw_hal_mgnt_xmit(_adapter *padapter, struct xmit_frame *pmgntframe)
 	s32 ret = _FAIL;
 
 	update_mgntframe_attrib_addr(padapter, pmgntframe);
-	
+
 	if(padapter->HalFunc.mgnt_xmit)
 		ret = padapter->HalFunc.mgnt_xmit(padapter, pmgntframe);
 	return ret;
 }
 
 s32	rtw_hal_init_xmit_priv(_adapter *padapter)
-{	
+{
 	if(padapter->HalFunc.init_xmit_priv != NULL)
 		return padapter->HalFunc.init_xmit_priv(padapter);
 	return _FAIL;
@@ -285,7 +285,7 @@ void	rtw_hal_free_xmit_priv(_adapter *padapter)
 }
 
 s32	rtw_hal_init_recv_priv(_adapter *padapter)
-{	
+{
 	if(padapter->HalFunc.init_recv_priv)
 		return padapter->HalFunc.init_recv_priv(padapter);
 
@@ -293,7 +293,7 @@ s32	rtw_hal_init_recv_priv(_adapter *padapter)
 }
 void	rtw_hal_free_recv_priv(_adapter *padapter)
 {
-	
+
 	if(padapter->HalFunc.free_recv_priv)
 		padapter->HalFunc.free_recv_priv(padapter);
 }
@@ -309,7 +309,7 @@ void rtw_hal_update_ra_mask(struct sta_info *psta, u8 rssi_level)
 	padapter = psta->padapter;
 
 	pmlmepriv = &(padapter->mlmepriv);
-	
+
 	if(check_fwstate(pmlmepriv, WIFI_AP_STATE) == _TRUE)
 	{
 		add_RATid(padapter, psta, rssi_level);
@@ -326,7 +326,7 @@ void	rtw_hal_add_ra_tid(_adapter *padapter, u32 bitmap, u8* arg, u8 rssi_level)
 	if(padapter->HalFunc.Add_RateATid)
 		padapter->HalFunc.Add_RateATid(padapter, bitmap, arg, rssi_level);
 }
-#ifdef CONFIG_CONCURRENT_MODE	
+#ifdef CONFIG_CONCURRENT_MODE
 void	rtw_hal_clone_data(_adapter *dst_padapter, _adapter *src_padapter)
 {
 	if(dst_padapter->HalFunc.clone_haldata)
@@ -369,7 +369,7 @@ u32	rtw_hal_read_rfreg(_adapter *padapter, u32 eRFPath, u32 RegAddr, u32 BitMask
 void	rtw_hal_write_rfreg(_adapter *padapter, u32 eRFPath, u32 RegAddr, u32 BitMask, u32 Data)
 {
 	if(padapter->HalFunc.write_rfreg)
-		padapter->HalFunc.write_rfreg(padapter, eRFPath, RegAddr, BitMask, Data);	
+		padapter->HalFunc.write_rfreg(padapter, eRFPath, RegAddr, BitMask, Data);
 }
 
 s32	rtw_hal_interrupt_handler(_adapter *padapter)
@@ -402,7 +402,7 @@ void	rtw_hal_dm_watchdog(_adapter *padapter)
 #if defined(CONFIG_CONCURRENT_MODE)
 	if (padapter->adapter_type != PRIMARY_ADAPTER)
 		return;
-#endif	
+#endif
 	if(padapter->HalFunc.hal_dm_watchdog)
 		padapter->HalFunc.hal_dm_watchdog(padapter);
 }
@@ -410,16 +410,16 @@ void	rtw_hal_dm_watchdog(_adapter *padapter)
 void rtw_hal_bcn_related_reg_setting(_adapter *padapter)
 {
 	if(padapter->HalFunc.SetBeaconRelatedRegistersHandler)
-		padapter->HalFunc.SetBeaconRelatedRegistersHandler(padapter);	
+		padapter->HalFunc.SetBeaconRelatedRegistersHandler(padapter);
 }
 
 
 #ifdef CONFIG_ANTENNA_DIVERSITY
 u8	rtw_hal_antdiv_before_linked(_adapter *padapter)
-{	
+{
 	if(padapter->HalFunc.AntDivBeforeLinkHandler)
 		return padapter->HalFunc.AntDivBeforeLinkHandler(padapter);
-	return _FALSE;		
+	return _FALSE;
 }
 void	rtw_hal_antdiv_rssi_compared(_adapter *padapter, WLAN_BSSID_EX *dst, WLAN_BSSID_EX *src)
 {
@@ -441,7 +441,7 @@ s32	rtw_hal_hostap_mgnt_xmit_entry(_adapter *padapter, _pkt *pkt)
 void	rtw_hal_sreset_init(_adapter *padapter)
 {
 	if(padapter->HalFunc.sreset_init_value)
-		padapter->HalFunc.sreset_init_value(padapter); 
+		padapter->HalFunc.sreset_init_value(padapter);
 }
 void rtw_hal_sreset_reset(_adapter *padapter)
 {
@@ -464,18 +464,18 @@ void rtw_hal_sreset_xmit_status_check(_adapter *padapter)
 		return;
 #endif
 	if(padapter->HalFunc.sreset_xmit_status_check)
-		padapter->HalFunc.sreset_xmit_status_check(padapter);		
+		padapter->HalFunc.sreset_xmit_status_check(padapter);
 }
 void rtw_hal_sreset_linked_status_check(_adapter *padapter)
 {
 	if(padapter->HalFunc.sreset_linked_status_check)
-		padapter->HalFunc.sreset_linked_status_check(padapter);	
+		padapter->HalFunc.sreset_linked_status_check(padapter);
 }
 u8   rtw_hal_sreset_get_wifi_status(_adapter *padapter)
 {
 	u8 status = 0;
-	if(padapter->HalFunc.sreset_get_wifi_status)				
-		status = padapter->HalFunc.sreset_get_wifi_status(padapter);       
+	if(padapter->HalFunc.sreset_get_wifi_status)
+		status = padapter->HalFunc.sreset_get_wifi_status(padapter);
 	return status;
 }
 
@@ -512,7 +512,7 @@ s32 rtw_hal_xmit_thread_handler(_adapter *padapter)
 void rtw_hal_notch_filter(_adapter *adapter, bool enable)
 {
 	if(adapter->HalFunc.hal_notch_filter)
-		adapter->HalFunc.hal_notch_filter(adapter,enable);		
+		adapter->HalFunc.hal_notch_filter(adapter,enable);
 }
 
 void rtw_hal_reset_security_engine(_adapter * adapter)
@@ -530,7 +530,6 @@ s32 rtw_hal_c2h_handler(_adapter *adapter, struct c2h_evt_hdr *c2h_evt)
 }
 
 c2h_id_filter rtw_hal_c2h_id_filter_ccx(_adapter *adapter)
-{	
-	return adapter->HalFunc.c2h_id_filter_ccx;	
+{
+	return adapter->HalFunc.c2h_id_filter_ccx;
 }
-

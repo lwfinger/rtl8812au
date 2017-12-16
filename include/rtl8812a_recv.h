@@ -74,9 +74,9 @@
 #define GET_RX_STATUS_DESC_OWN_8812(__pRxStatusDesc)				LE_BITS_TO_4BYTE( __pRxStatusDesc, 31, 1)
 
 //DWORD 1
-#define GET_RX_STATUS_DESC_MACID_8812(__pRxDesc) 					LE_BITS_TO_4BYTE(__pRxDesc+4, 0, 7)
-#define GET_RX_STATUS_DESC_TID_8812(__pRxDesc) 					LE_BITS_TO_4BYTE(__pRxDesc+4, 8, 4)
-#define GET_RX_STATUS_DESC_AMSDU_8812(__pRxDesc) 					LE_BITS_TO_4BYTE(__pRxDesc+4, 13, 1)
+#define GET_RX_STATUS_DESC_MACID_8812(__pRxDesc)					LE_BITS_TO_4BYTE(__pRxDesc+4, 0, 7)
+#define GET_RX_STATUS_DESC_TID_8812(__pRxDesc)					LE_BITS_TO_4BYTE(__pRxDesc+4, 8, 4)
+#define GET_RX_STATUS_DESC_AMSDU_8812(__pRxDesc)					LE_BITS_TO_4BYTE(__pRxDesc+4, 13, 1)
 #define GET_RX_STATUS_DESC_RXID_MATCH_8812(__pRxDesc)		LE_BITS_TO_4BYTE( __pRxDesc+4, 14, 1)
 #define GET_RX_STATUS_DESC_PAGGR_8812(__pRxDesc)				LE_BITS_TO_4BYTE( __pRxDesc+4, 15, 1)
 #define GET_RX_STATUS_DESC_A1_FIT_8812(__pRxDesc)				LE_BITS_TO_4BYTE( __pRxDesc+4, 16, 4)
@@ -120,10 +120,10 @@
 //DWORD 5
 #define GET_RX_STATUS_DESC_TSFL_8812(__pRxStatusDesc)				LE_BITS_TO_4BYTE( __pRxStatusDesc+20, 0, 32)
 
-#define GET_RX_STATUS_DESC_BUFF_ADDR_8812(__pRxDesc) 		LE_BITS_TO_4BYTE(__pRxDesc+24, 0, 32)
-#define GET_RX_STATUS_DESC_BUFF_ADDR64_8812(__pRxDesc) 		LE_BITS_TO_4BYTE(__pRxDesc+28, 0, 32)
+#define GET_RX_STATUS_DESC_BUFF_ADDR_8812(__pRxDesc)		LE_BITS_TO_4BYTE(__pRxDesc+24, 0, 32)
+#define GET_RX_STATUS_DESC_BUFF_ADDR64_8812(__pRxDesc)		LE_BITS_TO_4BYTE(__pRxDesc+28, 0, 32)
 
-#define SET_RX_STATUS_DESC_BUFF_ADDR_8812(__pRxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pRxDesc+24, 0, 32, __Value)
+#define SET_RX_STATUS_DESC_BUFF_ADDR_8812(__pRxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pRxDesc+24, 0, 32, __Value)
 
 
 #ifdef CONFIG_SDIO_HCI
@@ -150,4 +150,3 @@ void rtl8812_query_rx_desc_status(union recv_frame *precvframe, u8 *pdesc);
 void rtl8812_query_rx_phy_status(union recv_frame *prframe, u8 *pphy_stat);
 
 #endif
-

@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -33,7 +33,7 @@
 
 
 //================================================================================
-// LED_819xUsb routines. 
+// LED_819xUsb routines.
 //================================================================================
 
 //
@@ -42,7 +42,7 @@
 //
 static void
 SwLedOn_8812AU(
-	PADAPTER		padapter, 
+	PADAPTER		padapter,
 	PLED_USB		pLed
 )
 {
@@ -55,7 +55,7 @@ SwLedOn_8812AU(
 	}
 
 	if(	RT_GetInterfaceSelection(padapter) == INTF_SEL2_MINICARD ||
-	 	RT_GetInterfaceSelection(padapter) == INTF_SEL3_USB_Solo ||
+		RT_GetInterfaceSelection(padapter) == INTF_SEL3_USB_Solo ||
 		RT_GetInterfaceSelection(padapter) == INTF_SEL4_USB_Combo)
 	{
 		LedCfg = rtw_read8(padapter, REG_LEDCFG2);
@@ -112,7 +112,7 @@ SwLedOn_8812AU(
 				rtw_write8(padapter, (REG_LEDCFG2), (LedCfg&0x70)|BIT5); // SW control led1 on.
 				RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("SwLedOn LED2 0x%x\n", rtw_read32(padapter, REG_LEDCFG2)));
 				break;
-				
+
 			default:
 				break;
 		}
@@ -128,7 +128,7 @@ SwLedOn_8812AU(
 //
 static void
 SwLedOff_8812AU(
-	PADAPTER		padapter, 
+	PADAPTER		padapter,
 	PLED_USB		pLed
 )
 {
@@ -143,13 +143,13 @@ SwLedOff_8812AU(
 	if(	RT_GetInterfaceSelection(padapter) == INTF_SEL2_MINICARD ||
 		RT_GetInterfaceSelection(padapter) == INTF_SEL3_USB_Solo ||
 		RT_GetInterfaceSelection(padapter) == INTF_SEL4_USB_Combo)
-	{		
+	{
 		RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("In SwLedOff,LedAddr:%X LEDPIN=%d\n",REG_LEDCFG2, pLed->LedPin));
 		LedCfg = rtw_read8(padapter, REG_LEDCFG2);
-		
+
 		// 2009/10/23 MH Issau eed to move the LED GPIO from bit  0 to bit3.
 		// 2009/10/26 MH Issau if tyhe device is 8c DID is 0x8176, we need to enable bit6 to
-		// enable GPIO8 for controlling LED.	
+		// enable GPIO8 for controlling LED.
 		// 2010/07/02 Supprt Open-drain arrangement for controlling the LED. Added by Roger.
 		//
 		switch(pLed->LedPin)
@@ -159,13 +159,13 @@ SwLedOff_8812AU(
 				break;
 
 			case LED_PIN_LED0:
-				if(pHalData->bLedOpenDrain == _TRUE)					
+				if(pHalData->bLedOpenDrain == _TRUE)
 				{
-					LedCfg &= 0x90; // Set to software control.				
-					rtw_write8(padapter, REG_LEDCFG2, (LedCfg|BIT3));				
+					LedCfg &= 0x90; // Set to software control.
+					rtw_write8(padapter, REG_LEDCFG2, (LedCfg|BIT3));
 					LedCfg = rtw_read8(padapter, REG_MAC_PINMUX_CFG);
 					LedCfg &= 0xFE;
-					rtw_write8(padapter, REG_MAC_PINMUX_CFG, LedCfg);									
+					rtw_write8(padapter, REG_MAC_PINMUX_CFG, LedCfg);
 				}
 				else
 				{
@@ -200,7 +200,7 @@ SwLedOff_8812AU(
 				else
 				{
 					LedCfg = rtw_read8(padapter, REG_LEDCFG2);
-					LedCfg &= 0xe0; // Set to software control. 			
+					LedCfg &= 0xe0; // Set to software control.
 					if(IS_HARDWARE_TYPE_8723A(padapter))
 						rtw_write8(padapter, REG_LEDCFG2, (LedCfg|BIT3|BIT7|BIT5));
 					else
@@ -237,7 +237,7 @@ SwLedOff_8812AU(
 //
 static void
 SwLedOn_8821AU(
-	PADAPTER		Adapter, 
+	PADAPTER		Adapter,
 	PLED_USB		pLed
 )
 {
@@ -249,19 +249,19 @@ SwLedOn_8821AU(
 	}
 
 	if(	RT_GetInterfaceSelection(Adapter) == INTF_SEL2_MINICARD ||
-	 	RT_GetInterfaceSelection(Adapter) == INTF_SEL3_USB_Solo ||
+		RT_GetInterfaceSelection(Adapter) == INTF_SEL3_USB_Solo ||
 		RT_GetInterfaceSelection(Adapter) == INTF_SEL4_USB_Combo)
 	{
 		LedCfg = rtw_read8(Adapter, REG_LEDCFG2);
 		RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("In SwLedON,LedAddr:%X LEDPIN=%d\n",REG_LEDCFG2, pLed->LedPin));
 		switch(pLed->LedPin)
-		{	
+		{
 			case LED_PIN_GPIO0:
 				break;
 
 			case LED_PIN_LED0:
 
-				RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("In SwLedOn,LedAddr:%X LEDPIN=%d\n",REG_LEDCFG2, pLed->LedPin));				
+				RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("In SwLedOn,LedAddr:%X LEDPIN=%d\n",REG_LEDCFG2, pLed->LedPin));
 				LedCfg = rtw_read8(Adapter, REG_LEDCFG2);
 				rtw_write8(Adapter, REG_LEDCFG2, (LedCfg&0xf0)|BIT5|BIT6); // SW control led0 on.
 				break;
@@ -278,13 +278,13 @@ SwLedOn_8821AU(
 	else
 	{
 		switch(pLed->LedPin)
-		{	
+		{
 			case LED_PIN_GPIO0:
 				break;
 
 			case LED_PIN_LED0:
 			case LED_PIN_LED1:
-			case LED_PIN_LED2:			
+			case LED_PIN_LED2:
 				if(IS_HARDWARE_TYPE_8821U(Adapter))
 				{
 					LedCfg = rtw_read8(Adapter, REG_LEDCFG2);
@@ -308,7 +308,7 @@ SwLedOn_8821AU(
 //
 static void
 SwLedOff_8821AU(
-	PADAPTER		Adapter, 
+	PADAPTER		Adapter,
 	PLED_USB		pLed
 )
 {
@@ -323,13 +323,13 @@ SwLedOff_8821AU(
 	if(	RT_GetInterfaceSelection(Adapter) == INTF_SEL2_MINICARD ||
 		RT_GetInterfaceSelection(Adapter) == INTF_SEL3_USB_Solo ||
 		RT_GetInterfaceSelection(Adapter) == INTF_SEL4_USB_Combo)
-	{		
+	{
 		RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("In SwLedOff,LedAddr:%X LEDPIN=%d\n",REG_LEDCFG2, pLed->LedPin));
 		LedCfg = rtw_read8(Adapter, REG_LEDCFG2);
-		
+
 		// 2009/10/23 MH Issau eed to move the LED GPIO from bit  0 to bit3.
 		// 2009/10/26 MH Issau if tyhe device is 8c DID is 0x8176, we need to enable bit6 to
-		// enable GPIO8 for controlling LED.	
+		// enable GPIO8 for controlling LED.
 		// 2010/07/02 Supprt Open-drain arrangement for controlling the LED. Added by Roger.
 		//
 		switch(pLed->LedPin)
@@ -339,13 +339,13 @@ SwLedOff_8821AU(
 				break;
 
 			case LED_PIN_LED0:
-				if(pHalData->bLedOpenDrain == _TRUE)					
+				if(pHalData->bLedOpenDrain == _TRUE)
 				{
-					LedCfg &= 0x90; // Set to software control.				
-					rtw_write8(Adapter, REG_LEDCFG2, (LedCfg|BIT3));				
+					LedCfg &= 0x90; // Set to software control.
+					rtw_write8(Adapter, REG_LEDCFG2, (LedCfg|BIT3));
 					LedCfg = rtw_read8(Adapter, REG_MAC_PINMUX_CFG);
 					LedCfg &= 0xFE;
-					rtw_write8(Adapter, REG_MAC_PINMUX_CFG, LedCfg);									
+					rtw_write8(Adapter, REG_MAC_PINMUX_CFG, LedCfg);
 				}
 				else
 				{
@@ -387,7 +387,7 @@ SwLedOff_8821AU(
 				break;
 		}
 	}
-	
+
 	pLed->bLedOn = _FALSE;
 }
 
@@ -445,4 +445,3 @@ rtl8812au_DeInitSwLeds(
 	DeInitLed( &(ledpriv->SwLed1) );
 	DeInitLed( &(ledpriv->SwLed2) );
 }
-

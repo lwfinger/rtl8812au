@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -110,16 +110,16 @@
 //
 // Interface type.
 //
-#endif 
+#endif
 
 #ifdef CONFIG_USB_HCI
 
 //should be renamed and moved to another file
 typedef	enum _BOARD_TYPE_8192CUSB{
-	BOARD_USB_DONGLE 			= 0,		// USB dongle
-	BOARD_USB_High_PA 		= 1,		// USB dongle with high power PA
-	BOARD_MINICARD		  	= 2,		// Minicard
-	BOARD_USB_SOLO 		 	= 3,		// USB solo-Slim module
+	BOARD_USB_DONGLE			= 0,		// USB dongle
+	BOARD_USB_High_PA		= 1,		// USB dongle with high power PA
+	BOARD_MINICARD			= 2,		// Minicard
+	BOARD_USB_SOLO			= 3,		// USB solo-Slim module
 	BOARD_USB_COMBO			= 4,		// USB Combo-Slim module
 } BOARD_TYPE_8192CUSB, *PBOARD_TYPE_8192CUSB;
 
@@ -141,4 +141,3 @@ typedef	enum _BOARD_TYPE_8192CUSB{
 #include "basic_types.h"
 
 #endif
-

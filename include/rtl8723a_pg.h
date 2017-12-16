@@ -21,4 +21,3 @@
 #define __RTL8723A_PG_H__
 
 #endif
-

@@ -53,7 +53,7 @@
 #define BMC			BIT(24)
 #define LSG			BIT(26)
 #define FSG			BIT(27)
-#define OWN 		BIT(31)
+#define OWN		BIT(31)
 
 
 //OFFSET 4
@@ -61,7 +61,7 @@
 #define QSEL_SHT			8
 #define RATE_ID_SHT			16
 #define NAVUSEHDR			BIT(20)
-#define SEC_TYPE_SHT 		22
+#define SEC_TYPE_SHT		22
 #define PKT_OFFSET_SHT		26
 
 //OFFSET 8
@@ -114,7 +114,7 @@ typedef struct txdescriptor_8812
 
 	// Offset 4
 	u32 macid:6;
-	u32 rsvd0406:2;	
+	u32 rsvd0406:2;
 	u32 qsel:5;
 	u32 rd_nav_ext:1;
 	u32 lsig_txop_en:1;
@@ -164,7 +164,7 @@ typedef struct txdescriptor_8812
 	u32 cts2self:1;
 	u32 rtsen:1;
 	u32 hw_rts_en:1;
-	u32 port_id:1;	
+	u32 port_id:1;
 	u32 pwr_status:3;
 	u32 wait_dcts:1;
 	u32 cts2ap_en:1;
@@ -209,7 +209,7 @@ typedef struct txdescriptor_8812
 
 	// Offset 36
 	u32 rsvd36;
-}TXDESC_8812, *PTXDESC_8812; 
+}TXDESC_8812, *PTXDESC_8812;
 
 
 // Dword 0
@@ -234,20 +234,20 @@ typedef struct txdescriptor_8812
 #define SET_TX_DESC_RATE_ID_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 16, 5, __Value)
 #define SET_TX_DESC_EN_DESC_ID_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 21, 1, __Value)
 #define SET_TX_DESC_SEC_TYPE_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 22, 2, __Value)
-#define SET_TX_DESC_PKT_OFFSET_8812(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 24, 5, __Value)
+#define SET_TX_DESC_PKT_OFFSET_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+4, 24, 5, __Value)
 
 // Dword 2
-#define SET_TX_DESC_PAID_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 0,  9, __Value) 
+#define SET_TX_DESC_PAID_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 0,  9, __Value)
 #define SET_TX_DESC_CCA_RTS_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 10, 2, __Value)
-#define SET_TX_DESC_AGG_ENABLE_8812(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 12, 1, __Value)
-#define SET_TX_DESC_RDG_ENABLE_8812(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 13, 1, __Value)
-#define SET_TX_DESC_AGG_BREAK_8812(__pTxDesc, __Value) 				SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 16, 1, __Value)
+#define SET_TX_DESC_AGG_ENABLE_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 12, 1, __Value)
+#define SET_TX_DESC_RDG_ENABLE_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 13, 1, __Value)
+#define SET_TX_DESC_AGG_BREAK_8812(__pTxDesc, __Value)				SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 16, 1, __Value)
 #define SET_TX_DESC_MORE_FRAG_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 17, 1, __Value)
 #define SET_TX_DESC_RAW_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 18, 1, __Value)
 #define SET_TX_DESC_SPE_RPT_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 19, 1, __Value)
 #define SET_TX_DESC_AMPDU_DENSITY_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 20, 3, __Value)
-#define SET_TX_DESC_BT_INT_8812(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 23, 1, __Value)
-#define SET_TX_DESC_GID_8812(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 24, 6, __Value)
+#define SET_TX_DESC_BT_INT_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 23, 1, __Value)
+#define SET_TX_DESC_GID_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+8, 24, 6, __Value)
 
 // Dword 3
 #define SET_TX_DESC_WHEADER_LEN_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 0, 4, __Value)
@@ -263,8 +263,8 @@ typedef struct txdescriptor_8812
 #define SET_TX_DESC_NAV_USE_HDR_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 15, 1, __Value)
 #define SET_TX_DESC_USE_MAX_LEN_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 16, 1, __Value)
 #define SET_TX_DESC_MAX_AGG_NUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 17, 5, __Value)
-#define SET_TX_DESC_NDPA_8812(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 22, 2, __Value)
-#define SET_TX_DESC_AMPDU_MAX_TIME_8812(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 24, 8, __Value)
+#define SET_TX_DESC_NDPA_8812(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 22, 2, __Value)
+#define SET_TX_DESC_AMPDU_MAX_TIME_8812(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+12, 24, 8, __Value)
 
 // Dword 4
 #define SET_TX_DESC_TX_RATE_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+16, 0, 7, __Value)
@@ -276,7 +276,7 @@ typedef struct txdescriptor_8812
 
 // Dword 5
 #define SET_TX_DESC_DATA_SC_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 0, 4, __Value)
-#define SET_TX_DESC_DATA_SHORT_8812(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 4, 1, __Value)
+#define SET_TX_DESC_DATA_SHORT_8812(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 4, 1, __Value)
 #define SET_TX_DESC_DATA_BW_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 5, 2, __Value)
 #define SET_TX_DESC_DATA_LDPC_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 7, 1, __Value)
 #define SET_TX_DESC_DATA_STBC_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+20, 8, 2, __Value)
@@ -287,33 +287,33 @@ typedef struct txdescriptor_8812
 // Dword 6
 #define SET_TX_DESC_MBSSID_8821(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+24, 12, 4, __Value)
 
-// Dword 7 
-#define SET_TX_DESC_TX_BUFFER_SIZE_8812(__pTxDesc, __Value) 		SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
+// Dword 7
+#define SET_TX_DESC_TX_BUFFER_SIZE_8812(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
 #define SET_TX_DESC_TX_DESC_CHECKSUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
-#define SET_TX_DESC_USB_TXAGG_NUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 24, 8, __Value) 
+#define SET_TX_DESC_USB_TXAGG_NUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 24, 8, __Value)
 #ifdef CONFIG_SDIO_HCI
 #define SET_TX_DESC_SDIO_TXSEQ_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 16, 8, __Value)
 #endif
 
 // Dword 8
-#define SET_TX_DESC_HWSEQ_EN_8812(__pTxDesc, __Value) 			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
+#define SET_TX_DESC_HWSEQ_EN_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
 
 // Dword 9
-#define SET_TX_DESC_SEQ_8812(__pTxDesc, __Value) 					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 12, 12, __Value)
+#define SET_TX_DESC_SEQ_8812(__pTxDesc, __Value)					SET_BITS_TO_LE_4BYTE(__pTxDesc+36, 12, 12, __Value)
 
 // Dword 10
-#define SET_TX_DESC_TX_BUFFER_ADDRESS_8812(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+40, 0, 32, __Value)
+#define SET_TX_DESC_TX_BUFFER_ADDRESS_8812(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+40, 0, 32, __Value)
 
 // Dword 11
-#define SET_TX_DESC_NEXT_DESC_ADDRESS_8812(__pTxDesc, __Value) 	SET_BITS_TO_LE_4BYTE(__pTxDesc+48, 0, 32, __Value)
+#define SET_TX_DESC_NEXT_DESC_ADDRESS_8812(__pTxDesc, __Value)	SET_BITS_TO_LE_4BYTE(__pTxDesc+48, 0, 32, __Value)
 
 
 #define SET_EARLYMODE_PKTNUM_8812(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr, 0, 4, __Value)
-#define SET_EARLYMODE_LEN0_8812(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr, 4, 15, __Value)
-#define SET_EARLYMODE_LEN1_1_8812(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr, 19, 13, __Value)
-#define SET_EARLYMODE_LEN1_2_8812(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr+4, 0, 2, __Value)
-#define SET_EARLYMODE_LEN2_8812(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr+4, 2, 15,  __Value)
-#define SET_EARLYMODE_LEN3_8812(__pAddr, __Value) 					SET_BITS_TO_LE_4BYTE(__pAddr+4, 17, 15, __Value)
+#define SET_EARLYMODE_LEN0_8812(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr, 4, 15, __Value)
+#define SET_EARLYMODE_LEN1_1_8812(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr, 19, 13, __Value)
+#define SET_EARLYMODE_LEN1_2_8812(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr+4, 0, 2, __Value)
+#define SET_EARLYMODE_LEN2_8812(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr+4, 2, 15,  __Value)
+#define SET_EARLYMODE_LEN3_8812(__pAddr, __Value)					SET_BITS_TO_LE_4BYTE(__pAddr+4, 17, 15, __Value)
 
 #ifdef CONFIG_TX_EARLY_MODE
 #define USB_DUMMY_OFFSET		2
@@ -365,4 +365,3 @@ u8	SCMapping_8812(PADAPTER Adapter, struct pkt_attrib	*pattrib);
 #ifdef CONFIG_RTL8821A
 #include "rtl8821a_xmit.h"
 #endif // CONFIG_RTL8821A
-

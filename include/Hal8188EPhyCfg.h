@@ -38,7 +38,7 @@
 /*--------------------------Define Parameters-------------------------------*/
 
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 #define MAX_PG_GROUP 13
 
@@ -47,7 +47,7 @@
 /* BB/RF related */
 
 
-/*------------------------------Define structure----------------------------*/ 
+/*------------------------------Define structure----------------------------*/
 
 
 /*------------------------Export global variable----------------------------*/
@@ -98,21 +98,21 @@ void	rtl8192c_PHY_GetHWRegOriginalValue(	IN	PADAPTER		Adapter	);
 //
 // RF Power setting
 //
-//extern	BOOLEAN	PHY_SetRFPowerState(IN	PADAPTER			Adapter, 
+//extern	BOOLEAN	PHY_SetRFPowerState(IN	PADAPTER			Adapter,
 //									IN	RT_RF_POWER_STATE	eRFPowerState);
 
 //
 // BB TX Power R/W
 //
 void	PHY_GetTxPowerLevel8188E(	IN	PADAPTER		Adapter,
-											OUT u32*    		powerlevel	);
+											OUT u32*		powerlevel	);
 void	PHY_SetTxPowerLevel8188E(	IN	PADAPTER		Adapter,
 											IN	u8			channel	);
 BOOLEAN	PHY_UpdateTxPowerDbm8188E(	IN	PADAPTER	Adapter,
 											IN	int		powerInDbm	);
 
 //
-VOID 
+VOID
 PHY_ScanOperationBackup8188E(IN	PADAPTER	Adapter,
 										IN	u8		Operation	);
 
@@ -178,7 +178,7 @@ PHY_EnableHostClkReq(
 BOOLEAN
 SetAntennaConfig92C(
 	IN	PADAPTER	Adapter,
-	IN	u8		DefaultAnt	
+	IN	u8		DefaultAnt
 	);
 
 #ifdef CONFIG_PHY_SETTING_WITH_ODM
@@ -204,7 +204,7 @@ storePwrIndexDiffRateOffset(
 
 //==================================================================
 // Note: If SIC_ENABLE under PCIE, because of the slow operation
-//	you should 
+//	you should
 //	2) "#define RTL8723_FPGA_VERIFICATION	1"				in Precomp.h.WlanE.Windows
 //	3) "#define RTL8190_Download_Firmware_From_Header	0"	in Precomp.h.WlanE.Windows if needed.
 //
@@ -268,4 +268,3 @@ VOID SIC_Init(IN PADAPTER Adapter);
 
 
 #endif	// __INC_HAL8192CPHYCFG_H
-
