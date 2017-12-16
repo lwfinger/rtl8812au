@@ -184,7 +184,7 @@ u8 query_802_11_association_information(	_adapter *padapter,PNDIS_802_11_ASSOCIA
 		}
 	}												  	
 	RT_TRACE(_module_rtl871x_ioctl_query_c_,_drv_info_,("\n exit query_802_11_association_information \n"));
-_func_exit_;
+
 
 	return _TRUE;
 }

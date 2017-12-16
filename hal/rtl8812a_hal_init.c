@@ -1145,7 +1145,7 @@ SetFwRelatedForWoWLAN8812(
 
 static void rtl8812_free_hal_data(PADAPTER padapter)
 {
-_func_enter_;
+
 	if (padapter->HalData) {
 #ifdef CONFIG_CONCURRENT_MODE
 		if(padapter->isprimary)
@@ -1153,7 +1153,7 @@ _func_enter_;
 			rtw_mfree(padapter->HalData, sizeof(HAL_DATA_TYPE));
 		padapter->HalData = NULL;
 	}
-_func_exit_;
+
 }
 
 //===========================================================
@@ -4761,7 +4761,7 @@ void SetHwReg8812A(PADAPTER padapter, u8 variable, u8 *pval)
 	u16 val16;
 	u32 val32;
 
-_func_enter_;
+
 
 	pHalData = GET_HAL_DATA(padapter);
 	pdmpriv = &pHalData->dmpriv;
@@ -5558,7 +5558,7 @@ _func_enter_;
 			break;
 	}
 
-_func_exit_;
+
 }
 
 void GetHwReg8812A(PADAPTER padapter, u8 variable, u8 *pval)
@@ -5569,7 +5569,7 @@ void GetHwReg8812A(PADAPTER padapter, u8 variable, u8 *pval)
 	u16 val16;
 	u32 val32;
 
-_func_enter_;
+
 
 	pHalData = GET_HAL_DATA(padapter);
 	podmpriv = &pHalData->odmpriv;
@@ -5653,7 +5653,7 @@ _func_enter_;
 			break;
 	}
 
-_func_exit_;
+
 }
 
 /*

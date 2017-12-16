@@ -165,8 +165,6 @@ struct oid_obj_priv {
 	(defined(PLATFORM_WINDOWS) && defined(_RTW_IOCTL_RTL_C_))
 static NDIS_STATUS oid_null_function(struct oid_par_priv* poid_par_priv)
 {
-	_func_enter_;
-	_func_exit_;
 	return NDIS_STATUS_SUCCESS;
 }
 #endif

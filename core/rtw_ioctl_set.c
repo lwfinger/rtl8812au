@@ -36,7 +36,7 @@ u8 rtw_validate_ssid(NDIS_802_11_SSID *ssid)
 	u8	 i;
 	u8	ret=_TRUE;
 
-_func_enter_;	
+	
 
 	if (ssid->SsidLength > 32) {
 		RT_TRACE(_module_rtl871x_ioctl_set_c_, _drv_err_, ("ssid length >32\n"));
@@ -56,7 +56,7 @@ _func_enter_;
 
 exit:	
 
-_func_exit_;
+
 
 	return ret;
 }
@@ -71,7 +71,7 @@ u8 rtw_do_join(_adapter * padapter)
 	_queue	*queue	= &(pmlmepriv->scanned_queue);
 	u8 ret=_SUCCESS;
 
-_func_enter_;
+
 
 	_enter_critical_bh(&(pmlmepriv->scanned_queue.lock), &irqL);
 	phead = get_list_head(queue);
@@ -200,7 +200,7 @@ _func_enter_;
 	
 exit:
 	
-_func_exit_;	
+	
 
 	return ret;	
 }
@@ -210,7 +210,7 @@ u8 rtw_pnp_set_power_wakeup(_adapter* padapter)
 {
 	u8 res=_SUCCESS;
 
-_func_enter_;
+
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_err_,("==>rtw_pnp_set_power_wakeup!!!\n"));
 	
@@ -218,7 +218,7 @@ _func_enter_;
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_err_,("<==rtw_pnp_set_power_wakeup!!!\n"));
 
-_func_exit_;
+
 	
 	return res;
 }
@@ -227,7 +227,7 @@ u8 rtw_pnp_set_power_sleep(_adapter* padapter)
 {
 	u8 res=_SUCCESS;	
 	
-_func_enter_;
+
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_err_,("==>rtw_pnp_set_power_sleep!!!\n"));
 	//DbgPrint("+rtw_pnp_set_power_sleep\n");
@@ -236,14 +236,14 @@ _func_enter_;
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_err_,("<==rtw_pnp_set_power_sleep!!!\n"));
 
-_func_exit_;
+
 
 	return res;
 }
 
 u8 rtw_set_802_11_reload_defaults(_adapter * padapter, NDIS_802_11_RELOAD_DEFAULTS reloadDefaults)
 {
-_func_enter_;
+
 
 	switch( reloadDefaults)
 	{
@@ -259,7 +259,7 @@ _func_enter_;
 	
 	//TO DO...
 
-_func_exit_;
+
 	
 	return _TRUE;
 }
@@ -268,7 +268,7 @@ u8 set_802_11_test(_adapter* padapter, NDIS_802_11_TEST *test)
 {
 	u8 ret=_TRUE;
 	
-_func_enter_;
+
 
 	switch(test->Type)
 	{
@@ -287,7 +287,7 @@ _func_enter_;
 			break;
 	}
 
-_func_exit_;
+
 
 	return ret;	
 }
@@ -308,7 +308,7 @@ u8 rtw_set_802_11_bssid(_adapter* padapter, u8 *bssid)
 
 	struct mlme_priv *pmlmepriv = &padapter->mlmepriv;
 	
-_func_enter_;
+
 	
 	DBG_871X_LEVEL(_drv_always_, "set bssid:%pM\n", bssid);
 
@@ -378,7 +378,7 @@ exit:
 	RT_TRACE(_module_rtl871x_ioctl_set_c_, _drv_err_,
 		("rtw_set_802_11_bssid: status=%d\n", status));
 	
-_func_exit_;
+
 
 	return status;
 }
@@ -392,7 +392,7 @@ u8 rtw_set_802_11_ssid(_adapter* padapter, NDIS_802_11_SSID *ssid)
 	struct mlme_priv *pmlmepriv = &padapter->mlmepriv;
 	struct wlan_network *pnetwork = &pmlmepriv->cur_network;
 	
-_func_enter_;
+
 	
 	DBG_871X_LEVEL(_drv_always_, "set ssid [%s] fw_state=0x%08x\n",
 		       	ssid->Ssid, get_fwstate(pmlmepriv));
@@ -502,7 +502,7 @@ exit:
 	RT_TRACE(_module_rtl871x_ioctl_set_c_, _drv_err_,
 		("-rtw_set_802_11_ssid: status=%d\n", status));
 	
-_func_exit_;
+
 
 	return status;
 	
@@ -516,7 +516,7 @@ u8 rtw_set_802_11_infrastructure_mode(_adapter* padapter,
 	struct	wlan_network	*cur_network = &pmlmepriv->cur_network;
 	NDIS_802_11_NETWORK_INFRASTRUCTURE* pold_state = &(cur_network->network.InfrastructureMode);
 	
-_func_enter_;
+
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_notice_,
 		 ("+rtw_set_802_11_infrastructure_mode: old=%d new=%d fw_state=0x%08x\n",
@@ -590,7 +590,7 @@ _func_enter_;
 		_exit_critical_bh(&pmlmepriv->lock, &irqL);
 	}
 
-_func_exit_;
+
 
 	return _TRUE;
 }
@@ -601,7 +601,7 @@ u8 rtw_set_802_11_disassociate(_adapter *padapter)
 	_irqL irqL;
 	struct mlme_priv * pmlmepriv = &padapter->mlmepriv;
 
-_func_enter_;
+
 
 	_enter_critical_bh(&pmlmepriv->lock, &irqL);
 
@@ -617,7 +617,7 @@ _func_enter_;
 
 	_exit_critical_bh(&pmlmepriv->lock, &irqL);
 	
-_func_exit_;
+
 
 	return _TRUE;	
 }
@@ -628,7 +628,7 @@ u8 rtw_set_802_11_bssid_list_scan(_adapter* padapter, NDIS_802_11_SSID *pssid, i
 	struct	mlme_priv		*pmlmepriv= &padapter->mlmepriv;
 	u8	res=_TRUE;
 	
-_func_enter_;
+
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_err_,("+rtw_set_802_11_bssid_list_scan(), fw_state=%x\n", get_fwstate(pmlmepriv)));
 
@@ -669,7 +669,7 @@ _func_enter_;
 	}
 exit:
 	
-_func_exit_;
+
 
 	return res;	
 }
@@ -680,7 +680,7 @@ u8 rtw_set_802_11_authentication_mode(_adapter* padapter, NDIS_802_11_AUTHENTICA
 	int res;
 	u8 ret;
 	
-_func_enter_;
+
 
 	RT_TRACE(_module_rtl871x_ioctl_set_c_,_drv_info_,("set_802_11_auth.mode(): mode=%x\n", authmode));
 
@@ -703,7 +703,7 @@ _func_enter_;
 	else
 		ret=_FALSE;
 	
-_func_exit_;
+
 
 	return ret;
 }
@@ -716,7 +716,7 @@ u8 rtw_set_802_11_add_wep(_adapter* padapter, NDIS_802_11_WEP *wep){
 	struct security_priv* psecuritypriv=&(padapter->securitypriv);
 	u8		ret=_SUCCESS;
 
-_func_enter_;
+
 
 	bdefaultkey=(wep->KeyIndex & 0x40000000) > 0 ? _FALSE : _TRUE;   //for ???
 	btransmitkey= (wep->KeyIndex & 0x80000000) > 0 ? _TRUE  : _FALSE;	//for ???
@@ -766,7 +766,7 @@ _func_enter_;
 		ret= _FALSE;
 exit:
 	
-_func_exit_;
+
 
 	return ret;
 	
@@ -776,7 +776,7 @@ u8 rtw_set_802_11_remove_wep(_adapter* padapter, u32 keyindex){
 	
 	u8 ret=_SUCCESS;
 	
-_func_enter_;
+
 
 	if (keyindex >= 0x80000000 || padapter == NULL){
 		
@@ -809,7 +809,7 @@ _func_enter_;
 	
 exit:	
 	
-_func_exit_;
+
 
 	return ret;
 	
@@ -824,7 +824,7 @@ u8 rtw_set_802_11_add_key(_adapter* padapter, NDIS_802_11_KEY *key){
 	u8	bgrouptkey = _FALSE;//can be remove later
 	u8	ret=_SUCCESS;
 	
-_func_enter_;
+
 
 	if (((key->KeyIndex & 0x80000000) == 0) && ((key->KeyIndex & 0x40000000) > 0)){
 
@@ -1175,7 +1175,7 @@ _func_enter_;
 
 exit:
 	
-_func_exit_;
+
 
 	return ret;	
 }
@@ -1189,7 +1189,7 @@ u8 rtw_set_802_11_remove_key(_adapter*	padapter, NDIS_802_11_REMOVE_KEY *key){
 	u8	keyIndex = (u8)key->KeyIndex & 0x03;
 	u8	ret=_SUCCESS;
 	
-_func_enter_;
+
 
 	if ((key->KeyIndex & 0xbffffffc) > 0) {
 		ret=_FAIL;
@@ -1227,7 +1227,7 @@ _func_enter_;
 
 exit:
 	
-_func_exit_;
+
 
 	return _TRUE;
 	

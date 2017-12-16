@@ -1476,7 +1476,7 @@ u32 rtl8812au_hal_init(PADAPTER Adapter)
 
 
 
-_func_enter_;
+
 	
 HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_BEGIN);
 	if(Adapter->pwrctrlpriv.bkeepfwalive)
@@ -1952,7 +1952,7 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_END);
 	#endif
 
 
-_func_exit_;
+
 
 	return status;
 }
@@ -2082,7 +2082,7 @@ unsigned int rtl8812au_inirp_init(PADAPTER Adapter)
 	u32 (*_read_interrupt)(struct intf_hdl *pintfhdl, u32 addr);
 #endif
 
-_func_enter_;
+
 
 	_read_port = pintfhdl->io_ops._read_port;
 
@@ -2126,7 +2126,7 @@ exit:
 	
 	RT_TRACE(_module_hci_hal_init_c_,_drv_info_,("<=== usb_inirp_init \n"));
 
-_func_exit_;
+
 
 	return status;
 
@@ -2598,7 +2598,7 @@ void SetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
 	DM_ODM_T 		*podmpriv = &pHalData->odmpriv;
-_func_enter_;
+
 
 	switch(variable)
 	{
@@ -2654,14 +2654,14 @@ _func_enter_;
 			break;
 	}
 
-_func_exit_;
+
 }
 
 void GetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	DM_ODM_T 		*podmpriv = &pHalData->odmpriv;
-_func_enter_;
+
 
 	switch(variable)
 	{
@@ -2670,7 +2670,7 @@ _func_enter_;
 			break;
 	}
 
-_func_exit_;
+
 }
 
 //
@@ -2837,7 +2837,7 @@ void rtl8812au_set_hal_ops(_adapter * padapter)
 {
 	struct hal_ops	*pHalFunc = &padapter->HalFunc;
 
-_func_enter_;
+
 
 #ifdef CONFIG_CONCURRENT_MODE
 	if(padapter->isprimary)
@@ -2904,7 +2904,7 @@ _func_enter_;
 	pHalFunc->xmit_thread_handler = &rtl8812au_xmit_buf_handler;
 #endif
 	rtl8812_set_hal_ops(pHalFunc);
-_func_exit_;
+
 
 }
 

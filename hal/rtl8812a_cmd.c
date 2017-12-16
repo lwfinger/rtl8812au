@@ -77,7 +77,7 @@ static s32 FillH2CCmd_8812(PADAPTER padapter, u8 ElementID, u32 CmdLen, u8 *pCmd
 	u32	h2c_cmd_ex = 0;
 	s32 ret = _FAIL;
 
-_func_enter_;
+
 
 	padapter = GET_PRIMARY_ADAPTER(padapter);		
 	pHalData = GET_HAL_DATA(padapter);
@@ -158,7 +158,7 @@ exit:
 
 	_exit_critical_mutex(&(adapter_to_dvobj(padapter)->h2c_fwcmd_mutex), NULL);	
 
-_func_exit_;
+
 
 	return ret;
 }
@@ -186,13 +186,13 @@ u8 rtl8812_set_rssi_cmd(_adapter*padapter, u8 *param)
 {
 	u8	res=_SUCCESS;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
-_func_enter_;
+
 
 	*((u32*) param ) = cpu_to_le32( *((u32*) param ) );
 
 	FillH2CCmd_8812(padapter, H2C_8812_RSSI_REPORT, 4, param);
 
-_func_exit_;
+
 
 	return res;
 }
@@ -321,7 +321,7 @@ void rtl8812_set_raid_cmd(PADAPTER padapter, u32 bitmap, u8* arg)
 	struct sta_info	*psta;
 	u8 macid, init_rate, raid, shortGIrate=_FALSE;
 
-_func_enter_;
+
 
 	macid = arg[0];
 	raid = arg[1];
@@ -359,7 +359,7 @@ _func_enter_;
 
 	pdmpriv->INIDATA_RATE[macid] = init_rate;
 
-_func_exit_;
+
 
 }
 
@@ -384,7 +384,7 @@ void rtl8812_set_FwPwrMode_cmd(PADAPTER padapter, u8 PSMode)
 	struct pwrctrl_priv *pwrpriv = &padapter->pwrctrlpriv;
 	u8	Mode = 0, RLBM = 0, PowerState = 0, LPSAwakeIntvl = 1;
 
-_func_enter_;
+
 
 	DBG_871X("%s: Mode=%d SmartPS=%d UAPSD=%d\n", __FUNCTION__,
 			PSMode, pwrpriv->smart_ps, padapter->registrypriv.uapsd_enable);
@@ -443,7 +443,7 @@ _func_enter_;
 
 	FillH2CCmd_8812(padapter, H2C_8812_SETPWRMODE, sizeof(u1H2CSetPwrMode), (u8 *)&u1H2CSetPwrMode);
 
-_func_exit_;
+
 }
 
 void rtl8812_set_FwMediaStatus_cmd(PADAPTER padapter, u16 mstatus_rpt )
@@ -955,7 +955,7 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 	u8	DLBcnCount=0;
 	u32 poll = 0;
 
-_func_enter_;
+
 
 	DBG_871X("%s mstatus(%x)\n", __FUNCTION__,mstatus);
 
@@ -1106,7 +1106,7 @@ _func_enter_;
 		DBG_871X_LEVEL(_drv_info_, "%s wowlan_mode is off\n", __func__);
 	}
 #endif //CONFIG_WOWLAN
-_func_exit_;
+
 }
 
 #ifdef CONFIG_P2P_PS
@@ -1118,7 +1118,7 @@ void rtl8812_set_p2p_ps_offload_cmd(_adapter* padapter, u8 p2p_ps_state)
 	u8	*p2p_ps_offload = (u8 *)&pHalData->p2p_ps_offload;
 	u8	i;
 
-_func_enter_;
+
 
 #if 1
 	switch(p2p_ps_state)
@@ -1200,7 +1200,7 @@ _func_enter_;
 	FillH2CCmd_8812(padapter, H2C_8812_P2P_PS_OFFLOAD, 1, p2p_ps_offload);
 #endif
 
-_func_exit_;
+
 
 }
 #endif //CONFIG_P2P
@@ -1215,7 +1215,7 @@ u8 rtl8812_reset_tsf(_adapter *padapter, u8 reset_port )
 	u8	res=_SUCCESS;
 
 	s32 ret;
-_func_enter_;
+
 	if (IFACE_PORT0==reset_port) {
 		buf[0] = 0x1; buf[1] = 0;
 	} else{
@@ -1224,7 +1224,7 @@ _func_enter_;
 
 	ret = FillH2CCmd_8812(padapter, H2C_8812_TSF_RESET, 2, buf);
 
-_func_exit_;
+
 
 	return res;
 }
@@ -1262,7 +1262,7 @@ void rtl8812_set_wowlan_cmd(_adapter* padapter, u8 enable)
 	SETWOWLAN_PARM		pwowlan_parm;
 	struct pwrctrl_priv	*pwrpriv=&padapter->pwrctrlpriv;
 
-_func_enter_;
+
 		DBG_871X_LEVEL(_drv_always_, "+%s+\n", __func__);
 
 		pwowlan_parm.mode =0;
@@ -1337,7 +1337,7 @@ _func_enter_;
 			rtw_msleep_os(2);
 			res = FillH2CCmd_8812(padapter, H2C_8812_REMOTE_WAKE_CTRL, 3, (u8 *)&pwowlan_parm);
 		}
-_func_exit_;
+
 		DBG_871X_LEVEL(_drv_always_, "-%s res:%d-\n", __func__, res);
 		return ;
 }
