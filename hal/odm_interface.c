@@ -540,6 +540,7 @@ ODM_SetTimer(
 
 }
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 VOID
 ODM_InitializeTimer(
 	IN	PDM_ODM_T			pDM_Odm,
@@ -549,19 +550,11 @@ ODM_InitializeTimer(
 	IN	const char*			szID
 	)
 {
-#if(DM_ODM_SUPPORT_TYPE & (ODM_AP|ODM_ADSL))
-	pTimer->function = CallBackFunc;
-	pTimer->data = (unsigned long)pDM_Odm;
-	init_timer(pTimer);
-#elif(DM_ODM_SUPPORT_TYPE & ODM_CE)
 	PADAPTER Adapter = pDM_Odm->Adapter;
-	_init_timer(pTimer,Adapter->pnetdev,CallBackFunc,pDM_Odm);
-#elif(DM_ODM_SUPPORT_TYPE & ODM_WIN)
-	PADAPTER Adapter = pDM_Odm->Adapter;
-	PlatformInitializeTimer(Adapter, pTimer, CallBackFunc,pContext,szID);
-#endif
-}
 
+	_init_timer(pTimer,Adapter->pnetdev,CallBackFunc,pDM_Odm);
+}
+#endif
 
 VOID
 ODM_CancelTimer(
