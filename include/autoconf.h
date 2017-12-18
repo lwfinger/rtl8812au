@@ -42,12 +42,6 @@
 
 //#define CONFIG_IOCTL_CFG80211 1
 
-#ifdef CONFIG_PLATFORM_ARM_SUNxI
-	#ifndef CONFIG_IOCTL_CFG80211
-		#define CONFIG_IOCTL_CFG80211 1
-	#endif
-#endif
-
 #ifdef CONFIG_IOCTL_CFG80211
 	//#define RTW_USE_CFG80211_STA_EVENT /* Indecate new sta asoc through cfg80211_new_sta */
 	#define CONFIG_CFG80211_FORCE_COMPATIBLE_2_6_37_UNDER
@@ -229,12 +223,6 @@
 //#define CONFIG_USE_USB_BUFFER_ALLOC_TX 1	// Trade-off: For TX path, improve stability on some platforms, but may cause performance degrade on other platforms.
 //#define CONFIG_USE_USB_BUFFER_ALLOC_RX 1	// For RX path
 
-#ifdef CONFIG_PLATFORM_ARM_SUNxI
-	#ifndef		CONFIG_USE_USB_BUFFER_ALLOC_TX
-		#define CONFIG_USE_USB_BUFFER_ALLOC_TX
-	#endif
-#endif
-
 #ifdef CONFIG_USE_USB_BUFFER_ALLOC_RX
 #undef CONFIG_PREALLOC_RECV_SKB
 #endif
@@ -278,43 +266,6 @@
 #else
 	#define MP_DRIVER 0
 #endif
-
-
-/*
- * Platform  Related Config
- */
-#ifdef CONFIG_PLATFORM_MN10300
-	#define CONFIG_SPECIAL_SETTING_FOR_FUNAI_TV
-	#define CONFIG_USE_USB_BUFFER_ALLOC_RX
-
-	#if	defined (CONFIG_SW_ANTENNA_DIVERSITY)
-		#undef CONFIG_SW_ANTENNA_DIVERSITY
-		#define CONFIG_HW_ANTENNA_DIVERSITY
-	#endif
-
-	#if	defined (CONFIG_POWER_SAVING)
-		#undef CONFIG_POWER_SAVING
-	#endif
-
-#endif//CONFIG_PLATFORM_MN10300
-
-#ifdef CONFIG_PLATFORM_TI_DM365
-#define CONFIG_USE_USB_BUFFER_ALLOC_RX
-#endif
-
-
-#if defined(CONFIG_PLATFORM_ACTIONS_ATM702X)
-	#ifdef CONFIG_USB_TX_AGGREGATION
-		#undef CONFIG_USB_TX_AGGREGATION
-	#endif
-	#ifndef CONFIG_USE_USB_BUFFER_ALLOC_TX
-		#define CONFIG_USE_USB_BUFFER_ALLOC_TX
-	#endif
-	#ifndef CONFIG_USE_USB_BUFFER_ALLOC_RX
-		#define CONFIG_USE_USB_BUFFER_ALLOC_RX
-	#endif
-#endif
-
 
 /*
  * Outsource  Related Config

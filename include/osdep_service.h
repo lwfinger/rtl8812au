@@ -32,25 +32,10 @@
 #undef _FALSE
 #define _FALSE		0
 
-
-#ifdef PLATFORM_FREEBSD
-#include <osdep_service_bsd.h>
-#endif
-
-#ifdef PLATFORM_LINUX
 #include <osdep_service_linux.h>
 #include <linux/version.h>
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 11, 0)
 #include <linux/sched/signal.h>
-#endif
-#endif
-
-#ifdef PLATFORM_OS_XP
-#include <osdep_service_xp.h>
-#endif
-
-#ifdef PLATFORM_OS_CE
-#include <osdep_service_ce.h>
 #endif
 
 #define RTW_TIMER_HDL_NAME(name) rtw_##name##_timer_hdl
@@ -176,9 +161,7 @@ extern void	_rtw_init_listhead(_list *list);
 extern u32	rtw_is_list_empty(_list *phead);
 extern void	rtw_list_insert_head(_list *plist, _list *phead);
 extern void	rtw_list_insert_tail(_list *plist, _list *phead);
-#ifndef PLATFORM_FREEBSD
 extern void	rtw_list_delete(_list *plist);
-#endif //PLATFORM_FREEBSD
 
 extern void	_rtw_init_sema(_sema *sema, int init_val);
 extern void	_rtw_free_sema(_sema	*sema);
@@ -186,9 +169,7 @@ extern void	_rtw_up_sema(_sema	*sema);
 extern u32	_rtw_down_sema(_sema *sema);
 extern void	_rtw_mutex_init(_mutex *pmutex);
 extern void	_rtw_mutex_free(_mutex *pmutex);
-#ifndef PLATFORM_FREEBSD
 extern void	_rtw_spinlock_init(_lock *plock);
-#endif //PLATFORM_FREEBSD
 extern void	_rtw_spinlock_free(_lock *plock);
 extern void	_rtw_spinlock(_lock	*plock);
 extern void	_rtw_spinunlock(_lock	*plock);
@@ -231,87 +212,40 @@ extern void rtw_init_timer(_timer *ptimer, void *padapter, void *pfunc);
 
 __inline static unsigned char _cancel_timer_ex(_timer *ptimer)
 {
-#ifdef PLATFORM_LINUX
 	return del_timer_sync(ptimer);
-#endif
-#ifdef PLATFORM_FREEBSD
-	_cancel_timer(ptimer,0);
-	return 0;
-#endif
-#ifdef PLATFORM_WINDOWS
-	u8 bcancelled;
-
-	_cancel_timer(ptimer, &bcancelled);
-
-	return bcancelled;
-#endif
 }
 
 static __inline void thread_enter(char *name)
 {
-#ifdef PLATFORM_LINUX
 	#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 8, 0))
 	daemonize("%s", name);
 	#endif
 	allow_signal(SIGTERM);
-#endif
-#ifdef PLATFORM_FREEBSD
-	printf("%s", "RTKTHREAD_enter");
-#endif
 }
 
 __inline static void flush_signals_thread(void)
 {
-#ifdef PLATFORM_LINUX
 	if (signal_pending (current))
 	{
 		flush_signals(current);
 	}
-#endif
 }
 
 __inline static _OS_STATUS res_to_status(sint res)
 {
-
-#if defined (PLATFORM_LINUX) || defined (PLATFORM_MPIXEL) || defined (PLATFORM_FREEBSD)
 	return res;
-#endif
-
-#ifdef PLATFORM_WINDOWS
-
-	if (res == _SUCCESS)
-		return NDIS_STATUS_SUCCESS;
-	else
-		return NDIS_STATUS_FAILURE;
-
-#endif
-
 }
 
 __inline static void rtw_dump_stack(void)
 {
-#ifdef PLATFORM_LINUX
 	dump_stack();
-#endif
 }
 
 __inline static int rtw_bug_check(void *parg1, void *parg2, void *parg3, void *parg4)
 {
 	int ret = _TRUE;
 
-#ifdef PLATFORM_WINDOWS
-	if ( ((uint)parg1) <= 0x7fffffff ||
-		((uint)parg2) <= 0x7fffffff ||
-		((uint)parg3) <= 0x7fffffff ||
-		((uint)parg4) <= 0x7fffffff)
-	{
-		ret = _FALSE;
-		KeBugCheckEx(0x87110000, (ULONG_PTR)parg1, (ULONG_PTR)parg2, (ULONG_PTR)parg3, (ULONG_PTR)parg4);
-	}
-#endif
-
 	return ret;
-
 }
 
 #define _RND(sz, r) ((((sz)+((r)-1))/(r))*(r))
@@ -414,15 +348,10 @@ extern int rtw_is_file_readable(char *path);
 extern int rtw_retrive_from_file(char *path, u8* buf, u32 sz);
 extern int rtw_store_to_file(char *path, u8* buf, u32 sz);
 
-
-#ifndef PLATFORM_FREEBSD
 extern void rtw_free_netdev(struct net_device * netdev);
-#endif //PLATFORM_FREEBSD
-
 
 extern u64 rtw_modular64(u64 x, u64 y);
 extern u64 rtw_division64(u64 x, u64 y);
-
 
 /* Macros for handling unaligned memory accesses */
 

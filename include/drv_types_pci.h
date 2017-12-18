@@ -20,11 +20,7 @@
 #ifndef __DRV_TYPES_PCI_H__
 #define __DRV_TYPES_PCI_H__
 
-
-#ifdef PLATFORM_LINUX
 #include <linux/pci.h>
-#endif
-
 
 #define	INTEL_VENDOR_ID				0x8086
 #define	SIS_VENDOR_ID					0x1039

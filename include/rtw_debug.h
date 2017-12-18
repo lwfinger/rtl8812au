@@ -147,39 +147,16 @@
 	#define	_MODULE_DEFINE_	_module_efuse_
 #endif
 
-#ifdef PLATFORM_OS_CE
-extern void rtl871x_cedbg(const char *fmt, ...);
-#endif
-
 #define RT_TRACE(_Comp, _Level, Fmt) do{}while(0)
 #define RT_PRINT_DATA(_Comp, _Level, _TitleString, _HexData, _HexDataLen) do{}while(0)
 
-#ifdef PLATFORM_WINDOWS
-	#define DBG_871X do {} while(0)
-	#define MSG_8192C do {} while(0)
-	#define DBG_8192C do {} while(0)
-	#define DBG_871X_LEVEL do {} while(0)
-#else
 	#define DBG_871X(x, ...) do {} while(0)
 	#define MSG_8192C(x, ...) do {} while(0)
 	#define DBG_8192C(x,...) do {} while(0)
 	#define DBG_871X_LEVEL(x,...) do {} while(0)
-#endif
 
 #undef	_dbgdump
-#ifdef PLATFORM_WINDOWS
-
-	#ifdef PLATFORM_OS_XP
-		#define _dbgdump	DbgPrint
-	#elif defined PLATFORM_OS_CE
-		#define _dbgdump	rtl871x_cedbg
-	#endif
-
-#elif defined PLATFORM_LINUX
 	#define _dbgdump	printk
-#elif defined PLATFORM_FREEBSD
-	#define _dbgdump	printf
-#endif
 
 #define DRIVER_PREFIX	"RTL871X: "
 #define DEBUG_LEVEL	(_drv_err_)

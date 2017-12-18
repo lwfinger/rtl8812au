@@ -90,8 +90,6 @@
 #define	IPOPT_TS_TSANDADDR	1		/* timestamps and addresses */
 #define	IPOPT_TS_PRESPEC	3		/* specified modules only */
 
-#ifdef PLATFORM_LINUX
-
 struct ip_options {
   __u32		faddr;				/* Saved first hop address */
   unsigned char	optlen;
@@ -113,17 +111,14 @@ struct ip_options {
 };
 
 #define optlength(opt) (sizeof(struct ip_options) + opt->optlen)
-#endif
 
 struct iphdr {
-#if defined(__LITTLE_ENDIAN_BITFIELD)
+#if defined(__LITTLE_ENDIAN)
 	__u8	ihl:4,
 		version:4;
-#elif defined (__BIG_ENDIAN_BITFIELD)
+#else
 	__u8	version:4,
 		ihl:4;
-#else
-#error	"Please fix <asm/byteorder.h>"
 #endif
 	__u8	tos;
 	__u16	tot_len;

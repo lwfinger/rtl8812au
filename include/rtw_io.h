@@ -21,9 +21,6 @@
 #ifndef _RTW_IO_H_
 #define _RTW_IO_H_
 
-
-#ifdef PLATFORM_LINUX
-
 #ifdef CONFIG_USB_HCI
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,35))
@@ -34,20 +31,11 @@
 #define rtw_usb_buffer_free(dev, size, addr, dma) usb_buffer_free((dev), (size), (addr), (dma))
 #endif
 
-
 #endif //CONFIG_USB_HCI
-
-#endif //PLATFORM_LINUX
-
 
 #define NUM_IOREQ		8
 
-#ifdef PLATFORM_WINDOWS
-#define MAX_PROT_SZ	64
-#endif
-#ifdef PLATFORM_LINUX
 #define MAX_PROT_SZ	(64-16)
-#endif
 
 #define _IOREADY			0
 #define _IO_WAIT_COMPLETE   1
@@ -154,48 +142,11 @@ struct io_req {
 	u8	*pbuf;
 	_sema	sema;
 
-#ifdef PLATFORM_OS_CE
-#ifdef CONFIG_USB_HCI
-	// URB handler for rtw_write_mem
-	USB_TRANSFER usb_transfer_write_mem;
-#endif
-#endif
-
 	void (*_async_io_callback)(_adapter *padater, struct io_req *pio_req, u8 *cnxt);
 	u8 *cnxt;
-
-#ifdef PLATFORM_OS_XP
-	PMDL pmdl;
-	PIRP  pirp;
-
-#ifdef CONFIG_SDIO_HCI
-	PSDBUS_REQUEST_PACKET sdrp;
-#endif
-
-#endif
-
-
 };
 
 struct	intf_hdl {
-
-/*
-	u32	intf_option;
-	u32	bus_status;
-	u32	do_flush;
-	u8	*adapter;
-	u8	*intf_dev;
-	struct intf_priv	*pintfpriv;
-	u8	cnt;
-	void (*intf_hdl_init)(u8 *priv);
-	void (*intf_hdl_unload)(u8 *priv);
-	void (*intf_hdl_open)(u8 *priv);
-	void (*intf_hdl_close)(u8 *priv);
-	struct	_io_ops	io_ops;
-	//u8 intf_status;//moved to struct intf_priv
-	u16 len;
-	u16 done_len;
-*/
 	_adapter *padapter;
 	struct dvobj_priv *pintf_dev;//	pointer to &(padapter->dvobjpriv);
 
@@ -205,7 +156,7 @@ struct	intf_hdl {
 
 struct reg_protocol_rd {
 
-#ifdef CONFIG_LITTLE_ENDIAN
+#ifdef __LITTLE_ENDIAN
 
 	//DW1
 	u32		NumOfTrans:4;
@@ -263,7 +214,7 @@ struct reg_protocol_rd {
 struct reg_protocol_wt {
 
 
-#ifdef CONFIG_LITTLE_ENDIAN
+#ifdef __LITTLE_ENDIAN
 
 	//DW1
 	u32		NumOfTrans:4;
@@ -314,8 +265,6 @@ struct reg_protocol_wt {
 #endif
 
 };
-
-
 
 /*
 Below is the data structure used by _io_handler
