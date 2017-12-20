@@ -21,13 +21,6 @@
 
 #include <drv_types.h>
 
-#if defined (PLATFORM_LINUX) && defined (PLATFORM_WINDOWS)
-
-#error "Shall be Linux or Windows, but not both!\n"
-
-#endif
-
-
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Realtek Wireless Lan Driver");
 MODULE_AUTHOR("Realtek Semiconductor Corp.");
@@ -306,7 +299,6 @@ int _netdev_open(struct net_device *pnetdev);
 int netdev_open (struct net_device *pnetdev);
 static int netdev_close (struct net_device *pnetdev);
 
-//#ifdef RTK_DMP_PLATFORM
 #ifdef CONFIG_PROC_DEBUG
 #define RTL8192C_PROC_NAME "rtl819xC"
 #define RTL8192D_PROC_NAME "rtl819xD"
@@ -1560,10 +1552,6 @@ void rtw_cancel_all_timer(_adapter *padapter)
 #endif
 	//cancel dm timer
 	rtw_hal_dm_deinit(padapter);
-
-#ifdef CONFIG_PLATFORM_FS_MX61
-	msleep(50);
-#endif
 }
 
 u8 rtw_free_drv_sw(_adapter *padapter)
@@ -2522,9 +2510,7 @@ int _netdev_open(struct net_device *pnetdev)
 			padapter->intf_start(padapter);
 		}
 
-#ifndef RTK_DMP_PLATFORM
 		rtw_proc_init_one(pnetdev);
-#endif
 
 #ifdef CONFIG_IOCTL_CFG80211
 		rtw_cfg80211_init_wiphy(padapter);

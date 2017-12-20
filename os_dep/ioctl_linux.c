@@ -193,22 +193,12 @@ static void request_wps_pbc_event(_adapter *padapter)
 
 void rtw_request_wps_pbc_event(_adapter *padapter)
 {
-#ifdef RTK_DMP_PLATFORM
-#if (LINUX_VERSION_CODE > KERNEL_VERSION(2,6,12))
-	kobject_uevent(&padapter->pnetdev->dev.kobj, KOBJ_NET_PBC);
-#else
-	kobject_hotplug(&padapter->pnetdev->class_dev.kobj, KOBJ_NET_PBC);
-#endif
-#else
-
 	if ( padapter->pid[0] == 0 )
 	{	//	0 is the default value and it means the application monitors the HW PBC doesn't privde its pid to driver.
 		return;
 	}
 
 	rtw_signal_process(padapter->pid[0], SIGUSR1);
-
-#endif
 
 	rtw_led_control(padapter, LED_CTL_START_WPS_BOTTON);
 }
@@ -702,11 +692,7 @@ static char *translate_scan(_adapter *padapter,
 
 	iwe.u.qual.qual = (u8)sq;   // signal quality
 
-	#ifdef CONFIG_PLATFORM_ROCKCHIPS
-	iwe.u.qual.noise = -100; // noise level suggest by zhf@rockchips
-	#else
 	iwe.u.qual.noise = 0; // noise level
-	#endif //CONFIG_PLATFORM_ROCKCHIPS
 
 	//DBG_871X("iqual=%d, ilevel=%d, inoise=%d, iupdated=%d\n", iwe.u.qual.qual, iwe.u.qual.level , iwe.u.qual.noise, iwe.u.qual.updated);
 
@@ -733,13 +719,8 @@ static int wpa_set_auth_algs(struct net_device *dev, u32 value)
 		DBG_871X("wpa_set_auth_algs, AUTH_ALG_SHARED_KEY  [value:0x%x]\n",value);
 		padapter->securitypriv.ndisencryptstatus = Ndis802_11Encryption1Enabled;
 
-#ifdef CONFIG_PLATFORM_MT53XX
-		padapter->securitypriv.ndisauthtype = Ndis802_11AuthModeAutoSwitch;
-		padapter->securitypriv.dot11AuthAlgrthm = dot11AuthAlgrthm_Auto;
-#else
 		padapter->securitypriv.ndisauthtype = Ndis802_11AuthModeShared;
 		padapter->securitypriv.dot11AuthAlgrthm = dot11AuthAlgrthm_Shared;
-#endif
 	}
 	else if(value & AUTH_ALG_OPEN_SYSTEM)
 	{
@@ -747,13 +728,8 @@ static int wpa_set_auth_algs(struct net_device *dev, u32 value)
 		//padapter->securitypriv.ndisencryptstatus = Ndis802_11EncryptionDisabled;
 		if(padapter->securitypriv.ndisauthtype < Ndis802_11AuthModeWPAPSK)
 		{
-#ifdef CONFIG_PLATFORM_MT53XX
-			padapter->securitypriv.ndisauthtype = Ndis802_11AuthModeAutoSwitch;
-			padapter->securitypriv.dot11AuthAlgrthm = dot11AuthAlgrthm_Auto;
-#else
 			padapter->securitypriv.ndisauthtype = Ndis802_11AuthModeOpen;
 			padapter->securitypriv.dot11AuthAlgrthm = dot11AuthAlgrthm_Open;
-#endif
 		}
 
 	}
@@ -1569,26 +1545,9 @@ static int rtw_wx_get_sens(struct net_device *dev,
 			     struct iw_request_info *info,
 			     union iwreq_data *wrqu, char *extra)
 {
-	#ifdef CONFIG_PLATFORM_ROCKCHIPS
-	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
-
-	/*
-	*  20110311 Commented by Jeff
-	*  For rockchip platform's wpa_driver_wext_get_rssi
-	*/
-	if(check_fwstate(pmlmepriv, _FW_LINKED) == _TRUE) {
-		//wrqu->sens.value=-padapter->recvpriv.signal_strength;
-		wrqu->sens.value=-padapter->recvpriv.rssi;
-		//DBG_871X("%s: %d\n", __FUNCTION__, wrqu->sens.value);
-		wrqu->sens.fixed = 0; /* no auto select */
-	} else
-	#endif
-	{
-		wrqu->sens.value = 0;
-		wrqu->sens.fixed = 0;	/* no auto select */
-		wrqu->sens.disabled = 1;
-	}
+	wrqu->sens.value = 0;
+	wrqu->sens.fixed = 0;	/* no auto select */
+	wrqu->sens.disabled = 1;
 	return 0;
 }
 
@@ -2869,11 +2828,7 @@ static int rtw_wx_set_enc(struct net_device *dev,
 		DBG_871X("rtw_wx_set_enc():IW_ENCODE_OPEN\n");
 		padapter->securitypriv.ndisencryptstatus = Ndis802_11Encryption1Enabled;//Ndis802_11EncryptionDisabled;
 
-#ifdef CONFIG_PLATFORM_MT53XX
-		padapter->securitypriv.dot11AuthAlgrthm = dot11AuthAlgrthm_Auto;
-#else
 		padapter->securitypriv.dot11AuthAlgrthm= dot11AuthAlgrthm_Open;
-#endif
 
 		padapter->securitypriv.dot11PrivacyAlgrthm=_NO_PRIVACY_;
 		padapter->securitypriv.dot118021XGrpPrivacy=_NO_PRIVACY_;
@@ -2885,11 +2840,7 @@ static int rtw_wx_set_enc(struct net_device *dev,
 		DBG_871X("rtw_wx_set_enc():IW_ENCODE_RESTRICTED\n");
 		padapter->securitypriv.ndisencryptstatus = Ndis802_11Encryption1Enabled;
 
-#ifdef CONFIG_PLATFORM_MT53XX
-		padapter->securitypriv.dot11AuthAlgrthm = dot11AuthAlgrthm_Auto;
-#else
 		padapter->securitypriv.dot11AuthAlgrthm= dot11AuthAlgrthm_Shared;
-#endif
 
 		padapter->securitypriv.dot11PrivacyAlgrthm=_WEP40_;
 		padapter->securitypriv.dot118021XGrpPrivacy=_WEP40_;
@@ -3584,14 +3535,6 @@ static int rtw_wx_set_mtk_wps_probe_ie(struct net_device *dev,
 		struct iw_request_info *a,
 		union iwreq_data *wrqu, char *b)
 {
-#ifdef CONFIG_PLATFORM_MT53XX
-	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-	struct mlme_priv *pmlmepriv = &padapter->mlmepriv;
-
-	RT_TRACE(_module_rtl871x_ioctl_os_c, _drv_notice_,
-		 ("WLAN IOCTL: cmd_code=%x, fwstate=0x%x\n",
-		  a->cmd, get_fwstate(pmlmepriv)));
-#endif
 	return 0;
 }
 
@@ -3599,14 +3542,6 @@ static int rtw_wx_get_sensitivity(struct net_device *dev,
 				struct iw_request_info *info,
 				union iwreq_data *wrqu, char *buf)
 {
-#ifdef CONFIG_PLATFORM_MT53XX
-	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-
-	//	Modified by Albert 20110914
-	//	This is in dbm format for MTK platform.
-	wrqu->qual.level = padapter->recvpriv.rssi;
-	DBG_871X(" level = %u\n",  wrqu->qual.level );
-#endif
 	return 0;
 }
 
@@ -3614,13 +3549,7 @@ static int rtw_wx_set_mtk_wps_ie(struct net_device *dev,
 				struct iw_request_info *info,
 				union iwreq_data *wrqu, char *extra)
 {
-#ifdef CONFIG_PLATFORM_MT53XX
-	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-
-	return rtw_set_wpa_ie(padapter, wrqu->data.pointer, wrqu->data.length);
-#else
 	return 0;
-#endif
 }
 
 /*
@@ -11057,11 +10986,6 @@ static int rtw_mp_SetBT(struct net_device *dev,
 
 	if ( strncmp(extra, "dlfw", 4) == 0)
 	{
-#if defined(CONFIG_PLATFORM_SPRD) && (MP_DRIVER == 1)
-		// Pull up BT reset pin.
-		DBG_871X("%s: pull up BT reset pin when bt start mp test\n", __FUNCTION__);
-		rtw_wifi_gpio_wlan_ctrl(WLAN_BT_PWDN_ON);
-#endif
 #ifdef CONFIG_RTL8723A
 		status = rtl8723a_FirmwareDownload(padapter);
 #elif defined(CONFIG_RTL8723B)
@@ -12954,7 +12878,6 @@ static const struct iw_priv_args rtw_private_args[] = {
 		SIOCIWFIRSTPRIV + 0x6,
 		IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "wps_start"
 	},
-//for PLATFORM_MT53XX
 	{
 		SIOCIWFIRSTPRIV + 0x7,
 		IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "get_sensitivity"
@@ -12968,7 +12891,6 @@ static const struct iw_priv_args rtw_private_args[] = {
 		IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "wps_assoc_req_ie"
 	},
 
-//for RTK_DMP_PLATFORM
 	{
 		SIOCIWFIRSTPRIV + 0xA,
 		IW_PRIV_TYPE_INT | IW_PRIV_SIZE_FIXED | 1, 0, "channel_plan"
@@ -13091,12 +13013,10 @@ static iw_handler rtw_private_handler[] =
 	rtw_set_pid,						//0x05
 	rtw_wps_start,					//0x06
 
-// for PLATFORM_MT53XX
 	rtw_wx_get_sensitivity,			//0x07
 	rtw_wx_set_mtk_wps_probe_ie,	//0x08
 	rtw_wx_set_mtk_wps_ie,			//0x09
 
-// for RTK_DMP_PLATFORM
 // Set Channel depend on the country code
 	rtw_wx_set_channel_plan,		//0x0A
 
@@ -13177,13 +13097,7 @@ static struct iw_statistics *rtw_get_wireless_stats(struct net_device *dev)
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,14))
 	piwstats->qual.updated = IW_QUAL_ALL_UPDATED ;//|IW_QUAL_DBM;
 #else
-#ifdef RTK_DMP_PLATFORM
-	//IW_QUAL_DBM= 0x8, if driver use this flag, wireless extension will show value of dbm.
-	//remove this flag for show percentage 0~100
-	piwstats->qual.updated = 0x07;
-#else
 	piwstats->qual.updated = 0x0f;
-#endif
 #endif
 
 	#ifdef CONFIG_SIGNAL_DISPLAY_DBM
