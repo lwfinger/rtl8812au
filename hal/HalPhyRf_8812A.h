@@ -79,11 +79,7 @@ PHY_LCCalibrate_8812A(
 //
 void
 PHY_APCalibrate_8812A(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm,
-#else
 	IN	PADAPTER	pAdapter,
-#endif
 							IN	s1Byte		delta);
 void
 PHY_DigitalPredistortion_8812A(		IN	PADAPTER	pAdapter);
@@ -93,11 +89,7 @@ PHY_DPCalibrate_8812A(
 	IN	PDM_ODM_T	pDM_Odm
 );
 VOID PHY_SetRFPathSwitch_8812A(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm,
-#else
 	IN	PADAPTER	pAdapter,
-#endif
 	IN	BOOLEAN		bMain
 	);
 

@@ -70,11 +70,7 @@ GetDeltaSwingTable_8821A(
 );
 
 VOID PHY_SetRFPathSwitch_8821A(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm,
-#else
 	IN	PADAPTER	pAdapter,
-#endif
 	IN	BOOLEAN		bMain
 	);
 

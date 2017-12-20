@@ -293,7 +293,6 @@ ODM_MacStatusQuery(
 	IN		BOOLEAN						bPacketToSelf,
 	IN		BOOLEAN						bPacketBeacon
 	);
-#if (DM_ODM_SUPPORT_TYPE & (ODM_WIN|ODM_CE|ODM_AP))
 
 HAL_STATUS
 ODM_ConfigRFWithTxPwrTrackHeaderFile(
@@ -325,7 +324,5 @@ ODM_ConfigFWWithHeaderFile(
 	OUT u1Byte				*pFirmware,
 	OUT u4Byte				*pSize
 	);
-#endif
-
 
 #endif

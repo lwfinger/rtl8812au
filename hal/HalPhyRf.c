@@ -112,22 +112,12 @@ ODM_ClearTxPowerTrackingState(
 
 VOID
 ODM_TXPowerTrackingCallback_ThermalMeter(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm
-#else
 	IN PADAPTER	Adapter
-#endif
 	)
 {
 
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PDM_ODM_T		pDM_Odm = &pHalData->DM_OutSrc;
-#elif (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PDM_ODM_T		pDM_Odm = &pHalData->odmpriv;
-#endif
-#endif
 
 	u1Byte			ThermalValue = 0, delta, delta_LCK, delta_IQK, p = 0, i = 0;
 	u1Byte			ThermalValue_AVG_count = 0;
@@ -156,13 +146,7 @@ ODM_TXPowerTrackingCallback_ThermalMeter(
 	pDM_Odm->RFCalibrateInfo.bTXPowerTrackingInit = TRUE;
 
 #if (MP_DRIVER == 1)
-#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	pDM_Odm->RFCalibrateInfo.TxPowerTrackControl = pHalData->TxPowerTrackControl; // <Kordan> We should keep updating the control variable according to HalData.
-#endif
-
-#if (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	if ( *(pDM_Odm->mp_mode) == 1)
-#endif
 		// <Kordan> RFCalibrateInfo.RegA24 will be initialized when ODM HW configuring, but MP configures with para files.
 		pDM_Odm->RFCalibrateInfo.RegA24 = 0x090e1317;
 #endif
@@ -232,21 +216,13 @@ ODM_TXPowerTrackingCallback_ThermalMeter(
 	if (delta > 0 && pDM_Odm->RFCalibrateInfo.TxPowerTrackControl)
 	{
 		//"delta" here is used to record the absolute value of differrence.
-#if (DM_ODM_SUPPORT_TYPE & (ODM_WIN|ODM_CE))
 	    delta = ThermalValue > pHalData->EEPROMThermalMeter?(ThermalValue - pHalData->EEPROMThermalMeter):(pHalData->EEPROMThermalMeter - ThermalValue);
-#else
-	    delta = (ThermalValue > pDM_Odm->priv->pmib->dot11RFEntry.ther)?(ThermalValue - pDM_Odm->priv->pmib->dot11RFEntry.ther):(pDM_Odm->priv->pmib->dot11RFEntry.ther - ThermalValue);
-#endif
 		if (delta >= TXSCALE_TABLE_SIZE)
 			delta = TXSCALE_TABLE_SIZE - 1;
 
 		//4 7.1 The Final Power Index = BaseIndex + PowerIndexOffset
 
-#if (DM_ODM_SUPPORT_TYPE & (ODM_WIN|ODM_CE))
 		if(ThermalValue > pHalData->EEPROMThermalMeter) {
-#else
-		if(ThermalValue > pDM_Odm->priv->pmib->dot11RFEntry.ther) {
-#endif
 			ODM_RT_TRACE(pDM_Odm, ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD,
                 ("deltaSwingTableIdx_TUP_A[%d] = %d\n", delta, deltaSwingTableIdx_TUP_A[delta]));
 		        pDM_Odm->RFCalibrateInfo.DeltaPowerIndexLast[ODM_RF_PATH_A] = pDM_Odm->RFCalibrateInfo.DeltaPowerIndex[ODM_RF_PATH_A];
@@ -395,11 +371,7 @@ ODM_TXPowerTrackingCallback_ThermalMeter(
 					pDM_Odm->RFCalibrateInfo.PowerIndexOffset[ODM_RF_PATH_B], delta, ThermalValue, pHalData->EEPROMThermalMeter, pDM_Odm->RFCalibrateInfo.ThermalValue));
 
 			}
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 			if (ThermalValue > pHalData->EEPROMThermalMeter)
-#else
-			if (ThermalValue > pDM_Odm->priv->pmib->dot11RFEntry.ther)
-#endif
 			{
 				ODM_RT_TRACE(pDM_Odm,ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD,
 					("Temperature(%d) higher than PG value(%d)\n", ThermalValue, pHalData->EEPROMThermalMeter));
@@ -449,10 +421,8 @@ ODM_TXPowerTrackingCallback_ThermalMeter(
 			pDM_Odm->RFCalibrateInfo.ThermalValue = ThermalValue;         //Record last Power Tracking Thermal Value
 
 	}
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	if ((delta_IQK >= c.Threshold_IQK)) // Delta temperature is equal to or larger than 20 centigrade (When threshold is 8).
 		(*c.DoIQK)(pDM_Odm, delta_IQK, ThermalValue, 8);
-#endif
 
 	ODM_RT_TRACE(pDM_Odm,ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD,("<===ODM_TXPowerTrackingCallback_ThermalMeter\n"));
 
@@ -472,12 +442,10 @@ ODM_ResetIQKResult(
 )
 {
 	u1Byte		i;
-#if (DM_ODM_SUPPORT_TYPE == ODM_WIN || DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PADAPTER	Adapter = pDM_Odm->Adapter;
 
 	if (!IS_HARDWARE_TYPE_8192D(Adapter))
 		return;
-#endif
 	ODM_RT_TRACE(pDM_Odm,ODM_COMP_CALIBRATION, ODM_DBG_LOUD,("PHY_ResetIQKResult:: settings regs %d default regs %d\n", (u32)(sizeof(pDM_Odm->RFCalibrateInfo.IQKMatrixRegSetting)/sizeof(IQK_MATRIX_REGS_SETTING)), IQK_Matrix_Settings_NUM));
 	//0xe94, 0xe9c, 0xea4, 0xeac, 0xeb4, 0xebc, 0xec4, 0xecc
 
@@ -500,7 +468,7 @@ ODM_ResetIQKResult(
 	}
 
 }
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
+
 u1Byte ODM_GetRightChnlPlaceforIQK(u1Byte chnl)
 {
 	u1Byte	channel_all[ODM_TARGET_CHNL_NUM_2G_5G] =
@@ -519,6 +487,4 @@ u1Byte ODM_GetRightChnlPlaceforIQK(u1Byte chnl)
 		}
 	}
 	return 0;
-
 }
-#endif

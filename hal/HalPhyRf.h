@@ -63,17 +63,10 @@ ODM_ClearTxPowerTrackingState(
 
 VOID
 ODM_TXPowerTrackingCallback_ThermalMeter(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm
-#else
 	IN PADAPTER	Adapter
-#endif
 	);
 
-
-
 #define ODM_TARGET_CHNL_NUM_2G_5G	59
-
 
 VOID
 ODM_ResetIQKResult(

@@ -41,41 +41,13 @@ void DoIQK_8812A(
 	u1Byte		Threshold
 	)
 {
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	PADAPTER		Adapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-#endif
 
 	ODM_ResetIQKResult(pDM_Odm);
 
-#if(DM_ODM_SUPPORT_TYPE  & ODM_WIN)
-#if (DEV_BUS_TYPE == RT_PCI_INTERFACE)
-#if USE_WORKITEM
-	PlatformAcquireMutex(&pHalData->mxChnlBwControl);
-#else
-	PlatformAcquireSpinLock(Adapter, RT_CHANNEL_AND_BANDWIDTH_SPINLOCK);
-#endif
-#elif((DEV_BUS_TYPE == RT_USB_INTERFACE) || (DEV_BUS_TYPE == RT_SDIO_INTERFACE))
-	PlatformAcquireMutex(&pHalData->mxChnlBwControl);
-#endif
-#endif
-
-
 	pDM_Odm->RFCalibrateInfo.ThermalValue_IQK= ThermalValue;
 	PHY_IQCalibrate_8812A(Adapter, FALSE);
-
-
-#if(DM_ODM_SUPPORT_TYPE  & ODM_WIN)
-#if (DEV_BUS_TYPE == RT_PCI_INTERFACE)
-#if USE_WORKITEM
-	PlatformReleaseMutex(&pHalData->mxChnlBwControl);
-#else
-	PlatformReleaseSpinLock(Adapter, RT_CHANNEL_AND_BANDWIDTH_SPINLOCK);
-#endif
-#elif((DEV_BUS_TYPE == RT_USB_INTERFACE) || (DEV_BUS_TYPE == RT_SDIO_INTERFACE))
-	PlatformReleaseMutex(&pHalData->mxChnlBwControl);
-#endif
-#endif
 }
 
 /*-----------------------------------------------------------------------------
@@ -434,38 +406,12 @@ void ConfigureTxpowerTrack_8812A(
 // 2011/07/26 MH Add an API for testing IQK fail case.
 //
 // MP Already declare in odm.c
-#if !(DM_ODM_SUPPORT_TYPE & ODM_WIN)
 BOOLEAN
 ODM_CheckPowerStatus(
 	IN	PADAPTER		Adapter)
 {
-/*
-	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
-	PDM_ODM_T			pDM_Odm = &pHalData->DM_OutSrc;
-	RT_RF_POWER_STATE	rtState;
-	PMGNT_INFO			pMgntInfo	= &(Adapter->MgntInfo);
-
-	// 2011/07/27 MH We are not testing ready~~!! We may fail to get correct value when init sequence.
-	if (pMgntInfo->init_adpt_in_progress == TRUE)
-	{
-		ODM_RT_TRACE(pDM_Odm,COMP_INIT, DBG_LOUD, ("ODM_CheckPowerStatus Return TRUE, due to initadapter"));
-		return	TRUE;
-	}
-
-	//
-	//	2011/07/19 MH We can not execute tx pwoer tracking/ LLC calibrate or IQK.
-	//
-	Adapter->HalFunc.GetHwRegHandler(Adapter, HW_VAR_RF_STATE, (pu1Byte)(&rtState));
-	if(Adapter->bDriverStopped || Adapter->bDriverIsGoingToPnpSetPowerSleep || rtState == eRfOff)
-	{
-		ODM_RT_TRACE(pDM_Odm,COMP_INIT, DBG_LOUD, ("ODM_CheckPowerStatus Return FALSE, due to %d/%d/%d\n",
-		Adapter->bDriverStopped, Adapter->bDriverIsGoingToPnpSetPowerSleep, rtState));
-		return	FALSE;
-	}
-*/
 	return	TRUE;
 }
-#endif
 
 #define BW_20M	0
 #define	BW_40M  1
@@ -2031,39 +1977,21 @@ PHY_IQCalibrate_8812A(
 {
 
 
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 
-	#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PDM_ODM_T		pDM_Odm = &pHalData->DM_OutSrc;
-	#else  // (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PDM_ODM_T		pDM_Odm = &pHalData->odmpriv;
-	#endif
-#endif
 
 #if (MP_DRIVER == 1)
-	#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PMPT_CONTEXT	pMptCtx = &(pAdapter->MptCtx);
-	#else// (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
-	#endif
 #endif//(MP_DRIVER == 1)
 
-#if (DM_ODM_SUPPORT_TYPE & (ODM_WIN|ODM_CE) )
 	if (ODM_CheckPowerStatus(pAdapter) == FALSE)
 		return;
-#endif
-
 #if MP_DRIVER == 1
 	if( ! (pMptCtx->bSingleTone || pMptCtx->bCarrierSuppression) )
 #endif
 	{
-
-		//if(pMgntInfo->RegIQKFWOffload)
-		//	phy_IQCalibrate_By_FW_8812A(pAdapter);
-		//else
 			phy_IQCalibrate_8812A(pDM_Odm, pHalData->CurrentChannel);
-
 	}
 
 }
@@ -2076,22 +2004,16 @@ PHY_LCCalibrate_8812A(
 {
 	BOOLEAN			bStartContTx = FALSE, bSingleTone = FALSE, bCarrierSuppression = FALSE;
 
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	PADAPTER		pAdapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 
 
 	#if (MP_DRIVER == 1)
-	#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PMPT_CONTEXT	pMptCtx = &(pAdapter->MptCtx);
-	#else// (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
-	#endif
 	bStartContTx = pMptCtx->bStartContTx;
 	bSingleTone = pMptCtx->bSingleTone;
 	bCarrierSuppression = pMptCtx->bCarrierSuppression;
 	#endif//(MP_DRIVER == 1)
-#endif
 
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("===> PHY_LCCalibrate_8812A\n"));
 
@@ -2104,24 +2026,13 @@ PHY_LCCalibrate_8812A(
 }
 
 VOID phy_SetRFPathSwitch_8812A(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm,
-#else
 	IN	PADAPTER	pAdapter,
-#endif
 	IN	BOOLEAN		bMain,
 	IN	BOOLEAN		is2T
 	)
 {
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
-	#if (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PDM_ODM_T		pDM_Odm = &pHalData->odmpriv;
-	#elif (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PDM_ODM_T		pDM_Odm = &pHalData->DM_OutSrc;
-	#endif
-
-#endif
 
 	if (IS_HARDWARE_TYPE_8821(pAdapter))
 	{
@@ -2149,23 +2060,15 @@ VOID phy_SetRFPathSwitch_8812A(
 }
 
 VOID PHY_SetRFPathSwitch_8812A(
-#if (DM_ODM_SUPPORT_TYPE & ODM_AP)
-	IN PDM_ODM_T		pDM_Odm,
-#else
 	IN	PADAPTER	pAdapter,
-#endif
 	IN	BOOLEAN		bMain
 	)
 {
 
 #if DISABLE_BB_RF
 	return;
-#endif
-
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
-
-		phy_SetRFPathSwitch_8812A(pAdapter, bMain, TRUE);
-
+#else
+	phy_SetRFPathSwitch_8812A(pAdapter, bMain, TRUE);
 #endif
 }
 

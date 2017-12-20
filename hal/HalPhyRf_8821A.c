@@ -103,43 +103,14 @@ void DoIQK_8821A(
 	u1Byte		Threshold
 	)
 {
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	PADAPTER		Adapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-#endif
 
 	ODM_ResetIQKResult(pDM_Odm);
 
-#if(DM_ODM_SUPPORT_TYPE  & ODM_WIN)
-#if (DEV_BUS_TYPE == RT_PCI_INTERFACE)
-#if USE_WORKITEM
-	PlatformAcquireMutex(&pHalData->mxChnlBwControl);
-#else
-	PlatformAcquireSpinLock(Adapter, RT_CHANNEL_AND_BANDWIDTH_SPINLOCK);
-#endif
-#elif((DEV_BUS_TYPE == RT_USB_INTERFACE) || (DEV_BUS_TYPE == RT_SDIO_INTERFACE))
-	PlatformAcquireMutex(&pHalData->mxChnlBwControl);
-#endif
-#endif
-
-
 	pDM_Odm->RFCalibrateInfo.ThermalValue_IQK= ThermalValue;
 	PHY_IQCalibrate_8821A(Adapter, FALSE);
-
-
-#if(DM_ODM_SUPPORT_TYPE  & ODM_WIN)
-#if (DEV_BUS_TYPE == RT_PCI_INTERFACE)
-#if USE_WORKITEM
-	PlatformReleaseMutex(&pHalData->mxChnlBwControl);
-#else
-	PlatformReleaseSpinLock(Adapter, RT_CHANNEL_AND_BANDWIDTH_SPINLOCK);
-#endif
-#elif((DEV_BUS_TYPE == RT_USB_INTERFACE) || (DEV_BUS_TYPE == RT_SDIO_INTERFACE))
-	PlatformReleaseMutex(&pHalData->mxChnlBwControl);
-#endif
-#endif
 }
-
 
 VOID
 ODM_TxPwrTrackSetPwr8821A(
@@ -1353,42 +1324,19 @@ PHY_IQCalibrate_8821A(
 	IN	BOOLEAN		bReCovery
 	)
 {
-
-
-#if !(DM_ODM_SUPPORT_TYPE & ODM_AP)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 
-	#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PDM_ODM_T		pDM_Odm = &pHalData->DM_OutSrc;
-	#else  // (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PDM_ODM_T		pDM_Odm = &pHalData->odmpriv;
-	#endif
-#endif
 
 #if (MP_DRIVER == 1)
-	#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	PMPT_CONTEXT	pMptCtx = &(pAdapter->MptCtx);
-	#else// (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
-	#endif
 #endif//(MP_DRIVER == 1)
-
-#if 0 //ODM_CheckPowerStatus always return TRUE currently!
-#if (DM_ODM_SUPPORT_TYPE & (ODM_WIN|ODM_CE) )
-	if (ODM_CheckPowerStatus(pAdapter) == FALSE)
-		return;
-#endif
-#endif //gtemp
-
 
 #if MP_DRIVER == 1
 	if( ! (pMptCtx->bSingleTone || pMptCtx->bCarrierSuppression) )
 #endif
 	{
-		//if(pMgntInfo->RegIQKFWOffload)
-		//	phy_IQCalibrate_By_FW_8821A(pAdapter);
-		//else
-			phy_IQCalibrate_8821A(pDM_Odm);
+		phy_IQCalibrate_8821A(pDM_Odm);
 	}
 }
 
