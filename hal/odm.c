@@ -1052,7 +1052,6 @@ ODM_DMWatchdog(
 	odm_RSSIMonitorCheck(pDM_Odm);
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_CE)
-//#ifdef CONFIG_PLATFORM_SPRD
 	//For CE Platform(SPRD or Tablet)
 	//8723A or 8189ES platform
 	//NeilChen--2012--08--24--
@@ -1069,7 +1068,6 @@ ODM_DMWatchdog(
 			odm_DIGbyRSSI_LPS(pDM_Odm);
 	}
 	else
-//#endif
 #endif
 	{
 		odm_DIG(pDM_Odm);
@@ -9571,14 +9569,9 @@ GetPSDData(
 	//Read PSD report, Reg8B4[15:0]
 	psd_report = ODM_GetBBReg(pDM_Odm,0x8B4, bMaskDWord) & 0x0000FFFF;
 
-#if 1//(DEV_BUS_TYPE == RT_PCI_INTERFACE) && ( (RT_PLATFORM == PLATFORM_LINUX) || (RT_PLATFORM == PLATFORM_MACOSX))
 	psd_report = (u4Byte) (ConvertTo_dB(psd_report))+(u4Byte)(initial_gain_psd-0x1c);
-#else
-	psd_report = (int) (20*log10((double)psd_report))+(int)(initial_gain_psd-0x1c);
-#endif
 
 	return psd_report;
-
 }
 
 u4Byte

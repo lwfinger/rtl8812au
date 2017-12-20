@@ -28,11 +28,9 @@ s32	rtl8812au_init_xmit_priv(_adapter *padapter)
 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
-#ifdef PLATFORM_LINUX
 	tasklet_init(&pxmitpriv->xmit_tasklet,
 	     (void(*)(unsigned long))rtl8812au_xmit_tasklet,
 	     (unsigned long)padapter);
-#endif
 #ifdef CONFIG_TX_EARLY_MODE
 	pHalData->bEarlyModeEnable = padapter->registrypriv.early_mode;
 #endif
@@ -907,19 +905,14 @@ s32	 rtl8812au_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmi
 	struct xmit_priv	*pxmitpriv = &padapter->xmitpriv;
 	s32 err;
 
-	if ((err=rtw_xmitframe_enqueue(padapter, pxmitframe)) != _SUCCESS)
-	{
+	if ((err=rtw_xmitframe_enqueue(padapter, pxmitframe)) != _SUCCESS) {
 		rtw_free_xmitframe(pxmitpriv, pxmitframe);
 
 		// Trick, make the statistics correct
 		pxmitpriv->tx_pkts--;
 		pxmitpriv->tx_drop++;
-	}
-	else
-	{
-#ifdef PLATFORM_LINUX
+	} else {
 		tasklet_hi_schedule(&pxmitpriv->xmit_tasklet);
-#endif
 	}
 
 	return err;
@@ -931,18 +924,13 @@ s32	 rtl8812au_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmi
 
 static void rtl8812au_hostap_mgnt_xmit_cb(struct urb *urb)
 {
-#ifdef PLATFORM_LINUX
 	struct sk_buff *skb = (struct sk_buff *)urb->context;
 
-	//DBG_8192C("%s\n", __FUNCTION__);
-
 	dev_kfree_skb_any(skb);
-#endif
 }
 
 s32 rtl8812au_hostap_mgnt_xmit_entry(_adapter *padapter, _pkt *pkt)
 {
-#ifdef PLATFORM_LINUX
 	u16 fc;
 	int rc, len, pipe;
 	unsigned int bmcst, tid, qsel;
@@ -956,8 +944,6 @@ s32 rtl8812au_hostap_mgnt_xmit_entry(_adapter *padapter, _pkt *pkt)
 	HAL_DATA_TYPE *pHalData = GET_HAL_DATA(padapter);
 	struct dvobj_priv *pdvobj = adapter_to_dvobj(padapter);
 
-
-	//DBG_8192C("%s\n", __FUNCTION__);
 
 	skb = pkt;
 
@@ -1030,13 +1016,9 @@ s32 rtl8812au_hostap_mgnt_xmit_entry(_adapter *padapter, _pkt *pkt)
 	pxmitbuf = pxmitbuf + TXDESC_SIZE;
 	_rtw_memcpy(pxmitbuf, skb->data, len);
 
-	//DBG_8192C("mgnt_xmit, len=%x\n", pxmit_skb->len);
-
-
 	// ----- prepare urb for submit -----
 
 	//translate DMA FIFO addr to pipehandle
-	//pipe = ffaddr2pipehdl(pdvobj, MGT_QUEUE_INX);
 	pipe = usb_sndbulkpipe(pdvobj->pusbdev, pHalData->Queue2EPNum[(u8)MGT_QUEUE_INX]&0x0f);
 
 	usb_fill_bulk_urb(urb, pdvobj->pusbdev, pipe,
@@ -1051,14 +1033,9 @@ s32 rtl8812au_hostap_mgnt_xmit_entry(_adapter *padapter, _pkt *pkt)
 	}
 	usb_free_urb(urb);
 
-
 _exit:
 
 	dev_kfree_skb_any(skb);
-
-#endif
-
 	return 0;
-
 }
 #endif

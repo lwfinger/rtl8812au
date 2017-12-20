@@ -51,21 +51,17 @@ int	rtl8812au_init_recv_priv(_adapter *padapter)
 	_rtw_init_sema(&precvpriv->terminate_recvthread_sema, 0);//will be removed
 #endif
 
-#ifdef PLATFORM_LINUX
 	tasklet_init(&precvpriv->recv_tasklet,
 	     (void(*)(unsigned long))rtl8812au_recv_tasklet,
 	     (unsigned long)padapter);
-#endif
 
 #ifdef CONFIG_USB_INTERRUPT_IN_PIPE
-#ifdef PLATFORM_LINUX
 	precvpriv->int_in_urb = usb_alloc_urb(0, GFP_KERNEL);
 	if(precvpriv->int_in_urb == NULL){
 		res= _FAIL;
 		DBG_8192C("alloc_urb for interrupt in endpoint fail !!!!\n");
 		goto exit;
 	}
-#endif
 	precvpriv->int_in_buf = rtw_zmalloc(INTERRUPT_MSG_FORMAT_LEN);
 	if(precvpriv->int_in_buf == NULL){
 		res= _FAIL;
@@ -120,8 +116,6 @@ int	rtl8812au_init_recv_priv(_adapter *padapter)
 
 	precvpriv->free_recv_buf_queue_cnt = NR_RECVBUFF;
 
-#ifdef PLATFORM_LINUX
-
 	skb_queue_head_init(&precvpriv->rx_skb_queue);
 
 #ifdef CONFIG_PREALLOC_RECV_SKB
@@ -159,12 +153,8 @@ int	rtl8812au_init_recv_priv(_adapter *padapter)
 	}
 #endif
 
-#endif
-
 exit:
-
 	return res;
-
 }
 
 void rtl8812au_free_recv_priv (_adapter *padapter)
@@ -185,18 +175,12 @@ void rtl8812au_free_recv_priv (_adapter *padapter)
 		rtw_mfree(precvpriv->pallocated_recv_buf, NR_RECVBUFF *sizeof(struct recv_buf) + 4);
 
 #ifdef CONFIG_USB_INTERRUPT_IN_PIPE
-#ifdef PLATFORM_LINUX
 	if(precvpriv->int_in_urb)
-	{
 		usb_free_urb(precvpriv->int_in_urb);
-	}
-#endif//PLATFORM_LINUX
 
 	if(precvpriv->int_in_buf)
 		rtw_mfree(precvpriv->int_in_buf, INTERRUPT_MSG_FORMAT_LEN);
 #endif//CONFIG_USB_INTERRUPT_IN_PIPE
-
-#ifdef PLATFORM_LINUX
 
 	if (skb_queue_len(&precvpriv->rx_skb_queue)) {
 		DBG_8192C(KERN_WARNING "rx_skb_queue not empty\n");
@@ -211,9 +195,5 @@ void rtl8812au_free_recv_priv (_adapter *padapter)
 	}
 
 	skb_queue_purge(&precvpriv->free_recv_skb_queue);
-
 #endif
-
-#endif
-
 }

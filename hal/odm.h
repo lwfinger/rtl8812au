@@ -1184,14 +1184,7 @@ typedef struct _ANT_DETECTED_INFO{
 //
 // 2011/09/22 MH Copy from SD4 defined structure. We use to support PHY DM integration.
 //
-#if(DM_ODM_SUPPORT_TYPE & ODM_WIN)
-#if (RT_PLATFORM != PLATFORM_LINUX)
-typedef
-#endif
-struct DM_Out_Source_Dynamic_Mechanism_Structure
-#else// for AP,ADSL,CE Team
 typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
-#endif
 {
 	//RT_TIMER	FastAntTrainingTimer;
 	//
@@ -1523,26 +1516,9 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	RT_WORK_ITEM			RaRptWorkitem;
 	#endif
 #endif
-
-#if(DM_ODM_SUPPORT_TYPE & ODM_WIN)
-
-#if (RT_PLATFORM != PLATFORM_LINUX)
 } DM_ODM_T, *PDM_ODM_T;		// DM_Dynamic_Mechanism_Structure
-#else
-};
-#endif
 
-#else// for AP,ADSL,CE Team
-} DM_ODM_T, *PDM_ODM_T;		// DM_Dynamic_Mechanism_Structure
-#endif
-
-
-
-#if 1 //92c-series
 #define ODM_RF_PATH_MAX 2
-#else //jaguar - series
-#define ODM_RF_PATH_MAX 4
-#endif
 
 typedef enum _ODM_RF_RADIO_PATH {
     ODM_RF_PATH_A = 0,   //Radio Path A
