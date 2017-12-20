@@ -21,10 +21,6 @@
 
 #include <drv_types.h>
 
-#ifdef PLATFORM_FREEBSD
-#include <sys/unistd.h>		/* for RFHIGHPID */
-#endif
-
 #include "../hal/odm_precomp.h"
 #if (defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8723B))
 #include <rtw_bt_mp.h>
@@ -144,70 +140,6 @@ static void _init_mp_priv_(struct mp_priv *pmp_priv)
 	_rtw_memcpy(pnetwork->Ssid.Ssid, "mp_871x", pnetwork->Ssid.SsidLength);
 }
 
-#ifdef PLATFORM_WINDOWS
-/*
-void mp_wi_callback(
-	IN NDIS_WORK_ITEM*	pwk_item,
-	IN PVOID			cntx
-	)
-{
-	_adapter* padapter =(_adapter *)cntx;
-	struct mp_priv *pmppriv=&padapter->mppriv;
-	struct mp_wi_cntx	*pmp_wi_cntx=&pmppriv->wi_cntx;
-
-	// Execute specified action.
-	if(pmp_wi_cntx->curractfunc != NULL)
-	{
-		LARGE_INTEGER	cur_time;
-		ULONGLONG start_time, end_time;
-		NdisGetCurrentSystemTime(&cur_time);	// driver version
-		start_time = cur_time.QuadPart/10; // The return value is in microsecond
-
-		pmp_wi_cntx->curractfunc(padapter);
-
-		NdisGetCurrentSystemTime(&cur_time);	// driver version
-		end_time = cur_time.QuadPart/10; // The return value is in microsecond
-
-		RT_TRACE(_module_mp_, _drv_info_,
-			 ("WorkItemActType: %d, time spent: %I64d us\n",
-			  pmp_wi_cntx->param.act_type, (end_time-start_time)));
-	}
-
-	NdisAcquireSpinLock(&(pmp_wi_cntx->mp_wi_lock));
-	pmp_wi_cntx->bmp_wi_progress= _FALSE;
-	NdisReleaseSpinLock(&(pmp_wi_cntx->mp_wi_lock));
-
-	if (pmp_wi_cntx->bmpdrv_unload)
-	{
-		NdisSetEvent(&(pmp_wi_cntx->mp_wi_evt));
-	}
-
-}
-*/
-
-static int init_mp_priv_by_os(struct mp_priv *pmp_priv)
-{
-	struct mp_wi_cntx *pmp_wi_cntx;
-
-	if (pmp_priv == NULL) return _FAIL;
-
-	pmp_priv->rx_testcnt = 0;
-	pmp_priv->rx_testcnt1 = 0;
-	pmp_priv->rx_testcnt2 = 0;
-
-	pmp_priv->tx_testcnt = 0;
-	pmp_priv->tx_testcnt1 = 0;
-
-	pmp_wi_cntx = &pmp_priv->wi_cntx
-	pmp_wi_cntx->bmpdrv_unload = _FALSE;
-	pmp_wi_cntx->bmp_wi_progress = _FALSE;
-	pmp_wi_cntx->curractfunc = NULL;
-
-	return _SUCCESS;
-}
-#endif
-
-#ifdef PLATFORM_LINUX
 static int init_mp_priv_by_os(struct mp_priv *pmp_priv)
 {
 	int i, res;
@@ -248,7 +180,6 @@ _exit_init_mp_priv:
 
 	return res;
 }
-#endif
 
 static void mp_init_xmit_attrib(struct mp_tx *pmptx, PADAPTER padapter)
 {
@@ -1477,22 +1408,9 @@ void SetPacketTx(PADAPTER padapter)
 	_rtw_memset(ptr, payload, pkt_end - ptr);
 
 	//3 6. start thread
-#ifdef PLATFORM_LINUX
 	pmp_priv->tx.PktTxThread = kthread_run(mp_xmit_packet_thread, pmp_priv, "RTW_MP_THREAD");
 	if (IS_ERR(pmp_priv->tx.PktTxThread))
 		DBG_871X("Create PktTx Thread Fail !!!!!\n");
-#endif
-#ifdef PLATFORM_FREEBSD
-{
-	struct proc *p;
-	struct thread *td;
-	pmp_priv->tx.PktTxThread = kproc_kthread_add(mp_xmit_packet_thread, pmp_priv,
-					&p, &td, RFHIGHPID, 0, "MPXmitThread", "MPXmitThread");
-
-	if (pmp_priv->tx.PktTxThread < 0)
-		DBG_871X("Create PktTx Thread Fail !!!!!\n");
-}
-#endif
 }
 
 void SetPacketRx(PADAPTER pAdapter, u8 bStartRx)
@@ -1502,8 +1420,6 @@ void SetPacketRx(PADAPTER pAdapter, u8 bStartRx)
 	if(bStartRx)
 	{
 		// Accept CRC error and destination address
-#if 1
-//ndef CONFIG_RTL8723A
 		pHalData->ReceiveConfig = AAP | APM | AM | AB | APP_ICV | ADF | AMF | HTC_LOC_CTRL | APP_MIC | APP_PHYSTS;
 
 		pHalData->ReceiveConfig |= ACRC32;
@@ -1512,9 +1428,6 @@ void SetPacketRx(PADAPTER pAdapter, u8 bStartRx)
 
 		// Accept all data frames
 		rtw_write16(pAdapter, REG_RXFLTMAP2, 0xFFFF);
-#else
-		rtw_write32(pAdapter, REG_RCR, 0x70000101);
-#endif
 	}
 	else
 	{
@@ -1619,12 +1532,10 @@ u32 mp_query_psd(PADAPTER pAdapter, u8 *data)
 	u32 psd_data=0;
 
 
-#ifdef PLATFORM_LINUX
 	if (!netif_running(pAdapter->pnetdev)) {
 		RT_TRACE(_module_mp_, _drv_warning_, ("mp_query_psd: Fail! interface not opened!\n"));
 		return 0;
 	}
-#endif
 
 	if (check_fwstate(&pAdapter->mlmepriv, WIFI_MP_STATE) == _FALSE) {
 		RT_TRACE(_module_mp_, _drv_warning_, ("mp_query_psd: Fail! not in MP mode!\n"));

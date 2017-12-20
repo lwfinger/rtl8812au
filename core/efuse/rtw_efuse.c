@@ -1059,13 +1059,7 @@ efuse_ShadowRead4Byte(
  * 11/12/2008 	MHC		Create Version 0.
  *
  *---------------------------------------------------------------------------*/
-#ifdef PLATFORM
-static VOID
-efuse_ShadowWrite1Byte(
-	IN	PADAPTER	pAdapter,
-	IN	u16		Offset,
-	IN 	u8		Value);
-#endif //PLATFORM
+
 static VOID
 efuse_ShadowWrite1Byte(
 	IN	PADAPTER	pAdapter,
@@ -1264,9 +1258,7 @@ Efuse_InitSomeVar(
 	_rtw_memset((PVOID)&fakeBTEfuseModifiedMap[0], 0xff, EFUSE_BT_MAX_MAP_LEN);
 }
 
-#ifdef PLATFORM_LINUX
 #ifdef CONFIG_ADAPTOR_INFO_CACHING_FILE
-//#include <rtw_eeprom.h>
 
  int isAdaptorInfoFileValid(void)
 {
@@ -1320,6 +1312,3 @@ int retriveAdaptorInfoFile(char *path, struct eeprom_priv * eeprom_priv)
 	return ret;
 }
 #endif //CONFIG_ADAPTOR_INFO_CACHING_FILE
-#endif //PLATFORM_LINUX
-
-

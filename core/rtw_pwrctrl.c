@@ -819,14 +819,6 @@ void LeaveAllPowerSaveMode(IN PADAPTER Adapter)
 			else
 			#endif
 			{
-#if defined(CONFIG_PLATFORM_SPRD) && defined(CONFIG_RTL8188E)
-				#ifdef CONFIG_IPS
-				if(_FALSE == ips_leave(Adapter))
-				{
-					DBG_871X("======> ips_leave fail.............\n");
-				}
-				#endif
-#endif //CONFIG_PLATFORM_SPRD && CONFIG_RTL8188E
 			}
 		}
 	}
@@ -1338,12 +1330,6 @@ static void resume_workitem_callback(struct work_struct *work);
 void rtw_init_pwrctrl_priv(PADAPTER padapter)
 {
 	struct pwrctrl_priv *pwrctrlpriv = &padapter->pwrctrlpriv;
-
-
-
-#ifdef PLATFORM_WINDOWS
-	pwrctrlpriv->pnp_current_pwr_state=NdisDeviceStateD0;
-#endif
 
 	_init_pwrlock(&pwrctrlpriv->lock);
 	pwrctrlpriv->rf_pwrstate = rf_on;
