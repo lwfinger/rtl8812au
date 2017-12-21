@@ -612,7 +612,6 @@ EXTRA_CFLAGS += -DCONFIG_WOWLAN
 endif
 endif
 
-EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
 SUBARCH := $(shell uname -m | sed -e s/i.86/i386/)
 ARCH ?= $(SUBARCH)
 CROSS_COMPILE ?=

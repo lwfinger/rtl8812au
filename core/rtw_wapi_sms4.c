@@ -8,11 +8,8 @@
 
 #ifdef CONFIG_WAPI_SW_SMS4
 
-#define WAPI_LITTLE_ENDIAN
-//#define BIG_ENDIAN
 #define ENCRYPT  0
 #define DECRYPT  1
-
 
 /**********************************************************
  **********************************************************/
@@ -74,7 +71,7 @@ void SMS4Crypt(u8 *Input, u8 *Output, u32 *rk)
 	 x1 = p[1];
 	 x2 = p[2];
 	 x3 = p[3];
-#ifdef WAPI_LITTLE_ENDIAN
+#ifdef __LITTLE_ENDIAN
 	 x0 = Rotl(x0, 16); x0 = ((x0 & 0x00FF00FF) << 8) | ((x0 & 0xFF00FF00) >> 8);
 	 x1 = Rotl(x1, 16); x1 = ((x1 & 0x00FF00FF) << 8) | ((x1 & 0xFF00FF00) >> 8);
 	 x2 = Rotl(x2, 16); x2 = ((x2 & 0x00FF00FF) << 8) | ((x2 & 0xFF00FF00) >> 8);
@@ -95,7 +92,7 @@ void SMS4Crypt(u8 *Input, u8 *Output, u32 *rk)
 		  mid = ByteSub(mid);
 		  x3 ^= L1(mid);
 	 }
-#ifdef WAPI_LITTLE_ENDIAN
+#ifdef __LITTLE_ENDIAN
 	 x0 = Rotl(x0, 16); x0 = ((x0 & 0x00FF00FF) << 8) | ((x0 & 0xFF00FF00) >> 8);
 	 x1 = Rotl(x1, 16); x1 = ((x1 & 0x00FF00FF) << 8) | ((x1 & 0xFF00FF00) >> 8);
 	 x2 = Rotl(x2, 16); x2 = ((x2 & 0x00FF00FF) << 8) | ((x2 & 0xFF00FF00) >> 8);
@@ -119,7 +116,7 @@ void SMS4KeyExt(u8 *Key, u32 *rk, u32 CryptFlag)
 	 x1 = p[1];
 	 x2 = p[2];
 	 x3 = p[3];
-#ifdef WAPI_LITTLE_ENDIAN
+#ifdef __LITTLE_ENDIAN
 	 x0 = Rotl(x0, 16); x0 = ((x0 & 0xFF00FF) << 8) | ((x0 & 0xFF00FF00) >> 8);
 	 x1 = Rotl(x1, 16); x1 = ((x1 & 0xFF00FF) << 8) | ((x1 & 0xFF00FF00) >> 8);
 	 x2 = Rotl(x2, 16); x2 = ((x2 & 0xFF00FF) << 8) | ((x2 & 0xFF00FF00) >> 8);
