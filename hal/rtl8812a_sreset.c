@@ -37,10 +37,6 @@ void rtl8812_sreset_xmit_status_check(_adapter *padapter)
 		DBG_871X("%s REG_TXDMA_STATUS:0x%08x\n", __FUNCTION__, txdma_status);
 		rtw_hal_sreset_reset(padapter);
 	}
-#ifdef CONFIG_USB_HCI
-	//total xmit irp = 4
-	//DBG_8192C("==>%s free_xmitbuf_cnt(%d),txirp_cnt(%d)\n",__FUNCTION__,pxmitpriv->free_xmitbuf_cnt,pxmitpriv->txirp_cnt);
-	//if(pxmitpriv->txirp_cnt == NR_XMITBUFF+1)
 	current_time = rtw_get_current_time();
 
 	if (0 == pxmitpriv->free_xmitbuf_cnt || 0 == pxmitpriv->free_xmit_extbuf_cnt) {
@@ -50,18 +46,15 @@ void rtl8812_sreset_xmit_status_check(_adapter *padapter)
 		if (diff_time > 2000) {
 			if (psrtpriv->last_tx_complete_time == 0) {
 				psrtpriv->last_tx_complete_time = current_time;
-			}
-			else{
+			} else {
 				diff_time = rtw_get_passing_time_ms(psrtpriv->last_tx_complete_time);
 				if (diff_time > 4000) {
-					//padapter->Wifi_Error_Status = WIFI_TX_HANG;
 					DBG_871X("%s tx hang\n", __FUNCTION__);
 					rtw_hal_sreset_reset(padapter);
 				}
 			}
 		}
 	}
-#endif //CONFIG_USB_HCI
 
 	if (psrtpriv->dbg_trigger_point == SRESET_TGP_XMIT_STATUS) {
 		psrtpriv->dbg_trigger_point = SRESET_TGP_NULL;

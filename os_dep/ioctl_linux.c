@@ -6897,9 +6897,7 @@ static int rtw_dbg_port(struct net_device *dev,
 							pxmitpriv->free_xmitbuf_cnt, pxmitpriv->free_xmitframe_cnt,
 							pxmitpriv->free_xmit_extbuf_cnt, pxmitpriv->free_xframe_ext_cnt,
 							precvpriv->free_recvframe_cnt);
-						#ifdef CONFIG_USB_HCI
 						DBG_871X("rx_urb_pending_cn=%d\n", precvpriv->rx_pending_cnt);
-						#endif
 					}
 					break;
 				case 0x09:
@@ -8903,62 +8901,23 @@ static int rtw_mp_efuse_get(struct net_device *dev,
 		addr = EEPROM_MAC_ADDR_92C;
 		#endif // CONFIG_RTL8192C
 		#ifdef CONFIG_RTL8192D
-			#ifdef CONFIG_USB_HCI
 			if (pHalData->interfaceIndex == 0)
 				addr = EEPROM_MAC_ADDR_MAC0_92DU;
 			else
 				addr = EEPROM_MAC_ADDR_MAC1_92DU;
-			#else
-			if (pHalData->interfaceIndex == 0)
-				addr = EEPROM_MAC_ADDR_MAC0_92DE;
-			else
-				addr = EEPROM_MAC_ADDR_MAC1_92DE;
-			#endif
 		#endif // CONFIG_RTL8192D
 		#ifdef CONFIG_RTL8723A
-			#ifdef CONFIG_SDIO_HCI
-			addr = EEPROM_MAC_ADDR_8723AS;
-			#endif
-			#ifdef CONFIG_GSPI_HCI
-			addr = EEPROM_MAC_ADDR_8723AS;
-			#endif
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_MAC_ADDR_8723AU;
-			#endif
 		#endif // CONFIG_RTL8723A
 		#ifdef CONFIG_RTL8188E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_MAC_ADDR_88EU;
-			#endif
-			#ifdef CONFIG_SDIO_HCI
-			addr = EEPROM_MAC_ADDR_88ES;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_MAC_ADDR_88EE;
-			#endif
 		#endif // CONFIG_RTL8188E
 
 		#ifdef CONFIG_RTL8192E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_MAC_ADDR_8192EU;
-			#endif
-			#ifdef CONFIG_SDIO_HCI
-			addr = EEPROM_MAC_ADDR_8192ES;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_MAC_ADDR_8192EE;
-			#endif
 		#endif
 		#ifdef CONFIG_RTL8723B
-		#ifdef CONFIG_SDIO_HCI
-		addr = EEPROM_MAC_ADDR_8723BS;
-		#endif
-		#ifdef CONFIG_GSPI_HCI
-		addr = EEPROM_MAC_ADDR_8723BS;
-		#endif
-		#ifdef CONFIG_USB_HCI
 		addr = EEPROM_MAC_ADDR_8723BU;
-		#endif
 		#endif // CONFIG_RTL8723B
 		cnts = 6;
 
@@ -8996,33 +8955,17 @@ static int rtw_mp_efuse_get(struct net_device *dev,
 		addr = EEPROM_VID_92C;
 		#endif // CONFIG_RTL8192C
 		#ifdef CONFIG_RTL8192D
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_92DU;
-			#else
-			addr = EEPROM_VID_92DE;
-			#endif
 		#endif // CONFIG_RTL8192D
 		#ifdef CONFIG_RTL8723A
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_8723AU;
-			#endif
 		#endif // CONFIG_RTL8723A
 		#ifdef CONFIG_RTL8188E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_88EU;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_VID_88EE;
-			#endif
 		#endif // CONFIG_RTL8188E
 
 		#ifdef CONFIG_RTL8192E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_8192EU;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_VID_8192EE;
-			#endif
 		#endif // CONFIG_RTL8192E
 		#ifdef CONFIG_RTL8723B
 		addr = EEPROM_VID_8723BU;
@@ -9445,63 +9388,24 @@ static int rtw_mp_efuse_set(struct net_device *dev,
 		addr = EEPROM_MAC_ADDR_92C;
 		#endif
 		#ifdef CONFIG_RTL8192D
-			#ifdef CONFIG_USB_HCI
 			if (pHalData->interfaceIndex == 0)
 				addr = EEPROM_MAC_ADDR_MAC0_92DU;
 			else
 				addr = EEPROM_MAC_ADDR_MAC1_92DU;
-			#else
-			if (pHalData->interfaceIndex == 0)
-				addr = EEPROM_MAC_ADDR_MAC0_92DE;
-			else
-				addr = EEPROM_MAC_ADDR_MAC1_92DE;
-			#endif
 		#endif
 		#ifdef CONFIG_RTL8723A
-		#ifdef CONFIG_SDIO_HCI
-		addr = EEPROM_MAC_ADDR_8723AS;
-		#endif
-		#ifdef CONFIG_GSPI_HCI
-		addr = EEPROM_MAC_ADDR_8723AS;
-		#endif
-		#ifdef CONFIG_USB_HCI
 		addr = EEPROM_MAC_ADDR_8723AU;
-		#endif
 		#endif // CONFIG_RTL8723A
 		#ifdef CONFIG_RTL8188E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_MAC_ADDR_88EU;
-			#endif
-			#ifdef CONFIG_SDIO_HCI
-			addr = EEPROM_MAC_ADDR_88ES;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_MAC_ADDR_88EE;
-			#endif
 		#endif //#ifdef CONFIG_RTL8188E
 
 		#ifdef CONFIG_RTL8192E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_MAC_ADDR_8192EU;
-			#endif
-			#ifdef CONFIG_SDIO_HCI
-			addr = EEPROM_MAC_ADDR_8192ES;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_MAC_ADDR_8192EE;
-			#endif
 		#endif //#ifdef CONFIG_RTL8192E
 
 		#ifdef CONFIG_RTL8723B
-		#ifdef CONFIG_SDIO_HCI
-		addr = EEPROM_MAC_ADDR_8723BS;
-		#endif
-		#ifdef CONFIG_GSPI_HCI
-		addr = EEPROM_MAC_ADDR_8723BS;
-		#endif
-		#ifdef CONFIG_USB_HCI
 		addr = EEPROM_MAC_ADDR_8723BU;
-		#endif
 		#endif // CONFIG_RTL8723B
 
 		cnts = strlen(tmp[1]);
@@ -9564,33 +9468,17 @@ static int rtw_mp_efuse_set(struct net_device *dev,
 		addr = EEPROM_VID_92C;
 		#endif // CONFIG_RTL8192C
 		#ifdef CONFIG_RTL8192D
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_92DU;
-			#else
-			addr = EEPROM_VID_92DE;
-			#endif
 		#endif // CONFIG_RTL8192D
 		#ifdef CONFIG_RTL8723A
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_8723AU;
-			#endif
 		#endif // CONFIG_RTL8723A
 		#ifdef CONFIG_RTL8188E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_88EU;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_VID_88EE;
-			#endif
 		#endif // CONFIG_RTL8188E
 
 		#ifdef CONFIG_RTL8192E
-			#ifdef CONFIG_USB_HCI
 			addr = EEPROM_VID_8192EU;
-			#endif
-			#ifdef CONFIG_PCI_HCI
-			addr = EEPROM_VID_8192EE;
-			#endif
 		#endif // CONFIG_RTL8188E
 
 		#ifdef CONFIG_RTL8723B
@@ -12012,10 +11900,6 @@ extern void rtl8723a_fill_default_txdesc(struct xmit_frame *pxmitframe, u8 *pbuf
 #include <rtl8188e_hal.h>
 extern void rtl8188e_cal_txdesc_chksum(struct tx_desc *ptxdesc);
 #define cal_txdesc_chksum rtl8188e_cal_txdesc_chksum
-#ifdef CONFIG_SDIO_HCI || defined(CONFIG_GSPI_HCI)
-extern void rtl8188es_fill_default_txdesc(struct xmit_frame *pxmitframe, u8 *pbuf);
-#define fill_default_txdesc rtl8188es_fill_default_txdesc
-#endif // CONFIG_SDIO_HCI
 #endif // CONFIG_RTL8188E
 #if defined(CONFIG_RTL8723B)
 extern void rtl8723b_cal_txdesc_chksum(struct tx_desc *ptxdesc);
@@ -12130,9 +12014,6 @@ static s32 createpseudoadhoc(PADAPTER padapter)
 	_rtw_memcpy(&pcur_network->network, pdev_network, get_WLAN_BSSID_EX_sz(pdev_network));
 
 	// set msr to WIFI_FW_ADHOC_STATE
-#if 0
-	Set_NETYPE0_MSR(padapter, WIFI_FW_ADHOC_STATE);
-#else
 	{
 		u8 val8;
 
@@ -12141,7 +12022,6 @@ static s32 createpseudoadhoc(PADAPTER padapter)
 		val8 |= WIFI_FW_ADHOC_STATE & 0x3;
 		rtw_write8(padapter, MSR, val8);
 	}
-#endif
 }
 #endif
 
@@ -12243,16 +12123,6 @@ static struct xmit_frame* createloopbackpkt(PADAPTER padapter, u32 size)
 	desc->txdw5 = cpu_to_le32(desc->txdw5);
 	desc->txdw6 = cpu_to_le32(desc->txdw6);
 	desc->txdw7 = cpu_to_le32(desc->txdw7);
-#ifdef CONFIG_PCI_HCI
-	desc->txdw8 = cpu_to_le32(desc->txdw8);
-	desc->txdw9 = cpu_to_le32(desc->txdw9);
-	desc->txdw10 = cpu_to_le32(desc->txdw10);
-	desc->txdw11 = cpu_to_le32(desc->txdw11);
-	desc->txdw12 = cpu_to_le32(desc->txdw12);
-	desc->txdw13 = cpu_to_le32(desc->txdw13);
-	desc->txdw14 = cpu_to_le32(desc->txdw14);
-	desc->txdw15 = cpu_to_le32(desc->txdw15);
-#endif
 
 	cal_txdesc_chksum(desc);
 

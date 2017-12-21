@@ -46,76 +46,6 @@
 #include "rtl8723a_sreset.h"
 #endif
 
-
-#if defined(CONFIG_SDIO_HCI) || defined(CONFIG_GSPI_HCI)
-
-	//2TODO: We should define 8192S firmware related macro settings here!!
-	#define RTL819X_DEFAULT_RF_TYPE			RF_1T2R
-	#define RTL819X_TOTAL_RF_PATH				2
-
-//---------------------------------------------------------------------
-//		RTL8723S From file
-//---------------------------------------------------------------------
-	#define RTL8723_FW_UMC_IMG				"rtl8723S\\rtl8723fw.bin"
-	#define RTL8723_FW_UMC_B_IMG			"rtl8723S\\rtl8723fw_B.bin"
-	#define RTL8723_PHY_REG					"rtl8723S\\PHY_REG_1T.txt"
-	#define RTL8723_PHY_RADIO_A				"rtl8723S\\radio_a_1T.txt"
-	#define RTL8723_PHY_RADIO_B				"rtl8723S\\radio_b_1T.txt"
-	#define RTL8723_AGC_TAB					"rtl8723S\\AGC_TAB_1T.txt"
-	#define RTL8723_PHY_MACREG				"rtl8723S\\MAC_REG.txt"
-	#define RTL8723_PHY_REG_PG				"rtl8723S\\PHY_REG_PG.txt"
-	#define RTL8723_PHY_REG_MP				"rtl8723S\\PHY_REG_MP.txt"
-
-//---------------------------------------------------------------------
-//		RTL8723S From header
-//---------------------------------------------------------------------
-
-	// Fw Array
-	#define Rtl8723_FwImageArray				Rtl8723SFwImgArray
-	#define Rtl8723_FwUMCBCutImageArrayWithBT		Rtl8723SFwUMCBCutImgArrayWithBT
-	#define Rtl8723_FwUMCBCutImageArrayWithoutBT	Rtl8723SFwUMCBCutImgArrayWithoutBT
-
-	#define Rtl8723_ImgArrayLength				Rtl8723SImgArrayLength
-	#define Rtl8723_UMCBCutImgArrayWithBTLength		Rtl8723SUMCBCutImgArrayWithBTLength
-	#define Rtl8723_UMCBCutImgArrayWithoutBTLength	Rtl8723SUMCBCutImgArrayWithoutBTLength
-
-	#define Rtl8723_PHY_REG_Array_PG			Rtl8723SPHY_REG_Array_PG
-	#define Rtl8723_PHY_REG_Array_PGLength		Rtl8723SPHY_REG_Array_PGLength
-#if MP_DRIVER == 1
-	#define Rtl8723E_FwBTImgArray				Rtl8723EFwBTImgArray
-	#define Rtl8723E_FwBTImgArrayLength			Rtl8723EBTImgArrayLength
-
-	#define Rtl8723_FwUMCBCutMPImageArray		Rtl8723SFwUMCBCutMPImgArray
-	#define Rtl8723_UMCBCutMPImgArrayLength		Rtl8723SUMCBCutMPImgArrayLength
-
-	#define Rtl8723_PHY_REG_Array_MP			Rtl8723SPHY_REG_Array_MP
-	#define Rtl8723_PHY_REG_Array_MPLength		Rtl8723SPHY_REG_Array_MPLength
-#endif
-
-#ifndef CONFIG_PHY_SETTING_WITH_ODM
-	// MAC/BB/PHY Array
-	#define Rtl8723_MAC_Array					Rtl8723SMAC_2T_Array
-	//#define Rtl8723_AGCTAB_2TArray				Rtl8723SAGCTAB_2TArray
-	#define Rtl8723_AGCTAB_1TArray				Rtl8723SAGCTAB_1TArray
-	//#define Rtl8723_PHY_REG_2TArray				Rtl8723SPHY_REG_2TArray
-	#define Rtl8723_PHY_REG_1TArray				Rtl8723SPHY_REG_1TArray
-	//#define Rtl8723_RadioA_2TArray				Rtl8723SRadioA_2TArray
-	#define Rtl8723_RadioA_1TArray				Rtl8723SRadioA_1TArray
-	//#define Rtl8723_RadioB_2TArray				Rtl8723SRadioB_2TArray
-	#define Rtl8723_RadioB_1TArray				Rtl8723SRadioB_1TArray
-
-	// Array length
-	#define Rtl8723_MAC_ArrayLength				Rtl8723SMAC_2T_ArrayLength
-	#define Rtl8723_AGCTAB_1TArrayLength		Rtl8723SAGCTAB_1TArrayLength
-	#define Rtl8723_PHY_REG_1TArrayLength		Rtl8723SPHY_REG_1TArrayLength
-
-	#define Rtl8723_RadioA_1TArrayLength			Rtl8723SRadioA_1TArrayLength
-	#define Rtl8723_RadioB_1TArrayLength			Rtl8723SRadioB_1TArrayLength
-#endif // CONFIG_PHY_SETTING_WITH_ODM
-#endif // CONFIG_SDIO_HCI
-
-#ifdef CONFIG_USB_HCI
-
 	//2TODO: We should define 8192S firmware related macro settings here!!
 	#define RTL819X_DEFAULT_RF_TYPE			RF_1T2R
 	#define RTL819X_TOTAL_RF_PATH				2
@@ -181,8 +111,6 @@
 	#define Rtl8723_RadioA_1TArrayLength			Rtl8723URadioA_1TArrayLength
 	#define Rtl8723_RadioB_1TArrayLength			Rtl8723URadioB_1TArrayLength
 #endif
-#endif
-
 
 #define FW_8723A_SIZE			0x8000
 #define FW_8723A_START_ADDRESS	0x1000
@@ -192,7 +120,6 @@
 #define IS_FW_HEADER_EXIST_8723A(_pFwHdr)	((le16_to_cpu(_pFwHdr->Signature)&0xFFF0) == 0x92C0 ||\
 									(le16_to_cpu(_pFwHdr->Signature)&0xFFF0) == 0x88C0 ||\
 									(le16_to_cpu(_pFwHdr->Signature)&0xFFF0) == 0x2300)
-
 
 typedef struct _RT_FIRMWARE_8723A {
 	FIRMWARE_SOURCE	eFWSource;

@@ -52,10 +52,6 @@
 #endif //CONFIG_WOWLAN
 
 
-#ifdef CONFIG_SDIO_HCI
-
-	//TODO: We should define 8188ES firmware related macro settings here!!
-	//TODO:  The following need to check!!
 	#define RTL8188E_FW_UMC_IMG				"rtl8188E\\rtl8188efw.bin"
 	#define RTL8188E_PHY_REG					"rtl8188E\\PHY_REG_1T.txt"
 	#define RTL8188E_PHY_RADIO_A				"rtl8188E\\radio_a_1T.txt"
@@ -64,15 +60,6 @@
 	#define RTL8188E_PHY_MACREG				"rtl8188E\\MAC_REG.txt"
 	#define RTL8188E_PHY_REG_PG				"rtl8188E\\PHY_REG_PG.txt"
 	#define RTL8188E_PHY_REG_MP				"rtl8188E\\PHY_REG_MP.txt"
-
-//---------------------------------------------------------------------
-//		RTL8188E From header
-//---------------------------------------------------------------------
-#if 0
-	#define Rtl8188E_PHY_REG_Array_PG			Rtl8188ESPHY_REG_Array_PG
-	#define Rtl8188E_PHY_REG_Array_PGLength	Rtl8188ESPHY_REG_Array_PGLength
-
-#endif
 
 	//---------------------------------------------------------------------
 	//		RTL8188E Power Configuration CMDs for USB/SDIO interfaces
@@ -86,77 +73,11 @@
 	#define Rtl8188E_NIC_PDN_FLOW					rtl8188E_hwpdn_flow
 	#define Rtl8188E_NIC_LPS_ENTER_FLOW			rtl8188E_enter_lps_flow
 	#define Rtl8188E_NIC_LPS_LEAVE_FLOW			rtl8188E_leave_lps_flow
-
-#elif defined(CONFIG_USB_HCI)
-	#define RTL8188E_FW_UMC_IMG				"rtl8188E\\rtl8188efw.bin"
-	#define RTL8188E_PHY_REG					"rtl8188E\\PHY_REG_1T.txt"
-	#define RTL8188E_PHY_RADIO_A				"rtl8188E\\radio_a_1T.txt"
-	#define RTL8188E_PHY_RADIO_B				"rtl8188E\\radio_b_1T.txt"
-	#define RTL8188E_AGC_TAB					"rtl8188E\\AGC_TAB_1T.txt"
-	#define RTL8188E_PHY_MACREG				"rtl8188E\\MAC_REG.txt"
-	#define RTL8188E_PHY_REG_PG				"rtl8188E\\PHY_REG_PG.txt"
-	#define RTL8188E_PHY_REG_MP				"rtl8188E\\PHY_REG_MP.txt"
-
-#if 0
-	#define Rtl8188E_PHY_REG_Array_PG			Rtl8188EUPHY_REG_Array_PG
-	#define Rtl8188E_PHY_REG_Array_PGLength	Rtl8188EUPHY_REG_Array_PGLength
-
-#endif
-
-	//---------------------------------------------------------------------
-	//		RTL8188E Power Configuration CMDs for USB/SDIO interfaces
-	//---------------------------------------------------------------------
-	#define Rtl8188E_NIC_PWR_ON_FLOW				rtl8188E_power_on_flow
-	#define Rtl8188E_NIC_RF_OFF_FLOW				rtl8188E_radio_off_flow
-	#define Rtl8188E_NIC_DISABLE_FLOW				rtl8188E_card_disable_flow
-	#define Rtl8188E_NIC_ENABLE_FLOW				rtl8188E_card_enable_flow
-	#define Rtl8188E_NIC_SUSPEND_FLOW				rtl8188E_suspend_flow
-	#define Rtl8188E_NIC_RESUME_FLOW				rtl8188E_resume_flow
-	#define Rtl8188E_NIC_PDN_FLOW					rtl8188E_hwpdn_flow
-	#define Rtl8188E_NIC_LPS_ENTER_FLOW			rtl8188E_enter_lps_flow
-	#define Rtl8188E_NIC_LPS_LEAVE_FLOW			rtl8188E_leave_lps_flow
-
-#elif defined(CONFIG_PCI_HCI)
-	#define RTL8188E_FW_UMC_IMG				"rtl8188E\\rtl8188efw.bin"
-	#define RTL8188E_PHY_REG					"rtl8188E\\PHY_REG_1T.txt"
-	#define RTL8188E_PHY_RADIO_A				"rtl8188E\\radio_a_1T.txt"
-	#define RTL8188E_PHY_RADIO_B				"rtl8188E\\radio_b_1T.txt"
-	#define RTL8188E_AGC_TAB					"rtl8188E\\AGC_TAB_1T.txt"
-	#define RTL8188E_PHY_MACREG				"rtl8188E\\MAC_REG.txt"
-	#define RTL8188E_PHY_REG_PG				"rtl8188E\\PHY_REG_PG.txt"
-	#define RTL8188E_PHY_REG_MP				"rtl8188E\\PHY_REG_MP.txt"
-
-	#define Rtl8188E_PHY_REG_Array_PG			Rtl8188EEPHY_REG_Array_PG
-	#define Rtl8188E_PHY_REG_Array_PGLength	Rtl8188EEPHY_REG_Array_PGLength
-
-
-	#ifndef CONFIG_PHY_SETTING_WITH_ODM
-	#if MP_DRIVER == 1
-	#define Rtl8188ES_PHY_REG_Array_MP			Rtl8188ESPHY_REG_Array_MP
-	#endif
-	#endif
-
-	//---------------------------------------------------------------------
-	//		RTL8188E Power Configuration CMDs for USB/SDIO/PCIE interfaces
-	//---------------------------------------------------------------------
-	#define Rtl8188E_NIC_PWR_ON_FLOW				rtl8188E_power_on_flow
-	#define Rtl8188E_NIC_RF_OFF_FLOW				rtl8188E_radio_off_flow
-	#define Rtl8188E_NIC_DISABLE_FLOW				rtl8188E_card_disable_flow
-	#define Rtl8188E_NIC_ENABLE_FLOW				rtl8188E_card_enable_flow
-	#define Rtl8188E_NIC_SUSPEND_FLOW				rtl8188E_suspend_flow
-	#define Rtl8188E_NIC_RESUME_FLOW				rtl8188E_resume_flow
-	#define Rtl8188E_NIC_PDN_FLOW					rtl8188E_hwpdn_flow
-	#define Rtl8188E_NIC_LPS_ENTER_FLOW			rtl8188E_enter_lps_flow
-	#define Rtl8188E_NIC_LPS_LEAVE_FLOW			rtl8188E_leave_lps_flow
-#endif //CONFIG_***_HCI
 
 #if 1 // download firmware related data structure
 #define FW_8188E_SIZE				0x4000 //16384,16k
 #define FW_8188E_START_ADDRESS	0x1000
 #define FW_8188E_END_ADDRESS		0x1FFF //0x5FFF
-
-
-
 
 #define IS_FW_HEADER_EXIST_88E(_pFwHdr)	((le16_to_cpu(_pFwHdr->Signature)&0xFFF0) == 0x88E0)
 
@@ -300,21 +221,11 @@ typedef struct _RT_8188E_FIRMWARE_HDR
 #define INCLUDE_MULTI_FUNC_BT(_Adapter)	(GET_HAL_DATA(_Adapter)->MultiFunc & RT_MULTI_FUNC_BT)
 #define INCLUDE_MULTI_FUNC_GPS(_Adapter)	(GET_HAL_DATA(_Adapter)->MultiFunc & RT_MULTI_FUNC_GPS)
 
-//#define IS_MULTI_FUNC_CHIP(_Adapter)	(((((PHAL_DATA_TYPE)(_Adapter->HalData))->MultiFunc) & (RT_MULTI_FUNC_BT|RT_MULTI_FUNC_GPS)) ? _TRUE : _FALSE)
-
-//#define RT_IS_FUNC_DISABLED(__pAdapter, __FuncBits) ( (__pAdapter)->DisabledFunctions & (__FuncBits) )
-
-#ifdef CONFIG_PCI_HCI
-void InterruptRecognized8188EE(PADAPTER Adapter, PRT_ISR_CONTENT pIsrContent);
-void UpdateInterruptMask8188EE(PADAPTER Adapter, u32 AddMSR, u32 AddMSR1, u32 RemoveMSR, u32 RemoveMSR1);
-#endif	//CONFIG_PCI_HCI
-
 // rtl8188e_hal_init.c
 
 s32 rtl8188e_FirmwareDownload(PADAPTER padapter, BOOLEAN  bUsedWoWLANFw);
 void _8051Reset88E(PADAPTER padapter);
 void rtl8188e_InitializeFirmwareVars(PADAPTER padapter);
-
 
 s32 InitLLTTable(PADAPTER padapter, u8 txpktbuf_bndy);
 

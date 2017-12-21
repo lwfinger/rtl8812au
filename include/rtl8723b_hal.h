@@ -39,51 +39,6 @@
 #include "rtl8723b_bt-coexist.h"
 #endif
 
-#if defined(CONFIG_SDIO_HCI) || defined(CONFIG_GSPI_HCI)
-
-	//2TODO: We should define 8192S firmware related macro settings here!!
-	#define RTL819X_DEFAULT_RF_TYPE			RF_1T2R
-	#define RTL819X_TOTAL_RF_PATH				2
-
-//---------------------------------------------------------------------
-//		RTL8723BS From file
-//---------------------------------------------------------------------
-	#define RTL8723B_FW_IMG					"rtl8723B\\rtl8723bfw.bin"
-	#define RTL8723B_PHY_REG					"rtl8723B\\PHY_REG_1T.txt"
-	#define RTL8723B_PHY_RADIO_A				"rtl8723B\\radio_a_1T.txt"
-	#define RTL8723B_PHY_RADIO_B				"rtl8723B\\radio_b_1T.txt"
-	#define RTL8723B_TXPWR_TRACK				"rtl8723B\\TxPowerTrack.txt"
-	#define RTL8723B_AGC_TAB					"rtl8723B\\AGC_TAB_1T.txt"
-	#define RTL8723B_PHY_MACREG				"rtl8723B\\MAC_REG.txt"
-	#define RTL8723B_PHY_REG_PG				"rtl8723B\\PHY_REG_PG.txt"
-	#define RTL8723B_PHY_REG_MP				"rtl8723B\\PHY_REG_MP.txt"
-
-//---------------------------------------------------------------------
-//		RTL8723BS From header
-//---------------------------------------------------------------------
-
-	//#define Rtl8723B_FwImageArray				Array_MP_8723B_FW_NIC
-	//#define Rtl8723B_FwImgArrayLength			ArrayLength_MP_8723B_FW_NIC
-	//#define Rtl8723B_FwWoWImageArray			Array_MP_8723B_FW_WoWLAN
-	//#define Rtl8723B_FwWoWImgArrayLength		ArrayLength_MP_8723B_FW_WoWLAN
-
-	#define Rtl8723B_PHY_REG_Array_PG			Rtl8723SPHY_REG_Array_PG
-	#define Rtl8723B_PHY_REG_Array_PGLength	Rtl8723SPHY_REG_Array_PGLength
-
-#if MP_DRIVER == 1
-	#define Rtl8723B_FwBTImgArray				Rtl8723BFwBTImgArray
-	#define Rtl8723B_FwBTImgArrayLength		Rtl8723BFwBTImgArrayLength
-
-	#define Rtl8723B_FwMPImageArray			Rtl8723BFwMPImgArray
-	#define Rtl8723B_FwMPImgArrayLength		Rtl8723BMPImgArrayLength
-
-	#define Rtl8723B_PHY_REG_Array_MP			Rtl8723B_PHYREG_Array_MP
-	#define Rtl8723B_PHY_REG_Array_MPLength	Rtl8723B_PHYREG_Array_MPLength
-#endif
-
-#endif // CONFIG_SDIO_HCI
-
-#ifdef CONFIG_USB_HCI
 
 	//2TODO: We should define 8192S firmware related macro settings here!!
 	#define RTL819X_DEFAULT_RF_TYPE			RF_1T2R
@@ -123,7 +78,6 @@
 
 	#define Rtl8723B_PHY_REG_Array_MP			Rtl8723B_PHY_REG_Array_MP
 	#define Rtl8723B_PHY_REG_Array_MPLength	Rtl8723B_PHY_REG_Array_MPLength
-#endif
 #endif
 
 #define FW_8723B_SIZE			0x8000

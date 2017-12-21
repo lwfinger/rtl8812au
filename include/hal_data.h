@@ -282,14 +282,8 @@ typedef struct hal_com_data
 	//
 	u16	EEPROMVID;
 	u16	EEPROMSVID;
-#ifdef CONFIG_USB_HCI
 	u16	EEPROMPID;
 	u16	EEPROMSDID;
-#endif
-#ifdef CONFIG_PCI_HCI
-	u16	EEPROMDID;
-	u16	EEPROMSMID;
-#endif
 
 	u8	EEPROMCustomerID;
 	u8	EEPROMSubCustomerID;
@@ -482,39 +476,6 @@ typedef struct hal_com_data
 
 	RT_AMPDU_BRUST		AMPDUBurstMode; //92C maybe not use, but for compile successfully
 
-#ifdef CONFIG_SDIO_HCI
-	//
-	// For SDIO Interface HAL related
-	//
-
-	//
-	// SDIO ISR Related
-	//
-//	u32			IntrMask[1];
-//	u32			IntrMaskToSet[1];
-//	LOG_INTERRUPT		InterruptLog;
-	u32			sdio_himr;
-	u32			sdio_hisr;
-
-	//
-	// SDIO Tx FIFO related.
-	//
-	// HIQ, MID, LOW, PUB free pages; padapter->xmitpriv.free_txpg
-	u8			SdioTxFIFOFreePage[SDIO_TX_FREE_PG_QUEUE];
-	_lock		SdioTxFIFOFreePageLock;
-	#ifndef CONFIG_SDIO_TX_TASKLET
-	_thread_hdl_	SdioXmitThread;
-	_sema		SdioXmitSema;
-	_sema		SdioXmitTerminateSema;
-	#endif//CONFIG_SDIO_TX_TASKLET
-	//
-	// SDIO Rx FIFO related.
-	//
-	u8			SdioRxFIFOCnt;
-	u16			SdioRxFIFOSize;
-#endif //CONFIG_SDIO_HCI
-
-#ifdef CONFIG_USB_HCI
 	u32	UsbBulkOutSize;
 	BOOLEAN		bSupportUSB3;
 
@@ -540,29 +501,6 @@ typedef struct hal_com_data
 	u8	RegAcUsbDmaSize;
 	u8	RegAcUsbDmaTime;
 	#endif//CONFIG_USB_RX_AGGREGATION
-#endif //CONFIG_USB_HCI
-
-
-#ifdef CONFIG_PCI_HCI
-	//
-	// EEPROM setting.
-	//
-	u16	EEPROMChannelPlan;
-
-	u8	EEPROMTSSI[2];
-	u8	EEPROMBoardType;
-	u32	TransmitConfig;
-
-	u32	IntrMask[2];
-	u32	IntrMaskToSet[2];
-
-	u8	bDefaultAntenna;
-	//u8	bIQKInitialized;
-
-	u8	bInterruptMigration;
-	u8	bDisableTxInt;
-	u8	bGpioHwWpsPbc;
-#endif //CONFIG_PCI_HCI
 
 	struct dm_priv	dmpriv;
 	DM_ODM_T		odmpriv;

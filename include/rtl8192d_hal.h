@@ -38,72 +38,6 @@
 #include "rtl8192d_cmd.h"
 #include "rtl8192d_led.h"
 
-
-#ifdef CONFIG_PCI_HCI
-	#define RTL819X_DEFAULT_RF_TYPE			RF_2T2R
-
-//---------------------------------------------------------------------
-//		RTL8192DE From file
-//---------------------------------------------------------------------
-	#define	RTL8192D_FW_IMG				"rtl8192DE\\rtl8192dfw.bin"
-
-	#define RTL8192D_PHY_REG					"rtl8192DE\\PHY_REG.txt"
-	#define RTL8192D_PHY_REG_PG				"rtl8192DE\\PHY_REG_PG.txt"
-	#define RTL8192D_PHY_REG_MP				"rtl8192DE\\PHY_REG_MP.txt"
-
-	#define RTL8192D_AGC_TAB					"rtl8192DE\\AGC_TAB.txt"
-	#define RTL8192D_AGC_TAB_2G				"rtl8192DE\\AGC_TAB_2G.txt"
-	#define RTL8192D_AGC_TAB_5G				"rtl8192DE\\AGC_TAB_5G.txt"
-	#define RTL8192D_PHY_RADIO_A				"rtl8192DE\\radio_a.txt"
-	#define RTL8192D_PHY_RADIO_B				"rtl8192DE\\radio_b.txt"
-	#define RTL8192D_PHY_RADIO_A_intPA			"rtl8192DE\\radio_a_intPA.txt"
-	#define RTL8192D_PHY_RADIO_B_intPA			"rtl8192DE\\radio_b_intPA.txt"
-	#define RTL8192D_PHY_MACREG				"rtl8192DE\\MAC_REG.txt"
-
-//---------------------------------------------------------------------
-//		RTL8192DE From header
-//---------------------------------------------------------------------
-	// Fw Array
-	#define Rtl8192D_FwImageArray				Rtl8192DEFwImgArray
-
-	// MAC/BB/PHY Array
-	#define Rtl8192D_MAC_Array					Rtl8192DEMAC_2T_Array
-	#define Rtl8192D_AGCTAB_Array				Rtl8192DEAGCTAB_Array
-	#define Rtl8192D_AGCTAB_5GArray			Rtl8192DEAGCTAB_5GArray
-	#define Rtl8192D_AGCTAB_2GArray			Rtl8192DEAGCTAB_2GArray
-	#define Rtl8192D_AGCTAB_2TArray				Rtl8192DEAGCTAB_2TArray
-	#define Rtl8192D_AGCTAB_1TArray				Rtl8192DEAGCTAB_1TArray
-	#define Rtl8192D_PHY_REG_2TArray			Rtl8192DEPHY_REG_2TArray
-	#define Rtl8192D_PHY_REG_1TArray			Rtl8192DEPHY_REG_1TArray
-	#define Rtl8192D_PHY_REG_Array_PG			Rtl8192DEPHY_REG_Array_PG
-	#define Rtl8192D_PHY_REG_Array_MP			Rtl8192DEPHY_REG_Array_MP
-	#define Rtl8192D_RadioA_2TArray				Rtl8192DERadioA_2TArray
-	#define Rtl8192D_RadioA_1TArray				Rtl8192DERadioA_1TArray
-	#define Rtl8192D_RadioB_2TArray				Rtl8192DERadioB_2TArray
-	#define Rtl8192D_RadioB_1TArray				Rtl8192DERadioB_1TArray
-	#define Rtl8192D_RadioA_2T_intPAArray		Rtl8192DERadioA_2T_intPAArray
-	#define Rtl8192D_RadioB_2T_intPAArray		Rtl8192DERadioB_2T_intPAArray
-
-	// Array length
-	#define Rtl8192D_FwImageArrayLength			Rtl8192DEImgArrayLength
-	#define Rtl8192D_MAC_ArrayLength				Rtl8192DEMAC_2T_ArrayLength
-	#define Rtl8192D_AGCTAB_5GArrayLength			Rtl8192DEAGCTAB_5GArrayLength
-	#define Rtl8192D_AGCTAB_2GArrayLength			Rtl8192DEAGCTAB_2GArrayLength
-	#define Rtl8192D_AGCTAB_2TArrayLength			Rtl8192DEAGCTAB_2TArrayLength
-	#define Rtl8192D_AGCTAB_1TArrayLength			Rtl8192DEAGCTAB_1TArrayLength
-	#define Rtl8192D_AGCTAB_ArrayLength			Rtl8192DEAGCTAB_ArrayLength
-	#define Rtl8192D_PHY_REG_2TArrayLength			Rtl8192DEPHY_REG_2TArrayLength
-	#define Rtl8192D_PHY_REG_1TArrayLength			Rtl8192DEPHY_REG_1TArrayLength
-	#define Rtl8192D_PHY_REG_Array_PGLength		Rtl8192DEPHY_REG_Array_PGLength
-	#define Rtl8192D_PHY_REG_Array_MPLength		Rtl8192DEPHY_REG_Array_MPLength
-	#define Rtl8192D_RadioA_2TArrayLength			Rtl8192DERadioA_2TArrayLength
-	#define Rtl8192D_RadioB_2TArrayLength			Rtl8192DERadioB_2TArrayLength
-	#define Rtl8192D_RadioA_2T_intPAArrayLength		Rtl8192DERadioA_2T_intPAArrayLength
-	#define Rtl8192D_RadioB_2T_intPAArrayLength		Rtl8192DERadioB_2T_intPAArrayLength
-
-#elif defined(CONFIG_USB_HCI)
-
-
 	#define RTL819X_DEFAULT_RF_TYPE		RF_1T2R
 
 //---------------------------------------------------------------------
@@ -165,28 +99,6 @@
 	#define Rtl8192D_RadioB_2TArrayLength			Rtl8192DURadioB_2TArrayLength
 	#define Rtl8192D_RadioA_2T_intPAArrayLength		Rtl8192DURadioA_2T_intPAArrayLength
 	#define Rtl8192D_RadioB_2T_intPAArrayLength		Rtl8192DURadioB_2T_intPAArrayLength
-
-	// The file name "_2T" is for 92CU, "_1T"  is for 88CU. Modified by tynli. 2009.11.24.
-/*	#define Rtl819XFwImageArray					Rtl8192DUFwImgArray
-	#define Rtl819XMAC_Array					Rtl8192DUMAC_2TArray
-	#define Rtl819XAGCTAB_Array					Rtl8192DUAGCTAB_Array
-	#define Rtl819XAGCTAB_5GArray				Rtl8192DUAGCTAB_5GArray
-	#define Rtl819XAGCTAB_2GArray				Rtl8192DUAGCTAB_2GArray
-	#define Rtl819XPHY_REG_2TArray				Rtl8192DUPHY_REG_2TArray
-	#define Rtl819XPHY_REG_1TArray				Rtl8192DUPHY_REG_1TArray
-	#define Rtl819XRadioA_2TArray				Rtl8192DURadioA_2TArray
-	#define Rtl819XRadioA_1TArray				Rtl8192DURadioA_1TArray
-	#define Rtl819XRadioA_2T_intPAArray			Rtl8192DURadioA_2T_intPAArray
-	#define Rtl819XRadioB_2TArray				Rtl8192DURadioB_2TArray
-	#define Rtl819XRadioB_1TArray				Rtl8192DURadioB_1TArray
-	#define Rtl819XRadioB_2T_intPAArray			Rtl8192DURadioB_2T_intPAArray
-	#define Rtl819XPHY_REG_Array_PG				Rtl8192DUPHY_REG_Array_PG
-	#define Rtl819XPHY_REG_Array_MP				Rtl8192DUPHY_REG_Array_MP
-
-	#define Rtl819XAGCTAB_2TArray				Rtl8192DUAGCTAB_2TArray
-	#define Rtl819XAGCTAB_1TArray				Rtl8192DUAGCTAB_1TArray*/
-
-#endif
 
 //
 // Check if FW header exists. We do not consider the lower 4 bits in this case.
@@ -372,25 +284,6 @@ enum c2h_id_8192d {
 	MAX_C2HEVENT
 };
 
-#ifdef CONFIG_PCI_HCI
-//
-// Function disabled.
-//
-#define DF_TX_BIT		BIT0
-#define DF_RX_BIT		BIT1
-#define DF_IO_BIT		BIT2
-#define DF_IO_D3_BIT			BIT3
-
-#define RT_DF_TYPE		u32
-//#define RT_DISABLE_FUNC(__pAdapter, __FuncBits) ((__pAdapter)->DisabledFunctions |= ((RT_DF_TYPE)(__FuncBits)))
-//#define RT_ENABLE_FUNC(__pAdapter, __FuncBits) ((__pAdapter)->DisabledFunctions &= (~((RT_DF_TYPE)(__FuncBits))))
-//#define RT_IS_FUNC_DISABLED(__pAdapter, __FuncBits) ( (__pAdapter)->DisabledFunctions & (__FuncBits) )
-
-void InterruptRecognized8192DE(PADAPTER Adapter, PRT_ISR_CONTENT pIsrContent);
-VOID UpdateInterruptMask8192DE(PADAPTER Adapter, u32 AddMSR, u32 RemoveMSR);
-#endif
-
-
 #define GET_RF_TYPE(priv)	(GET_HAL_DATA(priv)->rf_type)
 
 int FirmwareDownload92D(IN PADAPTER Adapter);
@@ -402,8 +295,8 @@ VOID rtl8192d_ResetDualMacSwitchVariables(IN PADAPTER Adapter);
 u8 GetEEPROMSize8192D(PADAPTER Adapter);
 BOOLEAN PHY_CheckPowerOffFor8192D(PADAPTER Adapter);
 VOID PHY_SetPowerOnFor8192D(PADAPTER Adapter);
-//void PHY_ConfigMacPhyMode92D(PADAPTER Adapter);
 void rtl8192d_free_hal_data(_adapter * padapter);
 void rtl8192d_set_hal_ops(struct hal_ops *pHalFunc);
 void	rtl8192d_clone_haldata(_adapter* dst_adapter, _adapter* src_adapter);
+
 #endif

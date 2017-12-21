@@ -291,10 +291,6 @@ typedef struct txdescriptor_8812
 #define SET_TX_DESC_TX_BUFFER_SIZE_8812(__pTxDesc, __Value)		SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
 #define SET_TX_DESC_TX_DESC_CHECKSUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
 #define SET_TX_DESC_USB_TXAGG_NUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 24, 8, __Value)
-#ifdef CONFIG_SDIO_HCI
-#define SET_TX_DESC_SDIO_TXSEQ_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 16, 8, __Value)
-#endif
-
 // Dword 8
 #define SET_TX_DESC_HWSEQ_EN_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+32, 15, 1, __Value)
 
@@ -329,7 +325,6 @@ void rtl8812a_fill_txdesc_sectype(struct pkt_attrib *pattrib, u8 *ptxdesc);
 void rtl8812a_fill_txdesc_vcs(PADAPTER padapter, struct pkt_attrib *pattrib, u8 *ptxdesc);
 void rtl8812a_fill_txdesc_phy(PADAPTER padapter, struct pkt_attrib *pattrib, u8 *ptxdesc);
 
-#ifdef CONFIG_USB_HCI
 s32 rtl8812au_init_xmit_priv(PADAPTER padapter);
 void rtl8812au_free_xmit_priv(PADAPTER padapter);
 s32 rtl8812au_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
@@ -338,17 +333,6 @@ s32	 rtl8812au_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmi
 s32 rtl8812au_xmit_buf_handler(PADAPTER padapter);
 void rtl8812au_xmit_tasklet(void *priv);
 s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
-#endif
-
-#ifdef CONFIG_PCI_HCI
-s32 rtl8812e_init_xmit_priv(PADAPTER padapter);
-void rtl8812e_free_xmit_priv(PADAPTER padapter);
-struct xmit_buf *rtl8812e_dequeue_xmitbuf(struct rtw_tx_ring *ring);
-void	rtl8812e_xmitframe_resume(_adapter *padapter);
-s32 rtl8812e_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
-s32 rtl8812e_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
-void rtl8812e_xmit_tasklet(void *priv);
-#endif
 
 #ifdef CONFIG_TX_EARLY_MODE
 void UpdateEarlyModeInfo8812(struct xmit_priv *pxmitpriv,struct xmit_buf *pxmitbuf );

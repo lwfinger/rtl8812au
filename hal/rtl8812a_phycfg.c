@@ -188,7 +188,6 @@ phy_RFSerialWrite(
 	DataAndAddr = ((Offset<<20) | (Data&0x000fffff)) & 0x0fffffff;
 
 	//3 <Note> This is a workaround for 8812A test chips.
-#ifdef CONFIG_USB_HCI
 	// <20120427, Kordan> MAC first moves lower 16 bits and then upper 16 bits of a 32-bit data.
 	// BaseBand doesn't know the two actions is actually only one action to access 32-bit data,
 	// so that the lower 16 bits is overwritten by the upper 16 bits. (Asked by ynlin.)
@@ -207,7 +206,6 @@ phy_RFSerialWrite(
 		}
 	}
 	else // USB 3.0
-#endif
 	{
 		// Write Operation
 		// TODO: Dynamically determine whether using PI or SI to write RF registers.
@@ -2900,7 +2898,6 @@ PHY_GetTxPowerIndex_8812A(
 	}
 	else
 	{
-#ifdef CONFIG_USB_HCI
 		//
 		// 2013/01/29 MH For preventing VHT rate of 8812AU to be used in USB 2.0 mode
 		// and the current will be more than 500mA and card disappear. We need to limit
@@ -2912,7 +2909,6 @@ PHY_GetTxPowerIndex_8812A(
 		{
 			powerDiffByRate = 0;
 		}
-#endif // CONFIG_USB_HCI
 
 		txPower += powerDiffByRate;
 	}
@@ -3261,147 +3257,7 @@ PHY_SetTxPowerLevelByPath8812(
 								  vhtRates2T, sizeof(vhtRates2T)/sizeof(u1Byte));
 		}
 	}
-	/*else
-	{
-		u1Byte cckRatesSize = sizeof(cckRates)/sizeof(u1Byte);
-		u1Byte ofdmRatesSize = sizeof(ofdmRates)/sizeof(u1Byte);
-		u1Byte htRates1TSize = sizeof(htRates1T)/sizeof(u1Byte);
-		u1Byte htRates2TSize = sizeof(htRates2T)/sizeof(u1Byte);
-		u1Byte vhtRates1TSize = sizeof(vhtRates1T)/sizeof(u1Byte);
-		u1Byte vhtRates2TSize = sizeof(vhtRates2T)/sizeof(u1Byte);
-		u1Byte PowerIndexArray[POWERINDEX_ARRAY_SIZE];
-
-		u1Byte Length;
-		u4Byte RegAddress;
-
-
-		RT_TRACE(COMP_SCAN, DBG_LOUD, ("PHY_SetTxPowerLevel8812ByPath(): path = %d.\n",path));
-
-		PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,ofdmRates,&PowerIndexArray[cckRatesSize],ofdmRatesSize);
-		PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,htRates1T,&PowerIndexArray[cckRatesSize+ofdmRatesSize],htRates1TSize);
-		if(pHalData->CurrentBandType == BAND_ON_2_4G)
-		{
-			PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,cckRates,&PowerIndexArray[0],cckRatesSize);
-			PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,vhtRates1T,&PowerIndexArray[cckRatesSize+ofdmRatesSize+htRates1TSize+htRates2TSize],vhtRates1TSize);
-			Length = cckRatesSize + ofdmRatesSize + htRates1TSize + htRates2TSize + vhtRates1TSize;
-
-			if(pHalData->NumTotalRFPath >= 2)
-			{
-				PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,htRates2T,&PowerIndexArray[cckRatesSize+ofdmRatesSize+htRates1TSize],htRates2TSize);
-				PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,vhtRates2T,&PowerIndexArray[cckRatesSize+ofdmRatesSize+htRates1TSize+htRates2TSize+vhtRates1TSize],vhtRates2TSize);
-				Length += vhtRates2TSize;
-			}
-
-			if(path == ODM_RF_PATH_A)
-				RegAddress = rTxAGC_A_CCK11_CCK1_JAguar;
-			else					//ODM_RF_PATH_B
-				RegAddress = rTxAGC_B_CCK11_CCK1_JAguar;
-
-#ifdef CONFIG_USB_HCI
-			if(pMgntInfo->RegNByteAccess == 2)  //N Byte access
-			{
-				PlatformIOWriteNByte(Adapter,RegAddress,Length,PowerIndexArray);
-			}
-			else if(pMgntInfo->RegNByteAccess == 1) //DW access
-#endif
-			{
-				u1Byte i, j;
-				for(i = 0;i < Length;i+=4)
-				{
-					u4Byte powerIndex = 0;
-					for(j = 0;j < 4; j++)
-					{
-						powerIndex |= (PowerIndexArray[i+j]<<(8*j));
-					}
-
-					PHY_SetBBReg(Adapter, RegAddress+i, bMaskDWord, powerIndex);
-				}
-			}
-		}
-		else if(pHalData->CurrentBandType == BAND_ON_5G)
-		{
-			PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,vhtRates1T,&PowerIndexArray[cckRatesSize+ofdmRatesSize+htRates1TSize+htRates2TSize],vhtRates1TSize);
-
-			if(pHalData->NumTotalRFPath >= 2)
-			{
-				PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,htRates2T,&PowerIndexArray[cckRatesSize+ofdmRatesSize+htRates1TSize],htRates2TSize);
-				PHY_GetTxPowerIndexByRateArray_8812A(Adapter, path,pHalData->CurrentChannelBW, channel,vhtRates2T,&PowerIndexArray[cckRatesSize+ofdmRatesSize+htRates1TSize+htRates2TSize+vhtRates1TSize],vhtRates2TSize);
-
-				Length = ofdmRatesSize + htRates1TSize + htRates2TSize + vhtRates1TSize + vhtRates2TSize;
-			}
-			else
-			{
-				if(path == ODM_RF_PATH_A)
-					RegAddress = rTxAGC_A_Nss1Index3_Nss1Index0_JAguar;
-				else					// ODM_RF_PATH_B
-					RegAddress = rTxAGC_B_Nss1Index3_Nss1Index0_JAguar;
-
-#ifdef CONFIG_USB_HCI
-				if(pMgntInfo->RegNByteAccess == 2)
-				{
-					PlatformIOWriteNByte(Adapter,RegAddress,vhtRates1TSize,&PowerIndexArray[cckRatesSize + ofdmRatesSize + htRates1TSize + htRates2TSize]);
-				}
-				else if(pMgntInfo->RegNByteAccess == 1) //DW access
-#endif
-				{
-					u1Byte i, j;
-					for(i = 0;i < vhtRates1TSize;i+=4)
-					{
-						u4Byte powerIndex = 0;
-						for(j = 0;j < 4; j++)
-						{
-							powerIndex |= (PowerIndexArray[cckRatesSize + ofdmRatesSize + htRates1TSize + htRates2TSize+i+j]<<(8*j));
-						}
-
-						PHY_SetBBReg(Adapter, RegAddress+i, bMaskDWord, powerIndex);
-					}
-
-					{
-						u4Byte powerIndex = 0;
-						//i+=4;
-						for(j = 0;j < vhtRates1TSize%4;j++)  // for Nss1 MCS8,9
-						{
-							powerIndex |= (PowerIndexArray[cckRatesSize + ofdmRatesSize + htRates1TSize + htRates2TSize+i+j]<<(8*j));
-						}
-						PHY_SetBBReg(Adapter, RegAddress+i, bMaskLWord, powerIndex);
-					}
-				}
-
-				Length = ofdmRatesSize + htRates1TSize;
-			}
-
-			if(path == ODM_RF_PATH_A)
-				RegAddress = rTxAGC_A_Ofdm18_Ofdm6_JAguar;
-			else					// ODM_RF_PATH_B
-				RegAddress = rTxAGC_B_Ofdm18_Ofdm6_JAguar;
-
-#ifdef CONFIG_USB_HCI
-			if(pMgntInfo->RegNByteAccess == 2)
-			{
-				PlatformIOWriteNByte(Adapter,RegAddress,Length,&PowerIndexArray[cckRatesSize]);
-			}
-			else if(pMgntInfo->RegNByteAccess == 1) //DW
-#endif
-			{
-				u1Byte i, j;
-				for(i = 0;i < Length;i+=4)
-				{
-					u4Byte powerIndex = 0;
-					for(j = 0;j < 4; j++)
-					{
-						powerIndex |= (PowerIndexArray[cckRatesSize+i+j]<<(8*j));
-					}
-
-					PHY_SetBBReg(Adapter, RegAddress+i, bMaskDWord, powerIndex);
-				}
-			}
-
-		}
-	}*/
-
 	phy_TxPowerTrainingByPath_8812(Adapter, pHalData->CurrentChannelBW, channel, path);
-
-	//DBG_871X("<==PHY_SetTxPowerLevelByPath8812()\n");
 }
 
 //create new definition of PHY_SetTxPowerLevel8812 by YP.
@@ -3416,8 +3272,6 @@ PHY_SetTxPowerLevel8812(
 
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 	u8			path = 0;
-
-	//DBG_871X("==>PHY_SetTxPowerLevel8812()\n");
 
 	for( path = ODM_RF_PATH_A; path < pHalData->NumTotalRFPath; ++path )
 	{

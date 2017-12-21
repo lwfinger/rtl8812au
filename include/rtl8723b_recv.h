@@ -147,15 +147,9 @@ typedef struct phystatus_8723b
 	u32 antsel:1;
 } PHYSTATUS, *PPHYSTATUS;
 
-#if defined(CONFIG_SDIO_HCI) || defined(CONFIG_GSPI_HCI)
-s32 rtl8723bs_init_recv_priv(PADAPTER padapter);
-void rtl8723bs_free_recv_priv(PADAPTER padapter);
-#endif
-
 void rtl8723b_query_rx_phy_status(union recv_frame *prframe, struct phy_stat *pphy_stat);
 void rtl8723b_process_phy_info(PADAPTER padapter, void *prframe);
-#ifdef CONFIG_USB_HCI
 void update_recvframe_attrib(PADAPTER padapter, union recv_frame *precvframe, struct recv_stat *prxstat);
 void update_recvframe_phyinfo(union recv_frame *precvframe, struct phy_stat *pphy_info);
-#endif
+
 #endif

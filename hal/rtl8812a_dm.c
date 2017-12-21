@@ -93,7 +93,6 @@ static void dm_CheckPbcGPIO(_adapter *padapter)
 	if(!padapter->registrypriv.hw_wps_pbc)
 		return;
 
-#if defined(CONFIG_USB_HCI) || defined(CONFIG_SDIO_HCI)
 	if (IS_HARDWARE_TYPE_8812(padapter))
 	{
 		tmp1byte = rtw_read8(padapter, GPIO_IO_SEL);
@@ -140,9 +139,6 @@ static void dm_CheckPbcGPIO(_adapter *padapter)
 			bPbcPressed = _TRUE;
 		}
 	}
-#else
-
-#endif
 
 	if( _TRUE == bPbcPressed)
 	{
@@ -153,91 +149,6 @@ static void dm_CheckPbcGPIO(_adapter *padapter)
 		rtw_request_wps_pbc_event(padapter);
 	}
 }
-
-#ifdef CONFIG_PCI_HCI
-//
-//	Description:
-//		Perform interrupt migration dynamically to reduce CPU utilization.
-//
-//	Assumption:
-//		1. Do not enable migration under WIFI test.
-//
-//	Created by Roger, 2010.03.05.
-//
-VOID
-dm_InterruptMigration(
-	IN	PADAPTER	Adapter
-	)
-{
-	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
-	BOOLEAN			bCurrentIntMt, bCurrentACIntDisable;
-	BOOLEAN			IntMtToSet = _FALSE;
-	BOOLEAN			ACIntToSet = _FALSE;
-
-
-	// Retrieve current interrupt migration and Tx four ACs IMR settings first.
-	bCurrentIntMt = pHalData->bInterruptMigration;
-	bCurrentACIntDisable = pHalData->bDisableTxInt;
-
-	//
-	// <Roger_Notes> Currently we use busy traffic for reference instead of RxIntOK counts to prevent non-linear Rx statistics
-	// when interrupt migration is set before. 2010.03.05.
-	//
-	if(!Adapter->registrypriv.wifi_spec &&
-		(check_fwstate(pmlmepriv, _FW_LINKED)== _TRUE) &&
-		pmlmepriv->LinkDetectInfo.bHigherBusyTraffic)
-	{
-		IntMtToSet = _TRUE;
-
-		// To check whether we should disable Tx interrupt or not.
-		if(pmlmepriv->LinkDetectInfo.bHigherBusyRxTraffic )
-			ACIntToSet = _TRUE;
-	}
-
-	//Update current settings.
-	if( bCurrentIntMt != IntMtToSet ){
-		DBG_8192C("%s(): Update interrrupt migration(%d)\n",__FUNCTION__,IntMtToSet);
-		if(IntMtToSet)
-		{
-			//
-			// <Roger_Notes> Set interrrupt migration timer and corresponging Tx/Rx counter.
-			// timer 25ns*0xfa0=100us for 0xf packets.
-			// 2010.03.05.
-			//
-			rtw_write32(Adapter, REG_INT_MIG, 0xff000fa0);// 0x306:Rx, 0x307:Tx
-			pHalData->bInterruptMigration = IntMtToSet;
-		}
-		else
-		{
-			// Reset all interrupt migration settings.
-			rtw_write32(Adapter, REG_INT_MIG, 0);
-			pHalData->bInterruptMigration = IntMtToSet;
-		}
-	}
-
-	/*if( bCurrentACIntDisable != ACIntToSet ){
-		DBG_8192C("%s(): Update AC interrrupt(%d)\n",__FUNCTION__,ACIntToSet);
-		if(ACIntToSet) // Disable four ACs interrupts.
-		{
-			//
-			// <Roger_Notes> Disable VO, VI, BE and BK four AC interrupts to gain more efficient CPU utilization.
-			// When extremely highly Rx OK occurs, we will disable Tx interrupts.
-			// 2010.03.05.
-			//
-			UpdateInterruptMask8192CE( Adapter, 0, RT_AC_INT_MASKS );
-			pHalData->bDisableTxInt = ACIntToSet;
-		}
-		else// Enable four ACs interrupts.
-		{
-			UpdateInterruptMask8192CE( Adapter, RT_AC_INT_MASKS, 0 );
-			pHalData->bDisableTxInt = ACIntToSet;
-		}
-	}*/
-
-}
-
-#endif
 
 //
 // Initialize GPIO setting registers
@@ -271,23 +182,6 @@ ODM_BOARD_TYPE_E boardType(u8 InterfaceSel)
 {
     ODM_BOARD_TYPE_E        board	= ODM_BOARD_DEFAULT;
 
-#ifdef CONFIG_PCI_HCI
-	INTERFACE_SELECT_PCIE   pcie	= (INTERFACE_SELECT_PCIE)InterfaceSel;
-	switch (pcie)
-	{
-        case INTF_SEL0_SOLO_MINICARD:
-            board |= ODM_BOARD_MINICARD;
-            break;
-        case INTF_SEL1_BT_COMBO_MINICARD:
-            board |= ODM_BOARD_BT;
-			board |= ODM_BOARD_MINICARD;
-            break;
-        default:
-            board = ODM_BOARD_DEFAULT;
-            break;
-	}
-
-#elif defined(CONFIG_USB_HCI)
 	INTERFACE_SELECT_USB    usb	= (INTERFACE_SELECT_USB)InterfaceSel;
 	switch (usb)
 	{
@@ -310,9 +204,6 @@ ODM_BOARD_TYPE_E boardType(u8 InterfaceSel)
 	        board = ODM_BOARD_DEFAULT;
 	        break;
 	}
-
-#endif
-	//DBG_871X("===> boardType(): (pHalData->InterfaceSel, pDM_Odm->BoardType) = (%d, %d)\n", InterfaceSel, board);
 
 	return board;
 }
@@ -362,7 +253,6 @@ static void Init_ODM_ComInfo_8812(PADAPTER	Adapter)
 	ODM_CmnInfoInit(pDM_Odm,	ODM_CMNINFO_MP_TEST_CHIP,IS_NORMAL_CHIP(pHalData->VersionID));
 
 	//1 ======= BoardType: ODM_CMNINFO_BOARD_TYPE =======
-#if defined(CONFIG_USB_HCI) || defined(CONFIG_SDIO_HCI)
 	if(pHalData->InterfaceSel == INTF_SEL1_USB_High_Power)
 	{
 		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, 1);
@@ -373,11 +263,6 @@ static void Init_ODM_ComInfo_8812(PADAPTER	Adapter)
 		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, pHalData->ExternalPA_2G);
 		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, 0);
 	}
-#else
-	// PCIE no external PA now???
-	ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, 0);
-	ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, 0);
-#endif
 
 	if (pHalData->ExternalLNA_2G != 0) {
 		BoardType |= ODM_BOARD_EXT_LNA;
@@ -517,9 +402,7 @@ rtl8812_InitHalDm(
 	PDM_ODM_T		pDM_Odm = &(pHalData->odmpriv);
 	u8	i;
 
-#ifdef CONFIG_USB_HCI
 	dm_InitGPIOSetting(Adapter);
-#endif
 
 	pdmpriv->DM_Type = DM_Type_ByDriver;
 	pdmpriv->DMFlag = DYNAMIC_FUNC_DISABLE;
@@ -585,17 +468,6 @@ rtl8812_HalDmWatchDog(
 		//
 		// Dynamically switch RTS/CTS protection.
 		//
-		//dm_CheckProtection(Adapter);
-
-#ifdef CONFIG_PCI_HCI
-		// 20100630 Joseph: Disable Interrupt Migration mechanism temporarily because it degrades Rx throughput.
-		// Tx Migration settings.
-		//dm_InterruptMigration(Adapter);
-
-		//if(Adapter->HalFunc.TxCheckStuckHandler(Adapter))
-		//	PlatformScheduleWorkItem(&(GET_HAL_DATA(Adapter)->HalResetWorkItem));
-#endif
-
 	}
 
 	//ODM
@@ -624,14 +496,8 @@ skip_dm:
 
 	// Check GPIO to determine current RF on/off and Pbc status.
 	// Check Hardware Radio ON/OFF or not
-#ifdef CONFIG_PCI_HCI
-	if(pHalData->bGpioHwWpsPbc)
-#endif
-	{
-		//temp removed
-		dm_CheckPbcGPIO(Adapter);
-	}
-	return;
+	//temp removed
+	dm_CheckPbcGPIO(Adapter);
 }
 
 void rtl8812_init_dm_priv(IN PADAPTER Adapter)

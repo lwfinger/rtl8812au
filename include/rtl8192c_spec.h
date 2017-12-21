@@ -93,26 +93,10 @@
 // TODO: use these definition when using REG_xxx naming rule.
 // NOTE: DO NOT Remove these definition. Use later.
 
-#ifdef CONFIG_PCI_HCI
-#define IMR_RX_MASK		(IMR_ROK|IMR_RDU|IMR_RXFOVW)
-#define IMR_TX_MASK		(IMR_VODOK|IMR_VIDOK|IMR_BEDOK|IMR_BKDOK|IMR_MGNTDOK|IMR_HIGHDOK|IMR_BDOK)
-
-#define RT_IBSS_INT_MASKS				(IMR_BcnInt | IMR_TBDOK | IMR_TBDER)
-#define RT_AC_INT_MASKS				(IMR_VIDOK | IMR_VODOK | IMR_BEDOK|IMR_BKDOK)
-#define RT_BSS_INT_MASKS				(RT_IBSS_INT_MASKS)
-#endif
-
 //----------------------------------------------------------------------------
 //       8192C EEPROM/EFUSE share register definition.
 //----------------------------------------------------------------------------
 
-#ifdef CONFIG_PCI_HCI
-//
-// Interface type.
-//
-#endif
-
-#ifdef CONFIG_USB_HCI
 
 //should be renamed and moved to another file
 typedef	enum _BOARD_TYPE_8192CUSB{
@@ -126,9 +110,6 @@ typedef	enum _BOARD_TYPE_8192CUSB{
 #define	SUPPORT_HW_RADIO_DETECT(pHalData)	(pHalData->BoardType == BOARD_MINICARD||\
 													pHalData->BoardType == BOARD_USB_SOLO||\
 													pHalData->BoardType == BOARD_USB_COMBO)
-
-#endif
-
 
 #define EFUSE_ACCESS_ON			0x69	// For RTL8723 only.
 #define EFUSE_ACCESS_OFF			0x00	// For RTL8723 only.

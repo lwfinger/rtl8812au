@@ -48,7 +48,6 @@
 #define Reset_Cnt_Limit			3
 
 
-#ifdef CONFIG_PCI_HCI
 #define	SET_RTL8192SE_RF_SLEEP(_pAdapter)							\
 {																	\
 	u1Byte		u1bTmp;												\
@@ -68,7 +67,6 @@
 	delay_us(10);													\
 	PlatformEFIOWrite2Byte(_pAdapter, CMDR, 0x57FC);				\
 }
-#endif
 
 
 /*--------------------------Define Parameters-------------------------------*/
