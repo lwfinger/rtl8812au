@@ -20,8 +20,6 @@
 
 #include "odm_precomp.h"
 
-#if (RTL8812A_SUPPORT == 1)
-
 void
 odm_ConfigRFReg_8812A(
 	IN	PDM_ODM_T				pDM_Odm,
@@ -182,5 +180,3 @@ odm_ConfigBB_TXPWR_LMT_8812A(
 	PHY_SetPowerLimitTableValue(pDM_Odm, Regulation, Band,
 		Bandwidth, RateSection, RfPath, Channel, PowerLimit);
 }
-
-#endif

@@ -20,7 +20,6 @@
 
 #include "odm_precomp.h"
 
-#if (RTL8812A_SUPPORT == 1)
 static BOOLEAN
 CheckCondition(
     const u4Byte  Condition,
@@ -1897,5 +1896,3 @@ ODM_ReadAndConfig_TC_8812A_TXPWR_LMT(
 	}
 
 }
-
-#endif // end of HWIMG_SUPPORT

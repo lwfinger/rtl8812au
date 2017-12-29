@@ -1634,15 +1634,7 @@ NDIS_STATUS oid_rt_set_power_down_hdl(struct oid_par_priv *poid_par_priv)
 
 	bpwrup = *(u8 *)poid_par_priv->information_buf;
 	//CALL  the power_down function
-#if defined(CONFIG_RTL8712) //Linux MP insmod unknown symbol
-	dev_power_down(padapter,bpwrup);
-#endif
 	_irqlevel_changed_(&oldirql, RAISE);
-
-	//DEBUG_ERR(("\n <=== Query OID_RT_PRO_READ_REGISTER.
-	//	Add:0x%08x Width:%d Value:0x%08x\n",RegRWStruct->offset,RegRWStruct->width,RegRWStruct->value));
-
-
 
 	return status;
 }

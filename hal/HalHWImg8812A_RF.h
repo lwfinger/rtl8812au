@@ -18,7 +18,6 @@
 *
 ******************************************************************************/
 
-#if (RTL8812A_SUPPORT == 1)
 #ifndef __INC_MP_RF_HW_IMG_8812A_H
 #define __INC_MP_RF_HW_IMG_8812A_H
 
@@ -88,4 +87,3 @@ ODM_ReadAndConfig_MP_8812A_TXPWR_LMT( // TC: Test Chip, MP: MP Chip
 );
 
 #endif
-#endif // end of HWIMG_SUPPORT

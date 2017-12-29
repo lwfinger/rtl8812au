@@ -22,10 +22,6 @@
 #include <drv_types.h>
 
 #include "../hal/odm_precomp.h"
-#if (defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8723B))
-#include <rtw_bt_mp.h>
-#endif
-
 
 #ifdef CONFIG_MP_INCLUDED
 
@@ -279,46 +275,6 @@ static VOID PHY_SetRFPathSwitch_default(
 	DBG_871X("%s\n", __func__);
 }
 
-
-#if defined (CONFIG_RTL8192C) || defined (CONFIG_RTL8723A)
-#define PHY_IQCalibrate(a,b)	rtl8192c_PHY_IQCalibrate(a,b)
-#define PHY_LCCalibrate(a)	rtl8192c_PHY_LCCalibrate(a)
-//#define dm_CheckTXPowerTracking(a)	rtl8192c_odm_CheckTXPowerTracking(a)
-#define PHY_SetRFPathSwitch(a,b)	rtl8192c_PHY_SetRFPathSwitch(a,b)
-#endif
-
-#ifdef CONFIG_RTL8192D
-#define PHY_IQCalibrate(a,b)	rtl8192d_PHY_IQCalibrate(a)
-#define PHY_LCCalibrate(a)	rtl8192d_PHY_LCCalibrate(a)
-//#define dm_CheckTXPowerTracking(a)	rtl8192d_odm_CheckTXPowerTracking(a)
-#define PHY_SetRFPathSwitch(a,b)	rtl8192d_PHY_SetRFPathSwitch(a,b)
-#endif
-
-#ifdef CONFIG_RTL8188E
-#define PHY_IQCalibrate(a,b)	PHY_IQCalibrate_8188E(a,b)
-#define PHY_LCCalibrate(a)	PHY_LCCalibrate_8188E(&(GET_HAL_DATA(a)->odmpriv))
-#define PHY_SetRFPathSwitch(a,b) PHY_SetRFPathSwitch_8188E(a,b)
-#endif
-
-#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
-/*
-#define PHY_IQCalibrate(a,b)	PHY_IQCalibrate_8812A(a,b)
-#define PHY_LCCalibrate(a)	PHY_LCCalibrate_8812A(&(GET_HAL_DATA(a)->odmpriv))
-#define PHY_SetRFPathSwitch(a,b) PHY_SetRFPathSwitch_8812A(a,b)
-*/
-
-#ifndef CONFIG_RTL8812A
-#define	PHY_IQCalibrate_8812A
-#define	PHY_LCCalibrate_8812A
-#define	PHY_SetRFPathSwitch_8812A
-#endif
-
-#ifndef CONFIG_RTL8821A
-#define	PHY_IQCalibrate_8821A
-#define	PHY_LCCalibrate_8821A
-#define	PHY_SetRFPathSwitch_8812A
-#endif
-
 #define PHY_IQCalibrate(_Adapter, b)	\
 		IS_HARDWARE_TYPE_8812(_Adapter) ? PHY_IQCalibrate_8812A(_Adapter, b) : \
 		IS_HARDWARE_TYPE_8821(_Adapter) ? PHY_IQCalibrate_8821A(_Adapter, b) : \
@@ -332,19 +288,6 @@ static VOID PHY_SetRFPathSwitch_default(
 #define PHY_SetRFPathSwitch(_Adapter, b)	\
 		(IS_HARDWARE_TYPE_JAGUAR(_Adapter)) ? PHY_SetRFPathSwitch_8812A(_Adapter, b) : \
 		PHY_SetRFPathSwitch_default(_Adapter, b)
-
-#endif //#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
-#ifdef CONFIG_RTL8192E
-#define PHY_IQCalibrate(a,b)	PHY_IQCalibrate_8192E(a,b)
-#define PHY_LCCalibrate(a)	PHY_LCCalibrate_8192E(&(GET_HAL_DATA(a)->odmpriv))
-#define PHY_SetRFPathSwitch(a,b) PHY_SetRFPathSwitch_8192E(a,b)
-#endif //CONFIG_RTL8812A_8821A
-
-#ifdef CONFIG_RTL8723B
-#define PHY_IQCalibrate(a,b)	PHY_IQCalibrate_8723B(a,b)
-#define PHY_LCCalibrate(a)	PHY_LCCalibrate_8723B(a)
-#define PHY_SetRFPathSwitch(a,b)	PHY_SetRFPathSwitch_8723B(a,b)
-#endif
 
 s32
 MPT_InitializeAdapter(
@@ -381,39 +324,13 @@ MPT_InitializeAdapter(
 		"MptWorkItem");
 #endif
 	//init for BT MP
-#if defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8723B)
-	pMptCtx->bMPh2c_timeout = _FALSE;
-	pMptCtx->MptH2cRspEvent = _FALSE;
-	pMptCtx->MptBtC2hEvent = _FALSE;
-
-	_rtw_init_sema(&pMptCtx->MPh2c_Sema, 0);
-	_init_timer( &pMptCtx->MPh2c_timeout_timer, pAdapter->pnetdev, MPh2c_timeout_handle, pAdapter );
-#endif
 
 	pMptCtx->bMptWorkItemInProgress = _FALSE;
 	pMptCtx->CurrMptAct = NULL;
 	//-------------------------------------------------------------------------
 
-#if 1
 	// Don't accept any packets
 	rtw_write32(pAdapter, REG_RCR, 0);
-#else
-	// Accept CRC error and destination address
-	//pHalData->ReceiveConfig |= (RCR_ACRC32|RCR_AAP);
-	//rtw_write32(pAdapter, REG_RCR, pHalData->ReceiveConfig);
-	rtw_write32(pAdapter, REG_RCR, 0x70000101);
-#endif
-
-#if 0
-	// If EEPROM or EFUSE is empty,we assign as RF 2T2R for MP.
-	if (pHalData->AutoloadFailFlag == TRUE)
-	{
-		pHalData->RF_Type = RF_2T2R;
-	}
-#endif
-
-	//ledsetting = rtw_read32(pAdapter, REG_LEDCFG0);
-	//rtw_write32(pAdapter, REG_LEDCFG0, ledsetting & ~LED0DIS);
 
 	if(IS_HARDWARE_TYPE_8192DU(pAdapter))
 	{
@@ -423,35 +340,16 @@ MPT_InitializeAdapter(
 	{
 		//rtw_write32(pAdapter, REG_LEDCFG0, 0x08080);
 		ledsetting = rtw_read32(pAdapter, REG_LEDCFG0);
-
-	#if defined (CONFIG_RTL8192C) || defined( CONFIG_RTL8192D )
-			rtw_write32(pAdapter, REG_LEDCFG0, ledsetting & ~BIT(7));
-	#endif
 	}
 
 	PHY_IQCalibrate(pAdapter, _FALSE);
 	dm_CheckTXPowerTracking(&pHalData->odmpriv);	//trigger thermal meter
 	PHY_LCCalibrate(pAdapter);
 
-#ifdef CONFIG_RTL8192C
-	if (pHalData->BoardType == BOARD_MINICARD)
-		PHY_SetRFPathSwitch(pAdapter, 1/*pHalData->bDefaultAntenna*/); //default use Main
-#endif
-
 	pMptCtx->backup0xc50 = (u1Byte)PHY_QueryBBReg(pAdapter, rOFDM0_XAAGCCore1, bMaskByte0);
 	pMptCtx->backup0xc58 = (u1Byte)PHY_QueryBBReg(pAdapter, rOFDM0_XBAGCCore1, bMaskByte0);
 	pMptCtx->backup0xc30 = (u1Byte)PHY_QueryBBReg(pAdapter, rOFDM0_RxDetector1, bMaskByte0);
-#ifdef CONFIG_RTL8188E
-	pMptCtx->backup0x52_RF_A = (u1Byte)PHY_QueryRFReg(pAdapter, RF_PATH_A, RF_0x52, 0x000F0);
-	pMptCtx->backup0x52_RF_B = (u1Byte)PHY_QueryRFReg(pAdapter, RF_PATH_A, RF_0x52, 0x000F0);
-#endif
 
-#ifdef CONFIG_RTL8723A
-	rtl8723a_InitAntenna_Selection(pAdapter);
-#endif //CONFIG_RTL8723A
-#ifdef CONFIG_RTL8723B
-	rtl8723b_InitAntenna_Selection(pAdapter);
-#endif //CONFIG_RTL8723B
 	//set ant to wifi side in mp mode
 	rtw_write16(pAdapter, 0x870, 0x300);
 	rtw_write16(pAdapter, 0x860, 0x110);
@@ -487,22 +385,6 @@ MPT_DeInitAdapter(
 	PMPT_CONTEXT		pMptCtx = &pAdapter->mppriv.MptCtx;
 
 	pMptCtx->bMptDrvUnload = _TRUE;
-	#if defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8723B)
-	_rtw_free_sema(&(pMptCtx->MPh2c_Sema));
-	_cancel_timer_ex( &pMptCtx->MPh2c_timeout_timer);
-	#endif
-#if 0 // for Windows
-	PlatformFreeWorkItem( &(pMptCtx->MptWorkItem) );
-
-	while(pMptCtx->bMptWorkItemInProgress)
-	{
-		if(NdisWaitEvent(&(pMptCtx->MptWorkItemEvent), 50))
-		{
-			break;
-		}
-	}
-	NdisFreeSpinLock( &(pMptCtx->MptWorkItemSpinLock) );
-#endif
 }
 
 static u8 mpt_ProStartTest(PADAPTER padapter)
@@ -537,22 +419,16 @@ void GetPowerTracking(PADAPTER padapter, u8 *enable)
 
 static void disable_dm(PADAPTER padapter)
 {
-#ifndef CONFIG_RTL8723A
 	u8 v8;
-#endif
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
 
 
 	//3 1. disable firmware dynamic mechanism
 	// disable Power Training, Rate Adaptive
-#ifdef CONFIG_RTL8723A
-	SetBcnCtrlReg(padapter, 0, EN_BCN_FUNCTION);
-#else
 	v8 = rtw_read8(padapter, REG_BCN_CTRL);
 	v8 &= ~EN_BCN_FUNCTION;
 	rtw_write8(padapter, REG_BCN_CTRL, v8);
-#endif
 
 	//3 2. disable driver dynamic mechanism
 	// disable Dynamic Initial Gain
@@ -561,9 +437,6 @@ static void disable_dm(PADAPTER padapter)
 	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
 
 	// enable APK, LCK and IQK but disable power tracking
-#if !(defined(CONFIG_RTL8188E) || defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)|| defined(CONFIG_RTL8192E))
-	pdmpriv->TxPowerTrackControl = _FALSE;
-#endif
 	Switch_DM_Func(padapter, DYNAMIC_RF_CALIBRATION, _TRUE);
 }
 
@@ -587,9 +460,7 @@ s32 mp_start_test(PADAPTER padapter)
 
 	//3 disable dynamic mechanism
 	disable_dm(padapter);
-	#ifdef CONFIG_RTL8812A
 	rtl8812_InitHalDm(padapter);
-	#endif
 	//3 0. update mp_priv
 
 	if (padapter->registrypriv.rf_config == RF_MAX_TYPE) {
@@ -682,28 +553,11 @@ end_of_mp_start_test:
 
 	_exit_critical_bh(&pmlmepriv->lock, &irqL);
 
-	if (res == _SUCCESS)
-	{
+	if (res == _SUCCESS) {
 		// set MSR to WIFI_FW_ADHOC_STATE
-#if  !defined (CONFIG_RTL8712)
 		val8 = rtw_read8(padapter, MSR) & 0xFC; // 0x0102
 		val8 |= WIFI_FW_ADHOC_STATE;
 		rtw_write8(padapter, MSR, val8); // Link in ad hoc network
-#endif
-
-
-#if  defined (CONFIG_RTL8712)
-		rtw_write8(padapter, MSR, 1); // Link in ad hoc network
-		rtw_write8(padapter, RCR, 0); // RCR : disable all pkt, 0x10250048
-		rtw_write8(padapter, RCR+2, 0x57); // RCR disable Check BSSID, 0x1025004a
-
-		// disable RX filter map , mgt frames will put in RX FIFO 0
-		rtw_write16(padapter, RXFLTMAP0, 0x0); // 0x10250116
-
-		val8 = rtw_read8(padapter, EE_9346CR); // 0x1025000A
-		if (!(val8 & _9356SEL))//boot from EFUSE
-			efuse_change_max_size(padapter);
-#endif
 	}
 
 	return res;
@@ -947,27 +801,7 @@ void PhySetTxPowerLevel(PADAPTER pAdapter)
 	struct mp_priv *pmp_priv = &pAdapter->mppriv;
 
 	if (pmp_priv->bSetTxPower==0) // for NO manually set power index
-	{
-#ifdef CONFIG_RTL8188E
-		PHY_SetTxPowerLevel8188E(pAdapter,pmp_priv->channel);
-#endif
-#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 		PHY_SetTxPowerLevel8812(pAdapter,pmp_priv->channel);
-#endif
-#if defined(CONFIG_RTL8192D)
-		PHY_SetTxPowerLevel8192D(pAdapter,pmp_priv->channel);
-#endif
-#if defined(CONFIG_RTL8192C)
-		PHY_SetTxPowerLevel8192C(pAdapter,pmp_priv->channel);
-#endif
-#if defined(CONFIG_RTL8192E)
-		PHY_SetTxPowerLevel8192E(pAdapter,pmp_priv->channel);
-#endif
-#if defined(CONFIG_RTL8723B)
-		PHY_SetTxPowerLevel8723B(pAdapter,pmp_priv->channel);
-#endif
-
-	}
 }
 
 //------------------------------------------------------------------------------
@@ -1066,99 +900,6 @@ void fill_txdesc_for_mp(PADAPTER padapter, struct tx_desc *ptxdesc)
 	_rtw_memcpy(ptxdesc, &(pmp_priv->tx.desc), TXDESC_SIZE);
 }
 
-#if defined(CONFIG_RTL8192C) || defined(CONFIG_RTL8192D)
-void fill_tx_desc_8192cd(PADAPTER padapter)
-{
-	struct mp_priv *pmp_priv = &padapter->mppriv;
-	struct tx_desc *desc   = &(pmp_priv->tx.desc);
-	struct pkt_attrib *pattrib = &(pmp_priv->tx.attrib);
-
-	desc->txdw1 |= cpu_to_le32(BK); // don't aggregate(AMPDU)
-	desc->txdw1 |= cpu_to_le32((pattrib->mac_id) & 0x1F); //CAM_ID(MAC_ID)
-	desc->txdw1 |= cpu_to_le32((pattrib->qsel << QSEL_SHT) & 0x00001F00); // Queue Select, TID
-	desc->txdw1 |= cpu_to_le32((pattrib->raid << Rate_ID_SHT) & 0x000F0000); // Rate Adaptive ID
-
-	// offset 8
-	//	desc->txdw2 |= cpu_to_le32(AGG_BK);//AGG BK
-	desc->txdw3 |= cpu_to_le32((pattrib->seqnum<<16)&0x0fff0000);
-	desc->txdw4 |= cpu_to_le32(HW_SEQ_EN);
-
-	desc->txdw4 |= cpu_to_le32(USERATE);
-	desc->txdw4 |= cpu_to_le32(DISDATAFB);
-
-	if( pmp_priv->preamble ){
-		if (pmp_priv->rateidx <=  MPT_RATE_54M)
-			desc->txdw4 |= cpu_to_le32(DATA_SHORT); // CCK Short Preamble
-	}
-
-	if (pmp_priv->bandwidth == CHANNEL_WIDTH_40)
-		desc->txdw4 |= cpu_to_le32(DATA_BW);
-
-	// offset 20
-	desc->txdw5 |= cpu_to_le32(pmp_priv->rateidx & 0x0000001F);
-
-	if( pmp_priv->preamble ){
-		if (pmp_priv->rateidx > MPT_RATE_54M)
-			desc->txdw5 |= cpu_to_le32(SGI); // MCS Short Guard Interval
-	}
-
-	desc->txdw5 |= cpu_to_le32(0x0001FF00); // DATA/RTS Rate Fallback Limit
-}
-#endif
-
-#if defined(CONFIG_RTL8188E)
-void fill_tx_desc_8188e(PADAPTER padapter)
-{
-	struct mp_priv *pmp_priv = &padapter->mppriv;
-	struct tx_desc *desc   = &(pmp_priv->tx.desc);
-	struct pkt_attrib *pattrib = &(pmp_priv->tx.attrib);
-	u32	pkt_size = pattrib->last_txcmdsz;
-	s32 bmcast = IS_MCAST(pattrib->ra);
-// offset 0
-#if !defined(CONFIG_RTL8188E_SDIO)
-	desc->txdw0 |= cpu_to_le32(OWN | FSG | LSG);
-	desc->txdw0 |= cpu_to_le32(pkt_size & 0x0000FFFF); // packet size
-	desc->txdw0 |= cpu_to_le32(((TXDESC_SIZE + OFFSET_SZ) << OFFSET_SHT) & 0x00FF0000); //32 bytes for TX Desc
-	if (bmcast) desc->txdw0 |= cpu_to_le32(BMC); // broadcast packet
-
-	desc->txdw1 |= cpu_to_le32((0x01 << 26) & 0xff000000);
-#endif
-
-	desc->txdw1 |= cpu_to_le32((pattrib->mac_id) & 0x3F); //CAM_ID(MAC_ID)
-	desc->txdw1 |= cpu_to_le32((pattrib->qsel << QSEL_SHT) & 0x00001F00); // Queue Select, TID
-	desc->txdw1 |= cpu_to_le32((pattrib->raid << RATE_ID_SHT) & 0x000F0000); // Rate Adaptive ID
-	// offset 8
-	//	desc->txdw2 |= cpu_to_le32(AGG_BK);//AGG BK
-
-	desc->txdw3 |= cpu_to_le32((pattrib->seqnum<<16)&0x0fff0000);
-	desc->txdw4 |= cpu_to_le32(HW_SSN);
-
-	desc->txdw4 |= cpu_to_le32(USERATE);
-	desc->txdw4 |= cpu_to_le32(DISDATAFB);
-
-	if( pmp_priv->preamble ){
-		if (pmp_priv->rateidx <=  MPT_RATE_54M)
-			desc->txdw4 |= cpu_to_le32(DATA_SHORT); // CCK Short Preamble
-	}
-
-	if (pmp_priv->bandwidth == CHANNEL_WIDTH_40)
-		desc->txdw4 |= cpu_to_le32(DATA_BW);
-
-	// offset 20
-	desc->txdw5 |= cpu_to_le32(pmp_priv->rateidx & 0x0000001F);
-
-	if( pmp_priv->preamble ){
-		if (pmp_priv->rateidx > MPT_RATE_54M)
-			desc->txdw5 |= cpu_to_le32(SGI); // MCS Short Guard Interval
-	}
-
-	desc->txdw5 |= cpu_to_le32(RTY_LMT_EN); // retry limit enable
-	desc->txdw5 |= cpu_to_le32(0x00180000); // DATA/RTS Rate Fallback Limit
-
-
-}
-#endif
-#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 void fill_tx_desc_8812a(PADAPTER padapter)
 {
 	struct mp_priv *pmp_priv = &padapter->mppriv;
@@ -1203,47 +944,6 @@ void fill_tx_desc_8812a(PADAPTER padapter)
 	SET_TX_DESC_TX_RATE_8812(pDesc, pmp_priv->rateidx);
 
 }
-#endif
-#if defined(CONFIG_RTL8192E)
-void fill_tx_desc_8192e(PADAPTER padapter)
-{
-	struct mp_priv *pmp_priv = &padapter->mppriv;
-	struct tx_desc *desc   = &(pmp_priv->tx.desc);
-	struct pkt_attrib *pattrib = &(pmp_priv->tx.attrib);
-}
-#endif
-
-#if defined(CONFIG_RTL8723B)
-void fill_tx_desc_8723b(PADAPTER padapter)
-{
-	struct mp_priv *pmp_priv = &padapter->mppriv;
-	struct tx_desc *desc   = &(pmp_priv->tx.desc);
-	struct pkt_attrib *pattrib = &(pmp_priv->tx.attrib);
-	PTXDESC_8723B ptxdesc;
-
-	ptxdesc->bk = 1;
-	ptxdesc->macid = pattrib->mac_id;
-	ptxdesc->qsel = pattrib->qsel;
-
-	ptxdesc->rate_id = pattrib->raid;
-	ptxdesc->seq = pattrib->seqnum;
-	ptxdesc->hwseq_sel = 2;
-	ptxdesc->userate = 1;
-	ptxdesc->disdatafb = 1;
-
-	if( pmp_priv->preamble ){
-		if (pmp_priv->rateidx <=  MPT_RATE_54M)
-			ptxdesc->data_short = 1;
-	}
-	if (pmp_priv->bandwidth == CHANNEL_WIDTH_40)
-		ptxdesc->data_bw = 1;
-
-	ptxdesc->datarate = pmp_priv->rateidx;
-
-	ptxdesc->data_ratefb_lmt = 0x1F;
-	ptxdesc->rts_ratefb_lmt = 0xF;
-}
-#endif
 
 void SetPacketTx(PADAPTER padapter)
 {
@@ -1300,30 +1000,8 @@ void SetPacketTx(PADAPTER padapter)
 	pkt_end = pkt_start + pkt_size;
 
 	//3 3. init TX descriptor
-#if defined(CONFIG_RTL8192C) || defined(CONFIG_RTL8192D)
-	if(IS_HARDWARE_TYPE_8192C(padapter) ||IS_HARDWARE_TYPE_8192D(padapter))
-		fill_tx_desc_8192cd(padapter);
-#endif
-
-#if defined(CONFIG_RTL8188E)
-	if(IS_HARDWARE_TYPE_8188E(padapter))
-		fill_tx_desc_8188e(padapter);
-#endif
-
-#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 	if(IS_HARDWARE_TYPE_8812(padapter))
 		fill_tx_desc_8812a(padapter);
-#endif
-
-#if defined(CONFIG_RTL8192E)
-	if(IS_HARDWARE_TYPE_8188E(padapter))
-		fill_tx_desc_8192e(padapter);
-#endif
-#if defined(CONFIG_RTL8723B)
-	if(IS_HARDWARE_TYPE_8723B(padapter))
-		fill_tx_desc_8723b(padapter);
-#endif
-
 
 	//3 4. make wlan header, make_wlanhdr()
 	hdr = (struct rtw_ieee80211_hdr *)pkt_start;
@@ -1438,15 +1116,8 @@ static u32 rtw_GetPSDData(PADAPTER pAdapter, u32 point)
 {
 	u32 psd_val=0;
 
-#if defined(CONFIG_RTL8812A) //MP PSD for 8812A
 	u16 psd_reg = 0x910;
 	u16 psd_regL= 0xF44;
-
-#else
-	u16 psd_reg = 0x808;
-	u16 psd_regL= 0x8B4;
-
-#endif
 
 	psd_val = rtw_read32(pAdapter, psd_reg);
 

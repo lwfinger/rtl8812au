@@ -58,10 +58,6 @@ enum Power_Mgnt
 	PS_MODE_NUM,
 };
 
-#ifdef CONFIG_RTL8723B
-#define PS_MODE_SELF_DEFINED	PS_MODE_DTIM
-#endif //
-
 /*
 	BIT[2:0] = HW state
 	BIT[3] = Protocol PS state,   0: register active state , 1: register sleep state

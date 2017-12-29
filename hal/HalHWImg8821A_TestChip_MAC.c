@@ -21,7 +21,6 @@
 //#include "Mp_Precomp.h"
 #include "odm_precomp.h"
 
-#if (RTL8821A_SUPPORT == 1)
 static BOOLEAN
 CheckCondition(
     const u4Byte  Condition,
@@ -223,5 +222,3 @@ ODM_ReadAndConfig_TC_8821A_MAC_REG(
 	}
 
 }
-
-#endif // end of HWIMG_SUPPORT

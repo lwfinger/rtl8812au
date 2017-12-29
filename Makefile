@@ -22,14 +22,6 @@ EXTRA_CFLAGS += -I$(src)/include
 CONFIG_AUTOCFG_CP = n
 
 CONFIG_MULTIDRV = n
-CONFIG_RTL8192C = n
-CONFIG_RTL8192D = n
-CONFIG_RTL8723A = n
-CONFIG_RTL8188E = n
-CONFIG_RTL8812A = y
-CONFIG_RTL8821A = y
-CONFIG_RTL8192E = n
-CONFIG_RTL8723B = n
 
 CONFIG_USB_HCI = y
 CONFIG_PCI_HCI = n
@@ -42,7 +34,6 @@ CONFIG_USB_AUTOSUSPEND = n
 CONFIG_HW_PWRP_DETECTION = n
 CONFIG_WIFI_TEST = n
 CONFIG_BT_COEXIST = n
-CONFIG_RTL8192CU_REDEFINE_1X1 = n
 CONFIG_INTEL_WIDI = n
 CONFIG_WAPI_SUPPORT = n
 CONFIG_EFUSE_CONFIG_FILE = n
@@ -85,31 +76,21 @@ _OUTSRC_FILES := hal/odm_debug.o	\
 		
 ########### HAL_RTL8812A_RTL8821A #################################
 
-ifneq ($(CONFIG_RTL8812A)_$(CONFIG_RTL8821A), n_n)
-
-RTL871X = rtl8812a
-ifeq ($(CONFIG_USB_HCI), y)
+rtl8812a = rtl8812a
 MODULE_NAME = 8812au
-endif
-ifeq ($(CONFIG_PCI_HCI), y)
-MODULE_NAME = 8812ae
-endif
-ifeq ($(CONFIG_SDIO_HCI), y)
-MODULE_NAME = 8812as
-endif
 
 _HAL_INTFS_FILES +=  hal/HalPwrSeqCmd.o \
 					hal/Hal8812PwrSeq.o \
 					hal/Hal8821APwrSeq.o\
-					hal/$(RTL871X)_xmit.o\
-					hal/$(RTL871X)_sreset.o
+					hal/$(rtl8812a)_xmit.o\
+					hal/$(rtl8812a)_sreset.o
 
-_HAL_INTFS_FILES +=	hal/$(RTL871X)_hal_init.o \
-			hal/$(RTL871X)_phycfg.o \
-			hal/$(RTL871X)_rf6052.o \
-			hal/$(RTL871X)_dm.o \
-			hal/$(RTL871X)_rxdesc.o \
-			hal/$(RTL871X)_cmd.o \
+_HAL_INTFS_FILES +=	hal/$(rtl8812a)_hal_init.o \
+			hal/$(rtl8812a)_phycfg.o \
+			hal/$(rtl8812a)_rf6052.o \
+			hal/$(rtl8812a)_dm.o \
+			hal/$(rtl8812a)_rxdesc.o \
+			hal/$(rtl8812a)_cmd.o \
 			hal/usb_halinit.o \
 			hal/rtl$(MODULE_NAME)_led.o \
 			hal/rtl$(MODULE_NAME)_xmit.o \
@@ -118,11 +99,9 @@ _HAL_INTFS_FILES +=	hal/$(RTL871X)_hal_init.o \
 _HAL_INTFS_FILES += hal/usb_ops_linux.o
 
 ifeq ($(CONFIG_MP_INCLUDED), y)
-_HAL_INTFS_FILES += hal/$(RTL871X)_mp.o
+_HAL_INTFS_FILES += hal/$(rtl8812a)_mp.o
 endif
 
-ifeq ($(CONFIG_RTL8812A), y)
-EXTRA_CFLAGS += -DCONFIG_RTL8812A
 _OUTSRC_FILES += hal/HalHWImg8812A_FW.o\
 		hal/HalHWImg8812A_MAC.o\
 		hal/HalHWImg8812A_BB.o\
@@ -133,15 +112,7 @@ _OUTSRC_FILES += hal/HalHWImg8812A_FW.o\
 		hal/HalHWImg8812A_TestChip_RF.o\
 		hal/HalPhyRf_8812A.o\
 		hal/odm_RegConfig8812A.o
-endif
 
-ifeq ($(CONFIG_RTL8821A), y)
-
-ifeq ($(CONFIG_RTL8812A), n)
-MODULE_NAME := 8821au
-endif
-
-EXTRA_CFLAGS += -DCONFIG_RTL8821A
 _OUTSRC_FILES += hal/HalHWImg8821A_FW.o\
 		hal/HalHWImg8821A_MAC.o\
 		hal/HalHWImg8821A_BB.o\
@@ -152,10 +123,6 @@ _OUTSRC_FILES += hal/HalHWImg8821A_FW.o\
 		hal/HalPhyRf_8812A.o\
 		hal/HalPhyRf_8821A.o\
 		hal/odm_RegConfig8821A.o		
-endif	
-
-
-endif
 
 ########### AUTO_CFG  #################################	
 		
@@ -164,7 +131,7 @@ ifeq ($(CONFIG_AUTOCFG_CP), y)
 ifeq ($(CONFIG_MULTIDRV), y)	
 $(shell cp $(TopDIR)/autoconf_multidrv_usb_linux.h $(TopDIR)/include/autoconf.h)
 else
-$(shell cp $(TopDIR)/autoconf_$(RTL871X)_usb_linux.h $(TopDIR)/include/autoconf.h)
+$(shell cp $(TopDIR)/autoconf_$(rtl8812a)_usb_linux.h $(TopDIR)/include/autoconf.h)
 endif
 
 endif
@@ -197,10 +164,6 @@ ifeq ($(CONFIG_BT_COEXIST), y)
 EXTRA_CFLAGS += -DCONFIG_BT_COEXIST
 endif
 
-ifeq ($(CONFIG_RTL8192CU_REDEFINE_1X1), y)
-EXTRA_CFLAGS += -DRTL8192C_RECONFIG_TO_1T1R
-endif
-
 ifeq ($(CONFIG_INTEL_WIDI), y)
 EXTRA_CFLAGS += -DCONFIG_INTEL_WIDI
 endif
@@ -219,12 +182,6 @@ endif
 
 ifeq ($(CONFIG_FTP_PROTECT), y)
 EXTRA_CFLAGS += -DCONFIG_FTP_PROTECT
-endif
-
-ifeq ($(CONFIG_RTL8188E), y)
-ifeq ($(CONFIG_WOWLAN), y)
-EXTRA_CFLAGS += -DCONFIG_WOWLAN
-endif
 endif
 
 SUBARCH := $(shell uname -m | sed -e s/i.86/i386/)
@@ -279,18 +236,9 @@ $(MODULE_NAME)-y += $(_OUTSRC_FILES)
 $(MODULE_NAME)-$(CONFIG_MP_INCLUDED) += core/rtw_mp.o \
 					core/rtw_mp_ioctl.o
 
-ifeq ($(CONFIG_RTL8723A), y)
-$(MODULE_NAME)-$(CONFIG_MP_INCLUDED)+= core/rtw_bt_mp.o
-endif
-ifeq ($(CONFIG_RTL8723B), y)
-$(MODULE_NAME)-$(CONFIG_MP_INCLUDED)+= core/rtw_bt_mp.o
-endif
-
-obj-$(CONFIG_RTL8812AU_8821AU) := $(MODULE_NAME).o
+obj-m := $(MODULE_NAME).o
 
 else
-
-export CONFIG_RTL8812AU_8821AU = m
 
 all: modules
 

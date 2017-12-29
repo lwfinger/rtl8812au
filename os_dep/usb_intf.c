@@ -102,7 +102,6 @@ static void rtw_dev_remove(struct usb_interface *pusb_intf);
 /* DID_USB_v916_20130116 */
 static struct usb_device_id rtw_usb_id_tbl[] ={
 
-#ifdef CONFIG_RTL8812A
 	/*=== Realtek demoboard ===*/
 	{USB_DEVICE(USB_VENDER_ID_REALTEK, 0x8812),.driver_info = RTL8812},/* Default ID */
 	{USB_DEVICE(USB_VENDER_ID_REALTEK, 0x881A),.driver_info = RTL8812},/* Default ID */
@@ -131,9 +130,7 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
 	{USB_DEVICE(0x20f4, 0x805b),.driver_info = RTL8812}, /* TRENDnet - */
 	{USB_DEVICE(0x2357, 0x0101),.driver_info = RTL8812}, /* TP-Link - Archer T4U */
 	{USB_DEVICE(0x0411, 0x025d),.driver_info = RTL8812}, /* Buffalo - WI-U3-866D */
-#endif
 
-#ifdef CONFIG_RTL8821A
         /*=== Realtek demoboard ===*/
 	{USB_DEVICE(USB_VENDER_ID_REALTEK, 0x0811),.driver_info = RTL8821},/* Default ID */
 	{USB_DEVICE(USB_VENDER_ID_REALTEK, 0x0821),.driver_info = RTL8821},/* Default ID */
@@ -147,7 +144,6 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
 	{USB_DEVICE(0x2019, 0xAB32),.driver_info = RTL8821}, /* Planex - GW-450S */
 	{USB_DEVICE(0x0411, 0x0242),.driver_info = RTL8821}, /* BUFFALO - Edimax */
 	{USB_DEVICE(0x056E, 0x4007),.driver_info = RTL8821}, /* ELECOM - WDC-433DU2H */
-#endif
 
 	{}	/* Terminating entry */
 };
@@ -504,104 +500,20 @@ static void rtw_decide_chip_type_by_usb_info(_adapter *padapter, const struct us
 {
 	padapter->chip_type = pdid->driver_info;
 
-	#ifdef CONFIG_RTL8192C
-	if(padapter->chip_type == RTL8188C_8192C)
-		rtl8192cu_set_hw_type(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8192D
-	if(padapter->chip_type == RTL8192D)
-		rtl8192du_set_hw_type(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8723A
-	if(padapter->chip_type == RTL8723A)
-		rtl8723au_set_hw_type(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8188E
-	if(padapter->chip_type == RTL8188E)
-		rtl8188eu_set_hw_type(padapter);
-	#endif
-
-	#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 	if(padapter->chip_type == RTL8812 || padapter->chip_type == RTL8821)
 		rtl8812au_set_hw_type(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8192E
-	if(padapter->chip_type == RTL8192E)
-		rtl8192eu_set_hw_type(padapter);
-	#endif
-
 }
 void rtw_set_hal_ops(_adapter *padapter)
 {
-	#ifdef CONFIG_RTL8192C
-	if(padapter->chip_type == RTL8188C_8192C)
-		rtl8192cu_set_hal_ops(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8192D
-	if(padapter->chip_type == RTL8192D)
-		rtl8192du_set_hal_ops(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8723A
-	if(padapter->chip_type == RTL8723A)
-		rtl8723au_set_hal_ops(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8188E
-	if(padapter->chip_type == RTL8188E)
-		rtl8188eu_set_hal_ops(padapter);
-	#endif
-
-	#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 	if(padapter->chip_type == RTL8812 || padapter->chip_type == RTL8821)
 		rtl8812au_set_hal_ops(padapter);
-	#endif
-
-	#ifdef CONFIG_RTL8192E
-	if(padapter->chip_type == RTL8192E)
-		rtl8192eu_set_hal_ops(padapter);
-	#endif
 }
 
 void usb_set_intf_ops(_adapter *padapter,struct _io_ops *pops)
 {
-	#ifdef CONFIG_RTL8192C
-	if(padapter->chip_type == RTL8188C_8192C)
-		rtl8192cu_set_intf_ops(pops);
-	#endif
-
-	#ifdef CONFIG_RTL8192D
-	if(padapter->chip_type == RTL8192D)
-		rtl8192du_set_intf_ops(pops);
-	#endif
-
-	#ifdef CONFIG_RTL8723A
-	if(padapter->chip_type == RTL8723A)
-		rtl8723au_set_intf_ops(pops);
-	#endif
-
-	#ifdef CONFIG_RTL8188E
-	if(padapter->chip_type == RTL8188E)
-		rtl8188eu_set_intf_ops(pops);
-	#endif
-
-	#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 	if(padapter->chip_type == RTL8812 || padapter->chip_type == RTL8821)
 		rtl8812au_set_intf_ops(pops);
-	#endif
-
-	#ifdef CONFIG_RTL8192E
-	if(padapter->chip_type == RTL8192E)
-		rtl8192eu_set_intf_ops(pops);
-	#endif
-
 }
-
 
 static void usb_intf_start(_adapter *padapter)
 {

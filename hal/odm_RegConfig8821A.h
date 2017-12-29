@@ -20,8 +20,6 @@
 #ifndef __INC_ODM_REGCONFIG_H_8821A
 #define __INC_ODM_REGCONFIG_H_8821A
 
-#if (RTL8821A_SUPPORT == 1)
-
 void
 odm_ConfigRFReg_8821A(
 	IN	PDM_ODM_T				pDM_Odm,
@@ -89,4 +87,3 @@ odm_ConfigBB_TXPWR_LMT_8821A(
     );
 
 #endif
-#endif // end of SUPPORT

@@ -70,43 +70,25 @@
 
 #define CONFIG_DFS	1
 
- //#define CONFIG_SUPPORT_USB_INT
- #ifdef	CONFIG_SUPPORT_USB_INT
-//#define CONFIG_USB_INTERRUPT_IN_PIPE	1
-#endif
-
-//#ifndef CONFIG_MP_INCLUDED
 	#define CONFIG_IPS	1
 	#ifdef CONFIG_IPS
-	//#define CONFIG_IPS_LEVEL_2	1 //enable this to set default IPS mode to IPS_LEVEL_2
 	#endif
-	//#define SUPPORT_HW_RFOFF_DETECTED	1
 
 	#define CONFIG_LPS	1
 	#if defined(CONFIG_LPS) && defined(CONFIG_SUPPORT_USB_INT)
-	//#define CONFIG_LPS_LCLK	1
 	#endif
 
 	#ifdef CONFIG_LPS_LCLK
 	#define CONFIG_XMIT_THREAD_MODE
 	#endif
 
-	//befor link
-	//#define CONFIG_ANTENNA_DIVERSITY
-
 	//after link
 	#ifdef CONFIG_ANTENNA_DIVERSITY
 	#define CONFIG_HW_ANTENNA_DIVERSITY
 	#endif
 
-
-	//#define CONFIG_CONCURRENT_MODE 1
 	#ifdef CONFIG_CONCURRENT_MODE
-		//#define CONFIG_HWPORT_SWAP				//Port0->Sec , Port1 -> Pri
-		#ifdef CONFIG_RTL8812A
-			#define CONFIG_TSF_RESET_OFFLOAD 1		// For 2 PORT TSF SYNC.
-		#endif
-		//#define CONFIG_MULTI_VIR_IFACES //besides primary&secondary interfaces, extend to support more interfaces
+		#define CONFIG_TSF_RESET_OFFLOAD 1		// For 2 PORT TSF SYNC.
 	#endif
 
 	//#define CONFIG_IOL
@@ -234,9 +216,6 @@
 #define CONFIG_USB_VENDOR_REQ_MUTEX
 #define CONFIG_VENDOR_REQ_RETRY
 
-//#define CONFIG_USB_SUPPORT_ASYNC_VDN_REQ 1
-
-
 /*
  * HAL  Related Config
  */
@@ -269,52 +248,10 @@
 
 #define TEST_CHIP_SUPPORT				0
 
-#define RTL8192CE_SUPPORT				0
-#define RTL8192CU_SUPPORT				0
-#define RTL8192C_SUPPORT				(RTL8192CE_SUPPORT|RTL8192CU_SUPPORT)
-
-#define RTL8192DE_SUPPORT				0
-#define RTL8192DU_SUPPORT				0
-#define RTL8192D_SUPPORT				(RTL8192DE_SUPPORT|RTL8192DU_SUPPORT)
-
-#define RTL8723AU_SUPPORT				0
-#define RTL8723AS_SUPPORT				0
-#define RTL8723AE_SUPPORT				0
-#define RTL8723A_SUPPORT				(RTL8723AU_SUPPORT|RTL8723AS_SUPPORT|RTL8723AE_SUPPORT)
-
 #define RTL8723_FPGA_VERIFICATION		0
-
-#define RTL8188EE_SUPPORT				0
-#define RTL8188EU_SUPPORT				0
-#define RTL8188ES_SUPPORT				0
-#define RTL8188E_SUPPORT				(RTL8188EE_SUPPORT|RTL8188EU_SUPPORT|RTL8188ES_SUPPORT)
-
-#define RTL8812E_SUPPORT				0
-#ifdef CONFIG_RTL8812A
-#define RTL8812AU_SUPPORT				1
-#else
-#define RTL8812AU_SUPPORT				0
-#endif
-#define RTL8812A_SUPPORT				(RTL8812E_SUPPORT|RTL8812AU_SUPPORT)
-
-
-#ifdef CONFIG_RTL8821A
-#define RTL8821A_SUPPORT				1
-#else
-#define RTL8821A_SUPPORT				0
-#endif
-
-#define RTL8723B_SUPPORT				0
-
-#define RTL8192E_SUPPORT				0
 
 #define RATE_ADAPTIVE_SUPPORT		0
 #define POWER_TRAINING_ACTIVE			0
-
-
-#ifdef CONFIG_USB_TX_AGGREGATION
-//#define	CONFIG_TX_EARLY_MODE
-#endif
 
 #define	RTL8188E_EARLY_MODE_PKT_NUM_10	0
 

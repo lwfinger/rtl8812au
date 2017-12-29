@@ -1572,9 +1572,7 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_IQK);
 	// 2010/08/26 MH Merge from 8192CE.
 	if(pwrctrlpriv->rf_pwrstate == rf_on)
 	{
-		if(IS_HARDWARE_TYPE_8812AU(Adapter))
-		{
-#if (RTL8812A_SUPPORT == 1)
+		if(IS_HARDWARE_TYPE_8812AU(Adapter)) {
 			pHalData->odmpriv.RFCalibrateInfo.bNeedIQK = _TRUE;
 			if(pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized)
 				PHY_IQCalibrate_8812A(Adapter, _TRUE);
@@ -1583,16 +1581,11 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_IQK);
 				PHY_IQCalibrate_8812A(Adapter, _FALSE);
 				pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = _TRUE;
 			}
-#endif
 		}
 
 HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_PW_TRACK);
 
-		//ODM_TXPowerTrackingCheck(&pHalData->odmpriv );
-
-
 HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_LCK);
-		//PHY_LCCalibrate_8812A(Adapter);
 	}
 }
 

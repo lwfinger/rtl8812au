@@ -105,8 +105,6 @@ struct mp_tx
 	_thread_hdl_ PktTxThread;
 };
 
-#if defined(CONFIG_RTL8192C) || defined(CONFIG_RTL8192D) || defined(CONFIG_RTL8723A) || defined(CONFIG_RTL8188E) || defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A) ||defined(CONFIG_RTL8192E) || defined(CONFIG_RTL8723B)
-
 #define MP_MAX_LINES		1000
 #define MP_MAX_LINES_BYTES	256
 #define u1Byte u8
@@ -142,8 +140,6 @@ struct mp_tx
 #define UINT u32
 #define ULONG u32
 #define PULONG u32*
-
-
 
 typedef VOID (*MPT_WORK_ITEM_HANDLER)(IN PVOID Adapter);
 typedef struct _MPT_CONTEXT
@@ -246,39 +242,12 @@ typedef struct _MPT_CONTEXT
     u1Byte          mptOutBuf[100];
 
 }MPT_CONTEXT, *PMPT_CONTEXT;
-#endif
 //#endif
 
 /* E-Fuse */
-#ifdef CONFIG_RTL8192D
-#define EFUSE_MAP_SIZE		256
-#endif
-#ifdef CONFIG_RTL8192C
-#define EFUSE_MAP_SIZE		128
-#endif
-#ifdef CONFIG_RTL8723A
-#define EFUSE_MAP_SIZE		256
-#endif
-#ifdef CONFIG_RTL8188E
 #define EFUSE_MAP_SIZE		512
-#endif
-#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
-#define EFUSE_MAP_SIZE		512
-#endif
-#ifdef CONFIG_RTL8192E
-#define EFUSE_MAP_SIZE		512
-#endif
-#ifdef CONFIG_RTL8723B
-#define EFUSE_MAP_SIZE		512
-#endif
 
-#if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
 #define EFUSE_MAX_SIZE		1024
-#elif defined(CONFIG_RTL8188E)
-#define EFUSE_MAX_SIZE		256
-#else
-#define EFUSE_MAX_SIZE		512
-#endif
 /* end of E-Fuse */
 
 //#define RTPRIV_IOCTL_MP					( SIOCIWFIRSTPRIV + 0x17)

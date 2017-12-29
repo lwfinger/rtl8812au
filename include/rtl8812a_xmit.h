@@ -20,6 +20,8 @@
 #ifndef __RTL8812A_XMIT_H__
 #define __RTL8812A_XMIT_H__
 
+#include "rtl8821a_xmit.h"
+
 //
 // Queue Select Value in TxDesc
 //
@@ -345,7 +347,3 @@ u8	BWMapping_8812(PADAPTER Adapter, struct pkt_attrib *pattrib);
 u8	SCMapping_8812(PADAPTER Adapter, struct pkt_attrib	*pattrib);
 
 #endif //__RTL8812_XMIT_H__
-
-#ifdef CONFIG_RTL8821A
-#include "rtl8821a_xmit.h"
-#endif // CONFIG_RTL8821A
