@@ -1606,41 +1606,41 @@ static u1Byte DeltaSwingTableIdx_2GA_N_8188E[] = {0, 0, 0, 2, 2, 3, 3, 4, 4, 4, 
 #define SWAW_STEP_PEAK		0
 #define SWAW_STEP_DETERMINE	1
 
-VOID ODM_Write_DIG(IN	PDM_ODM_T	pDM_Odm,	IN	u1Byte	CurrentIGI);
-VOID ODM_Write_CCK_CCA_Thres(IN	PDM_ODM_T	pDM_Odm, IN	u1Byte	CurCCK_CCAThres);
+VOID ODM_Write_DIG(PDM_ODM_T	pDM_Odm, u1Byte	CurrentIGI);
+VOID ODM_Write_CCK_CCA_Thres(PDM_ODM_T	pDM_Odm, u1Byte	CurCCK_CCAThres);
 
 VOID
 ODM_SetAntenna(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		Antenna);
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		Antenna);
 
 
 #define dm_RF_Saving	ODM_RF_Saving
-void ODM_RF_Saving(	IN	PDM_ODM_T	pDM_Odm,
-							IN	u1Byte		bForceInNormal );
+void ODM_RF_Saving(PDM_ODM_T	pDM_Odm,
+		u1Byte		bForceInNormal );
 
 #define SwAntDivRestAfterLink	ODM_SwAntDivRestAfterLink
-VOID ODM_SwAntDivRestAfterLink(	IN	PDM_ODM_T	pDM_Odm);
+VOID ODM_SwAntDivRestAfterLink(PDM_ODM_T	pDM_Odm);
 
 #define dm_CheckTXPowerTracking		ODM_TXPowerTrackingCheck
 VOID
 ODM_TXPowerTrackingCheck(
-	IN		PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	);
 
 BOOLEAN
 ODM_RAStateCheck(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		s4Byte			RSSI,
-	IN		BOOLEAN			bForceUpdate,
-	OUT		pu1Byte			pRATRState
+	PDM_ODM_T		pDM_Odm,
+	s4Byte			RSSI,
+	BOOLEAN			bForceUpdate,
+	pu1Byte			pRATRState
 	);
 
 #define dm_SWAW_RSSI_Check	ODM_SwAntDivChkPerPktRssi
 VOID ODM_SwAntDivChkPerPktRssi(
-	IN PDM_ODM_T		pDM_Odm,
-	IN u1Byte			StationID,
-	IN PODM_PHY_INFO_T pPhyInfo
+	PDM_ODM_T		pDM_Odm,
+	u1Byte			StationID,
+	PODM_PHY_INFO_T pPhyInfo
 	);
 
 u4Byte ConvertTo_dB(u4Byte Value);
@@ -1653,102 +1653,102 @@ GetPSDData(
 
 VOID
 odm_DIGbyRSSI_LPS(
-	IN		PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	);
 
 u4Byte ODM_Get_Rate_Bitmap(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		macid,
-	IN	u4Byte		ra_mask,
-	IN	u1Byte		rssi_level);
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		macid,
+	u4Byte		ra_mask,
+	u1Byte		rssi_level);
 
 #if (BEAMFORMING_SUPPORT == 1)
 BEAMFORMING_CAP
 Beamforming_GetEntryBeamCapByMacId(
- IN PMGNT_INFO pMgntInfo,
- IN u1Byte  MacId
+ PMGNT_INFO pMgntInfo,
+ u1Byte  MacId
  );
 #endif
 
-VOID ODM_DMInit( IN	PDM_ODM_T	pDM_Odm);
+VOID ODM_DMInit(PDM_ODM_T	pDM_Odm);
 
 VOID
 ODM_DMWatchdog(
-	IN		PDM_ODM_T			pDM_Odm			// For common use in the future
+	PDM_ODM_T			pDM_Odm			// For common use in the future
 	);
 
 VOID
 ODM_CmnInfoInit(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		ODM_CMNINFO_E	CmnInfo,
-	IN		u4Byte			Value
+	PDM_ODM_T		pDM_Odm,
+	ODM_CMNINFO_E	CmnInfo,
+	u4Byte			Value
 	);
 
 VOID
 ODM_CmnInfoHook(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		ODM_CMNINFO_E	CmnInfo,
-	IN		PVOID			pValue
+	PDM_ODM_T		pDM_Odm,
+	ODM_CMNINFO_E	CmnInfo,
+	PVOID			pValue
 	);
 
 VOID
 ODM_CmnInfoPtrArrayHook(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		ODM_CMNINFO_E	CmnInfo,
-	IN		u2Byte			Index,
-	IN		PVOID			pValue
+	PDM_ODM_T		pDM_Odm,
+	ODM_CMNINFO_E	CmnInfo,
+	u2Byte			Index,
+	PVOID			pValue
 	);
 
 VOID
 ODM_CmnInfoUpdate(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u4Byte			CmnInfo,
-	IN		u8Byte			Value
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			CmnInfo,
+	u8Byte			Value
 	);
 
 VOID
 ODM_InitAllTimers(
-    IN PDM_ODM_T	pDM_Odm
+    PDM_ODM_T	pDM_Odm
     );
 
 VOID
 ODM_CancelAllTimers(
-    IN PDM_ODM_T    pDM_Odm
+    PDM_ODM_T    pDM_Odm
     );
 
 VOID
 ODM_ReleaseAllTimers(
-    IN PDM_ODM_T	pDM_Odm
+    PDM_ODM_T	pDM_Odm
     );
 
 VOID
 ODM_ResetIQKResult(
-    IN PDM_ODM_T pDM_Odm
+    PDM_ODM_T pDM_Odm
     );
 
 VOID
 ODM_AntselStatistics_88C(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			MacId,
-	IN		u4Byte			PWDBAll,
-	IN		BOOLEAN			isCCKrate
+	PDM_ODM_T		pDM_Odm,
+	u1Byte			MacId,
+	u4Byte			PWDBAll,
+	BOOLEAN			isCCKrate
 );
 
 VOID
 ODM_SingleDualAntennaDefaultSetting(
-	IN		PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	);
 
 BOOLEAN
 ODM_SingleDualAntennaDetection(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			mode
+	PDM_ODM_T		pDM_Odm,
+	u1Byte			mode
 	);
 
 VOID
 ODM_UpdateInitRate(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		Rate
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		Rate
 	);
 void odm_dtc(PDM_ODM_T pDM_Odm);
 

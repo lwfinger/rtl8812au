@@ -37,8 +37,8 @@ static void _dbg_dump_macreg(_adapter *padapter)
 
 static VOID
 _ConfigChipOutEP_8812(
-	IN	PADAPTER	pAdapter,
-	IN	u8		NumOutPipe
+	PADAPTER	pAdapter,
+	u8		NumOutPipe
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
@@ -73,9 +73,9 @@ _ConfigChipOutEP_8812(
 }
 
 static BOOLEAN HalUsbSetQueuePipeMapping8812AUsb(
-	IN	PADAPTER	pAdapter,
-	IN	u8		NumInPipe,
-	IN	u8		NumOutPipe
+	PADAPTER	pAdapter,
+	u8		NumInPipe,
+	u8		NumOutPipe
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
@@ -146,7 +146,7 @@ void rtl8812au_interface_configure(_adapter *padapter)
 }
 
 static VOID
-_InitBurstPktLen(IN PADAPTER Adapter)
+_InitBurstPktLen(PADAPTER Adapter)
 {
 	u1Byte speedvalue, provalue, temp;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -323,7 +323,7 @@ static u32 _InitPowerOn8812AU(_adapter *padapter)
 // Shall USB interface init this?
 static VOID
 _InitInterrupt_8812AU(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
@@ -335,7 +335,7 @@ _InitInterrupt_8812AU(
 
 static VOID
 _InitQueueReservedPage_8821AUsb(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
@@ -397,7 +397,7 @@ _InitQueueReservedPage_8821AUsb(
 
 static VOID
 _InitQueueReservedPage_8812AUsb(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
@@ -457,14 +457,14 @@ _InitQueueReservedPage_8812AUsb(
 	rtw_write32(Adapter, REG_RQPN, value32);
 }
 
-static void _InitID_8812A(IN  PADAPTER Adapter)
+static void _InitID_8812A( PADAPTER Adapter)
 {
 	hal_init_macaddr(Adapter);//set mac_address
 }
 
 static VOID
 _InitTxBufferBoundary_8821AUsb(
-	IN PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	struct registry_priv *pregistrypriv = &Adapter->registrypriv;
@@ -495,7 +495,7 @@ _InitTxBufferBoundary_8821AUsb(
 
 static VOID
 _InitTxBufferBoundary_8812AUsb(
-	IN PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	struct registry_priv *pregistrypriv = &Adapter->registrypriv;
@@ -519,7 +519,7 @@ _InitTxBufferBoundary_8812AUsb(
 
 static VOID
 _InitPageBoundary_8812AUsb(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	//u2Byte			rxff_bndy;
@@ -543,13 +543,13 @@ _InitPageBoundary_8812AUsb(
 
 static VOID
 _InitNormalChipRegPriority_8812AUsb(
-	IN	PADAPTER	Adapter,
-	IN	u16		beQ,
-	IN	u16		bkQ,
-	IN	u16		viQ,
-	IN	u16		voQ,
-	IN	u16		mgtQ,
-	IN	u16		hiQ
+	PADAPTER	Adapter,
+	u16		beQ,
+	u16		bkQ,
+	u16		viQ,
+	u16		voQ,
+	u16		mgtQ,
+	u16		hiQ
 	)
 {
 	u16 value16	= (rtw_read16(Adapter, REG_TRXDMA_CTRL) & 0x7);
@@ -563,7 +563,7 @@ _InitNormalChipRegPriority_8812AUsb(
 
 static VOID
 _InitNormalChipTwoOutEpPriority_8812AUsb(
-	IN	PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
@@ -617,7 +617,7 @@ _InitNormalChipTwoOutEpPriority_8812AUsb(
 
 static VOID
 _InitNormalChipThreeOutEpPriority_8812AUsb(
-	IN	PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	struct registry_priv *pregistrypriv = &Adapter->registrypriv;
@@ -644,7 +644,7 @@ _InitNormalChipThreeOutEpPriority_8812AUsb(
 
 static VOID
 _InitQueuePriority_8812AUsb(
-	IN	PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
@@ -668,7 +668,7 @@ _InitQueuePriority_8812AUsb(
 
 static VOID
 _InitHardwareDropIncorrectBulkOut_8812A(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	u32	value32 = rtw_read32(Adapter, REG_TXDMA_OFFSET_CHK);
@@ -678,7 +678,7 @@ _InitHardwareDropIncorrectBulkOut_8812A(
 
 static VOID
 _InitNetworkType_8812A(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	u32	value32;
@@ -692,7 +692,7 @@ _InitNetworkType_8812A(
 
 static VOID
 _InitTransferPageSize_8812AUsb(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 
@@ -704,8 +704,8 @@ _InitTransferPageSize_8812AUsb(
 
 static VOID
 _InitDriverInfoSize_8812A(
-	IN  PADAPTER	Adapter,
-	IN	u8		drvInfoSize
+	PADAPTER	Adapter,
+	u8		drvInfoSize
 	)
 {
 	rtw_write8(Adapter,REG_RX_DRVINFO_SZ, drvInfoSize);
@@ -713,7 +713,7 @@ _InitDriverInfoSize_8812A(
 
 static VOID
 _InitWMACSetting_8812A(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	//u4Byte			value32;
@@ -760,7 +760,7 @@ _InitWMACSetting_8812A(
 
 static VOID
 _InitAdaptiveCtrl_8812AUsb(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	u16	value16;
@@ -793,7 +793,7 @@ _InitAdaptiveCtrl_8812AUsb(
 
 static VOID
 _InitEDCA_8812AUsb(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	// Set Spec SIFS (used in NAV)
@@ -820,8 +820,8 @@ _InitEDCA_8812AUsb(
 
 static VOID
 _InitBeaconMaxError_8812A(
-	IN  PADAPTER	Adapter,
-	IN	BOOLEAN		InfraMode
+	PADAPTER	Adapter,
+	BOOLEAN		InfraMode
 	)
 {
 #ifdef RTL8192CU_ADHOC_WORKAROUND_SETTING
@@ -849,7 +849,7 @@ static void _InitHWLed(PADAPTER Adapter)
 
 static VOID
 _InitRDGSetting_8812A(
-	IN	PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	rtw_write8(Adapter,REG_RD_CTRL,0xFF);
@@ -859,7 +859,7 @@ _InitRDGSetting_8812A(
 
 static VOID
 _InitRxSetting_8812AU(
-	IN	PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	rtw_write32(Adapter, REG_MACID, 0x87654321);
@@ -868,7 +868,7 @@ _InitRxSetting_8812AU(
 
 static VOID
 _InitRetryFunction_8812A(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	u8	value8;
@@ -899,7 +899,7 @@ _InitRetryFunction_8812A(
  *---------------------------------------------------------------------------*/
 static VOID
 usb_AggSettingTxUpdate_8812A(
-	IN	PADAPTER			Adapter
+	PADAPTER			Adapter
 	)
 {
 #ifdef CONFIG_USB_TX_AGGREGATION
@@ -938,7 +938,7 @@ usb_AggSettingTxUpdate_8812A(
  *---------------------------------------------------------------------------*/
 static VOID
 usb_AggSettingRxUpdate_8812A(
-	IN	PADAPTER			Adapter
+	PADAPTER			Adapter
 	)
 {
 #ifdef CONFIG_USB_RX_AGGREGATION
@@ -979,7 +979,7 @@ usb_AggSettingRxUpdate_8812A(
 
 static VOID
 init_UsbAggregationSetting_8812A(
-	IN  PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1015,14 +1015,14 @@ init_UsbAggregationSetting_8812A(
  *---------------------------------------------------------------------------*/
 VOID
 USB_AggModeSwitch(
-	IN	PADAPTER			Adapter
+	PADAPTER			Adapter
 	)
 {
 }	// USB_AggModeSwitch
 
 static VOID
 _InitOperationMode_8812A(
-	IN	PADAPTER			Adapter
+	PADAPTER			Adapter
 	)
 {
 }
@@ -1030,7 +1030,7 @@ _InitOperationMode_8812A(
 
 // Set CCK and OFDM Block "ON"
 static VOID _BBTurnOnBlock(
-	IN	PADAPTER		Adapter
+	PADAPTER		Adapter
 	)
 {
 #if (DISABLE_BB_RF)
@@ -1042,7 +1042,7 @@ static VOID _BBTurnOnBlock(
 }
 
 static VOID _RfPowerSave(
-	IN	PADAPTER		Adapter
+	PADAPTER		Adapter
 	)
 {
 }
@@ -1053,7 +1053,7 @@ enum {
 };
 
 static VOID
-_InitAntenna_Selection_8812A(IN	PADAPTER Adapter)
+_InitAntenna_Selection_8812A(PADAPTER Adapter)
 {
 
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
@@ -1082,7 +1082,7 @@ _InitAntenna_Selection_8812A(IN	PADAPTER Adapter)
 //
 static VOID
 HalDetectSelectiveSuspendMode(
-	IN PADAPTER				Adapter
+	PADAPTER				Adapter
 	)
 {
 }	// HalDetectSelectiveSuspendMode
@@ -1103,8 +1103,8 @@ HalDetectSelectiveSuspendMode(
  *---------------------------------------------------------------------------*/
 static VOID
 HwSuspendModeEnable_8812AU(
-	IN	PADAPTER	pAdapter,
-	IN	u8			Type
+	PADAPTER	pAdapter,
+	u8			Type
 	)
 {
 	//PRT_USB_DEVICE		pDevice = GET_RT_USB_DEVICE(pAdapter);
@@ -1143,7 +1143,7 @@ HwSuspendModeEnable_8812AU(
 	}
 
 }	// HwSuspendModeEnable92Cu
-rt_rf_power_state RfOnOffDetect(IN	PADAPTER pAdapter )
+rt_rf_power_state RfOnOffDetect(PADAPTER pAdapter )
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(pAdapter);
 	u8	val8;
@@ -1651,7 +1651,7 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_END);
 
 VOID
 CardDisableRTL8812AU(
-	IN	PADAPTER			Adapter
+	PADAPTER			Adapter
 )
 {
 	u8	u1bTmp;
@@ -1842,9 +1842,9 @@ unsigned int rtl8812au_inirp_deinit(PADAPTER Adapter)
 //-------------------------------------------------------------------
 VOID
 hal_ReadIDs_8812AU(
-	IN	PADAPTER	Adapter,
-	IN	pu1Byte		PROMContent,
-	IN	BOOLEAN		AutoloadFail
+	PADAPTER	Adapter,
+	pu1Byte		PROMContent,
+	BOOLEAN		AutoloadFail
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1897,9 +1897,9 @@ hal_ReadIDs_8812AU(
 
 VOID
 hal_ReadMACAddress_8812AU(
-	IN	PADAPTER	Adapter,
-	IN	u8*			PROMContent,
-	IN	BOOLEAN		AutoloadFail
+	PADAPTER	Adapter,
+	u8*			PROMContent,
+	BOOLEAN		AutoloadFail
 	)
 {
 	EEPROM_EFUSE_PRIV *pEEPROM = GET_EEPROM_EFUSE_PRIV(Adapter);
@@ -1930,8 +1930,8 @@ hal_ReadMACAddress_8812AU(
 
 VOID
 hal_InitPGData_8812A(
-	IN	PADAPTER		padapter,
-	IN	OUT	u8*			PROMContent
+	PADAPTER		padapter,
+	u8*			PROMContent
 	)
 {
 	EEPROM_EFUSE_PRIV *pEEPROM = GET_EEPROM_EFUSE_PRIV(padapter);
@@ -1968,7 +1968,7 @@ hal_InitPGData_8812A(
 
 VOID
 hal_CustomizedBehavior_8812AU(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2022,7 +2022,7 @@ hal_CustomizedBehavior_8812AU(
 
 static void
 hal_CustomizeByCustomerID_8812AU(
-	IN	PADAPTER		pAdapter
+	PADAPTER		pAdapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -2087,18 +2087,18 @@ hal_CustomizeByCustomerID_8812AU(
 
 VOID
 hal_ReadUsbModeSwitch_8812AU(
-	IN	PADAPTER	Adapter,
-	IN	u8*			PROMContent,
-	IN	BOOLEAN		AutoloadFail
+	PADAPTER	Adapter,
+	u8*			PROMContent,
+	BOOLEAN		AutoloadFail
 	)
 {
 }
 
 static VOID
 ReadLEDSetting_8812AU(
-	IN	PADAPTER	Adapter,
-	IN	u8*		PROMContent,
-	IN	BOOLEAN		AutoloadFail
+	PADAPTER	Adapter,
+	u8*		PROMContent,
+	BOOLEAN		AutoloadFail
 	)
 {
 	struct led_priv *pledpriv = &(Adapter->ledpriv);
@@ -2112,7 +2112,7 @@ ReadLEDSetting_8812AU(
 
 VOID
 InitAdapterVariablesByPROM_8812AU(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	EEPROM_EFUSE_PRIV *pEEPROM = GET_EEPROM_EFUSE_PRIV(Adapter);
@@ -2156,7 +2156,7 @@ InitAdapterVariablesByPROM_8812AU(
 }
 
 static void Hal_ReadPROMContent_8812A(
-	IN PADAPTER		Adapter
+	PADAPTER		Adapter
 	)
 {
 	EEPROM_EFUSE_PRIV *pEEPROM = GET_EEPROM_EFUSE_PRIV(Adapter);
@@ -2177,7 +2177,7 @@ static void Hal_ReadPROMContent_8812A(
 
 VOID
 hal_ReadRFType_8812A(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2209,14 +2209,14 @@ hal_ReadRFType_8812A(
 
 VOID
 hal_CustomizedBehavior_8812AUsb(
-	IN PADAPTER		Adapter
+	PADAPTER		Adapter
 	)
 {
 }
 
 void
 ReadAdapterInfo8812AU(
-	IN PADAPTER			Adapter
+	PADAPTER			Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2346,9 +2346,9 @@ void GetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 //
 u8
 SetHalDefVar8812AUsb(
-	IN	PADAPTER				Adapter,
-	IN	HAL_DEF_VARIABLE		eVariable,
-	IN	PVOID					pValue
+	PADAPTER				Adapter,
+	HAL_DEF_VARIABLE		eVariable,
+	PVOID					pValue
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2370,9 +2370,9 @@ SetHalDefVar8812AUsb(
 //
 u8
 GetHalDefVar8812AUsb(
-	IN	PADAPTER				Adapter,
-	IN	HAL_DEF_VARIABLE		eVariable,
-	IN	PVOID					pValue
+	PADAPTER				Adapter,
+	HAL_DEF_VARIABLE		eVariable,
+	PVOID					pValue
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);

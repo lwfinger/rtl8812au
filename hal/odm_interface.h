@@ -39,45 +39,17 @@
 #define _bit_all(_name)			BIT_##_name
 #define _bit_ic(_name, _ic)		BIT_##_name##_ic
 
-// _cat: implemented by Token-Pasting Operator.
-#if 0
-#define _cat(_name, _ic_type, _func)								\
-	(																		\
-		_func##_all(_name)										\
-	)
-#endif
-
-/*===================================
-
-#define ODM_REG_DIG_11N		0xC50
-#define ODM_REG_DIG_11AC	0xDDD
-
-ODM_REG(DIG,_pDM_Odm)
-=====================================*/
 
 #define _reg_11N(_name)			ODM_REG_##_name##_11N
 #define _reg_11AC(_name)		ODM_REG_##_name##_11AC
 #define _bit_11N(_name)			ODM_BIT_##_name##_11N
 #define _bit_11AC(_name)		ODM_BIT_##_name##_11AC
 
-#if 1 //TODO: enable it if we need to support run-time to differentiate between 92C_SERIES and JAGUAR_SERIES.
 #define _cat(_name, _ic_type, _func)									\
 	(															\
 		((_ic_type) & ODM_IC_11N_SERIES)? _func##_11N(_name):		\
 		_func##_11AC(_name)									\
 	)
-#endif
-#if 0 // only sample code
-#define _cat(_name, _ic_type, _func)									\
-	(															\
-		((_ic_type) & ODM_RTL8192C)? _func##_ic(_name, _8192C):		\
-		((_ic_type) & ODM_RTL8192D)? _func##_ic(_name, _8192D):		\
-		((_ic_type) & ODM_RTL8192S)? _func##_ic(_name, _8192S):		\
-		((_ic_type) & ODM_RTL8723A)? _func##_ic(_name, _8723A):		\
-		((_ic_type) & ODM_RTL8188E)? _func##_ic(_name, _8188E):		\
-		_func##_ic(_name, _8195)									\
-	)
-#endif
 
 // _name: name of register or bit.
 // Example: "ODM_REG(R_A_AGC_CORE1, pDM_Odm)"
@@ -114,120 +86,119 @@ typedef VOID (*RT_WORKITEM_CALL_BACK)(PVOID pContext);
 
 u1Byte
 ODM_Read1Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr
 	);
 
 u2Byte
 ODM_Read2Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr
 	);
 
 u4Byte
 ODM_Read4Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr
 	);
 
 VOID
 ODM_Write1Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr,
-	IN	u1Byte			Data
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr,
+	u1Byte			Data
 	);
 
 VOID
 ODM_Write2Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr,
-	IN	u2Byte			Data
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr,
+	u2Byte			Data
 	);
 
 VOID
 ODM_Write4Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr,
-	IN	u4Byte			Data
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr,
+	u4Byte			Data
 	);
 
 VOID
 ODM_SetMACReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask,
-	IN	u4Byte		Data
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask,
+	u4Byte		Data
 	);
 
 u4Byte
 ODM_GetMACReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask
 	);
 
 VOID
 ODM_SetBBReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask,
-	IN	u4Byte		Data
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask,
+	u4Byte		Data
 	);
 
 u4Byte
 ODM_GetBBReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask
 	);
 
 VOID
 ODM_SetRFReg(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E	eRFPath,
-	IN	u4Byte					RegAddr,
-	IN	u4Byte					BitMask,
-	IN	u4Byte					Data
+	PDM_ODM_T				pDM_Odm,
+	ODM_RF_RADIO_PATH_E	eRFPath,
+	u4Byte					RegAddr,
+	u4Byte					BitMask,
+	u4Byte					Data
 	);
 
 u4Byte
 ODM_GetRFReg(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E	eRFPath,
-	IN	u4Byte					RegAddr,
-	IN	u4Byte					BitMask
+	PDM_ODM_T				pDM_Odm,
+	ODM_RF_RADIO_PATH_E	eRFPath,
+	u4Byte					RegAddr,
+	u4Byte					BitMask
 	);
-
 
 //
 // Memory Relative Function.
 //
 VOID
 ODM_AllocateMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	OUT	PVOID		*pPtr,
-	IN	u4Byte		length
+	PDM_ODM_T	pDM_Odm,
+	PVOID		*pPtr,
+	u4Byte		length
 	);
 VOID
 ODM_FreeMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	OUT	PVOID		pPtr,
-	IN	u4Byte		length
+	PDM_ODM_T	pDM_Odm,
+	PVOID		pPtr,
+	u4Byte		length
 	);
 
 VOID
 ODM_MoveMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	OUT PVOID		pDest,
-	IN  PVOID		pSrc,
-	IN  u4Byte		Length
+	PDM_ODM_T	pDM_Odm,
+	PVOID		pDest,
+	PVOID		pSrc,
+	u4Byte		Length
 	);
 
 s4Byte ODM_CompareMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	PVOID           pBuf1,
-      IN	PVOID           pBuf2,
-      IN	u4Byte          length
+	PDM_ODM_T	pDM_Odm,
+	PVOID           pBuf1,
+      	PVOID           pBuf2,
+      	u4Byte          length
        );
 
 //
@@ -235,14 +206,14 @@ s4Byte ODM_CompareMemory(
 //
 VOID
 ODM_AcquireSpinLock(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	RT_SPINLOCK_TYPE	type
+	PDM_ODM_T			pDM_Odm,
+	RT_SPINLOCK_TYPE	type
 	);
 
 VOID
 ODM_ReleaseSpinLock(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	RT_SPINLOCK_TYPE	type
+	PDM_ODM_T			pDM_Odm,
+	RT_SPINLOCK_TYPE	type
 	);
 
 
@@ -251,36 +222,36 @@ ODM_ReleaseSpinLock(
 //
 VOID
 ODM_InitializeWorkItem(
-	IN	PDM_ODM_T					pDM_Odm,
-	IN	PRT_WORK_ITEM				pRtWorkItem,
-	IN	RT_WORKITEM_CALL_BACK		RtWorkItemCallback,
-	IN	PVOID						pContext,
-	IN	const char*					szID
+	PDM_ODM_T					pDM_Odm,
+	PRT_WORK_ITEM				pRtWorkItem,
+	RT_WORKITEM_CALL_BACK		RtWorkItemCallback,
+	PVOID						pContext,
+	const char*					szID
 	);
 
 VOID
 ODM_StartWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	);
 
 VOID
 ODM_StopWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	);
 
 VOID
 ODM_FreeWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	);
 
 VOID
 ODM_ScheduleWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	);
 
 VOID
 ODM_IsWorkItemScheduled(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	);
 
 //
@@ -288,63 +259,62 @@ ODM_IsWorkItemScheduled(
 //
 VOID
 ODM_StallExecution(
-	IN	u4Byte	usDelay
+	u4Byte	usDelay
 	);
 
 VOID
-ODM_delay_ms(IN u4Byte	ms);
+ODM_delay_ms(u4Byte	ms);
 
 
 VOID
-ODM_delay_us(IN u4Byte	us);
+ODM_delay_us(u4Byte	us);
 
 VOID
-ODM_sleep_ms(IN u4Byte	ms);
+ODM_sleep_ms(u4Byte	ms);
 
 VOID
-ODM_sleep_us(IN u4Byte	us);
+ODM_sleep_us(u4Byte	us);
 
 VOID
 ODM_SetTimer(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	PRT_TIMER		pTimer,
-	IN	u4Byte			msDelay
+	PDM_ODM_T		pDM_Odm,
+	PRT_TIMER		pTimer,
+	u4Byte			msDelay
 	);
 
 VOID
 ODM_InitializeTimer(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	PRT_TIMER			pTimer,
-	IN	RT_TIMER_CALL_BACK	CallBackFunc,
-	IN	PVOID				pContext,
-	IN	const char*			szID
+	PDM_ODM_T			pDM_Odm,
+	PRT_TIMER			pTimer,
+	RT_TIMER_CALL_BACK	CallBackFunc,
+	PVOID				pContext,
+	const char*			szID
 	);
 
 VOID
 ODM_CancelTimer(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	PRT_TIMER		pTimer
+	PDM_ODM_T		pDM_Odm,
+	PRT_TIMER		pTimer
 	);
 
 VOID
 ODM_ReleaseTimer(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	PRT_TIMER		pTimer
+	PDM_ODM_T		pDM_Odm,
+	PRT_TIMER		pTimer
 	);
-
 
 //
 // ODM FW relative API.
 //
 u4Byte
 ODM_FillH2CCmd(
-	IN	pu1Byte		pH2CBuffer,
-	IN	u4Byte		H2CBufferLen,
-	IN	u4Byte		CmdNum,
-	IN	pu4Byte		pElementID,
-	IN	pu4Byte		pCmdLen,
-	IN	pu1Byte*		pCmbBuffer,
-	IN	pu1Byte		CmdStartSeq
+	pu1Byte		pH2CBuffer,
+	u4Byte		H2CBufferLen,
+	u4Byte		CmdNum,
+	pu4Byte		pElementID,
+	pu4Byte		pCmdLen,
+	pu1Byte*		pCmbBuffer,
+	pu1Byte		CmdStartSeq
 	);
 
 #endif	// __ODM_INTERFACE_H__

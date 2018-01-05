@@ -29,7 +29,7 @@ static BOOLEAN CheckCondition(const u4Byte Condition, const u4Byte Hex);
 
 void
 ODM_ReadAndConfig_MP_8821A_MAC_REG( // TC: Test Chip, MP: MP Chip
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 );
 
 #endif

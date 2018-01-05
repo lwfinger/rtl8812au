@@ -457,7 +457,7 @@ u4Byte Array_MP_8812A_AGC_TAB[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_AGC_TAB(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -651,9 +651,9 @@ u4Byte Array_MP_8812A_AGC_TAB_DIFF_HB[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF(
-	IN   PDM_ODM_T  pDM_Odm,
-	IN   u4Byte	Array[],
-	IN   u4Byte	ArrayLen
+	PDM_ODM_T  pDM_Odm,
+	u4Byte	Array[],
+	u4Byte	ArrayLen
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -958,7 +958,7 @@ u4Byte Array_MP_8812A_PHY_REG[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_PHY_REG(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -1039,7 +1039,7 @@ u4Byte Array_MP_8812A_PHY_REG_MP[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_PHY_REG_MP(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -1153,7 +1153,7 @@ u4Byte Array_MP_8812A_PHY_REG_PG[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_PHY_REG_PG(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	u4Byte     hex = 0;
@@ -1251,7 +1251,7 @@ u4Byte Array_MP_8812A_PHY_REG_PG_ASUS[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_ASUS(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -1365,7 +1365,7 @@ u4Byte Array_MP_8812A_PHY_REG_PG_NEC[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_NEC(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)

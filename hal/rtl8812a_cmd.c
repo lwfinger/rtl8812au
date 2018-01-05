@@ -714,7 +714,7 @@ void ConstructProbeRsp(_adapter *padapter, u8 *pframe, u32 *pLength, u8 *StaAddr
 // 2010.06.23. Added by tynli.
 VOID
 CheckFwRsvdPageContent(
-	IN	PADAPTER		Adapter
+	PADAPTER		Adapter
 )
 {
 	HAL_DATA_TYPE*	pHalData = GET_HAL_DATA(Adapter);
@@ -737,8 +737,8 @@ CheckFwRsvdPageContent(
 //
 u8
 GetTxBufferRsvdPageNum8812(
-	IN	PADAPTER	Adapter,
-	IN	BOOLEAN		bWoWLANBoundary
+	PADAPTER	Adapter,
+	BOOLEAN		bWoWLANBoundary
 )
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);

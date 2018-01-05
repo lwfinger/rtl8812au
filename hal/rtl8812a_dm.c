@@ -39,7 +39,7 @@
 
 static VOID
 dm_CheckProtection(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 #if 0
@@ -66,7 +66,7 @@ dm_CheckProtection(
 
 static VOID
 dm_CheckStatistics(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 #if 0
@@ -155,7 +155,7 @@ static void dm_CheckPbcGPIO(_adapter *padapter)
 //
 static void
 dm_InitGPIOSetting(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	PHAL_DATA_TYPE		pHalData = GET_HAL_DATA(Adapter);
@@ -394,7 +394,7 @@ static void Update_ODM_ComInfo_8812(PADAPTER	Adapter)
 
 void
 rtl8812_InitHalDm(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
@@ -417,7 +417,7 @@ rtl8812_InitHalDm(
 
 VOID
 rtl8812_HalDmWatchDog(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	BOOLEAN		bFwCurrentInPSMode = _FALSE;
@@ -500,7 +500,7 @@ skip_dm:
 	dm_CheckPbcGPIO(Adapter);
 }
 
-void rtl8812_init_dm_priv(IN PADAPTER Adapter)
+void rtl8812_init_dm_priv(PADAPTER Adapter)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
@@ -525,7 +525,7 @@ void rtl8812_init_dm_priv(IN PADAPTER Adapter)
 	pHalData->TxPwrInPercentage = TX_PWR_PERCENTAGE_3;
 }
 
-void rtl8812_deinit_dm_priv(IN PADAPTER Adapter)
+void rtl8812_deinit_dm_priv(PADAPTER Adapter)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 	struct dm_priv	*pdmpriv = &pHalData->dmpriv;

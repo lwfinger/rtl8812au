@@ -334,11 +334,11 @@ ODM_TxPwrTrackSetPwr8812A(
 
 VOID
 GetDeltaSwingTable_8812A(
-	IN	PDM_ODM_T			pDM_Odm,
-	OUT pu1Byte			*TemperatureUP_A,
-	OUT pu1Byte			*TemperatureDOWN_A,
-	OUT pu1Byte			*TemperatureUP_B,
-	OUT pu1Byte			*TemperatureDOWN_B
+	PDM_ODM_T			pDM_Odm,
+	pu1Byte			*TemperatureUP_A,
+	pu1Byte			*TemperatureDOWN_A,
+	pu1Byte			*TemperatureUP_B,
+	pu1Byte			*TemperatureDOWN_B
 	)
 {
     PADAPTER        Adapter		 = pDM_Odm->Adapter;
@@ -408,7 +408,7 @@ void ConfigureTxpowerTrack_8812A(
 // MP Already declare in odm.c
 BOOLEAN
 ODM_CheckPowerStatus(
-	IN	PADAPTER		Adapter)
+	PADAPTER		Adapter)
 {
 	return	TRUE;
 }
@@ -418,10 +418,10 @@ ODM_CheckPowerStatus(
 #define	BW_80M	2
 
 void _IQK_RX_FillIQC_8812A(
-	IN PDM_ODM_T			pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E	Path,
-	IN unsigned int			RX_X,
-	IN unsigned int			RX_Y
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	Path,
+	unsigned int			RX_X,
+	unsigned int			RX_Y
 	)
 {
 	switch (Path) {
@@ -463,10 +463,10 @@ void _IQK_RX_FillIQC_8812A(
 }
 
 void _IQK_TX_FillIQC_8812A(
-	IN PDM_ODM_T			pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E	Path,
-	IN unsigned int			TX_X,
-	IN unsigned int			TX_Y
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	Path,
+	unsigned int			TX_X,
+	unsigned int			TX_Y
 	)
 {
 	switch (Path) {
@@ -500,10 +500,10 @@ void _IQK_TX_FillIQC_8812A(
 }
 
 void _IQK_BackupMacBB_8812A(
-	IN PDM_ODM_T	pDM_Odm,
-	IN pu4Byte		MACBB_backup,
-	IN pu4Byte		Backup_MACBB_REG,
-	IN u4Byte		MACBB_NUM
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		MACBB_backup,
+	pu4Byte		Backup_MACBB_REG,
+	u4Byte		MACBB_NUM
 	)
 {
 	u4Byte i;
@@ -517,11 +517,11 @@ void _IQK_BackupMacBB_8812A(
 }
 
 void _IQK_BackupRF_8812A(
-	IN PDM_ODM_T	pDM_Odm,
-	IN pu4Byte		RFA_backup,
-	IN pu4Byte		RFB_backup,
-	IN pu4Byte		Backup_RF_REG,
-	IN u4Byte		RF_NUM
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		RFA_backup,
+	pu4Byte		RFB_backup,
+	pu4Byte		Backup_RF_REG,
+	u4Byte		RF_NUM
 	)
 {
 
@@ -536,10 +536,10 @@ void _IQK_BackupRF_8812A(
 }
 
 void _IQK_BackupAFE_8812A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN pu4Byte		AFE_backup,
-	IN pu4Byte		Backup_AFE_REG,
-	IN u4Byte		AFE_NUM
+	PDM_ODM_T		pDM_Odm,
+	pu4Byte		AFE_backup,
+	pu4Byte		Backup_AFE_REG,
+	u4Byte		AFE_NUM
 	)
 {
 	u4Byte i;
@@ -552,10 +552,10 @@ void _IQK_BackupAFE_8812A(
 }
 
 void _IQK_RestoreMacBB_8812A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN pu4Byte		MACBB_backup,
-	IN pu4Byte		Backup_MACBB_REG,
-	IN u4Byte		MACBB_NUM
+	PDM_ODM_T		pDM_Odm,
+	pu4Byte		MACBB_backup,
+	pu4Byte		Backup_MACBB_REG,
+	u4Byte		MACBB_NUM
 	)
 {
 	u4Byte i;
@@ -568,11 +568,11 @@ void _IQK_RestoreMacBB_8812A(
 }
 
 void _IQK_RestoreRF_8812A(
-	IN PDM_ODM_T			pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E	Path,
-	IN pu4Byte			Backup_RF_REG,
-	IN pu4Byte			RF_backup,
-	IN u4Byte			RF_REG_NUM
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	Path,
+	pu4Byte			Backup_RF_REG,
+	pu4Byte			RF_backup,
+	u4Byte			RF_REG_NUM
 	)
 {
 	u4Byte i;
@@ -600,10 +600,10 @@ void _IQK_RestoreRF_8812A(
 }
 
 void _IQK_RestoreAFE_8812A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN pu4Byte		AFE_backup,
-	IN pu4Byte		Backup_AFE_REG,
-	IN u4Byte		AFE_NUM
+	PDM_ODM_T		pDM_Odm,
+	pu4Byte		AFE_backup,
+	pu4Byte		Backup_AFE_REG,
+	u4Byte		AFE_NUM
 	)
 {
 	u4Byte i;
@@ -627,7 +627,7 @@ void _IQK_RestoreAFE_8812A(
 }
 
 void _IQK_ConfigureMAC_8812A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 	// ========MAC register setting========
@@ -642,9 +642,9 @@ void _IQK_ConfigureMAC_8812A(
 #define cal_num 3
 
 void _IQK_Tx_8812A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E Path,
-	IN u1Byte chnlIdx
+	PDM_ODM_T		pDM_Odm,
+	ODM_RF_RADIO_PATH_E Path,
+	u1Byte chnlIdx
 	)
 {
 	u4Byte		TX_fail,RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
@@ -1771,8 +1771,8 @@ void _IQK_Tx_8812A(
 // Maintained by BB James.
 VOID
 phy_IQCalibrate_8812A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN u1Byte		Channel
+	PDM_ODM_T		pDM_Odm,
+	u1Byte		Channel
 	)
 {
 	u4Byte	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
@@ -1802,8 +1802,8 @@ phy_IQCalibrate_8812A(
 
 VOID
 phy_LCCalibrate_8812A(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	BOOLEAN		is2T
+	PDM_ODM_T	pDM_Odm,
+	BOOLEAN		is2T
 	)
 {
 	u4Byte	/*RF_Amode=0, RF_Bmode=0,*/ LC_Cal = 0, tmp = 0;
@@ -1887,8 +1887,8 @@ phy_LCCalibrate_8812A(
 
 VOID
 phy_ReloadIQKSetting_8812A(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		Channel
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		Channel
 	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
@@ -1919,7 +1919,7 @@ phy_ReloadIQKSetting_8812A(
 
 VOID
 PHY_ResetIQKResult_8812A(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 )
 {
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
@@ -1936,7 +1936,7 @@ PHY_ResetIQKResult_8812A(
 
 VOID
 phy_IQCalibrate_By_FW_8812A(
-	IN	PADAPTER	pAdapter
+	PADAPTER	pAdapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -1971,8 +1971,8 @@ phy_IQCalibrate_By_FW_8812A(
 
 VOID
 PHY_IQCalibrate_8812A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bReCovery
+	PADAPTER	pAdapter,
+	BOOLEAN		bReCovery
 	)
 {
 
@@ -1999,7 +1999,7 @@ PHY_IQCalibrate_8812A(
 
 VOID
 PHY_LCCalibrate_8812A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 	BOOLEAN			bStartContTx = FALSE, bSingleTone = FALSE, bCarrierSuppression = FALSE;
@@ -2026,9 +2026,9 @@ PHY_LCCalibrate_8812A(
 }
 
 VOID phy_SetRFPathSwitch_8812A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bMain,
-	IN	BOOLEAN		is2T
+	PADAPTER	pAdapter,
+	BOOLEAN		bMain,
+	BOOLEAN		is2T
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -2060,8 +2060,8 @@ VOID phy_SetRFPathSwitch_8812A(
 }
 
 VOID PHY_SetRFPathSwitch_8812A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bMain
+	PADAPTER	pAdapter,
+	BOOLEAN		bMain
 	)
 {
 
@@ -2075,19 +2075,17 @@ VOID PHY_SetRFPathSwitch_8812A(
 
 VOID
 _DPK_ThermalCompensation(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 }
 
 VOID
 _DPK_parareload(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN pu4Byte		MACBB_backup,
-	IN pu4Byte		Backup_MACBB_REG,
-	IN u4Byte		MACBB_NUM
-
-
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		MACBB_backup,
+	pu4Byte		Backup_MACBB_REG,
+	u4Byte		MACBB_NUM
 	)
 {
 	u4Byte i;
@@ -2102,10 +2100,10 @@ _DPK_parareload(
 
 VOID
 _DPK_parabackup(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN pu4Byte		MACBB_backup,
-	IN pu4Byte		Backup_MACBB_REG,
-	IN u4Byte		MACBB_NUM
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		MACBB_backup,
+	pu4Byte		Backup_MACBB_REG,
+	u4Byte		MACBB_NUM
 
 
 	)
@@ -2121,7 +2119,7 @@ _DPK_parabackup(
 
 VOID
 _DPK_Globalparaset(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 
@@ -2210,8 +2208,8 @@ _DPK_Globalparaset(
 
 VOID
 _DPK_GetGainLoss(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN u1Byte path
+	PDM_ODM_T	pDM_Odm,
+	u1Byte path
 	)
 {
 	u4Byte GL_I=0,GL_Q=0;
@@ -2327,9 +2325,9 @@ _DPK_GetGainLoss(
 
 VOID
 _DPK_EnableDP(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN u1Byte path,
-	IN u4Byte TXindex
+	PDM_ODM_T	pDM_Odm,
+	u1Byte path,
+	u4Byte TXindex
 	)
 {
 
@@ -2426,7 +2424,7 @@ _DPK_EnableDP(
 
 VOID
 _DPK_pathABDPK(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	u4Byte TXindex = 0;
@@ -2687,7 +2685,7 @@ _DPK_pathABDPK(
 
 VOID
 phy_DPCalibrate_8812A(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
     u4Byte backupRegAddrs[] = {
@@ -2722,7 +2720,7 @@ phy_DPCalibrate_8812A(
 
 VOID
 PHY_DPCalibrate_8812A(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("===> PHY_DPCalibrate_8812A\n"));

@@ -1376,9 +1376,9 @@ u4Byte ArrayLength_TC_8812A_FW_NIC = 21570;
 
 void
 ODM_ReadFirmware_TC_8812A_FW_NIC(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 )
 {
      ODM_MoveMemory(pDM_Odm, pFirmware, Array_TC_8812A_FW_NIC, ArrayLength_TC_8812A_FW_NIC);
@@ -2547,9 +2547,9 @@ u4Byte ArrayLength_TC_8812A_FW_WoWLAN = 18454;
 
 void
 ODM_ReadFirmware_TC_8812A_FW_WoWLAN(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 )
 {
      ODM_MoveMemory(pDM_Odm, pFirmware, Array_TC_8812A_FW_WoWLAN, ArrayLength_TC_8812A_FW_WoWLAN);

@@ -44,9 +44,9 @@ const char *const GLBwSrc[]={
 
 u32
 PHY_QueryBBReg8812(
-	IN	PADAPTER	Adapter,
-	IN	u32			RegAddr,
-	IN	u32			BitMask
+	PADAPTER	Adapter,
+	u32			RegAddr,
+	u32			BitMask
 	)
 {
 	u32	ReturnValue = 0, OriginalValue, BitShift;
@@ -69,10 +69,10 @@ PHY_QueryBBReg8812(
 
 VOID
 PHY_SetBBReg8812(
-	IN	PADAPTER	Adapter,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask,
-	IN	u4Byte		Data
+	PADAPTER	Adapter,
+	u4Byte		RegAddr,
+	u4Byte		BitMask,
+	u4Byte		Data
 	)
 {
 	u4Byte			OriginalValue, BitShift;
@@ -99,9 +99,9 @@ PHY_SetBBReg8812(
 
 static	u32
 phy_RFSerialRead(
-	IN	PADAPTER		Adapter,
-	IN	u8				eRFPath,
-	IN	u32				Offset
+	PADAPTER		Adapter,
+	u8				eRFPath,
+	u32				Offset
 	)
 {
 	u32							retValue = 0;
@@ -162,10 +162,10 @@ phy_RFSerialRead(
 
 static	VOID
 phy_RFSerialWrite(
-	IN	PADAPTER		Adapter,
-	IN	u8				eRFPath,
-	IN	u32				Offset,
-	IN	u32				Data
+	PADAPTER		Adapter,
+	u8				eRFPath,
+	u32				Offset,
+	u32				Data
 	)
 {
 	u32							DataAndAddr = 0;
@@ -217,10 +217,10 @@ phy_RFSerialWrite(
 
 u32
 PHY_QueryRFReg8812(
-	IN	PADAPTER		Adapter,
-	IN	u8				eRFPath,
-	IN	u32				RegAddr,
-	IN	u32				BitMask
+	PADAPTER		Adapter,
+	u8				eRFPath,
+	u32				RegAddr,
+	u32				BitMask
 	)
 {
 	u32				Original_Value, Readback_Value, BitShift;
@@ -239,11 +239,11 @@ PHY_QueryRFReg8812(
 
 VOID
 PHY_SetRFReg8812(
-	IN	PADAPTER		Adapter,
-	IN	u8				eRFPath,
-	IN	u32				RegAddr,
-	IN	u32				BitMask,
-	IN	u32				Data
+	PADAPTER		Adapter,
+	u8				eRFPath,
+	u32				RegAddr,
+	u32				BitMask,
+	u32				Data
 	)
 {
 #if (DISABLE_BB_RF == 1)
@@ -297,7 +297,7 @@ s32 PHY_MACConfig8812(PADAPTER Adapter)
 
 static	VOID
 phy_InitBBRFRegisterDefinition(
-	IN	PADAPTER		Adapter
+	PADAPTER		Adapter
 )
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
@@ -331,7 +331,7 @@ phy_InitBBRFRegisterDefinition(
 
 VOID
 PHY_BB8812_Config_1T(
-	IN PADAPTER Adapter
+	PADAPTER Adapter
 	)
 {
 	// BB OFDM RX Path_A
@@ -354,7 +354,7 @@ PHY_BB8812_Config_1T(
 
 static	int
 phy_BB8812_Config_ParaFile(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	EEPROM_EFUSE_PRIV	*pEEPROM = GET_EEPROM_EFUSE_PRIV(Adapter);
@@ -497,7 +497,7 @@ phy_BB_Config_ParaFile_Fail:
 
 int
 PHY_BBConfig8812(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	int	rtStatus = _SUCCESS;
@@ -557,7 +557,7 @@ PHY_BBConfig8812(
 
 int
 PHY_RFConfig8812(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -599,8 +599,8 @@ eqNByte(
 
 BOOLEAN
 GetU1ByteIntegerFromStringInDecimal(
-	IN		s8*	Str,
-	IN OUT	u8*	pInt
+		s8*	Str,
+		u8*	pInt
 	)
 {
 	u16 i = 0;
@@ -625,8 +625,8 @@ GetU1ByteIntegerFromStringInDecimal(
 
 static s8
 phy_GetChannelGroup(
-	IN BAND_TYPE	Band,
-	IN u8			Channel
+	BAND_TYPE	Band,
+	u8			Channel
 	)
 {
 	s8 channelGroup = -1;
@@ -676,8 +676,8 @@ phy_GetChannelGroup(
 
 u8
 phy_getPowerByRateBaseIndex(
-	IN	BAND_TYPE			Band,
-	IN	u8					Rate
+	BAND_TYPE			Band,
+	u8					Rate
 	)
 {
 	u8	index = 0;
@@ -753,7 +753,7 @@ phy_getPowerByRateBaseIndex(
 
 VOID
 PHY_InitPowerLimitTable(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -785,7 +785,7 @@ PHY_InitPowerLimitTable(
 
 VOID
 PHY_ConvertPowerLimitToPowerIndex(
-	IN	PADAPTER			Adapter
+	PADAPTER			Adapter
 	)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
@@ -1106,14 +1106,14 @@ PHY_ConvertPowerLimitToPowerIndex(
 
 VOID
 PHY_SetPowerLimitTableValue(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	s8*				Regulation,
-	IN	s8*				Band,
-	IN	s8*				Bandwidth,
-	IN	s8*				RateSection,
-	IN	s8*				RfPath,
-	IN	s8*				Channel,
-	IN	s8*				PowerLimit
+	PDM_ODM_T		pDM_Odm,
+	s8*				Regulation,
+	s8*				Band,
+	s8*				Bandwidth,
+	s8*				RateSection,
+	s8*				RfPath,
+	s8*				Channel,
+	s8*				PowerLimit
 	)
 {
 	PADAPTER			Adapter = pDM_Odm->Adapter;
@@ -1179,13 +1179,13 @@ PHY_SetPowerLimitTableValue(
 
 u8
 PHY_GetPowerLimitValue(
-	IN	PADAPTER			Adapter,
-	IN	u32					RegPwrTblSel,
-	IN	BAND_TYPE			Band,
-	IN	CHANNEL_WIDTH	Bandwidth,
-	IN	RF_PATH				RfPath,
-	IN	u8					DataRate,
-	IN	u8					Channel
+	PADAPTER			Adapter,
+	u32					RegPwrTblSel,
+	BAND_TYPE			Band,
+	CHANNEL_WIDTH	Bandwidth,
+	RF_PATH				RfPath,
+	u8					DataRate,
+	u8					Channel
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1339,10 +1339,10 @@ PHY_GetPowerLimitValue(
 //
 VOID
 PHY_StorePwrByRateIndexVhtSeries(
-	IN	PADAPTER	Adapter,
-	IN	u32			RegAddr,
-	IN	u32			BitMask,
-	IN	u32			Data
+	PADAPTER	Adapter,
+	u32			RegAddr,
+	u32			BitMask,
+	u32			Data
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1416,10 +1416,10 @@ PHY_StorePwrByRateIndexVhtSeries(
 
 VOID
 phy_ChangePGDataFromExactToRelativeValue(
-	IN	u32*	pData,
-	IN	u8		Start,
-	IN	u8		End,
-	IN	u8		BaseValue
+	u32*	pData,
+	u8		Start,
+	u8		End,
+	u8		BaseValue
 	)
 {
 	s8	i = 0;
@@ -1454,10 +1454,10 @@ phy_ChangePGDataFromExactToRelativeValue(
 }
 
 VOID phy_PreprocessVHTPGDataFromExactToRelativeValue(
-	IN	PADAPTER	Adapter,
-	IN	u32			RegAddr,
-	IN	u32			BitMask,
-	IN	u32*		pData
+	PADAPTER	Adapter,
+	u32			RegAddr,
+	u32			BitMask,
+	u32*		pData
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1591,10 +1591,10 @@ VOID phy_PreprocessVHTPGDataFromExactToRelativeValue(
 
 VOID
 phy_PreprocessPGDataFromExactToRelativeValue(
-	IN	PADAPTER	Adapter,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask,
-	IN	pu4Byte		pData
+	PADAPTER	Adapter,
+	u4Byte		RegAddr,
+	u4Byte		BitMask,
+	pu4Byte		pData
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1768,9 +1768,9 @@ phy_PreprocessPGDataFromExactToRelativeValue(
 
 VOID
 phy_StorePwrByRateIndexBase(
-	IN	PADAPTER	Adapter,
-	IN	u32			RegAddr,
-	IN	u32			Data
+	PADAPTER	Adapter,
+	u32			RegAddr,
+	u32			Data
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2065,10 +2065,10 @@ phy_StorePwrByRateIndexBase(
 
 VOID
 storePwrIndexDiffRateOffset(
-	IN	PADAPTER	Adapter,
-	IN	u32		RegAddr,
-	IN	u32		BitMask,
-	IN	u32		Data
+	PADAPTER	Adapter,
+	u32		RegAddr,
+	u32		BitMask,
+	u32		Data
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2204,9 +2204,9 @@ storePwrIndexDiffRateOffset(
 
 static u8
 phy_DbmToTxPwrIdx(
-	IN	PADAPTER		Adapter,
-	IN	WIRELESS_MODE	WirelessMode,
-	IN	int			PowerInDbm
+	PADAPTER		Adapter,
+	WIRELESS_MODE	WirelessMode,
+	int			PowerInDbm
 	)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
@@ -2262,9 +2262,9 @@ phy_DbmToTxPwrIdx(
 
 static int
 phy_TxPwrIdxToDbm(
-	IN	PADAPTER		Adapter,
-	IN	WIRELESS_MODE	WirelessMode,
-	IN	u8			TxPwrIdx
+	PADAPTER		Adapter,
+	WIRELESS_MODE	WirelessMode,
+	u8			TxPwrIdx
 	)
 {
 	int				Offset = 0;
@@ -2298,8 +2298,8 @@ phy_TxPwrIdxToDbm(
 
 VOID
 PHY_GetTxPowerLevel8812(
-	IN	PADAPTER		Adapter,
-	OUT u32*		powerlevel
+	PADAPTER		Adapter,
+	u32*		powerlevel
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2338,12 +2338,12 @@ PHY_GetTxPowerLevel8812(
 }
 
 void phy_PowerIndexCheck8812(
-	IN	PADAPTER	Adapter,
-	IN	u8			channel,
-	IN OUT u8 *		cckPowerLevel,
-	IN OUT u8 *		ofdmPowerLevel,
-	IN OUT u8 *		BW20PowerLevel,
-	IN OUT u8 *		BW40PowerLevel
+	PADAPTER	Adapter,
+	u8			channel,
+	u8 *		cckPowerLevel,
+	u8 *		ofdmPowerLevel,
+	u8 *		BW20PowerLevel,
+	u8 *		BW40PowerLevel
 	)
 {
 
@@ -2358,8 +2358,8 @@ void phy_PowerIndexCheck8812(
 
 BOOLEAN
 phy_GetChnlIndex8812A(
-	IN	u8	Channel,
-	OUT u8*	ChannelIdx
+	u8	Channel,
+	u8*	ChannelIdx
 	)
 {
 	u8	channel5G[CHANNEL_MAX_NUMBER_5G] =
@@ -2395,10 +2395,10 @@ phy_GetChnlIndex8812A(
 //
 u32
 phy_GetTxPwrByRateOffset_8812(
-	IN	PADAPTER	pAdapter,
-	IN	u8			Band,
-	IN	u8			Rf_Path,
-	IN	u8			Rate_Section
+	PADAPTER	pAdapter,
+	u8			Band,
+	u8			Rf_Path,
+	u8			Rate_Section
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
@@ -2600,8 +2600,8 @@ phy_GetTxPwrByRateOffset_8812(
 //
 VOID
 phy_TxPwrAdjInPercentage(
-	IN		PADAPTER		Adapter,
-	OUT		u8*				pTxPwrIdx)
+		PADAPTER		Adapter,
+		u8*				pTxPwrIdx)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	u8	TxPwrInPercentage = 0;
@@ -2642,11 +2642,11 @@ phy_TxPwrAdjInPercentage(
  **************************************************************************************************************/
 u32
 PHY_GetTxPowerIndex_8812A(
-	IN	PADAPTER			pAdapter,
-	IN	u8					RFPath,
-	IN	u8					Rate,
-	IN	CHANNEL_WIDTH	BandWidth,
-	IN	u8					Channel
+	PADAPTER			pAdapter,
+	u8					RFPath,
+	u8					Rate,
+	CHANNEL_WIDTH	BandWidth,
+	u8					Channel
 	)
 {
 	PHAL_DATA_TYPE		pHalData = GET_HAL_DATA(pAdapter);
@@ -2884,10 +2884,10 @@ PHY_GetTxPowerIndex_8812A(
 
 VOID
 PHY_SetTxPowerIndex_8812A(
-	IN	PADAPTER			Adapter,
-	IN	u4Byte				PowerIndex,
-	IN	u1Byte				RFPath,
-	IN	u1Byte				Rate
+	PADAPTER			Adapter,
+	u4Byte				PowerIndex,
+	u1Byte				RFPath,
+	u1Byte				Rate
 	)
 {
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(Adapter);
@@ -3069,12 +3069,12 @@ PHY_SetTxPowerIndex_8812A(
 
 VOID
 phy_SetTxPowerIndexByRateArray(
-	IN	PADAPTER			pAdapter,
-	IN	u8					RFPath,
-	IN	CHANNEL_WIDTH	BandWidth,
-	IN	u8					Channel,
-	IN	u8*					Rates,
-	IN	u8					RateArraySize
+	PADAPTER			pAdapter,
+	u8					RFPath,
+	CHANNEL_WIDTH	BandWidth,
+	u8					Channel,
+	u8*					Rates,
+	u8					RateArraySize
 	)
 {
 	u32	powerIndex = 0;
@@ -3091,13 +3091,13 @@ phy_SetTxPowerIndexByRateArray(
 
 VOID
 PHY_GetTxPowerIndexByRateArray_8812A(
-	IN	PADAPTER			pAdapter,
-	IN	u8					RFPath,
-	IN	CHANNEL_WIDTH	BandWidth,
-	IN	u8					Channel,
-	IN	u8*					Rate,
-	OUT	u8*					PowerIndex,
-	IN	u8					ArraySize
+	PADAPTER			pAdapter,
+	u8					RFPath,
+	CHANNEL_WIDTH	BandWidth,
+	u8					Channel,
+	u8*					Rate,
+	u8*					PowerIndex,
+	u8					ArraySize
 	)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(pAdapter);
@@ -3113,10 +3113,10 @@ PHY_GetTxPowerIndexByRateArray_8812A(
 
 VOID
 phy_TxPowerTrainingByPath_8812(
-	IN	PADAPTER			Adapter,
-	IN	CHANNEL_WIDTH		BandWidth,
-	IN	u8					Channel,
-	IN	u8					RfPath
+	PADAPTER			Adapter,
+	CHANNEL_WIDTH		BandWidth,
+	u8					Channel,
+	u8					RfPath
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -3155,9 +3155,9 @@ phy_TxPowerTrainingByPath_8812(
 
 VOID
 PHY_SetTxPowerLevelByPath8812(
-	IN	PADAPTER		Adapter,
-	IN	u8				channel,
-	IN	u8				path
+	PADAPTER		Adapter,
+	u8				channel,
+	u8				path
 	)
 {
 
@@ -3207,8 +3207,8 @@ PHY_SetTxPowerLevelByPath8812(
 //the new way to set tx power by rate, NByte access, here N byte shall be 4 byte(DWord) or NByte(N>4) access. by page/YP, 20121106
 VOID
 PHY_SetTxPowerLevel8812(
-	IN	PADAPTER		Adapter,
-	IN	u8				Channel
+	PADAPTER		Adapter,
+	u8				Channel
 	)
 {
 
@@ -3225,8 +3225,8 @@ PHY_SetTxPowerLevel8812(
 
 BOOLEAN
 PHY_UpdateTxPowerDbm8812(
-	IN	PADAPTER	Adapter,
-	IN	int		powerInDbm
+	PADAPTER	Adapter,
+	int		powerInDbm
 	)
 {
 	return _TRUE;
@@ -3234,9 +3234,9 @@ PHY_UpdateTxPowerDbm8812(
 
 
 u32 PHY_GetTxBBSwing_8812A(
-	IN	PADAPTER	Adapter,
-	IN	BAND_TYPE	Band,
-	IN	u8			RFPath
+	PADAPTER	Adapter,
+	BAND_TYPE	Band,
+	u8			RFPath
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(GetDefaultAdapter(Adapter));
@@ -3383,8 +3383,8 @@ u32 PHY_GetTxBBSwing_8812A(
 
 VOID
 phy_SetRFEReg8812(
-	IN PADAPTER		Adapter,
-	IN u8			Band
+	PADAPTER		Adapter,
+	u8			Band
 )
 {
 	u1Byte			u1tmp = 0;
@@ -3511,8 +3511,8 @@ phy_SetRFEReg8812(
 
 s32
 PHY_SwitchWirelessBand8812(
-	IN PADAPTER		Adapter,
-	IN u8			Band
+	PADAPTER		Adapter,
+	u8			Band
 )
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
@@ -3731,8 +3731,8 @@ PHY_SwitchWirelessBand8812(
 
 BOOLEAN
 phy_SwBand8812(
-	IN	PADAPTER	pAdapter,
-	IN	u8			channelToSW
+	PADAPTER	pAdapter,
+	u8			channelToSW
 )
 {
 	u8			u1Btmp;
@@ -3763,7 +3763,7 @@ phy_SwBand8812(
 
 u8
 phy_GetSecondaryChnl_8812(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 )
 {
 	u8					SCSettingOf40 = 0, SCSettingOf20 = 0;
@@ -3808,7 +3808,7 @@ phy_GetSecondaryChnl_8812(
 
 VOID
 phy_SetRegBW_8812(
-	IN	PADAPTER		Adapter,
+	PADAPTER		Adapter,
 	CHANNEL_WIDTH	CurrentBW
 )
 {
@@ -3840,9 +3840,9 @@ phy_SetRegBW_8812(
 
 void
 phy_FixSpur_8812A(
-	IN	PADAPTER	        pAdapter,
-	IN  CHANNEL_WIDTH    Bandwidth,
-	IN  u1Byte			    Channel
+	PADAPTER	        pAdapter,
+	CHANNEL_WIDTH    Bandwidth,
+	u1Byte			    Channel
 )
 {
 	// C cut Item12 ADC FIFO CLOCK
@@ -3886,7 +3886,7 @@ phy_FixSpur_8812A(
 
 VOID
 phy_PostSetBwMode8812(
-	IN	PADAPTER	Adapter
+	PADAPTER	Adapter
 )
 {
 	u8			SubChnlNum = 0;
@@ -3990,7 +3990,7 @@ phy_PostSetBwMode8812(
 
 //<20130207, Kordan> The variales initialized here are used in odm_LNAPowerControl().
 VOID phy_InitRssiTRSW(
-	IN	PADAPTER					pAdapter
+	PADAPTER					pAdapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -4019,7 +4019,7 @@ VOID phy_InitRssiTRSW(
 
 VOID
 phy_SwChnl8812(
-	IN	PADAPTER	pAdapter
+	PADAPTER	pAdapter
 	)
 {
 	u8	eRFPath = 0;
@@ -4116,7 +4116,7 @@ phy_SwChnl8812(
 
 VOID
 phy_SwChnlAndSetBwMode8812(
-	IN  PADAPTER		Adapter
+	PADAPTER		Adapter
 )
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
@@ -4162,14 +4162,14 @@ phy_SwChnlAndSetBwMode8812(
 
 VOID
 PHY_HandleSwChnlAndSetBW8812(
-	IN	PADAPTER			Adapter,
-	IN	BOOLEAN				bSwitchChannel,
-	IN	BOOLEAN				bSetBandWidth,
-	IN	u8					ChannelNum,
-	IN	CHANNEL_WIDTH		ChnlWidth,
-	IN	u8					ChnlOffsetOf40MHz,
-	IN	u8					ChnlOffsetOf80MHz,
-	IN	u8					CenterFrequencyIndex1
+	PADAPTER			Adapter,
+	BOOLEAN				bSwitchChannel,
+	BOOLEAN				bSetBandWidth,
+	u8					ChannelNum,
+	CHANNEL_WIDTH		ChnlWidth,
+	u8					ChnlOffsetOf40MHz,
+	u8					ChnlOffsetOf80MHz,
+	u8					CenterFrequencyIndex1
 )
 {
 	PADAPTER			pDefAdapter =  GetDefaultAdapter(Adapter);
@@ -4288,9 +4288,9 @@ PHY_HandleSwChnlAndSetBW8812(
 
 VOID
 PHY_SetBWMode8812(
-	IN	PADAPTER			Adapter,
-	IN	CHANNEL_WIDTH	Bandwidth,	// 20M or 40M
-	IN	u8					Offset		// Upper, Lower, or Don't care
+	PADAPTER			Adapter,
+	CHANNEL_WIDTH	Bandwidth,	// 20M or 40M
+	u8					Offset		// Upper, Lower, or Don't care
 )
 {
 	PHAL_DATA_TYPE		pHalData = GET_HAL_DATA(Adapter);
@@ -4304,8 +4304,8 @@ PHY_SetBWMode8812(
 
 VOID
 PHY_SwChnl8812(
-	IN	PADAPTER	Adapter,
-	IN	u8			channel
+	PADAPTER	Adapter,
+	u8			channel
 	)
 {
 	//DBG_871X("%s()===>\n",__FUNCTION__);
@@ -4317,11 +4317,11 @@ PHY_SwChnl8812(
 
 VOID
 PHY_SetSwChnlBWMode8812(
-	IN	PADAPTER			Adapter,
-	IN	u8					channel,
-	IN	CHANNEL_WIDTH		Bandwidth,
-	IN	u8					Offset40,
-	IN	u8					Offset80
+	PADAPTER			Adapter,
+	u8					channel,
+	CHANNEL_WIDTH		Bandwidth,
+	u8					Offset40,
+	u8					Offset80
 )
 {
 	//DBG_871X("%s()===>\n",__FUNCTION__);

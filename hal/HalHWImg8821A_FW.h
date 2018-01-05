@@ -28,9 +28,9 @@
 
 void
 ODM_ReadFirmware_MP_8821A_FW_AP(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 );
 
 /******************************************************************************
@@ -39,9 +39,9 @@ ODM_ReadFirmware_MP_8821A_FW_AP(
 
 void
 ODM_ReadFirmware_MP_8821A_FW_BT(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 );
 
 /******************************************************************************
@@ -50,9 +50,9 @@ ODM_ReadFirmware_MP_8821A_FW_BT(
 
 void
 ODM_ReadFirmware_MP_8821A_FW_NIC(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 );
 
 /******************************************************************************
@@ -61,9 +61,9 @@ ODM_ReadFirmware_MP_8821A_FW_NIC(
 
 void
 ODM_ReadFirmware_MP_8821A_FW_WoWLAN(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 );
 
 #endif

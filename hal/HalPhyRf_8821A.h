@@ -51,27 +51,27 @@ ODM_TxPwrTrackSetPwr8821A(
 
 void
 PHY_IQCalibrate_8821A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bReCovery
+	PADAPTER	pAdapter,
+	BOOLEAN		bReCovery
 );
 
 VOID
 PHY_LCCalibrate_8821A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 );
 
 VOID
 GetDeltaSwingTable_8821A(
-	IN	PDM_ODM_T			pDM_Odm,
-	OUT pu1Byte			*TemperatureUP_A,
-	OUT pu1Byte			*TemperatureDOWN_A,
-	OUT pu1Byte			*TemperatureUP_B,
-	OUT pu1Byte			*TemperatureDOWN_B
+	PDM_ODM_T			pDM_Odm,
+	pu1Byte			*TemperatureUP_A,
+	pu1Byte			*TemperatureDOWN_A,
+	pu1Byte			*TemperatureUP_B,
+	pu1Byte			*TemperatureDOWN_B
 );
 
 VOID PHY_SetRFPathSwitch_8821A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bMain
+	PADAPTER	pAdapter,
+	BOOLEAN		bMain
 	);
 
 

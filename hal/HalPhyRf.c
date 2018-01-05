@@ -39,8 +39,8 @@
 
 
 void ConfigureTxpowerTrack(
-	IN	PDM_ODM_T		pDM_Odm,
-	OUT	PTXPWRTRACK_CFG	pConfig
+	PDM_ODM_T		pDM_Odm,
+	PTXPWRTRACK_CFG	pConfig
 	)
 {
 	if(pDM_Odm->SupportICType==ODM_RTL8821)
@@ -59,7 +59,7 @@ void ConfigureTxpowerTrack(
 //======================================================================
 VOID
 ODM_ClearTxPowerTrackingState(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(pDM_Odm->Adapter);
@@ -94,7 +94,7 @@ ODM_ClearTxPowerTrackingState(
 
 VOID
 ODM_TXPowerTrackingCallback_ThermalMeter(
-	IN PADAPTER	Adapter
+	PADAPTER	Adapter
 	)
 {
 
@@ -420,7 +420,7 @@ ODM_TXPowerTrackingCallback_ThermalMeter(
 
 VOID
 ODM_ResetIQKResult(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 )
 {
 	u1Byte		i;

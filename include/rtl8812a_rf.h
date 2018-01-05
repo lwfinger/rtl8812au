@@ -22,25 +22,25 @@
 
 VOID
 PHY_RF6052SetBandwidth8812(
-	IN	PADAPTER				Adapter,
-	IN	CHANNEL_WIDTH		Bandwidth);
+	PADAPTER				Adapter,
+	CHANNEL_WIDTH		Bandwidth);
 
 
 int
 PHY_RF6052_Config_8812(
-	IN	PADAPTER	Adapter	);
+	PADAPTER	Adapter	);
 
 VOID
 PHY_RF6052SetCckTxPower8812(
-	IN	PADAPTER	Adapter,
-	IN	u8*			pPowerlevel);
+	PADAPTER	Adapter,
+	u8*			pPowerlevel);
 
 VOID
 PHY_RF6052SetOFDMTxPower8812(
-	IN	PADAPTER	Adapter,
-	IN	u8*			pPowerLevelOFDM,
-	IN	u8*			pPowerLevelBW20,
-	IN	u8*			pPowerLevelBW40,
-	IN	u8			Channel);
+	PADAPTER	Adapter,
+	u8*			pPowerLevelOFDM,
+	u8*			pPowerLevelBW20,
+	u8*			pPowerLevelBW40,
+	u8			Channel);
 
 #endif//__RTL8188E_RF_H__

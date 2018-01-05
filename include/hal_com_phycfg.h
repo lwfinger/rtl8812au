@@ -54,19 +54,19 @@ typedef struct _BB_REGISTER_DEFINITION{
 }BB_REGISTER_DEFINITION_T, *PBB_REGISTER_DEFINITION_T;
 
 #ifndef CONFIG_EMBEDDED_FWIMG
-int phy_ConfigMACWithParaFile(IN PADAPTER	Adapter, IN u8*	pFileName);
+int phy_ConfigMACWithParaFile(PADAPTER	Adapter, u8*	pFileName);
 
-int PHY_ConfigBBWithPowerLimitTableParaFile(IN PADAPTER	Adapter, IN s8*	pFileName);
+int PHY_ConfigBBWithPowerLimitTableParaFile(PADAPTER	Adapter, s8*	pFileName);
 
-int phy_ConfigBBWithParaFile(IN PADAPTER	Adapter, IN u8*	pFileName);
+int phy_ConfigBBWithParaFile(PADAPTER	Adapter, u8*	pFileName);
 
-int phy_ConfigBBWithPgParaFile(IN PADAPTER	Adapter, IN u8*	pFileName);
+int phy_ConfigBBWithPgParaFile(PADAPTER	Adapter, u8*	pFileName);
 
-int phy_ConfigBBWithMpParaFile(IN PADAPTER	Adapter, IN u8*	pFileName);
+int phy_ConfigBBWithMpParaFile(PADAPTER	Adapter, u8*	pFileName);
 
-int PHY_ConfigRFWithParaFile(IN	PADAPTER	Adapter, IN u8*	pFileName, IN u8	eRFPath);
+int PHY_ConfigRFWithParaFile(IN	PADAPTER	Adapter, u8*	pFileName, u8	eRFPath);
 
-int PHY_ConfigRFWithTxPwrTrackParaFile(IN PADAPTER	Adapter, IN u8*	pFileName);
+int PHY_ConfigRFWithTxPwrTrackParaFile(PADAPTER	Adapter, u8*	pFileName);
 #endif
 
 

@@ -203,8 +203,8 @@ typedef enum _LED_STRATEGY_USB	LED_STRATEGY, *PLED_STRATEGY;
 
 VOID
 LedControlUSB(
-	IN	PADAPTER		Adapter,
-	IN	LED_CTL_MODE		LedAction
+	PADAPTER		Adapter,
+	LED_CTL_MODE		LedAction
 	);
 
 struct led_priv{

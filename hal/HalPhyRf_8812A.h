@@ -35,11 +35,11 @@ void ConfigureTxpowerTrack_8812A(
 
 VOID
 GetDeltaSwingTable_8812A(
-	IN	PDM_ODM_T			pDM_Odm,
-	OUT pu1Byte			*TemperatureUP_A,
-	OUT pu1Byte			*TemperatureDOWN_A,
-	OUT pu1Byte			*TemperatureUP_B,
-	OUT pu1Byte			*TemperatureDOWN_B
+	PDM_ODM_T			pDM_Odm,
+	pu1Byte			*TemperatureUP_A,
+	pu1Byte			*TemperatureDOWN_A,
+	pu1Byte			*TemperatureUP_B,
+	pu1Byte			*TemperatureDOWN_B
 	);
 
 void DoIQK_8812A(
@@ -61,8 +61,8 @@ ODM_TxPwrTrackSetPwr8812A(
 
 void
 PHY_IQCalibrate_8812A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bReCovery
+	PADAPTER	pAdapter,
+	BOOLEAN		bReCovery
 );
 
 
@@ -71,26 +71,24 @@ PHY_IQCalibrate_8812A(
 //
 void
 PHY_LCCalibrate_8812A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 );
 
 //
 // AP calibrate
 //
 void
-PHY_APCalibrate_8812A(
-	IN	PADAPTER	pAdapter,
-							IN	s1Byte		delta);
+PHY_APCalibrate_8812A(PADAPTER	pAdapter, s1Byte delta);
 void
-PHY_DigitalPredistortion_8812A(		IN	PADAPTER	pAdapter);
+PHY_DigitalPredistortion_8812A(PADAPTER	pAdapter);
 
 VOID
 PHY_DPCalibrate_8812A(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 );
 VOID PHY_SetRFPathSwitch_8812A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bMain
+	PADAPTER	pAdapter,
+	BOOLEAN		bMain
 	);
 
 

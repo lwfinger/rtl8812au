@@ -1987,7 +1987,7 @@ SwLedBlink12(
 
 VOID
 SwLedBlink13(
-	IN PLED_USB			pLed
+	PLED_USB			pLed
 	)
 {
 	PADAPTER Adapter = pLed->padapter;
@@ -3611,8 +3611,8 @@ SwLedControlMode8(
 //page added for Belkin AC950, 20120813
 void
 SwLedControlMode9(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+	PADAPTER			Adapter,
+	LED_CTL_MODE		LedAction
 )
 {
 	struct led_priv	*ledpriv = &(Adapter->ledpriv);
@@ -4379,8 +4379,8 @@ SwLedControlMode12(
 
 VOID
 SwLedControlMode13(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+	PADAPTER			Adapter,
+	LED_CTL_MODE		LedAction
 )
 {
 	struct led_priv	*ledpriv = &(Adapter->ledpriv);

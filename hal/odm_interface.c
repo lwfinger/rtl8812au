@@ -29,8 +29,8 @@
 
 u1Byte
 ODM_Read1Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -41,8 +41,8 @@ ODM_Read1Byte(
 
 u2Byte
 ODM_Read2Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -52,8 +52,8 @@ ODM_Read2Byte(
 
 u4Byte
 ODM_Read4Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -64,9 +64,9 @@ ODM_Read4Byte(
 
 VOID
 ODM_Write1Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr,
-	IN	u1Byte			Data
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr,
+	u1Byte			Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -77,9 +77,9 @@ ODM_Write1Byte(
 
 VOID
 ODM_Write2Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr,
-	IN	u2Byte			Data
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr,
+	u2Byte			Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -90,9 +90,9 @@ ODM_Write2Byte(
 
 VOID
 ODM_Write4Byte(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u4Byte			RegAddr,
-	IN	u4Byte			Data
+	PDM_ODM_T		pDM_Odm,
+	u4Byte			RegAddr,
+	u4Byte			Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -102,10 +102,10 @@ ODM_Write4Byte(
 
 VOID
 ODM_SetMACReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask,
-	IN	u4Byte		Data
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask,
+	u4Byte		Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -115,9 +115,9 @@ ODM_SetMACReg(
 
 u4Byte
 ODM_GetMACReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -127,10 +127,10 @@ ODM_GetMACReg(
 
 VOID
 ODM_SetBBReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask,
-	IN	u4Byte		Data
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask,
+	u4Byte		Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -140,9 +140,9 @@ ODM_SetBBReg(
 
 u4Byte
 ODM_GetBBReg(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		RegAddr,
-	IN	u4Byte		BitMask
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		RegAddr,
+	u4Byte		BitMask
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -153,11 +153,11 @@ ODM_GetBBReg(
 
 VOID
 ODM_SetRFReg(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E	eRFPath,
-	IN	u4Byte				RegAddr,
-	IN	u4Byte				BitMask,
-	IN	u4Byte				Data
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	eRFPath,
+	u4Byte				RegAddr,
+	u4Byte				BitMask,
+	u4Byte				Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -168,10 +168,10 @@ ODM_SetRFReg(
 
 u4Byte
 ODM_GetRFReg(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E	eRFPath,
-	IN	u4Byte				RegAddr,
-	IN	u4Byte				BitMask
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	eRFPath,
+	u4Byte				RegAddr,
+	u4Byte				BitMask
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -184,9 +184,9 @@ ODM_GetRFReg(
 //
 VOID
 ODM_AllocateMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	OUT	PVOID		*pPtr,
-	IN	u4Byte		length
+	PDM_ODM_T	pDM_Odm,
+	PVOID		*pPtr,
+	u4Byte		length
 	)
 {
 	*pPtr = rtw_zvmalloc(length);
@@ -195,9 +195,9 @@ ODM_AllocateMemory(
 // length could be ignored, used to detect memory leakage.
 VOID
 ODM_FreeMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	OUT	PVOID		pPtr,
-	IN	u4Byte		length
+	PDM_ODM_T	pDM_Odm,
+	PVOID		pPtr,
+	u4Byte		length
 	)
 {
 	rtw_vmfree(pPtr, length);
@@ -205,20 +205,20 @@ ODM_FreeMemory(
 
 VOID
 ODM_MoveMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	OUT PVOID		pDest,
-	IN  PVOID		pSrc,
-	IN  u4Byte		Length
+	PDM_ODM_T	pDM_Odm,
+	PVOID		pDest,
+	PVOID		pSrc,
+	u4Byte		Length
 	)
 {
 	_rtw_memcpy(pDest, pSrc, Length);
 }
 
 s4Byte ODM_CompareMemory(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	PVOID           pBuf1,
-      IN	PVOID           pBuf2,
-      IN	u4Byte          length
+	PDM_ODM_T	pDM_Odm,
+	PVOID           pBuf1,
+      PVOID           pBuf2,
+      u4Byte          length
        )
 {
 	return _rtw_memcmp(pBuf1,pBuf2,length);
@@ -229,16 +229,16 @@ s4Byte ODM_CompareMemory(
 //
 VOID
 ODM_AcquireSpinLock(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	RT_SPINLOCK_TYPE	type
+	PDM_ODM_T			pDM_Odm,
+	RT_SPINLOCK_TYPE	type
 	)
 {
 }
 
 VOID
 ODM_ReleaseSpinLock(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	RT_SPINLOCK_TYPE	type
+	PDM_ODM_T			pDM_Odm,
+	RT_SPINLOCK_TYPE	type
 	)
 {
 }
@@ -248,18 +248,18 @@ ODM_ReleaseSpinLock(
 //
 VOID
 ODM_InitializeWorkItem(
-	IN	PDM_ODM_T					pDM_Odm,
-	IN	PRT_WORK_ITEM				pRtWorkItem,
-	IN	RT_WORKITEM_CALL_BACK		RtWorkItemCallback,
-	IN	PVOID						pContext,
-	IN	const char*					szID
+	PDM_ODM_T					pDM_Odm,
+	PRT_WORK_ITEM				pRtWorkItem,
+	RT_WORKITEM_CALL_BACK		RtWorkItemCallback,
+	PVOID						pContext,
+	const char*					szID
 	)
 {
 }
 
 VOID
 ODM_StartWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
@@ -267,28 +267,28 @@ ODM_StartWorkItem(
 
 VOID
 ODM_StopWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
 
 VOID
 ODM_FreeWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
 
 VOID
 ODM_ScheduleWorkItem(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
 
 VOID
 ODM_IsWorkItemScheduled(
-	IN	PRT_WORK_ITEM	pRtWorkItem
+	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
@@ -298,41 +298,41 @@ ODM_IsWorkItemScheduled(
 //
 VOID
 ODM_StallExecution(
-	IN	u4Byte	usDelay
+	u4Byte	usDelay
 	)
 {
 	rtw_udelay_os(usDelay);
 }
 
 VOID
-ODM_delay_ms(IN u4Byte	ms)
+ODM_delay_ms(u4Byte	ms)
 {
 	rtw_mdelay_os(ms);
 }
 
 VOID
-ODM_delay_us(IN u4Byte	us)
+ODM_delay_us(u4Byte	us)
 {
 	rtw_udelay_os(us);
 }
 
 VOID
-ODM_sleep_ms(IN u4Byte	ms)
+ODM_sleep_ms(u4Byte	ms)
 {
 	rtw_msleep_os(ms);
 }
 
 VOID
-ODM_sleep_us(IN u4Byte	us)
+ODM_sleep_us(u4Byte	us)
 {
 	rtw_usleep_os(us);
 }
 
 VOID
 ODM_SetTimer(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	PRT_TIMER		pTimer,
-	IN	u4Byte			msDelay
+	PDM_ODM_T		pDM_Odm,
+	PRT_TIMER		pTimer,
+	u4Byte			msDelay
 	)
 {
 	_set_timer(pTimer,msDelay ); //ms
@@ -341,11 +341,11 @@ ODM_SetTimer(
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 VOID
 ODM_InitializeTimer(
-	IN	PDM_ODM_T			pDM_Odm,
-	IN	PRT_TIMER			pTimer,
-	IN	RT_TIMER_CALL_BACK	CallBackFunc,
-	IN	PVOID				pContext,
-	IN	const char*			szID
+	PDM_ODM_T			pDM_Odm,
+	PRT_TIMER			pTimer,
+	RT_TIMER_CALL_BACK	CallBackFunc,
+	PVOID				pContext,
+	const char*			szID
 	)
 {
 	PADAPTER Adapter = pDM_Odm->Adapter;
@@ -356,8 +356,8 @@ ODM_InitializeTimer(
 
 VOID
 ODM_CancelTimer(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	PRT_TIMER		pTimer
+	PDM_ODM_T		pDM_Odm,
+	PRT_TIMER		pTimer
 	)
 {
 	_cancel_timer_ex(pTimer);
@@ -365,8 +365,8 @@ ODM_CancelTimer(
 
 VOID
 ODM_ReleaseTimer(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	PRT_TIMER		pTimer
+	PDM_ODM_T		pDM_Odm,
+	PRT_TIMER		pTimer
 	)
 {
 }
@@ -376,13 +376,13 @@ ODM_ReleaseTimer(
 //
 u4Byte
 ODM_FillH2CCmd(
-	IN	pu1Byte		pH2CBuffer,
-	IN	u4Byte		H2CBufferLen,
-	IN	u4Byte		CmdNum,
-	IN	pu4Byte		pElementID,
-	IN	pu4Byte		pCmdLen,
-	IN	pu1Byte*		pCmbBuffer,
-	IN	pu1Byte		CmdStartSeq
+	pu1Byte		pH2CBuffer,
+	u4Byte		H2CBufferLen,
+	u4Byte		CmdNum,
+	pu4Byte		pElementID,
+	pu4Byte		pCmdLen,
+	pu1Byte*		pCmbBuffer,
+	pu1Byte		CmdStartSeq
 	)
 {
 	return	TRUE;

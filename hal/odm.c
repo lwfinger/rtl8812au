@@ -381,42 +381,42 @@ unsigned int TxPwrTrk_OFDM_SwingTbl[TxPwrTrk_OFDM_SwingTbl_Len] = {
 //START------------COMMON INFO RELATED---------------//
 VOID
 odm_CommonInfoSelfInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_CommonInfoSelfUpdate(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_CmnInfoInit_Debug(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_CmnInfoHook_Debug(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_CmnInfoUpdate_Debug(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 VOID
 odm_BasicDbgMessage
 (
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 /*
 VOID
 odm_FindMinimumRSSI(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_IsLinked(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 */
 //END------------COMMON INFO RELATED---------------//
@@ -424,122 +424,122 @@ odm_IsLinked(
 //START---------------DIG---------------------------//
 VOID
 odm_FalseAlarmCounterStatistics(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DIGInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DIG(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 BOOLEAN
 odm_DigAbort(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_CCKPacketDetectionThresh(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_AdaptivityInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 );
 
 VOID
 odm_Adaptivity(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			IGI
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			IGI
 );
 //END---------------DIG---------------------------//
 
 //START-------BB POWER SAVE-----------------------//
 VOID
 odm_DynamicBBPowerSavingInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DynamicBBPowerSaving(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_1R_CCA(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 //END---------BB POWER SAVE-----------------------//
 
 VOID
 odm_RefreshRateAdaptiveMaskMP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_RefreshRateAdaptiveMaskCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_RefreshRateAdaptiveMaskAPADSL(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DynamicATCSwitch_init(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DynamicATCSwitch(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_Write_CrystalCap(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			CrystalCap
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			CrystalCap
 );
 
 VOID
 odm_DynamicTxPowerInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DynamicTxPowerRestorePowerIndex(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_DynamicTxPowerNIC(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_DynamicTxPowerSavePowerIndex(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DynamicTxPowerWritePowerIndex(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		Value);
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		Value);
 
 VOID
 odm_DynamicTxPower_92C(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_DynamicTxPower_92D(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
@@ -549,65 +549,65 @@ odm_MPT_DIGCallback(
 
 VOID
 odm_MPT_DIGWorkItemCallback(
-    IN PVOID            pContext
+    PVOID            pContext
     );
 
 VOID
 odm_RSSIMonitorInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_RSSIMonitorCheckMP(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_RSSIMonitorCheckCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 VOID
 odm_RSSIMonitorCheckAP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 
 
 VOID
 odm_RSSIMonitorCheck(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 VOID
 odm_DynamicTxPower(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_DynamicTxPowerAP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 
 VOID
 odm_SwAntDivInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_SwAntDivInit_NIC(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_SwAntDivChkAntSwitch(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			Step
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			Step
 	);
 
 VOID
 odm_SwAntDivChkAntSwitchNIC(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte		Step
+		PDM_ODM_T		pDM_Odm,
+		u1Byte		Step
 	);
 
 
@@ -615,27 +615,27 @@ VOID odm_SwAntDivChkAntSwitchCallback(void *FunctionContext);
 
 VOID
 odm_GlobalAdapterCheck(
-	IN		VOID
+		VOID
 	);
 
 VOID
 odm_RefreshBasicRateMask(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_RefreshRateAdaptiveMask(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 ODM_TXPowerTrackingCheck(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 VOID
 odm_TXPowerTrackingCheckAP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 
@@ -646,43 +646,43 @@ odm_TXPowerTrackingCheckAP(
 
 VOID
 odm_RateAdaptiveMaskInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_TXPowerTrackingThermalMeterInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 
 VOID
 odm_TXPowerTrackingInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_TXPowerTrackingCheckMP(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 
 VOID
 odm_TXPowerTrackingCheckCE(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 VOID
 odm_EdcaTurboCheck(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 VOID
 ODM_EdcaTurboInit(
-	IN	PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 );
 
 VOID
 odm_EdcaTurboCheckCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	);
 
 #define		RxDefaultAnt1		0x65a9
@@ -690,35 +690,35 @@ odm_EdcaTurboCheckCE(
 
 VOID
 odm_InitHybridAntDiv(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	);
 
 BOOLEAN
 odm_StaDefAntSel(
-	IN PDM_ODM_T	pDM_Odm,
-	IN u4Byte		OFDM_Ant1_Cnt,
-	IN u4Byte		OFDM_Ant2_Cnt,
-	IN u4Byte		CCK_Ant1_Cnt,
-	IN u4Byte		CCK_Ant2_Cnt,
-	OUT u1Byte		*pDefAnt
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		OFDM_Ant1_Cnt,
+	u4Byte		OFDM_Ant2_Cnt,
+	u4Byte		CCK_Ant1_Cnt,
+	u4Byte		CCK_Ant2_Cnt,
+	u1Byte		*pDefAnt
 	);
 
 VOID
 odm_SetRxIdleAnt(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte	Ant,
-	IN   BOOLEAN   bDualPath
+	PDM_ODM_T	pDM_Odm,
+	u1Byte	Ant,
+	BOOLEAN   bDualPath
 );
 
 
 
 VOID
 odm_HwAntDiv(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 );
 
-VOID	odm_PathDiversityInit(IN	PDM_ODM_T	pDM_Odm);
-VOID	odm_PathDiversity(	IN	PDM_ODM_T	pDM_Odm);
+VOID	odm_PathDiversityInit(PDM_ODM_T	pDM_Odm);
+VOID	odm_PathDiversity(	PDM_ODM_T	pDM_Odm);
 
 //============================================================
 //3 Export Interface
@@ -729,7 +729,7 @@ VOID	odm_PathDiversity(	IN	PDM_ODM_T	pDM_Odm);
 //
 VOID
 ODM_DMInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 
@@ -777,7 +777,7 @@ ODM_DMInit(
 //
 VOID
 ODM_DMWatchdog(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	//odm_CmnInfoHook_Debug(pDM_Odm);
@@ -895,9 +895,9 @@ ODM_DMWatchdog(
 //
 VOID
 ODM_CmnInfoInit(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		ODM_CMNINFO_E	CmnInfo,
-	IN		u4Byte			Value
+		PDM_ODM_T		pDM_Odm,
+		ODM_CMNINFO_E	CmnInfo,
+		u4Byte			Value
 	)
 {
 	//ODM_RT_TRACE(pDM_Odm,);
@@ -999,9 +999,9 @@ ODM_CmnInfoInit(
 
 VOID
 ODM_CmnInfoHook(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		ODM_CMNINFO_E	CmnInfo,
-	IN		PVOID			pValue
+		PDM_ODM_T		pDM_Odm,
+		ODM_CMNINFO_E	CmnInfo,
+		PVOID			pValue
 	)
 {
 	//
@@ -1130,10 +1130,10 @@ ODM_CmnInfoHook(
 
 VOID
 ODM_CmnInfoPtrArrayHook(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		ODM_CMNINFO_E	CmnInfo,
-	IN		u2Byte			Index,
-	IN		PVOID			pValue
+		PDM_ODM_T		pDM_Odm,
+		ODM_CMNINFO_E	CmnInfo,
+		u2Byte			Index,
+		PVOID			pValue
 	)
 {
 	//
@@ -1161,9 +1161,9 @@ ODM_CmnInfoPtrArrayHook(
 //
 VOID
 ODM_CmnInfoUpdate(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u4Byte			CmnInfo,
-	IN		u8Byte			Value
+		PDM_ODM_T		pDM_Odm,
+		u4Byte			CmnInfo,
+		u8Byte			Value
 	)
 {
 	//
@@ -1277,7 +1277,7 @@ ODM_CmnInfoUpdate(
 
 VOID
 odm_CommonInfoSelfInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pDM_Odm->bCckHighPower = (BOOLEAN) ODM_GetBBReg(pDM_Odm, ODM_REG(CCK_RPT_FORMAT,pDM_Odm), ODM_BIT(CCK_RPT_FORMAT,pDM_Odm));
@@ -1308,7 +1308,7 @@ odm_CommonInfoSelfInit(
 
 VOID
 odm_CommonInfoSelfUpdate(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	u1Byte	EntryCnt=0;
@@ -1339,7 +1339,7 @@ odm_CommonInfoSelfUpdate(
 
 VOID
 odm_CmnInfoInit_Debug(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	ODM_RT_TRACE(pDM_Odm,ODM_COMP_COMMON, ODM_DBG_LOUD, ("odm_CmnInfoInit_Debug==>\n"));
@@ -1363,7 +1363,7 @@ odm_CmnInfoInit_Debug(
 
 VOID
 odm_CmnInfoHook_Debug(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	ODM_RT_TRACE(pDM_Odm,ODM_COMP_COMMON, ODM_DBG_LOUD, ("odm_CmnInfoHook_Debug==>\n"));
@@ -1397,7 +1397,7 @@ odm_CmnInfoHook_Debug(
 
 VOID
 odm_CmnInfoUpdate_Debug(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	ODM_RT_TRACE(pDM_Odm,ODM_COMP_COMMON, ODM_DBG_LOUD, ("odm_CmnInfoUpdate_Debug==>\n"));
@@ -1410,7 +1410,7 @@ odm_CmnInfoUpdate_Debug(
 VOID
 odm_BasicDbgMessage
 (
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	PFALSE_ALARM_STATISTICS FalseAlmCnt = &(pDM_Odm->FalseAlmCnt);
@@ -1446,9 +1446,9 @@ odm_BasicDbgMessage
  *---------------------------------------------------------------------------*/
 VOID
 ODM_ChangeDynamicInitGainThresh(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		DM_Type,
-	IN	u4Byte		DM_Value
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		DM_Type,
+	u4Byte		DM_Value
 	)
 {
 	pDIG_T	pDM_DigTable = &pDM_Odm->DM_DigTable;
@@ -1507,7 +1507,7 @@ int getIGIForDiff(int value_IGI)
 
 VOID
 odm_AdaptivityInit(
-IN PDM_ODM_T pDM_Odm
+PDM_ODM_T pDM_Odm
 )
 {
 	PADAPTER		pAdapter	= pDM_Odm->Adapter;
@@ -1538,7 +1538,7 @@ IN PDM_ODM_T pDM_Odm
 
 VOID
 odm_DynamicATCSwitch_init(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 )
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -1547,7 +1547,7 @@ odm_DynamicATCSwitch_init(
 
 VOID
 odm_DynamicATCSwitch(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 )
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -1561,8 +1561,8 @@ odm_DynamicATCSwitch(
 
 VOID
 odm_Write_CrystalCap(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			CrystalCap
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			CrystalCap
 )
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -1603,8 +1603,8 @@ odm_Write_CrystalCap(
 
 VOID
 odm_Adaptivity(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			IGI
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			IGI
 )
 {
 	s4Byte TH_H_dmc, TH_L_dmc;
@@ -1732,8 +1732,8 @@ odm_Adaptivity(
 
 VOID
 ODM_Write_DIG(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u1Byte			CurrentIGI
+	PDM_ODM_T		pDM_Odm,
+	u1Byte			CurrentIGI
 	)
 {
 	pDIG_T	pDM_DigTable = &pDM_Odm->DM_DigTable;
@@ -1787,7 +1787,7 @@ ODM_Write_DIG(
 
 VOID
 odm_DIGbyRSSI_LPS(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	//PADAPTER					pAdapter =pDM_Odm->Adapter;
@@ -1831,7 +1831,7 @@ odm_DIGbyRSSI_LPS(
 
 VOID
 odm_DIGInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pDIG_T	pDM_DigTable = &pDM_Odm->DM_DigTable;
@@ -1879,14 +1879,14 @@ odm_DIGInit(
 
 VOID
 odm_DigForBtHsMode(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
 
 VOID
 odm_DIG(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pDIG_T						pDM_DigTable = &pDM_Odm->DM_DigTable;
@@ -2320,7 +2320,7 @@ odm_DIG(
 
 BOOLEAN
 odm_DigAbort(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	return	FALSE;
@@ -2332,7 +2332,7 @@ odm_DigAbort(
 
 VOID
 odm_FalseAlarmCounterStatistics(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	u4Byte ret_value;
@@ -2446,7 +2446,7 @@ odm_FalseAlarmCounterStatistics(
 
 VOID
 odm_CCKPacketDetectionThresh(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 
@@ -2485,8 +2485,8 @@ odm_CCKPacketDetectionThresh(
 
 VOID
 ODM_Write_CCK_CCA_Thres(
-	IN	PDM_ODM_T		pDM_Odm,
-	IN	u1Byte			CurCCK_CCAThres
+	PDM_ODM_T		pDM_Odm,
+	u1Byte			CurCCK_CCAThres
 	)
 {
 	pDIG_T	pDM_DigTable = &pDM_Odm->DM_DigTable;
@@ -2505,7 +2505,7 @@ ODM_Write_CCK_CCA_Thres(
 //3============================================================
 VOID
 odm_DynamicBBPowerSavingInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pPS_T	pDM_PSTable = &pDM_Odm->DM_PSTable;
@@ -2521,7 +2521,7 @@ odm_DynamicBBPowerSavingInit(
 
 VOID
 odm_DynamicBBPowerSaving(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	if (pDM_Odm->SupportICType != ODM_RTL8723A)
@@ -2548,7 +2548,7 @@ odm_DynamicBBPowerSaving(
 
 VOID
 odm_1R_CCA(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	pPS_T	pDM_PSTable = &pDM_Odm->DM_PSTable;
@@ -2602,8 +2602,8 @@ odm_1R_CCA(
 
 void
 ODM_RF_Saving(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		bForceInNormal
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		bForceInNormal
 	)
 {
 	pPS_T	pDM_PSTable = &pDM_Odm->DM_PSTable;
@@ -2696,7 +2696,7 @@ ODM_RF_Saving(
 
 VOID
 odm_RateAdaptiveMaskInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	PODM_RATE_ADAPTIVE	pOdmRA = &pDM_Odm->RateAdaptive;
@@ -2715,10 +2715,10 @@ odm_RateAdaptiveMaskInit(
 }
 
 u4Byte ODM_Get_Rate_Bitmap(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		macid,
-	IN	u4Byte		ra_mask,
-	IN	u1Byte		rssi_level)
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		macid,
+	u4Byte		ra_mask,
+	u1Byte		rssi_level)
 {
 	PSTA_INFO_T	pEntry;
 	u4Byte	rate_bitmap = 0;
@@ -2865,7 +2865,7 @@ u4Byte ODM_Get_Rate_Bitmap(
 
 VOID
 odm_RefreshBasicRateMask(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
@@ -2888,7 +2888,7 @@ odm_RefreshBasicRateMask(
  *---------------------------------------------------------------------------*/
 VOID
 odm_RefreshRateAdaptiveMask(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 
@@ -2923,14 +2923,14 @@ odm_RefreshRateAdaptiveMask(
 
 VOID
 odm_RefreshRateAdaptiveMaskMP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
 
 VOID
 odm_RefreshRateAdaptiveMaskCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	u1Byte	i;
@@ -2981,7 +2981,7 @@ odm_RefreshRateAdaptiveMaskCE(
 
 VOID
 odm_RefreshRateAdaptiveMaskAPADSL(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
@@ -2990,10 +2990,10 @@ odm_RefreshRateAdaptiveMaskAPADSL(
 // - TRUE: RATRState is changed.
 BOOLEAN
 ODM_RAStateCheck(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		s4Byte			RSSI,
-	IN		BOOLEAN			bForceUpdate,
-	OUT		pu1Byte			pRATRState
+		PDM_ODM_T		pDM_Odm,
+		s4Byte			RSSI,
+		BOOLEAN			bForceUpdate,
+		pu1Byte			pRATRState
 	)
 {
 	PODM_RATE_ADAPTIVE pRA = &pDM_Odm->RateAdaptive;
@@ -3053,7 +3053,7 @@ ODM_RAStateCheck(
 
 VOID
 odm_DynamicTxPowerInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	PADAPTER	Adapter = pDM_Odm->Adapter;
@@ -3067,7 +3067,7 @@ odm_DynamicTxPowerInit(
 
 VOID
 odm_DynamicTxPowerSavePowerIndex(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	u1Byte		index;
@@ -3082,7 +3082,7 @@ odm_DynamicTxPowerSavePowerIndex(
 
 VOID
 odm_DynamicTxPowerRestorePowerIndex(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	u1Byte			index;
@@ -3097,8 +3097,8 @@ odm_DynamicTxPowerRestorePowerIndex(
 
 VOID
 odm_DynamicTxPowerWritePowerIndex(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		Value)
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		Value)
 {
 
 	u1Byte			index;
@@ -3113,7 +3113,7 @@ odm_DynamicTxPowerWritePowerIndex(
 
 VOID
 odm_DynamicTxPower(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	//
@@ -3157,7 +3157,7 @@ odm_DynamicTxPower(
 
 VOID
 odm_DynamicTxPowerNIC(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	if (!(pDM_Odm->SupportAbility & ODM_BB_DYNAMIC_TXPWR))
@@ -3184,7 +3184,7 @@ odm_DynamicTxPowerNIC(
 
 VOID
 odm_DynamicTxPowerAP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 
 	)
 {
@@ -3193,7 +3193,7 @@ odm_DynamicTxPowerAP(
 
 VOID
 odm_DynamicTxPower_92C(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 }
@@ -3201,7 +3201,7 @@ odm_DynamicTxPower_92C(
 
 VOID
 odm_DynamicTxPower_92D(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 }
@@ -3212,7 +3212,7 @@ odm_DynamicTxPower_92D(
 
 VOID
 odm_RSSIDumpToRegister(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 }
@@ -3220,14 +3220,14 @@ odm_RSSIDumpToRegister(
 
 VOID
 odm_RSSIMonitorInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 }
 
 VOID
 odm_RSSIMonitorCheck(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	//
@@ -3267,7 +3267,7 @@ odm_RSSIMonitorCheck(
 
 VOID
 odm_RSSIMonitorCheckMP(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 }
@@ -3277,14 +3277,14 @@ odm_RSSIMonitorCheckMP(
 //
 static VOID
 FindMinimumRSSI_Dmsp(
-	IN	PADAPTER	pAdapter
+	PADAPTER	pAdapter
 )
 {
 }
 
 static void
 FindMinimumRSSI(
-IN	PADAPTER	pAdapter
+PADAPTER	pAdapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -3310,7 +3310,7 @@ IN	PADAPTER	pAdapter
 
 VOID
 odm_RSSIMonitorCheckCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	PADAPTER	Adapter = pDM_Odm->Adapter;
@@ -3407,14 +3407,14 @@ odm_RSSIMonitorCheckCE(
 
 VOID
 odm_RSSIMonitorCheckAP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
 
 VOID
 ODM_InitAllTimers(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 #if(defined(CONFIG_SW_ANTENNA_DIVERSITY))
@@ -3425,7 +3425,7 @@ ODM_InitAllTimers(
 
 VOID
 ODM_CancelAllTimers(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 #if(defined(CONFIG_SW_ANTENNA_DIVERSITY))
@@ -3435,7 +3435,7 @@ ODM_CancelAllTimers(
 
 VOID
 ODM_ReleaseAllTimers(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	ODM_ReleaseTimer(pDM_Odm,&pDM_Odm->DM_SWAT_Table.SwAntennaSwitchTimer);
@@ -3447,7 +3447,7 @@ ODM_ReleaseAllTimers(
 
 VOID
 odm_TXPowerTrackingInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	odm_TXPowerTrackingThermalMeterInit(pDM_Odm);
@@ -3455,7 +3455,7 @@ odm_TXPowerTrackingInit(
 
 u1Byte
 getSwingIndex(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -3474,7 +3474,7 @@ getSwingIndex(
 
 VOID
 odm_TXPowerTrackingThermalMeterInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	u1Byte			p = 0;
@@ -3522,7 +3522,7 @@ odm_TXPowerTrackingThermalMeterInit(
 
 VOID
 ODM_TXPowerTrackingCheck(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	//
@@ -3561,7 +3561,7 @@ ODM_TXPowerTrackingCheck(
 
 VOID
 odm_TXPowerTrackingCheckCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	PADAPTER	Adapter = pDM_Odm->Adapter;
@@ -3585,14 +3585,14 @@ odm_TXPowerTrackingCheckCE(
 
 VOID
 odm_TXPowerTrackingCheckMP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
 
 VOID
 odm_TXPowerTrackingCheckAP(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 }
@@ -3603,7 +3603,7 @@ odm_TXPowerTrackingCheckAP(
 #if(defined(CONFIG_SW_ANTENNA_DIVERSITY))
 VOID
 odm_SwAntDivInit(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	odm_SwAntDivInit_NIC(pDM_Odm);
@@ -3611,7 +3611,7 @@ odm_SwAntDivInit(
 
 VOID
 odm_SwAntDivInit_NIC(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pSWAT_T		pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -3648,7 +3648,7 @@ odm_SwAntDivInit_NIC(
 //
 VOID
 ODM_SwAntDivResetBeforeLink(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 
@@ -3664,7 +3664,7 @@ ODM_SwAntDivResetBeforeLink(
 //
 VOID
 ODM_SwAntDivRestAfterLink(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pSWAT_T		pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -3679,9 +3679,9 @@ ODM_SwAntDivRestAfterLink(
 
 VOID
 ODM_SwAntDivChkPerPktRssi(
-	IN PDM_ODM_T	pDM_Odm,
-	IN u1Byte		StationID,
-	IN PODM_PHY_INFO_T pPhyInfo
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		StationID,
+	PODM_PHY_INFO_T pPhyInfo
 	)
 {
 	SWAT_T		*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -3731,8 +3731,8 @@ ODM_SwAntDivChkPerPktRssi(
 //
 VOID
 odm_SwAntDivChkAntSwitch(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			Step
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			Step
 	)
 {
 	//
@@ -3778,16 +3778,16 @@ odm_SwAntDivChkAntSwitch(
 
 VOID
 ODM_SetAntenna(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte		Antenna)
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		Antenna)
 {
 	ODM_SetBBReg(pDM_Odm, 0x860, BIT8|BIT9, Antenna);
 }
 
 VOID
 odm_SwAntDivChkAntSwitchNIC(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte		Step
+		PDM_ODM_T		pDM_Odm,
+		u1Byte		Step
 	)
 {
 }
@@ -3807,18 +3807,18 @@ VOID odm_SwAntDivChkAntSwitchCallback(void *FunctionContext)
 
 #else //#if(defined(CONFIG_SW_ANTENNA_DIVERSITY))
 
-VOID odm_SwAntDivInit(	IN		PDM_ODM_T		pDM_Odm	) {}
+VOID odm_SwAntDivInit(		PDM_ODM_T		pDM_Odm	) {}
 VOID ODM_SwAntDivChkPerPktRssi(
-	IN PDM_ODM_T	pDM_Odm,
-	IN u1Byte		StationID,
-	IN PODM_PHY_INFO_T pPhyInfo
+	PDM_ODM_T	pDM_Odm,
+	u1Byte		StationID,
+	PODM_PHY_INFO_T pPhyInfo
 	) {}
 VOID odm_SwAntDivChkAntSwitch(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			Step
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			Step
 	) {}
-VOID ODM_SwAntDivResetBeforeLink(	IN		PDM_ODM_T		pDM_Odm	){}
-VOID ODM_SwAntDivRestAfterLink(	IN		PDM_ODM_T		pDM_Odm	){}
+VOID ODM_SwAntDivResetBeforeLink(		PDM_ODM_T		pDM_Odm	){}
+VOID ODM_SwAntDivRestAfterLink(		PDM_ODM_T		pDM_Odm	){}
 VOID odm_SwAntDivChkAntSwitchCallback(void *FunctionContext){}
 
 #endif //#if(defined(CONFIG_SW_ANTENNA_DIVERSITY))
@@ -3830,7 +3830,7 @@ VOID odm_SwAntDivChkAntSwitchCallback(void *FunctionContext){}
 #if(defined(CONFIG_HW_ANTENNA_DIVERSITY))
 VOID
 odm_InitHybridAntDiv_88C_92D(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 
@@ -3899,7 +3899,7 @@ odm_InitHybridAntDiv_88C_92D(
 
 VOID
 odm_InitHybridAntDiv(
-	IN PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 	)
 {
 	if(!(pDM_Odm->SupportAbility & ODM_BB_ANT_DIV))
@@ -3911,12 +3911,12 @@ odm_InitHybridAntDiv(
 
 BOOLEAN
 odm_StaDefAntSel(
-	IN PDM_ODM_T	pDM_Odm,
-	IN u4Byte		OFDM_Ant1_Cnt,
-	IN u4Byte		OFDM_Ant2_Cnt,
-	IN u4Byte		CCK_Ant1_Cnt,
-	IN u4Byte		CCK_Ant2_Cnt,
-	OUT u1Byte		*pDefAnt
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		OFDM_Ant1_Cnt,
+	u4Byte		OFDM_Ant2_Cnt,
+	u4Byte		CCK_Ant1_Cnt,
+	u4Byte		CCK_Ant2_Cnt,
+	u1Byte		*pDefAnt
 
 	)
 {
@@ -3972,9 +3972,9 @@ odm_StaDefAntSel(
 
 VOID
 odm_SetRxIdleAnt(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u1Byte	Ant,
-	IN   BOOLEAN   bDualPath
+	PDM_ODM_T	pDM_Odm,
+	u1Byte	Ant,
+	BOOLEAN   bDualPath
 )
 {
 	SWAT_T			*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -4006,10 +4006,10 @@ odm_SetRxIdleAnt(
 
 VOID
 ODM_AntselStatistics_88C(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			MacId,
-	IN		u4Byte			PWDBAll,
-	IN		BOOLEAN			isCCKrate
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			MacId,
+		u4Byte			PWDBAll,
+		BOOLEAN			isCCKrate
 )
 {
 	SWAT_T			*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -4042,14 +4042,14 @@ ODM_AntselStatistics_88C(
 
 VOID
 ODM_SetTxAntByTxInfo_88C_92D(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 )
 {
 }
 
 VOID
 odm_HwAntDiv_92C_92D(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 )
 {
 	SWAT_T			*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -4125,7 +4125,7 @@ odm_HwAntDiv_92C_92D(
 
 VOID
 odm_HwAntDiv(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 )
 {
 
@@ -4143,9 +4143,9 @@ odm_HwAntDiv(
 
 #else //#if(defined(CONFIG_HW_ANTENNA_DIVERSITY))
 
-VOID odm_InitHybridAntDiv(	IN PDM_ODM_T	pDM_Odm		){}
-VOID odm_HwAntDiv(	IN	PDM_ODM_T	pDM_Odm){}
-VOID ODM_SetTxAntByTxInfo_88C_92D(	IN		PDM_ODM_T		pDM_Odm){ }
+VOID odm_InitHybridAntDiv(PDM_ODM_T	pDM_Odm		){}
+VOID odm_HwAntDiv(	PDM_ODM_T	pDM_Odm){}
+VOID ODM_SetTxAntByTxInfo_88C_92D(PDM_ODM_T		pDM_Odm){ }
 
 #endif //#if(defined(CONFIG_HW_ANTENNA_DIVERSITY))
 
@@ -4156,7 +4156,7 @@ VOID ODM_SetTxAntByTxInfo_88C_92D(	IN		PDM_ODM_T		pDM_Odm){ }
 //============================================================
 VOID
 ODM_EdcaTurboInit(
-	IN    PDM_ODM_T		pDM_Odm)
+	PDM_ODM_T		pDM_Odm)
 {
 
 	PADAPTER	Adapter = pDM_Odm->Adapter;
@@ -4174,7 +4174,7 @@ ODM_EdcaTurboInit(
 
 VOID
 odm_EdcaTurboCheck(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	//
@@ -4208,7 +4208,7 @@ odm_EdcaTurboCheck(
 
 VOID
 odm_EdcaTurboCheckCE(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	PADAPTER		       Adapter = pDM_Odm->Adapter;
@@ -4377,7 +4377,7 @@ dm_CheckEdcaTurbo_EXIT:
 
 u4Byte
 GetPSDData(
-	IN PDM_ODM_T	pDM_Odm,
+	PDM_ODM_T	pDM_Odm,
 	unsigned int	point,
 	u1Byte initial_gain_psd)
 {
@@ -4449,7 +4449,7 @@ ConvertTo_dB(
 
 VOID
 odm_PathDiversityInit(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 )
 {
 	if(!(pDM_Odm->SupportAbility & ODM_BB_PATH_DIV))
@@ -4461,7 +4461,7 @@ odm_PathDiversityInit(
 
 VOID
 odm_PathDiversity(
-	IN	PDM_ODM_T	pDM_Odm
+	PDM_ODM_T	pDM_Odm
 )
 {
 	if(!(pDM_Odm->SupportAbility & ODM_BB_PATH_DIV))
@@ -4473,10 +4473,10 @@ odm_PathDiversity(
 
 VOID
 odm_PHY_SaveAFERegisters(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	pu4Byte		AFEReg,
-	IN	pu4Byte		AFEBackup,
-	IN	u4Byte		RegisterNum
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		AFEReg,
+	pu4Byte		AFEBackup,
+	u4Byte		RegisterNum
 	)
 {
 	u4Byte	i;
@@ -4489,10 +4489,10 @@ odm_PHY_SaveAFERegisters(
 
 VOID
 odm_PHY_ReloadAFERegisters(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	pu4Byte		AFEReg,
-	IN	pu4Byte		AFEBackup,
-	IN	u4Byte		RegiesterNum
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		AFEReg,
+	pu4Byte		AFEBackup,
+	u4Byte		RegiesterNum
 	)
 {
 	u4Byte	i;
@@ -4513,7 +4513,7 @@ odm_PHY_ReloadAFERegisters(
 //
 VOID
 ODM_SingleDualAntennaDefaultSetting(
-	IN		PDM_ODM_T		pDM_Odm
+		PDM_ODM_T		pDM_Odm
 	)
 {
 	pSWAT_T		pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -4533,8 +4533,8 @@ ODM_SingleDualAntennaDefaultSetting(
 //
 BOOLEAN
 ODM_SingleDualAntennaDetection(
-	IN		PDM_ODM_T		pDM_Odm,
-	IN		u1Byte			mode
+		PDM_ODM_T		pDM_Odm,
+		u1Byte			mode
 	)
 {
 	PADAPTER	pAdapter	 =  pDM_Odm->Adapter;

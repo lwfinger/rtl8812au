@@ -270,11 +270,11 @@ ODM_TxPwrTrackSetPwr8821A(
 
 VOID
 GetDeltaSwingTable_8821A(
-	IN	PDM_ODM_T			pDM_Odm,
-	OUT pu1Byte			*TemperatureUP_A,
-	OUT pu1Byte			*TemperatureDOWN_A,
-	OUT pu1Byte			*TemperatureUP_B,
-	OUT pu1Byte			*TemperatureDOWN_B
+	PDM_ODM_T			pDM_Odm,
+	pu1Byte			*TemperatureUP_A,
+	pu1Byte			*TemperatureDOWN_A,
+	pu1Byte			*TemperatureUP_B,
+	pu1Byte			*TemperatureDOWN_B
 	)
 {
     PADAPTER        Adapter		 = pDM_Odm->Adapter;
@@ -344,10 +344,10 @@ void ConfigureTxpowerTrack_8821A(
 #define IQK_DELAY_TIME		1		//ms
 
 void _IQK_RX_FillIQC_8821A(
-	IN PDM_ODM_T			pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E	Path,
-	IN unsigned int			RX_X,
-	IN unsigned int			RX_Y
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	Path,
+	unsigned int			RX_X,
+	unsigned int			RX_Y
 	)
 {
 	switch (Path) {
@@ -366,10 +366,10 @@ void _IQK_RX_FillIQC_8821A(
 }
 
 void _IQK_TX_FillIQC_8821A(
-	IN PDM_ODM_T			pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E	Path,
-	IN unsigned int			TX_X,
-	IN unsigned int			TX_Y
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	Path,
+	unsigned int			TX_X,
+	unsigned int			TX_Y
 	)
 {
 	switch (Path) {
@@ -391,10 +391,10 @@ void _IQK_TX_FillIQC_8821A(
 }
 
 void _IQK_BackupMacBB_8821A(
-	IN PDM_ODM_T	pDM_Odm,
-	IN pu4Byte		MACBB_backup,
-	IN pu4Byte		Backup_MACBB_REG,
-	IN u4Byte		MACBB_NUM
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		MACBB_backup,
+	pu4Byte		Backup_MACBB_REG,
+	u4Byte		MACBB_NUM
 	)
 {
 	u4Byte i;
@@ -407,11 +407,11 @@ void _IQK_BackupMacBB_8821A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupMacBB Success!!!!\n"));
 }
 void _IQK_BackupRF_8821A(
-	IN PDM_ODM_T	pDM_Odm,
-	IN pu4Byte		RFA_backup,
-	IN pu4Byte		RFB_backup,
-	IN pu4Byte		Backup_RF_REG,
-	IN u4Byte		RF_NUM
+	PDM_ODM_T	pDM_Odm,
+	pu4Byte		RFA_backup,
+	pu4Byte		RFB_backup,
+	pu4Byte		Backup_RF_REG,
+	u4Byte		RF_NUM
 	)
 {
 
@@ -424,10 +424,10 @@ void _IQK_BackupRF_8821A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupRF Success!!!!\n"));
 }
 void _IQK_BackupAFE_8821A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN pu4Byte		AFE_backup,
-	IN pu4Byte		Backup_AFE_REG,
-	IN u4Byte		AFE_NUM
+	PDM_ODM_T		pDM_Odm,
+	pu4Byte		AFE_backup,
+	pu4Byte		Backup_AFE_REG,
+	u4Byte		AFE_NUM
 	)
 {
 	u4Byte i;
@@ -439,10 +439,10 @@ void _IQK_BackupAFE_8821A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupAFE Success!!!!\n"));
 }
 void _IQK_RestoreMacBB_8821A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN pu4Byte		MACBB_backup,
-	IN pu4Byte		Backup_MACBB_REG,
-	IN u4Byte		MACBB_NUM
+	PDM_ODM_T		pDM_Odm,
+	pu4Byte		MACBB_backup,
+	pu4Byte		Backup_MACBB_REG,
+	u4Byte		MACBB_NUM
 	)
 {
 	u4Byte i;
@@ -454,11 +454,11 @@ void _IQK_RestoreMacBB_8821A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RestoreMacBB Success!!!!\n"));
 }
 void _IQK_RestoreRF_8821A(
-	IN PDM_ODM_T			pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E	Path,
-	IN pu4Byte			Backup_RF_REG,
-	IN pu4Byte			RF_backup,
-	IN u4Byte			RF_REG_NUM
+	PDM_ODM_T			pDM_Odm,
+	ODM_RF_RADIO_PATH_E	Path,
+	pu4Byte			Backup_RF_REG,
+	pu4Byte			RF_backup,
+	u4Byte			RF_REG_NUM
 	)
 {
 	u4Byte i;
@@ -478,10 +478,10 @@ void _IQK_RestoreRF_8821A(
 	}
 }
 void _IQK_RestoreAFE_8821A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN pu4Byte		AFE_backup,
-	IN pu4Byte		Backup_AFE_REG,
-	IN u4Byte		AFE_NUM
+	PDM_ODM_T		pDM_Odm,
+	pu4Byte		AFE_backup,
+	pu4Byte		Backup_AFE_REG,
+	u4Byte		AFE_NUM
 	)
 {
 	u4Byte i;
@@ -501,7 +501,7 @@ void _IQK_RestoreAFE_8821A(
 
 
 void _IQK_ConfigureMAC_8821A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 	// ========MAC register setting========
@@ -517,8 +517,8 @@ void _IQK_ConfigureMAC_8821A(
 #define cal_num 3
 
 void _IQK_Tx_8821A(
-	IN PDM_ODM_T		pDM_Odm,
-	IN ODM_RF_RADIO_PATH_E Path
+	PDM_ODM_T		pDM_Odm,
+	ODM_RF_RADIO_PATH_E Path
 	)
 {
 	u4Byte		TX_fail, RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
@@ -1244,7 +1244,7 @@ void _IQK_Tx_8821A(
 
 VOID
 phy_IQCalibrate_By_FW_8821A(
-	IN	PADAPTER	pAdapter
+	PADAPTER	pAdapter
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -1280,7 +1280,7 @@ phy_IQCalibrate_By_FW_8821A(
 
 VOID
 phy_IQCalibrate_8821A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 	u4Byte	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
@@ -1320,8 +1320,8 @@ phy_IQCalibrate_8821A(
 
 VOID
 PHY_IQCalibrate_8821A(
-	IN	PADAPTER	pAdapter,
-	IN	BOOLEAN		bReCovery
+	PADAPTER	pAdapter,
+	BOOLEAN		bReCovery
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -1343,7 +1343,7 @@ PHY_IQCalibrate_8821A(
 
 VOID
 PHY_LCCalibrate_8821A(
-	IN PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 	PHY_LCCalibrate_8812A(pDM_Odm);

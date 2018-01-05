@@ -413,8 +413,8 @@ void rtl8812a_fill_txdesc_phy(PADAPTER padapter, struct pkt_attrib *pattrib, u8 
 
 u8
 BWMapping_8812(
-	IN	PADAPTER		Adapter,
-	IN	struct pkt_attrib	*pattrib
+	PADAPTER		Adapter,
+	struct pkt_attrib	*pattrib
 )
 {
 	u8	BWSettingOfDesc = 0;
@@ -446,8 +446,8 @@ BWMapping_8812(
 
 u8
 SCMapping_8812(
-	IN	PADAPTER		Adapter,
-	IN	struct pkt_attrib	*pattrib
+	PADAPTER		Adapter,
+	struct pkt_attrib	*pattrib
 )
 {
 	u8	SCSettingOfDesc = 0;

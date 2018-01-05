@@ -39,8 +39,8 @@
  *---------------------------------------------------------------------------*/
 VOID
 PHY_RF6052SetBandwidth8812(
-	IN	PADAPTER				Adapter,
-	IN	CHANNEL_WIDTH		Bandwidth)	//20M or 40M
+	PADAPTER				Adapter,
+	CHANNEL_WIDTH		Bandwidth)	//20M or 40M
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 
@@ -75,13 +75,13 @@ PHY_RF6052SetBandwidth8812(
 // powerbase1 for HT MCS rates
 //
 void getPowerBase8812(
-	IN	PADAPTER	Adapter,
-	IN	u8*			pPowerLevelOFDM,
-	IN	u8*			pPowerLevelBW20,
-	IN	u8*			pPowerLevelBW40,
-	IN	u8			Channel,
-	IN OUT u32*		OfdmBase,
-	IN OUT u32*		MCSBase
+	PADAPTER	Adapter,
+	u8*			pPowerLevelOFDM,
+	u8*			pPowerLevelBW20,
+	u8*			pPowerLevelBW40,
+	u8			Channel,
+	u32*		OfdmBase,
+	u32*		MCSBase
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -116,12 +116,12 @@ void getPowerBase8812(
 }
 
 void getTxPowerWriteValByRegulatory8812(
-	IN		PADAPTER	Adapter,
-	IN		u8			Channel,
-	IN		u8			index,
-	IN		u32*		powerBase0,
-	IN		u32*		powerBase1,
-	OUT		u32*		pOutWriteVal
+		PADAPTER	Adapter,
+		u8			Channel,
+		u8			index,
+		u32*		powerBase0,
+		u32*		powerBase1,
+		u32*		pOutWriteVal
 	)
 {
 
@@ -291,9 +291,9 @@ void getTxPowerWriteValByRegulatory8812(
 }
 
 static void writeOFDMPowerReg8812(
-	IN		PADAPTER	Adapter,
-	IN		u8		index,
-	IN		u32*		pValue
+		PADAPTER	Adapter,
+		u8		index,
+		u32*		pValue
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -341,8 +341,8 @@ static void writeOFDMPowerReg8812(
 
 VOID
 PHY_RF6052SetCckTxPower8812(
-	IN	PADAPTER	Adapter,
-	IN	u8*			pPowerlevel)
+	PADAPTER	Adapter,
+	u8*			pPowerlevel)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
 	struct dm_priv		*pdmpriv = &pHalData->dmpriv;
@@ -443,11 +443,11 @@ PHY_RF6052SetCckTxPower8812(
 
 VOID
 PHY_RF6052SetOFDMTxPower8812(
-	IN	PADAPTER	Adapter,
-	IN	u8*		pPowerLevelOFDM,
-	IN	u8*		pPowerLevelBW20,
-	IN	u8*		pPowerLevelBW40,
-	IN	u8		Channel)
+	PADAPTER	Adapter,
+	u8*		pPowerLevelOFDM,
+	u8*		pPowerLevelBW20,
+	u8*		pPowerLevelBW40,
+	u8		Channel)
 {
 	u32 writeVal[2], powerBase0[2], powerBase1[2], pwrtrac_value;
 	u8 index = 0;
@@ -468,7 +468,7 @@ PHY_RF6052SetOFDMTxPower8812(
 
 static int
 phy_RF6052_Config_ParaFile_8812(
-	IN	PADAPTER		Adapter
+	PADAPTER		Adapter
 	)
 {
 	u8					eRFPath;
@@ -552,7 +552,7 @@ phy_RF6052_Config_ParaFile_Fail:
 
 int
 PHY_RF6052_Config_8812(
-	IN	PADAPTER		Adapter)
+	PADAPTER		Adapter)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
 	int					rtStatus = _SUCCESS;

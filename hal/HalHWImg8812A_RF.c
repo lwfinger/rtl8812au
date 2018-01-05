@@ -527,7 +527,7 @@ u4Byte Array_MP_8812A_RadioA[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_RadioA(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -1056,7 +1056,7 @@ u4Byte Array_MP_8812A_RadioB[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_RadioB(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
@@ -1159,7 +1159,7 @@ u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_AP_8812A[] = {0, 0, 1, 1, 2,
 
 void
 ODM_ReadAndConfig_MP_8812A_TxPowerTrack_AP(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
@@ -1218,7 +1218,7 @@ u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_PCIE_8812A[] = {0, 0, 1, 1, 
 
 void
 ODM_ReadAndConfig_MP_8812A_TxPowerTrack_PCIE(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
@@ -1277,7 +1277,7 @@ u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_USB_8812A[] = {0, 1, 1, 2, 2
 
 void
 ODM_ReadAndConfig_MP_8812A_TxPowerTrack_USB(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
@@ -1336,7 +1336,7 @@ u1Byte gDeltaSwingTableIdx_MP_2GCCKA_P_TxPowerTrack_USB_RFE3_8812A[] = {0, 0, 1,
 
 void
 ODM_ReadAndConfig_MP_8812A_TxPowerTrack_USB_RFE3(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
@@ -1933,7 +1933,7 @@ pu1Byte Array_MP_8812A_TXPWR_LMT[] = {
 
 void
 ODM_ReadAndConfig_MP_8812A_TXPWR_LMT(
-	IN   PDM_ODM_T  pDM_Odm
+	PDM_ODM_T  pDM_Odm
 	)
 {
 	u4Byte     i           = 0;

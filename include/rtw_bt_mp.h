@@ -178,20 +178,20 @@ typedef enum _BT_REPORT_TYPE{
 
 VOID
 MPTBT_Test(
-	IN	PADAPTER	Adapter,
-	IN	u1Byte		opCode,
-	IN	u1Byte		byte1,
-	IN	u1Byte		byte2,
-	IN	u1Byte		byte3
+	PADAPTER	Adapter,
+	u1Byte		opCode,
+	u1Byte		byte1,
+	u1Byte		byte2,
+	u1Byte		byte3
 	);
 
 NDIS_STATUS
 MPTBT_SendOidBT(
-	IN	PADAPTER		pAdapter,
-	IN	PVOID			InformationBuffer,
-	IN	ULONG			InformationBufferLength,
-	OUT	PULONG			BytesRead,
-	OUT	PULONG			BytesNeeded
+	PADAPTER		pAdapter,
+	PVOID			InformationBuffer,
+	ULONG			InformationBufferLength,
+	PULONG			BytesRead,
+	PULONG			BytesNeeded
 	);
 
 VOID

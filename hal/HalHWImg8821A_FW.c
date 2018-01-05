@@ -559,9 +559,9 @@ u4Byte ArrayLength_MP_8821A_FW_BT = 8484;
 
 void
 ODM_ReadFirmware_MP_8821A_FW_BT(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8821A_FW_BT;
@@ -2575,9 +2575,9 @@ u4Byte ArrayLength_MP_8821A_FW_NIC = 31972;
 
 void
 ODM_ReadFirmware_MP_8821A_FW_NIC(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8821A_FW_NIC;
@@ -3704,9 +3704,9 @@ u4Byte ArrayLength_MP_8821A_FW_WoWLAN = 17806;
 
 void
 ODM_ReadFirmware_MP_8821A_FW_WoWLAN(
-     IN   PDM_ODM_T    pDM_Odm,
-     OUT  u1Byte       *pFirmware,
-     OUT  u4Byte       *pFirmwareSize
+     PDM_ODM_T    pDM_Odm,
+     u1Byte       *pFirmware,
+     u4Byte       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8821A_FW_WoWLAN;

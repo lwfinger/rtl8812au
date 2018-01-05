@@ -27,7 +27,7 @@
 
 VOID
 ODM_InitDebugSetting(
-	IN		PDM_ODM_T		pDM_Odm
+	PDM_ODM_T		pDM_Odm
 	)
 {
 pDM_Odm->DebugLevel				=	ODM_DBG_LOUD;

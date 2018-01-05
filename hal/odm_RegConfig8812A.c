@@ -22,11 +22,11 @@
 
 void
 odm_ConfigRFReg_8812A(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u4Byte					Addr,
-	IN	u4Byte					Data,
-	IN  ODM_RF_RADIO_PATH_E     RF_PATH,
-	IN	u4Byte				    RegAddr
+	PDM_ODM_T				pDM_Odm,
+	u4Byte					Addr,
+	u4Byte					Data,
+	ODM_RF_RADIO_PATH_E     RF_PATH,
+	u4Byte				    RegAddr
 	)
 {
 	if(Addr == 0xfe || Addr == 0xffe)
@@ -48,9 +48,9 @@ odm_ConfigRFReg_8812A(
 
 void
 odm_ConfigRF_RadioA_8812A(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u4Byte					Addr,
-	IN	u4Byte					Data
+	PDM_ODM_T				pDM_Odm,
+	u4Byte					Addr,
+	u4Byte					Data
 	)
 {
 	u4Byte  content = 0x1000; // RF_Content: radioa_txt
@@ -63,9 +63,9 @@ odm_ConfigRF_RadioA_8812A(
 
 void
 odm_ConfigRF_RadioB_8812A(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u4Byte					Addr,
-	IN	u4Byte					Data
+	PDM_ODM_T				pDM_Odm,
+	u4Byte					Addr,
+	u4Byte					Data
 	)
 {
 	u4Byte  content = 0x1001; // RF_Content: radiob_txt
@@ -79,9 +79,9 @@ odm_ConfigRF_RadioB_8812A(
 
 void
 odm_ConfigMAC_8812A(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	u4Byte		Addr,
-	IN	u1Byte		Data
+	PDM_ODM_T	pDM_Odm,
+	u4Byte		Addr,
+	u1Byte		Data
 	)
 {
 	ODM_Write1Byte(pDM_Odm, Addr, Data);
@@ -90,10 +90,10 @@ odm_ConfigMAC_8812A(
 
 void
 odm_ConfigBB_AGC_8812A(
-    IN	PDM_ODM_T	pDM_Odm,
-    IN	u4Byte		Addr,
-    IN	u4Byte		Bitmask,
-    IN	u4Byte		Data
+    PDM_ODM_T	pDM_Odm,
+    u4Byte		Addr,
+    u4Byte		Bitmask,
+    u4Byte		Data
     )
 {
 	ODM_SetBBReg(pDM_Odm, Addr, Bitmask, Data);
@@ -105,10 +105,10 @@ odm_ConfigBB_AGC_8812A(
 
 void
 odm_ConfigBB_PHY_REG_PG_8812A(
-	IN	PDM_ODM_T	pDM_Odm,
-    IN	u4Byte		Addr,
-    IN	u4Byte		Bitmask,
-    IN	u4Byte		Data
+	PDM_ODM_T	pDM_Odm,
+    u4Byte		Addr,
+    u4Byte		Bitmask,
+    u4Byte		Data
     )
 {
 	if (Addr == 0xfe || Addr == 0xffe) {
@@ -127,10 +127,10 @@ odm_ConfigBB_PHY_REG_PG_8812A(
 
 void
 odm_ConfigBB_PHY_8812A(
-	IN	PDM_ODM_T	pDM_Odm,
-    IN	u4Byte		Addr,
-    IN	u4Byte		Bitmask,
-    IN	u4Byte		Data
+	PDM_ODM_T	pDM_Odm,
+    u4Byte		Addr,
+    u4Byte		Bitmask,
+    u4Byte		Data
     )
 {
 	if (Addr == 0xfe) {
@@ -167,14 +167,14 @@ odm_ConfigBB_PHY_8812A(
 
 void
 odm_ConfigBB_TXPWR_LMT_8812A(
-	IN	PDM_ODM_T	pDM_Odm,
-	IN	pu1Byte		Regulation,
-	IN	pu1Byte		Band,
-	IN	pu1Byte		Bandwidth,
-	IN	pu1Byte		RateSection,
-	IN	pu1Byte		RfPath,
-	IN	pu1Byte		Channel,
-	IN	pu1Byte		PowerLimit
+	PDM_ODM_T	pDM_Odm,
+	pu1Byte		Regulation,
+	pu1Byte		Band,
+	pu1Byte		Bandwidth,
+	pu1Byte		RateSection,
+	pu1Byte		RfPath,
+	pu1Byte		Channel,
+	pu1Byte		PowerLimit
     )
 {
 	PHY_SetPowerLimitTableValue(pDM_Odm, Regulation, Band,
