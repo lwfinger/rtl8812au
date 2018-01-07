@@ -454,13 +454,13 @@ extern	u8Byte ODM_GlobalDebugComponents;
 
 #define COMP_DFS                                BIT62
 
-#define	COMP_ALL				UINT64_C(0xFFFFFFFFFFFFFFFF) // All components
+#define	COMP_ALL				u3264_C(0xFFFFFFFFFFFFFFFF) // All components
 // For debug print flag to use
 /*------------------------------Define structure----------------------------*/
 /* 2007/07/13 MH  *//*------For DeBuG Print modeue------*/
 
 /* Defnie structure to store different debug flag variable. Every debug flag
-     is a UINT32 integer and you can assign 32 different events. */
+     is a u3232 integer and you can assign 32 different events. */
 typedef struct tag_DBGP_Debug_Flag_Structure
 {
 	u4Byte	Mans;			/* Main Scheduler module. */

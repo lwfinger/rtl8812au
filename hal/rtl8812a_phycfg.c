@@ -107,7 +107,7 @@ phy_RFSerialRead(
 	u32							retValue = 0;
 	HAL_DATA_TYPE				*pHalData = GET_HAL_DATA(Adapter);
 	BB_REGISTER_DEFINITION_T	*pPhyReg = &pHalData->PHYRegDef[eRFPath];
-	BOOLEAN						bIsPIMode = _FALSE;
+	bool						bIsPIMode = false;
 
 
 	// 2009/06/17 MH We can not execute IO for power save or other accident mode.
@@ -125,9 +125,9 @@ phy_RFSerialRead(
 	Offset &= 0xff;
 
 	if (eRFPath == RF_PATH_A)
-	bIsPIMode = (BOOLEAN)PHY_QueryBBReg(Adapter, 0xC00, 0x4);
+	bIsPIMode = (bool)PHY_QueryBBReg(Adapter, 0xC00, 0x4);
 	else if (eRFPath == RF_PATH_B)
-	bIsPIMode = (BOOLEAN)PHY_QueryBBReg(Adapter, 0xE00, 0x4);
+	bIsPIMode = (bool)PHY_QueryBBReg(Adapter, 0xE00, 0x4);
 
 	if(IS_VENDOR_8812A_TEST_CHIP(Adapter))
 		PHY_SetBBReg(Adapter, pPhyReg->rfHSSIPara2, bMaskDWord, 0);
@@ -326,7 +326,7 @@ phy_InitBBRFRegisterDefinition(
 	pHalData->PHYRegDef[RF_PATH_A].rfLSSIReadBackPi = rA_PIRead_Jaguar;
 	pHalData->PHYRegDef[RF_PATH_B].rfLSSIReadBackPi = rB_PIRead_Jaguar;
 
-	//pHalData->bPhyValueInitReady=_TRUE;
+	//pHalData->bPhyValueInitReady=true;
 }
 
 void
@@ -455,7 +455,7 @@ phy_BB8812_Config_ParaFile(
 
 	// If EEPROM or EFUSE autoload OK, We must config by PHY_REG_PG.txt
 	//1 TODO
-	if (pEEPROM->bautoload_fail_flag == _FALSE)
+	if (pEEPROM->bautoload_fail_flag == false)
 	{
 		pHalData->pwrGroupCnt = 0;
 
@@ -579,7 +579,7 @@ PHY_RFConfig8812(
 	return rtStatus;
 }
 
-BOOLEAN
+bool
 eqNByte(
 	u8*	str1,
 	u8*	str2,
@@ -587,17 +587,17 @@ eqNByte(
 	)
 {
 	if(num==0)
-		return _FALSE;
+		return false;
 	while(num>0)
 	{
 		num--;
 		if(str1[num]!=str2[num])
-			return _FALSE;
+			return false;
 	}
-	return _TRUE;
+	return true;
 }
 
-BOOLEAN
+bool
 GetU1ByteIntegerFromStringInDecimal(
 		s8*	Str,
 		u8*	pInt
@@ -615,12 +615,12 @@ GetU1ByteIntegerFromStringInDecimal(
 		}
 		else
 		{
-			return _FALSE;
+			return false;
 		}
 		++i;
 	}
 
-	return _TRUE;
+	return true;
 }
 
 static s8
@@ -2356,7 +2356,7 @@ void phy_PowerIndexCheck8812(
 	pHalData->CurrentBW4024GTxPwrIdx = BW40PowerLevel[0];
 }
 
-BOOLEAN
+bool
 phy_GetChnlIndex8812A(
 	u8	Channel,
 	u8*	ChannelIdx
@@ -2367,16 +2367,16 @@ phy_GetChnlIndex8812A(
 				114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,149,151,
 				153,155,157,159,161,163,165,167,168,169,171,173,175,177};
 	u8	i = 0;
-	BOOLEAN bIn24G=_TRUE;
+	bool bIn24G=true;
 
 	if(Channel <= 14)
 	{
-		bIn24G=_TRUE;
+		bIn24G=true;
 		*ChannelIdx = Channel -1;
 	}
 	else
 	{
-		bIn24G = _FALSE;
+		bIn24G = false;
 
 		for (i = 0; i < sizeof(channel5G)/sizeof(u8); ++i)
 		{
@@ -2656,11 +2656,11 @@ PHY_GetTxPowerIndex_8812A(
 	u32					powerDiffByRate = 0;
 	u32					txPower = 0;
 	u8					chnlIdx = (Channel-1);
-	BOOLEAN				bIn24G = _FALSE;
+	bool				bIn24G = false;
 
 	//DBG_871X("===> PHY_GetTxPowerIndex_8812A\n");
 
-	if (HAL_IsLegalChannel(pAdapter, Channel) == _FALSE)
+	if (HAL_IsLegalChannel(pAdapter, Channel) == false)
 	{
 		chnlIdx = 0;
 		DBG_871X("Illegal channel!!\n");
@@ -2800,7 +2800,7 @@ PHY_GetTxPowerIndex_8812A(
 	// OFDM=1/2			18/12/9/6     54/48/36/24
 	// HT=3/4/5/6			MCS0-3 MCS4-7 MCS8-11 MCS12-15
 	// VHT=7/8/9/10/11		1SSMCS0-3 1SSMCS4-7 2SSMCS1/0/1SSMCS/9/8 2SSMCS2-5
-	if (pregistrypriv->RegPwrByRate == _FALSE && pHalData->EEPROMRegulatory != 2)
+	if (pregistrypriv->RegPwrByRate == false && pHalData->EEPROMRegulatory != 2)
 	{
 		powerDiffByRate = phy_GetTxPwrByRateOffset_8812(pAdapter, (u8)(!bIn24G), RFPath, Rate);
 
@@ -2891,7 +2891,7 @@ PHY_SetTxPowerIndex_8812A(
 	)
 {
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(Adapter);
-	BOOLEAN				Direction = FALSE;
+	bool				Direction = FALSE;
 	u4Byte				TxagcOffset = 0;
 
 	// <20120928, Kordan> A workaround in 8812A/8821A testchip, to fix the bug of odd Tx power indexes.
@@ -3223,13 +3223,13 @@ PHY_SetTxPowerLevel8812(
 	//DBG_871X("<==PHY_SetTxPowerLevel8812()\n");
 }
 
-BOOLEAN
+bool
 PHY_UpdateTxPowerDbm8812(
 	PADAPTER	Adapter,
 	int		powerInDbm
 	)
 {
-	return _TRUE;
+	return true;
 }
 
 
@@ -3729,14 +3729,14 @@ PHY_SwitchWirelessBand8812(
 	return _SUCCESS;
 }
 
-BOOLEAN
+bool
 phy_SwBand8812(
 	PADAPTER	pAdapter,
 	u8			channelToSW
 )
 {
 	u8			u1Btmp;
-	BOOLEAN		ret_value = _TRUE;
+	bool		ret_value = true;
 	u8			Band = BAND_ON_5G, BandToSW;
 
 	u1Btmp = rtw_read8(pAdapter, REG_CCK_CHECK_8812);
@@ -4027,7 +4027,7 @@ phy_SwChnl8812(
 	u8	channelToSW = pHalData->CurrentChannel;
 
 	if (pAdapter->registrypriv.mp_mode == 0) {
-		if(phy_SwBand8812(pAdapter, channelToSW) == _FALSE)
+		if(phy_SwBand8812(pAdapter, channelToSW) == false)
 		{
 			DBG_871X("error Chnl %d !\n", channelToSW);
 		}
@@ -4131,13 +4131,13 @@ phy_SwChnlAndSetBwMode8812(
 	if(pHalData->bSwChnl)
 	{
 		phy_SwChnl8812(Adapter);
-		pHalData->bSwChnl = _FALSE;
+		pHalData->bSwChnl = false;
 	}
 
 	if(pHalData->bSetChnlBW)
 	{
 		phy_PostSetBwMode8812(Adapter);
-		pHalData->bSetChnlBW = _FALSE;
+		pHalData->bSetChnlBW = false;
 	}
 
 	ODM_ClearTxPowerTrackingState(&pHalData->odmpriv);
@@ -4146,25 +4146,25 @@ phy_SwChnlAndSetBwMode8812(
 	if(IS_HARDWARE_TYPE_8812(Adapter))
 		phy_InitRssiTRSW(Adapter);
 
-	if ( (pHalData->bNeedIQK == _TRUE)
+	if ( (pHalData->bNeedIQK == true)
 #if (MP_DRIVER == 1)
 		|| (Adapter->registrypriv.mp_mode == 1)
 #endif
 		)
 	{
 		if(IS_HARDWARE_TYPE_8812(Adapter))
-			PHY_IQCalibrate_8812A(Adapter, _FALSE);
+			PHY_IQCalibrate_8812A(Adapter, false);
 		else if(IS_HARDWARE_TYPE_8821(Adapter))
-			PHY_IQCalibrate_8821A(Adapter, _FALSE);
-		pHalData->bNeedIQK = _FALSE;
+			PHY_IQCalibrate_8821A(Adapter, false);
+		pHalData->bNeedIQK = false;
 	}
 }
 
 void
 PHY_HandleSwChnlAndSetBW8812(
 	PADAPTER			Adapter,
-	BOOLEAN				bSwitchChannel,
-	BOOLEAN				bSetBandWidth,
+	bool				bSwitchChannel,
+	bool				bSetBandWidth,
 	u8					ChannelNum,
 	CHANNEL_WIDTH		ChnlWidth,
 	u8					ChnlOffsetOf40MHz,
@@ -4196,7 +4196,7 @@ PHY_HandleSwChnlAndSetBW8812(
 		if(pHalData->CurrentChannel != ChannelNum)
 		{
 			if (HAL_IsLegalChannel(Adapter, ChannelNum))
-				pHalData->bSwChnl = _TRUE;
+				pHalData->bSwChnl = true;
 			else
 				return;
 		}
@@ -4204,17 +4204,17 @@ PHY_HandleSwChnlAndSetBW8812(
 
 	if(bSetBandWidth)
 	{
-		if(pHalData->bChnlBWInitialzed == _FALSE)
+		if(pHalData->bChnlBWInitialzed == false)
 		{
-			pHalData->bChnlBWInitialzed = _TRUE;
-			pHalData->bSetChnlBW = _TRUE;
+			pHalData->bChnlBWInitialzed = true;
+			pHalData->bSetChnlBW = true;
 		}
 		else if((pHalData->CurrentChannelBW != ChnlWidth) ||
 			(pHalData->nCur40MhzPrimeSC != ChnlOffsetOf40MHz) ||
 			(pHalData->nCur80MhzPrimeSC != ChnlOffsetOf80MHz) ||
 			(pHalData->CurrentCenterFrequencyIndex1!= CenterFrequencyIndex1))
 		{
-			pHalData->bSetChnlBW = _TRUE;
+			pHalData->bSetChnlBW = true;
 		}
 	}
 
@@ -4297,7 +4297,7 @@ PHY_SetBWMode8812(
 
 	//DBG_871X("%s()===>\n",__FUNCTION__);
 
-	PHY_HandleSwChnlAndSetBW8812(Adapter, _FALSE, _TRUE, pHalData->CurrentChannel, Bandwidth, Offset, Offset, pHalData->CurrentChannel);
+	PHY_HandleSwChnlAndSetBW8812(Adapter, false, true, pHalData->CurrentChannel, Bandwidth, Offset, Offset, pHalData->CurrentChannel);
 
 	//DBG_871X("<==%s()\n",__FUNCTION__);
 }
@@ -4310,7 +4310,7 @@ PHY_SwChnl8812(
 {
 	//DBG_871X("%s()===>\n",__FUNCTION__);
 
-	PHY_HandleSwChnlAndSetBW8812(Adapter, _TRUE, _FALSE, channel, 0, 0, 0, channel);
+	PHY_HandleSwChnlAndSetBW8812(Adapter, true, false, channel, 0, 0, 0, channel);
 
 	//DBG_871X("<==%s()\n",__FUNCTION__);
 }
@@ -4326,7 +4326,7 @@ PHY_SetSwChnlBWMode8812(
 {
 	//DBG_871X("%s()===>\n",__FUNCTION__);
 
-	PHY_HandleSwChnlAndSetBW8812(Adapter, _TRUE, _TRUE, channel, Bandwidth, Offset40, Offset80, channel);
+	PHY_HandleSwChnlAndSetBW8812(Adapter, true, true, channel, Bandwidth, Offset40, Offset80, channel);
 
 	//DBG_871X("<==%s()\n",__FUNCTION__);
 }

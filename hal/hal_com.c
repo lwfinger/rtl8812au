@@ -88,22 +88,22 @@ hal_com_get_channel_plan(
 	u8			hw_channel_plan,	//channel plan from HW (efuse/eeprom)
 	u8			sw_channel_plan,	//channel plan from SW (registry/module param)
 	u8			def_channel_plan,	//channel plan used when the former two is invalid
-	BOOLEAN		AutoLoadFail
+	bool		AutoLoadFail
 	)
 {
 	u8 swConfig;
 	u8 chnlPlan;
 
-	swConfig = _TRUE;
+	swConfig = true;
 	if (!AutoLoadFail)
 	{
 		if (!rtw_is_channel_plan_valid(sw_channel_plan))
-			swConfig = _FALSE;
+			swConfig = false;
 		if (hw_channel_plan & EEPROM_CHANNEL_PLAN_BY_HW_MASK)
-			swConfig = _FALSE;
+			swConfig = false;
 	}
 
-	if (swConfig == _TRUE)
+	if (swConfig == true)
 		chnlPlan = sw_channel_plan;
 	else
 		chnlPlan = hw_channel_plan & (~EEPROM_CHANNEL_PLAN_BY_HW_MASK);
@@ -114,26 +114,26 @@ hal_com_get_channel_plan(
 	return chnlPlan;
 }
 
-BOOLEAN
+bool
 HAL_IsLegalChannel(
 	PADAPTER	Adapter,
 	u32			Channel
 	)
 {
-	BOOLEAN bLegalChannel = _TRUE;
+	bool bLegalChannel = true;
 
 	if (Channel > 14) {
-		if(IsSupported5G(Adapter->registrypriv.wireless_mode) == _FALSE) {
-			bLegalChannel = _FALSE;
+		if(IsSupported5G(Adapter->registrypriv.wireless_mode) == false) {
+			bLegalChannel = false;
 			DBG_871X("Channel > 14 but wireless_mode do not support 5G\n");
 		}
 	} else if ((Channel <= 14) && (Channel >=1)){
-		if(IsSupported24G(Adapter->registrypriv.wireless_mode) == _FALSE) {
-			bLegalChannel = _FALSE;
+		if(IsSupported24G(Adapter->registrypriv.wireless_mode) == false) {
+			bLegalChannel = false;
 			DBG_871X("(Channel <= 14) && (Channel >=1) but wireless_mode do not support 2.4G\n");
 		}
 	} else {
-		bLegalChannel = _FALSE;
+		bLegalChannel = false;
 		DBG_871X("Channel is Invalid !!!\n");
 	}
 
@@ -230,7 +230,7 @@ _OneOutPipeMapping(
 static void
 _TwoOutPipeMapping(
 	PADAPTER	pAdapter,
-	BOOLEAN		bWIFICfg
+	bool		bWIFICfg
 	)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(pAdapter);
@@ -275,7 +275,7 @@ _TwoOutPipeMapping(
 
 static void _ThreeOutPipeMapping(
 	PADAPTER	pAdapter,
-	BOOLEAN		bWIFICfg
+	bool		bWIFICfg
 	)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(pAdapter);
@@ -318,7 +318,7 @@ static void _ThreeOutPipeMapping(
 }
 static void _FourOutPipeMapping(
 	PADAPTER	pAdapter,
-	BOOLEAN		bWIFICfg
+	bool		bWIFICfg
 	)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(pAdapter);
@@ -359,7 +359,7 @@ static void _FourOutPipeMapping(
 	}
 
 }
-BOOLEAN
+bool
 Hal_MappingOutPipe(
 	PADAPTER	pAdapter,
 	u8		NumOutPipe
@@ -367,9 +367,9 @@ Hal_MappingOutPipe(
 {
 	struct registry_priv *pregistrypriv = &pAdapter->registrypriv;
 
-	BOOLEAN	 bWIFICfg = (pregistrypriv->wifi_spec) ?_TRUE:_FALSE;
+	bool	 bWIFICfg = (pregistrypriv->wifi_spec) ?true:false;
 
-	BOOLEAN result = _TRUE;
+	bool result = true;
 
 	switch(NumOutPipe)
 	{
@@ -384,7 +384,7 @@ Hal_MappingOutPipe(
 			_OneOutPipeMapping(pAdapter);
 			break;
 		default:
-			result = _FALSE;
+			result = false;
 			break;
 	}
 

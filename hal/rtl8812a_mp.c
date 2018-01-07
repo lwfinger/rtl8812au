@@ -26,7 +26,7 @@
 
 s32 Hal_SetPowerTracking(PADAPTER padapter, u8 enable)
 {
-	BOOLEAN					bResult = TRUE;
+	bool					bResult = TRUE;
 	PMPT_CONTEXT			pMptCtx = &(padapter->mppriv.MptCtx);
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
@@ -69,11 +69,11 @@ static void Hal_disable_dm(PADAPTER padapter)
 	// disable Dynamic Initial Gain
 	// disable High Power
 	// disable Power Tracking
-	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
+	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, false);
 
 	// enable APK, LCK and IQK but disable power tracking
-	pDM_Odm->RFCalibrateInfo.TxPowerTrackControl = _FALSE;
-	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _TRUE);
+	pDM_Odm->RFCalibrateInfo.TxPowerTrackControl = false;
+	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, true);
 }
 
 /*-----------------------------------------------------------------------------
@@ -98,8 +98,8 @@ void Hal_mpt_SwitchRfSetting(PADAPTER pAdapter)
 	//HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 	struct mp_priv	*pmp = &pAdapter->mppriv;
 	u1Byte				ChannelToSw = pmp->channel;
-	ULONG				ulRateIdx = pmp->rateidx;
-	ULONG				ulbandwidth = pmp->bandwidth;
+	u32				ulRateIdx = pmp->rateidx;
+	u32				ulbandwidth = pmp->bandwidth;
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(pAdapter);
 
 	// <20120525, Kordan> Dynamic mechanism for APK, asked by Dennis.
@@ -113,7 +113,7 @@ void Hal_mpt_SwitchRfSetting(PADAPTER pAdapter)
 /*---------------------------hal\rtl8192c\MPT_Phy.c---------------------------*/
 
 /*---------------------------hal\rtl8192c\MPT_HelperFunc.c---------------------------*/
-void Hal_MPT_CCKTxPowerAdjust(PADAPTER Adapter, BOOLEAN bInCH14)
+void Hal_MPT_CCKTxPowerAdjust(PADAPTER Adapter, bool bInCH14)
 {
 	u32		TempVal = 0, TempVal2 = 0, TempVal3 = 0;
 	u32		CurrCCKSwingVal = 0, CCKSwingIndex = 12;
@@ -193,7 +193,7 @@ void Hal_MPT_CCKTxPowerAdjust(PADAPTER Adapter, BOOLEAN bInCH14)
 	write_bbreg(Adapter, rCCK0_DebugPort, bMaskLWord, TempVal3);
 }
 
-void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, BOOLEAN beven)
+void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven)
 {
 	s32		TempCCk;
 	u8		CCK_index, CCK_index_old;
@@ -225,12 +225,12 @@ void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, BOOLEAN beven)
 	if (beven && !pMptCtx->bMptIndexEven)	//odd->even
 	{
 		Action = 2;
-		pMptCtx->bMptIndexEven = _TRUE;
+		pMptCtx->bMptIndexEven = true;
 	}
 	else if (!beven && pMptCtx->bMptIndexEven)	//even->odd
 	{
 		Action = 1;
-		pMptCtx->bMptIndexEven = _FALSE;
+		pMptCtx->bMptIndexEven = false;
 	}
 
 	if (Action != 0)
@@ -241,7 +241,7 @@ void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, BOOLEAN beven)
 		{
 			if (pDM_Odm->RFCalibrateInfo.bCCKinCH14)
 			{
-				if (_rtw_memcmp((void*)&TempCCk, (void*)&CCKSwingTable_Ch14[i][2], 4) == _TRUE)
+				if (_rtw_memcmp((void*)&TempCCk, (void*)&CCKSwingTable_Ch14[i][2], 4) == true)
 				{
 					CCK_index_old = (u8) i;
 //					RTPRINT(FINIT, INIT_TxPower,("MPT_CCKTxPowerAdjustbyIndex: Initial reg0x%x = 0x%lx, CCK_index=0x%x, ch 14 %d\n",
@@ -251,7 +251,7 @@ void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, BOOLEAN beven)
 			}
 			else
 			{
-				if (_rtw_memcmp((void*)&TempCCk, (void*)&CCKSwingTable_Ch1_Ch13[i][2], 4) == _TRUE)
+				if (_rtw_memcmp((void*)&TempCCk, (void*)&CCKSwingTable_Ch1_Ch13[i][2], 4) == true)
 				{
 					CCK_index_old = (u8) i;
 //					RTPRINT(FINIT, INIT_TxPower,("MPT_CCKTxPowerAdjustbyIndex: Initial reg0x%x = 0x%lx, CCK_index=0x%x, ch14 %d\n",
@@ -338,11 +338,11 @@ void Hal_SetChannel(PADAPTER pAdapter)
 	SelectChannel(pAdapter, channel);
 
 	if (pHalData->CurrentChannel == 14 && !pDM_Odm->RFCalibrateInfo.bCCKinCH14) {
-		pDM_Odm->RFCalibrateInfo.bCCKinCH14 = _TRUE;
+		pDM_Odm->RFCalibrateInfo.bCCKinCH14 = true;
 		Hal_MPT_CCKTxPowerAdjust(pAdapter, pDM_Odm->RFCalibrateInfo.bCCKinCH14);
 	}
 	else if (pHalData->CurrentChannel != 14 && pDM_Odm->RFCalibrateInfo.bCCKinCH14) {
-		pDM_Odm->RFCalibrateInfo.bCCKinCH14 = _FALSE;
+		pDM_Odm->RFCalibrateInfo.bCCKinCH14 = false;
 		Hal_MPT_CCKTxPowerAdjust(pAdapter, pDM_Odm->RFCalibrateInfo.bCCKinCH14);
 	}
 
@@ -682,7 +682,7 @@ s32 Hal_SetThermalMeter(PADAPTER pAdapter, u8 target_ther)
 		return _FAIL;
 	}
 
-	if (check_fwstate(&pAdapter->mlmepriv, WIFI_MP_STATE) == _FALSE) {
+	if (check_fwstate(&pAdapter->mlmepriv, WIFI_MP_STATE) == false) {
 		RT_TRACE(_module_mp_, _drv_warning_, ("SetThermalMeter: Fail! not in MP mode!\n"));
 		return _FAIL;
 	}
@@ -785,7 +785,7 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 	PMPT_CONTEXT	pMptCtx = &pAdapter->mppriv.MptCtx;
-	BOOLEAN		is92C = IS_92C_SERIAL(pHalData->VersionID);
+	bool		is92C = IS_92C_SERIAL(pHalData->VersionID);
 
 	u8 rfPath;
 	u32              reg58 = 0x0;
@@ -1066,7 +1066,7 @@ void Hal_SetOFDMContinuousTx(PADAPTER pAdapter, u8 bStart)
 		write_bbreg(pAdapter, rFPGA0_XB_HSSIParameter1, bMaskDWord, 0x01000100);
 	}
 
-	pAdapter->mppriv.MptCtx.bCckContTx = _FALSE;
+	pAdapter->mppriv.MptCtx.bCckContTx = false;
 	pAdapter->mppriv.MptCtx.bOfdmContTx = bStart;
 }/* mpt_StartOfdmContTx */
 

@@ -118,7 +118,7 @@ struct H2C_SS_RFOFF_PARAM{
 #define SET_8812_H2CCMD_P2P_PS_OFFLOAD_DISCOVERY(__pH2CCmd, __Value)	SET_BITS_TO_LE_1BYTE(__pH2CCmd, 6, 1, __Value)
 
 
-void	Set_RA_LDPC_8812(struct sta_info	*psta, BOOLEAN bLDPC);
+void	Set_RA_LDPC_8812(struct sta_info	*psta, bool bLDPC);
 
 // host message to firmware cmd
 void rtl8812_set_FwPwrMode_cmd(PADAPTER padapter, u8 PSMode);

@@ -87,28 +87,28 @@ uint	 rtw_hal_init(_adapter *padapter)
 	uint	status = _SUCCESS;
 
 #ifdef CONFIG_DUALMAC_CONCURRENT
-	if(padapter->hw_init_completed == _TRUE)
+	if(padapter->hw_init_completed == true)
 	{
-		DBG_871X("rtw_hal_init: hw_init_completed == _TRUE\n");
+		DBG_871X("rtw_hal_init: hw_init_completed == true\n");
 		return status;
 	}
 
 	// before init mac0, driver must init mac1 first to avoid usb rx error.
-	if((padapter->pbuddy_adapter != NULL) && (padapter->DualMacConcurrent == _TRUE)
+	if((padapter->pbuddy_adapter != NULL) && (padapter->DualMacConcurrent == true)
 		&& (padapter->adapter_type == PRIMARY_ADAPTER))
 	{
-		if(padapter->pbuddy_adapter->hw_init_completed == _TRUE)
+		if(padapter->pbuddy_adapter->hw_init_completed == true)
 		{
-			DBG_871X("rtw_hal_init: pbuddy_adapter hw_init_completed == _TRUE\n");
+			DBG_871X("rtw_hal_init: pbuddy_adapter hw_init_completed == true\n");
 		}
 		else
 		{
 			status =	padapter->HalFunc.hal_init(padapter->pbuddy_adapter);
 			if(status == _SUCCESS){
-				padapter->pbuddy_adapter->hw_init_completed = _TRUE;
+				padapter->pbuddy_adapter->hw_init_completed = true;
 			}
 			else{
-				padapter->pbuddy_adapter->hw_init_completed = _FALSE;
+				padapter->pbuddy_adapter->hw_init_completed = false;
 				RT_TRACE(_module_hal_init_c_,_drv_err_,("rtw_hal_init: hal__init fail(pbuddy_adapter)\n"));
 				DBG_871X("rtw_hal_init: hal__init fail(pbuddy_adapter)\n");
 				return status;
@@ -117,12 +117,12 @@ uint	 rtw_hal_init(_adapter *padapter)
 	}
 #endif
 
-	padapter->hw_init_completed=_FALSE;
+	padapter->hw_init_completed=false;
 
 	status = padapter->HalFunc.hal_init(padapter);
 
 	if(status == _SUCCESS){
-		padapter->hw_init_completed = _TRUE;
+		padapter->hw_init_completed = true;
 
 		if (padapter->registrypriv.notch_filter == 1)
 			rtw_hal_notch_filter(padapter, 1);
@@ -132,7 +132,7 @@ uint	 rtw_hal_init(_adapter *padapter)
 		rtw_led_control(padapter, LED_CTL_POWER_ON);
 	}
 	else{
-		padapter->hw_init_completed = _FALSE;
+		padapter->hw_init_completed = false;
 		DBG_871X("rtw_hal_init: hal__init fail\n");
 	}
 
@@ -152,7 +152,7 @@ uint rtw_hal_deinit(_adapter *padapter)
 
 	if(status == _SUCCESS){
 		rtw_led_control(padapter, LED_CTL_POWER_OFF);
-		padapter->hw_init_completed = _FALSE;
+		padapter->hw_init_completed = false;
 	}
 	else
 	{
@@ -189,12 +189,12 @@ u8 rtw_hal_get_def_var(_adapter *padapter, HAL_DEF_VARIABLE eVariable, void * pV
 	return _FAIL;
 }
 
-void rtw_hal_set_odm_var(_adapter *padapter, HAL_ODM_VARIABLE eVariable, void * pValue1,BOOLEAN bSet)
+void rtw_hal_set_odm_var(_adapter *padapter, HAL_ODM_VARIABLE eVariable, void * pValue1,bool bSet)
 {
 	if(padapter->HalFunc.SetHalODMVarHandler)
 		padapter->HalFunc.SetHalODMVarHandler(padapter,eVariable,pValue1,bSet);
 }
-void	rtw_hal_get_odm_var(_adapter *padapter, HAL_ODM_VARIABLE eVariable, void * pValue1,BOOLEAN bSet)
+void	rtw_hal_get_odm_var(_adapter *padapter, HAL_ODM_VARIABLE eVariable, void * pValue1,bool bSet)
 {
 	if(padapter->HalFunc.GetHalODMVarHandler)
 		padapter->HalFunc.GetHalODMVarHandler(padapter,eVariable,pValue1,bSet);
@@ -250,7 +250,7 @@ s32	rtw_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe)
 	if(padapter->HalFunc.hal_xmitframe_enqueue)
 		return padapter->HalFunc.hal_xmitframe_enqueue(padapter, pxmitframe);
 
-	return _FALSE;
+	return false;
 }
 
 s32	rtw_hal_xmit(_adapter *padapter, struct xmit_frame *pxmitframe)
@@ -258,7 +258,7 @@ s32	rtw_hal_xmit(_adapter *padapter, struct xmit_frame *pxmitframe)
 	if(padapter->HalFunc.hal_xmit)
 		return padapter->HalFunc.hal_xmit(padapter, pxmitframe);
 
-	return _FALSE;
+	return false;
 }
 
 s32	rtw_hal_mgnt_xmit(_adapter *padapter, struct xmit_frame *pmgntframe)
@@ -310,7 +310,7 @@ void rtw_hal_update_ra_mask(struct sta_info *psta, u8 rssi_level)
 
 	pmlmepriv = &(padapter->mlmepriv);
 
-	if(check_fwstate(pmlmepriv, WIFI_AP_STATE) == _TRUE)
+	if(check_fwstate(pmlmepriv, WIFI_AP_STATE) == true)
 	{
 		add_RATid(padapter, psta, rssi_level);
 	}
@@ -419,7 +419,7 @@ u8	rtw_hal_antdiv_before_linked(_adapter *padapter)
 {
 	if(padapter->HalFunc.AntDivBeforeLinkHandler)
 		return padapter->HalFunc.AntDivBeforeLinkHandler(padapter);
-	return _FALSE;
+	return false;
 }
 void	rtw_hal_antdiv_rssi_compared(_adapter *padapter, WLAN_BSSID_EX *dst, WLAN_BSSID_EX *src)
 {
@@ -481,7 +481,7 @@ u8   rtw_hal_sreset_get_wifi_status(_adapter *padapter)
 
 bool rtw_hal_sreset_inprogress(_adapter *padapter)
 {
-	bool inprogress = _FALSE;
+	bool inprogress = false;
 
 	padapter = GET_PRIMARY_ADAPTER(padapter);
 

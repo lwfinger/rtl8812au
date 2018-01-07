@@ -135,28 +135,28 @@ struct mp_tx
 #define s8Byte		s64
 #define ps8Byte			s64*
 
-#define UCHAR u8
-#define USHORT u16
-#define UINT u32
-#define ULONG u32
-#define PULONG u32*
+#define u8 u8
+#define u16 u16
+#define u32 u32
+#define u32 u32
+#define Pu32 u32*
 
 typedef void (*MPT_WORK_ITEM_HANDLER)(void * Adapter);
 typedef struct _MPT_CONTEXT
 {
 	// Indicate if we have started Mass Production Test.
-	BOOLEAN			bMassProdTest;
+	bool			bMassProdTest;
 
 	// Indicate if the driver is unloading or unloaded.
-	BOOLEAN			bMptDrvUnload;
+	bool			bMptDrvUnload;
 
 	_sema			MPh2c_Sema;
 	_timer			MPh2c_timeout_timer;
 // Event used to sync H2c for BT control
 
-	BOOLEAN		MptH2cRspEvent;
-	BOOLEAN		MptBtC2hEvent;
-	BOOLEAN		bMPh2c_timeout;
+	bool		MptH2cRspEvent;
+	bool		MptBtC2hEvent;
+	bool		bMPh2c_timeout;
 
 	/* 8190 PCI does not support NDIS_WORK_ITEM. */
 	// Work Item for Mass Production Test.
@@ -167,29 +167,29 @@ typedef struct _MPT_CONTEXT
 	// To protect the following variables.
 //	NDIS_SPIN_LOCK		MptWorkItemSpinLock;
 	// Indicate a MptWorkItem is scheduled and not yet finished.
-	BOOLEAN			bMptWorkItemInProgress;
+	bool			bMptWorkItemInProgress;
 	// An instance which implements function and context of MptWorkItem.
 	MPT_WORK_ITEM_HANDLER	CurrMptAct;
 
 	// 1=Start, 0=Stop from UI.
-	ULONG			MptTestStart;
+	u32			MptTestStart;
 	// _TEST_MODE, defined in MPT_Req2.h
-	ULONG			MptTestItem;
+	u32			MptTestItem;
 	// Variable needed in each implementation of CurrMptAct.
-	ULONG			MptActType;	// Type of action performed in CurrMptAct.
+	u32			MptActType;	// Type of action performed in CurrMptAct.
 	// The Offset of IO operation is depend of MptActType.
-	ULONG			MptIoOffset;
+	u32			MptIoOffset;
 	// The Value of IO operation is depend of MptActType.
-	ULONG			MptIoValue;
+	u32			MptIoValue;
 	// The RfPath of IO operation is depend of MptActType.
-	ULONG			MptRfPath;
+	u32			MptRfPath;
 
 	WIRELESS_MODE		MptWirelessModeToSw;	// Wireless mode to switch.
 	u8			MptChannelToSw;		// Channel to switch.
 	u8			MptInitGainToSet;	// Initial gain to set.
-	//ULONG			bMptAntennaA;		// TRUE if we want to use antenna A.
-	ULONG			MptBandWidth;		// bandwidth to switch.
-	ULONG			MptRateIndex;		// rate index.
+	//u32			bMptAntennaA;		// TRUE if we want to use antenna A.
+	u32			MptBandWidth;		// bandwidth to switch.
+	u32			MptRateIndex;		// rate index.
 	// Register value kept for Single Carrier Tx test.
 	u8			btMpCckTxPower;
 	// Register value kept for Single Carrier Tx test.
@@ -198,27 +198,27 @@ typedef struct _MPT_CONTEXT
 	u8			TxPwrLevel[2];	// rf-A, rf-B
 	u32			RegTxPwrLimit;
 	// Content of RCR Regsiter for Mass Production Test.
-	ULONG			MptRCR;
+	u32			MptRCR;
 	// TRUE if we only receive packets with specific pattern.
-	BOOLEAN			bMptFilterPattern;
+	bool			bMptFilterPattern;
 	// Rx OK count, statistics used in Mass Production Test.
-	ULONG			MptRxOkCnt;
+	u32			MptRxOkCnt;
 	// Rx CRC32 error count, statistics used in Mass Production Test.
-	ULONG			MptRxCrcErrCnt;
+	u32			MptRxCrcErrCnt;
 
-	BOOLEAN			bCckContTx;	// TRUE if we are in CCK Continuous Tx test.
-	BOOLEAN			bOfdmContTx;	// TRUE if we are in OFDM Continuous Tx test.
-	BOOLEAN			bStartContTx;	// TRUE if we have start Continuous Tx test.
+	bool			bCckContTx;	// TRUE if we are in CCK Continuous Tx test.
+	bool			bOfdmContTx;	// TRUE if we are in OFDM Continuous Tx test.
+	bool			bStartContTx;	// TRUE if we have start Continuous Tx test.
 	// TRUE if we are in Single Carrier Tx test.
-	BOOLEAN			bSingleCarrier;
+	bool			bSingleCarrier;
 	// TRUE if we are in Carrier Suppression Tx Test.
-	BOOLEAN			bCarrierSuppression;
+	bool			bCarrierSuppression;
 	//TRUE if we are in Single Tone Tx test.
-	BOOLEAN			bSingleTone;
+	bool			bSingleTone;
 
 	// ACK counter asked by K.Y..
-	BOOLEAN			bMptEnableAckCounter;
-	ULONG			MptAckCounter;
+	bool			bMptEnableAckCounter;
+	u32			MptAckCounter;
 
 	// SD3 Willis For 8192S to save 1T/2T RF table for ACUT	Only fro ACUT delete later ~~~!
 	//s1Byte		BufOfLines[2][MAX_LINES_HWCONFIG_TXT][MAX_BYTES_LINE_HWCONFIG_TXT];
@@ -226,7 +226,7 @@ typedef struct _MPT_CONTEXT
 	//s4Byte			RfReadLine[2];
 
 	u8		APK_bound[2];	//for APK	path A/path B
-	BOOLEAN		bMptIndexEven;
+	bool		bMptIndexEven;
 
 	u8		backup0xc50;
 	u8		backup0xc58;
@@ -238,7 +238,7 @@ typedef struct _MPT_CONTEXT
 	u1Byte			c2hBuf[20];
 
     u1Byte          btInBuf[100];
-	ULONG			mptOutLen;
+	u32			mptOutLen;
     u1Byte          mptOutBuf[100];
 
 }MPT_CONTEXT, *PMPT_CONTEXT;
@@ -359,8 +359,8 @@ struct bb_reg_param {
 };
 //=======================================================================
 
-#define LOWER	_TRUE
-#define RAISE	_FALSE
+#define LOWER	true
+#define RAISE	false
 
 /* Hardware Registers */
 #if 0
@@ -506,15 +506,15 @@ typedef enum _OFDM_TX_MODE {
 typedef enum _RXPHY_BITMASK_
 {
 	OFDM_PPDU_BIT = 0,
-	OFDM_FALSE_BIT,
+	OFDMfalse_BIT,
 	OFDM_MPDU_OK_BIT,
 	OFDM_MPDU_FAIL_BIT,
 	CCK_PPDU_BIT,
-	CCK_FALSE_BIT,
+	CCKfalse_BIT,
 	CCK_MPDU_OK_BIT,
 	CCK_MPDU_FAIL_BIT,
 	HT_PPDU_BIT,
-	HT_FALSE_BIT,
+	HTfalse_BIT,
 	HT_MPDU_BIT,
 	HT_MPDU_OK_BIT,
 	HT_MPDU_FAIL_BIT,
@@ -615,8 +615,8 @@ extern s32 Hal_SetPowerTracking(PADAPTER padapter, u8 enable);
 extern void Hal_GetPowerTracking(PADAPTER padapter, u8 * enable);
 extern void Hal_GetThermalMeter(PADAPTER pAdapter, u8 *value);
 extern void Hal_mpt_SwitchRfSetting(PADAPTER pAdapter);
-extern void Hal_MPT_CCKTxPowerAdjust(PADAPTER Adapter, BOOLEAN bInCH14);
-extern void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, BOOLEAN beven);
+extern void Hal_MPT_CCKTxPowerAdjust(PADAPTER Adapter, bool bInCH14);
+extern void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven);
 extern void Hal_SetCCKTxPower(PADAPTER pAdapter, u8 * TxPower);
 extern void Hal_SetOFDMTxPower(PADAPTER pAdapter, u8 * TxPower);
 extern void Hal_TriggerRFThermalMeter(PADAPTER pAdapter);
@@ -625,7 +625,7 @@ extern void Hal_SetCCKContinuousTx(PADAPTER pAdapter, u8 bStart);
 extern void Hal_SetOFDMContinuousTx(PADAPTER pAdapter, u8 bStart);
 extern void Hal_ProSetCrystalCap (PADAPTER pAdapter , u32 CrystalCapVal);
 extern void _rtw_mp_xmit_priv(struct xmit_priv *pxmitpriv);
-extern void MP_PHY_SetRFPathSwitch(PADAPTER pAdapter ,BOOLEAN bMain);
-extern ULONG mpt_ProQueryCalTxPower(PADAPTER	pAdapter,u8 RfPath);
+extern void MP_PHY_SetRFPathSwitch(PADAPTER pAdapter ,bool bMain);
+extern u32 mpt_ProQueryCalTxPower(PADAPTER	pAdapter,u8 RfPath);
 
 #endif //_RTW_MP_H_

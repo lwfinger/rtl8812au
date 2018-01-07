@@ -62,7 +62,7 @@ ODM_TxPwrTrackSetPwr8812A(
 void
 PHY_IQCalibrate_8812A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bReCovery
+	bool		bReCovery
 );
 
 
@@ -88,7 +88,7 @@ PHY_DPCalibrate_8812A(
 );
 void PHY_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bMain
+	bool		bMain
 	);
 
 

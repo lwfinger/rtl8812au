@@ -32,7 +32,7 @@
 
 static u8 _is_fw_read_cmd_down(_adapter* padapter, u8 msgbox_num)
 {
-	u8	read_down = _FALSE;
+	u8	read_down = false;
 	int	retry_cnts = 100;
 
 	u8 valid;
@@ -42,7 +42,7 @@ static u8 _is_fw_read_cmd_down(_adapter* padapter, u8 msgbox_num)
 	do{
 		valid = rtw_read8(padapter,REG_HMETFR) & BIT(msgbox_num);
 		if(0 == valid ){
-			read_down = _TRUE;
+			read_down = true;
 		}
 #ifdef CONFIG_WOWLAN
 		rtw_msleep_os(2);
@@ -66,7 +66,7 @@ static u8 _is_fw_read_cmd_down(_adapter* padapter, u8 msgbox_num)
 ******************************************/
 static s32 FillH2CCmd_8812(PADAPTER padapter, u8 ElementID, u32 CmdLen, u8 *pCmdBuffer)
 {
-	u8 bcmd_down = _FALSE;
+	u8 bcmd_down = false;
 	s32 retry_cnts = 100;
 	u8 h2c_box_num;
 	u32	msgbox_addr;
@@ -83,7 +83,7 @@ static s32 FillH2CCmd_8812(PADAPTER padapter, u8 ElementID, u32 CmdLen, u8 *pCmd
 	pHalData = GET_HAL_DATA(padapter);
 
 
-	if(padapter->bFWReady == _FALSE)
+	if(padapter->bFWReady == false)
 	{
 		//DBG_8192C("FillH2CCmd_8812(): return H2C cmd because fw is not ready\n");
 		return ret;
@@ -98,7 +98,7 @@ static s32 FillH2CCmd_8812(PADAPTER padapter, u8 ElementID, u32 CmdLen, u8 *pCmd
 	if (CmdLen > RTL8812_MAX_CMD_LEN) {
 		goto exit;
 	}
-	if (padapter->bSurpriseRemoved == _TRUE)
+	if (padapter->bSurpriseRemoved == true)
 		goto exit;
 
 	//pay attention to if  race condition happened in  H2C cmd setting.
@@ -143,7 +143,7 @@ static s32 FillH2CCmd_8812(PADAPTER padapter, u8 ElementID, u32 CmdLen, u8 *pCmd
 		rtw_write32(padapter,msgbox_addr, h2c_cmd);
 		#endif
 
-		bcmd_down = _TRUE;
+		bcmd_down = true;
 
 	//	DBG_8192C("MSG_BOX:%d,CmdLen(%d), reg:0x%x =>h2c_cmd:0x%x, reg:0x%x =>h2c_cmd_ex:0x%x ..\n"
 	//		,pHalData->LastHMEBoxNum ,CmdLen,msgbox_addr,h2c_cmd,msgbox_ex_addr,h2c_cmd_ex);
@@ -220,14 +220,14 @@ u8	Get_VHT_ENI(
 	return (Ret << 4);
 }
 
-BOOLEAN
+bool
 Get_RA_ShortGI(
 	PADAPTER			Adapter,
 	struct sta_info		*psta,
 	u8					shortGIrate
 )
 {
-	BOOLEAN		bShortGI;
+	bool		bShortGI;
 	struct mlme_ext_priv	*pmlmeext = &Adapter->mlmeextpriv;
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 
@@ -241,7 +241,7 @@ Get_RA_ShortGI(
 		)
 	{
 		if(psta->vhtpriv.vht_highest_rate >= MGN_VHT2SS_MCS8)
-			bShortGI = _FALSE;
+			bShortGI = false;
 	}
 #endif
 
@@ -252,7 +252,7 @@ Get_RA_ShortGI(
 void
 Set_RA_LDPC_8812(
 	struct sta_info	*psta,
-	BOOLEAN			bLDPC
+	bool			bLDPC
 	)
 {
 	if(psta == NULL)
@@ -319,7 +319,7 @@ void rtl8812_set_raid_cmd(PADAPTER padapter, u32 bitmap, u8* arg)
 	struct mlme_ext_priv	*pmlmeext = &padapter->mlmeextpriv;
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	struct sta_info	*psta;
-	u8 macid, init_rate, raid, shortGIrate=_FALSE;
+	u8 macid, init_rate, raid, shortGIrate=false;
 
 
 
@@ -334,7 +334,7 @@ void rtl8812_set_raid_cmd(PADAPTER padapter, u32 bitmap, u8* arg)
 		return;
 	}
 
-	if(pHalData->fw_ractrl == _TRUE)
+	if(pHalData->fw_ractrl == true)
 	{
 		u8	H2CCommand[7] ={0};
 
@@ -354,7 +354,7 @@ void rtl8812_set_raid_cmd(PADAPTER padapter, u32 bitmap, u8* arg)
 		FillH2CCmd_8812(padapter, H2C_8812_RA_MASK, 7, H2CCommand);
 	}
 
-	if (shortGIrate==_TRUE)
+	if (shortGIrate==true)
 		init_rate |= BIT(7);
 
 	pdmpriv->INIDATA_RATE[macid] = init_rate;
@@ -651,7 +651,7 @@ void ConstructNullFunctionData(
 
 	SetSeqNum(pwlanhdr, 0);
 
-	if (bQoS == _TRUE) {
+	if (bQoS == true) {
 		struct rtw_ieee80211_hdr_3addr_qos *pwlanqoshdr;
 
 		SetFrameSubType(pframe, WIFI_QOS_DATA_NULL);
@@ -670,7 +670,7 @@ void ConstructNullFunctionData(
 	*pLength = pktlen;
 }
 
-void ConstructProbeRsp(_adapter *padapter, u8 *pframe, u32 *pLength, u8 *StaAddr, BOOLEAN bHideSSID)
+void ConstructProbeRsp(_adapter *padapter, u8 *pframe, u32 *pLength, u8 *StaAddr, bool bHideSSID)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
 	u16					*fctrl;
@@ -738,7 +738,7 @@ CheckFwRsvdPageContent(
 u8
 GetTxBufferRsvdPageNum8812(
 	PADAPTER	Adapter,
-	BOOLEAN		bWoWLANBoundary
+	bool		bWoWLANBoundary
 )
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -769,7 +769,7 @@ GetTxBufferRsvdPageNum8812(
 //			      TRUE: At the second time, we should send the first packet (default:beacon)
 //						to Hw again and set the lengh in descriptor to the real beacon lengh.
 // 2009.10.15 by tynli.
-static void SetFwRsvdPagePkt_8812(PADAPTER padapter, BOOLEAN bDLFinished)
+static void SetFwRsvdPagePkt_8812(PADAPTER padapter, bool bDLFinished)
 {
 	PHAL_DATA_TYPE pHalData;
 	struct xmit_frame	*pcmdframe;
@@ -800,7 +800,7 @@ static void SetFwRsvdPagePkt_8812(PADAPTER padapter, BOOLEAN bDLFinished)
 
 	// <tynli_note> The function SetFwRsvdPagePkt_8812() input must be added a value "bDLWholePackets" to
 	// decide if download wowlan packets, and use "bDLWholePackets" to be GetTxBufferRsvdPageNum8812() 2nd input value.
-	RsvdPageNum = GetTxBufferRsvdPageNum8812(padapter, _FALSE);
+	RsvdPageNum = GetTxBufferRsvdPageNum8812(padapter, false);
 	MaxRsvdPageBufSize = RsvdPageNum*PageSize;
 
 	pcmdframe = rtw_alloc_cmdxmitframe(pxmitpriv, MaxRsvdPageBufSize);
@@ -843,7 +843,7 @@ static void SetFwRsvdPagePkt_8812(PADAPTER padapter, BOOLEAN bDLFinished)
 
 		//(2) ps-poll
 		ConstructPSPoll(padapter, &ReservedPagePacket[BufIndex], &PSPollLength);
-		rtl8812a_fill_fake_txdesc(padapter, &ReservedPagePacket[BufIndex-TxDescLen], PSPollLength, _TRUE, _FALSE);
+		rtl8812a_fill_fake_txdesc(padapter, &ReservedPagePacket[BufIndex-TxDescLen], PSPollLength, true, false);
 
 		SET_8812_H2CCMD_RSVDPAGE_LOC_PSPOLL(RsvdPageLoc, TotalPageNum);
 
@@ -869,8 +869,8 @@ static void SetFwRsvdPagePkt_8812(PADAPTER padapter, BOOLEAN bDLFinished)
 			&ReservedPagePacket[BufIndex],
 			&NullFunctionDataLength,
 			get_my_bssid(&pmlmeinfo->network),
-			_FALSE, 0, 0, _FALSE);
-		rtl8812a_fill_fake_txdesc(padapter, &ReservedPagePacket[BufIndex-TxDescLen], NullFunctionDataLength, _FALSE, _FALSE);
+			false, 0, 0, false);
+		rtl8812a_fill_fake_txdesc(padapter, &ReservedPagePacket[BufIndex-TxDescLen], NullFunctionDataLength, false, false);
 
 		SET_8812_H2CCMD_RSVDPAGE_LOC_NULL_DATA(RsvdPageLoc, TotalPageNum);
 
@@ -896,8 +896,8 @@ static void SetFwRsvdPagePkt_8812(PADAPTER padapter, BOOLEAN bDLFinished)
 			&ReservedPagePacket[BufIndex],
 			&QosNullLength,
 			get_my_bssid(&pmlmeinfo->network),
-			_TRUE, 0, 0, _FALSE);
-		rtl8812a_fill_fake_txdesc(padapter, &ReservedPagePacket[BufIndex-TxDescLen], QosNullLength, _FALSE, _FALSE);
+			true, 0, 0, false);
+		rtl8812a_fill_fake_txdesc(padapter, &ReservedPagePacket[BufIndex-TxDescLen], QosNullLength, false, false);
 
 		SET_8812_H2CCMD_RSVDPAGE_LOC_QOS_NULL_DATA(RsvdPageLoc, TotalPageNum);
 
@@ -950,8 +950,8 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
-	BOOLEAN		bSendBeacon=_FALSE;
-	BOOLEAN		bcn_valid = _FALSE;
+	bool		bSendBeacon=false;
+	bool		bcn_valid = false;
 	u8	DLBcnCount=0;
 	u32 poll = 0;
 
@@ -985,7 +985,7 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 		if(pHalData->RegFwHwTxQCtrl&BIT6)
 		{
 			DBG_871X("HalDownloadRSVDPage(): There is an Adapter is sending beacon.\n");
-			bSendBeacon = _TRUE;
+			bSendBeacon = true;
 		}
 
 		// Set FWHW_TXQ_CTRL 0x422[6]=0 to tell Hw the packet is not a real beacon frame.
@@ -999,7 +999,7 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 		do
 		{
 			// download rsvd page.
-			SetFwRsvdPagePkt_8812(padapter, _FALSE);
+			SetFwRsvdPagePkt_8812(padapter, false);
 			DLBcnCount++;
 			do
 			{
@@ -1036,7 +1036,7 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 				poll = 0;
 				do
 				{
-					SetFwRsvdPagePkt_8812(padapter, _TRUE);
+					SetFwRsvdPagePkt_8812(padapter, true);
 					DLBcnCount++;
 
 					do
@@ -1247,7 +1247,7 @@ int reset_tsf(PADAPTER Adapter, u8 reset_port )
 		reset_cnt_after = rtw_read8(Adapter, reg_reset_tsf_cnt);
 	}
 
-	return(loop_cnt >= 10) ? _FAIL : _TRUE;
+	return(loop_cnt >= 10) ? _FAIL : true;
 }
 
 
@@ -1274,18 +1274,18 @@ void rtl8812_set_wowlan_cmd(_adapter* padapter, u8 enable)
 		if(enable){
 
 			pwowlan_parm.mode |=FW_WOWLAN_FUN_EN;
-			pwrpriv->wowlan_magic =_TRUE;
-			pwrpriv->wowlan_unicast =_TRUE;
+			pwrpriv->wowlan_magic =true;
+			pwrpriv->wowlan_unicast =true;
 
-			if(pwrpriv->wowlan_pattern ==_TRUE){
+			if(pwrpriv->wowlan_pattern ==true){
 				pwowlan_parm.mode |= FW_WOWLAN_PATTERN_MATCH;
 				DBG_871X_LEVEL(_drv_info_, "%s 2.pwowlan_parm.mode=0x%x \n",__FUNCTION__,pwowlan_parm.mode );
 			}
-			if(pwrpriv->wowlan_magic ==_TRUE){
+			if(pwrpriv->wowlan_magic ==true){
 				pwowlan_parm.mode |=FW_WOWLAN_MAGIC_PKT;
 				DBG_871X_LEVEL(_drv_info_, "%s 3.pwowlan_parm.mode=0x%x \n",__FUNCTION__,pwowlan_parm.mode );
 			}
-			if(pwrpriv->wowlan_unicast ==_TRUE){
+			if(pwrpriv->wowlan_unicast ==true){
 				pwowlan_parm.mode |=FW_WOWLAN_UNICAST;
 				DBG_871X_LEVEL(_drv_info_, "%s 4.pwowlan_parm.mode=0x%x \n",__FUNCTION__,pwowlan_parm.mode );
 			}
@@ -1332,7 +1332,7 @@ void rtl8812_set_wowlan_cmd(_adapter* padapter, u8 enable)
 
 			res = FillH2CCmd_8812(padapter, H2C_8812_REMOTE_WAKE_CTRL, 3, (u8 *)&pwowlan_parm);
 		} else {
-			pwrpriv->wowlan_magic =_FALSE;
+			pwrpriv->wowlan_magic =false;
 			res = FillH2CCmd_8812(padapter, H2C_8812_WO_WLAN, 2, (u8 *)&pwowlan_parm);
 			rtw_msleep_os(2);
 			res = FillH2CCmd_8812(padapter, H2C_8812_REMOTE_WAKE_CTRL, 3, (u8 *)&pwowlan_parm);

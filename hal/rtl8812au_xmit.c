@@ -60,7 +60,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz ,u8 bag
 #ifndef CONFIG_USE_USB_BUFFER_ALLOC_TX
 	if (padapter->registrypriv.mp_mode == 0)
 	{
-		if((!bagg_pkt) &&(rtw_usb_bulk_size_boundary(padapter,TXDESC_SIZE+sz)==_FALSE))
+		if((!bagg_pkt) &&(rtw_usb_bulk_size_boundary(padapter,TXDESC_SIZE+sz)==false))
 		{
 			ptxdesc = (pmem+PACKET_OFFSET_SZ);
 			//DBG_8192C("==> non-agg-pkt,shift pointer...\n");
@@ -144,13 +144,13 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz ,u8 bag
 		    (pattrib->ether_type != 0x88b4) &&
 		    (pattrib->dhcp_pkt != 1)
 #ifdef CONFIG_AUTO_AP_MODE
-		    && (pattrib->pctrl != _TRUE)
+		    && (pattrib->pctrl != true)
 #endif
 		)
 		{
 			//Non EAP & ARP & DHCP type data packet
 
-			if (pattrib->ampdu_en==_TRUE) {
+			if (pattrib->ampdu_en==true) {
 				SET_TX_DESC_AGG_ENABLE_8812(ptxdesc, 1);
 				SET_TX_DESC_MAX_AGG_NUM_8812(ptxdesc, 0x1f);
 				// Set A-MPDU aggregation.
@@ -164,7 +164,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz ,u8 bag
 			//DATA  Rate FB LMT
 			SET_TX_DESC_DATA_RATE_FB_LIMIT_8812(ptxdesc, 0x1f);
 
-			if (pHalData->fw_ractrl == _FALSE) {
+			if (pHalData->fw_ractrl == false) {
 				SET_TX_DESC_USE_RATE_8812(ptxdesc, 1);
 
 				if(pdmpriv->INIDATA_RATE[pattrib->mac_id] & BIT(7))
@@ -213,7 +213,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz ,u8 bag
 
 		//offset 20
 		SET_TX_DESC_RETRY_LIMIT_ENABLE_8812(ptxdesc, 1);
-		if (pattrib->retry_ctrl == _TRUE) {
+		if (pattrib->retry_ctrl == true) {
 			SET_TX_DESC_DATA_RETRY_LIMIT_8812(ptxdesc, 6);
 		} else {
 			SET_TX_DESC_DATA_RETRY_LIMIT_8812(ptxdesc, 12);
@@ -222,7 +222,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz ,u8 bag
 		SET_TX_DESC_USE_RATE_8812(ptxdesc, 1);
 
 #ifdef CONFIG_INTEL_PROXIM
-		if((padapter->proximity.proxim_on==_TRUE)&&(pattrib->intel_proxim==_TRUE)){
+		if((padapter->proximity.proxim_on==true)&&(pattrib->intel_proxim==true)){
 			DBG_871X("\n %s pattrib->rate=%d\n",__FUNCTION__,pattrib->rate);
 			SET_TX_DESC_TX_RATE_8812(ptxdesc, pattrib->rate);
 		}
@@ -284,7 +284,7 @@ s32 rtl8812au_xmit_buf_handler(PADAPTER padapter)
 		return _FAIL;
 	}
 
-	ret = (padapter->bDriverStopped == _TRUE) || (padapter->bSurpriseRemoved == _TRUE);
+	ret = (padapter->bDriverStopped == true) || (padapter->bSurpriseRemoved == true);
 	if (ret) {
 		RT_TRACE(_module_hal_xmit_c_, _drv_notice_,
 				 ("%s: bDriverStopped(%d) bSurpriseRemoved(%d)!\n",
@@ -292,7 +292,7 @@ s32 rtl8812au_xmit_buf_handler(PADAPTER padapter)
 		return _FAIL;
 	}
 
-	if(check_pending_xmitbuf(pxmitpriv) == _FALSE)
+	if(check_pending_xmitbuf(pxmitpriv) == false)
 		return _SUCCESS;
 
 #ifdef CONFIG_LPS_LCLK
@@ -364,7 +364,7 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 			sz = pattrib->last_txcmdsz;
 		}
 
-		pull = update_txdesc(pxmitframe, mem_addr, sz, _FALSE);
+		pull = update_txdesc(pxmitframe, mem_addr, sz, false);
 
 		if(pull)
 		{
@@ -465,7 +465,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 		pxmitbuf = rtw_alloc_xmitbuf(pxmitpriv);
 		if (pxmitbuf == NULL){
 			//DBG_871X("%s #1, connot alloc xmitbuf!!!! \n",__FUNCTION__);
-			return _FALSE;
+			return false;
 		}
 	}
 
@@ -479,7 +479,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 			// no more xmit frame, release xmit buffer
 			//DBG_8192C("no more xmit frame ,return\n");
 			rtw_free_xmitbuf(pxmitpriv, pxmitbuf);
-			return _FALSE;
+			return false;
 		}
 
 #ifndef IDEA_CONDITION
@@ -513,7 +513,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 		pxmitframe->pkt_offset = 1; // first frame of aggregation, reserve offset
 		#endif
 
-		if (rtw_xmitframe_coalesce(padapter, pxmitframe->pkt, pxmitframe) == _FALSE) {
+		if (rtw_xmitframe_coalesce(padapter, pxmitframe->pkt, pxmitframe) == false) {
 			DBG_871X("%s coalesce 1st xmitframe failed \n",__FUNCTION__);
 			continue;
 		}
@@ -578,7 +578,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 	xmitframe_phead = get_list_head(&ptxservq->sta_pending);
 	xmitframe_plist = get_next(xmitframe_phead);
 
-	while (rtw_end_of_queue_search(xmitframe_phead, xmitframe_plist) == _FALSE)
+	while (rtw_end_of_queue_search(xmitframe_phead, xmitframe_plist) == false)
 	{
 		pxmitframe = LIST_CONTAINOR(xmitframe_plist, struct xmit_frame, list);
 		xmitframe_plist = get_next(xmitframe_plist);
@@ -628,7 +628,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 //		pxmitframe->pxmitbuf = pxmitbuf;
 		pxmitframe->buf_addr = pxmitbuf->pbuf + pbuf;
 
-		if (rtw_xmitframe_coalesce(padapter, pxmitframe->pkt, pxmitframe) == _FALSE) {
+		if (rtw_xmitframe_coalesce(padapter, pxmitframe->pkt, pxmitframe) == false) {
 			DBG_871X("%s coalesce failed \n",__FUNCTION__);
 			rtw_free_xmitframe(pxmitpriv, pxmitframe);
 			continue;
@@ -639,7 +639,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 		rtw_os_xmit_complete(padapter, pxmitframe);
 
 		// (len - TXDESC_SIZE) == pxmitframe->attrib.last_txcmdsz
-		update_txdesc(pxmitframe, pxmitframe->buf_addr, pxmitframe->attrib.last_txcmdsz,_TRUE);
+		update_txdesc(pxmitframe, pxmitframe->buf_addr, pxmitframe->attrib.last_txcmdsz,true);
 
 		// don't need xmitframe any more
 		rtw_free_xmitframe(pxmitpriv, pxmitframe);
@@ -668,7 +668,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 	}//end while( aggregate same priority and same DA(AP or STA) frames)
 
 
-	if (_rtw_queue_empty(&ptxservq->sta_pending) == _TRUE)
+	if (_rtw_queue_empty(&ptxservq->sta_pending) == true)
 		rtw_list_delete(&ptxservq->tx_pending);
 
 	_exit_critical_bh(&pxmitpriv->lock, &irqL);
@@ -692,7 +692,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 	}
 #endif	// CONFIG_USE_USB_BUFFER_ALLOC_TX
 
-	update_txdesc(pfirstframe, pfirstframe->buf_addr, pfirstframe->attrib.last_txcmdsz,_TRUE);
+	update_txdesc(pfirstframe, pfirstframe->buf_addr, pfirstframe->attrib.last_txcmdsz,true);
 
         #ifdef CONFIG_TX_EARLY_MODE
 	//prepare EM info for first frame, agg_num value start from 1
@@ -718,7 +718,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 
 	rtw_free_xmitframe(pxmitpriv, pfirstframe);
 
-	return _TRUE;
+	return true;
 }
 
 #else
@@ -741,7 +741,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 		pxmitbuf = rtw_alloc_xmitbuf(pxmitpriv);
 		if(!pxmitbuf)
 		{
-			return _FALSE;
+			return false;
 		}
 	}
 
@@ -788,14 +788,14 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 		else
 		{
 			rtw_free_xmitbuf(pxmitpriv, pxmitbuf);
-			return _FALSE;
+			return false;
 		}
 
 		break;
 
 	}while(0/*xcnt < (NR_XMITFRAME >> 3)*/);
 
-	return _TRUE;
+	return true;
 
 }
 #endif
@@ -820,8 +820,8 @@ static s32 xmitframe_direct(_adapter *padapter, struct xmit_frame *pxmitframe)
 
 /*
  * Return
- *	_TRUE	dump packet directly
- *	_FALSE	enqueue packet
+ *	true	dump packet directly
+ *	false	enqueue packet
  */
 static s32 pre_xmitframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 {
@@ -843,11 +843,11 @@ static s32 pre_xmitframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 	}
 
 
-	if (check_fwstate(pmlmepriv, _FW_UNDER_SURVEY|_FW_UNDER_LINKING) == _TRUE)
+	if (check_fwstate(pmlmepriv, _FW_UNDER_SURVEY|_FW_UNDER_LINKING) == true)
 		goto enqueue;
 
 #ifdef CONFIG_CONCURRENT_MODE
-	if (check_buddy_fwstate(padapter, _FW_UNDER_SURVEY|_FW_UNDER_LINKING) == _TRUE)
+	if (check_buddy_fwstate(padapter, _FW_UNDER_SURVEY|_FW_UNDER_LINKING) == true)
 		goto enqueue;
 #endif
 
@@ -866,7 +866,7 @@ static s32 pre_xmitframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 		rtw_free_xmitframe(pxmitpriv, pxmitframe);
 	}
 
-	return _TRUE;
+	return true;
 
 enqueue:
 	res = rtw_xmitframe_enqueue(padapter, pxmitframe);
@@ -879,10 +879,10 @@ enqueue:
 		// Trick, make the statistics correct
 		pxmitpriv->tx_pkts--;
 		pxmitpriv->tx_drop++;
-		return _TRUE;
+		return true;
 	}
 
-	return _FALSE;
+	return false;
 }
 
 s32 rtl8812au_mgnt_xmit(_adapter *padapter, struct xmit_frame *pmgntframe)
@@ -892,8 +892,8 @@ s32 rtl8812au_mgnt_xmit(_adapter *padapter, struct xmit_frame *pmgntframe)
 
 /*
  * Return
- *	_TRUE	dump packet directly ok
- *	_FALSE	temporary can't transmit packets to hardware
+ *	true	dump packet directly ok
+ *	false	temporary can't transmit packets to hardware
  */
 s32 rtl8812au_hal_xmit(_adapter *padapter, struct xmit_frame *pxmitframe)
 {

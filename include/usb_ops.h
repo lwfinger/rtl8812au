@@ -54,16 +54,16 @@ void rtl8812au_set_intf_ops(struct _io_ops *pops);
 
 /*
 * Increase and check if the continual_urb_error of this @param dvobjprive is larger than MAX_CONTINUAL_URB_ERR
-* @return _TRUE:
-* @return _FALSE:
+* @return true:
+* @return false:
 */
 static inline int rtw_inc_and_chk_continual_urb_error(struct dvobj_priv *dvobj)
 {
-	int ret = _FALSE;
+	int ret = false;
 	int value;
 	if( (value=ATOMIC_INC_RETURN(&dvobj->continual_urb_error)) > MAX_CONTINUAL_URB_ERR) {
 		DBG_871X("[dvobj:%p][ERROR] continual_urb_error:%d > %d\n", dvobj, value, MAX_CONTINUAL_URB_ERR);
-		ret = _TRUE;
+		ret = true;
 	} else {
 		//DBG_871X("[dvobj:%p] continual_urb_error:%d\n", dvobj, value);
 	}
@@ -95,14 +95,14 @@ enum RTW_USB_SPEED {
 
 static inline u8 rtw_usb_bulk_size_boundary(_adapter * padapter,int buf_len)
 {
-	u8 rst = _TRUE;
+	u8 rst = true;
 
 	if (IS_SUPER_SPEED_USB(padapter))
-		rst = (0 == (buf_len) % USB_SUPER_SPEED_BULK_SIZE)?_TRUE:_FALSE;
+		rst = (0 == (buf_len) % USB_SUPER_SPEED_BULK_SIZE)?true:false;
 	if (IS_HIGH_SPEED_USB(padapter))
-		rst = (0 == (buf_len) % USB_HIGH_SPEED_BULK_SIZE)?_TRUE:_FALSE;
+		rst = (0 == (buf_len) % USB_HIGH_SPEED_BULK_SIZE)?true:false;
 	else
-		rst = (0 == (buf_len) % USB_FULL_SPEED_BULK_SIZE)?_TRUE:_FALSE;
+		rst = (0 == (buf_len) % USB_FULL_SPEED_BULK_SIZE)?true:false;
 	return rst;
 }
 

@@ -235,9 +235,9 @@ void rtl8812_query_rx_phy_status(
 	struct sta_info *psta;
 	//_irqL		irqL;
 
-	pkt_info.bPacketMatchBSSID =_FALSE;
-	pkt_info.bPacketToSelf = _FALSE;
-	pkt_info.bPacketBeacon = _FALSE;
+	pkt_info.bPacketMatchBSSID =false;
+	pkt_info.bPacketToSelf = false;
+	pkt_info.bPacketBeacon = false;
 
 	wlanhdr = get_recvframe_data(precvframe);
 
@@ -250,7 +250,7 @@ void rtl8812_query_rx_phy_status(
 	pkt_info.bPacketBeacon = pkt_info.bPacketMatchBSSID && (GetFrameSubType(wlanhdr) == WIFI_BEACON);
 
 	if(pkt_info.bPacketBeacon){
-		if(check_fwstate(&padapter->mlmepriv, WIFI_STATION_STATE) == _TRUE){
+		if(check_fwstate(&padapter->mlmepriv, WIFI_STATION_STATE) == true){
 			sa = padapter->mlmepriv.cur_network.network.MacAddress;
 			#if 0
 			{
@@ -282,7 +282,7 @@ void rtl8812_query_rx_phy_status(
 
 	precvframe->u.hdr.psta = NULL;
 	if (pkt_info.bPacketMatchBSSID &&
-		(check_fwstate(&padapter->mlmepriv, WIFI_AP_STATE) == _TRUE))
+		(check_fwstate(&padapter->mlmepriv, WIFI_AP_STATE) == true))
 	{
 		if (psta)
 		{
@@ -293,7 +293,7 @@ void rtl8812_query_rx_phy_status(
 	}
 	else if (pkt_info.bPacketToSelf || pkt_info.bPacketBeacon)
 	{
-		if (check_fwstate(&padapter->mlmepriv, WIFI_ADHOC_STATE|WIFI_ADHOC_MASTER_STATE) == _TRUE)
+		if (check_fwstate(&padapter->mlmepriv, WIFI_ADHOC_STATE|WIFI_ADHOC_MASTER_STATE) == true)
 		{
 			if (psta)
 			{

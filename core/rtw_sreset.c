@@ -29,7 +29,7 @@ void sreset_init_value(_adapter *padapter)
 	struct sreset_priv *psrtpriv = &pHalData->srestpriv;
 
 	_rtw_mutex_init(&psrtpriv->silentreset_mutex);
-	psrtpriv->silent_reset_inprogress = _FALSE;
+	psrtpriv->silent_reset_inprogress = false;
 	psrtpriv->Wifi_Error_Status = WIFI_STATUS_SUCCESS;
 	psrtpriv->last_tx_time =0;
 	psrtpriv->last_tx_complete_time =0;
@@ -41,7 +41,7 @@ void sreset_reset_value(_adapter *padapter)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 	struct sreset_priv *psrtpriv = &pHalData->srestpriv;
 
-	psrtpriv->silent_reset_inprogress = _FALSE;
+	psrtpriv->silent_reset_inprogress = false;
 	psrtpriv->Wifi_Error_Status = WIFI_STATUS_SUCCESS;
 	psrtpriv->last_tx_time =0;
 	psrtpriv->last_tx_complete_time =0;
@@ -57,7 +57,7 @@ u8 sreset_get_wifi_status(_adapter *padapter)
 	u8 status = WIFI_STATUS_SUCCESS;
 	u32 val32 = 0;
 	_irqL irqL;
-	if(psrtpriv->silent_reset_inprogress == _TRUE)
+	if(psrtpriv->silent_reset_inprogress == true)
         {
 		return status;
 	}
@@ -108,7 +108,7 @@ bool sreset_inprogress(_adapter *padapter)
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 	return pHalData->srestpriv.silent_reset_inprogress;
 #else
-	return _FALSE;
+	return false;
 #endif
 }
 
@@ -163,7 +163,7 @@ void sreset_restore_security_station(_adapter *padapter)
 		else
 		{
 			//pairwise key
-			rtw_setstakey_cmd(padapter, (unsigned char *)psta, _TRUE);
+			rtw_setstakey_cmd(padapter, (unsigned char *)psta, true);
 			//group key
 			rtw_set_key(padapter,&padapter->securitypriv,padapter->securitypriv.dot118021XGrpKeyid, 0);
 		}
@@ -216,7 +216,7 @@ void sreset_restore_network_station(_adapter *padapter)
 	set_channel_bwmode(padapter, pmlmeext->cur_channel, pmlmeext->cur_ch_offset, pmlmeext->cur_bwmode);
 
 	//disable dynamic functions, such as high power, DIG
-	//Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
+	//Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, false);
 
 	rtw_hal_set_hwreg(padapter, HW_VAR_BSSID, pmlmeinfo->network.MacAddress);
 
@@ -319,7 +319,7 @@ void sreset_reset(_adapter *padapter)
 	psrtpriv->Wifi_Error_Status = WIFI_STATUS_SUCCESS;
 
 	_enter_critical_mutex(&psrtpriv->silentreset_mutex, &irqL);
-	psrtpriv->silent_reset_inprogress = _TRUE;
+	psrtpriv->silent_reset_inprogress = true;
 	pwrpriv->change_rfpwrstate = rf_off;
 
 	sreset_stop_adapter(padapter);
@@ -337,7 +337,7 @@ void sreset_reset(_adapter *padapter)
 	sreset_start_adapter(padapter->pbuddy_adapter);
 	#endif
 
-	psrtpriv->silent_reset_inprogress = _FALSE;
+	psrtpriv->silent_reset_inprogress = false;
 	_exit_critical_mutex(&psrtpriv->silentreset_mutex, &irqL);
 
 	DBG_871X("%s done in %d ms\n", __FUNCTION__, rtw_get_passing_time_ms(start));

@@ -24,28 +24,9 @@
 #define SUCCESS	0
 #define FAIL	(-1)
 
-#ifndef TRUE
-	#define _TRUE	1
-#else
-	#define _TRUE	TRUE
-#endif
-
-#ifndef FALSE
-	#define _FALSE	0
-#else
-	#define _FALSE	FALSE
-#endif
-
 	#include <linux/types.h>
-	#define NDIS_OID uint
-	#define NDIS_STATUS uint
 
 	typedef	signed int sint;
-
-        #define UCHAR u8
-	#define USHORT u16
-	#define UINT u32
-	#define ULONG u32
 
 	typedef void (*proc_t)(void*);
 
@@ -70,25 +51,18 @@
 */
 
 //
-// Byte Swapping routine.
-//
-#define EF1Byte
-#define EF2Byte		le16_to_cpu
-#define EF4Byte	le32_to_cpu
-
-//
 // Read LE format data from memory
 //
-#define ReadEF1Byte(_ptr)		EF1Byte(*((u8 *)(_ptr)))
-#define ReadEF2Byte(_ptr)		EF2Byte(*((u16 *)(_ptr)))
-#define ReadEF4Byte(_ptr)		EF4Byte(*((u32 *)(_ptr)))
+#define Read(_ptr)		(*((u8 *)(_ptr)))
+#define Readle16_to_cpu(_ptr)		le16_to_cpu(*((u16 *)(_ptr)))
+#define Readle32_to_cpu(_ptr)		le32_to_cpu(*((u32 *)(_ptr)))
 
 //
 // Write LE data to memory
 //
-#define WriteEF1Byte(_ptr, _val)	(*((u8 *)(_ptr)))=EF1Byte(_val)
-#define WriteEF2Byte(_ptr, _val)	(*((u16 *)(_ptr)))=EF2Byte(_val)
-#define WriteEF4Byte(_ptr, _val)	(*((u32 *)(_ptr)))=EF4Byte(_val)
+#define Write(_ptr, _val)	(*((u8 *)(_ptr)))=(_val)
+#define Writele16_to_cpu(_ptr, _val)	(*((u16 *)(_ptr)))=le16_to_cpu(_val)
+#define Writele32_to_cpu(_ptr, _val)	(*((u32 *)(_ptr)))=le32_to_cpu(_val)
 
 //
 //	Example:
@@ -113,7 +87,7 @@
 //		4-byte pointer in litten-endian system.
 //
 #define LE_P4BYTE_TO_HOST_4BYTE(__pStart) \
-	(EF4Byte(*((u32 *)(__pStart))))
+	(le32_to_cpu(*((u32 *)(__pStart))))
 
 //
 //	Description:
@@ -145,7 +119,7 @@
 //
 #define SET_BITS_TO_LE_4BYTE(__pStart, __BitOffset, __BitLen, __Value) \
 	*((u32 *)(__pStart)) = \
-		EF4Byte( \
+		le32_to_cpu( \
 			LE_BITS_CLEARED_TO_4BYTE(__pStart, __BitOffset, __BitLen) \
 			| \
 			( (((u32)__Value) & BIT_LEN_MASK_32(__BitLen)) << (__BitOffset) ) \
@@ -159,7 +133,7 @@
 	(BIT_LEN_MASK_16(__BitLen) << (__BitOffset))
 
 #define LE_P2BYTE_TO_HOST_2BYTE(__pStart) \
-	(EF2Byte(*((u16 *)(__pStart))))
+	(le16_to_cpu(*((u16 *)(__pStart))))
 
 #define LE_BITS_TO_2BYTE(__pStart, __BitOffset, __BitLen) \
 	( \
@@ -177,7 +151,7 @@
 
 #define SET_BITS_TO_LE_2BYTE(__pStart, __BitOffset, __BitLen, __Value) \
 	*((u16 *)(__pStart)) = \
-		EF2Byte( \
+		le16_to_cpu( \
 			LE_BITS_CLEARED_TO_2BYTE(__pStart, __BitOffset, __BitLen) \
 			| \
 			( (((u16)__Value) & BIT_LEN_MASK_16(__BitLen)) << (__BitOffset) ) \
@@ -190,7 +164,7 @@
 	(BIT_LEN_MASK_8(__BitLen) << (__BitOffset))
 
 #define LE_P1BYTE_TO_HOST_1BYTE(__pStart) \
-	(EF1Byte(*((u8 *)(__pStart))))
+	((*((u8 *)(__pStart))))
 
 #define LE_BITS_TO_1BYTE(__pStart, __BitOffset, __BitLen) \
 	( \
@@ -208,7 +182,7 @@
 
 #define SET_BITS_TO_LE_1BYTE(__pStart, __BitOffset, __BitLen, __Value) \
 	*((u8 *)(__pStart)) = \
-		EF1Byte( \
+		( \
 			LE_BITS_CLEARED_TO_1BYTE(__pStart, __BitOffset, __BitLen) \
 			| \
 			( (((u8)__Value) & BIT_LEN_MASK_8(__BitLen)) << (__BitOffset) ) \
@@ -224,7 +198,7 @@
 #define SET_BITS_TO_LE_1BYTE_8BIT(__pStart, __BitOffset, __BitLen, __Value) \
 { \
 	*((pu1Byte)(__pStart)) = \
-		EF1Byte( \
+		( \
 			LE_BITS_CLEARED_TO_1BYTE_8BIT(__pStart, __BitOffset, __BitLen) \
 			| \
 			((u1Byte)__Value) \
@@ -233,7 +207,5 @@
 
 // Get the N-bytes aligment offset from the current length
 #define N_BYTE_ALIGMENT(__Value, __Aligment) ((__Aligment == 1) ? (__Value) : (((__Value + __Aligment - 1) / __Aligment) * __Aligment))
-
-typedef unsigned char	BOOLEAN,*PBOOLEAN;
 
 #endif //__BASIC_TYPES_H__

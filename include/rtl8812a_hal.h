@@ -255,7 +255,7 @@ typedef enum _TX_PWR_PERCENTAGE{
 #define INCLUDE_MULTI_FUNC_BT(_Adapter)	(GET_HAL_DATA(_Adapter)->MultiFunc & RT_MULTI_FUNC_BT)
 #define INCLUDE_MULTI_FUNC_GPS(_Adapter)	(GET_HAL_DATA(_Adapter)->MultiFunc & RT_MULTI_FUNC_GPS)
 
-//#define IS_MULTI_FUNC_CHIP(_Adapter)	(((((PHAL_DATA_TYPE)(_Adapter->HalData))->MultiFunc) & (RT_MULTI_FUNC_BT|RT_MULTI_FUNC_GPS)) ? _TRUE : _FALSE)
+//#define IS_MULTI_FUNC_CHIP(_Adapter)	(((((PHAL_DATA_TYPE)(_Adapter->HalData))->MultiFunc) & (RT_MULTI_FUNC_BT|RT_MULTI_FUNC_GPS)) ? true : false)
 
 //#define RT_IS_FUNC_DISABLED(__pAdapter, __FuncBits) ( (__pAdapter)->DisabledFunctions & (__FuncBits) )
 
@@ -272,7 +272,7 @@ typedef enum _TX_PWR_PERCENTAGE{
 
 // rtl8812_hal_init.c
 void	_8051Reset8812(PADAPTER padapter);
-s32	FirmwareDownload8812(PADAPTER Adapter, BOOLEAN bUsedWoWLANFw);
+s32	FirmwareDownload8812(PADAPTER Adapter, bool bUsedWoWLANFw);
 void	InitializeFirmwareVars8812(PADAPTER padapter);
 
 s32	InitLLTTable8812(PADAPTER padapter, u8 txpktbuf_bndy);
@@ -284,20 +284,20 @@ void CheckAutoloadState8812A(PADAPTER padapter);
 u8	GetEEPROMSize8812A(PADAPTER padapter);
 void InitPGData8812A(PADAPTER padapter);
 void	Hal_EfuseParseIDCode8812A(PADAPTER padapter, u8 *hwinfo);
-void	Hal_ReadPROMVersion8812A(PADAPTER padapter, u8 *hwinfo, BOOLEAN AutoLoadFail);
-void	Hal_ReadTxPowerInfo8812A(PADAPTER padapter,u8* hwinfo,BOOLEAN	AutoLoadFail);
-void	Hal_ReadBoardType8812A(PADAPTER pAdapter,u8* hwinfo,BOOLEAN AutoLoadFail);
-void	Hal_ReadThermalMeter_8812A(PADAPTER	Adapter,u8* PROMContent,BOOLEAN		AutoloadFail);
-void	Hal_ReadChannelPlan8812A(PADAPTER padapter, u8 *hwinfo, BOOLEAN AutoLoadFail);
-void	Hal_EfuseParseXtal_8812A(PADAPTER pAdapter,u8* hwinfo,BOOLEAN AutoLoadFail);
-void	Hal_ReadAntennaDiversity8812A(PADAPTER pAdapter,u8* PROMContent,BOOLEAN AutoLoadFail);
-void	Hal_ReadPAType_8812A(PADAPTER Adapter,u8* PROMContent, BOOLEAN AutoloadFail);
-void	Hal_ReadPAType_8821A(PADAPTER Adapter,u8* PROMContent, BOOLEAN AutoloadFail);
-void	Hal_ReadRFEType_8812A(PADAPTER Adapter,u8* PROMContent, BOOLEAN AutoloadFail);
-void	Hal_EfuseParseBTCoexistInfo8812A(PADAPTER Adapter, u8* hwinfo, BOOLEAN AutoLoadFail);
-void	hal_ReadUsbType_8812AU(PADAPTER Adapter, u8 *PROMContent, BOOLEAN AutoloadFail);
+void	Hal_ReadPROMVersion8812A(PADAPTER padapter, u8 *hwinfo, bool AutoLoadFail);
+void	Hal_ReadTxPowerInfo8812A(PADAPTER padapter,u8* hwinfo,bool	AutoLoadFail);
+void	Hal_ReadBoardType8812A(PADAPTER pAdapter,u8* hwinfo,bool AutoLoadFail);
+void	Hal_ReadThermalMeter_8812A(PADAPTER	Adapter,u8* PROMContent,bool		AutoloadFail);
+void	Hal_ReadChannelPlan8812A(PADAPTER padapter, u8 *hwinfo, bool AutoLoadFail);
+void	Hal_EfuseParseXtal_8812A(PADAPTER pAdapter,u8* hwinfo,bool AutoLoadFail);
+void	Hal_ReadAntennaDiversity8812A(PADAPTER pAdapter,u8* PROMContent,bool AutoLoadFail);
+void	Hal_ReadPAType_8812A(PADAPTER Adapter,u8* PROMContent, bool AutoloadFail);
+void	Hal_ReadPAType_8821A(PADAPTER Adapter,u8* PROMContent, bool AutoloadFail);
+void	Hal_ReadRFEType_8812A(PADAPTER Adapter,u8* PROMContent, bool AutoloadFail);
+void	Hal_EfuseParseBTCoexistInfo8812A(PADAPTER Adapter, u8* hwinfo, bool AutoLoadFail);
+void	hal_ReadUsbType_8812AU(PADAPTER Adapter, u8 *PROMContent, bool AutoloadFail);
 
-BOOLEAN HalDetectPwrDownMode8812(PADAPTER Adapter);
+bool HalDetectPwrDownMode8812(PADAPTER Adapter);
 
 #ifdef CONFIG_WOWLAN
 void Hal_DetectWoWMode(PADAPTER pAdapter);

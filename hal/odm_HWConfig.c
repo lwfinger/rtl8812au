@@ -311,7 +311,7 @@ odm_RxPhyStatus92CSeries_Parsing(
 	s1Byte				rx_pwr[4], rx_pwr_all=0;
 	u1Byte				EVM, PWDB_ALL = 0, PWDB_ALL_BT;
 	u1Byte				RSSI, total_rssi=0;
-	BOOLEAN				isCCKrate=FALSE;
+	bool				isCCKrate=FALSE;
 	u1Byte				rf_rx_num = 0;
 	u1Byte				cck_highpwr = 0;
 	u1Byte				LNA_idx, VGA_idx;
@@ -1241,9 +1241,9 @@ ODM_MacStatusQuery(
 	PDM_ODM_T					pDM_Odm,
 	pu1Byte						pMacStatus,
 	u1Byte						MacID,
-	BOOLEAN						bPacketMatchBSSID,
-	BOOLEAN						bPacketToSelf,
-	BOOLEAN						bPacketBeacon
+	bool						bPacketMatchBSSID,
+	bool						bPacketToSelf,
+	bool						bPacketBeacon
 	)
 {
 	// 2011/10/19 Driver team will handle in the future.

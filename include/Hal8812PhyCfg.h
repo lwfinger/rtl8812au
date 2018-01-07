@@ -130,7 +130,7 @@ PHY_SwitchWirelessBand8812(
 //
 void	PHY_GetTxPowerLevel8812(PADAPTER	Adapter, u32*	powerlevel	);
 void	PHY_SetTxPowerLevel8812(PADAPTER	Adapter, u8	Channel	);
-BOOLEAN	PHY_UpdateTxPowerDbm8812(PADAPTER	Adapter, int	powerInDbm	);
+bool	PHY_UpdateTxPowerDbm8812(PADAPTER	Adapter, int	powerInDbm	);
 u32 PHY_GetTxPowerIndex_8812A(
 	PADAPTER			pAdapter,
 	u8					RFPath,
@@ -188,7 +188,7 @@ PHY_SetSwChnlBWMode8812(
 void
 PHY_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bMain
+	bool		bMain
 );
 
 void

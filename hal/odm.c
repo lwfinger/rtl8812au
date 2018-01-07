@@ -437,7 +437,7 @@ odm_DIG(
 		PDM_ODM_T		pDM_Odm
 	);
 
-BOOLEAN
+bool
 odm_DigAbort(
 		PDM_ODM_T		pDM_Odm
 	);
@@ -693,7 +693,7 @@ odm_InitHybridAntDiv(
 	PDM_ODM_T	pDM_Odm
 	);
 
-BOOLEAN
+bool
 odm_StaDefAntSel(
 	PDM_ODM_T	pDM_Odm,
 	u4Byte		OFDM_Ant1_Cnt,
@@ -707,7 +707,7 @@ void
 odm_SetRxIdleAnt(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte	Ant,
-	BOOLEAN   bDualPath
+	bool   bDualPath
 );
 
 
@@ -977,14 +977,14 @@ ODM_CmnInfoInit(
 			pDM_Odm->PatchID = (u1Byte)Value;
 			break;
 		case	ODM_CMNINFO_BINHCT_TEST:
-			pDM_Odm->bInHctTest = (BOOLEAN)Value;
+			pDM_Odm->bInHctTest = (bool)Value;
 			break;
 		case	ODM_CMNINFO_BWIFI_TEST:
-			pDM_Odm->bWIFITest = (BOOLEAN)Value;
+			pDM_Odm->bWIFITest = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_SMART_CONCURRENT:
-			pDM_Odm->bDualMacSmartConcurrent = (BOOLEAN )Value;
+			pDM_Odm->bDualMacSmartConcurrent = (bool )Value;
 			break;
 
 		//To remove the compiler warning, must add an empty default statement to handle the other values.
@@ -1049,7 +1049,7 @@ ODM_CmnInfoHook(
 			break;
 
 		case	ODM_CMNINFO_DMSP_GET_VALUE:
-			pDM_Odm->pbGetValueFromOtherMac = (BOOLEAN *)pValue;
+			pDM_Odm->pbGetValueFromOtherMac = (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_BUDDY_ADAPTOR:
@@ -1057,15 +1057,15 @@ ODM_CmnInfoHook(
 			break;
 
 		case	ODM_CMNINFO_DMSP_IS_MASTER:
-			pDM_Odm->pbMasterOfDMSP = (BOOLEAN *)pValue;
+			pDM_Odm->pbMasterOfDMSP = (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_SCAN:
-			pDM_Odm->pbScanInProcess = (BOOLEAN *)pValue;
+			pDM_Odm->pbScanInProcess = (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_POWER_SAVING:
-			pDM_Odm->pbPowerSaving = (BOOLEAN *)pValue;
+			pDM_Odm->pbPowerSaving = (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_ONE_PATH_CCA:
@@ -1073,15 +1073,15 @@ ODM_CmnInfoHook(
 			break;
 
 		case	ODM_CMNINFO_DRV_STOP:
-			pDM_Odm->pbDriverStopped =  (BOOLEAN *)pValue;
+			pDM_Odm->pbDriverStopped =  (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_PNP_IN:
-			pDM_Odm->pbDriverIsGoingToPnpSetPowerSleep =  (BOOLEAN *)pValue;
+			pDM_Odm->pbDriverIsGoingToPnpSetPowerSleep =  (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_INIT_ON:
-			pDM_Odm->pinit_adpt_in_progress =  (BOOLEAN *)pValue;
+			pDM_Odm->pinit_adpt_in_progress =  (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_ANT_TEST:
@@ -1089,7 +1089,7 @@ ODM_CmnInfoHook(
 			break;
 
 		case	ODM_CMNINFO_NET_CLOSED:
-			pDM_Odm->pbNet_closed = (BOOLEAN *)pValue;
+			pDM_Odm->pbNet_closed = (bool *)pValue;
 			break;
 
 		case	ODM_CMNINFO_FORCED_RATE:
@@ -1105,7 +1105,7 @@ ODM_CmnInfoHook(
 		//	break;
 
 		//case	ODM_CMNINFO_BT_COEXIST:
-		//	pDM_Odm->BTCoexist = (BOOLEAN *)pValue;
+		//	pDM_Odm->BTCoexist = (bool *)pValue;
 
 		//case	ODM_CMNINFO_STA_STATUS:
 			//pDM_Odm->pODM_StaInfo[] = (PSTA_INFO_T)pValue;
@@ -1172,7 +1172,7 @@ ODM_CmnInfoUpdate(
 	switch	(CmnInfo)
 	{
 		case ODM_CMNINFO_LINK_IN_PROGRESS:
-			pDM_Odm->bLinkInProcess = (BOOLEAN)Value;
+			pDM_Odm->bLinkInProcess = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_ABILITY:
@@ -1184,15 +1184,15 @@ ODM_CmnInfoUpdate(
 			break;
 
 		case	ODM_CMNINFO_WIFI_DIRECT:
-			pDM_Odm->bWIFI_Direct = (BOOLEAN)Value;
+			pDM_Odm->bWIFI_Direct = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_WIFI_DISPLAY:
-			pDM_Odm->bWIFI_Display = (BOOLEAN)Value;
+			pDM_Odm->bWIFI_Display = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_LINK:
-			pDM_Odm->bLinked = (BOOLEAN)Value;
+			pDM_Odm->bLinked = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_RSSI_MIN:
@@ -1215,11 +1215,11 @@ ODM_CmnInfoUpdate(
 			break;
 		// The following is for BT HS mode and BT coexist mechanism.
 		case ODM_CMNINFO_BT_DISABLED:
-			pDM_Odm->bBtDisabled = (BOOLEAN)Value;
+			pDM_Odm->bBtDisabled = (bool)Value;
 			break;
 
 		case ODM_CMNINFO_BT_HS_CONNECT_PROCESS:
-			pDM_Odm->bBtConnectProcess = (BOOLEAN)Value;
+			pDM_Odm->bBtConnectProcess = (bool)Value;
 			break;
 
 		case ODM_CMNINFO_BT_HS_RSSI:
@@ -1227,15 +1227,15 @@ ODM_CmnInfoUpdate(
 			break;
 
 		case	ODM_CMNINFO_BT_OPERATION:
-			pDM_Odm->bBtHsOperation = (BOOLEAN)Value;
+			pDM_Odm->bBtHsOperation = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_BT_LIMITED_DIG:
-			pDM_Odm->bBtLimitedDig = (BOOLEAN)Value;
+			pDM_Odm->bBtLimitedDig = (bool)Value;
 			break;
 
 		case	ODM_CMNINFO_BT_DISABLE_EDCA:
-			pDM_Odm->bBtDisableEdcaTurbo = (BOOLEAN)Value;
+			pDM_Odm->bBtDisableEdcaTurbo = (bool)Value;
 			break;
 
 /*
@@ -1280,7 +1280,7 @@ odm_CommonInfoSelfInit(
 		PDM_ODM_T		pDM_Odm
 	)
 {
-	pDM_Odm->bCckHighPower = (BOOLEAN) ODM_GetBBReg(pDM_Odm, ODM_REG(CCK_RPT_FORMAT,pDM_Odm), ODM_BIT(CCK_RPT_FORMAT,pDM_Odm));
+	pDM_Odm->bCckHighPower = (bool) ODM_GetBBReg(pDM_Odm, ODM_REG(CCK_RPT_FORMAT,pDM_Odm), ODM_BIT(CCK_RPT_FORMAT,pDM_Odm));
 	pDM_Odm->RFPathRxEnable = (u1Byte) ODM_GetBBReg(pDM_Odm, ODM_REG(BB_RX_PATH,pDM_Odm), ODM_BIT(BB_RX_PATH,pDM_Odm));
 
 	if(pDM_Odm->SupportICType==ODM_RTL8723A)
@@ -1610,7 +1610,7 @@ odm_Adaptivity(
 	s4Byte TH_H_dmc, TH_L_dmc;
 	s4Byte TH_H, TH_L, Diff, IGI_target;
 	u4Byte value32;
-	BOOLEAN EDCCA_State;
+	bool EDCCA_State;
 
 	if(!(pDM_Odm->SupportAbility & ODM_BB_ADAPTIVITY))
 	{
@@ -1844,8 +1844,8 @@ odm_DIGInit(
 	//pDM_DigTable->CurMultiSTAConnectState = DIG_MultiSTA_DISCONNECT;
 	pDM_DigTable->RssiLowThresh	= DM_DIG_THRESH_LOW;
 	pDM_DigTable->RssiHighThresh	= DM_DIG_THRESH_HIGH;
-	pDM_DigTable->FALowThresh	= DM_FALSEALARM_THRESH_LOW;
-	pDM_DigTable->FAHighThresh	= DM_FALSEALARM_THRESH_HIGH;
+	pDM_DigTable->FALowThresh	= DMfalseALARM_THRESH_LOW;
+	pDM_DigTable->FAHighThresh	= DMfalseALARM_THRESH_HIGH;
 	if(pDM_Odm->BoardType & (ODM_BOARD_EXT_PA|ODM_BOARD_EXT_LNA))
 	{
 		pDM_DigTable->rx_gain_range_max = DM_DIG_MAX_NIC;
@@ -1894,7 +1894,7 @@ odm_DIG(
 	pRXHP_T						pRX_HP_Table  = &pDM_Odm->DM_RXHP_Table;
 	u1Byte						DIG_Dynamic_MIN;
 	u1Byte						DIG_MaxOfMin;
-	BOOLEAN						FirstConnect, FirstDisConnect;
+	bool						FirstConnect, FirstDisConnect;
 	u1Byte						dm_dig_max, dm_dig_min, offset;
 	u1Byte						CurrentIGI = pDM_DigTable->CurIGValue;
 
@@ -2318,7 +2318,7 @@ odm_DIG(
 }
 
 
-BOOLEAN
+bool
 odm_DigAbort(
 		PDM_ODM_T		pDM_Odm
 	)
@@ -2703,9 +2703,9 @@ odm_RateAdaptiveMaskInit(
 
 	pOdmRA->Type = DM_Type_ByDriver;
 	if (pOdmRA->Type == DM_Type_ByDriver)
-		pDM_Odm->bUseRAMask = _TRUE;
+		pDM_Odm->bUseRAMask = true;
 	else
-		pDM_Odm->bUseRAMask = _FALSE;
+		pDM_Odm->bUseRAMask = false;
 
 	pOdmRA->RATRState = DM_RATR_STA_INIT;
 	pOdmRA->LdpcThres = 35;
@@ -2986,13 +2986,13 @@ odm_RefreshRateAdaptiveMaskAPADSL(
 {
 }
 
-// Return Value: BOOLEAN
+// Return Value: bool
 // - TRUE: RATRState is changed.
-BOOLEAN
+bool
 ODM_RAStateCheck(
 		PDM_ODM_T		pDM_Odm,
 		s4Byte			RSSI,
-		BOOLEAN			bForceUpdate,
+		bool			bForceUpdate,
 		pu1Byte			pRATRState
 	)
 {
@@ -3059,7 +3059,7 @@ odm_DynamicTxPowerInit(
 	PADAPTER	Adapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
-	pdmpriv->bDynamicTxPowerEnable = _FALSE;
+	pdmpriv->bDynamicTxPowerEnable = false;
 
 	pdmpriv->LastDTPLvl = TxHighPwrLevel_Normal;
 	pdmpriv->DynamicTxHighPowerLvl = TxHighPwrLevel_Normal;
@@ -3293,7 +3293,7 @@ PADAPTER	pAdapter
 
 	//1 1.Determine the minimum RSSI
 
-	if((pDM_Odm->bLinked != _TRUE) &&
+	if((pDM_Odm->bLinked != true) &&
 		(pdmpriv->EntryMinUndecoratedSmoothedPWDB == 0))
 	{
 		pdmpriv->MinUndecoratedPWDBForDM = 0;
@@ -3322,7 +3322,7 @@ odm_RSSIMonitorCheckCE(
 	u8	UL_DL_STATE = 0;// for 8812 use
 	u32	PWDB_rssi[NUM_STA]={0};//[0~15]:MACID, [16~31]:PWDB_rssi
 
-	if(pDM_Odm->bLinked != _TRUE)
+	if(pDM_Odm->bLinked != true)
 		return;
 
 	if((pDM_Odm->SupportICType == ODM_RTL8812)||(pDM_Odm->SupportICType == ODM_RTL8821))
@@ -3371,7 +3371,7 @@ odm_RSSIMonitorCheckCE(
 		for(i=0; i< sta_cnt; i++)
 		{
 			if(PWDB_rssi[i] != (0)){
-				if(pHalData->fw_ractrl == _TRUE)// Report every sta's RSSI to FW
+				if(pHalData->fw_ractrl == true)// Report every sta's RSSI to FW
 				{
 					if((pDM_Odm->SupportICType == ODM_RTL8812)||(pDM_Odm->SupportICType == ODM_RTL8821)){
 						PWDB_rssi[i] |= (UL_DL_STATE << 24);
@@ -3481,11 +3481,11 @@ odm_TXPowerTrackingThermalMeterInit(
 	PADAPTER			Adapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
 
-	pDM_Odm->RFCalibrateInfo.bTXPowerTracking = _TRUE;
+	pDM_Odm->RFCalibrateInfo.bTXPowerTracking = true;
 	pDM_Odm->RFCalibrateInfo.TXPowercount = 0;
-	pDM_Odm->RFCalibrateInfo.bTXPowerTrackingInit = _FALSE;
+	pDM_Odm->RFCalibrateInfo.bTXPowerTrackingInit = false;
 	if ( *(pDM_Odm->mp_mode) != 1)
-		pDM_Odm->RFCalibrateInfo.TxPowerTrackControl = _TRUE;
+		pDM_Odm->RFCalibrateInfo.TxPowerTrackControl = true;
 	MSG_8192C("pDM_Odm TxPowerTrackControl = %d\n", pDM_Odm->RFCalibrateInfo.TxPowerTrackControl);
 
 	pDM_Odm->RFCalibrateInfo.TxPowerTrackControl = TRUE;
@@ -3800,7 +3800,7 @@ void odm_SwAntDivChkAntSwitchCallback(void *FunctionContext)
 {
 	PDM_ODM_T	pDM_Odm= (PDM_ODM_T)FunctionContext;
 	PADAPTER	padapter = pDM_Odm->Adapter;
-	if(padapter->net_closed == _TRUE)
+	if(padapter->net_closed == true)
 	    return;
 	odm_SwAntDivChkAntSwitch(pDM_Odm, SWAW_STEP_DETERMINE);
 }
@@ -3909,7 +3909,7 @@ odm_InitHybridAntDiv(
 	}
 }
 
-BOOLEAN
+bool
 odm_StaDefAntSel(
 	PDM_ODM_T	pDM_Odm,
 	u4Byte		OFDM_Ant1_Cnt,
@@ -3974,7 +3974,7 @@ void
 odm_SetRxIdleAnt(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte	Ant,
-	BOOLEAN   bDualPath
+	bool   bDualPath
 )
 {
 	SWAT_T			*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -4009,7 +4009,7 @@ ODM_AntselStatistics_88C(
 		PDM_ODM_T		pDM_Odm,
 		u1Byte			MacId,
 		u4Byte			PWDBAll,
-		BOOLEAN			isCCKrate
+		bool			isCCKrate
 )
 {
 	SWAT_T			*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
@@ -4055,7 +4055,7 @@ odm_HwAntDiv_92C_92D(
 	SWAT_T			*pDM_SWAT_Table = &pDM_Odm->DM_SWAT_Table;
 	u4Byte			RSSI_Min=0xFF, RSSI, RSSI_Ant1, RSSI_Ant2;
 	u1Byte			RxIdleAnt, i;
-	BOOLEAN		bRet=FALSE;
+	bool		bRet=FALSE;
 	PSTA_INFO_T	pEntry;
 
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_ANT_DIV,ODM_DBG_LOUD,("odm_HwAntDiv==============>\n"));
@@ -4221,7 +4221,7 @@ odm_EdcaTurboCheckCE(
 	u32	edca_param;
 	u64	cur_tx_bytes = 0;
 	u64	cur_rx_bytes = 0;
-	u8	bbtchange = _FALSE;
+	u8	bbtchange = false;
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
 	struct xmit_priv		*pxmitpriv = &(Adapter->xmitpriv);
 	struct recv_priv		*precvpriv = &(Adapter->recvpriv);
@@ -4350,7 +4350,7 @@ odm_EdcaTurboCheckCE(
 			pDM_Odm->DM_EDCA_Table.prv_traffic_idx = trafficIndex;
 		}
 
-		pDM_Odm->DM_EDCA_Table.bCurrentTurboEDCA = _TRUE;
+		pDM_Odm->DM_EDCA_Table.bCurrentTurboEDCA = true;
 	}
 	else
 	{
@@ -4361,13 +4361,13 @@ odm_EdcaTurboCheckCE(
 		 if(pDM_Odm->DM_EDCA_Table.bCurrentTurboEDCA)
 		{
 			rtw_write32(Adapter, REG_EDCA_BE_PARAM, pHalData->AcParam_BE);
-			pDM_Odm->DM_EDCA_Table.bCurrentTurboEDCA = _FALSE;
+			pDM_Odm->DM_EDCA_Table.bCurrentTurboEDCA = false;
 		}
 	}
 
 dm_CheckEdcaTurbo_EXIT:
 	// Set variables for next time.
-	precvpriv->bIsAnyNonBEPkts = _FALSE;
+	precvpriv->bIsAnyNonBEPkts = false;
 	pxmitpriv->last_tx_bytes = pxmitpriv->tx_bytes;
 	precvpriv->last_rx_bytes = precvpriv->rx_bytes;
 }
@@ -4531,7 +4531,7 @@ ODM_SingleDualAntennaDefaultSetting(
 //
 // Added by Roger, 2011.12.15
 //
-BOOLEAN
+bool
 ODM_SingleDualAntennaDetection(
 		PDM_ODM_T		pDM_Odm,
 		u1Byte			mode
@@ -4545,8 +4545,8 @@ ODM_SingleDualAntennaDetection(
 	u1Byte		initial_gain = 0x5a;
 	u4Byte		PSD_report_tmp;
 	u4Byte		AntA_report = 0x0, AntB_report = 0x0,AntO_report=0x0;
-	BOOLEAN		bResult = TRUE;
-	BOOLEAN		bAntDetection = FALSE;
+	bool		bResult = TRUE;
+	bool		bAntDetection = FALSE;
 	u4Byte		AFE_Backup[16];
 	u4Byte		AFE_REG_8723A[16] = {
 					rRx_Wait_CCA,	rTx_CCK_RFON,

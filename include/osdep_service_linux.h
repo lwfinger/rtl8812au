@@ -256,7 +256,7 @@ __inline static void _set_timer(_timer *ptimer,u32 delay_time)
 __inline static void _cancel_timer(_timer *ptimer,u8 *bcancelled)
 {
 	del_timer_sync(ptimer);
-	*bcancelled=  _TRUE;//TRUE ==1; FALSE==0
+	*bcancelled=  true;//TRUE ==1; FALSE==0
 }
 
 

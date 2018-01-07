@@ -348,19 +348,19 @@ PHY_RF6052SetCckTxPower8812(
 	struct dm_priv		*pdmpriv = &pHalData->dmpriv;
 	struct mlme_ext_priv	*pmlmeext = &Adapter->mlmeextpriv;
 	u32			TxAGC[2]={0, 0}, tmpval=0;
-	BOOLEAN		TurboScanOff = _FALSE;
+	bool		TurboScanOff = false;
 	u8			idx1, idx2;
 	u8*			ptr;
 
 	//FOR CE ,must disable turbo scan
-	TurboScanOff = _TRUE;
+	TurboScanOff = true;
 
 	if(pmlmeext->sitesurvey_res.state == SCAN_PROCESS)
 	{
 		TxAGC[RF_PATH_A] = 0x3f3f3f3f;
 		TxAGC[RF_PATH_B] = 0x3f3f3f3f;
 
-		TurboScanOff = _TRUE;//disable turbo scan
+		TurboScanOff = true;//disable turbo scan
 
 		if(TurboScanOff)
 		{

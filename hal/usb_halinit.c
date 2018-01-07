@@ -72,14 +72,14 @@ _ConfigChipOutEP_8812(
 
 }
 
-static BOOLEAN HalUsbSetQueuePipeMapping8812AUsb(
+static bool HalUsbSetQueuePipeMapping8812AUsb(
 	PADAPTER	pAdapter,
 	u8		NumInPipe,
 	u8		NumOutPipe
 	)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
-	BOOLEAN			result		= _FALSE;
+	bool			result		= false;
 
 	_ConfigChipOutEP_8812(pAdapter, NumOutPipe);
 
@@ -193,7 +193,7 @@ _InitBurstPktLen(PADAPTER Adapter)
 		//rtw_write8(Adapter, 0x10c, 0xb4);
 		//hal_UphyUpdate8812AU(Adapter);
 
-		pHalData->bSupportUSB3 = _FALSE;
+		pHalData->bSupportUSB3 = false;
 	}
 	else  //USB3 Mode
 	{
@@ -202,7 +202,7 @@ _InitBurstPktLen(PADAPTER Adapter)
 		rtw_write8(Adapter, REG_RXDMA_PRO_8812, provalue&(~(BIT5|BIT4))); //set burst pkt len=1k
 		rtw_write16(Adapter, REG_RXDMA_PRO_8812, 0x0e);
 		//PlatformEFIOWrite2Byte(Adapter, REG_RXDMA_AGG_PG_TH,0x0a05); //dmc agg th 20K
-		pHalData->bSupportUSB3 = _TRUE;
+		pHalData->bSupportUSB3 = true;
 
 		// set Reg 0xf008[3:4] to 2'00 to disable U1/U2 Mode to avoid 2.5G spur in USB3.0. added by page, 20120712
 		rtw_write8(Adapter, 0xf008, rtw_read8(Adapter, 0xf008)&0xE7);
@@ -223,7 +223,7 @@ _InitBurstPktLen(PADAPTER Adapter)
 	rtw_write8(Adapter, REG_PIFS, 0x00);
 
 	//Suggention by SD1 Jong and Pisa, by Maddest 20130107.
-	if(IS_HARDWARE_TYPE_8821U(Adapter) && (Adapter->registrypriv.wifi_spec == _FALSE))
+	if(IS_HARDWARE_TYPE_8821U(Adapter) && (Adapter->registrypriv.wifi_spec == false))
 	{
 		rtw_write16(Adapter, REG_MAX_AGGR_NUM, 0x0a0a);
 		rtw_write8(Adapter, REG_FWHW_TXQ_CTRL, 0x80);
@@ -346,7 +346,7 @@ _InitQueueReservedPage_8821AUsb(
 	u32			numPubQ	= 0;
 	u32			value32;
 	u8			value8;
-	BOOLEAN			bWiFiConfig	= pregistrypriv->wifi_spec;
+	bool			bWiFiConfig	= pregistrypriv->wifi_spec;
 
 	if(!bWiFiConfig)
 	{
@@ -408,7 +408,7 @@ _InitQueueReservedPage_8812AUsb(
 	u32			numPubQ	= 0;
 	u32			value32;
 	u8			value8;
-	BOOLEAN			bWiFiConfig	= pregistrypriv->wifi_spec;
+	bool			bWiFiConfig	= pregistrypriv->wifi_spec;
 
 	if(!bWiFiConfig)
 	{
@@ -524,7 +524,7 @@ _InitPageBoundary_8812AUsb(
 {
 	//u2Byte			rxff_bndy;
 	//u2Byte			Offset;
-	//BOOLEAN			bSupportRemoteWakeUp;
+	//bool			bSupportRemoteWakeUp;
 
 	//Adapter->HalFunc.GetHalDefVarHandler(Adapter, HAL_DEF_WOWLAN , &bSupportRemoteWakeUp);
 	// RX Page Boundary
@@ -821,7 +821,7 @@ _InitEDCA_8812AUsb(
 static void
 _InitBeaconMaxError_8812A(
 	PADAPTER	Adapter,
-	BOOLEAN		InfraMode
+	bool		InfraMode
 	)
 {
 #ifdef RTL8192CU_ADHOC_WORKAROUND_SETTING
@@ -907,7 +907,7 @@ usb_AggSettingTxUpdate_8812A(
 	u32			value32;
 
 	if(Adapter->registrypriv.wifi_spec)
-		pHalData->UsbTxAggMode = _FALSE;
+		pHalData->UsbTxAggMode = false;
 
 	if(pHalData->UsbTxAggMode){
 		value32 = rtw_read32(Adapter, REG_TDECTRL);
@@ -991,7 +991,7 @@ init_UsbAggregationSetting_8812A(
 	usb_AggSettingRxUpdate_8812A(Adapter);
 
 	// 201/12/10 MH Add for USB agg mode dynamic switch.
-	pHalData->UsbRxHighSpeedMode = _FALSE;
+	pHalData->UsbRxHighSpeedMode = false;
 }
 
 /*-----------------------------------------------------------------------------
@@ -1125,7 +1125,7 @@ HwSuspendModeEnable_8812AU(
 	// to disable HW suspend mode for IPS/radio_off.
 	//
 	//RT_TRACE(COMP_RF, DBG_LOUD, ("HwSuspendModeEnable92Cu = %d\n", Type));
-	if (Type == _FALSE)
+	if (Type == false)
 	{
 		reg |= BIT14;
 		//RT_TRACE(COMP_RF, DBG_LOUD, ("REG_GPIO_MUXCFG = %x\n", reg));
@@ -1272,12 +1272,12 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_BEGIN);
 		_ps_open_RF(Adapter);
 
 		if(pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized){
-			//PHY_IQCalibrate_8812A(Adapter,_TRUE);
+			//PHY_IQCalibrate_8812A(Adapter,true);
 		}
 		else
 		{
-			//PHY_IQCalibrate_8812A(Adapter,_FALSE);
-			pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = _TRUE;
+			//PHY_IQCalibrate_8812A(Adapter,false);
+			pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = true;
 		}
 
 		//ODM_TXPowerTrackingCheck(&pHalData->odmpriv );
@@ -1360,23 +1360,23 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_DOWNLOAD_FW);
 	}
 #endif  //MP_DRIVER == 1
 	{
-		status = FirmwareDownload8812(Adapter, _FALSE);
+		status = FirmwareDownload8812(Adapter, false);
 		if (status != _SUCCESS) {
 			DBG_871X("%s: Download Firmware failed!!\n", __FUNCTION__);
-			Adapter->bFWReady = _FALSE;
-			pHalData->fw_ractrl = _FALSE;
+			Adapter->bFWReady = false;
+			pHalData->fw_ractrl = false;
 			//return status;
 		} else {
 			DBG_871X("%s: Download Firmware Success!!\n",__FUNCTION__);
-			Adapter->bFWReady = _TRUE;
-			pHalData->fw_ractrl = _TRUE;
+			Adapter->bFWReady = true;
+			pHalData->fw_ractrl = true;
 		}
 	}
 
 
 	InitializeFirmwareVars8812(Adapter);
 
-	if(pwrctrlpriv->reg_rfoff == _TRUE){
+	if(pwrctrlpriv->reg_rfoff == true){
 		pwrctrlpriv->rf_pwrstate = rf_off;
 	}
 
@@ -1432,7 +1432,7 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_MISC02);
 	init_UsbAggregationSetting_8812A(Adapter);
 	_InitOperationMode_8812A(Adapter);//todo
 	_InitBeaconParameters_8812A(Adapter);
-	_InitBeaconMaxError_8812A(Adapter, _TRUE);
+	_InitBeaconMaxError_8812A(Adapter, true);
 
 	_InitBurstPktLen(Adapter);  //added by page. 20110919
 
@@ -1573,13 +1573,13 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_IQK);
 	if(pwrctrlpriv->rf_pwrstate == rf_on)
 	{
 		if(IS_HARDWARE_TYPE_8812AU(Adapter)) {
-			pHalData->odmpriv.RFCalibrateInfo.bNeedIQK = _TRUE;
+			pHalData->odmpriv.RFCalibrateInfo.bNeedIQK = true;
 			if(pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized)
-				PHY_IQCalibrate_8812A(Adapter, _TRUE);
+				PHY_IQCalibrate_8812A(Adapter, true);
 			else
 			{
-				PHY_IQCalibrate_8812A(Adapter, _FALSE);
-				pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = _TRUE;
+				PHY_IQCalibrate_8812A(Adapter, false);
+				pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = true;
 			}
 		}
 
@@ -1602,7 +1602,7 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_BT_COEXIST);
 
 	// 2010/08/23 MH According to Alfred's suggestion, we need to to prevent HW enter
 	// suspend mode automatically.
-	//HwSuspendModeEnable92Cu(Adapter, _FALSE);
+	//HwSuspendModeEnable92Cu(Adapter, false);
 
 HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_MISC31);
 
@@ -1727,7 +1727,7 @@ u32 rtl8812au_hal_deinit(PADAPTER Adapter)
 		rtw_write16(Adapter, REG_GPIO_MUXCFG, rtw_read16(Adapter, REG_GPIO_MUXCFG)&(~BIT12));
 	}
 
-	if(pHalData->bSupportUSB3 == _TRUE)
+	if(pHalData->bSupportUSB3 == true)
 	{
 		// set Reg 0xf008[3:4] to 2'11 to eable U1/U2 Mode in USB3.0. added by page, 20120712
 		rtw_write8(Adapter, 0xf008, rtw_read8(Adapter, 0xf008)|0x18);
@@ -1749,7 +1749,7 @@ u32 rtl8812au_hal_deinit(PADAPTER Adapter)
 	else
 #endif
 	{
-		if(Adapter->hw_init_completed == _TRUE){
+		if(Adapter->hw_init_completed == true){
 			CardDisableRTL8812AU(Adapter);
 
 			if((Adapter->pwrctrlpriv.bHWPwrPindetect ) && (Adapter->pwrctrlpriv.bHWPowerdown))
@@ -1788,7 +1788,7 @@ unsigned int rtl8812au_inirp_init(PADAPTER Adapter)
 	precvbuf = (struct recv_buf *)precvpriv->precv_buf;
 	for(i=0; i<NR_RECVBUFF; i++)
 	{
-		if(_read_port(pintfhdl, precvpriv->ff_hwaddr, 0, (unsigned char *)precvbuf) == _FALSE )
+		if(_read_port(pintfhdl, precvpriv->ff_hwaddr, 0, (unsigned char *)precvbuf) == false )
 		{
 			RT_TRACE(_module_hci_hal_init_c_,_drv_err_,("usb_rx_init: usb_read_port error \n"));
 			status = _FAIL;
@@ -1807,7 +1807,7 @@ unsigned int rtl8812au_inirp_init(PADAPTER Adapter)
 		goto exit;
 	}
 	_read_interrupt = pintfhdl->io_ops._read_interrupt;
-	if(_read_interrupt(pintfhdl, RECV_INT_IN_ADDR) == _FALSE )
+	if(_read_interrupt(pintfhdl, RECV_INT_IN_ADDR) == false )
 	{
 		RT_TRACE(_module_hci_hal_init_c_,_drv_err_,("usb_rx_init: usb_read_interrupt error \n"));
 		status = _FAIL;
@@ -1844,7 +1844,7 @@ void
 hal_ReadIDs_8812AU(
 	PADAPTER	Adapter,
 	pu1Byte		PROMContent,
-	BOOLEAN		AutoloadFail
+	bool		AutoloadFail
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1855,14 +1855,14 @@ hal_ReadIDs_8812AU(
 		// VID, PID
 		if(IS_HARDWARE_TYPE_8812AU(Adapter))
 		{
-			pHalData->EEPROMVID = EF2Byte( *(u16 *)&PROMContent[EEPROM_VID_8812AU] );
-			pHalData->EEPROMPID = EF2Byte( *(u16 *)&PROMContent[EEPROM_PID_8812AU] );
+			pHalData->EEPROMVID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_VID_8812AU] );
+			pHalData->EEPROMPID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_PID_8812AU] );
 		}
 		else if (IS_HARDWARE_TYPE_8821U(Adapter))
 
 		{
-			pHalData->EEPROMVID = EF2Byte( *(u16 *)&PROMContent[EEPROM_VID_8821AU] );
-			pHalData->EEPROMPID = EF2Byte( *(u16 *)&PROMContent[EEPROM_PID_8821AU] );
+			pHalData->EEPROMVID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_VID_8821AU] );
+			pHalData->EEPROMPID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_PID_8821AU] );
 		}
 
 
@@ -1899,12 +1899,12 @@ void
 hal_ReadMACAddress_8812AU(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
-	BOOLEAN		AutoloadFail
+	bool		AutoloadFail
 	)
 {
 	EEPROM_EFUSE_PRIV *pEEPROM = GET_EEPROM_EFUSE_PRIV(Adapter);
 
-	if(_FALSE == AutoloadFail)
+	if(false == AutoloadFail)
 	{
 		if(IS_HARDWARE_TYPE_8812AU(Adapter))
 		{
@@ -1939,30 +1939,30 @@ hal_InitPGData_8812A(
 	u32			i;
 	u16			value16;
 
-	if(_FALSE == pEEPROM->bautoload_fail_flag)
+	if(false == pEEPROM->bautoload_fail_flag)
 	{ // autoload OK.
 		if (is_boot_from_eeprom(padapter))
 		{
 			// Read all Content from EEPROM or EFUSE.
 			for(i = 0; i < HWSET_MAX_SIZE_JAGUAR; i += 2)
 			{
-				//value16 = EF2Byte(ReadEEprom(pAdapter, (u2Byte) (i>>1)));
+				//value16 = le16_to_cpu(ReadEEprom(pAdapter, (u2Byte) (i>>1)));
 				//*((u16*)(&PROMContent[i])) = value16;
 			}
 		}
 		else
 		{
 			// Read EFUSE real map to shadow.
-			EFUSE_ShadowMapUpdate(padapter, EFUSE_WIFI, _FALSE);
+			EFUSE_ShadowMapUpdate(padapter, EFUSE_WIFI, false);
 		}
 	}
 	else
 	{//autoload fail
 		RT_TRACE(_module_hci_hal_init_c_, _drv_notice_, ("AutoLoad Fail reported from CR9346!!\n"));
-		//pHalData->AutoloadFailFlag = _TRUE;
+		//pHalData->AutoloadFailFlag = true;
 		//update to default value 0xFF
 		if (!is_boot_from_eeprom(padapter))
-			EFUSE_ShadowMapUpdate(padapter, EFUSE_WIFI, _FALSE);
+			EFUSE_ShadowMapUpdate(padapter, EFUSE_WIFI, false);
 	}
 }
 
@@ -1981,7 +1981,7 @@ hal_CustomizedBehavior_8812AU(
 	{
 		case RT_CID_DEFAULT:
 			pledpriv->LedStrategy = SW_LED_MODE9;
-			pledpriv->bRegUseLed = _TRUE;
+			pledpriv->bRegUseLed = true;
 			break;
 
 		case RT_CID_819x_HP:
@@ -2017,7 +2017,7 @@ hal_CustomizedBehavior_8812AU(
 			break;
 	}
 
-	pHalData->bLedOpenDrain = _TRUE;// Support Open-drain arrangement for controlling the LED. Added by Roger, 2009.10.16.
+	pHalData->bLedOpenDrain = true;// Support Open-drain arrangement for controlling the LED. Added by Roger, 2009.10.16.
 }
 
 static void
@@ -2052,7 +2052,7 @@ hal_CustomizeByCustomerID_8812AU(
 				pEEPROM->CustomerID = RT_CID_DLINK;
 			else if((pHalData->EEPROMVID == 0x0BFF) && (pHalData->EEPROMPID == 0x8160))
 			{
-				//pHalData->bAutoConnectEnable = _FALSE;
+				//pHalData->bAutoConnectEnable = false;
 				pEEPROM->CustomerID = RT_CID_CHINA_MOBILE;
 			}
 			else if((pHalData->EEPROMVID == 0x0BDA) &&	(pHalData->EEPROMPID == 0x5088))
@@ -2089,7 +2089,7 @@ void
 hal_ReadUsbModeSwitch_8812AU(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
-	BOOLEAN		AutoloadFail
+	bool		AutoloadFail
 	)
 {
 }
@@ -2098,13 +2098,13 @@ static void
 ReadLEDSetting_8812AU(
 	PADAPTER	Adapter,
 	u8*		PROMContent,
-	BOOLEAN		AutoloadFail
+	bool		AutoloadFail
 	)
 {
 	struct led_priv *pledpriv = &(Adapter->ledpriv);
 
 #ifdef CONFIG_SW_LED
-	pledpriv->bRegUseLed = _TRUE;
+	pledpriv->bRegUseLed = true;
 #else // HW LED
 	pledpriv->LedStrategy = HW_LED;
 #endif //CONFIG_SW_LED
@@ -2164,8 +2164,8 @@ static void Hal_ReadPROMContent_8812A(
 
 	/* check system boot selection */
 	eeValue = rtw_read8(Adapter, REG_9346CR);
-	pEEPROM->EepromOrEfuse		= (eeValue & BOOT_FROM_EEPROM) ? _TRUE : _FALSE;
-	pEEPROM->bautoload_fail_flag	= (eeValue & EEPROM_EN) ? _FALSE : _TRUE;
+	pEEPROM->EepromOrEfuse		= (eeValue & BOOT_FROM_EEPROM) ? true : false;
+	pEEPROM->bautoload_fail_flag	= (eeValue & EEPROM_EN) ? false : true;
 
 	DBG_8192C("Boot from %s, Autoload %s !\n", (pEEPROM->EepromOrEfuse ? "EEPROM" : "EFUSE"),
 				(pEEPROM->bautoload_fail_flag ? "Fail" : "OK") );
@@ -2189,10 +2189,10 @@ hal_ReadRFType_8812A(
 #endif
 
 	//if (pHalData->rf_type == RF_1T1R){
-	//	pHalData->bRFPathRxEnable[0] = _TRUE;
+	//	pHalData->bRFPathRxEnable[0] = true;
 	//}
 	//else {	// Default unknow type is 2T2r
-	//	pHalData->bRFPathRxEnable[0] = pHalData->bRFPathRxEnable[1] = _TRUE;
+	//	pHalData->bRFPathRxEnable[0] = pHalData->bRFPathRxEnable[1] = true;
 	//}
 
 	if (IsSupported24G(Adapter->registrypriv.wireless_mode) &&
@@ -2417,13 +2417,13 @@ static void rtl8812au_init_default_value(_adapter * padapter)
 
 
 	//init default value
-	pHalData->fw_ractrl = _FALSE;
+	pHalData->fw_ractrl = false;
 	if(!pwrctrlpriv->bkeepfwalive)
 		pHalData->LastHMEBoxNum = 0;
 
 	//init dm default value
-	pHalData->bChnlBWInitialzed = _FALSE;
-	pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = _FALSE;
+	pHalData->bChnlBWInitialzed = false;
+	pHalData->odmpriv.RFCalibrateInfo.bIQKInitialized = false;
 	pHalData->odmpriv.RFCalibrateInfo.TM_Trigger = 0;//for IQK
 	pHalData->pwrGroupCnt = 0;
 	pHalData->PGMaxGroup= MAX_PG_GROUP;
@@ -2482,7 +2482,7 @@ static void rtl8812au_init_default_value(_adapter * padapter)
 
 static u8 rtl8812au_ps_func(PADAPTER Adapter,HAL_INTF_PS_FUNC efunc_id, u8 *val)
 {
-	u8 bResult = _TRUE;
+	u8 bResult = true;
 	switch(efunc_id){
 
 		#if defined(CONFIG_AUTOSUSPEND) && defined(SUPPORT_HW_RFOFF_DETECTED)

@@ -21,7 +21,7 @@
 //#include "Mp_Precomp.h"
 #include "odm_precomp.h"
 
-static BOOLEAN
+static bool
 CheckCondition(
     const u4Byte  Condition,
     const u4Byte  Hex

@@ -406,7 +406,7 @@ void ConfigureTxpowerTrack_8812A(
 // 2011/07/26 MH Add an API for testing IQK fail case.
 //
 // MP Already declare in odm.c
-BOOLEAN
+bool
 ODM_CheckPowerStatus(
 	PADAPTER		Adapter)
 {
@@ -650,9 +650,9 @@ void _IQK_Tx_8812A(
 	u4Byte		TX_fail,RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
 	int			TX_X = 0, TX_Y = 0, RX_X = 0, RX_Y = 0, TX_Average = 0, RX_Average = 0;
 	int			TX_X0[cal_num], TX_Y0[cal_num], RX_X0[cal_num], RX_Y0[cal_num];
-	BOOLEAN		TX0IQKOK = FALSE, RX0IQKOK = FALSE;
+	bool		TX0IQKOK = FALSE, RX0IQKOK = FALSE;
 	int			TX_X1[cal_num], TX_Y1[cal_num], RX_X1[cal_num], RX_Y1[cal_num];
-	BOOLEAN		TX1IQKOK = FALSE, RX1IQKOK = FALSE, VDF_enable = FALSE;
+	bool		TX1IQKOK = FALSE, RX1IQKOK = FALSE, VDF_enable = FALSE;
 	int			i, k, VDF_Y[3], VDF_X[3], Tx_dt[3], Rx_dt[3], ii, dx = 0, dy = 0, TX_finish = 0, RX_finish = 0, dt = 0;
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 
@@ -1803,7 +1803,7 @@ phy_IQCalibrate_8812A(
 void
 phy_LCCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm,
-	BOOLEAN		is2T
+	bool		is2T
 	)
 {
 	u4Byte	/*RF_Amode=0, RF_Bmode=0,*/ LC_Cal = 0, tmp = 0;
@@ -1972,7 +1972,7 @@ phy_IQCalibrate_By_FW_8812A(
 void
 PHY_IQCalibrate_8812A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bReCovery
+	bool		bReCovery
 	)
 {
 
@@ -2002,7 +2002,7 @@ PHY_LCCalibrate_8812A(
 	PDM_ODM_T		pDM_Odm
 	)
 {
-	BOOLEAN			bStartContTx = FALSE, bSingleTone = FALSE, bCarrierSuppression = FALSE;
+	bool			bStartContTx = FALSE, bSingleTone = FALSE, bCarrierSuppression = FALSE;
 
 	PADAPTER		pAdapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -2027,8 +2027,8 @@ PHY_LCCalibrate_8812A(
 
 void phy_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bMain,
-	BOOLEAN		is2T
+	bool		bMain,
+	bool		is2T
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -2061,7 +2061,7 @@ void phy_SetRFPathSwitch_8812A(
 
 void PHY_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bMain
+	bool		bMain
 	)
 {
 

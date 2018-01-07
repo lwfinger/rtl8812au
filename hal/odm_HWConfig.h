@@ -260,9 +260,9 @@ ODM_MacStatusQuery(
 	PDM_ODM_T					pDM_Odm,
 	pu1Byte						pMacStatus,
 	u1Byte						MacID,
-	BOOLEAN						bPacketMatchBSSID,
-	BOOLEAN						bPacketToSelf,
-	BOOLEAN						bPacketBeacon
+	bool						bPacketMatchBSSID,
+	bool						bPacketToSelf,
+	bool						bPacketBeacon
 	);
 
 HAL_STATUS

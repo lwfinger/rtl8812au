@@ -268,7 +268,7 @@ typedef struct hal_com_data
 	u8	bTXPowerDataReadFromEEPORM;
 	u8	bAPKThermalMeterIgnore;
 
-	BOOLEAN			EepromOrEfuse;
+	bool			EepromOrEfuse;
 	u8				EfuseUsedPercentage;
 	u16				EfuseUsedBytes;
 	//u8				EfuseMap[2][HWSET_MAX_SIZE_JAGUAR];
@@ -377,12 +377,12 @@ typedef struct hal_com_data
 	u8	BoardType;
 	u8	ExternalPA;
 	u8	bIQKInitialized;
-	BOOLEAN		bLCKInProgress;
+	bool		bLCKInProgress;
 
-	BOOLEAN		bSwChnl;
-	BOOLEAN		bSetChnlBW;
-	BOOLEAN		bChnlBWInitialzed;
-	BOOLEAN		bNeedIQK;
+	bool		bSwChnl;
+	bool		bSetChnlBW;
+	bool		bChnlBWInitialzed;
+	bool		bNeedIQK;
 
 	u8	bLedOpenDrain; // Support Open-drain arrangement for controlling the LED. Added by Roger, 2009.10.16.
 	u8	TxPowerTrackControl; //for mp mode, turn off txpwrtracking as default
@@ -395,7 +395,7 @@ typedef struct hal_com_data
 	u32	RfRegChnlVal[2];
 
 	//RDG enable
-	BOOLEAN	 bRDGEnable;
+	bool	 bRDGEnable;
 
 	//for host message to fw
 	u8	LastHMEBoxNum;
@@ -420,7 +420,7 @@ typedef struct hal_com_data
 	u8	FwRsvdPageStartOffset; //2010.06.23. Added by tynli. Reserve page start offset except beacon in TxQ.
 
 	// 2010/08/09 MH Add CU power down mode.
-	BOOLEAN		pwrdown;
+	bool		pwrdown;
 
 	// Add for dual MAC  0--Mac0 1--Mac1
 	u32	interfaceIndex;
@@ -429,11 +429,11 @@ typedef struct hal_com_data
 	u8	OutEpNumber;
 
 	// 2010/12/10 MH Add for USB aggreation mode dynamic shceme.
-	BOOLEAN		UsbRxHighSpeedMode;
+	bool		UsbRxHighSpeedMode;
 
 	// 2010/11/22 MH Add for slim combo debug mode selective.
 	// This is used for fix the drawback of CU TSMC-A/UMC-A cut. HW auto suspend ability. Close BT clock.
-	BOOLEAN		SlimComboDbg;
+	bool		SlimComboDbg;
 
 #ifdef CONFIG_P2P
 	u8	p2p_ps_offload;
@@ -447,7 +447,7 @@ typedef struct hal_com_data
 	RT_AMPDU_BRUST		AMPDUBurstMode; //92C maybe not use, but for compile successfully
 
 	u32	UsbBulkOutSize;
-	BOOLEAN		bSupportUSB3;
+	bool		bSupportUSB3;
 
 	// Interrupt relatd register information.
 	u32	IntArray[3];//HISR0,HISR1,HSISR

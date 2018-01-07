@@ -49,7 +49,7 @@ SwLedOn_8812AU(
 	u8	LedCfg;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
-	if( (padapter->bSurpriseRemoved == _TRUE) || ( padapter->bDriverStopped == _TRUE))
+	if( (padapter->bSurpriseRemoved == true) || ( padapter->bDriverStopped == true))
 	{
 		return;
 	}
@@ -118,7 +118,7 @@ SwLedOn_8812AU(
 		}
 	}
 
-	pLed->bLedOn = _TRUE;
+	pLed->bLedOn = true;
 }
 
 
@@ -135,7 +135,7 @@ SwLedOff_8812AU(
 	u8	LedCfg;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
-	if(padapter->bSurpriseRemoved == _TRUE)
+	if(padapter->bSurpriseRemoved == true)
 	{
 		return;
 	}
@@ -159,7 +159,7 @@ SwLedOff_8812AU(
 				break;
 
 			case LED_PIN_LED0:
-				if(pHalData->bLedOpenDrain == _TRUE)
+				if(pHalData->bLedOpenDrain == true)
 				{
 					LedCfg &= 0x90; // Set to software control.
 					rtw_write8(padapter, REG_LEDCFG2, (LedCfg|BIT3));
@@ -228,7 +228,7 @@ SwLedOff_8812AU(
 		}
 	}
 
-	pLed->bLedOn = _FALSE;
+	pLed->bLedOn = false;
 }
 
 //
@@ -243,7 +243,7 @@ SwLedOn_8821AU(
 {
 	u8	LedCfg;
 
-	if( (Adapter->bSurpriseRemoved == _TRUE) || ( Adapter->bDriverStopped == _TRUE))
+	if( (Adapter->bSurpriseRemoved == true) || ( Adapter->bDriverStopped == true))
 	{
 		return;
 	}
@@ -298,7 +298,7 @@ SwLedOn_8821AU(
 				break;
 		}
 	}
-	pLed->bLedOn = _TRUE;
+	pLed->bLedOn = true;
 }
 
 
@@ -315,7 +315,7 @@ SwLedOff_8821AU(
 	HAL_DATA_TYPE *pHalData = GET_HAL_DATA(Adapter);
 	u8	LedCfg;
 
-	if(Adapter->bSurpriseRemoved == _TRUE)
+	if(Adapter->bSurpriseRemoved == true)
 	{
 		return;
 	}
@@ -339,7 +339,7 @@ SwLedOff_8821AU(
 				break;
 
 			case LED_PIN_LED0:
-				if(pHalData->bLedOpenDrain == _TRUE)
+				if(pHalData->bLedOpenDrain == true)
 				{
 					LedCfg &= 0x90; // Set to software control.
 					rtw_write8(Adapter, REG_LEDCFG2, (LedCfg|BIT3));
@@ -388,7 +388,7 @@ SwLedOff_8821AU(
 		}
 	}
 
-	pLed->bLedOn = _FALSE;
+	pLed->bLedOn = false;
 }
 
 

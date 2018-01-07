@@ -166,7 +166,7 @@ int rtw_os_recvbuf_resource_alloc(_adapter *padapter, struct recv_buf *precvbuf)
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
 	struct usb_device	*pusbd = pdvobjpriv->pusbdev;
 
-	precvbuf->irp_pending = _FALSE;
+	precvbuf->irp_pending = false;
 	precvbuf->purb = usb_alloc_urb(0, GFP_KERNEL);
 	if(precvbuf->purb == NULL){
 		res = _FAIL;
@@ -174,7 +174,7 @@ int rtw_os_recvbuf_resource_alloc(_adapter *padapter, struct recv_buf *precvbuf)
 
 	precvbuf->pskb = NULL;
 
-	precvbuf->reuse = _FALSE;
+	precvbuf->reuse = false;
 
 	precvbuf->pallocated_buf  = precvbuf->pbuf = NULL;
 
@@ -287,7 +287,7 @@ void rtw_os_recv_indicate_pkt(_adapter *padapter, _pkt *pkt, struct rx_pkt_attri
 
 	/* Indicat the packets to upper layer */
 	if (pkt) {
-		if(check_fwstate(pmlmepriv, WIFI_AP_STATE) == _TRUE)
+		if(check_fwstate(pmlmepriv, WIFI_AP_STATE) == true)
 		{
 			_pkt *pskb2=NULL;
 			struct sta_info *psta = NULL;
@@ -296,7 +296,7 @@ void rtw_os_recv_indicate_pkt(_adapter *padapter, _pkt *pkt, struct rx_pkt_attri
 
 			//DBG_871X("bmcast=%d\n", bmcast);
 
-			if(_rtw_memcmp(pattrib->dst, myid(&padapter->eeprompriv), ETH_ALEN)==_FALSE)
+			if(_rtw_memcmp(pattrib->dst, myid(&padapter->eeprompriv), ETH_ALEN)==false)
 			{
 				//DBG_871X("not ap psta=%p, addr=%pM\n", psta, pattrib->dst);
 
@@ -346,7 +346,7 @@ void rtw_os_recv_indicate_pkt(_adapter *padapter, _pkt *pkt, struct rx_pkt_attri
 #endif  // (LINUX_VERSION_CODE <= KERNEL_VERSION(2, 6, 35))
 
 
-		if( br_port && (check_fwstate(pmlmepriv, WIFI_STATION_STATE|WIFI_ADHOC_STATE) == _TRUE) )
+		if( br_port && (check_fwstate(pmlmepriv, WIFI_STATION_STATE|WIFI_ADHOC_STATE) == true) )
 		{
 			int nat25_handle_frame(_adapter *priv, struct sk_buff *skb);
 			if (nat25_handle_frame(padapter, pkt) == -1) {
@@ -402,7 +402,7 @@ void rtw_handle_tkip_mic_err(_adapter *padapter,u8 bgroup)
 
 		if( cur_time - psecuritypriv->last_mic_err_time < 60*HZ )
 		{
-			psecuritypriv->btkip_countermeasure = _TRUE;
+			psecuritypriv->btkip_countermeasure = true;
 			psecuritypriv->last_mic_err_time = 0;
 			psecuritypriv->btkip_countermeasure_time = cur_time;
 		}
@@ -637,9 +637,9 @@ void rtw_os_read_port(_adapter *padapter, struct recv_buf *precvbuf)
 	dev_kfree_skb_any(precvbuf->pskb);
 
 	precvbuf->pskb = NULL;
-	precvbuf->reuse = _FALSE;
+	precvbuf->reuse = false;
 
-	if(precvbuf->irp_pending == _FALSE)
+	if(precvbuf->irp_pending == false)
 	{
 		rtw_read_port(padapter, precvpriv->ff_hwaddr, 0, (unsigned char *)precvbuf);
 	}

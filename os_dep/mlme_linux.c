@@ -333,12 +333,12 @@ u8 rtw_handle_tkip_countermeasure(_adapter* padapter)
 	u8 status = _SUCCESS;
 	u32 cur_time = 0;
 
-	if (padapter->securitypriv.btkip_countermeasure == _TRUE) {
+	if (padapter->securitypriv.btkip_countermeasure == true) {
 		cur_time = rtw_get_current_time();
 
 		if( (cur_time - padapter->securitypriv.btkip_countermeasure_time) > 60 * HZ )
 		{
-			padapter->securitypriv.btkip_countermeasure = _FALSE;
+			padapter->securitypriv.btkip_countermeasure = false;
 			padapter->securitypriv.btkip_countermeasure_time = 0;
 		}
 		else

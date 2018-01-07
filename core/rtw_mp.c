@@ -204,8 +204,8 @@ static void mp_init_xmit_attrib(struct mp_tx *pmptx, PADAPTER padapter)
 //	do_queue_select(padapter, pattrib);
 	pattrib->nr_frags = 1;
 	pattrib->encrypt = 0;
-	pattrib->bswenc = _FALSE;
-	pattrib->qos_en = _FALSE;
+	pattrib->bswenc = false;
+	pattrib->qos_en = false;
 }
 
 s32 init_mp_priv(PADAPTER padapter)
@@ -254,7 +254,7 @@ void free_mp_priv(struct mp_priv *pmp_priv)
 
 static void PHY_IQCalibrate_default(
 	PADAPTER	pAdapter,
-	BOOLEAN		bReCovery
+	bool		bReCovery
 	)
 {
 	DBG_871X("%s\n", __func__);
@@ -269,7 +269,7 @@ static void PHY_LCCalibrate_default(
 
 static void PHY_SetRFPathSwitch_default(
 	PADAPTER	pAdapter,
-	BOOLEAN		bMain
+	bool		bMain
 	)
 {
 	DBG_871X("%s\n", __func__);
@@ -307,9 +307,9 @@ MPT_InitializeAdapter(
 	//-------------------------------------------------------------------------
 	// SW Initialization for 8190 MP.
 	//-------------------------------------------------------------------------
-	pMptCtx->bMptDrvUnload = _FALSE;
-	pMptCtx->bMassProdTest = _FALSE;
-	pMptCtx->bMptIndexEven = _TRUE;	//default gain index is -6.0db
+	pMptCtx->bMptDrvUnload = false;
+	pMptCtx->bMassProdTest = false;
+	pMptCtx->bMptIndexEven = true;	//default gain index is -6.0db
 	pMptCtx->h2cReqNum = 0x0;
 	/* Init mpt event. */
 #if 0 // for Windows
@@ -325,7 +325,7 @@ MPT_InitializeAdapter(
 #endif
 	//init for BT MP
 
-	pMptCtx->bMptWorkItemInProgress = _FALSE;
+	pMptCtx->bMptWorkItemInProgress = false;
 	pMptCtx->CurrMptAct = NULL;
 	//-------------------------------------------------------------------------
 
@@ -342,7 +342,7 @@ MPT_InitializeAdapter(
 		ledsetting = rtw_read32(pAdapter, REG_LEDCFG0);
 	}
 
-	PHY_IQCalibrate(pAdapter, _FALSE);
+	PHY_IQCalibrate(pAdapter, false);
 	dm_CheckTXPowerTracking(&pHalData->odmpriv);	//trigger thermal meter
 	PHY_LCCalibrate(pAdapter);
 
@@ -384,20 +384,20 @@ MPT_DeInitAdapter(
 {
 	PMPT_CONTEXT		pMptCtx = &pAdapter->mppriv.MptCtx;
 
-	pMptCtx->bMptDrvUnload = _TRUE;
+	pMptCtx->bMptDrvUnload = true;
 }
 
 static u8 mpt_ProStartTest(PADAPTER padapter)
 {
 	PMPT_CONTEXT pMptCtx = &padapter->mppriv.MptCtx;
 
-	pMptCtx->bMassProdTest = _TRUE;
-	pMptCtx->bStartContTx = _FALSE;
-	pMptCtx->bCckContTx = _FALSE;
-	pMptCtx->bOfdmContTx = _FALSE;
-	pMptCtx->bSingleCarrier = _FALSE;
-	pMptCtx->bCarrierSuppression = _FALSE;
-	pMptCtx->bSingleTone = _FALSE;
+	pMptCtx->bMassProdTest = true;
+	pMptCtx->bStartContTx = false;
+	pMptCtx->bCckContTx = false;
+	pMptCtx->bOfdmContTx = false;
+	pMptCtx->bSingleCarrier = false;
+	pMptCtx->bCarrierSuppression = false;
+	pMptCtx->bSingleTone = false;
 
 	return _SUCCESS;
 }
@@ -434,10 +434,10 @@ static void disable_dm(PADAPTER padapter)
 	// disable Dynamic Initial Gain
 	// disable High Power
 	// disable Power Tracking
-	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
+	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, false);
 
 	// enable APK, LCK and IQK but disable power tracking
-	Switch_DM_Func(padapter, DYNAMIC_RF_CALIBRATION, _TRUE);
+	Switch_DM_Func(padapter, DYNAMIC_RF_CALIBRATION, true);
 }
 
 //This function initializes the DUT to the MP test mode
@@ -506,12 +506,12 @@ s32 mp_start_test(PADAPTER padapter)
 
 	_enter_critical_bh(&pmlmepriv->lock, &irqL);
 
-	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == _TRUE)
+	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == true)
 		goto end_of_mp_start_test;
 
 	//init mp_start_test status
-	if (check_fwstate(pmlmepriv, _FW_LINKED) == _TRUE) {
-		rtw_disassoc_cmd(padapter, 500, _TRUE);
+	if (check_fwstate(pmlmepriv, _FW_LINKED) == true) {
+		rtw_disassoc_cmd(padapter, 500, true);
 		rtw_indicate_disconnect(padapter);
 		rtw_free_assoc_resources(padapter, 1);
 	}
@@ -577,7 +577,7 @@ void mp_stop_test(PADAPTER padapter)
 	{
 	pmppriv->bSetTxPower=0;
 	_enter_critical_bh(&pmlmepriv->lock, &irqL);
-	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == _FALSE)
+	if (check_fwstate(pmlmepriv, WIFI_MP_STATE) == false)
 		goto end_of_mp_stop_test;
 
 	//3 1. disconnect psudo AdHoc
@@ -626,12 +626,12 @@ static void mpt_SwitchRfSetting(PADAPTER pAdapter)
 
 /*---------------------------hal\rtl8192c\MPT_Phy.c---------------------------*/
 /*---------------------------hal\rtl8192c\MPT_HelperFunc.c---------------------------*/
-static void MPT_CCKTxPowerAdjust(PADAPTER Adapter, BOOLEAN bInCH14)
+static void MPT_CCKTxPowerAdjust(PADAPTER Adapter, bool bInCH14)
 {
 	Hal_MPT_CCKTxPowerAdjust(Adapter,bInCH14);
 }
 
-static void MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, BOOLEAN beven)
+static void MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven)
 {
 	Hal_MPT_CCKTxPowerAdjustbyIndex(pAdapter,beven);
 	}
@@ -684,17 +684,17 @@ int SetTxPower(PADAPTER pAdapter)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
 	u1Byte			CurrChannel;
-	BOOLEAN			bResult = _TRUE;
+	bool			bResult = true;
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
 	u1Byte			rf, TxPower[2];
 
 	u8 u1TxPower = pAdapter->mppriv.txpoweridx;
 	CurrChannel = pMptCtx->MptChannelToSw;
 
-	if(HAL_IsLegalChannel(pAdapter, CurrChannel) == _FALSE)
+	if(HAL_IsLegalChannel(pAdapter, CurrChannel) == false)
 	{
 		DBG_871X("SetTxPower(): CurrentChannel:%d is not valid\n", CurrChannel);
-		return _FALSE;
+		return false;
 	}
 
 	TxPower[ODM_RF_PATH_A] = (u1Byte)(u1TxPower&0xff);
@@ -705,12 +705,12 @@ int SetTxPower(PADAPTER pAdapter)
 	{
 		if(TxPower[rf] > MAX_TX_PWR_INDEX_N_MODE) {
 			DBG_871X("===> SetTxPower: The power index is too large.\n");
-			return _FALSE;
+			return false;
 		}
 		pMptCtx->TxPwrLevel[rf] = TxPower[rf];
 	}
 	Hal_SetTxPower(pAdapter);
-	return _TRUE;
+	return true;
 }
 
 void SetTxAGCOffset(PADAPTER pAdapter, u32 ulTxAGCOffset)
@@ -731,7 +731,7 @@ void SetDataRate(PADAPTER pAdapter)
 	Hal_SetDataRate(pAdapter);
 }
 
-void MP_PHY_SetRFPathSwitch(PADAPTER pAdapter ,BOOLEAN bMain)
+void MP_PHY_SetRFPathSwitch(PADAPTER pAdapter ,bool bMain)
 {
 
 	PHY_SetRFPathSwitch(pAdapter,bMain);
@@ -1156,7 +1156,7 @@ u32 mp_query_psd(PADAPTER pAdapter, u8 *data)
 		return 0;
 	}
 
-	if (check_fwstate(&pAdapter->mlmepriv, WIFI_MP_STATE) == _FALSE) {
+	if (check_fwstate(&pAdapter->mlmepriv, WIFI_MP_STATE) == false) {
 		RT_TRACE(_module_mp_, _drv_warning_, ("mp_query_psd: Fail! not in MP mode!\n"));
 		return 0;
 	}
@@ -1217,7 +1217,7 @@ void _rtw_mp_xmit_priv (struct xmit_priv *pxmitpriv)
 	pxmitbuf = (struct xmit_buf *)pxmitpriv->pxmit_extbuf;
 	for(i=0; i<num_xmit_extbuf; i++)
 	{
-		rtw_os_xmit_resource_free(padapter, pxmitbuf,(max_xmit_extbuf_size + XMITBUF_ALIGN_SZ), _FALSE);
+		rtw_os_xmit_resource_free(padapter, pxmitbuf,(max_xmit_extbuf_size + XMITBUF_ALIGN_SZ), false);
 
 		pxmitbuf++;
 	}
@@ -1260,7 +1260,7 @@ void _rtw_mp_xmit_priv (struct xmit_priv *pxmitpriv)
 		pxmitbuf->padapter = padapter;
 		pxmitbuf->buf_tag = XMITBUF_MGNT;
 
-		if((res=rtw_os_xmit_resource_alloc(padapter, pxmitbuf,max_xmit_extbuf_size + XMITBUF_ALIGN_SZ, _FALSE)) == _FAIL) {
+		if((res=rtw_os_xmit_resource_alloc(padapter, pxmitbuf,max_xmit_extbuf_size + XMITBUF_ALIGN_SZ, false)) == _FAIL) {
 			res= _FAIL;
 			goto exit;
 		}
@@ -1281,17 +1281,17 @@ exit:
 
 
 
-ULONG getPowerDiffByRate8188E(
+u32 getPowerDiffByRate8188E(
 	PADAPTER	pAdapter,
 	u1Byte		CurrChannel,
-	ULONG		RfPath
+	u32		RfPath
 	)
 {
 	PMPT_CONTEXT			pMptCtx = &(pAdapter->mppriv.MptCtx);
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
-	ULONG	PwrGroup=0;
-	ULONG	TxPower=0, Limit=0;
-	ULONG	Pathmapping = (RfPath == ODM_RF_PATH_A?0:8);
+	u32	PwrGroup=0;
+	u32	TxPower=0, Limit=0;
+	u32	Pathmapping = (RfPath == ODM_RF_PATH_A?0:8);
 
 	switch(pHalData->EEPROMRegulatory)
 	{
@@ -1478,7 +1478,7 @@ ULONG getPowerDiffByRate8188E(
 
 
 
-static	ULONG
+static	u32
 mpt_ProQueryCalTxPower_8188E(
 	PADAPTER		pAdapter,
 	u1Byte			RfPath
@@ -1487,8 +1487,8 @@ mpt_ProQueryCalTxPower_8188E(
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(pAdapter);
 	u1Byte				TxCount=TX_1S, i = 0;	//default set to 1S
 	//PMGNT_INFO			pMgntInfo = &(pAdapter->MgntInfo);
-	ULONG				TxPower = 1, PwrGroup=0, PowerDiffByRate=0;
-	ULONG				TxPowerCCK = 1, TxPowerOFDM = 1, TxPowerBW20 = 1, TxPowerBW40 = 1 ;
+	u32				TxPower = 1, PwrGroup=0, PowerDiffByRate=0;
+	u32				TxPowerCCK = 1, TxPowerOFDM = 1, TxPowerBW20 = 1, TxPowerBW40 = 1 ;
 	PMPT_CONTEXT		pMptCtx = &(pAdapter->mppriv.MptCtx);
 	u1Byte				CurrChannel = pHalData->CurrentChannel;
 	u1Byte				index = (CurrChannel -1);
@@ -1584,14 +1584,14 @@ mpt_ProQueryCalTxPower_8188E(
 }
 
 
-ULONG mpt_ProQueryCalTxPower(
+u32 mpt_ProQueryCalTxPower(
 	PADAPTER	pAdapter,
 		u8		RfPath
 	)
 {
 
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
-	ULONG			TxPower = 1, PwrGroup=0, PowerDiffByRate=0;
+	u32			TxPower = 1, PwrGroup=0, PowerDiffByRate=0;
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
 	u1Byte			limit = 0, rate = 0;
 	rate=pMptCtx->MptRateIndex;

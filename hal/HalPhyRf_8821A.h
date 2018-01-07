@@ -52,7 +52,7 @@ ODM_TxPwrTrackSetPwr8821A(
 void
 PHY_IQCalibrate_8821A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bReCovery
+	bool		bReCovery
 );
 
 void
@@ -71,7 +71,7 @@ GetDeltaSwingTable_8821A(
 
 void PHY_SetRFPathSwitch_8821A(
 	PADAPTER	pAdapter,
-	BOOLEAN		bMain
+	bool		bMain
 	);
 
 
