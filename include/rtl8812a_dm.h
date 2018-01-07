@@ -25,7 +25,7 @@ void rtl8812_deinit_dm_priv(PADAPTER Adapter);
 void rtl8812_InitHalDm(PADAPTER Adapter);
 void rtl8812_HalDmWatchDog(PADAPTER Adapter);
 
-//VOID rtl8192c_dm_CheckTXPowerTracking(PADAPTER Adapter);
+//void rtl8192c_dm_CheckTXPowerTracking(PADAPTER Adapter);
 
 //void rtl8192c_dm_RF_Saving(PADAPTER pAdapter, u8 bForceInNormal);
 

@@ -37,7 +37,7 @@
  *
  * Note:		For RF type 0222D
  *---------------------------------------------------------------------------*/
-VOID
+void
 PHY_RF6052SetBandwidth8812(
 	PADAPTER				Adapter,
 	CHANNEL_WIDTH		Bandwidth)	//20M or 40M
@@ -339,7 +339,7 @@ static void writeOFDMPowerReg8812(
 	}
 }
 
-VOID
+void
 PHY_RF6052SetCckTxPower8812(
 	PADAPTER	Adapter,
 	u8*			pPowerlevel)
@@ -441,7 +441,7 @@ PHY_RF6052SetCckTxPower8812(
 
 }	/* PHY_RF6052SetCckTxPower */
 
-VOID
+void
 PHY_RF6052SetOFDMTxPower8812(
 	PADAPTER	Adapter,
 	u8*		pPowerLevelOFDM,

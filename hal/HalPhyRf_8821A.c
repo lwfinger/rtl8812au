@@ -112,7 +112,7 @@ void DoIQK_8821A(
 	PHY_IQCalibrate_8821A(Adapter, FALSE);
 }
 
-VOID
+void
 ODM_TxPwrTrackSetPwr8821A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
@@ -268,7 +268,7 @@ ODM_TxPwrTrackSetPwr8821A(
 	}
 }	// odm_TxPwrTrackSetPwr88E
 
-VOID
+void
 GetDeltaSwingTable_8821A(
 	PDM_ODM_T			pDM_Odm,
 	pu1Byte			*TemperatureUP_A,
@@ -1242,7 +1242,7 @@ void _IQK_Tx_8821A(
 #define AFE_REG_NUM 12
 #define RF_REG_NUM 3
 
-VOID
+void
 phy_IQCalibrate_By_FW_8821A(
 	PADAPTER	pAdapter
 	)
@@ -1278,7 +1278,7 @@ phy_IQCalibrate_By_FW_8821A(
 
 }
 
-VOID
+void
 phy_IQCalibrate_8821A(
 	PDM_ODM_T		pDM_Odm
 	)
@@ -1318,7 +1318,7 @@ phy_IQCalibrate_8821A(
 
 
 
-VOID
+void
 PHY_IQCalibrate_8821A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bReCovery
@@ -1341,7 +1341,7 @@ PHY_IQCalibrate_8821A(
 }
 
 
-VOID
+void
 PHY_LCCalibrate_8821A(
 	PDM_ODM_T		pDM_Odm
 	)

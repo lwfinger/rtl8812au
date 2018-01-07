@@ -33,7 +33,7 @@ void ConfigureTxpowerTrack_8812A(
 	PTXPWRTRACK_CFG	pConfig
 	);
 
-VOID
+void
 GetDeltaSwingTable_8812A(
 	PDM_ODM_T			pDM_Odm,
 	pu1Byte			*TemperatureUP_A,
@@ -49,7 +49,7 @@ void DoIQK_8812A(
 	u1Byte		Threshold
 	);
 
-VOID
+void
 ODM_TxPwrTrackSetPwr8812A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
@@ -82,11 +82,11 @@ PHY_APCalibrate_8812A(PADAPTER	pAdapter, s1Byte delta);
 void
 PHY_DigitalPredistortion_8812A(PADAPTER	pAdapter);
 
-VOID
+void
 PHY_DPCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm
 );
-VOID PHY_SetRFPathSwitch_8812A(
+void PHY_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bMain
 	);

@@ -67,7 +67,7 @@ void DoIQK_8812A(
  *	04/23/2012	MHC		Create Version 0.
  *
  *---------------------------------------------------------------------------*/
-VOID
+void
 ODM_TxPwrTrackSetPwr8812A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
@@ -332,7 +332,7 @@ ODM_TxPwrTrackSetPwr8812A(
 	}
 }
 
-VOID
+void
 GetDeltaSwingTable_8812A(
 	PDM_ODM_T			pDM_Odm,
 	pu1Byte			*TemperatureUP_A,
@@ -1769,7 +1769,7 @@ void _IQK_Tx_8812A(
 #define RF_REG_NUM 3
 
 // Maintained by BB James.
-VOID
+void
 phy_IQCalibrate_8812A(
 	PDM_ODM_T		pDM_Odm,
 	u1Byte		Channel
@@ -1800,7 +1800,7 @@ phy_IQCalibrate_8812A(
 }
 
 
-VOID
+void
 phy_LCCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm,
 	BOOLEAN		is2T
@@ -1885,7 +1885,7 @@ phy_LCCalibrate_8812A(
 #define		DP_DPK_NUM			3
 #define		DP_DPK_VALUE_NUM	2
 
-VOID
+void
 phy_ReloadIQKSetting_8812A(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte		Channel
@@ -1917,7 +1917,7 @@ phy_ReloadIQKSetting_8812A(
 
 }
 
-VOID
+void
 PHY_ResetIQKResult_8812A(
 	PDM_ODM_T	pDM_Odm
 )
@@ -1934,7 +1934,7 @@ PHY_ResetIQKResult_8812A(
 	ODM_SetBBReg(pDM_Odm, 0xe10, 0x000003ff, 0x100);
 }
 
-VOID
+void
 phy_IQCalibrate_By_FW_8812A(
 	PADAPTER	pAdapter
 	)
@@ -1969,7 +1969,7 @@ phy_IQCalibrate_By_FW_8812A(
    //FillH2CCmd_8812(pAdapter, 0x45, 3, IQKcmd);
 }
 
-VOID
+void
 PHY_IQCalibrate_8812A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bReCovery
@@ -1997,7 +1997,7 @@ PHY_IQCalibrate_8812A(
 }
 
 
-VOID
+void
 PHY_LCCalibrate_8812A(
 	PDM_ODM_T		pDM_Odm
 	)
@@ -2025,7 +2025,7 @@ PHY_LCCalibrate_8812A(
 
 }
 
-VOID phy_SetRFPathSwitch_8812A(
+void phy_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bMain,
 	BOOLEAN		is2T
@@ -2059,7 +2059,7 @@ VOID phy_SetRFPathSwitch_8812A(
 
 }
 
-VOID PHY_SetRFPathSwitch_8812A(
+void PHY_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bMain
 	)
@@ -2073,14 +2073,14 @@ VOID PHY_SetRFPathSwitch_8812A(
 }
 
 
-VOID
+void
 _DPK_ThermalCompensation(
 	PDM_ODM_T	pDM_Odm
 	)
 {
 }
 
-VOID
+void
 _DPK_parareload(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		MACBB_backup,
@@ -2098,7 +2098,7 @@ _DPK_parareload(
 }
 
 
-VOID
+void
 _DPK_parabackup(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		MACBB_backup,
@@ -2117,7 +2117,7 @@ _DPK_parabackup(
 	}
 }
 
-VOID
+void
 _DPK_Globalparaset(
 	PDM_ODM_T	pDM_Odm
 	)
@@ -2206,7 +2206,7 @@ _DPK_Globalparaset(
 }
 
 
-VOID
+void
 _DPK_GetGainLoss(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte path
@@ -2323,7 +2323,7 @@ _DPK_GetGainLoss(
 }
 
 
-VOID
+void
 _DPK_EnableDP(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte path,
@@ -2422,7 +2422,7 @@ _DPK_EnableDP(
 }
 
 
-VOID
+void
 _DPK_pathABDPK(
 	PDM_ODM_T	pDM_Odm
 	)
@@ -2683,7 +2683,7 @@ _DPK_pathABDPK(
 
 
 
-VOID
+void
 phy_DPCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm
 	)
@@ -2718,7 +2718,7 @@ phy_DPCalibrate_8812A(
 
 }
 
-VOID
+void
 PHY_DPCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm
 	)

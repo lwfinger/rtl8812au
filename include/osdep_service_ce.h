@@ -116,9 +116,9 @@ __inline static void rtw_list_delete(_list *plist)
 	InitializeListHead(plist);
 }
 
-#define RTW_TIMER_HDL_ARGS IN PVOID SystemSpecific1, PVOID FunctionContext, PVOID SystemSpecific2, PVOID SystemSpecific3
+#define RTW_TIMER_HDL_ARGS IN void * SystemSpecific1, void * FunctionContext, void * SystemSpecific2, void * SystemSpecific3
 
-__inline static void _init_timer(_timer *ptimer,_nic_hdl nic_hdl,void *pfunc,PVOID cntx)
+__inline static void _init_timer(_timer *ptimer,_nic_hdl nic_hdl,void *pfunc,void * cntx)
 {
 	NdisMInitializeTimer(ptimer, nic_hdl, pfunc, cntx);
 }
@@ -133,7 +133,7 @@ __inline static void _cancel_timer(_timer *ptimer,u8 *bcancelled)
 	NdisMCancelTimer(ptimer,bcancelled);
 }
 
-__inline static void _init_workitem(_workitem *pwork, void *pfunc, PVOID cntx)
+__inline static void _init_workitem(_workitem *pwork, void *pfunc, void * cntx)
 {
 
 	NdisInitializeWorkItem(pwork, pfunc, cntx);

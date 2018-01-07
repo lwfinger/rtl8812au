@@ -84,17 +84,17 @@ int	PHY_BBConfig8812(PADAPTER	Adapter	);
 void	PHY_BB8812_Config_1T(PADAPTER	Adapter );
 int	PHY_RFConfig8812(PADAPTER	Adapter	);
 
-VOID
+void
 PHY_InitPowerLimitTable(
 	PDM_ODM_T	pDM_Odm
 	);
 
-VOID
+void
 PHY_ConvertPowerLimitToPowerIndex(
 	PADAPTER			Adapter
 	);
 
-VOID
+void
 PHY_SetPowerLimitTableValue(
 	PDM_ODM_T		pDM_Odm,
 	s8*				Regulation,
@@ -145,7 +145,7 @@ u32 PHY_GetTxBBSwing_8812A(
 	u8			RFPath
 	);
 
-VOID
+void
 PHY_SetTxPowerIndex_8812A(
 	PADAPTER			Adapter,
 	u4Byte				PowerIndex,
@@ -155,7 +155,7 @@ PHY_SetTxPowerIndex_8812A(
 //
 // Switch bandwidth for 8192S
 //
-VOID
+void
 PHY_SetBWMode8812(
 	PADAPTER			pAdapter,
 	CHANNEL_WIDTH		Bandwidth,
@@ -165,14 +165,14 @@ PHY_SetBWMode8812(
 //
 // channel switch related funciton
 //
-VOID
+void
 PHY_SwChnl8812(
 	PADAPTER	Adapter,
 	u8			channel
 );
 
 
-VOID
+void
 PHY_SetSwChnlBWMode8812(
 	PADAPTER			Adapter,
 	u8					channel,
@@ -185,13 +185,13 @@ PHY_SetSwChnlBWMode8812(
 // BB/MAC/RF other monitor API
 //
 
-VOID
+void
 PHY_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bMain
 );
 
-VOID
+void
 storePwrIndexDiffRateOffset(
 	PADAPTER	Adapter,
 	u32		RegAddr,

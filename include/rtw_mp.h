@@ -141,7 +141,7 @@ struct mp_tx
 #define ULONG u32
 #define PULONG u32*
 
-typedef VOID (*MPT_WORK_ITEM_HANDLER)(PVOID Adapter);
+typedef void (*MPT_WORK_ITEM_HANDLER)(void * Adapter);
 typedef struct _MPT_CONTEXT
 {
 	// Indicate if we have started Mass Production Test.

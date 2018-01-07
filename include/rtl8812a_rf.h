@@ -20,7 +20,7 @@
 #ifndef __RTL8812A_RF_H__
 #define __RTL8812A_RF_H__
 
-VOID
+void
 PHY_RF6052SetBandwidth8812(
 	PADAPTER				Adapter,
 	CHANNEL_WIDTH		Bandwidth);
@@ -30,12 +30,12 @@ int
 PHY_RF6052_Config_8812(
 	PADAPTER	Adapter	);
 
-VOID
+void
 PHY_RF6052SetCckTxPower8812(
 	PADAPTER	Adapter,
 	u8*			pPowerlevel);
 
-VOID
+void
 PHY_RF6052SetOFDMTxPower8812(
 	PADAPTER	Adapter,
 	u8*			pPowerLevelOFDM,

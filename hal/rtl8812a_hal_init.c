@@ -85,7 +85,7 @@ s32 iol_InitLLTTable(
 	return iol_execute(padapter, IOL_INIT_LLT);
 }
 
-static VOID
+static void
 efuse_phymap_to_logical(u8 * phymap, u16 _offset, u16 _size_byte, u8  *pbuf)
 {
 	u8	*efuseTbl = NULL;
@@ -630,7 +630,7 @@ void SetBcnCtrlReg(
 	rtw_write8(padapter, REG_BCN_CTRL, (u8)pHalData->RegBcnCtrlVal);
 }
 
-static VOID
+static void
 _FWDownloadEnable_8812(
 	PADAPTER		padapter,
 	BOOLEAN			enable
@@ -660,7 +660,7 @@ _FWDownloadEnable_8812(
 static int
 _BlockWrite_8812(
 	PADAPTER		padapter,
-	PVOID		buffer,
+	void *		buffer,
 	u32			buffSize
 	)
 {
@@ -742,7 +742,7 @@ static int
 _PageWrite_8812(
 	PADAPTER	padapter,
 	u32			page,
-	PVOID		buffer,
+	void *		buffer,
 	u32			size
 	)
 {
@@ -755,7 +755,7 @@ _PageWrite_8812(
 	return _BlockWrite_8812(padapter,buffer,size);
 }
 
-static VOID
+static void
 _FillDummy_8812(
 	u8*		pFwBuf,
 	u32*	pFwLen
@@ -778,7 +778,7 @@ _FillDummy_8812(
 static int
 _WriteFW_8812(
 	PADAPTER		padapter,
-	PVOID			buffer,
+	void *			buffer,
 	u32			size
 	)
 {
@@ -1072,7 +1072,7 @@ void InitializeFirmwareVars8812(PADAPTER padapter)
 //
 // 2011.04.12 by tynli.
 //
-VOID
+void
 SetFwRelatedForWoWLAN8812(
 		PADAPTER			padapter,
 		u8					bHostIsGoingtoSleep
@@ -1447,7 +1447,7 @@ hal_ReadPowerValueFromPROM8812A(
 
 }
 
-VOID
+void
 Hal_EfuseParseBTCoexistInfo8812A(
 	PADAPTER			Adapter,
 	pu1Byte			hwinfo,
@@ -1491,7 +1491,7 @@ Hal_EfuseParseIDCode8812A(
 	DBG_8192C("EEPROM ID=0x%04x\n", EEPROMId);
 }
 
-VOID
+void
 Hal_ReadPROMVersion8812A(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1632,7 +1632,7 @@ Hal_ReadTxPowerInfo8812A(
 
 }
 
-VOID
+void
 Hal_ReadBoardType8812A(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1655,7 +1655,7 @@ Hal_ReadBoardType8812A(
 
 }
 
-VOID
+void
 Hal_ReadThermalMeter_8812A(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1684,7 +1684,7 @@ Hal_ReadThermalMeter_8812A(
 	DBG_871X("ThermalMeter = 0x%x\n", pHalData->EEPROMThermalMeter);
 }
 
-VOID
+void
 Hal_ReadChannelPlan8812A(
 	PADAPTER		padapter,
 	u8*				hwinfo,
@@ -1702,7 +1702,7 @@ Hal_ReadChannelPlan8812A(
 	DBG_871X("mlmepriv.ChannelPlan = 0x%02x\n", padapter->mlmepriv.ChannelPlan);
 }
 
-VOID
+void
 Hal_EfuseParseXtal_8812A(
 	PADAPTER	pAdapter,
 	u8*			hwinfo,
@@ -1724,7 +1724,7 @@ Hal_EfuseParseXtal_8812A(
 	DBG_871X("CrystalCap: 0x%2x\n", pHalData->CrystalCap);
 }
 
-VOID
+void
 Hal_ReadAntennaDiversity8812A(
 	PADAPTER		pAdapter,
 	u8*				PROMContent,
@@ -1764,7 +1764,7 @@ Hal_ReadAntennaDiversity8812A(
 	DBG_871X("SWAS: bHwAntDiv = %x, TRxAntDivType = %x\n", pHalData->AntDivCfg, pHalData->TRxAntDivType);
 }
 
-VOID
+void
 Hal_ReadPAType_8812A(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1843,7 +1843,7 @@ Hal_ReadPAType_8812A(
 	DBG_871X("pHalData->LNAType_5G is 0x%x, pHalData->ExternalLNA_5G = %d\n", pHalData->LNAType_5G, pHalData->ExternalLNA_5G);
 }
 
-VOID
+void
 Hal_ReadPAType_8821A(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1922,7 +1922,7 @@ Hal_ReadPAType_8821A(
 	DBG_871X("pHalData->LNAType_5G is 0x%x, pHalData->ExternalLNA_5G = %d\n", pHalData->LNAType_5G, pHalData->ExternalLNA_5G);
 }
 
-VOID
+void
 Hal_ReadRFEType_8812A(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1985,7 +1985,7 @@ Hal_ReadRFEType_8812A(
 //
 // 2013/04/15 MH Add 8812AU- VL/VS/VN for different board type.
 //
-VOID
+void
 hal_ReadUsbType_8812AU(
 	PADAPTER	Adapter,
 	u8			*PROMContent,
@@ -2082,7 +2082,7 @@ enum{
 		LDOE25_SHIFT						= 28 ,
 	};
 
-static VOID
+static void
 Hal_EfusePowerSwitch8812A(
 	PADAPTER	pAdapter,
 	u8		bWrite,
@@ -2139,7 +2139,7 @@ Hal_EfusePowerSwitch8812A(
 	}
 }
 
-static VOID
+static void
 rtl8812_EfusePowerSwitch(
 	PADAPTER	pAdapter,
 	u8		bWrite,
@@ -2158,7 +2158,7 @@ Hal_EfuseSwitchToBank8812A(
 	return _FALSE;
 }
 
-static VOID
+static void
 Hal_EfuseReadEFuse8812A(
 	PADAPTER		Adapter,
 	u16			_offset,
@@ -2346,7 +2346,7 @@ exit:
 		rtw_mfree2d((void *)eFuseWord, EFUSE_MAX_SECTION_JAGUAR, EFUSE_MAX_WORD_UNIT, sizeof(u16));
 }
 
-static VOID
+static void
 rtl8812_ReadEFuse(
 	PADAPTER	Adapter,
 	u8		efuseType,
@@ -2404,12 +2404,12 @@ exit:
 }
 
 //Do not support BT
-VOID
+void
 Hal_EFUSEGetEfuseDefinition8812A(
 	PADAPTER	pAdapter,
 	u1Byte		efuseType,
 	u1Byte		type,
-	PVOID		pOut
+	void *		pOut
 	)
 {
 	switch(type)
@@ -2472,12 +2472,12 @@ Hal_EFUSEGetEfuseDefinition8812A(
 			break;
 	}
 }
-VOID
+void
 Hal_EFUSEGetEfuseDefinition_Pseudo8812A(
 	PADAPTER	pAdapter,
 	u8			efuseType,
 	u8			type,
-	PVOID		pOut
+	void *		pOut
 	)
 {
 	switch(type)
@@ -2542,7 +2542,7 @@ Hal_EFUSEGetEfuseDefinition_Pseudo8812A(
 }
 
 
-static VOID
+static void
 rtl8812_EFUSE_GetEfuseDefinition(
 	PADAPTER	pAdapter,
 	u8		efuseType,
@@ -2573,7 +2573,7 @@ Hal_EfuseWordEnableDataWrite8812A(PADAPTER	pAdapter,
 	u8	badworden = 0x0F;
 	u8	tmpdata[8];
 
-	_rtw_memset((PVOID)tmpdata, 0xff, PGPKT_DATA_SIZE);
+	_rtw_memset((void *)tmpdata, 0xff, PGPKT_DATA_SIZE);
 	//RT_TRACE(COMP_EFUSE, DBG_LOUD, ("word_en = %x efuse_addr=%x\n", word_en, efuse_addr));
 
 	if(!(word_en&BIT0))
@@ -2752,8 +2752,8 @@ hal_EfusePgPacketRead_8812A(
 	if(offset>EFUSE_MAX_SECTION_JAGUAR)
 		return _FALSE;
 
-	_rtw_memset((PVOID)data, 0xff, sizeof(u8)*PGPKT_DATA_SIZE);
-	_rtw_memset((PVOID)tmpdata, 0xff, sizeof(u8)*PGPKT_DATA_SIZE);
+	_rtw_memset((void *)data, 0xff, sizeof(u8)*PGPKT_DATA_SIZE);
+	_rtw_memset((void *)tmpdata, 0xff, sizeof(u8)*PGPKT_DATA_SIZE);
 
 
 	//
@@ -2906,7 +2906,7 @@ hal_EfusePgPacketWrite_8812A(PADAPTER	pAdapter,
 
 	//DBG_871X("hal_EfusePgPacketWrite_8812A target offset 0x%x word_en 0x%x \n", target_pkt.offset, target_pkt.word_en);
 
-	_rtw_memset((PVOID)target_pkt.data, 0xFF, sizeof(u8)*8);
+	_rtw_memset((void *)target_pkt.data, 0xFF, sizeof(u8)*8);
 
 	efuse_WordEnableDataRead(word_en, data, target_pkt.data);
 	target_word_cnts = Efuse_CalculateWordCnts(target_pkt.word_en);
@@ -3505,7 +3505,7 @@ void ReadRFType8812A(PADAPTER padapter)
 void rtl8812_GetHalODMVar(
 	PADAPTER				Adapter,
 	HAL_ODM_VARIABLE		eVariable,
-	PVOID					pValue1,
+	void *					pValue1,
 	BOOLEAN					bSet)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -3521,7 +3521,7 @@ void rtl8812_GetHalODMVar(
 void rtl8812_SetHalODMVar(
 	PADAPTER				Adapter,
 	HAL_ODM_VARIABLE		eVariable,
-	PVOID					pValue1,
+	void *					pValue1,
 	BOOLEAN					bSet)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -3757,7 +3757,7 @@ ReadChipVersion8812A(
 	DBG_8192C("RF_Type is %x!!\n", pHalData->rf_type);
 }
 
-VOID
+void
 Hal_PatchwithJaguar_8812(
 	PADAPTER				Adapter,
 	RT_MEDIA_STATUS		MediaStatus
@@ -3933,7 +3933,7 @@ void InitDefaultValue8821A(PADAPTER padapter)
 		pHalData->odmpriv.RFCalibrateInfo.ThermalValue_HP[i] = 0;
 }
 
-VOID
+void
 _InitBeaconParameters_8812A(
 	PADAPTER Adapter
 	)
@@ -3958,7 +3958,7 @@ _InitBeaconParameters_8812A(
 	pHalData->RegCR_1 = rtw_read8(Adapter, REG_CR+1);
 }
 
-static VOID
+static void
 _BeaconFunctionEnable(
 	PADAPTER		Adapter,
 	BOOLEAN			Enable,

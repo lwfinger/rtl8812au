@@ -252,7 +252,7 @@ void free_mp_priv(struct mp_priv *pmp_priv)
 }
 
 
-static VOID PHY_IQCalibrate_default(
+static void PHY_IQCalibrate_default(
 	PADAPTER	pAdapter,
 	BOOLEAN		bReCovery
 	)
@@ -260,14 +260,14 @@ static VOID PHY_IQCalibrate_default(
 	DBG_871X("%s\n", __func__);
 }
 
-static VOID PHY_LCCalibrate_default(
+static void PHY_LCCalibrate_default(
 	PADAPTER	pAdapter
 	)
 {
 	DBG_871X("%s\n", __func__);
 }
 
-static VOID PHY_SetRFPathSwitch_default(
+static void PHY_SetRFPathSwitch_default(
 	PADAPTER	pAdapter,
 	BOOLEAN		bMain
 	)
@@ -320,7 +320,7 @@ MPT_InitializeAdapter(
 		Adapter,
 		&(pMptCtx->MptWorkItem),
 		(RT_WORKITEM_CALL_BACK)MPT_WorkItemCallback,
-		(PVOID)Adapter,
+		(void *)Adapter,
 		"MptWorkItem");
 #endif
 	//init for BT MP
@@ -377,7 +377,7 @@ MPT_InitializeAdapter(
  *	05/18/2007	MHC		Add normal driver MPHalt code.
  *
  *---------------------------------------------------------------------------*/
-VOID
+void
 MPT_DeInitAdapter(
 	PADAPTER	pAdapter
 	)

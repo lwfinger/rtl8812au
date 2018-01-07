@@ -260,7 +260,7 @@ __inline static void _cancel_timer(_timer *ptimer,u8 *bcancelled)
 }
 
 
-__inline static void _init_workitem(_workitem *pwork, void *pfunc, PVOID cntx)
+__inline static void _init_workitem(_workitem *pwork, void *pfunc, void * cntx)
 {
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,20))
 	INIT_WORK(pwork, pfunc);

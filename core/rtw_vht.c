@@ -194,7 +194,7 @@ u32	rtw_vht_rate_to_bitmap(u8 *pVHTRate)
 	return RateBitmap;
 }
 
-void	update_sta_vht_info_apmode(_adapter *padapter, PVOID psta)
+void	update_sta_vht_info_apmode(_adapter *padapter, void * psta)
 {
 	struct mlme_priv	*pmlmepriv = &(padapter->mlmepriv);
 	struct vht_priv	*pvhtpriv_ap = &pmlmepriv->vhtpriv;

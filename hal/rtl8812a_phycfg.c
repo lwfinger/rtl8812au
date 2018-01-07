@@ -67,7 +67,7 @@ PHY_QueryBBReg8812(
 }
 
 
-VOID
+void
 PHY_SetBBReg8812(
 	PADAPTER	Adapter,
 	u4Byte		RegAddr,
@@ -160,7 +160,7 @@ phy_RFSerialRead(
 }
 
 
-static	VOID
+static	void
 phy_RFSerialWrite(
 	PADAPTER		Adapter,
 	u8				eRFPath,
@@ -237,7 +237,7 @@ PHY_QueryRFReg8812(
 	return (Readback_Value);
 }
 
-VOID
+void
 PHY_SetRFReg8812(
 	PADAPTER		Adapter,
 	u8				eRFPath,
@@ -295,7 +295,7 @@ s32 PHY_MACConfig8812(PADAPTER Adapter)
 }
 
 
-static	VOID
+static	void
 phy_InitBBRFRegisterDefinition(
 	PADAPTER		Adapter
 )
@@ -329,7 +329,7 @@ phy_InitBBRFRegisterDefinition(
 	//pHalData->bPhyValueInitReady=_TRUE;
 }
 
-VOID
+void
 PHY_BB8812_Config_1T(
 	PADAPTER Adapter
 	)
@@ -751,7 +751,7 @@ phy_getPowerByRateBaseIndex(
 	return index;
 }
 
-VOID
+void
 PHY_InitPowerLimitTable(
 	PDM_ODM_T	pDM_Odm
 	)
@@ -783,7 +783,7 @@ PHY_InitPowerLimitTable(
 	//DBG_871X("<===== PHY_InitPowerLimitTable()!\n" );
 }
 
-VOID
+void
 PHY_ConvertPowerLimitToPowerIndex(
 	PADAPTER			Adapter
 	)
@@ -1104,7 +1104,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 	DBG_871X("<===== PHY_ConvertPowerLimitToPowerIndex()\n" );
 }
 
-VOID
+void
 PHY_SetPowerLimitTableValue(
 	PDM_ODM_T		pDM_Odm,
 	s8*				Regulation,
@@ -1337,7 +1337,7 @@ PHY_GetPowerLimitValue(
 //
 // 2012/10/18
 //
-VOID
+void
 PHY_StorePwrByRateIndexVhtSeries(
 	PADAPTER	Adapter,
 	u32			RegAddr,
@@ -1414,7 +1414,7 @@ PHY_StorePwrByRateIndexVhtSeries(
 
 }
 
-VOID
+void
 phy_ChangePGDataFromExactToRelativeValue(
 	u32*	pData,
 	u8		Start,
@@ -1453,7 +1453,7 @@ phy_ChangePGDataFromExactToRelativeValue(
 	*pData = TempData;
 }
 
-VOID phy_PreprocessVHTPGDataFromExactToRelativeValue(
+void phy_PreprocessVHTPGDataFromExactToRelativeValue(
 	PADAPTER	Adapter,
 	u32			RegAddr,
 	u32			BitMask,
@@ -1589,7 +1589,7 @@ VOID phy_PreprocessVHTPGDataFromExactToRelativeValue(
 	}
 }
 
-VOID
+void
 phy_PreprocessPGDataFromExactToRelativeValue(
 	PADAPTER	Adapter,
 	u4Byte		RegAddr,
@@ -1766,7 +1766,7 @@ phy_PreprocessPGDataFromExactToRelativeValue(
 
 }
 
-VOID
+void
 phy_StorePwrByRateIndexBase(
 	PADAPTER	Adapter,
 	u32			RegAddr,
@@ -2063,7 +2063,7 @@ phy_StorePwrByRateIndexBase(
 	};
 }
 
-VOID
+void
 storePwrIndexDiffRateOffset(
 	PADAPTER	Adapter,
 	u32		RegAddr,
@@ -2296,7 +2296,7 @@ phy_TxPwrIdxToDbm(
 	return PwrOutDbm;
 }
 
-VOID
+void
 PHY_GetTxPowerLevel8812(
 	PADAPTER		Adapter,
 	u32*		powerlevel
@@ -2598,7 +2598,7 @@ phy_GetTxPwrByRateOffset_8812(
 //
 //	2010.03.09, added by Roger.
 //
-VOID
+void
 phy_TxPwrAdjInPercentage(
 		PADAPTER		Adapter,
 		u8*				pTxPwrIdx)
@@ -2882,7 +2882,7 @@ PHY_GetTxPowerIndex_8812A(
  *                                                                                    <20120830, Kordan>
  **************************************************************************************************************/
 
-VOID
+void
 PHY_SetTxPowerIndex_8812A(
 	PADAPTER			Adapter,
 	u4Byte				PowerIndex,
@@ -3067,7 +3067,7 @@ PHY_SetTxPowerIndex_8812A(
 	}
 }
 
-VOID
+void
 phy_SetTxPowerIndexByRateArray(
 	PADAPTER			pAdapter,
 	u8					RFPath,
@@ -3089,7 +3089,7 @@ phy_SetTxPowerIndexByRateArray(
 
 }
 
-VOID
+void
 PHY_GetTxPowerIndexByRateArray_8812A(
 	PADAPTER			pAdapter,
 	u8					RFPath,
@@ -3111,7 +3111,7 @@ PHY_GetTxPowerIndexByRateArray_8812A(
 
 }
 
-VOID
+void
 phy_TxPowerTrainingByPath_8812(
 	PADAPTER			Adapter,
 	CHANNEL_WIDTH		BandWidth,
@@ -3153,7 +3153,7 @@ phy_TxPowerTrainingByPath_8812(
 	PHY_SetBBReg(Adapter, writeOffset, 0xffffff, writeData);
 }
 
-VOID
+void
 PHY_SetTxPowerLevelByPath8812(
 	PADAPTER		Adapter,
 	u8				channel,
@@ -3205,7 +3205,7 @@ PHY_SetTxPowerLevelByPath8812(
 //create new definition of PHY_SetTxPowerLevel8812 by YP.
 //Page revised on 20121106
 //the new way to set tx power by rate, NByte access, here N byte shall be 4 byte(DWord) or NByte(N>4) access. by page/YP, 20121106
-VOID
+void
 PHY_SetTxPowerLevel8812(
 	PADAPTER		Adapter,
 	u8				Channel
@@ -3381,7 +3381,7 @@ u32 PHY_GetTxBBSwing_8812A(
 	return out;
 }
 
-VOID
+void
 phy_SetRFEReg8812(
 	PADAPTER		Adapter,
 	u8			Band
@@ -3806,7 +3806,7 @@ phy_GetSecondaryChnl_8812(
 	return  ( (SCSettingOf40 << 4) | SCSettingOf20);
 }
 
-VOID
+void
 phy_SetRegBW_8812(
 	PADAPTER		Adapter,
 	CHANNEL_WIDTH	CurrentBW
@@ -3884,7 +3884,7 @@ phy_FixSpur_8812A(
 
 }
 
-VOID
+void
 phy_PostSetBwMode8812(
 	PADAPTER	Adapter
 )
@@ -3989,7 +3989,7 @@ phy_PostSetBwMode8812(
 }
 
 //<20130207, Kordan> The variales initialized here are used in odm_LNAPowerControl().
-VOID phy_InitRssiTRSW(
+void phy_InitRssiTRSW(
 	PADAPTER					pAdapter
 	)
 {
@@ -4017,7 +4017,7 @@ VOID phy_InitRssiTRSW(
 	}
 }
 
-VOID
+void
 phy_SwChnl8812(
 	PADAPTER	pAdapter
 	)
@@ -4114,7 +4114,7 @@ phy_SwChnl8812(
 	}
 }
 
-VOID
+void
 phy_SwChnlAndSetBwMode8812(
 	PADAPTER		Adapter
 )
@@ -4160,7 +4160,7 @@ phy_SwChnlAndSetBwMode8812(
 	}
 }
 
-VOID
+void
 PHY_HandleSwChnlAndSetBW8812(
 	PADAPTER			Adapter,
 	BOOLEAN				bSwitchChannel,
@@ -4286,7 +4286,7 @@ PHY_HandleSwChnlAndSetBW8812(
 
 }
 
-VOID
+void
 PHY_SetBWMode8812(
 	PADAPTER			Adapter,
 	CHANNEL_WIDTH	Bandwidth,	// 20M or 40M
@@ -4302,7 +4302,7 @@ PHY_SetBWMode8812(
 	//DBG_871X("<==%s()\n",__FUNCTION__);
 }
 
-VOID
+void
 PHY_SwChnl8812(
 	PADAPTER	Adapter,
 	u8			channel
@@ -4315,7 +4315,7 @@ PHY_SwChnl8812(
 	//DBG_871X("<==%s()\n",__FUNCTION__);
 }
 
-VOID
+void
 PHY_SetSwChnlBWMode8812(
 	PADAPTER			Adapter,
 	u8					channel,

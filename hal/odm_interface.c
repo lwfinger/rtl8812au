@@ -62,7 +62,7 @@ ODM_Read4Byte(
 }
 
 
-VOID
+void
 ODM_Write1Byte(
 	PDM_ODM_T		pDM_Odm,
 	u4Byte			RegAddr,
@@ -75,7 +75,7 @@ ODM_Write1Byte(
 }
 
 
-VOID
+void
 ODM_Write2Byte(
 	PDM_ODM_T		pDM_Odm,
 	u4Byte			RegAddr,
@@ -88,7 +88,7 @@ ODM_Write2Byte(
 }
 
 
-VOID
+void
 ODM_Write4Byte(
 	PDM_ODM_T		pDM_Odm,
 	u4Byte			RegAddr,
@@ -100,7 +100,7 @@ ODM_Write4Byte(
 	rtw_write32(Adapter,RegAddr, Data);
 }
 
-VOID
+void
 ODM_SetMACReg(
 	PDM_ODM_T	pDM_Odm,
 	u4Byte		RegAddr,
@@ -125,7 +125,7 @@ ODM_GetMACReg(
 	return PHY_QueryBBReg(Adapter, RegAddr, BitMask);
 }
 
-VOID
+void
 ODM_SetBBReg(
 	PDM_ODM_T	pDM_Odm,
 	u4Byte		RegAddr,
@@ -151,7 +151,7 @@ ODM_GetBBReg(
 }
 
 
-VOID
+void
 ODM_SetRFReg(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	eRFPath,
@@ -182,10 +182,10 @@ ODM_GetRFReg(
 //
 // ODM Memory relative API.
 //
-VOID
+void
 ODM_AllocateMemory(
 	PDM_ODM_T	pDM_Odm,
-	PVOID		*pPtr,
+	void *		*pPtr,
 	u4Byte		length
 	)
 {
@@ -193,21 +193,21 @@ ODM_AllocateMemory(
 }
 
 // length could be ignored, used to detect memory leakage.
-VOID
+void
 ODM_FreeMemory(
 	PDM_ODM_T	pDM_Odm,
-	PVOID		pPtr,
+	void *		pPtr,
 	u4Byte		length
 	)
 {
 	rtw_vmfree(pPtr, length);
 }
 
-VOID
+void
 ODM_MoveMemory(
 	PDM_ODM_T	pDM_Odm,
-	PVOID		pDest,
-	PVOID		pSrc,
+	void *		pDest,
+	void *		pSrc,
 	u4Byte		Length
 	)
 {
@@ -216,8 +216,8 @@ ODM_MoveMemory(
 
 s4Byte ODM_CompareMemory(
 	PDM_ODM_T	pDM_Odm,
-	PVOID           pBuf1,
-      PVOID           pBuf2,
+	void *           pBuf1,
+      void *           pBuf2,
       u4Byte          length
        )
 {
@@ -227,7 +227,7 @@ s4Byte ODM_CompareMemory(
 //
 // ODM MISC relative API.
 //
-VOID
+void
 ODM_AcquireSpinLock(
 	PDM_ODM_T			pDM_Odm,
 	RT_SPINLOCK_TYPE	type
@@ -235,7 +235,7 @@ ODM_AcquireSpinLock(
 {
 }
 
-VOID
+void
 ODM_ReleaseSpinLock(
 	PDM_ODM_T			pDM_Odm,
 	RT_SPINLOCK_TYPE	type
@@ -246,18 +246,18 @@ ODM_ReleaseSpinLock(
 //
 // Work item relative API. FOr MP driver only~!
 //
-VOID
+void
 ODM_InitializeWorkItem(
 	PDM_ODM_T					pDM_Odm,
 	PRT_WORK_ITEM				pRtWorkItem,
 	RT_WORKITEM_CALL_BACK		RtWorkItemCallback,
-	PVOID						pContext,
+	void *						pContext,
 	const char*					szID
 	)
 {
 }
 
-VOID
+void
 ODM_StartWorkItem(
 	PRT_WORK_ITEM	pRtWorkItem
 	)
@@ -265,28 +265,28 @@ ODM_StartWorkItem(
 }
 
 
-VOID
+void
 ODM_StopWorkItem(
 	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
 
-VOID
+void
 ODM_FreeWorkItem(
 	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
 
-VOID
+void
 ODM_ScheduleWorkItem(
 	PRT_WORK_ITEM	pRtWorkItem
 	)
 {
 }
 
-VOID
+void
 ODM_IsWorkItemScheduled(
 	PRT_WORK_ITEM	pRtWorkItem
 	)
@@ -296,7 +296,7 @@ ODM_IsWorkItemScheduled(
 //
 // ODM Timer relative API.
 //
-VOID
+void
 ODM_StallExecution(
 	u4Byte	usDelay
 	)
@@ -304,31 +304,31 @@ ODM_StallExecution(
 	rtw_udelay_os(usDelay);
 }
 
-VOID
+void
 ODM_delay_ms(u4Byte	ms)
 {
 	rtw_mdelay_os(ms);
 }
 
-VOID
+void
 ODM_delay_us(u4Byte	us)
 {
 	rtw_udelay_os(us);
 }
 
-VOID
+void
 ODM_sleep_ms(u4Byte	ms)
 {
 	rtw_msleep_os(ms);
 }
 
-VOID
+void
 ODM_sleep_us(u4Byte	us)
 {
 	rtw_usleep_os(us);
 }
 
-VOID
+void
 ODM_SetTimer(
 	PDM_ODM_T		pDM_Odm,
 	PRT_TIMER		pTimer,
@@ -339,12 +339,12 @@ ODM_SetTimer(
 }
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
-VOID
+void
 ODM_InitializeTimer(
 	PDM_ODM_T			pDM_Odm,
 	PRT_TIMER			pTimer,
 	RT_TIMER_CALL_BACK	CallBackFunc,
-	PVOID				pContext,
+	void *				pContext,
 	const char*			szID
 	)
 {
@@ -354,7 +354,7 @@ ODM_InitializeTimer(
 }
 #endif
 
-VOID
+void
 ODM_CancelTimer(
 	PDM_ODM_T		pDM_Odm,
 	PRT_TIMER		pTimer
@@ -363,7 +363,7 @@ ODM_CancelTimer(
 	_cancel_timer_ex(pTimer);
 }
 
-VOID
+void
 ODM_ReleaseTimer(
 	PDM_ODM_T		pDM_Odm,
 	PRT_TIMER		pTimer

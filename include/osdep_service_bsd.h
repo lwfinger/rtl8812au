@@ -699,7 +699,7 @@ __inline static void _cancel_timer(_timer *ptimer,u8 *bcancelled)
 	rtw_mtx_unlock(NULL);
 }
 
-__inline static void _init_workitem(_workitem *pwork, void *pfunc, PVOID cntx)
+__inline static void _init_workitem(_workitem *pwork, void *pfunc, void * cntx)
 {
 	printf("%s Not implement yet! \n",__FUNCTION__);
 }

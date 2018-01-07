@@ -39,7 +39,7 @@ void DoIQK_8821A(
 	u1Byte		Threshold
 	);
 
-VOID
+void
 ODM_TxPwrTrackSetPwr8821A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
@@ -55,12 +55,12 @@ PHY_IQCalibrate_8821A(
 	BOOLEAN		bReCovery
 );
 
-VOID
+void
 PHY_LCCalibrate_8821A(
 	PDM_ODM_T		pDM_Odm
 );
 
-VOID
+void
 GetDeltaSwingTable_8821A(
 	PDM_ODM_T			pDM_Odm,
 	pu1Byte			*TemperatureUP_A,
@@ -69,7 +69,7 @@ GetDeltaSwingTable_8821A(
 	pu1Byte			*TemperatureDOWN_B
 );
 
-VOID PHY_SetRFPathSwitch_8821A(
+void PHY_SetRFPathSwitch_8821A(
 	PADAPTER	pAdapter,
 	BOOLEAN		bMain
 	);

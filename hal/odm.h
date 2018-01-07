@@ -1606,10 +1606,10 @@ static u1Byte DeltaSwingTableIdx_2GA_N_8188E[] = {0, 0, 0, 2, 2, 3, 3, 4, 4, 4, 
 #define SWAW_STEP_PEAK		0
 #define SWAW_STEP_DETERMINE	1
 
-VOID ODM_Write_DIG(PDM_ODM_T	pDM_Odm, u1Byte	CurrentIGI);
-VOID ODM_Write_CCK_CCA_Thres(PDM_ODM_T	pDM_Odm, u1Byte	CurCCK_CCAThres);
+void ODM_Write_DIG(PDM_ODM_T	pDM_Odm, u1Byte	CurrentIGI);
+void ODM_Write_CCK_CCA_Thres(PDM_ODM_T	pDM_Odm, u1Byte	CurCCK_CCAThres);
 
-VOID
+void
 ODM_SetAntenna(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte		Antenna);
@@ -1620,10 +1620,10 @@ void ODM_RF_Saving(PDM_ODM_T	pDM_Odm,
 		u1Byte		bForceInNormal );
 
 #define SwAntDivRestAfterLink	ODM_SwAntDivRestAfterLink
-VOID ODM_SwAntDivRestAfterLink(PDM_ODM_T	pDM_Odm);
+void ODM_SwAntDivRestAfterLink(PDM_ODM_T	pDM_Odm);
 
 #define dm_CheckTXPowerTracking		ODM_TXPowerTrackingCheck
-VOID
+void
 ODM_TXPowerTrackingCheck(
 	PDM_ODM_T		pDM_Odm
 	);
@@ -1637,7 +1637,7 @@ ODM_RAStateCheck(
 	);
 
 #define dm_SWAW_RSSI_Check	ODM_SwAntDivChkPerPktRssi
-VOID ODM_SwAntDivChkPerPktRssi(
+void ODM_SwAntDivChkPerPktRssi(
 	PDM_ODM_T		pDM_Odm,
 	u1Byte			StationID,
 	PODM_PHY_INFO_T pPhyInfo
@@ -1651,7 +1651,7 @@ GetPSDData(
 	unsigned int	point,
 	u1Byte initial_gain_psd);
 
-VOID
+void
 odm_DIGbyRSSI_LPS(
 	PDM_ODM_T		pDM_Odm
 	);
@@ -1670,63 +1670,63 @@ Beamforming_GetEntryBeamCapByMacId(
  );
 #endif
 
-VOID ODM_DMInit(PDM_ODM_T	pDM_Odm);
+void ODM_DMInit(PDM_ODM_T	pDM_Odm);
 
-VOID
+void
 ODM_DMWatchdog(
 	PDM_ODM_T			pDM_Odm			// For common use in the future
 	);
 
-VOID
+void
 ODM_CmnInfoInit(
 	PDM_ODM_T		pDM_Odm,
 	ODM_CMNINFO_E	CmnInfo,
 	u4Byte			Value
 	);
 
-VOID
+void
 ODM_CmnInfoHook(
 	PDM_ODM_T		pDM_Odm,
 	ODM_CMNINFO_E	CmnInfo,
-	PVOID			pValue
+	void *			pValue
 	);
 
-VOID
+void
 ODM_CmnInfoPtrArrayHook(
 	PDM_ODM_T		pDM_Odm,
 	ODM_CMNINFO_E	CmnInfo,
 	u2Byte			Index,
-	PVOID			pValue
+	void *			pValue
 	);
 
-VOID
+void
 ODM_CmnInfoUpdate(
 	PDM_ODM_T		pDM_Odm,
 	u4Byte			CmnInfo,
 	u8Byte			Value
 	);
 
-VOID
+void
 ODM_InitAllTimers(
     PDM_ODM_T	pDM_Odm
     );
 
-VOID
+void
 ODM_CancelAllTimers(
     PDM_ODM_T    pDM_Odm
     );
 
-VOID
+void
 ODM_ReleaseAllTimers(
     PDM_ODM_T	pDM_Odm
     );
 
-VOID
+void
 ODM_ResetIQKResult(
     PDM_ODM_T pDM_Odm
     );
 
-VOID
+void
 ODM_AntselStatistics_88C(
 	PDM_ODM_T		pDM_Odm,
 	u1Byte			MacId,
@@ -1734,7 +1734,7 @@ ODM_AntselStatistics_88C(
 	BOOLEAN			isCCKrate
 );
 
-VOID
+void
 ODM_SingleDualAntennaDefaultSetting(
 	PDM_ODM_T		pDM_Odm
 	);
@@ -1745,7 +1745,7 @@ ODM_SingleDualAntennaDetection(
 	u1Byte			mode
 	);
 
-VOID
+void
 ODM_UpdateInitRate(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte		Rate
