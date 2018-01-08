@@ -11,11 +11,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
  ******************************************************************************/
 #ifndef _RTW_MP_IOCTL_H_
 #define _RTW_MP_IOCTL_H_
@@ -23,13 +18,6 @@
 #include <mp_custom_oid.h>
 #include <rtw_mp.h>
 
-#if 0
-#define TESTFWCMDNUMBER			1000000
-#define TEST_H2CINT_WAIT_TIME		500
-#define TEST_C2HINT_WAIT_TIME		500
-#define HCI_TEST_SYSCFG_HWMASK		1
-#define _BUSCLK_40M			(4 << 2)
-#endif
 //------------------------------------------------------------------------------
 typedef struct CFG_DBG_MSG_STRUCT {
 	u32 DebugLevel;

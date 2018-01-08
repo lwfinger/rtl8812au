@@ -11,49 +11,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
  ******************************************************************************/
 #ifndef _RTW_MP_H_
 #define _RTW_MP_H_
-
-
-#if 0
-#define MPT_NOOP			0
-#define MPT_READ_MAC_1BYTE		1
-#define MPT_READ_MAC_2BYTE		2
-#define MPT_READ_MAC_4BYTE		3
-#define MPT_WRITE_MAC_1BYTE		4
-#define MPT_WRITE_MAC_2BYTE		5
-#define MPT_WRITE_MAC_4BYTE		6
-#define MPT_READ_BB_CCK			7
-#define MPT_WRITE_BB_CCK		8
-#define MPT_READ_BB_OFDM		9
-#define MPT_WRITE_BB_OFDM		10
-#define MPT_READ_RF			11
-#define MPT_WRITE_RF			12
-#define MPT_READ_EEPROM_1BYTE		13
-#define MPT_WRITE_EEPROM_1BYTE		14
-#define MPT_READ_EEPROM_2BYTE		15
-#define MPT_WRITE_EEPROM_2BYTE		16
-#define MPT_SET_CSTHRESHOLD		21
-#define MPT_SET_INITGAIN		22
-#define MPT_SWITCH_BAND			23
-#define MPT_SWITCH_CHANNEL		24
-#define MPT_SET_DATARATE		25
-#define MPT_SWITCH_ANTENNA		26
-#define MPT_SET_TX_POWER		27
-#define MPT_SET_CONT_TX			28
-#define MPT_SET_SINGLE_CARRIER		29
-#define MPT_SET_CARRIER_SUPPRESSION	30
-#define MPT_GET_RATE_TABLE		31
-#define MPT_READ_TSSI			32
-#define MPT_GET_THERMAL_METER		33
-#endif
-
 
 #define MAX_MP_XMITBUF_SZ	2048
 #define NR_MP_XMITFRAME		8
