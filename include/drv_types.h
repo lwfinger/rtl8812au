@@ -25,7 +25,6 @@
 #include <drv_conf.h>
 #include <basic_types.h>
 #include <osdep_service.h>
-#include <rtw_byteorder.h>
 #include <wlan_bssdef.h>
 #include <wifi.h>
 #include <ieee80211.h>
@@ -33,14 +32,11 @@
 #include <drv_types_linux.h>
 
 enum _NIC_VERSION {
-
 	RTL8711_NIC,
 	RTL8712_NIC,
 	RTL8713_NIC,
 	RTL8716_NIC
-
 };
-
 
 typedef struct _ADAPTER _adapter, ADAPTER,*PADAPTER;
 
