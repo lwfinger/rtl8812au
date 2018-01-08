@@ -49,8 +49,8 @@
 // Read LE format data from memory
 //
 #define Read(_ptr)		(*((u8 *)(_ptr)))
-#define Readle16_to_cpu(_ptr)		le16_to_cpu(*((u16 *)(_ptr)))
-#define Readle32_to_cpu(_ptr)		le32_to_cpu(*((u32 *)(_ptr)))
+#define Readle16_to_cpu(_ptr)		le16_to_cpu(*((__le16 *)(_ptr)))
+#define Readle32_to_cpu(_ptr)		le32_to_cpu(*((__le32 *)(_ptr)))
 
 //
 // Write LE data to memory
@@ -82,7 +82,7 @@
 //		4-byte pointer in litten-endian system.
 //
 #define LE_P4BYTE_TO_HOST_4BYTE(__pStart) \
-	(le32_to_cpu(*((u32 *)(__pStart))))
+	(le32_to_cpu(*((__le32 *)(__pStart))))
 
 //
 //	Description:
@@ -113,8 +113,8 @@
 //		Set subfield of little-endian 4-byte value to specified value.
 //
 #define SET_BITS_TO_LE_4BYTE(__pStart, __BitOffset, __BitLen, __Value) \
-	*((u32 *)(__pStart)) = \
-		le32_to_cpu( \
+	*((__le32 *)(__pStart)) = \
+		cpu_to_le32( \
 			LE_BITS_CLEARED_TO_4BYTE(__pStart, __BitOffset, __BitLen) \
 			| \
 			( (((u32)__Value) & BIT_LEN_MASK_32(__BitLen)) << (__BitOffset) ) \
@@ -128,7 +128,7 @@
 	(BIT_LEN_MASK_16(__BitLen) << (__BitOffset))
 
 #define LE_P2BYTE_TO_HOST_2BYTE(__pStart) \
-	(le16_to_cpu(*((u16 *)(__pStart))))
+	(le16_to_cpu(*((__le16 *)(__pStart))))
 
 #define LE_BITS_TO_2BYTE(__pStart, __BitOffset, __BitLen) \
 	( \
@@ -144,12 +144,11 @@
 		( ~BIT_OFFSET_LEN_MASK_16(__BitOffset, __BitLen) ) \
 	)
 
-#define SET_BITS_TO_LE_2BYTE(__pStart, __BitOffset, __BitLen, __Value) \
-	*((u16 *)(__pStart)) = \
-		le16_to_cpu( \
-			LE_BITS_CLEARED_TO_2BYTE(__pStart, __BitOffset, __BitLen) \
-			| \
-			( (((u16)__Value) & BIT_LEN_MASK_16(__BitLen)) << (__BitOffset) ) \
+#define SET_BITS_TO_LE_2BYTE(__pstart, __bitoffset, __bitlen, __val) \
+		*((__le16 *)(__pstart)) =				\
+		cpu_to_le16(						\
+		LE_BITS_CLEARED_TO_2BYTE(__pstart, __bitoffset, __bitlen) | \
+		((((u16)__val) & BIT_LEN_MASK_16(__bitlen)) << (__bitoffset)) \
 		);
 
 #define BIT_LEN_MASK_8(__BitLen) \
