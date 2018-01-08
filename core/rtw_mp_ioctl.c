@@ -797,15 +797,12 @@ uint oid_rt_pro_trigger_gpio_hdl(struct oid_par_priv *poid_par_priv)
 
 	uint	status = uint_SUCCESS;
 
-
 	if (poid_par_priv->type_of_oid != SET_OID)
 		return uint_NOT_ACCEPTED;
 
 	_irqlevel_changed_(&oldirql, LOWER);
-	rtw_hal_set_hwreg(Adapter, HW_VAR_TRIGGER_GPIO_0, 0);
+	rtw_hal_set_hwreg(Adapter, HW_VAR_TRIGGER_GPIO_0, NULL);
 	_irqlevel_changed_(&oldirql, RAISE);
-
-
 
 	return status;
 }
