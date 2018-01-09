@@ -273,7 +273,7 @@ typedef struct _WLAN_BCN_INFO
 
 typedef struct _WLAN_BSSID_EX
 {
-  u32  Length;
+  __le32  Length;
   NDIS_802_11_MAC_ADDRESS  MacAddress;
   u8  Reserved[2];//[0]: IS beacon frame
   NDIS_802_11_SSID  Ssid;

@@ -15,31 +15,22 @@
 #define _RTW_WLAN_UTIL_C_
 
 #include <drv_types.h>
+#include "rtw_mlme.h"
 
+static unsigned char ARTHEROS_OUI1[] = {0x00, 0x03, 0x7f};
+static unsigned char ARTHEROS_OUI2[] = {0x00, 0x13, 0x74};
 
-unsigned char ARTHEROS_OUI1[] = {0x00, 0x03, 0x7f};
-unsigned char ARTHEROS_OUI2[] = {0x00, 0x13, 0x74};
+static unsigned char BROADCOM_OUI1[] = {0x00, 0x10, 0x18};
+static unsigned char BROADCOM_OUI2[] = {0x00, 0x0a, 0xf7};
+static unsigned char BROADCOM_OUI3[] = {0x00, 0x05, 0xb5};
 
-unsigned char BROADCOM_OUI1[] = {0x00, 0x10, 0x18};
-unsigned char BROADCOM_OUI2[] = {0x00, 0x0a, 0xf7};
-unsigned char BROADCOM_OUI3[] = {0x00, 0x05, 0xb5};
+static unsigned char CISCO_OUI[] = {0x00, 0x40, 0x96};
+static unsigned char MARVELL_OUI[] = {0x00, 0x50, 0x43};
+static unsigned char RALINK_OUI[] = {0x00, 0x0c, 0x43};
+static unsigned char REALTEK_OUI[] = {0x00, 0xe0, 0x4c};
+static unsigned char AIRGOCAP_OUI[] = {0x00, 0x0a, 0xf5};
 
-unsigned char CISCO_OUI[] = {0x00, 0x40, 0x96};
-unsigned char MARVELL_OUI[] = {0x00, 0x50, 0x43};
-unsigned char RALINK_OUI[] = {0x00, 0x0c, 0x43};
-unsigned char REALTEK_OUI[] = {0x00, 0xe0, 0x4c};
-unsigned char AIRGOCAP_OUI[] = {0x00, 0x0a, 0xf5};
-
-unsigned char REALTEK_96B_IE[] = {0x00, 0xe0, 0x4c, 0x02, 0x01, 0x20};
-
-extern unsigned char	MCS_rate_2R[16];
-#ifdef CONFIG_DISABLE_MCS13TO15
-extern unsigned char	MCS_rate_2R_MCS13TO15_OFF[16];
-#endif //CONFIG_DISABLE_MCS13TO15
-extern unsigned char	MCS_rate_1R[16];
 extern unsigned char RTW_WPA_OUI[];
-extern unsigned char WPA_TKIP_CIPHER[4];
-extern unsigned char RSN_TKIP_CIPHER[4];
 
 #define R2T_PHY_DELAY	(0)
 
@@ -673,7 +664,7 @@ __inline u8 *get_my_bssid(WLAN_BSSID_EX *pnetwork)
 
 u16 get_beacon_interval(WLAN_BSSID_EX *bss)
 {
-	unsigned short val;
+	__le16 val;
 	_rtw_memcpy((unsigned char *)&val, rtw_get_beacon_interval_from_ie(bss->IEs), 2);
 
 	return le16_to_cpu(val);
@@ -760,7 +751,7 @@ void CAM_empty_entry(
 
 void invalidate_cam_all(_adapter *padapter)
 {
-	rtw_hal_set_hwreg(padapter, HW_VAR_CAM_INVALID_ALL, 0);
+	rtw_hal_set_hwreg(padapter, HW_VAR_CAM_INVALID_ALL, NULL);
 }
 #if 0
 static u32 _ReadCAM(_adapter *padapter ,u32 addr)
@@ -928,7 +919,7 @@ void flush_all_cam_entry(_adapter *padapter)
 	}
 #else //CONFIG_CONCURRENT_MODE
 
-	rtw_hal_set_hwreg(padapter, HW_VAR_CAM_INVALID_ALL, 0);
+	rtw_hal_set_hwreg(padapter, HW_VAR_CAM_INVALID_ALL, NULL);
 
 #endif //CONFIG_CONCURRENT_MODE
 
@@ -1315,12 +1306,6 @@ void HT_caps_handler(_adapter *padapter, PNDIS_802_11_VARIABLE_IEs pIE)
 		}
 	}
 
-	//	Commented by Albert 2010/07/12
-	//	Have to handle the endian issue after copying.
-	//	HT_ext_caps didn't be used yet.
-	pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info = le16_to_cpu( pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info );
-	pmlmeinfo->HT_caps.u.HT_cap_element.HT_ext_caps = le16_to_cpu( pmlmeinfo->HT_caps.u.HT_cap_element.HT_ext_caps );
-
 	rtw_hal_get_hwreg(padapter, HW_VAR_RF_TYPE, (u8 *)(&rf_type));
 
 	//update the MCS rates
@@ -1595,7 +1580,7 @@ int rtw_check_bcn_info(ADAPTER *Adapter, u8 *pframe, u32 packet_len)
 	p = rtw_get_ie(bssid->IEs + _FIXED_IE_LENGTH_, _HT_CAPABILITY_IE_, &len, bssid->IELength - _FIXED_IE_LENGTH_);
 	if(p && len>0) {
 			pht_cap = (struct rtw_ieee80211_ht_cap *)(p + 2);
-			ht_cap_info = pht_cap->cap_info;
+			ht_cap_info = le16_to_cpu(pht_cap->cap_info);
 	} else {
 			ht_cap_info = 0;
 	}
@@ -2074,14 +2059,10 @@ int support_short_GI(_adapter *padapter, struct HT_caps_element *pHT_caps)
 
 	bit_offset = (pmlmeext->cur_bwmode & CHANNEL_WIDTH_40)? 6: 5;
 
-	if (pHT_caps->u.HT_cap_element.HT_caps_info & (0x1 << bit_offset))
-	{
+	if (le16_to_cpu(pHT_caps->u.HT_cap_element.HT_caps_info) & (0x1 << bit_offset))
 		return _SUCCESS;
-	}
 	else
-	{
 		return _FAIL;
-	}
 }
 
 unsigned char get_highest_rate_idx(u32 mask)
@@ -2547,10 +2528,10 @@ void process_addba_req(_adapter *padapter, u8 *paddba_req, u8 *addr)
 void update_TSF(struct mlme_ext_priv *pmlmeext, u8 *pframe, uint len)
 {
 	u8* pIE;
-	u32 *pbuf;
+	__le32 *pbuf;
 
 	pIE = pframe + sizeof(struct rtw_ieee80211_hdr_3addr);
-	pbuf = (u32*)pIE;
+	pbuf = ((__le32*)pIE);
 
 	pmlmeext->TSFValue = le32_to_cpu(*(pbuf+1));
 
@@ -2561,7 +2542,7 @@ void update_TSF(struct mlme_ext_priv *pmlmeext, u8 *pframe, uint len)
 
 void correct_TSF(_adapter *padapter, struct mlme_ext_priv *pmlmeext)
 {
-	rtw_hal_set_hwreg(padapter, HW_VAR_CORRECT_TSF, 0);
+	rtw_hal_set_hwreg(padapter, HW_VAR_CORRECT_TSF, NULL);
 }
 
 void beacon_timing_control(_adapter *padapter)

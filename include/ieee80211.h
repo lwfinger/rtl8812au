@@ -320,52 +320,52 @@ struct ieee_ibss_seq {
 };
 
 struct rtw_ieee80211_hdr {
-	u16 frame_ctl;
-	u16 duration_id;
+	__le16 frame_ctl;
+	__le16 duration_id;
 	u8 addr1[ETH_ALEN];
 	u8 addr2[ETH_ALEN];
 	u8 addr3[ETH_ALEN];
-	u16 seq_ctl;
+	__le16 seq_ctl;
 	u8 addr4[ETH_ALEN];
 } __attribute__ ((packed));
 
 struct rtw_ieee80211_hdr_3addr {
-	u16 frame_ctl;
-	u16 duration_id;
+	__le16 frame_ctl;
+	__le16 duration_id;
 	u8 addr1[ETH_ALEN];
 	u8 addr2[ETH_ALEN];
 	u8 addr3[ETH_ALEN];
-	u16 seq_ctl;
+	__le16 seq_ctl;
 } __attribute__ ((packed));
 
 
 struct rtw_ieee80211_hdr_qos {
-	u16 frame_ctl;
-	u16 duration_id;
+	__le16 frame_ctl;
+	__le16 duration_id;
 	u8 addr1[ETH_ALEN];
 	u8 addr2[ETH_ALEN];
 	u8 addr3[ETH_ALEN];
-	u16 seq_ctl;
+	__le16 seq_ctl;
 	u8 addr4[ETH_ALEN];
-	u16	qc;
+	__le16	qc;
 }  __attribute__ ((packed));
 
 struct rtw_ieee80211_hdr_3addr_qos {
-        u16 frame_ctl;
-	u16 duration_id;
+        __le16 frame_ctl;
+	__le16 duration_id;
 	u8 addr1[ETH_ALEN];
 	u8 addr2[ETH_ALEN];
 	u8 addr3[ETH_ALEN];
-	u16 seq_ctl;
-       u16     qc;
+	__le16 seq_ctl;
+       __le16     qc;
 }  __attribute__ ((packed));
 
 struct eapol {
 	u8 snap[6];
-	u16 ethertype;
+	__le16 ethertype;
 	u8 version;
 	u8 type;
-	u16 length;
+	__le16 length;
 } __attribute__ ((packed));
 
 enum eap_type {
@@ -837,7 +837,7 @@ struct ieee80211_security {
 	u8 key_sizes[WEP_KEYS];
 	u8 keys[WEP_KEYS][WEP_KEY_LEN];
 	u8 level;
-	u16 flags;
+	__le16 flags;
 } __attribute__ ((packed));
 
 /*
@@ -913,17 +913,17 @@ struct ieee80211_info_element {
 
 struct ieee80211_authentication {
 	struct ieee80211_header_data header;
-	u16 algorithm;
-	u16 transaction;
-	u16 status;
+	__le16 algorithm;
+	__le16 transaction;
+	__le16 status;
 	//struct ieee80211_info_element_hdr info_element;
 } __attribute__ ((packed));
 
 struct ieee80211_probe_response {
 	struct ieee80211_header_data header;
-	u32 time_stamp[2];
-	u16 beacon_interval;
-	u16 capability;
+	__le32 time_stamp[2];
+	__le16 beacon_interval;
+	__le16 capability;
 	struct ieee80211_info_element info_element;
 } __attribute__ ((packed));
 
@@ -933,24 +933,24 @@ struct ieee80211_probe_request {
 
 struct ieee80211_assoc_request_frame {
 	struct rtw_ieee80211_hdr_3addr header;
-	u16 capability;
-	u16 listen_interval;
+	__le16 capability;
+	__le16 listen_interval;
 	struct ieee80211_info_element_hdr info_element;
 } __attribute__ ((packed));
 
 struct ieee80211_assoc_response_frame {
 	struct rtw_ieee80211_hdr_3addr header;
-	u16 capability;
-	u16 status;
-	u16 aid;
+	__le16 capability;
+	__le16 status;
+	__le16 aid;
 } __attribute__ ((packed));
 
 struct ieee80211_txb {
 	u8 nr_frags;
 	u8 encrypted;
-	u16 reserved;
-	u16 frag_size;
-	u16 payload_size;
+	__le16 reserved;
+	__le16 frag_size;
+	__le16 payload_size;
 	struct sk_buff *fragments[0];
 };
 

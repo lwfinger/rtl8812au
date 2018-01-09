@@ -80,6 +80,16 @@
 #define _FW_LINKED			WIFI_ASOC_STATE
 #define _FW_UNDER_SURVEY	WIFI_SITE_MONITOR
 
+extern unsigned char WPA_TKIP_CIPHER[4];
+extern unsigned char RSN_TKIP_CIPHER[4];
+#ifdef CONFIG_DISABLE_MCS13TO15
+extern unsigned char	MCS_rate_2R_MCS13TO15_OFF[16];
+extern unsigned char	MCS_rate_2R[16];
+#else //CONFIG_DISABLE_MCS13TO15
+extern unsigned char	MCS_rate_2R[16];
+#endif //CONFIG_DISABLE_MCS13TO15
+extern unsigned char	MCS_rate_1R[16];
+
 
 enum dot11AuthAlgrthmNum {
  dot11AuthAlgrthm_Open = 0,
