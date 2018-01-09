@@ -30,7 +30,7 @@
 //3 ============================================================
 
 
-void setIqkMatrix_8821A(
+static void setIqkMatrix_8821A(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte		OFDM_index,
 	u1Byte		RFPath,
@@ -338,7 +338,7 @@ void ConfigureTxpowerTrack_8821A(
 #define MAX_TOLERANCE		5
 #define IQK_DELAY_TIME		1		//ms
 
-void _IQK_RX_FillIQC_8821A(
+static void _IQK_RX_FillIQC_8821A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
 	unsigned int			RX_X,
@@ -360,7 +360,7 @@ void _IQK_RX_FillIQC_8821A(
 	};
 }
 
-void _IQK_TX_FillIQC_8821A(
+static void _IQK_TX_FillIQC_8821A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
 	unsigned int			TX_X,
@@ -385,7 +385,7 @@ void _IQK_TX_FillIQC_8821A(
 	};
 }
 
-void _IQK_BackupMacBB_8821A(
+static void _IQK_BackupMacBB_8821A(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		MACBB_backup,
 	pu4Byte		Backup_MACBB_REG,
@@ -401,7 +401,8 @@ void _IQK_BackupMacBB_8821A(
 
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupMacBB Success!!!!\n"));
 }
-void _IQK_BackupRF_8821A(
+
+static void _IQK_BackupRF_8821A(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		RFA_backup,
 	pu4Byte		RFB_backup,
@@ -418,7 +419,8 @@ void _IQK_BackupRF_8821A(
 	}
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupRF Success!!!!\n"));
 }
-void _IQK_BackupAFE_8821A(
+
+static void _IQK_BackupAFE_8821A(
 	PDM_ODM_T		pDM_Odm,
 	pu4Byte		AFE_backup,
 	pu4Byte		Backup_AFE_REG,
@@ -433,7 +435,8 @@ void _IQK_BackupAFE_8821A(
 	}
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupAFE Success!!!!\n"));
 }
-void _IQK_RestoreMacBB_8821A(
+
+static void _IQK_RestoreMacBB_8821A(
 	PDM_ODM_T		pDM_Odm,
 	pu4Byte		MACBB_backup,
 	pu4Byte		Backup_MACBB_REG,
@@ -448,7 +451,8 @@ void _IQK_RestoreMacBB_8821A(
 	}
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RestoreMacBB Success!!!!\n"));
 }
-void _IQK_RestoreRF_8821A(
+
+static void _IQK_RestoreRF_8821A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
 	pu4Byte			Backup_RF_REG,
@@ -472,7 +476,8 @@ void _IQK_RestoreRF_8821A(
 		break;
 	}
 }
-void _IQK_RestoreAFE_8821A(
+
+static void _IQK_RestoreAFE_8821A(
 	PDM_ODM_T		pDM_Odm,
 	pu4Byte		AFE_backup,
 	pu4Byte		Backup_AFE_REG,
@@ -494,8 +499,7 @@ void _IQK_RestoreAFE_8821A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RestoreAFE Success!!!!\n"));
 }
 
-
-void _IQK_ConfigureMAC_8821A(
+static void _IQK_ConfigureMAC_8821A(
 	PDM_ODM_T		pDM_Odm
 	)
 {
@@ -511,7 +515,7 @@ void _IQK_ConfigureMAC_8821A(
 
 #define cal_num 3
 
-void _IQK_Tx_8821A(
+static void _IQK_Tx_8821A(
 	PDM_ODM_T		pDM_Odm,
 	ODM_RF_RADIO_PATH_E Path
 	)
@@ -1237,8 +1241,7 @@ void _IQK_Tx_8821A(
 #define AFE_REG_NUM 12
 #define RF_REG_NUM 3
 
-void
-phy_IQCalibrate_By_FW_8821A(
+static void phy_IQCalibrate_By_FW_8821A(
 	PADAPTER	pAdapter
 	)
 {
@@ -1273,8 +1276,7 @@ phy_IQCalibrate_By_FW_8821A(
 
 }
 
-void
-phy_IQCalibrate_8821A(
+static void phy_IQCalibrate_8821A(
 	PDM_ODM_T		pDM_Odm
 	)
 {
