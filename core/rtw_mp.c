@@ -708,7 +708,7 @@ int SetTxPower(PADAPTER pAdapter)
 	return true;
 }
 
-void SetTxAGCOffset(PADAPTER pAdapter, u32 ulTxAGCOffset)
+static void SetTxAGCOffset(PADAPTER pAdapter, u32 ulTxAGCOffset)
 {
 	u32 TxAGCOffset_B, TxAGCOffset_C, TxAGCOffset_D,tmpAGC;
 
@@ -772,13 +772,13 @@ void SetCarrierSuppressionTx(PADAPTER pAdapter, u8 bStart)
 	Hal_SetCarrierSuppressionTx(pAdapter, bStart);
 }
 
-void SetCCKContinuousTx(PADAPTER pAdapter, u8 bStart)
+static void SetCCKContinuousTx(PADAPTER pAdapter, u8 bStart)
 {
 	PhySetTxPowerLevel(pAdapter);
 	Hal_SetCCKContinuousTx(pAdapter,bStart);
 }
 
-void SetOFDMContinuousTx(PADAPTER pAdapter, u8 bStart)
+static void SetOFDMContinuousTx(PADAPTER pAdapter, u8 bStart)
 {
 	PhySetTxPowerLevel(pAdapter);
 	Hal_SetOFDMContinuousTx( pAdapter, bStart);
@@ -895,7 +895,7 @@ void fill_txdesc_for_mp(PADAPTER padapter, struct tx_desc *ptxdesc)
 	_rtw_memcpy(ptxdesc, &(pmp_priv->tx.desc), TXDESC_SIZE);
 }
 
-void fill_tx_desc_8812a(PADAPTER padapter)
+static void fill_tx_desc_8812a(PADAPTER padapter)
 {
 	struct mp_priv *pmp_priv = &padapter->mppriv;
 	//struct tx_desc *pDesc   = &(pmp_priv->tx.desc);
@@ -1276,7 +1276,7 @@ exit:
 
 
 
-u32 getPowerDiffByRate8188E(
+static u32 getPowerDiffByRate8188E(
 	PADAPTER	pAdapter,
 	u1Byte		CurrChannel,
 	u32		RfPath
