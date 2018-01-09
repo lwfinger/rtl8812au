@@ -10554,7 +10554,7 @@ void _linked_info_dump(_adapter *padapter)
 		DBG_871X("received bytes = %d\n", (u32) (padapter->recvpriv.rx_bytes - padapter->recvpriv.last_rx_bytes ) );
 	}
 	DBG_871X("============ linked status check ===================\n");
-	DBG_871X("============ RX GAIN / FALSE ALARM  ===================\n");
+	DBG_871X("============ RX GAIN / false ALARM  ===================\n");
 	DBG_871X(" DIG PATH-A(0x%02x), PATH-B(0x%02x)\n",rtw_read8(padapter,0xc50),rtw_read8(padapter,0xc58));
 	DBG_871X(" OFDM -Alarm DA2(0x%04x),DA4(0x%04x),DA6(0x%04x),DA8(0x%04x)\n",
 		rtw_read16(padapter,0xDA2),rtw_read16(padapter,0xDA4),rtw_read16(padapter,0xDA6),rtw_read16(padapter,0xDA8));

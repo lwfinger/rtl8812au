@@ -380,5 +380,5 @@ ODM_FillH2CCmd(
 	pu1Byte		CmdStartSeq
 	)
 {
-	return	TRUE;
+	return	true;
 }

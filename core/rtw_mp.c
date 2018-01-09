@@ -1490,7 +1490,7 @@ mpt_ProQueryCalTxPower_8188E(
 	u1Byte				rf_path=(RfPath), rfPath;
 	u1Byte				limit = 0, rate = 0;
 
-	if(HAL_IsLegalChannel(pAdapter, CurrChannel) == FALSE)
+	if(HAL_IsLegalChannel(pAdapter, CurrChannel) == false)
 	{
 		CurrChannel = 1;
 	}

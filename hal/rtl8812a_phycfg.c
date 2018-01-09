@@ -2886,7 +2886,7 @@ PHY_SetTxPowerIndex_8812A(
 	)
 {
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(Adapter);
-	bool				Direction = FALSE;
+	bool				Direction = false;
 	u4Byte				TxagcOffset = 0;
 
 	// <20120928, Kordan> A workaround in 8812A/8821A testchip, to fix the bug of odd Tx power indexes.
@@ -2904,7 +2904,7 @@ PHY_SetTxPowerIndex_8812A(
 		Direction = pHalData->odmpriv.IsTxagcOffsetPositiveB;
 		TxagcOffset = pHalData->odmpriv.TxagcOffsetValueB;
 	}
-	if(Direction == FALSE)
+	if(Direction == false)
 	{
 		if(PowerIndex > TxagcOffset)
 			PowerIndex -= TxagcOffset;

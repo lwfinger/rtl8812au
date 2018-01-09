@@ -104,7 +104,7 @@ void DoIQK_8821A(
 	ODM_ResetIQKResult(pDM_Odm);
 
 	pDM_Odm->RFCalibrateInfo.ThermalValue_IQK= ThermalValue;
-	PHY_IQCalibrate_8821A(Adapter, FALSE);
+	PHY_IQCalibrate_8821A(Adapter, false);
 }
 
 void
@@ -211,7 +211,7 @@ ODM_TxPwrTrackSetPwr8821A(
 
 					ODM_SetBBReg(pDM_Odm, rA_TxScale_Jaguar, 0xFFE00000, TxScalingTable_Jaguar[PwrTrackingLimit]);
 
-					pDM_Odm->Modify_TxAGC_Flag_PathA= TRUE;
+					pDM_Odm->Modify_TxAGC_Flag_PathA= true;
 
 					//Set TxAGC Page C{};
 					//Adapter->HalFunc.SetTxPowerLevelHandler(Adapter, pHalData->CurrentChannel);
@@ -226,7 +226,7 @@ ODM_TxPwrTrackSetPwr8821A(
 
 					ODM_SetBBReg(pDM_Odm, rA_TxScale_Jaguar, 0xFFE00000, TxScalingTable_Jaguar[0]);
 
-					pDM_Odm->Modify_TxAGC_Flag_PathA= TRUE;
+					pDM_Odm->Modify_TxAGC_Flag_PathA= true;
 
 					//Set TxAGC Page C{};
 					//Adapter->HalFunc.SetTxPowerLevelHandler(Adapter, pHalData->CurrentChannel);
@@ -249,9 +249,9 @@ ODM_TxPwrTrackSetPwr8821A(
 						//Adapter->HalFunc.SetTxPowerLevelHandler(Adapter, pHalData->CurrentChannel);
 						PHY_SetTxPowerLevel8812(Adapter, pHalData->CurrentChannel);
 
-						pDM_Odm->Modify_TxAGC_Flag_PathA= FALSE;
+						pDM_Odm->Modify_TxAGC_Flag_PathA= false;
 
-						ODM_RT_TRACE(pDM_Odm,ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD,("******Path_A pDM_Odm->Modify_TxAGC_Flag = FALSE \n"));
+						ODM_RT_TRACE(pDM_Odm,ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD,("******Path_A pDM_Odm->Modify_TxAGC_Flag = false \n"));
 					}
 				}
 			}
@@ -523,14 +523,14 @@ static void _IQK_Tx_8821A(
 	u4Byte		TX_fail, RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
 	int		TX_X = 0, TX_Y = 0, RX_X = 0, RX_Y = 0, TX_Average = 0, RX_Average = 0;
 	int		TX_X0[cal_num], TX_Y0[cal_num], TX_X0_RXK[cal_num], TX_Y0_RXK[cal_num], RX_X0[cal_num], RX_Y0[cal_num];
-	bool		TX0IQKOK = FALSE, RX0IQKOK = FALSE;
-	bool		VDF_enable = FALSE;
+	bool		TX0IQKOK = false, RX0IQKOK = false;
+	bool		VDF_enable = false;
 	int			i, k, VDF_Y[3], VDF_X[3], Tx_dt[3], Rx_dt[3], ii, dx = 0, dy = 0, TX_finish = 0, RX_finish = 0;
 
 
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BandWidth = %d\n", *pDM_Odm->pBandWidth));
 	if (*pDM_Odm->pBandWidth == 2){
-		VDF_enable = TRUE;
+		VDF_enable = true;
 	}
 
 	while (cal < cal_num){
@@ -717,13 +717,13 @@ static void _IQK_Tx_8821A(
 									VDF_X[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
 									ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
 									VDF_Y[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-									TX0IQKOK = TRUE;
+									TX0IQKOK = true;
 									break;
 								}
 								else{
 									ODM_SetBBReg(pDM_Odm, 0xccc, 0x000007ff, 0x0);
 									ODM_SetBBReg(pDM_Odm, 0xcd4, 0x000007ff, 0x200);
-									TX0IQKOK = FALSE;
+									TX0IQKOK = false;
 									cal_retry++;
 									if (cal_retry == 10) {
 										break;
@@ -731,7 +731,7 @@ static void _IQK_Tx_8821A(
 								}
 							}
 				                    else{
-								TX0IQKOK = FALSE;
+								TX0IQKOK = false;
 								cal_retry++;
 								if (cal_retry == 10){
 								break;
@@ -777,13 +777,13 @@ static void _IQK_Tx_8821A(
 								TX_X0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
 								ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
 								TX_Y0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-								TX0IQKOK = TRUE;
+								TX0IQKOK = true;
 								break;
 							}
 							else{
 								ODM_SetBBReg(pDM_Odm, 0xccc, 0x000007ff, 0x0);
 								ODM_SetBBReg(pDM_Odm, 0xcd4, 0x000007ff, 0x200);
-								TX0IQKOK = FALSE;
+								TX0IQKOK = false;
 								cal_retry++;
 								if (cal_retry == 10) {
 									break;
@@ -791,7 +791,7 @@ static void _IQK_Tx_8821A(
 							}
 						}
 						else{
-							TX0IQKOK = FALSE;
+							TX0IQKOK = false;
 							cal_retry++;
 							if (cal_retry == 10)
 							break;
@@ -800,7 +800,7 @@ static void _IQK_Tx_8821A(
 				}
 
 
-			if (TX0IQKOK == FALSE)
+			if (TX0IQKOK == false)
 				break;				// TXK fail, Don't do RXK
 
 			if (VDF_enable == 1){
@@ -888,28 +888,28 @@ static void _IQK_Tx_8821A(
 								TX_X0_RXK[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
 								ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
 								TX_Y0_RXK[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-								TX0IQKOK = TRUE;
+								TX0IQKOK = true;
 								break;
 							}
 							else{
-								TX0IQKOK = FALSE;
+								TX0IQKOK = false;
 								cal_retry++;
 								if (cal_retry == 10)
 									break;
 							}
 						}
 							else{
-							TX0IQKOK = FALSE;
+							TX0IQKOK = false;
 							cal_retry++;
 							if (cal_retry == 10)
 								break;
 							}
 					}
 
-					if (TX0IQKOK == FALSE){   //If RX mode TXK fail, then take TXK Result
+					if (TX0IQKOK == false){   //If RX mode TXK fail, then take TXK Result
 							TX_X0_RXK[cal] = TX_X0[cal];
 							TX_Y0_RXK[cal] = TX_Y0[cal];
-							TX0IQKOK = TRUE;
+							TX0IQKOK = true;
 							ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RXK Step 1 fail\n"));
 					}
 
@@ -972,13 +972,13 @@ static void _IQK_Tx_8821A(
 								VDF_X[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
 								ODM_Write4Byte(pDM_Odm, 0xcb8, 0x08000000);
 								VDF_Y[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-								RX0IQKOK = TRUE;
+								RX0IQKOK = true;
 								break;
 							}
 							else{
 								ODM_SetBBReg(pDM_Odm, 0xc10, 0x000003ff, 0x200>>1);
 								ODM_SetBBReg(pDM_Odm, 0xc10, 0x03ff0000, 0x0>>1);
-								RX0IQKOK = FALSE;
+								RX0IQKOK = false;
 								cal_retry++;
 								if (cal_retry == 10)
 									break;
@@ -986,7 +986,7 @@ static void _IQK_Tx_8821A(
 							}
 						}
 						else{
-							RX0IQKOK = FALSE;
+							RX0IQKOK = false;
 							cal_retry++;
 							if (cal_retry == 10)
 							break;
@@ -1050,18 +1050,18 @@ static void _IQK_Tx_8821A(
 							TX_X0_RXK[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
 							ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
 							TX_Y0_RXK[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-							TX0IQKOK = TRUE;
+							TX0IQKOK = true;
 							break;
 						}
 						else{
-							TX0IQKOK = FALSE;
+							TX0IQKOK = false;
 							cal_retry++;
 							if (cal_retry == 10)
 								break;
 						}
 					}
 					else{
-						TX0IQKOK = FALSE;
+						TX0IQKOK = false;
 						cal_retry++;
 						if (cal_retry == 10)
 						break;
@@ -1069,10 +1069,10 @@ static void _IQK_Tx_8821A(
 				}
 
 
-				if (TX0IQKOK == FALSE){   //If RX mode TXK fail, then take TXK Result
+				if (TX0IQKOK == false){   //If RX mode TXK fail, then take TXK Result
 					TX_X0_RXK[cal] = TX_X0[cal];
 					TX_Y0_RXK[cal] = TX_Y0[cal];
-					TX0IQKOK = TRUE;
+					TX0IQKOK = true;
 					ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("1"));
 				}
 
@@ -1131,13 +1131,13 @@ static void _IQK_Tx_8821A(
 							RX_X0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
 							ODM_Write4Byte(pDM_Odm, 0xcb8, 0x08000000);
 							RX_Y0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-							RX0IQKOK = TRUE;
+							RX0IQKOK = true;
 							break;
 						}
 						else{
 							ODM_SetBBReg(pDM_Odm, 0xc10, 0x000003ff, 0x200>>1);
 							ODM_SetBBReg(pDM_Odm, 0xc10, 0x03ff0000, 0x0>>1);
-							RX0IQKOK = FALSE;
+							RX0IQKOK = false;
 							cal_retry++;
 							if (cal_retry == 10)
 								break;
@@ -1145,7 +1145,7 @@ static void _IQK_Tx_8821A(
 						}
 					}
 					else{
-						RX0IQKOK = FALSE;
+						RX0IQKOK = false;
 						cal_retry++;
 						if (cal_retry == 10)
 						break;

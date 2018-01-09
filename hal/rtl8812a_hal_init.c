@@ -2038,7 +2038,7 @@ hal_ReadUsbType_8812AU(
 		{
 			// Config 8812AU as 1*1 mode AC mode.
 			pHalData->rf_type = RF_1T1R;
-			//UsbModeSwitch_SetUsbModeMechOn(Adapter, FALSE);
+			//UsbModeSwitch_SetUsbModeMechOn(Adapter, false);
 			//pHalData->EFUSEHidden = EFUSE_HIDDEN_812AU_VL;
 			DBG_871X("%s(): EFUSE_HIDDEN_812AU_VL\n",__FUNCTION__);
 		}
@@ -2056,7 +2056,7 @@ hal_ReadUsbType_8812AU(
 				{
 					// Antenna == 2 WMODE = 3 RTL8812AU-VS 11AC + USB2.0 Mode
 					// Driver will not support USB automatic switch
-					//UsbModeSwitch_SetUsbModeMechOn(Adapter, FALSE);
+					//UsbModeSwitch_SetUsbModeMechOn(Adapter, false);
 					//pHalData->EFUSEHidden = EFUSE_HIDDEN_812AU_VS;
 					DBG_871X("%s(): EFUSE_HIDDEN_812AU_VS\n",__FUNCTION__);
 				}
@@ -2064,7 +2064,7 @@ hal_ReadUsbType_8812AU(
 			else if (wmode == 2)
 			{
 				// Antenna == 2 WMODE = 2 RTL8812AU-VN 11N only + USB2.0 Mode
-				//UsbModeSwitch_SetUsbModeMechOn(Adapter, FALSE);
+				//UsbModeSwitch_SetUsbModeMechOn(Adapter, false);
 				//pHalData->EFUSEHidden = EFUSE_HIDDEN_812AU_VN;
 				DBG_871X("%s(): EFUSE_HIDDEN_812AU_VN\n",__FUNCTION__);
 			}

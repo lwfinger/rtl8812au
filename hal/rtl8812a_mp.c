@@ -21,7 +21,7 @@
 
 s32 Hal_SetPowerTracking(PADAPTER padapter, u8 enable)
 {
-	bool					bResult = TRUE;
+	bool					bResult = true;
 	PMPT_CONTEXT			pMptCtx = &(padapter->mppriv.MptCtx);
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
@@ -205,7 +205,7 @@ void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven)
 	if (!IS_92C_SERIAL(pHalData->VersionID))
 		return;
 #if 0
-	while(PlatformAtomicExchange(&Adapter->IntrCCKRefCount, TRUE) == TRUE)
+	while(PlatformAtomicExchange(&Adapter->IntrCCKRefCount, true) == true)
 	{
 		PlatformSleepUs(100);
 		TimeOut--;
@@ -289,7 +289,7 @@ void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven)
 	RTPRINT(FINIT, INIT_TxPower,
 	("MPT_CCKTxPowerAdjustbyIndex 0xa20=%x\n", PlatformEFIORead4Byte(Adapter, 0xa20)));
 
-	PlatformAtomicExchange(&Adapter->IntrCCKRefCount, FALSE);
+	PlatformAtomicExchange(&Adapter->IntrCCKRefCount, false);
 #endif
 }
 /*---------------------------hal\rtl8192c\MPT_HelperFunc.c---------------------------*/
@@ -994,16 +994,16 @@ void Hal_SetCCKContinuousTx(PADAPTER pAdapter, u8 bStart)
 		PHY_SetBBReg(pAdapter, rFPGA0_XA_HSSIParameter1, bMaskDWord, 0x01000500);
 		PHY_SetBBReg(pAdapter, rFPGA0_XB_HSSIParameter1, bMaskDWord, 0x01000500);
 
-		pAdapter->mppriv.MptCtx.bCckContTx = TRUE;
-		pAdapter->mppriv.MptCtx.bOfdmContTx = FALSE;
+		pAdapter->mppriv.MptCtx.bCckContTx = true;
+		pAdapter->mppriv.MptCtx.bOfdmContTx = false;
 
 	}
 	else {
 		RT_TRACE(_module_mp_, _drv_info_,
 			 ("SetCCKContinuousTx: test stop\n"));
 
-	pAdapter->mppriv.MptCtx.bCckContTx = FALSE;
-	pAdapter->mppriv.MptCtx.bOfdmContTx = FALSE;
+	pAdapter->mppriv.MptCtx.bCckContTx = false;
+	pAdapter->mppriv.MptCtx.bOfdmContTx = false;
 
 	PHY_SetBBReg(pAdapter, rCCK0_System, bCCKBBMode, 0x0);    //normal mode
 	PHY_SetBBReg(pAdapter, rCCK0_System, bCCKScramble, 0x1);  //turn on scramble setting

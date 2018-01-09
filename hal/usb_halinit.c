@@ -1287,12 +1287,12 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_BEGIN);
 	DBG_871X(" power-on :REG_SYS_CLKR 0x09=0x%02x. REG_CR 0x100=0x%02x.\n", value8, u1bRegCR);
 	if((value8&BIT3)  && (u1bRegCR != 0 && u1bRegCR != 0xEA))
 	{
-		//pHalData->bMACFuncEnable = TRUE;
+		//pHalData->bMACFuncEnable = true;
 		DBG_871X(" MAC has already power on.\n");
 	}
 	else
 	{
-		//pHalData->bMACFuncEnable = FALSE;
+		//pHalData->bMACFuncEnable = false;
 		// Set FwPSState to ALL_ON mode to prevent from the I/O be return because of 32k
 		// state which is set before sleep under wowlan mode. 2012.01.04. by tynli.
 		//pHalData->FwPSState = FW_PS_STATE_ALL_ON_88E;
@@ -2057,18 +2057,18 @@ hal_CustomizeByCustomerID_8812AU(
 			DBG_871X("PID= 0x%x, VID=  %x\n",pHalData->EEPROMPID,pHalData->EEPROMVID);
 			break;
 		case EEPROM_CID_WHQL:
-			//padapter->bInHctTest = TRUE;
+			//padapter->bInHctTest = true;
 
-			//pMgntInfo->bSupportTurboMode = FALSE;
-			//pMgntInfo->bAutoTurboBy8186 = FALSE;
+			//pMgntInfo->bSupportTurboMode = false;
+			//pMgntInfo->bAutoTurboBy8186 = false;
 
-			//pMgntInfo->PowerSaveControl.bInactivePs = FALSE;
-			//pMgntInfo->PowerSaveControl.bIPSModeBackup = FALSE;
-			//pMgntInfo->PowerSaveControl.bLeisurePs = FALSE;
-			//pMgntInfo->PowerSaveControl.bLeisurePsModeBackup = FALSE;
+			//pMgntInfo->PowerSaveControl.bInactivePs = false;
+			//pMgntInfo->PowerSaveControl.bIPSModeBackup = false;
+			//pMgntInfo->PowerSaveControl.bLeisurePs = false;
+			//pMgntInfo->PowerSaveControl.bLeisurePsModeBackup = false;
 			//pMgntInfo->keepAliveLevel = 0;
 
-			//padapter->bUnloadDriverwhenS3S4 = FALSE;
+			//padapter->bUnloadDriverwhenS3S4 = false;
 			break;
 		default:
 			pEEPROM->CustomerID = RT_CID_DEFAULT;

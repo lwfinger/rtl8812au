@@ -48,12 +48,12 @@ dm_CheckProtection(
 
 	if(Adapter->TxStats.CurrentInitTxRate <= RateThreshold)
 	{
-		pMgntInfo->bDmDisableProtect = TRUE;
+		pMgntInfo->bDmDisableProtect = true;
 		DbgPrint("Forced disable protect: %x\n", Adapter->TxStats.CurrentInitTxRate);
 	}
 	else
 	{
-		pMgntInfo->bDmDisableProtect = FALSE;
+		pMgntInfo->bDmDisableProtect = false;
 		DbgPrint("Enable protect: %x\n", Adapter->TxStats.CurrentInitTxRate);
 	}
 #endif

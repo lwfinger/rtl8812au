@@ -211,7 +211,7 @@ u8 WapiGetEntryForCamClear(_adapter *padapter,u8 *pPeerMac,u8 keyid,u8 IsMsk)
 /*
 	if(RTIsListEmpty(&pWapiInfo->wapiCamUsedList)){
 		RT_TRACE(COMP_SEC,DBG_LOUD,("No Entry for wapi!!!\n"));
-		return FALSE;
+		return false;
 	}
 
 	pList = &pWapiInfo->wapiCamUsedList;
@@ -466,8 +466,8 @@ void rtw_wapi_update_info(_adapter *padapter, union recv_frame *precv_frame)
 }
 
 /****************************************************************************
-TRUE-----------------Drop
-FALSE---------------- handle
+true-----------------Drop
+false---------------- handle
 add to support WAPI to N-mode
 *****************************************************************************/
 u8 rtw_wapi_check_for_drop(

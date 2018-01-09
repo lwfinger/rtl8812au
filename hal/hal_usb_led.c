@@ -3744,7 +3744,7 @@ SwLedControlMode9(
 		case LED_CTL_SITE_SURVEY:
 			 if((pmlmepriv->LinkDetectInfo.bBusyTraffic) && (check_fwstate(pmlmepriv, _FW_LINKED)== true))
 				;
-			 else //if(pLed->bLedScanBlinkInProgress ==FALSE)
+			 else //if(pLed->bLedScanBlinkInProgress ==false)
 			 {
 				if(IS_LED_WPS_BLINKING(pLed))
 					return;
@@ -4044,7 +4044,7 @@ SwLedControlMode10(
 		case LED_CTL_SITE_SURVEY:
 			 if(check_fwstate(pmlmepriv, _FW_LINKED)== true)
 				;                                                                  //don't blink when media connect
-			 else //if(pLed->bLedScanBlinkInProgress ==FALSE)
+			 else //if(pLed->bLedScanBlinkInProgress ==false)
 			 {
 				if(IS_LED_WPS_BLINKING(pLed) || IS_LED_WPS_BLINKING(pLed1))
 					return;

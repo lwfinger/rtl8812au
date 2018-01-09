@@ -2865,8 +2865,8 @@ int recv_indicatepkts_in_order(_adapter *padapter, struct recv_reorder_ctrl *pre
 			// This protect buffer from overflow.
 			if(index >= REORDER_WIN_SIZE)
 			{
-				RT_ASSERT(FALSE, ("IndicateRxReorderList(): Buffer overflow!! \n"));
-				bPktInBuf = TRUE;
+				RT_ASSERT(false, ("IndicateRxReorderList(): Buffer overflow!! \n"));
+				bPktInBuf = true;
 				break;
 			}
 #endif
