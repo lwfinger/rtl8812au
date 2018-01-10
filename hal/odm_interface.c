@@ -202,7 +202,7 @@ void
 ODM_MoveMemory(
 	PDM_ODM_T	pDM_Odm,
 	void *		pDest,
-	void *		pSrc,
+	const void *		pSrc,
 	u4Byte		Length
 	)
 {
