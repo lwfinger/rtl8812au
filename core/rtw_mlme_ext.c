@@ -4699,7 +4699,7 @@ void issue_p2p_provision_request(_adapter *padapter, u8* pssid, u8 ussidlen, u8*
 
 	wpsielen = 0;
 	//	WPS OUI
-	*(u32*) ( wpsie ) = cpu_to_be32( WPSOUI );
+	*(__be32*) ( wpsie ) = cpu_to_be32( WPSOUI );
 	wpsielen += 4;
 
 	//	WPS version
@@ -4745,7 +4745,7 @@ void issue_p2p_provision_request(_adapter *padapter, u8* pssid, u8 ussidlen, u8*
 }
 
 
-u8 is_matched_in_profilelist( u8* peermacaddr, struct profile_info* profileinfo )
+static u8 is_matched_in_profilelist( u8* peermacaddr, struct profile_info* profileinfo )
 {
 	u8 i, match_result = 0;
 
@@ -4896,7 +4896,7 @@ void issue_probersp_p2p(_adapter *padapter, unsigned char *da)
 
 		wpsielen = 0;
 		//	WPS OUI
-		*(u32*) ( wpsie ) = cpu_to_be32( WPSOUI );
+		*(__be32*) ( wpsie ) = cpu_to_be32( WPSOUI );
 		wpsielen += 4;
 
 		//	WPS version
@@ -5045,7 +5045,7 @@ void issue_probersp_p2p(_adapter *padapter, unsigned char *da)
 		wpsielen += 2;
 
 		//	OUI
-		*(u32*) ( wpsie + wpsielen ) = cpu_to_be32( WPSOUI );
+		*(__be32*) ( wpsie + wpsielen ) = cpu_to_be32( WPSOUI );
 		wpsielen += 4;
 
 		//	Sub Category ID
@@ -5116,7 +5116,7 @@ void issue_probersp_p2p(_adapter *padapter, unsigned char *da)
 
 }
 
-int _issue_probereq_p2p(_adapter *padapter, u8 *da, int wait_ack)
+static int _issue_probereq_p2p(_adapter *padapter, u8 *da, int wait_ack)
 {
 	int ret = _FAIL;
 	struct xmit_frame		*pmgntframe;
@@ -5224,7 +5224,7 @@ int _issue_probereq_p2p(_adapter *padapter, u8 *da, int wait_ack)
 
 		wpsielen = 0;
 		//	WPS OUI
-		*(u32*) ( wpsie ) = cpu_to_be32( WPSOUI );
+		*(__be32*) ( wpsie ) = cpu_to_be32( WPSOUI );
 		wpsielen += 4;
 
 		//	WPS version
@@ -5296,7 +5296,7 @@ int _issue_probereq_p2p(_adapter *padapter, u8 *da, int wait_ack)
 		wpsielen += 2;
 
 		//	OUI
-		*(u32*) ( wpsie + wpsielen ) = cpu_to_be32( WPSOUI );
+		*(__be32 *) ( wpsie + wpsielen ) = cpu_to_be32( WPSOUI );
 		wpsielen += 4;
 
 		//	Sub Category ID
@@ -5506,7 +5506,7 @@ exit:
 
 #endif //CONFIG_P2P
 
-s32 rtw_action_public_decache(union recv_frame *recv_frame, s32 token)
+static s32 rtw_action_public_decache(union recv_frame *recv_frame, s32 token)
 {
 	_adapter *adapter = recv_frame->u.hdr.adapter;
 	struct mlme_ext_priv *mlmeext = &(adapter->mlmeextpriv);
@@ -5540,7 +5540,7 @@ s32 rtw_action_public_decache(union recv_frame *recv_frame, s32 token)
 	return _SUCCESS;
 }
 
-unsigned int on_action_public_p2p(union recv_frame *precv_frame)
+static unsigned int on_action_public_p2p(union recv_frame *precv_frame)
 {
 	_adapter *padapter = precv_frame->u.hdr.adapter;
 	u8 *pframe = precv_frame->u.hdr.rx_data;
@@ -5954,7 +5954,7 @@ unsigned int on_action_public_p2p(union recv_frame *precv_frame)
 	return _SUCCESS;
 }
 
-unsigned int on_action_public_vendor(union recv_frame *precv_frame)
+static unsigned int on_action_public_vendor(union recv_frame *precv_frame)
 {
 	unsigned int ret = _FAIL;
 	u8 *pframe = precv_frame->u.hdr.rx_data;
@@ -5968,7 +5968,7 @@ unsigned int on_action_public_vendor(union recv_frame *precv_frame)
 	return ret;
 }
 
-unsigned int on_action_public_default(union recv_frame *precv_frame, u8 action)
+static unsigned int on_action_public_default(union recv_frame *precv_frame, u8 action)
 {
 	unsigned int ret = _FAIL;
 	u8 *pframe = precv_frame->u.hdr.rx_data;
@@ -6057,7 +6057,7 @@ unsigned int OnAction_p2p(_adapter *padapter, union recv_frame *precv_frame)
 	if(category != RTW_WLAN_CATEGORY_P2P)
 		return _SUCCESS;
 
-	if ( cpu_to_be32( *( ( u32* ) ( frame_body + 1 ) ) ) != P2POUI )
+	if (be32_to_cpu(*((__be32 *)(frame_body + 1))) != P2POUI )
 		return _SUCCESS;
 
 #ifdef CONFIG_IOCTL_CFG80211
@@ -6136,7 +6136,7 @@ unsigned int DoReserved(_adapter *padapter, union recv_frame *precv_frame)
 	return _SUCCESS;
 }
 
-struct xmit_frame *_alloc_mgtxmitframe(struct xmit_priv *pxmitpriv, bool once)
+static struct xmit_frame *_alloc_mgtxmitframe(struct xmit_priv *pxmitpriv, bool once)
 {
 	struct xmit_frame *pmgntframe;
 	struct xmit_buf *pxmitbuf;
@@ -6312,7 +6312,7 @@ s32 dump_mgntframe_and_wait_ack(_adapter *padapter, struct xmit_frame *pmgntfram
 #endif //!CONFIG_XMIT_ACK
 }
 
-int update_hidden_ssid(u8 *ies, u32 ies_len, u8 hidden_ssid_mode)
+static int update_hidden_ssid(u8 *ies, u32 ies_len, u8 hidden_ssid_mode)
 {
 	u8 *ssid_ie;
 	sint ssid_len_ori;
@@ -6481,7 +6481,7 @@ void issue_beacon(_adapter *padapter, int timeout_ms)
 				insert_len += 2;
 
 				//	OUI
-				*(u32*) ( pframe + insert_len ) = cpu_to_be32( WPSOUI );
+				*(__be32*) ( pframe + insert_len ) = cpu_to_be32( WPSOUI );
 				insert_len += 4;
 
 				//	Sub Category ID
@@ -6959,7 +6959,7 @@ void issue_probersp(_adapter *padapter, unsigned char *da, u8 is_valid_p2p_probe
 
 }
 
-int _issue_probereq(_adapter *padapter, NDIS_802_11_SSID *pssid, u8 *da, int wait_ack)
+static int _issue_probereq(_adapter *padapter, NDIS_802_11_SSID *pssid, u8 *da, int wait_ack)
 {
 	int ret = _FAIL;
 	struct xmit_frame		*pmgntframe;
@@ -7651,7 +7651,10 @@ void issue_assocreq(_adapter *padapter)
 		p = rtw_get_ie((pmlmeinfo->network.IEs + sizeof(NDIS_802_11_FIXED_IEs)), _HT_CAPABILITY_IE_, &ie_len, (pmlmeinfo->network.IELength - sizeof(NDIS_802_11_FIXED_IEs)));
 		if ((p != NULL) && (!(is_ap_in_tkip(padapter))))
 		{
+			u16 HT_caps_info;
+
 			_rtw_memcpy(&(pmlmeinfo->HT_caps), (p + 2), sizeof(struct HT_caps_element));
+			HT_caps_info = le16_to_cpu(pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info);
 
 			//to disable 40M Hz support while gd_bw_40MHz_en = 0
 			if (pmlmeext->cur_channel > 14) {
@@ -7664,15 +7667,16 @@ void issue_assocreq(_adapter *padapter)
 
 			if (cbw40_enable == 0)
 			{
-				pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info &= (~(BIT(6) | BIT(1)));
+				HT_caps_info &= (~(BIT(6) | BIT(1)));
 			}
 			else
 			{
-				pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info |= BIT(1);
+				HT_caps_info |= BIT(1);
 			}
 
 			//todo: disable SM power save mode
-			pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info |= 0x000c;
+			HT_caps_info |= 0x000c;
+			pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info = cpu_to_le16(HT_caps_info);
 
 			rtw_hal_get_hwreg(padapter, HW_VAR_RF_TYPE, (u8 *)(&rf_type));
 			//switch (pregpriv->rf_config)
@@ -7716,7 +7720,6 @@ void issue_assocreq(_adapter *padapter)
 				_rtw_memcpy(pmlmeinfo->HT_caps.u.HT_cap_element.MCS_rate, MCS_rate_1R, 16);
 			}
 #endif
-			pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info = cpu_to_le16(pmlmeinfo->HT_caps.u.HT_cap_element.HT_caps_info);
 
 #ifdef CONFIG_BT_COEXIST
 			if (BT_1Ant(padapter) == true)
@@ -7892,7 +7895,7 @@ void issue_assocreq(_adapter *padapter)
 			p2pielen += 2;
 
 			//	OUI
-			*(u32*) ( p2pie + p2pielen ) = cpu_to_be32( WPSOUI );
+			*(__be32*) ( p2pie + p2pielen ) = cpu_to_be32( WPSOUI );
 			p2pielen += 4;
 
 			//	Sub Category ID
@@ -7920,7 +7923,7 @@ void issue_assocreq(_adapter *padapter)
 			p2pie[ p2pielen++ ] = P2P_ATTR_INTERFACE;
 
 			//	Length:
-			*(__be16*) ( p2pie + p2pielen ) = cpu_to_le16( 0x000D );
+			*(__le16*) ( p2pie + p2pielen ) = cpu_to_le16( 0x000D );
 			p2pielen += 2;
 
 			//	Value:
@@ -8159,7 +8162,7 @@ static int _issue_qos_nulldata(_adapter *padapter, unsigned char *da, u16 tid, i
 	if(pattrib->mdata)
 		SetMData(fctrl);
 
-	qc = (unsigned short *)(pframe + pattrib->hdrlen - 2);
+	qc = (__le16 *)(pframe + pattrib->hdrlen - 2);
 
 	SetPriority(qc, tid);
 
@@ -8297,7 +8300,7 @@ static int _issue_deauth(_adapter *padapter, unsigned char *da, unsigned short r
 	pframe += sizeof(struct rtw_ieee80211_hdr_3addr);
 	pattrib->pktlen = sizeof(struct rtw_ieee80211_hdr_3addr);
 
-	reason = cpu_to_le16(reason);
+	cpu_to_le16p(&reason);
 	pframe = rtw_set_fixed_ie(pframe, _RSON_CODE_ , (unsigned char *)&reason, &(pattrib->pktlen));
 
 	pattrib->last_txcmdsz = pattrib->pktlen;
@@ -8443,7 +8446,7 @@ void issue_action_BA(_adapter *padapter, unsigned char *raddr, unsigned char act
 	struct pkt_attrib		*pattrib;
 	u8					*pframe;
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	__le16					*fctrl;
+	__le16			*fctrl, le_status;
 	struct xmit_priv		*pxmitpriv = &(padapter->xmitpriv);
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
@@ -8489,7 +8492,7 @@ void issue_action_BA(_adapter *padapter, unsigned char *raddr, unsigned char act
 	pframe = rtw_set_fixed_ie(pframe, 1, &(category), &(pattrib->pktlen));
 	pframe = rtw_set_fixed_ie(pframe, 1, &(action), &(pattrib->pktlen));
 
-      status = cpu_to_le16(status);
+	le32_to_cpup((__le32*)&status);
 
 
 	if (category == 3)
@@ -8527,8 +8530,8 @@ void issue_action_BA(_adapter *padapter, unsigned char *raddr, unsigned char act
 
 				//BA_timeout_value = 0xffff;//max: 65535 TUs(~ 65 ms)
 				BA_timeout_value = 5000;//~ 5ms
-				BA_timeout_value = cpu_to_le16(BA_timeout_value);
-				pframe = rtw_set_fixed_ie(pframe, 2, (unsigned char *)(&(BA_timeout_value)), &(pattrib->pktlen));
+				le_tmp = cpu_to_le16(BA_timeout_value);
+				pframe = rtw_set_fixed_ie(pframe, 2, (unsigned char *)(&le_tmp), &(pattrib->pktlen));
 
 				//if ((psta = rtw_get_stainfo(pstapriv, pmlmeinfo->network.MacAddress)) != NULL)
 				if ((psta = rtw_get_stainfo(pstapriv, raddr)) != NULL)
@@ -9397,7 +9400,7 @@ u8 collect_bss_info(_adapter *padapter, union recv_frame *precv_frame, WLAN_BSSI
 	}
 
 	_rtw_memcpy(&bssid->Configuration.BeaconPeriod, rtw_get_beacon_interval_from_ie(bssid->IEs), 2);
-	bssid->Configuration.BeaconPeriod = le32_to_cpu(bssid->Configuration.BeaconPeriod);
+	le16_to_cpup((__le16 *)&bssid->Configuration.BeaconPeriod);
 
 	val16 = rtw_get_capability((WLAN_BSSID_EX *)bssid);
 
