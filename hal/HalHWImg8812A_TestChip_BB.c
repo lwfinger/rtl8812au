@@ -50,7 +50,7 @@ CheckCondition(
 *                           AGC_TAB.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8812A_AGC_TAB[] = {
+static u4Byte Array_TC_8812A_AGC_TAB[] = {
 	0xFF0F07D8, 0xABCD,
 		0x81C, 0xFF000001,
 		0x81C, 0xFF020001,
@@ -446,7 +446,7 @@ u4Byte Array_TC_8812A_AGC_TAB[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8812A_AGC_TAB(
 	PDM_ODM_T  pDM_Odm
 	)
@@ -520,7 +520,7 @@ ODM_ReadAndConfig_TC_8812A_AGC_TAB(
 *                           AGC_TAB_DIFF.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8812A_AGC_TAB_DIFF_MB[] = {
+static u4Byte Array_TC_8812A_AGC_TAB_DIFF_MB[] = {
 		0x111, 0x47CE0003,
 		0x81C, 0x46D00001,
 		0x81C, 0x45D20001,
@@ -536,7 +536,7 @@ u4Byte Array_TC_8812A_AGC_TAB_DIFF_MB[] = {
 		0x222, 0x02E60001,
 };
 
-u4Byte Array_TC_8812A_AGC_TAB_DIFF_HB[] = {
+static u4Byte Array_TC_8812A_AGC_TAB_DIFF_HB[] = {
 		0x333, 0x47CE0003,
 		0x81C, 0x46D00001,
 		0x81C, 0x45D20001,
@@ -552,7 +552,7 @@ u4Byte Array_TC_8812A_AGC_TAB_DIFF_HB[] = {
 		0x444, 0x02E60001,
 };
 
-u4Byte Array_TC_8812A_AGC_TAB_DIFF_LB[] = {
+static u4Byte Array_TC_8812A_AGC_TAB_DIFF_LB[] = {
 		0x555, 0x08DA0001,
 		0x81B, 0x07DC0001,
 		0x81C, 0x06DE0001,
@@ -570,7 +570,7 @@ u4Byte Array_TC_8812A_AGC_TAB_DIFF_LB[] = {
 		0x888, 0x05E00001,
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8812A_AGC_TAB_DIFF(
 	PDM_ODM_T  pDM_Odm,
 	u4Byte	Array[],
@@ -643,7 +643,7 @@ ODM_ReadAndConfig_TC_8812A_AGC_TAB_DIFF(
 *                           PHY_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8812A_PHY_REG[] = {
+static u4Byte Array_TC_8812A_PHY_REG[] = {
 		0x800, 0x8020D010,
 		0x804, 0x080112E0,
 		0x808, 0x0E028233,
@@ -877,7 +877,7 @@ u4Byte Array_TC_8812A_PHY_REG[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8812A_PHY_REG(
 	PDM_ODM_T  pDM_Odm
 	)
@@ -951,12 +951,12 @@ ODM_ReadAndConfig_TC_8812A_PHY_REG(
 *                           PHY_REG_MP.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8812A_PHY_REG_MP[] = {
+static u4Byte Array_TC_8812A_PHY_REG_MP[] = {
 		0x800, 0x8020D410,
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8812A_PHY_REG_MP(
 	PDM_ODM_T  pDM_Odm
 	)
@@ -1030,7 +1030,7 @@ ODM_ReadAndConfig_TC_8812A_PHY_REG_MP(
 *                           PHY_REG_PG.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8812A_PHY_REG_PG[] = {
+static u4Byte Array_TC_8812A_PHY_REG_PG[] = {
 		0xC20, 0x00000000, 0x34363840,
 		0xC24, 0x00000000, 0x42424444,
 		0xC28, 0x00000000, 0x30323638,
@@ -1070,7 +1070,7 @@ u4Byte Array_TC_8812A_PHY_REG_PG[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8812A_PHY_REG_PG(
 	PDM_ODM_T  pDM_Odm
 	)
