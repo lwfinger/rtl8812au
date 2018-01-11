@@ -616,7 +616,7 @@ void rtw_udelay_os(int us)
 }
 #endif
 
-void rtw_yield_os()
+void rtw_yield_os(void)
 {
 	yield();
 }
@@ -631,7 +631,7 @@ static android_suspend_lock_t rtw_suspend_lock ={
 };
 #endif
 
-inline void rtw_suspend_lock_init()
+void rtw_suspend_lock_init(void)
 {
 	#ifdef CONFIG_WAKELOCK
 	wake_lock_init(&rtw_suspend_lock, WAKE_LOCK_SUSPEND, RTW_SUSPEND_LOCK_NAME);
@@ -640,7 +640,7 @@ inline void rtw_suspend_lock_init()
 	#endif
 }
 
-inline void rtw_suspend_lock_uninit()
+void rtw_suspend_lock_uninit(void)
 {
 	#ifdef CONFIG_WAKELOCK
 	wake_lock_destroy(&rtw_suspend_lock);
@@ -649,7 +649,7 @@ inline void rtw_suspend_lock_uninit()
 	#endif
 }
 
-inline void rtw_lock_suspend()
+void rtw_lock_suspend(void)
 {
 	#ifdef CONFIG_WAKELOCK
 	wake_lock(&rtw_suspend_lock);
@@ -662,7 +662,7 @@ inline void rtw_lock_suspend()
 	#endif
 }
 
-inline void rtw_unlock_suspend()
+void rtw_unlock_suspend(void)
 {
 	#ifdef CONFIG_WAKELOCK
 	wake_unlock(&rtw_suspend_lock);
@@ -676,7 +676,7 @@ inline void rtw_unlock_suspend()
 }
 
 #ifdef CONFIG_WOWLAN
-inline void rtw_lock_suspend_timeout(long timeout)
+void rtw_lock_suspend_timeout(long timeout)
 {
 	#ifdef CONFIG_WAKELOCK
 	wake_lock_timeout(&rtw_suspend_lock, timeout);

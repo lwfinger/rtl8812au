@@ -648,5 +648,6 @@ void *scdb_findEntry(_adapter *priv, unsigned char *macAddr, unsigned char *ipAd
 void dhcp_flag_bcast(_adapter *priv, struct sk_buff *skb);
 int nat25_db_handle(_adapter *priv, struct sk_buff *skb, int method);
 void nat25_db_expire(_adapter *priv);
+int rtw_change_ifname(_adapter *padapter, const char *ifname);
 
 #endif //__DRV_TYPES_H__
