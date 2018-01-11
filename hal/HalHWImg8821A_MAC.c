@@ -51,7 +51,7 @@ CheckCondition(
 *                           MAC_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_MP_8821A_MAC_REG[] = {
+static u4Byte Array_MP_8821A_MAC_REG[] = {
 		0x428, 0x0000000A,
 		0x429, 0x00000010,
 		0x430, 0x00000000,
