@@ -2551,7 +2551,7 @@ exit:
 	return res;
 }
 
-s32 c2h_evt_hdl(_adapter *adapter, struct c2h_evt_hdr *c2h_evt, c2h_id_filter filter)
+static s32 c2h_evt_hdl(_adapter *adapter, struct c2h_evt_hdr *c2h_evt, c2h_id_filter filter)
 {
 	s32 ret = _FAIL;
 	u8 buf[16];
