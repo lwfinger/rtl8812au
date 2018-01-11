@@ -51,7 +51,7 @@ CheckCondition(
 *                           AGC_TAB.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8821A_AGC_TAB[] = {
+static const u4Byte Array_TC_8821A_AGC_TAB[] = {
 		0x81C, 0xBF000001,
 		0x81C, 0xBF020001,
 		0x81C, 0xBF040001,
@@ -229,10 +229,7 @@ u4Byte Array_TC_8821A_AGC_TAB[] = {
 
 };
 
-void
-ODM_ReadAndConfig_TC_8821A_AGC_TAB(
-	PDM_ODM_T  pDM_Odm
-	)
+static void ODM_ReadAndConfig_TC_8821A_AGC_TAB(PDM_ODM_T  pDM_Odm)
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
@@ -244,7 +241,7 @@ ODM_ReadAndConfig_TC_8821A_AGC_TAB(
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_TC_8821A_AGC_TAB)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_TC_8821A_AGC_TAB;
+	const pu4Byte    Array       = Array_TC_8821A_AGC_TAB;
 
 
 	hex += board;
@@ -303,7 +300,7 @@ ODM_ReadAndConfig_TC_8821A_AGC_TAB(
 *                           PHY_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8821A_PHY_REG[] = {
+static const  u32 Array_TC_8821A_PHY_REG[] = {
 		0x800, 0x0020D410,
 		0x804, 0x080112E0,
 		0x808, 0x0E028211,
@@ -473,7 +470,7 @@ u4Byte Array_TC_8821A_PHY_REG[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8821A_PHY_REG(
 	PDM_ODM_T  pDM_Odm
 	)
@@ -488,7 +485,7 @@ ODM_ReadAndConfig_TC_8821A_PHY_REG(
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_TC_8821A_PHY_REG)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_TC_8821A_PHY_REG;
+	const pu4Byte    Array       = Array_TC_8821A_PHY_REG;
 
 
 	hex += board;
@@ -547,7 +544,7 @@ ODM_ReadAndConfig_TC_8821A_PHY_REG(
 *                           PHY_REG_PG.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8821A_PHY_REG_PG[] = {
+static const  u32 Array_TC_8821A_PHY_REG_PG[] = {
 		0xC20, 0x00000000, 0x34343434,
 		0xC24, 0x00000000, 0x34343434,
 		0xC28, 0x00000000, 0x30323234,
@@ -587,7 +584,7 @@ u4Byte Array_TC_8821A_PHY_REG_PG[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8821A_PHY_REG_PG(
 	PDM_ODM_T  pDM_Odm
 	)
@@ -600,7 +597,7 @@ ODM_ReadAndConfig_TC_8821A_PHY_REG_PG(
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_TC_8821A_PHY_REG_PG)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_TC_8821A_PHY_REG_PG;
+	const pu4Byte    Array       = Array_TC_8821A_PHY_REG_PG;
 
 	pDM_Odm->PhyRegPgValueType = PHY_REG_PG_EXACT_VALUE;
 	hex += board;
