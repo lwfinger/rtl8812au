@@ -158,7 +158,7 @@ exit:
 	return ret;
 }
 
-u8 rtl8812_h2c_msg_hdl(_adapter *padapter, unsigned char *pbuf)
+static u8 rtl8812_h2c_msg_hdl(_adapter *padapter, unsigned char *pbuf)
 {
 	u8 ElementID, CmdLen;
 	u8 *pCmdBuffer;
@@ -182,8 +182,7 @@ u8 rtl8812_set_rssi_cmd(_adapter*padapter, u8 *param)
 	u8	res=_SUCCESS;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
-
-	*((u32*) param ) = cpu_to_le32( *((u32*) param ) );
+	*((__le32*) param ) = cpu_to_le32( *((u32*) param ) );
 
 	FillH2CCmd_8812(padapter, H2C_8812_RSSI_REPORT, 4, param);
 
@@ -192,7 +191,7 @@ u8 rtl8812_set_rssi_cmd(_adapter*padapter, u8 *param)
 	return res;
 }
 
-u8	Get_VHT_ENI(
+static u8	Get_VHT_ENI(
 	u32		IOTAction,
 	u32		WirelessMode,
 	u32		ratr_bitmap
@@ -215,7 +214,7 @@ u8	Get_VHT_ENI(
 	return (Ret << 4);
 }
 
-bool
+static bool
 Get_RA_ShortGI(
 	PADAPTER			Adapter,
 	struct sta_info		*psta,
@@ -273,7 +272,7 @@ Set_RA_LDPC_8812(
 }
 
 
-u8
+static u8
 Get_RA_LDPC_8812(
 	struct sta_info		*psta
 )
@@ -460,10 +459,10 @@ void rtl8812_set_FwMediaStatus_cmd(PADAPTER padapter, u16 mstatus_rpt )
 	FillH2CCmd_8812(padapter, H2C_8812_MSRRPT, 3, u1JoinBssRptParm);
 }
 
-void ConstructBeacon(_adapter *padapter, u8 *pframe, u32 *pLength)
+static void ConstructBeacon(_adapter *padapter, u8 *pframe, u32 *pLength)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16					*fctrl;
+	__le16 *fctrl;
 	u32					rate_len, pktlen;
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
@@ -562,10 +561,10 @@ _ConstructBeacon:
 
 }
 
-void ConstructPSPoll(_adapter *padapter, u8 *pframe, u32 *pLength)
+static void ConstructPSPoll(_adapter *padapter, u8 *pframe, u32 *pLength)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16					*fctrl;
+	__le16 *fctrl;
 	u32					pktlen;
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
@@ -592,7 +591,7 @@ void ConstructPSPoll(_adapter *padapter, u8 *pframe, u32 *pLength)
 	*pLength = 16;
 }
 
-void ConstructNullFunctionData(
+static void ConstructNullFunctionData(
 	PADAPTER padapter,
 	u8		*pframe,
 	u32		*pLength,
@@ -603,7 +602,7 @@ void ConstructNullFunctionData(
 	u8		bForcePowerSave)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16						*fctrl;
+	__le16 *fctrl;
 	u32						pktlen;
 	struct mlme_priv		*pmlmepriv = &padapter->mlmepriv;
 	struct wlan_network		*cur_network = &pmlmepriv->cur_network;
@@ -665,10 +664,10 @@ void ConstructNullFunctionData(
 	*pLength = pktlen;
 }
 
-void ConstructProbeRsp(_adapter *padapter, u8 *pframe, u32 *pLength, u8 *StaAddr, bool bHideSSID)
+static void ConstructProbeRsp(_adapter *padapter, u8 *pframe, u32 *pLength, u8 *StaAddr, bool bHideSSID)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16					*fctrl;
+	__le16 *fctrl;
 	u8					*mac, *bssid;
 	u32					pktlen;
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
@@ -730,7 +729,7 @@ CheckFwRsvdPageContent(
 // Retrun value: the page number.
 // 2012.08.09, by tynli.
 //
-u8
+static u8
 GetTxBufferRsvdPageNum8812(
 	PADAPTER	Adapter,
 	bool		bWoWLANBoundary
