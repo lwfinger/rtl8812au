@@ -401,7 +401,7 @@ void ConfigureTxpowerTrack_8812A(
 // 2011/07/26 MH Add an API for testing IQK fail case.
 //
 // MP Already declare in odm.c
-bool
+static bool
 ODM_CheckPowerStatus(
 	PADAPTER		Adapter)
 {
@@ -412,7 +412,7 @@ ODM_CheckPowerStatus(
 #define	BW_40M  1
 #define	BW_80M	2
 
-void _IQK_RX_FillIQC_8812A(
+static void _IQK_RX_FillIQC_8812A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
 	unsigned int			RX_X,
@@ -457,7 +457,7 @@ void _IQK_RX_FillIQC_8812A(
 	};
 }
 
-void _IQK_TX_FillIQC_8812A(
+static void _IQK_TX_FillIQC_8812A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
 	unsigned int			TX_X,
@@ -494,7 +494,7 @@ void _IQK_TX_FillIQC_8812A(
 	};
 }
 
-void _IQK_BackupMacBB_8812A(
+static void _IQK_BackupMacBB_8812A(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		MACBB_backup,
 	pu4Byte		Backup_MACBB_REG,
@@ -511,7 +511,7 @@ void _IQK_BackupMacBB_8812A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupMacBB Success!!!!\n"));
 }
 
-void _IQK_BackupRF_8812A(
+static void _IQK_BackupRF_8812A(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		RFA_backup,
 	pu4Byte		RFB_backup,
@@ -530,7 +530,7 @@ void _IQK_BackupRF_8812A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupRF Success!!!!\n"));
 }
 
-void _IQK_BackupAFE_8812A(
+static void _IQK_BackupAFE_8812A(
 	PDM_ODM_T		pDM_Odm,
 	pu4Byte		AFE_backup,
 	pu4Byte		Backup_AFE_REG,
@@ -546,7 +546,7 @@ void _IQK_BackupAFE_8812A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BackupAFE Success!!!!\n"));
 }
 
-void _IQK_RestoreMacBB_8812A(
+static void _IQK_RestoreMacBB_8812A(
 	PDM_ODM_T		pDM_Odm,
 	pu4Byte		MACBB_backup,
 	pu4Byte		Backup_MACBB_REG,
@@ -562,7 +562,7 @@ void _IQK_RestoreMacBB_8812A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RestoreMacBB Success!!!!\n"));
 }
 
-void _IQK_RestoreRF_8812A(
+static void _IQK_RestoreRF_8812A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
 	pu4Byte			Backup_RF_REG,
@@ -594,7 +594,7 @@ void _IQK_RestoreRF_8812A(
 	}
 }
 
-void _IQK_RestoreAFE_8812A(
+static void _IQK_RestoreAFE_8812A(
 	PDM_ODM_T		pDM_Odm,
 	pu4Byte		AFE_backup,
 	pu4Byte		Backup_AFE_REG,
@@ -621,7 +621,7 @@ void _IQK_RestoreAFE_8812A(
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RestoreAFE Success!!!!\n"));
 }
 
-void _IQK_ConfigureMAC_8812A(
+static void _IQK_ConfigureMAC_8812A(
 	PDM_ODM_T		pDM_Odm
 	)
 {
@@ -636,7 +636,7 @@ void _IQK_ConfigureMAC_8812A(
 
 #define cal_num 3
 
-void _IQK_Tx_8812A(
+static void _IQK_Tx_8812A(
 	PDM_ODM_T		pDM_Odm,
 	ODM_RF_RADIO_PATH_E Path,
 	u1Byte chnlIdx
@@ -1764,7 +1764,7 @@ void _IQK_Tx_8812A(
 #define RF_REG_NUM 3
 
 // Maintained by BB James.
-void
+static void
 phy_IQCalibrate_8812A(
 	PDM_ODM_T		pDM_Odm,
 	u1Byte		Channel
@@ -1795,7 +1795,7 @@ phy_IQCalibrate_8812A(
 }
 
 
-void
+static void
 phy_LCCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm,
 	bool		is2T
@@ -1880,7 +1880,7 @@ phy_LCCalibrate_8812A(
 #define		DP_DPK_NUM			3
 #define		DP_DPK_VALUE_NUM	2
 
-void
+static void
 phy_ReloadIQKSetting_8812A(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte		Channel
@@ -1912,7 +1912,7 @@ phy_ReloadIQKSetting_8812A(
 
 }
 
-void
+static void
 PHY_ResetIQKResult_8812A(
 	PDM_ODM_T	pDM_Odm
 )
@@ -1929,7 +1929,7 @@ PHY_ResetIQKResult_8812A(
 	ODM_SetBBReg(pDM_Odm, 0xe10, 0x000003ff, 0x100);
 }
 
-void
+static void
 phy_IQCalibrate_By_FW_8812A(
 	PADAPTER	pAdapter
 	)
@@ -2020,7 +2020,7 @@ PHY_LCCalibrate_8812A(
 
 }
 
-void phy_SetRFPathSwitch_8812A(
+static void phy_SetRFPathSwitch_8812A(
 	PADAPTER	pAdapter,
 	bool		bMain,
 	bool		is2T
@@ -2068,14 +2068,14 @@ void PHY_SetRFPathSwitch_8812A(
 }
 
 
-void
+static void
 _DPK_ThermalCompensation(
 	PDM_ODM_T	pDM_Odm
 	)
 {
 }
 
-void
+static void
 _DPK_parareload(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		MACBB_backup,
@@ -2093,7 +2093,7 @@ _DPK_parareload(
 }
 
 
-void
+static void
 _DPK_parabackup(
 	PDM_ODM_T	pDM_Odm,
 	pu4Byte		MACBB_backup,
@@ -2112,7 +2112,7 @@ _DPK_parabackup(
 	}
 }
 
-void
+static void
 _DPK_Globalparaset(
 	PDM_ODM_T	pDM_Odm
 	)
@@ -2201,7 +2201,7 @@ _DPK_Globalparaset(
 }
 
 
-void
+static void
 _DPK_GetGainLoss(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte path
@@ -2318,7 +2318,7 @@ _DPK_GetGainLoss(
 }
 
 
-void
+static void
 _DPK_EnableDP(
 	PDM_ODM_T	pDM_Odm,
 	u1Byte path,
@@ -2417,7 +2417,7 @@ _DPK_EnableDP(
 }
 
 
-void
+static void
 _DPK_pathABDPK(
 	PDM_ODM_T	pDM_Odm
 	)
@@ -2678,7 +2678,7 @@ _DPK_pathABDPK(
 
 
 
-void
+static void
 phy_DPCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm
 	)
