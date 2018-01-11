@@ -410,20 +410,20 @@ int rtw_generate_ie(struct registry_priv *pregistrypriv)
 	ie += sz;
 
 	//beacon interval : 2bytes
-	*(u16*)ie = cpu_to_le16((u16)pdev_network->Configuration.BeaconPeriod);//BCN_INTERVAL;
+	*(__le16*)ie = cpu_to_le16((u16)pdev_network->Configuration.BeaconPeriod);//BCN_INTERVAL;
 	sz += 2;
 	ie += 2;
 
 	//capability info
-	*(u16*)ie = 0;
+	*(__le16*)ie = 0;
 
-	*(u16*)ie |= cpu_to_le16(cap_IBSS);
+	*(__le16*)ie |= cpu_to_le16(cap_IBSS);
 
 	if(pregistrypriv->preamble == PREAMBLE_SHORT)
-		*(u16*)ie |= cpu_to_le16(cap_ShortPremble);
+		*(__le16*)ie |= cpu_to_le16(cap_ShortPremble);
 
 	if (pdev_network->Privacy)
-		*(u16*)ie |= cpu_to_le16(cap_Privacy);
+		*(__le16*)ie |= cpu_to_le16(cap_Privacy);
 
 	sz += 2;
 	ie += 2;
@@ -513,7 +513,7 @@ unsigned char *rtw_get_wpa_ie(unsigned char *pie, int *wpa_ie_len, int limit)
 			//check version...
 			_rtw_memcpy((u8 *)&val16, (pbuf + 6), sizeof(val16));
 
-			val16 = le16_to_cpu(val16);
+			le16_to_cpup((__le16 *)&val16);
 			if (val16 != 0x0001)
 				goto check_next_ie;
 
@@ -1291,7 +1291,7 @@ u8 key_2char2num(u8 hch, u8 lch)
     return ((key_char2num(hch) << 4) | key_char2num(lch));
 }
 
-u8 convert_ip_addr(u8 hch, u8 mch, u8 lch)
+static u8 convert_ip_addr(u8 hch, u8 mch, u8 lch)
 {
     return ((key_char2num(hch) * 100) + (key_char2num(mch) * 10 ) + key_char2num(lch));
 }
@@ -1796,7 +1796,7 @@ int ieee80211_get_hdrlen(u16 fc)
 	return hdrlen;
 }
 
-int rtw_get_cipher_info(struct wlan_network *pnetwork)
+static int rtw_get_cipher_info(struct wlan_network *pnetwork)
 {
 	u32 wpa_ielen;
 	unsigned char *pbuf;
@@ -1849,7 +1849,7 @@ void rtw_get_bcn_info(struct wlan_network *pnetwork)
 	unsigned char		*p;
 
 	_rtw_memcpy((u8 *)&cap, rtw_get_capability_from_ie(pnetwork->network.IEs), 2);
-	cap = le16_to_cpu(cap);
+	le16_to_cpup((__le16 *)&cap);
 	if (cap & WLAN_CAPABILITY_PRIVACY) {
 		bencrypt = 1;
 		pnetwork->network.Privacy = 1;
@@ -1881,7 +1881,7 @@ void rtw_get_bcn_info(struct wlan_network *pnetwork)
 	p = rtw_get_ie(pnetwork->network.IEs + _FIXED_IE_LENGTH_, _HT_CAPABILITY_IE_, &len, pnetwork->network.IELength - _FIXED_IE_LENGTH_);
 	if(p && len>0) {
 			pht_cap = (struct rtw_ieee80211_ht_cap *)(p + 2);
-			pnetwork->BcnInfo.ht_cap_info = pht_cap->cap_info;
+			pnetwork->BcnInfo.ht_cap_info = le16_to_cpu(pht_cap->cap_info);
 	} else {
 			pnetwork->BcnInfo.ht_cap_info = 0;
 	}
