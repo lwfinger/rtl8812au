@@ -698,8 +698,7 @@ union recv_frame * portctrl(_adapter *adapter,union recv_frame * precv_frame)
 	u16	ether_type=0;
 	u16  eapol_type = 0x888e;//for Funia BD's WPA issue
 	struct rx_pkt_attrib *pattrib;
-
-
+	__be16 be_tmp;
 
 	pstapriv = &adapter->stapriv;
 	psta = rtw_get_stainfo(pstapriv, psta_addr);
@@ -727,13 +726,12 @@ union recv_frame * portctrl(_adapter *adapter,union recv_frame * precv_frame)
 
 			//get ether_type
 			ptr=ptr+pfhdr->attrib.hdrlen+pfhdr->attrib.iv_len+LLC_HEADER_SIZE;
-			_rtw_memcpy(&ether_type,ptr, 2);
-			ether_type= ntohs((unsigned short )ether_type);
+			_rtw_memcpy(&be_tmp,ptr, 2);
+			ether_type= ntohs(be_tmp);
 
 		        if (ether_type == eapol_type) {
 				prtnframe=precv_frame;
-			}
-			else {
+			} else {
 				//free this frame
 				rtw_free_recvframe(precv_frame, &adapter->recvpriv.free_recv_queue);
 				prtnframe=NULL;
@@ -2145,10 +2143,12 @@ sint wlanhdr_to_ethhdr ( union recv_frame *precvframe);
 sint wlanhdr_to_ethhdr ( union recv_frame *precvframe)
 {
 	sint	rmv_len;
-	u16	eth_type, len;
+	u16	eth_type;
+	u16 len;
 	u8	bsnaphdr;
 	u8	*psnap_type;
 	struct ieee80211_snap_hdr	*psnap;
+	__be16 be_tmp;
 
 	sint ret=_SUCCESS;
 	_adapter			*adapter =precvframe->u.hdr.adapter;
@@ -2185,8 +2185,8 @@ sint wlanhdr_to_ethhdr ( union recv_frame *precvframe)
 
 	RT_TRACE(_module_rtl871x_recv_c_,_drv_info_,("\n===pattrib->hdrlen: %x,  pattrib->iv_len:%x ===\n\n", pattrib->hdrlen,  pattrib->iv_len));
 
-	_rtw_memcpy(&eth_type, ptr+rmv_len, 2);
-	eth_type= ntohs((unsigned short )eth_type); //pattrib->ether_type
+	_rtw_memcpy(&be_tmp, ptr+rmv_len, 2);
+	eth_type= ntohs(be_tmp); //pattrib->ether_type
 	pattrib->eth_type = eth_type;
 
 #ifdef CONFIG_AUTO_AP_MODE
@@ -2244,8 +2244,9 @@ sint wlanhdr_to_ethhdr ( union recv_frame *precvframe)
 	_rtw_memcpy(ptr+ETH_ALEN, pattrib->src, ETH_ALEN);
 
 	if(!bsnaphdr) {
-		len = htons(len);
-		_rtw_memcpy(ptr+12, &len, 2);
+		__be16 be_len = htons(len);
+
+		_rtw_memcpy(ptr+12, &be_len, 2);
 	}
 
 
@@ -2371,7 +2372,7 @@ exit:
 #endif
 
 //perform defrag
-union recv_frame * recvframe_defrag(_adapter *adapter,_queue *defrag_q)
+static union recv_frame * recvframe_defrag(_adapter *adapter,_queue *defrag_q)
 {
 	_list	 *plist, *phead;
 	u8	*data,wlanhdr_offset;
@@ -2586,7 +2587,7 @@ union recv_frame* recvframe_chk_defrag(PADAPTER padapter, union recv_frame *prec
 
 }
 
-int amsdu_to_msdu(_adapter *padapter, union recv_frame *prframe)
+static int amsdu_to_msdu(_adapter *padapter, union recv_frame *prframe)
 {
 	int	a_len, padding_len;
 	u16	nSubframe_Length;
@@ -3244,7 +3245,7 @@ int process_recv_indicatepkts(_adapter *padapter, union recv_frame *prframe)
 
 }
 
-int recv_func_prehandle(_adapter *padapter, union recv_frame *rframe)
+static int recv_func_prehandle(_adapter *padapter, union recv_frame *rframe)
 {
 	int ret = _SUCCESS;
 	struct rx_pkt_attrib *pattrib = &rframe->u.hdr.attrib;
@@ -3288,7 +3289,7 @@ exit:
 	return ret;
 }
 
-int recv_func_posthandle(_adapter *padapter, union recv_frame *prframe)
+static int recv_func_posthandle(_adapter *padapter, union recv_frame *prframe)
 {
 	int ret = _SUCCESS;
 	union recv_frame *orig_prframe = prframe;
