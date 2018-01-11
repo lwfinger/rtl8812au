@@ -643,5 +643,10 @@ void rtw_indicate_wx_assoc_event(_adapter *padapter);
 void rtw_indicate_wx_disassoc_event(_adapter *padapter);
 void indicate_wx_scan_complete_event(_adapter *padapter);
 u8 rtw_do_join(_adapter * padapter);
+int nat25_handle_frame(_adapter *priv, struct sk_buff *skb);
+void *scdb_findEntry(_adapter *priv, unsigned char *macAddr, unsigned char *ipAddr);
+void dhcp_flag_bcast(_adapter *priv, struct sk_buff *skb);
+int nat25_db_handle(_adapter *priv, struct sk_buff *skb, int method);
+void nat25_db_expire(_adapter *priv);
 
 #endif //__DRV_TYPES_H__
