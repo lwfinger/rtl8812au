@@ -51,7 +51,7 @@ CheckCondition(
 *                           MAC_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8821A_MAC_REG[] = {
+static const u4Byte Array_TC_8821A_MAC_REG[] = {
 		0x428, 0x0000000A,
 		0x429, 0x00000010,
 		0x430, 0x00000000,
@@ -148,7 +148,7 @@ u4Byte Array_TC_8821A_MAC_REG[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8821A_MAC_REG(
 	PDM_ODM_T  pDM_Odm
 	)
@@ -163,7 +163,7 @@ ODM_ReadAndConfig_TC_8821A_MAC_REG(
 	u1Byte     _interface   = pDM_Odm->SupportInterface;
 	u1Byte     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_TC_8821A_MAC_REG)/sizeof(u4Byte);
-	pu4Byte    Array       = Array_TC_8821A_MAC_REG;
+	const pu4Byte    Array       = Array_TC_8821A_MAC_REG;
 
 
 	hex += board;
