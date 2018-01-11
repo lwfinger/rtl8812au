@@ -206,7 +206,7 @@ ODM_MoveMemory(
 	u4Byte		Length
 	)
 {
-	_rtw_memcpy(pDest, pSrc, Length);
+	_rtw_memcpy(pDest, (void *)pSrc, Length);
 }
 
 s4Byte ODM_CompareMemory(

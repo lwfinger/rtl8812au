@@ -72,13 +72,13 @@ odm_ConfigBB_PHY_8821A(
 void
 odm_ConfigBB_TXPWR_LMT_8821A(
 	PDM_ODM_T	pDM_Odm,
-	pu1Byte		Regulation,
-	pu1Byte		Band,
-	pu1Byte		Bandwidth,
-	pu1Byte		RateSection,
-	pu1Byte		RfPath,
-	pu1Byte		Channel,
-	pu1Byte		PowerLimit
+	const pu1Byte		Regulation,
+	const pu1Byte		Band,
+	const pu1Byte		Bandwidth,
+	const pu1Byte		RateSection,
+	const pu1Byte		RfPath,
+	const pu1Byte		Channel,
+	const pu1Byte		PowerLimit
     );
 
 #endif

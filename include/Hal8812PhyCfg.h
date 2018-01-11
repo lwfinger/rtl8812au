@@ -92,13 +92,13 @@ PHY_ConvertPowerLimitToPowerIndex(
 void
 PHY_SetPowerLimitTableValue(
 	PDM_ODM_T		pDM_Odm,
-	s8*				Regulation,
-	s8*				Band,
-	s8*				Bandwidth,
-	s8*				RateSection,
-	s8*				RfPath,
-	s8*				Channel,
-	s8*				PowerLimit
+	const s8*				Regulation,
+	const s8*				Band,
+	const s8*				Bandwidth,
+	const s8*				RateSection,
+	const s8*				RfPath,
+	const s8*				Channel,
+	const s8*				PowerLimit
 	);
 
 u8

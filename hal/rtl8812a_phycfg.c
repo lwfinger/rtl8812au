@@ -576,7 +576,7 @@ PHY_RFConfig8812(
 
 bool
 eqNByte(
-	u8*	str1,
+	const u8*	str1,
 	u8*	str2,
 	u32	num
 	)
@@ -594,7 +594,7 @@ eqNByte(
 
 bool
 GetU1ByteIntegerFromStringInDecimal(
-		s8*	Str,
+		const s8*	Str,
 		u8*	pInt
 	)
 {
@@ -1102,13 +1102,13 @@ PHY_ConvertPowerLimitToPowerIndex(
 void
 PHY_SetPowerLimitTableValue(
 	PDM_ODM_T		pDM_Odm,
-	s8*				Regulation,
-	s8*				Band,
-	s8*				Bandwidth,
-	s8*				RateSection,
-	s8*				RfPath,
-	s8*				Channel,
-	s8*				PowerLimit
+	const s8*				Regulation,
+	const s8*				Band,
+	const s8*				Bandwidth,
+	const s8*				RateSection,
+	const s8*				RfPath,
+	const s8*				Channel,
+	const s8*				PowerLimit
 	)
 {
 	PADAPTER			Adapter = pDM_Odm->Adapter;
