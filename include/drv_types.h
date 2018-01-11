@@ -639,4 +639,9 @@ extern int rtw_bw_mode;
 
 void netdev_br_init(struct net_device *netdev);
 int pm_netdev_open(struct net_device *pnetdev,u8 bnormal);
+void rtw_indicate_wx_assoc_event(_adapter *padapter);
+void rtw_indicate_wx_disassoc_event(_adapter *padapter);
+void indicate_wx_scan_complete_event(_adapter *padapter);
+u8 rtw_do_join(_adapter * padapter);
+
 #endif //__DRV_TYPES_H__
