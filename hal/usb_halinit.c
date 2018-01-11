@@ -96,7 +96,7 @@ static bool HalUsbSetQueuePipeMapping8812AUsb(
 
 }
 
-void rtl8812au_interface_configure(_adapter *padapter)
+static void rtl8812au_interface_configure(_adapter *padapter)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(padapter);
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
@@ -1008,7 +1008,7 @@ init_UsbAggregationSetting_8812A(
  *	12/10/2010	MHC		Create Version 0.
  *
  *---------------------------------------------------------------------------*/
-void
+static void
 USB_AggModeSwitch(
 	PADAPTER			Adapter
 	)
@@ -1138,7 +1138,8 @@ HwSuspendModeEnable_8812AU(
 	}
 
 }	// HwSuspendModeEnable92Cu
-rt_rf_power_state RfOnOffDetect(PADAPTER pAdapter )
+
+static rt_rf_power_state RfOnOffDetect(PADAPTER pAdapter )
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(pAdapter);
 	u8	val8;
@@ -1160,17 +1161,16 @@ rt_rf_power_state RfOnOffDetect(PADAPTER pAdapter )
 	return rfpowerstate;
 }	// HalDetectPwrDownMode
 
-void _ps_open_RF(_adapter *padapter) {
-	//here call with bRegSSPwrLvl 1, bRegSSPwrLvl 2 needs to be verified
-	//phy_SsPwrSwitch92CU(padapter, rf_on, 1);
+static void _ps_open_RF(_adapter *padapter)
+{
 }
 
-void _ps_close_RF(_adapter *padapter){
+static void _ps_close_RF(_adapter *padapter){
 	//here call with bRegSSPwrLvl 1, bRegSSPwrLvl 2 needs to be verified
 	//phy_SsPwrSwitch92CU(padapter, rf_off, 1);
 }
 
-u32 rtl8812au_hal_init(PADAPTER Adapter)
+static u32 rtl8812au_hal_init(PADAPTER Adapter)
 {
 	u8	value8 = 0, u1bRegCR;
 	u16  value16;
@@ -1644,7 +1644,7 @@ HAL_INIT_PROFILE_TAG(HAL_INIT_STAGES_END);
 	return status;
 }
 
-void
+static void
 CardDisableRTL8812AU(
 	PADAPTER			Adapter
 )
@@ -1700,7 +1700,7 @@ static void rtl8812au_hw_power_down(_adapter *padapter)
 	rtw_write16(padapter, REG_APS_FSMCO, 0x8812);
 }
 
-u32 rtl8812au_hal_deinit(PADAPTER Adapter)
+static u32 rtl8812au_hal_deinit(PADAPTER Adapter)
  {
 
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -1755,7 +1755,7 @@ u32 rtl8812au_hal_deinit(PADAPTER Adapter)
  }
 
 
-unsigned int rtl8812au_inirp_init(PADAPTER Adapter)
+static unsigned int rtl8812au_inirp_init(PADAPTER Adapter)
 {
 	u8 i;
 	struct recv_buf *precvbuf;
@@ -1819,7 +1819,7 @@ exit:
 
 }
 
-unsigned int rtl8812au_inirp_deinit(PADAPTER Adapter)
+static unsigned int rtl8812au_inirp_deinit(PADAPTER Adapter)
 {
 	RT_TRACE(_module_hci_hal_init_c_,_drv_info_,("\n ===> usb_rx_deinit \n"));
 
@@ -1835,7 +1835,7 @@ unsigned int rtl8812au_inirp_deinit(PADAPTER Adapter)
 //	EEPROM/EFUSE Content Parsing
 //
 //-------------------------------------------------------------------
-void
+static void
 hal_ReadIDs_8812AU(
 	PADAPTER	Adapter,
 	pu1Byte		PROMContent,
@@ -1850,14 +1850,14 @@ hal_ReadIDs_8812AU(
 		// VID, PID
 		if(IS_HARDWARE_TYPE_8812AU(Adapter))
 		{
-			pHalData->EEPROMVID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_VID_8812AU] );
-			pHalData->EEPROMPID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_PID_8812AU] );
+			pHalData->EEPROMVID = le16_to_cpu( *(__le16 *)&PROMContent[EEPROM_VID_8812AU] );
+			pHalData->EEPROMPID = le16_to_cpu( *(__le16 *)&PROMContent[EEPROM_PID_8812AU] );
 		}
 		else if (IS_HARDWARE_TYPE_8821U(Adapter))
 
 		{
-			pHalData->EEPROMVID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_VID_8821AU] );
-			pHalData->EEPROMPID = le16_to_cpu( *(u16 *)&PROMContent[EEPROM_PID_8821AU] );
+			pHalData->EEPROMVID = le16_to_cpu( *(__le16 *)&PROMContent[EEPROM_VID_8821AU] );
+			pHalData->EEPROMPID = le16_to_cpu( *(__le16 *)&PROMContent[EEPROM_PID_8821AU] );
 		}
 
 
@@ -1890,7 +1890,7 @@ hal_ReadIDs_8812AU(
 	DBG_871X("Customer ID: 0x%02X, SubCustomer ID: 0x%02X\n", pHalData->EEPROMCustomerID, pHalData->EEPROMSubCustomerID);
 }
 
-void
+static void
 hal_ReadMACAddress_8812AU(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -1923,7 +1923,7 @@ hal_ReadMACAddress_8812AU(
 	DBG_8192C("%s MAC Address from EFUSE = "MAC_FMT"\n",__FUNCTION__, MAC_ARG(pEEPROM->mac_addr));
 }
 
-void
+static void
 hal_InitPGData_8812A(
 	PADAPTER		padapter,
 	u8*			PROMContent
@@ -1961,7 +1961,7 @@ hal_InitPGData_8812A(
 	}
 }
 
-void
+static void
 hal_CustomizedBehavior_8812AU(
 	PADAPTER	Adapter
 	)
@@ -2080,7 +2080,7 @@ hal_CustomizeByCustomerID_8812AU(
 	hal_CustomizedBehavior_8812AU(pAdapter);
 }
 
-void
+static void
 hal_ReadUsbModeSwitch_8812AU(
 	PADAPTER	Adapter,
 	u8*			PROMContent,
@@ -2105,7 +2105,7 @@ ReadLEDSetting_8812AU(
 #endif //CONFIG_SW_LED
 }
 
-void
+static void
 InitAdapterVariablesByPROM_8812AU(
 	PADAPTER	Adapter
 	)
@@ -2170,7 +2170,7 @@ static void Hal_ReadPROMContent_8812A(
 	InitAdapterVariablesByPROM_8812AU(Adapter);
 }
 
-void
+static void
 hal_ReadRFType_8812A(
 	PADAPTER	Adapter
 	)
@@ -2202,14 +2202,14 @@ hal_ReadRFType_8812A(
 	//	pHalData->BandSet = BAND_ON_2_4G;
 }
 
-void
+static void
 hal_CustomizedBehavior_8812AUsb(
 	PADAPTER		Adapter
 	)
 {
 }
 
-void
+static void
 ReadAdapterInfo8812AU(
 	PADAPTER			Adapter
 	)
@@ -2230,7 +2230,7 @@ ReadAdapterInfo8812AU(
 	DBG_871X("ReadAdapterInfo8812AU <====\n");
 }
 
-void UpdateInterruptMask8812AU(PADAPTER padapter,u8 bHIMR0 ,u32 AddMSR, u32 RemoveMSR)
+static void UpdateInterruptMask8812AU(PADAPTER padapter,u8 bHIMR0 ,u32 AddMSR, u32 RemoveMSR)
 {
 	HAL_DATA_TYPE *pHalData;
 
@@ -2255,7 +2255,7 @@ void UpdateInterruptMask8812AU(PADAPTER padapter,u8 bHIMR0 ,u32 AddMSR, u32 Remo
 
 }
 
-void SetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
+static void SetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
@@ -2319,7 +2319,7 @@ void SetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 
 }
 
-void GetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
+static void GetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	DM_ODM_T		*podmpriv = &pHalData->odmpriv;
@@ -2339,7 +2339,7 @@ void GetHwReg8812AU(PADAPTER Adapter, u8 variable, u8* val)
 //	Description:
 //		Change default setting of specified variable.
 //
-u8
+static u8
 SetHalDefVar8812AUsb(
 	PADAPTER				Adapter,
 	HAL_DEF_VARIABLE		eVariable,
@@ -2363,7 +2363,7 @@ SetHalDefVar8812AUsb(
 //	Description:
 //		Query setting of specified variable.
 //
-u8
+static u8
 GetHalDefVar8812AUsb(
 	PADAPTER				Adapter,
 	HAL_DEF_VARIABLE		eVariable,
@@ -2383,7 +2383,7 @@ GetHalDefVar8812AUsb(
 	return bResult;
 }
 
-void _update_response_rate(_adapter *padapter,unsigned int mask)
+static void _update_response_rate(_adapter *padapter,unsigned int mask)
 {
 	u8	RateIndex = 0;
 	// Set RRSR rate table.
