@@ -631,4 +631,12 @@ __inline static u8 *myid(struct eeprom_priv *peepriv)
 #include <usb_ops.h>
 #include <usb_hal.h>
 
+extern int rtw_mc2u_disable;
+extern char *rtw_initmac;
+extern int rtw_ht_enable;
+extern int rtw_ampdu_enable;
+extern int rtw_bw_mode;
+
+void netdev_br_init(struct net_device *netdev);
+int pm_netdev_open(struct net_device *pnetdev,u8 bnormal);
 #endif //__DRV_TYPES_H__
