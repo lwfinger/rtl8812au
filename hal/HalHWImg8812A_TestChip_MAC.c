@@ -50,7 +50,7 @@ CheckCondition(
 *                           MAC_REG.TXT
 ******************************************************************************/
 
-u4Byte Array_TC_8812A_MAC_REG[] = {
+static u4Byte Array_TC_8812A_MAC_REG[] = {
 		0x010, 0x0000000C,
 		0x072, 0x00000000,
 		0x428, 0x0000000A,
@@ -153,7 +153,7 @@ u4Byte Array_TC_8812A_MAC_REG[] = {
 
 };
 
-void
+static void
 ODM_ReadAndConfig_TC_8812A_MAC_REG(
 	PDM_ODM_T  pDM_Odm
 	)
