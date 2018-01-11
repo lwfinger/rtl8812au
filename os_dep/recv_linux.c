@@ -262,7 +262,7 @@ _pkt *rtw_os_alloc_msdu_pkt(union recv_frame *prframe, u16 nSubframe_Length, u8 
 		_rtw_memcpy(skb_push(sub_skb, ETH_ALEN), pattrib->src, ETH_ALEN);
 		_rtw_memcpy(skb_push(sub_skb, ETH_ALEN), pattrib->dst, ETH_ALEN);
 	} else {
-		u16 len;
+		__be16 len;
 		/* Leave Ethernet header part of hdr and full payload */
 		len = htons(sub_skb->len);
 		_rtw_memcpy(skb_push(sub_skb, 2), &len, 2);
@@ -641,9 +641,9 @@ void rtw_os_read_port(_adapter *padapter, struct recv_buf *precvbuf)
 }
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
-void _rtw_reordering_ctrl_timeout_handler(void *FunctionContext)
+static void _rtw_reordering_ctrl_timeout_handler(void *FunctionContext)
 #else
-void _rtw_reordering_ctrl_timeout_handler(struct timer_list *t)
+static void _rtw_reordering_ctrl_timeout_handler(struct timer_list *t)
 #endif
 {
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
