@@ -1191,20 +1191,17 @@ u32 mp_query_psd(PADAPTER pAdapter, u8 *data)
 
 void _rtw_mp_xmit_priv (struct xmit_priv *pxmitpriv)
 {
-	   int i,res;
-	  _adapter *padapter = pxmitpriv->adapter;
+	int i,res;
+	_adapter *padapter = pxmitpriv->adapter;
 	struct xmit_frame	*pxmitframe = (struct xmit_frame*) pxmitpriv->pxmit_frame_buf;
 	struct xmit_buf *pxmitbuf = (struct xmit_buf *)pxmitpriv->pxmitbuf;
 
 	u32 max_xmit_extbuf_size = MAX_XMIT_EXTBUF_SZ;
 	u32 num_xmit_extbuf = NR_XMIT_EXTBUFF;
-	if(padapter->registrypriv.mp_mode ==0)
-	{
+	if(padapter->registrypriv.mp_mode ==0) {
 		max_xmit_extbuf_size = MAX_XMIT_EXTBUF_SZ;
 		num_xmit_extbuf = NR_XMIT_EXTBUFF;
-	}
-	else
-	{
+	} else {
 		max_xmit_extbuf_size = 20000;
 		num_xmit_extbuf = 1;
 	}
@@ -1591,17 +1588,14 @@ u32 mpt_ProQueryCalTxPower(
 	u1Byte			limit = 0, rate = 0;
 	rate=pMptCtx->MptRateIndex;
 
-	 if ( IS_HARDWARE_TYPE_8188E(pAdapter) || IS_HARDWARE_TYPE_8192E(pAdapter) )//|| IS_HARDWARE_TYPE_8723B(pAdapter))
-	 {
+	if (IS_HARDWARE_TYPE_8188E(pAdapter) || IS_HARDWARE_TYPE_8192E(pAdapter)) {
 		return mpt_ProQueryCalTxPower_8188E(pAdapter, RfPath);
-	 }
-	 else
-	 {
+	} else {
 		#ifdef CONFIG_8812A
 		TxPower = PHY_GetTxPowerIndex_8812A(pAdapter, RfPath, rate,pHalData->CurrentChannelBW, pHalData->CurrentChannel);
 		#endif
 		return TxPower;
-	 }
+	}
 }
 
 
@@ -1609,7 +1603,7 @@ void Hal_ProSetCrystalCap (PADAPTER pAdapter , u32 CrystalCapVal)
 {
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(pAdapter);
 
-		CrystalCapVal = pHalData->CrystalCap & 0x3F;
+	CrystalCapVal = pHalData->CrystalCap & 0x3F;
 
 	if(IS_HARDWARE_TYPE_8192D(pAdapter))
 	{

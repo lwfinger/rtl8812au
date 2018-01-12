@@ -34,7 +34,7 @@ uint oid_rt_wireless_mode_hdl(struct oid_par_priv *poid_par_priv)
 	} else if (poid_par_priv->type_of_oid == QUERY_OID) {
 		*(u8*)poid_par_priv->information_buf = Adapter->registrypriv.wireless_mode;
 		*poid_par_priv->bytes_rw = poid_par_priv->information_buf_len;
-		 RT_TRACE(_module_mp_, _drv_info_, ("-query Wireless Mode=%d\n", Adapter->registrypriv.wireless_mode));
+		RT_TRACE(_module_mp_, _drv_info_, ("-query Wireless Mode=%d\n", Adapter->registrypriv.wireless_mode));
 	} else {
 		status = uint_NOT_ACCEPTED;
 	}
