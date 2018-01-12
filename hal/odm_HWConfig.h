@@ -151,7 +151,7 @@
 
 typedef struct _Phy_Rx_AGC_Info
 {
-	#if __LITTLE_ENDIAN
+	#ifdef __LITTLE_ENDIAN
 		u1Byte	gain:7,trsw:1;
 	#else
 		u1Byte	trsw:1,gain:7;
@@ -178,7 +178,7 @@ typedef struct _Phy_Status_Rpt_8192cd
 	s1Byte	sig_evm;
 	u1Byte	rsvd_3;
 
-#if __LITTLE_ENDIAN
+#ifdef __LITTLE_ENDIAN
 	u1Byte	antsel_rx_keep_2:1;	//ex_intf_flg:1;
 	u1Byte	sgi_en:1;
 	u1Byte	rxsc:2;
