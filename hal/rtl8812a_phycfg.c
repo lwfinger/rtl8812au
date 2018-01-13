@@ -757,7 +757,7 @@ PHY_InitPowerLimitTable(
 
 	//DBG_871X( "=====> PHY_InitPowerLimitTable()!\n" );
 
-	for ( i = 0; i < MAX_REGULATION_NUM; ++i )
+	for ( i = 0; i < MAX_REGULATION_NUM; i++ )
 	{
 		for ( j = 0; j < MAX_2_4G_BANDWITH_NUM; ++j )
 			for ( k = 0; k < MAX_2_4G_RATE_SECTION_NUM; ++k )
@@ -766,12 +766,12 @@ PHY_InitPowerLimitTable(
 						pHalData->TxPwrLimit_2_4G[i][j][k][m][l] = MAX_POWER_INDEX;
 	}
 
-	for ( i = 0; i < MAX_REGULATION_NUM; ++i )
+	for ( i = 0; i < MAX_REGULATION_NUM; i++ )
 	{
-		for ( j = 0; j < MAX_5G_BANDWITH_NUM; ++j )
-			for ( k = 0; k < MAX_5G_RATE_SECTION_NUM; ++k )
-				for ( m = 0; m < MAX_5G_CHANNEL_NUM; ++m )
-					for ( l = 0; l <  GET_HAL_RFPATH_NUM(Adapter) ; ++l )
+		for ( j = 0; j < MAX_5G_BANDWITH_NUM; j++ )
+			for ( k = 0; k < MAX_5G_RATE_SECTION_NUM; k++ )
+				for ( m = 0; m < MAX_5G_CHANNEL_NUM; m++ )
+					for ( l = 0; l <  GET_HAL_RFPATH_NUM(Adapter) ; l++ )
 						pHalData->TxPwrLimit_5G[i][j][k][m][l] = MAX_POWER_INDEX;
 	}
 
@@ -792,11 +792,11 @@ PHY_ConvertPowerLimitToPowerIndex(
 	u8				rfPath = 0;
 
 	DBG_871X( "=====> PHY_ConvertPowerLimitToPowerIndex()\n" );
-	for ( regulation = 0; regulation < MAX_REGULATION_NUM; ++regulation )
+	for ( regulation = 0; regulation < MAX_REGULATION_NUM; regulation++ )
 	{
-		for ( bw = 0; bw < MAX_2_4G_BANDWITH_NUM; ++bw )
+		for ( bw = 0; bw < MAX_2_4G_BANDWITH_NUM; bw++ )
 		{
-			for ( group = 0; group < MAX_2_4G_CHANNEL_NUM; ++group )
+			for ( group = 0; group < MAX_2_4G_CHANNEL_NUM; group++ )
 			{
 				if ( group == 0 )
 						channel = 1;
@@ -812,7 +812,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 						channel = 14;
 
 
-				for ( rateSection = 0; rateSection < MAX_2_4G_RATE_SECTION_NUM; ++rateSection )
+				for ( rateSection = 0; rateSection < MAX_2_4G_RATE_SECTION_NUM; rateSection++ )
 				{
 					if ( pHalData->odmpriv.PhyRegPgValueType == PHY_REG_PG_EXACT_VALUE ) {
 						// obtain the base dBm values in 2.4G band
@@ -836,7 +836,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 					// all the path
 					tempPwrLmt = pHalData->TxPwrLimit_2_4G[regulation][bw][rateSection][group][ODM_RF_PATH_A];
 					// process ODM_RF_PATH_A later
-					for ( rfPath = 0; rfPath < MAX_RF_PATH_NUM; ++rfPath )
+					for ( rfPath = 0; rfPath < MAX_RF_PATH_NUM; rfPath++ )
 					{
 						if ( pHalData->odmpriv.PhyRegPgValueType == PHY_REG_PG_EXACT_VALUE )
 							BW40PwrBasedBm2_4G = pHalData->TxPwrByRateBase2_4G[rfPath][baseIndex2_4G];
@@ -860,11 +860,11 @@ PHY_ConvertPowerLimitToPowerIndex(
 
 	if ( IS_HARDWARE_TYPE_8812( Adapter ) || IS_HARDWARE_TYPE_8821( Adapter ) )
 	{
-		for ( regulation = 0; regulation < MAX_REGULATION_NUM; ++regulation )
+		for ( regulation = 0; regulation < MAX_REGULATION_NUM; regulation++ )
 		{
-			for ( bw = 0; bw < MAX_5G_BANDWITH_NUM; ++bw )
+			for ( bw = 0; bw < MAX_5G_BANDWITH_NUM; bw++ )
 			{
-				for ( group = 0; group < MAX_5G_CHANNEL_NUM; ++group )
+				for ( group = 0; group < MAX_5G_CHANNEL_NUM; group++ )
 				{
 
 					/* channels of 5G band in Hal_ReadTxPowerInfo8812A()
@@ -908,7 +908,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 					else
 						channel = 51; // index of chnl 173 in chanl5G
 
-					for ( rateSection = 1; rateSection < MAX_5G_RATE_SECTION_NUM; ++rateSection )
+					for ( rateSection = 1; rateSection < MAX_5G_RATE_SECTION_NUM; rateSection++ )
 					{
 						if ( pHalData->odmpriv.PhyRegPgValueType == PHY_REG_PG_EXACT_VALUE ) {
 							// obtain the base dBm values in 5G band
@@ -935,8 +935,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 						// power limit value by using index rf path A and use it to calculate all the value of
 						// all the path
 						tempPwrLmt = pHalData->TxPwrLimit_5G[regulation][bw][rateSection][group][ODM_RF_PATH_A];
-						if ( tempPwrLmt == MAX_POWER_INDEX )
-						{
+						if ( tempPwrLmt == MAX_POWER_INDEX ) {
 							if ( bw == 0 || bw == 1 ) { // 5G VHT and HT can cross reference
 								DBG_871X( "No power limit table of the specified band %d, bandwidth %d, ratesection %d, group %d, rf path %d\n",
 											1, bw, rateSection, group, ODM_RF_PATH_A );
@@ -945,20 +944,17 @@ PHY_ConvertPowerLimitToPowerIndex(
 										pHalData->TxPwrLimit_5G[regulation][bw][4][group][ODM_RF_PATH_A];
 									tempPwrLmt = pHalData->TxPwrLimit_5G[regulation]
 															[bw][4][group][ODM_RF_PATH_A];
-								}
-								else if ( rateSection == 4 ) {
+								} else if ( rateSection == 4 ) {
 									pHalData->TxPwrLimit_5G[regulation][bw][4][group][ODM_RF_PATH_A] =
 										pHalData->TxPwrLimit_5G[regulation][bw][2][group][ODM_RF_PATH_A];
 									tempPwrLmt = pHalData->TxPwrLimit_5G[regulation]
 															[bw][2][group][ODM_RF_PATH_A];
-								}
-								else if ( rateSection == 3 ) {
+								} else if ( rateSection == 3 ) {
 									pHalData->TxPwrLimit_5G[regulation][bw][3][group][ODM_RF_PATH_A] =
 										pHalData->TxPwrLimit_5G[regulation][bw][5][group][ODM_RF_PATH_A];
 									tempPwrLmt = pHalData->TxPwrLimit_5G[regulation]
 															[bw][5][group][ODM_RF_PATH_A];
-								}
-								else if ( rateSection == 5 ) {
+								} else if ( rateSection == 5 ) {
 									pHalData->TxPwrLimit_5G[regulation][bw][5][group][ODM_RF_PATH_A] =
 										pHalData->TxPwrLimit_5G[regulation][bw][3][group][ODM_RF_PATH_A];
 									tempPwrLmt = pHalData->TxPwrLimit_5G[regulation]
@@ -970,8 +966,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 						}
 
 						// process ODM_RF_PATH_A later
-						for ( rfPath = ODM_RF_PATH_B; rfPath < MAX_RF_PATH_NUM; ++rfPath )
-						{
+						for ( rfPath = ODM_RF_PATH_B; rfPath < MAX_RF_PATH_NUM; rfPath++ ) {
 							if ( pHalData->odmpriv.PhyRegPgValueType == PHY_REG_PG_EXACT_VALUE )
 								BW40PwrBasedBm5G = pHalData->TxPwrByRateBase5G[rfPath][baseIndex5G];
 							else
@@ -995,11 +990,11 @@ PHY_ConvertPowerLimitToPowerIndex(
 		}
 
 		// process value of ODM_RF_PATH_A
-		for ( regulation = 0; regulation < MAX_REGULATION_NUM; ++regulation )
+		for ( regulation = 0; regulation < MAX_REGULATION_NUM; regulation++ )
 		{
-			for ( bw = 0; bw < MAX_5G_BANDWITH_NUM; ++bw )
+			for ( bw = 0; bw < MAX_5G_BANDWITH_NUM; bw++ )
 			{
-				for ( group = 0; group < MAX_5G_CHANNEL_NUM; ++group )
+				for ( group = 0; group < MAX_5G_CHANNEL_NUM; group++ )
 				{
 					if ( group == 0 )
 						channel = 0; // index of chnl 36 in channel5G
@@ -1030,7 +1025,7 @@ PHY_ConvertPowerLimitToPowerIndex(
 					else
 						channel = 51; // index of chnl 173 in chanl5G
 
-					for ( rateSection = 0; rateSection < MAX_5G_RATE_SECTION_NUM; ++rateSection )
+					for ( rateSection = 0; rateSection < MAX_5G_RATE_SECTION_NUM; rateSection++ )
 					{
 						if ( pHalData->odmpriv.PhyRegPgValueType == PHY_REG_PG_EXACT_VALUE ) {
 							// obtain the base dBm values in 5G band
@@ -3210,7 +3205,7 @@ PHY_SetTxPowerLevel8812(
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 	u8			path = 0;
 
-	for( path = ODM_RF_PATH_A; path < pHalData->NumTotalRFPath; ++path )
+	for( path = ODM_RF_PATH_A; path < pHalData->NumTotalRFPath; path++)
 	{
 		PHY_SetTxPowerLevelByPath8812(Adapter, Channel, path);
 	}

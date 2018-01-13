@@ -643,12 +643,12 @@ static void _IQK_Tx_8812A(
 	)
 {
 	u4Byte		TX_fail,RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
-	int			TX_X = 0, TX_Y = 0, RX_X = 0, RX_Y = 0, TX_Average = 0, RX_Average = 0;
-	int			TX_X0[cal_num], TX_Y0[cal_num], RX_X0[cal_num], RX_Y0[cal_num];
+	int		TX_X = 0, TX_Y = 0, RX_X = 0, RX_Y = 0, TX_Average = 0, RX_Average = 0;
+	int		TX_X0[cal_num], TX_Y0[cal_num], RX_X0[cal_num], RX_Y0[cal_num];
 	bool		TX0IQKOK = false, RX0IQKOK = false;
-	int			TX_X1[cal_num], TX_Y1[cal_num], RX_X1[cal_num], RX_Y1[cal_num];
+	int		TX_X1[cal_num], TX_Y1[cal_num], RX_X1[cal_num], RX_Y1[cal_num];
 	bool		TX1IQKOK = false, RX1IQKOK = false, VDF_enable = false;
-	int			i, k, VDF_Y[3], VDF_X[3], Tx_dt[3], Rx_dt[3], ii, dx = 0, dy = 0, TX_finish = 0, RX_finish = 0, dt = 0;
+	int		i, k, VDF_Y[3], VDF_X[3], Tx_dt[3], Rx_dt[3], ii, dx = 0, dy = 0, TX_finish = 0, RX_finish = 0, dt = 0;
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 
 	ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("BandWidth = %d, ExtPA5G = %d, ExtPA2G = %d\n", *pDM_Odm->pBandWidth, pDM_Odm->ExtPA5G, pDM_Odm->ExtPA));
@@ -706,7 +706,7 @@ static void _IQK_Tx_8812A(
 			break;
 		default:
 			break;
-			}
+		}
 
 		switch (Path) {
 			case ODM_RF_PATH_A:
@@ -748,235 +748,199 @@ static void _IQK_Tx_8812A(
 
                 if (VDF_enable == 1){
                     ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("TXVDF Start\n"));
-                    for (k = 0;k <= 2; k++){
+                    for (k = 0; k <= 2; k++) {
                         switch (k){
-                            case 0:
-                                {
-                                    ODM_Write4Byte(pDM_Odm, 0xc80, 0x18008c38);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
-                                    ODM_Write4Byte(pDM_Odm, 0xc84, 0x38008c38);// RX_Tone_idx[9:0], RxK_Mask[29]
-                                    ODM_Write4Byte(pDM_Odm, 0x984, 0x00462910);// [0]:AGC_en, [15]:idac_K_Mask
-                                    ODM_SetBBReg(pDM_Odm, 0xce8, BIT(31), 0x0);
-                                }
-                                break;
-                            case 1:
-                                {
-                                    ODM_SetBBReg(pDM_Odm, 0xc80, BIT(28), 0x0);
-                                    ODM_SetBBReg(pDM_Odm, 0xc84, BIT(28), 0x0);
-                                    ODM_Write4Byte(pDM_Odm, 0x984, 0x0046a910);// [0]:AGC_en, [15]:idac_K_Mask
-                                }
-                                break;
-                            case 2:
-                                {
-                                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_Y[1] = %x;;;VDF_Y[0] = %x\n", VDF_Y[1]>>21 & 0x00007ff, VDF_Y[0]>>21 & 0x00007ff));
-                                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_X[1] = %x;;;VDF_X[0] = %x\n", VDF_X[1]>>21 & 0x00007ff, VDF_X[0]>>21 & 0x00007ff));
-                                    Tx_dt[cal] = (VDF_Y[1]>>20)-(VDF_Y[0]>>20);
-                                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("Tx_dt = %d\n", Tx_dt[cal]));
-                                    Tx_dt[cal] = ((16*Tx_dt[cal])*10000/15708);
-                                    Tx_dt[cal] = (Tx_dt[cal] >> 1 )+(Tx_dt[cal] & BIT(0));
-                                    ODM_Write4Byte(pDM_Odm, 0xc80, 0x18008c20);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
-                                    ODM_Write4Byte(pDM_Odm, 0xc84, 0x38008c20);// RX_Tone_idx[9:0], RxK_Mask[29]
-                                    ODM_SetBBReg(pDM_Odm, 0xce8, BIT(31), 0x1);
-                                    ODM_SetBBReg(pDM_Odm, 0xce8, 0x3fff0000, Tx_dt[cal] & 0x00003fff);
-                                }
-                                break;
-                            default:
-                                break;
+                        case 0:
+				ODM_Write4Byte(pDM_Odm, 0xc80, 0x18008c38);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
+				ODM_Write4Byte(pDM_Odm, 0xc84, 0x38008c38);// RX_Tone_idx[9:0], RxK_Mask[29]
+				ODM_Write4Byte(pDM_Odm, 0x984, 0x00462910);// [0]:AGC_en, [15]:idac_K_Mask
+				ODM_SetBBReg(pDM_Odm, 0xce8, BIT(31), 0x0);
+				break;
+			case 1:
+				ODM_SetBBReg(pDM_Odm, 0xc80, BIT(28), 0x0);
+				ODM_SetBBReg(pDM_Odm, 0xc84, BIT(28), 0x0);
+				ODM_Write4Byte(pDM_Odm, 0x984, 0x0046a910);// [0]:AGC_en, [15]:idac_K_Mask
+				break;
+			case 2:
+				ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_Y[1] = %x;;;VDF_Y[0] = %x\n", VDF_Y[1]>>21 & 0x00007ff, VDF_Y[0]>>21 & 0x00007ff));
+				ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_X[1] = %x;;;VDF_X[0] = %x\n", VDF_X[1]>>21 & 0x00007ff, VDF_X[0]>>21 & 0x00007ff));
+				Tx_dt[cal] = (VDF_Y[1]>>20)-(VDF_Y[0]>>20);
+				ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("Tx_dt = %d\n", Tx_dt[cal]));
+				Tx_dt[cal] = ((16*Tx_dt[cal])*10000/15708);
+				Tx_dt[cal] = (Tx_dt[cal] >> 1 )+(Tx_dt[cal] & BIT(0));
+				ODM_Write4Byte(pDM_Odm, 0xc80, 0x18008c20);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
+				ODM_Write4Byte(pDM_Odm, 0xc84, 0x38008c20);// RX_Tone_idx[9:0], RxK_Mask[29]
+				ODM_SetBBReg(pDM_Odm, 0xce8, BIT(31), 0x1);
+				ODM_SetBBReg(pDM_Odm, 0xce8, 0x3fff0000, Tx_dt[cal] & 0x00003fff);
+				break;
+			default:
+				break;
                         }
-                        ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00100000);// cb8[20] 將 SI/PI 使用權切給 iqk_dpk module
-                        cal_retry = 0;
-                        while(1){
-                            // one shot
-                            ODM_Write4Byte(pDM_Odm, 0x980, 0xfa000000);
-                            ODM_Write4Byte(pDM_Odm, 0x980, 0xf8000000);
+			ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00100000);// cb8[20] 將 SI/PI 使用權切給 iqk_dpk module
+			cal_retry = 0;
+			while(1) {
+				// one shot
+          			ODM_Write4Byte(pDM_Odm, 0x980, 0xfa000000);
+				ODM_Write4Byte(pDM_Odm, 0x980, 0xf8000000);
 
-                            ODM_delay_ms(10); //Delay 10ms
-                            ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00000000);
-                            delay_count = 0;
-                            while (1){
-                                IQK_ready = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(10));
-                                if ((IQK_ready) || (delay_count>20)){
-                                    break;
-                                }
-                                else{
-                                    ODM_delay_ms(1);
-                                    delay_count++;
-                                }
-                            }
+				ODM_delay_ms(10); //Delay 10ms
+				ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00000000);
+				delay_count = 0;
+				while (1) {
+					IQK_ready = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(10));
+					if ((IQK_ready) || (delay_count>20)){
+						break;
+					} else {
+						ODM_delay_ms(1);
+						delay_count++;
+					}
+				}
 
-                            if (delay_count < 20){							// If 20ms No Result, then cal_retry++
-                                // ============TXIQK Check==============
-                                TX_fail = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(12));
+				if (delay_count < 20){							// If 20ms No Result, then cal_retry++
+					// ============TXIQK Check==============
+     					TX_fail = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(12));
 
-                                if (~TX_fail){
-                                    ODM_Write4Byte(pDM_Odm, 0xcb8, 0x02000000);
-                                    VDF_X[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-                                    ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
-                                    VDF_Y[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-                                    TX0IQKOK = true;
-                                    break;
-                                }
-                                else{
-                                    TX0IQKOK = false;
-                                    cal_retry++;
-                                    if (cal_retry == 10) {
-                                        break;
-                                    }
-                                }
-                            }
-                            else{
-                                TX0IQKOK = false;
-                                cal_retry++;
-                                if (cal_retry == 10){
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("TXA_VDF_cal_retry = %d\n", cal_retry));
-                    TX_X0[cal] = VDF_X[k-1] ;
-                    TX_Y0[cal] = VDF_Y[k-1];
-                }
-                else{
-                    ODM_Write4Byte(pDM_Odm, 0xc80, 0x18008c10);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
-                    ODM_Write4Byte(pDM_Odm, 0xc84, 0x38008c10);// RX_Tone_idx[9:0], RxK_Mask[29]
-                    ODM_Write4Byte(pDM_Odm, 0xce8, 0x00000000);
+					if (~TX_fail){
+						ODM_Write4Byte(pDM_Odm, 0xcb8, 0x02000000);
+						VDF_X[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
+						ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
+						VDF_Y[k] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
+						TX0IQKOK = true;
+						break;
+					} else {
+						TX0IQKOK = false;
+						cal_retry++;
+						if (cal_retry == 10) {
+							break;
+						}
+					}
+				} else{
+					TX0IQKOK = false;
+					cal_retry++;
+					if (cal_retry == 10){
+						break;
+					}
+				}
+			}
+		}
+		ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("TXA_VDF_cal_retry = %d\n", cal_retry));
+		TX_X0[cal] = VDF_X[k-1] ;
+		TX_Y0[cal] = VDF_Y[k-1];
+	} else{
+		ODM_Write4Byte(pDM_Odm, 0xc80, 0x18008c10);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
+		ODM_Write4Byte(pDM_Odm, 0xc84, 0x38008c10);// RX_Tone_idx[9:0], RxK_Mask[29]
+		ODM_Write4Byte(pDM_Odm, 0xce8, 0x00000000);
 
-                    for(cal = 0; cal < cal_num; cal++){
-                        cal_retry = 0;
-                        while(1){
-                            // one shot
-                            ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00100000);// cb8[20] 將 SI/PI 使用權切給 iqk_dpk module
-                            ODM_Write4Byte(pDM_Odm, 0x980, 0xfa000000);
-                            ODM_Write4Byte(pDM_Odm, 0x980, 0xf8000000);
+		for(cal = 0; cal < cal_num; cal++){
+			cal_retry = 0;
+			while(1){
+				// one shot
+				ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00100000);// cb8[20] 將 SI/PI 使用權切給 iqk_dpk module
+				ODM_Write4Byte(pDM_Odm, 0x980, 0xfa000000);
+				ODM_Write4Byte(pDM_Odm, 0x980, 0xf8000000);
 
-                            ODM_delay_ms(10); //Delay 25ms
-                            ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00000000);
-                            delay_count = 0;
-                            while (1){
-                                IQK_ready = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(10));
-                                if ((IQK_ready) || (delay_count>20)) {
-                                    break;
-                                }
-                                else{
-                                    ODM_delay_ms(1);
-                                    delay_count++;
-                                }
-                            }
+				ODM_delay_ms(10); //Delay 25ms
+				ODM_Write4Byte(pDM_Odm, 0xcb8, 0x00000000);
+				delay_count = 0;
+				while (1){
+					IQK_ready = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(10));
+					if ((IQK_ready) || (delay_count>20)) {
+						break;
+					} else {
+						ODM_delay_ms(1);
+						delay_count++;
+					}
+				}
 
-                            if (delay_count < 20){							// If 20ms No Result, then cal_retry++
-                                // ============TXIQK Check==============
-                                TX_fail = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(12));
+				if (delay_count < 20){							// If 20ms No Result, then cal_retry++
+					// ============TXIQK Check==============
+					TX_fail = ODM_GetBBReg(pDM_Odm, 0xd00, BIT(12));
 
-                                if (~TX_fail){
-                                    ODM_Write4Byte(pDM_Odm, 0xcb8, 0x02000000);
-                                    TX_X0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-                                    ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
-                                    TX_Y0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
-                                    TX0IQKOK = true;
-                                    /*
+					if (~TX_fail){
+						ODM_Write4Byte(pDM_Odm, 0xcb8, 0x02000000);
+						TX_X0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
+						ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
+						TX_Y0[cal] = ODM_GetBBReg(pDM_Odm, 0xd00, 0x07ff0000)<<21;
+						TX0IQKOK = true;
+						break;
+					} else {
+						TX0IQKOK = false;
+						cal_retry++;
+						if (cal_retry == 10) {
+							break;
+						}
+					}
+				} else{
+					TX0IQKOK = false;
+					cal_retry++;
+					if (cal_retry == 10)
+						break;
+				}
+			}
+			ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("TXA_cal_retry = %d\n", cal_retry));
+			if (TX0IQKOK)
+				TX_Average++;
+			}
+		}
 
-                                       ODM_Write4Byte(pDM_Odm, 0xcb8, 0x01000000);
-                                       reg1 = ODM_GetBBReg(pDM_Odm, 0xd00, 0xffffffff);
-                                       ODM_Write4Byte(pDM_Odm, 0xcb8, 0x02000000);
-                                       reg2 = ODM_GetBBReg(pDM_Odm, 0xd00, 0x0000001f);
-                                       Image_Power = (reg2<<32)+reg1;
-                                       DbgPrint("Before PW = %d\n", Image_Power);
-                                       ODM_Write4Byte(pDM_Odm, 0xcb8, 0x03000000);
-                                       reg1 = ODM_GetBBReg(pDM_Odm, 0xd00, 0xffffffff);
-                                       ODM_Write4Byte(pDM_Odm, 0xcb8, 0x04000000);
-                                       reg2 = ODM_GetBBReg(pDM_Odm, 0xd00, 0x0000001f);
-                                       Image_Power = (reg2<<32)+reg1;
-                                       DbgPrint("After PW = %d\n", Image_Power);
-                                     */
-                                    break;
-                                }
-                                else{
-                                    TX0IQKOK = false;
-                                    cal_retry++;
-                                    if (cal_retry == 10) {
-                                        break;
-                                    }
-                                }
-                            }
-                            else{
-                                TX0IQKOK = false;
-                                cal_retry++;
-                                if (cal_retry == 10)
-                                    break;
-                            }
-                        }
-                        ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("TXA_cal_retry = %d\n", cal_retry));
-                        if (TX0IQKOK)
-                            TX_Average++;
-                    }
-                }
-
-                ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
+		ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
                 ODM_SetRFReg(pDM_Odm, Path, 0x58, 0x7fe00, ODM_GetRFReg(pDM_Odm, Path, 0x8, 0xffc00)); // Load LOK
                 ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
 
                 if (TX0IQKOK == false)
-                    break;				// TXK fail, Don't do RXK
-
+			break;				// TXK fail, Don't do RXK
 
                 if (VDF_enable == 1){
-                    ODM_SetBBReg(pDM_Odm, 0xce8, BIT(31), 0x0);    // TX VDF Disable
-                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RXVDF Start\n"));
+			ODM_SetBBReg(pDM_Odm, 0xce8, BIT(31), 0x0);    // TX VDF Disable
+			ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("RXVDF Start\n"));
 
-                    //====== RX IQK ======
-                    ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
-                    ODM_SetRFReg(pDM_Odm, Path, 0xef, bRFRegOffsetMask, 0x80000);
-                    ODM_SetRFReg(pDM_Odm, Path, 0x30, bRFRegOffsetMask, 0x30000);
-                    ODM_SetRFReg(pDM_Odm, Path, 0x31, bRFRegOffsetMask, 0x3f7ff);
-                    ODM_SetRFReg(pDM_Odm, Path, 0x32, bRFRegOffsetMask, 0xfe7bf);
-                    ODM_SetRFReg(pDM_Odm, Path, 0x8f, bRFRegOffsetMask, 0x88001);
-                    ODM_SetRFReg(pDM_Odm, Path, 0x65, bRFRegOffsetMask, 0x931d0);
-                    ODM_SetRFReg(pDM_Odm, Path, 0xef, bRFRegOffsetMask, 0x00000);
-                    ODM_SetBBReg(pDM_Odm, 0x978, BIT(31), 0x1);
-                    ODM_SetBBReg(pDM_Odm, 0x97c, BIT(31), 0x0);
-                    ODM_Write4Byte(pDM_Odm, 0x984, 0x0046a911);
+			//====== RX IQK ======
+			ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
+			ODM_SetRFReg(pDM_Odm, Path, 0xef, bRFRegOffsetMask, 0x80000);
+			ODM_SetRFReg(pDM_Odm, Path, 0x30, bRFRegOffsetMask, 0x30000);
+			ODM_SetRFReg(pDM_Odm, Path, 0x31, bRFRegOffsetMask, 0x3f7ff);
+			ODM_SetRFReg(pDM_Odm, Path, 0x32, bRFRegOffsetMask, 0xfe7bf);
+			ODM_SetRFReg(pDM_Odm, Path, 0x8f, bRFRegOffsetMask, 0x88001);
+			ODM_SetRFReg(pDM_Odm, Path, 0x65, bRFRegOffsetMask, 0x931d0);
+			ODM_SetRFReg(pDM_Odm, Path, 0xef, bRFRegOffsetMask, 0x00000);
+			ODM_SetBBReg(pDM_Odm, 0x978, BIT(31), 0x1);
+			ODM_SetBBReg(pDM_Odm, 0x97c, BIT(31), 0x0);
+			ODM_Write4Byte(pDM_Odm, 0x984, 0x0046a911);
 
-                    ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
-                    ODM_Write4Byte(pDM_Odm, 0xc88, 0x02140119);
-                    ODM_Write4Byte(pDM_Odm, 0xc8c, 0x28161420);
+			ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
+			ODM_Write4Byte(pDM_Odm, 0xc88, 0x02140119);
+			ODM_Write4Byte(pDM_Odm, 0xc8c, 0x28161420);
 
-                    for (k = 0;k <= 2; k++){
-                        ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
-                        ODM_SetBBReg(pDM_Odm, 0x978, 0x03FF8000, (VDF_X[k])>>21&0x000007ff);
-                        ODM_SetBBReg(pDM_Odm, 0x978, 0x000007FF, (VDF_Y[k])>>21&0x000007ff);
+			for (k = 0;k <= 2; k++){
+				ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
+				ODM_SetBBReg(pDM_Odm, 0x978, 0x03FF8000, (VDF_X[k])>>21&0x000007ff);
+				ODM_SetBBReg(pDM_Odm, 0x978, 0x000007FF, (VDF_Y[k])>>21&0x000007ff);
 
-
-                        ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
-                        switch (k){
-                            case 0:
-                                {
-                                    ODM_Write4Byte(pDM_Odm, 0xc80, 0x38008c38);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
-                                    ODM_Write4Byte(pDM_Odm, 0xc84, 0x18008c38);// RX_Tone_idx[9:0], RxK_Mask[29]
-                                    ODM_SetBBReg(pDM_Odm, 0xce8, BIT(30), 0x0);
-                                }
-                                break;
-                            case 1:
-                                {
-                                    ODM_Write4Byte(pDM_Odm, 0xc80, 0x28008c38);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
-                                    ODM_Write4Byte(pDM_Odm, 0xc84, 0x08008c38);// RX_Tone_idx[9:0], RxK_Mask[29]
-                                }
-                                break;
-                            case 2:
-                                {
-                                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_Y[1] = %x;;;VDF_Y[0] = %x\n", VDF_Y[1]>>21 & 0x00007ff, VDF_Y[0]>>21 & 0x00007ff));
-                                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_X[1] = %x;;;VDF_X[0] = %x\n", VDF_X[1]>>21 & 0x00007ff, VDF_X[0]>>21 & 0x00007ff));
-                                    Rx_dt[cal] = (VDF_Y[1]>>20)-(VDF_Y[0]>>20);
-                                    ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("Rx_dt = %d\n", Rx_dt[cal]));
-                                    Rx_dt[cal] = ((16*Rx_dt[cal])*10000/13823);
-                                    Rx_dt[cal] = (Rx_dt[cal] >> 1 )+(Rx_dt[cal] & BIT(0));
-                                    ODM_Write4Byte(pDM_Odm, 0xc80, 0x38008c20);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
-                                    ODM_Write4Byte(pDM_Odm, 0xc84, 0x18008c20);// RX_Tone_idx[9:0], RxK_Mask[29]
-                                    ODM_SetBBReg(pDM_Odm, 0xce8, 0x00003fff, Rx_dt[cal] & 0x00003fff);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
+				ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
+				switch (k) {
+				case 0:
+					ODM_Write4Byte(pDM_Odm, 0xc80, 0x38008c38);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
+					ODM_Write4Byte(pDM_Odm, 0xc84, 0x18008c38);// RX_Tone_idx[9:0], RxK_Mask[29]
+					ODM_SetBBReg(pDM_Odm, 0xce8, BIT(30), 0x0);
+					break;
+				case 1:
+					ODM_Write4Byte(pDM_Odm, 0xc80, 0x28008c38);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
+					ODM_Write4Byte(pDM_Odm, 0xc84, 0x08008c38);// RX_Tone_idx[9:0], RxK_Mask[29]
+					break;
+				case 2:
+					ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_Y[1] = %x;;;VDF_Y[0] = %x\n", VDF_Y[1]>>21 & 0x00007ff, VDF_Y[0]>>21 & 0x00007ff));
+					ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("VDF_X[1] = %x;;;VDF_X[0] = %x\n", VDF_X[1]>>21 & 0x00007ff, VDF_X[0]>>21 & 0x00007ff));
+					Rx_dt[cal] = (VDF_Y[1]>>20)-(VDF_Y[0]>>20);
+					ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("Rx_dt = %d\n", Rx_dt[cal]));
+					Rx_dt[cal] = ((16*Rx_dt[cal])*10000/13823);
+					Rx_dt[cal] = (Rx_dt[cal] >> 1 )+(Rx_dt[cal] & BIT(0));
+					ODM_Write4Byte(pDM_Odm, 0xc80, 0x38008c20);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
+					ODM_Write4Byte(pDM_Odm, 0xc84, 0x18008c20);// RX_Tone_idx[9:0], RxK_Mask[29]
+					ODM_SetBBReg(pDM_Odm, 0xce8, 0x00003fff, Rx_dt[cal] & 0x00003fff);
+					break;
+				default:
+					break;
+				}
 
 
                         if (k==2){
@@ -1262,13 +1226,12 @@ static void _IQK_Tx_8812A(
 				ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("TXB_VDF_cal_retry = %d\n", cal_retry));
 					TX_X1[cal] = VDF_X[k-1] ;
 					TX_Y1[cal] = VDF_Y[k-1];
-			}
-			else{
+			} else{
 				ODM_Write4Byte(pDM_Odm, 0xe80, 0x18008c10);// TX_Tone_idx[9:0], TxK_Mask[29] TX_Tone = 16
 				ODM_Write4Byte(pDM_Odm, 0xe84, 0x38008c10);// RX_Tone_idx[9:0], RxK_Mask[29]
 				ODM_Write4Byte(pDM_Odm, 0xee8, 0x00000000);
 
-				for(cal = 0; cal < cal_num; cal++){
+				for (cal = 0; cal < cal_num; cal++){
 					cal_retry = 0;
 					while(1){
 					// one shot
@@ -2331,13 +2294,14 @@ _DPK_EnableDP(
 	//***************************************//
 
 	//PWSF[6] = 0x40 = 0dB, set the address represented TXindex as 0dB
-	u1Byte PWSF[] = { 0xff, 0xca, 0xa1, 0x80, 0x65, 0x51, 0x40,  //6~0dB
-				  0x33, 0x28, 0x20, 0x19, 0x14, 0x10, 0x0d,  //-1~-7dB
-				  0x0a, 0x08, 0x06, 0x05, 0x04, 0x03, 0x03,  //-8~-14dB
-				  0x02, 0x02, 0x01, 0x01,
-				  };
+	u1Byte PWSF[] = {
+		0xff, 0xca, 0xa1, 0x80, 0x65, 0x51, 0x40,  //6~0dB
+		0x33, 0x28, 0x20, 0x19, 0x14, 0x10, 0x0d,  //-1~-7dB
+		0x0a, 0x08, 0x06, 0x05, 0x04, 0x03, 0x03,  //-8~-14dB
+		0x02, 0x02, 0x01, 0x01,
+	};
 	u1Byte zeropoint;
-	u1Byte pwsf1,pwsf2;
+	int pwsf1,pwsf2;
 	u1Byte i;
 	u4Byte pagesel = 0,regsel = 0;
 
@@ -2392,21 +2356,15 @@ _DPK_EnableDP(
 
 
 
-	for(i=0;i<16;i++)
-		{
-			if((6-zeropoint)+i*2 > 24)
-				pwsf1 = 24;
-			else
-				pwsf1 = (6-zeropoint)+i*2;
+	for(i = 0; i < 16; i++) {
+		pwsf1 = ( 6 - zeropoint) + i * 2;
+		pwsf1 = clamp_t(int, pwsf1, 0, 24);
+		pwsf2 = (6 - zeropoint - 1) + i * 2;
+		pwsf2 = clamp_t(int, pwsf2, 0, 24);
 
-			if((6-zeropoint-1)+i*2 > 24)
-				pwsf2 = 24;
-			else
-				pwsf2 = (6-zeropoint-1)+i*2;
-
-			ODM_Write4Byte(pDM_Odm, 0xce4+pagesel, 0x00000001 | i<<1 | (PWSF[pwsf1]<<8) | (PWSF[pwsf2]<<16));
-			ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("0x%x\n", ODM_Read4Byte(pDM_Odm, 0xce4+pagesel)));
-			ODM_SetBBReg(pDM_Odm, 0xce4+pagesel, 0xff, 0x0);
+		ODM_Write4Byte(pDM_Odm, 0xce4+pagesel, 0x00000001 | i<<1 | (PWSF[pwsf1]<<8) | (PWSF[pwsf2]<<16));
+		ODM_RT_TRACE(pDM_Odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD, ("0x%x\n", ODM_Read4Byte(pDM_Odm, 0xce4+pagesel)));
+		ODM_SetBBReg(pDM_Odm, 0xce4+pagesel, 0xff, 0x0);
 	}
 
 	ODM_Write4Byte(pDM_Odm, 0xce4+pagesel, 0x00000000);
