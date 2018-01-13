@@ -97,7 +97,6 @@ typedef	struct tag_HAL_VERSION
 //HAL_VERSION VersionID
 
 // HAL_IC_TYPE_E
-#define IS_81XXC(version)		(((GET_CVID_IC_TYPE(version) == CHIP_8192C)||(GET_CVID_IC_TYPE(version) == CHIP_8188C))? true : false)
 #define IS_8723_SERIES(version)		((GET_CVID_IC_TYPE(version) == CHIP_8723A)? true : false)
 #define IS_92D(version)			((GET_CVID_IC_TYPE(version) == CHIP_8192D)? true : false)
 #define IS_8188E(version)		((GET_CVID_IC_TYPE(version) == CHIP_8188E)? true : false)
@@ -133,12 +132,6 @@ typedef	struct tag_HAL_VERSION
 //----------------------------------------------------------------------------
 //Chip version Macro. --
 //----------------------------------------------------------------------------
-#define IS_81XXC_TEST_CHIP(version)		((IS_81XXC(version) && (!IS_NORMAL_CHIP(version)))? true: false)
-
-#define IS_92C_SERIAL(version)			((IS_81XXC(version) && IS_2T2R(version)) ? true : false)
-#define IS_81xxC_VENDOR_UMC_A_CUT(version)	(IS_81XXC(version)?(IS_CHIP_VENDOR_UMC(version) ? (IS_A_CUT(version) ? true : false) : false): false)
-#define IS_81xxC_VENDOR_UMC_B_CUT(version)	(IS_81XXC(version)?(IS_CHIP_VENDOR_UMC(version) ? (IS_B_CUT(version) ? true : false) : false): false)
-#define IS_81xxC_VENDOR_UMC_C_CUT(version)	(IS_81XXC(version)?(IS_CHIP_VENDOR_UMC(version) ? (IS_C_CUT(version) ? true : false) : false): false)
 
 #define IS_NORMAL_CHIP92D(version)		(( IS_92D(version))?((GET_CVID_CHIP_TYPE(version)==NORMAL_CHIP)? true: false):false)
 

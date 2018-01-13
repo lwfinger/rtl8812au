@@ -190,108 +190,8 @@ void Hal_MPT_CCKTxPowerAdjust(PADAPTER Adapter, bool bInCH14)
 
 void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven)
 {
-	s32		TempCCk;
-	u8		CCK_index, CCK_index_old;
-	u8		Action = 0;	//0: no action, 1: even->odd, 2:odd->even
-	u8		TimeOut = 100;
-	s32		i = 0;
-	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
-	PMPT_CONTEXT	pMptCtx = &pAdapter->mppriv.MptCtx;
-
-	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
-	PDM_ODM_T		pDM_Odm = &(pHalData->odmpriv);
-
-
-	if (!IS_92C_SERIAL(pHalData->VersionID))
-		return;
-#if 0
-	while(PlatformAtomicExchange(&Adapter->IntrCCKRefCount, true) == true)
-	{
-		PlatformSleepUs(100);
-		TimeOut--;
-		if(TimeOut <= 0)
-		{
-			RTPRINT(FINIT, INIT_TxPower,
-			 ("!!!MPT_CCKTxPowerAdjustbyIndex Wait for check CCK gain index too long!!!\n" ));
-			break;
-		}
-	}
-#endif
-	if (beven && !pMptCtx->bMptIndexEven)	//odd->even
-	{
-		Action = 2;
-		pMptCtx->bMptIndexEven = true;
-	}
-	else if (!beven && pMptCtx->bMptIndexEven)	//even->odd
-	{
-		Action = 1;
-		pMptCtx->bMptIndexEven = false;
-	}
-
-	if (Action != 0)
-	{
-		//Query CCK default setting From 0xa24
-		TempCCk = read_bbreg(pAdapter, rCCK0_TxFilter2, bMaskDWord) & bMaskCCK;
-		for (i = 0; i < CCK_TABLE_SIZE; i++)
-		{
-			if (pDM_Odm->RFCalibrateInfo.bCCKinCH14)
-			{
-				if (_rtw_memcmp((void*)&TempCCk, (void*)&CCKSwingTable_Ch14[i][2], 4) == true)
-				{
-					CCK_index_old = (u8) i;
-//					RTPRINT(FINIT, INIT_TxPower,("MPT_CCKTxPowerAdjustbyIndex: Initial reg0x%x = 0x%lx, CCK_index=0x%x, ch 14 %d\n",
-//						rCCK0_TxFilter2, TempCCk, CCK_index_old, pHalData->bCCKinCH14));
-					break;
-				}
-			}
-			else
-			{
-				if (_rtw_memcmp((void*)&TempCCk, (void*)&CCKSwingTable_Ch1_Ch13[i][2], 4) == true)
-				{
-					CCK_index_old = (u8) i;
-//					RTPRINT(FINIT, INIT_TxPower,("MPT_CCKTxPowerAdjustbyIndex: Initial reg0x%x = 0x%lx, CCK_index=0x%x, ch14 %d\n",
-//						rCCK0_TxFilter2, TempCCk, CCK_index_old, pHalData->bCCKinCH14));
-					break;
-				}
-			}
-		}
-
-		if (Action == 1)
-			CCK_index = CCK_index_old - 1;
-		else
-			CCK_index = CCK_index_old + 1;
-
-//		RTPRINT(FINIT, INIT_TxPower,("MPT_CCKTxPowerAdjustbyIndex: new CCK_index=0x%x\n",
-//			 CCK_index));
-
-		//Adjust CCK according to gain index
-		if (!pDM_Odm->RFCalibrateInfo.bCCKinCH14) {
-			rtw_write8(pAdapter, 0xa22, CCKSwingTable_Ch1_Ch13[CCK_index][0]);
-			rtw_write8(pAdapter, 0xa23, CCKSwingTable_Ch1_Ch13[CCK_index][1]);
-			rtw_write8(pAdapter, 0xa24, CCKSwingTable_Ch1_Ch13[CCK_index][2]);
-			rtw_write8(pAdapter, 0xa25, CCKSwingTable_Ch1_Ch13[CCK_index][3]);
-			rtw_write8(pAdapter, 0xa26, CCKSwingTable_Ch1_Ch13[CCK_index][4]);
-			rtw_write8(pAdapter, 0xa27, CCKSwingTable_Ch1_Ch13[CCK_index][5]);
-			rtw_write8(pAdapter, 0xa28, CCKSwingTable_Ch1_Ch13[CCK_index][6]);
-			rtw_write8(pAdapter, 0xa29, CCKSwingTable_Ch1_Ch13[CCK_index][7]);
-		} else {
-			rtw_write8(pAdapter, 0xa22, CCKSwingTable_Ch14[CCK_index][0]);
-			rtw_write8(pAdapter, 0xa23, CCKSwingTable_Ch14[CCK_index][1]);
-			rtw_write8(pAdapter, 0xa24, CCKSwingTable_Ch14[CCK_index][2]);
-			rtw_write8(pAdapter, 0xa25, CCKSwingTable_Ch14[CCK_index][3]);
-			rtw_write8(pAdapter, 0xa26, CCKSwingTable_Ch14[CCK_index][4]);
-			rtw_write8(pAdapter, 0xa27, CCKSwingTable_Ch14[CCK_index][5]);
-			rtw_write8(pAdapter, 0xa28, CCKSwingTable_Ch14[CCK_index][6]);
-			rtw_write8(pAdapter, 0xa29, CCKSwingTable_Ch14[CCK_index][7]);
-		}
-	}
-#if 0
-	RTPRINT(FINIT, INIT_TxPower,
-	("MPT_CCKTxPowerAdjustbyIndex 0xa20=%x\n", PlatformEFIORead4Byte(Adapter, 0xa20)));
-
-	PlatformAtomicExchange(&Adapter->IntrCCKRefCount, false);
-#endif
 }
+
 /*---------------------------hal\rtl8192c\MPT_HelperFunc.c---------------------------*/
 
 /*
@@ -302,12 +202,6 @@ void Hal_MPT_CCKTxPowerAdjustbyIndex(PADAPTER pAdapter, bool beven)
  */
 void Hal_SetChannel(PADAPTER pAdapter)
 {
-#if 0
-	struct mp_priv *pmp = &pAdapter->mppriv;
-
-//	SelectChannel(pAdapter, pmp->channel);
-	set_channel_bwmode(pAdapter, pmp->channel, pmp->channel_offset, pmp->bandwidth);
-#else
 	u8		eRFPath;
 
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -340,8 +234,6 @@ void Hal_SetChannel(PADAPTER pAdapter)
 		pDM_Odm->RFCalibrateInfo.bCCKinCH14 = false;
 		Hal_MPT_CCKTxPowerAdjust(pAdapter, pDM_Odm->RFCalibrateInfo.bCCKinCH14);
 	}
-
-#endif
 }
 
 /*
@@ -780,15 +672,15 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 	PMPT_CONTEXT	pMptCtx = &pAdapter->mppriv.MptCtx;
-	bool		is92C = IS_92C_SERIAL(pHalData->VersionID);
 
 	u8 rfPath;
 	u32              reg58 = 0x0;
 	static u4Byte       regRF0x0 = 0x0;
-    static u4Byte       reg0xCB0 = 0x0;
-    static u4Byte       reg0xEB0 = 0x0;
-    static u4Byte       reg0xCB4 = 0x0;
-    static u4Byte       reg0xEB4 = 0x0;
+	static u4Byte       reg0xCB0 = 0x0;
+	static u4Byte       reg0xEB0 = 0x0;
+	static u4Byte       reg0xCB4 = 0x0;
+	static u4Byte       reg0xEB4 = 0x0;
+
 	switch (pAdapter->mppriv.antenna_tx)
 	{
 		case ANTENNA_A:
@@ -856,42 +748,23 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 	}
 	else// Stop Single Tone.
 	{
-			RT_TRACE(_module_mp_,_drv_alert_, ("SetSingleToneTx: test stop\n"));
+		RT_TRACE(_module_mp_,_drv_alert_, ("SetSingleToneTx: test stop\n"));
 
-		{   // <20120326, Kordan> To amplify the power of tone for Xtal calibration. (asked by Edlu)
-            // <20120326, Kordan> Only in single tone mode. (asked by Edlu)
-            if (IS_HARDWARE_TYPE_8188E(pAdapter))
-            {
-                reg58 = PHY_QueryRFReg(pAdapter, RF_PATH_A, LNA_Low_Gain_3, bRFRegOffsetMask);
-                reg58 &= 0xFFFFFFF0;
-                PHY_SetRFReg(pAdapter, RF_PATH_A, LNA_Low_Gain_3, bRFRegOffsetMask, reg58);
-            }
+		// <20120326, Kordan> Only in single tone mode. (asked by Edlu)
 
 		write_bbreg(pAdapter, rFPGA0_RFMOD, bCCKEn, 0x1);
 		write_bbreg(pAdapter, rFPGA0_RFMOD, bOFDMEn, 0x1);
-		}
-		if (is92C) {
-			_write_rfreg(pAdapter, RF_PATH_A, 0x21, BIT19, 0x00);
-			rtw_usleep_os(100);
-			write_rfreg(pAdapter, RF_PATH_A, 0x00, 0x32d75); // PAD all on.
-			write_rfreg(pAdapter, RF_PATH_B, 0x00, 0x32d75); // PAD all on.
-			rtw_usleep_os(100);
-		} else {
-			write_rfreg(pAdapter, rfPath, 0x21, 0x54000);
-			rtw_usleep_os(100);
-			write_rfreg(pAdapter, rfPath, 0x00, 0x30000); // PAD all on.
-			rtw_usleep_os(100);
-		}
+		write_rfreg(pAdapter, rfPath, 0x21, 0x54000);
+		rtw_usleep_os(100);
+		write_rfreg(pAdapter, rfPath, 0x00, 0x30000); // PAD all on.
+		rtw_usleep_os(100);
 
 		//Stop for dynamic set Power index.
 		write_bbreg(pAdapter, rFPGA0_XA_HSSIParameter1, bMaskDWord, 0x01000100);
 		write_bbreg(pAdapter, rFPGA0_XB_HSSIParameter1, bMaskDWord, 0x01000100);
 
 	}
-
 }
-
-
 
 void Hal_SetCarrierSuppressionTx(PADAPTER pAdapter, u8 bStart)
 {

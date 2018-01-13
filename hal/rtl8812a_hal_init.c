@@ -5128,21 +5128,14 @@ void SetHwReg8812A(PADAPTER padapter, u8 variable, u8 *pval)
 				rtw_write32(padapter, REG_AMPDU_MAX_LENGTH_8812, AMPDULen);
 			}
 			break;
-#if 0
-		case HW_VAR_RXDMA_AGG_PG_TH:
-			rtw_write8(padapter, REG_RXDMA_AGG_PG_TH, *pval);
-			break;
-#endif
 		case HW_VAR_H2C_FW_PWRMODE:
 			{
 				u8 psmode = *pval;
 
 				// Forece leave RF low power mode for 1T1R to prevent conficting setting in Fw power
 				// saving sequence. 2010.06.07. Added by tynli. Suggested by SD3 yschang.
-				if ((psmode != PS_MODE_ACTIVE) && (!IS_92C_SERIAL(pHalData->VersionID)))
-				{
+				if ((psmode != PS_MODE_ACTIVE))
 					ODM_RF_Saving(podmpriv, true);
-				}
 				rtl8812_set_FwPwrMode_cmd(padapter, psmode);
 			}
 			break;
