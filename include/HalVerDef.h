@@ -22,11 +22,9 @@ typedef enum tag_HAL_IC_Type_Definition
 	CHIP_8188C	=	1,
 	CHIP_8192C	=	2,
 	CHIP_8192D	=	3,
-	CHIP_8723A	=	4,
 	CHIP_8188E	=	5,
 	CHIP_8812	=	6,
 	CHIP_8821	=	7,
-	CHIP_8723B	=	8,
 	CHIP_8192E	=	9,
 }HAL_IC_TYPE_E;
 
@@ -97,13 +95,11 @@ typedef	struct tag_HAL_VERSION
 //HAL_VERSION VersionID
 
 // HAL_IC_TYPE_E
-#define IS_8723_SERIES(version)		((GET_CVID_IC_TYPE(version) == CHIP_8723A)? true : false)
 #define IS_92D(version)			((GET_CVID_IC_TYPE(version) == CHIP_8192D)? true : false)
 #define IS_8188E(version)		((GET_CVID_IC_TYPE(version) == CHIP_8188E)? true : false)
 #define IS_8192E(version)		((GET_CVID_IC_TYPE(version) == CHIP_8192E)? true : false)
 #define IS_8812_SERIES(version)		((GET_CVID_IC_TYPE(version) == CHIP_8812)? true : false)
 #define IS_8821_SERIES(version)		((GET_CVID_IC_TYPE(version) == CHIP_8821)? true : false)
-#define IS_8723B_SERIES(version)	((GET_CVID_IC_TYPE(version) == CHIP_8723B)? true : false)
 
 
 //HAL_CHIP_TYPE_E
@@ -139,9 +135,6 @@ typedef	struct tag_HAL_VERSION
 #define IS_92D_C_CUT(version)			((IS_92D(version)) ? (IS_C_CUT(version) ? true : false) : false)
 #define IS_92D_D_CUT(version)			((IS_92D(version)) ? (IS_D_CUT(version) ? true : false) : false)
 #define IS_92D_E_CUT(version)			((IS_92D(version)) ? (IS_E_CUT(version) ? true : false) : false)
-
-#define IS_8723A_A_CUT(version)			((IS_8723_SERIES(version)) ? ( IS_A_CUT(version)?true : false) : false)
-#define IS_8723A_B_CUT(version)			((IS_8723_SERIES(version)) ? ( IS_B_CUT(version)?true : false) : false)
 
 #define IS_VENDOR_8812A_TEST_CHIP(_Adapter)	((IS_8812_SERIES(GET_HAL_DATA(_Adapter)->VersionID)) ? ((IS_NORMAL_CHIP(GET_HAL_DATA(_Adapter)->VersionID)) ? false : true) : false)
 #define IS_VENDOR_8812A_MP_CHIP(_Adapter)	((IS_8812_SERIES(GET_HAL_DATA(_Adapter)->VersionID)) ? ((IS_NORMAL_CHIP(GET_HAL_DATA(_Adapter)->VersionID)) ? true : false) : false)
