@@ -442,26 +442,10 @@ exit:
 
 u8  rtw_hal_networktype_to_raid(_adapter *adapter,unsigned char network_type)
 {
-	if(IS_NEW_GENERATION_IC(adapter)){
-		return networktype_to_raid_ex(adapter,network_type);
-	}
-	else{
-		return networktype_to_raid(adapter,network_type);
-	}
-
+	return networktype_to_raid_ex(adapter,network_type);
 }
+
 u8 rtw_get_mgntframe_raid(_adapter *adapter,unsigned char network_type)
 {
-
-	u8 raid;
-	if(IS_NEW_GENERATION_IC(adapter)){
-
-		raid = (network_type & WIRELESS_11B)	?RATEID_IDX_B
-											:RATEID_IDX_G;
-	}
-	else{
-		raid = (network_type & WIRELESS_11B)	?RATR_INX_WIRELESS_B
-											:RATR_INX_WIRELESS_G;
-	}
-	return raid;
+	return (network_type & WIRELESS_11B) ? RATEID_IDX_B : RATEID_IDX_G;
 }

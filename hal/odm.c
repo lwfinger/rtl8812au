@@ -1507,21 +1507,8 @@ PDM_ODM_T pDM_Odm
 {
 	PADAPTER		pAdapter	= pDM_Odm->Adapter;
 
-	if(IS_HARDWARE_TYPE_8723B(pAdapter))
-	{
-		pDM_Odm->TH_H = 0xf8; //-8dB
-		pDM_Odm->TH_L = 0xfb; //-5dB
-	}
-	else if(IS_HARDWARE_TYPE_8192EE(pAdapter))
-	{
-		pDM_Odm->TH_H = 0xf0; //-16dB
-		pDM_Odm->TH_L = 0xf3; //-13dB
-	}
-	else
-	{
-		pDM_Odm->TH_H = 0xfa; //-6dB
-		pDM_Odm->TH_L = 0xfd; //-3dB
-	}
+	pDM_Odm->TH_H = 0xfa; //-6dB
+	pDM_Odm->TH_L = 0xfd; //-3dB
 
 	pDM_Odm->IGI_Base = 0x32;
 	pDM_Odm->IGI_target = 0x1c;
@@ -1563,37 +1550,18 @@ odm_Write_CrystalCap(
 	PADAPTER		Adapter = pDM_Odm->Adapter;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 
-	if(IS_HARDWARE_TYPE_8192D(Adapter))
-	{
-		PHY_SetBBReg(Adapter, 0x24, 0xF0, CrystalCap & 0x0F);
-		PHY_SetBBReg(Adapter, 0x28, 0xF0000000, ((CrystalCap & 0xF0) >> 4));
-	}
-
-	if(IS_HARDWARE_TYPE_8188E(Adapter))
-	{
-		// write 0x24[16:11] = 0x24[22:17] = CrystalCap
-		PHY_SetBBReg(Adapter, REG_AFE_XTAL_CTRL, 0x7ff800, (CrystalCap | (CrystalCap << 6)));
-	}
-
-	if(IS_HARDWARE_TYPE_8812(Adapter))
-	{
+	if(IS_HARDWARE_TYPE_8812(Adapter)) {
 		// write 0x2C[30:25] = 0x2C[24:19] = CrystalCap
 		CrystalCap = CrystalCap & 0x3F;
 		PHY_SetBBReg(Adapter, REG_MAC_PHY_CTRL, 0x7FF80000, (CrystalCap | (CrystalCap << 6)));
 	}
 
 	//only for B-cut
-	if ((IS_HARDWARE_TYPE_8723A(Adapter) && pHalData->EEPROMVersion >= 0x01) ||
-		IS_HARDWARE_TYPE_8723B(Adapter) ||IS_HARDWARE_TYPE_8192E(Adapter) || IS_HARDWARE_TYPE_8821(Adapter))
-	{
+	if (IS_HARDWARE_TYPE_8821(Adapter)) {
 		// 0x2C[23:18] = 0x2C[17:12] = CrystalCap
 		CrystalCap = CrystalCap & 0x3F;
 		PHY_SetBBReg(Adapter, REG_MAC_PHY_CTRL, 0xFFF000, (CrystalCap | (CrystalCap << 6)));
 	}
-
-	if(IS_HARDWARE_TYPE_8723AE(Adapter))
-		PHY_SetBBReg(Adapter, REG_LDOA15_CTRL, bMaskDWord, 0x01572505);
-
 }
 
 void
@@ -3566,7 +3534,7 @@ odm_TXPowerTrackingCheckCE(
 		return;
 
 	if(!pDM_Odm->RFCalibrateInfo.TM_Trigger) {		//at least delay 1 sec
-		if(IS_HARDWARE_TYPE_8188E(Adapter) || IS_HARDWARE_TYPE_JAGUAR(Adapter) || IS_HARDWARE_TYPE_8192E(Adapter) )//||IS_HARDWARE_TYPE_8723B(Adapter))
+		if(IS_HARDWARE_TYPE_JAGUAR(Adapter))
 			ODM_SetRFReg(pDM_Odm, ODM_RF_PATH_A, RF_T_METER_NEW, (BIT17 | BIT16), 0x03);
 		else
 			ODM_SetRFReg(pDM_Odm, ODM_RF_PATH_A, RF_T_METER_OLD, bRFRegOffsetMask, 0x60);

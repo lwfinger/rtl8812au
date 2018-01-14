@@ -18,10 +18,8 @@
 // HAL_IC_TYPE_E
 typedef enum tag_HAL_IC_Type_Definition
 {
-	CHIP_8192S	=	0,
-	CHIP_8188C	=	1,
-	CHIP_8812	=	6,
-	CHIP_8821	=	7,
+	CHIP_8812	=	0,
+	CHIP_8821	=	1,
 }HAL_IC_TYPE_E;
 
 //HAL_CHIP_TYPE_E

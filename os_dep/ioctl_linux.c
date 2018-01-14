@@ -2175,10 +2175,7 @@ static int rtw_wx_get_scan(struct net_device *dev, struct iw_request_info *a,
 	if(!rtw_p2p_chk_state(pwdinfo, P2P_STATE_NONE))
 	{
 		//	P2P is enabled
-		if ( padapter->chip_type == RTL8192D )
-			wait_for_surveydone = 300;	//	Because the 8192du supports more channels.
-		else
-			wait_for_surveydone = 200;
+		wait_for_surveydone = 200;
 	}
 	else
 	{

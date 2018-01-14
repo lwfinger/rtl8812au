@@ -425,36 +425,13 @@ int rtw_android_priv_cmd(struct net_device *net, struct ifreq *ifr, int cmd)
 		/* TBD: BTCOEXSCAN-STOP */
 		break;
 	case ANDROID_WIFI_CMD_BTCOEXMODE:
-		#if 0
-		uint mode = *(command + strlen(CMD_BTCOEXMODE) + 1) - '0';
-		if (mode == 1)
-			net_os_set_packet_filter(net, 0); /* DHCP starts */
-		else
-			net_os_set_packet_filter(net, 1); /* DHCP ends */
-#ifdef WL_CFG80211
-		bytes_written = wl_cfg80211_set_btcoex_dhcp(net, command);
-#endif
-		#endif
 		break;
-
 	case ANDROID_WIFI_CMD_SETSUSPENDOPT:
-		//bytes_written = wl_android_set_suspendopt(net, command, priv_cmd.total_len);
 		break;
-
 	case ANDROID_WIFI_CMD_SETBAND:
-	{
-		uint band = *(command + strlen("SETBAND") + 1) - '0';
-		_adapter*	padapter = ( _adapter * ) rtw_netdev_priv(net);
-
-		if (padapter->chip_type == RTL8192D)
-			padapter->setband = band;
-
 		break;
-	}
 	case ANDROID_WIFI_CMD_GETBAND:
-		//bytes_written = wl_android_get_band(net, command, priv_cmd.total_len);
 		break;
-
 	case ANDROID_WIFI_CMD_COUNTRY:
 		bytes_written = rtw_android_set_country(net, command, priv_cmd.total_len);
 		break;

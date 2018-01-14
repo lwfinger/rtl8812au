@@ -327,15 +327,7 @@ MPT_InitializeAdapter(
 	// Don't accept any packets
 	rtw_write32(pAdapter, REG_RCR, 0);
 
-	if(IS_HARDWARE_TYPE_8192DU(pAdapter))
-	{
-		rtw_write32(pAdapter, REG_LEDCFG0, 0x8888);
-	}
-	else
-	{
-		//rtw_write32(pAdapter, REG_LEDCFG0, 0x08080);
-		ledsetting = rtw_read32(pAdapter, REG_LEDCFG0);
-	}
+	ledsetting = rtw_read32(pAdapter, REG_LEDCFG0);
 
 	PHY_IQCalibrate(pAdapter, false);
 	dm_CheckTXPowerTracking(&pHalData->odmpriv);	//trigger thermal meter
@@ -1588,14 +1580,10 @@ u32 mpt_ProQueryCalTxPower(
 	u1Byte			limit = 0, rate = 0;
 	rate=pMptCtx->MptRateIndex;
 
-	if (IS_HARDWARE_TYPE_8188E(pAdapter) || IS_HARDWARE_TYPE_8192E(pAdapter)) {
-		return mpt_ProQueryCalTxPower_8188E(pAdapter, RfPath);
-	} else {
-		#ifdef CONFIG_8812A
-		TxPower = PHY_GetTxPowerIndex_8812A(pAdapter, RfPath, rate,pHalData->CurrentChannelBW, pHalData->CurrentChannel);
-		#endif
-		return TxPower;
-	}
+	#ifdef CONFIG_8812A
+	TxPower = PHY_GetTxPowerIndex_8812A(pAdapter, RfPath, rate,pHalData->CurrentChannelBW, pHalData->CurrentChannel);
+	#endif
+	return TxPower;
 }
 
 
@@ -1605,29 +1593,15 @@ void Hal_ProSetCrystalCap (PADAPTER pAdapter , u32 CrystalCapVal)
 
 	CrystalCapVal = pHalData->CrystalCap & 0x3F;
 
-	if(IS_HARDWARE_TYPE_8192D(pAdapter))
-	{
-		PHY_SetBBReg(pAdapter, REG_AFE_XTAL_CTRL, 0xF0, CrystalCapVal & 0x0F);
-		PHY_SetBBReg(pAdapter, REG_AFE_PLL_CTRL, 0xF0000000, (CrystalCapVal & 0xF0) >> 4);
-	}
-	else if(IS_HARDWARE_TYPE_8188E(pAdapter))
-	{
-		// write 0x24[16:11] = 0x24[22:17] = CrystalCap
-		PHY_SetBBReg(pAdapter, REG_AFE_XTAL_CTRL, 0x7FF800, (CrystalCapVal | (CrystalCapVal << 6)));
-	}
-	else if(IS_HARDWARE_TYPE_8812(pAdapter))
+	if(IS_HARDWARE_TYPE_8812(pAdapter))
 	{
 		// write 0x2C[30:25] = 0x2C[24:19] = CrystalCap
 		PHY_SetBBReg(pAdapter, REG_MAC_PHY_CTRL, 0x7FF80000, (CrystalCapVal | (CrystalCapVal << 6)));
 	}
-	else if(IS_HARDWARE_TYPE_8821(pAdapter) || IS_HARDWARE_TYPE_8192E(pAdapter))
+	else
 	{
 		// write 0x2C[23:18] = 0x2C[17:12] = CrystalCap
 		PHY_SetBBReg(pAdapter, REG_MAC_PHY_CTRL, 0xFFF000, (CrystalCapVal | (CrystalCapVal << 6)));
-	}
-	else
-	{
-		PHY_SetBBReg(pAdapter, 0x2c, 0xFFF000, (CrystalCapVal | (CrystalCapVal << 6)));
 	}
 }
 
