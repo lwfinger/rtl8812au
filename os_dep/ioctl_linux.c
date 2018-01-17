@@ -1685,17 +1685,6 @@ static int rtw_wx_set_wap(struct net_device *dev,
 	struct	wlan_network	*pnetwork = NULL;
 	NDIS_802_11_AUTHENTICATION_MODE	authmode;
 
-
-/*
-#ifdef CONFIG_CONCURRENT_MODE
-	if(padapter->iface_type > PRIMARY_IFACE)
-	{
-		ret = -EINVAL;
-		goto exit;
-	}
-#endif
-*/
-
 #ifdef CONFIG_CONCURRENT_MODE
 	if (check_buddy_fwstate(padapter, _FW_UNDER_SURVEY|_FW_UNDER_LINKING) == true)
 	{
@@ -1742,25 +1731,7 @@ static int rtw_wx_set_wap(struct net_device *dev,
 	 {
 
 		if ((rtw_end_of_queue_search(phead, pmlmepriv->pscanned)) == true)
-		{
-#if 0
-			ret = -EINVAL;
-			goto exit;
-
-			if(check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true)
-			{
-				rtw_set_802_11_bssid(padapter, temp->sa_data);
-				goto exit;
-			}
-			else
-			{
-				ret = -EINVAL;
-				goto exit;
-			}
-#endif
-
 			break;
-		}
 
 		pnetwork = LIST_CONTAINOR(pmlmepriv->pscanned, struct wlan_network, list);
 
@@ -1786,7 +1757,6 @@ static int rtw_wx_set_wap(struct net_device *dev,
 	_exit_critical_bh(&queue->lock, &irqL);
 
 	rtw_set_802_11_authentication_mode(padapter, authmode);
-	//set_802_11_encryption_mode(padapter, padapter->securitypriv.ndisencryptstatus);
 	if (rtw_set_802_11_bssid(padapter, temp->sa_data) == false) {
 		ret = -1;
 		goto exit;
@@ -2304,16 +2274,6 @@ static int rtw_wx_set_essid(struct net_device *dev,
 	DBG_871X("DBG_IOCTL %s:%d\n",__FUNCTION__, __LINE__);
 	#endif
 
-/*
-#ifdef CONFIG_CONCURRENT_MODE
-	if(padapter->iface_type > PRIMARY_IFACE)
-	{
-		ret = -EINVAL;
-		goto exit;
-	}
-#endif
-*/
-
 #ifdef CONFIG_CONCURRENT_MODE
 	if (check_buddy_fwstate(padapter, _FW_UNDER_SURVEY|_FW_UNDER_LINKING) == true)
 	{
@@ -2389,27 +2349,11 @@ static int rtw_wx_set_essid(struct net_device *dev,
 
 		RT_TRACE(_module_rtl871x_ioctl_os_c, _drv_info_, ("rtw_wx_set_essid: ssid=[%s]\n", src_ssid));
 		_enter_critical_bh(&queue->lock, &irqL);
-	       phead = get_list_head(queue);
-              pmlmepriv->pscanned = get_next(phead);
+		phead = get_list_head(queue);
+		pmlmepriv->pscanned = get_next(phead);
 
-		while (1)
-		{
-			if (rtw_end_of_queue_search(phead, pmlmepriv->pscanned) == true)
-			{
-#if 0
-				if(check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true)
-				{
-					rtw_set_802_11_ssid(padapter, &ndis_ssid);
-
-					goto exit;
-				}
-				else
-				{
-					RT_TRACE(_module_rtl871x_ioctl_os_c,_drv_info_,("rtw_wx_set_ssid(): scanned_queue is empty\n"));
-					ret = -EINVAL;
-					goto exit;
-				}
-#endif
+		while (1) {
+			if (rtw_end_of_queue_search(phead, pmlmepriv->pscanned) == true) {
 			        RT_TRACE(_module_rtl871x_ioctl_os_c, _drv_warning_,
 					 ("rtw_wx_set_essid: scan_q is empty, set ssid to check if scanning again!\n"));
 
@@ -2427,24 +2371,20 @@ static int rtw_wx_set_essid(struct net_device *dev,
 				  pnetwork->network.Ssid.Ssid));
 
 			if ((_rtw_memcmp(dst_ssid, src_ssid, ndis_ssid.SsidLength) == true) &&
-				(pnetwork->network.Ssid.SsidLength==ndis_ssid.SsidLength))
-			{
+				(pnetwork->network.Ssid.SsidLength==ndis_ssid.SsidLength)) {
 				RT_TRACE(_module_rtl871x_ioctl_os_c, _drv_info_,
 					 ("rtw_wx_set_essid: find match, set infra mode\n"));
 
-				if(check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true)
-				{
+				if(check_fwstate(pmlmepriv, WIFI_ADHOC_STATE)) {
 					if(pnetwork->network.InfrastructureMode != pmlmepriv->cur_network.network.InfrastructureMode)
 						continue;
 				}
 
-				if (rtw_set_802_11_infrastructure_mode(padapter, pnetwork->network.InfrastructureMode) == false)
-				{
+				if (!rtw_set_802_11_infrastructure_mode(padapter, pnetwork->network.InfrastructureMode)) {
 					ret = -1;
 					_exit_critical_bh(&queue->lock, &irqL);
 					goto exit;
 				}
-
 				break;
 			}
 		}
