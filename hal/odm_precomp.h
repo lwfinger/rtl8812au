@@ -43,32 +43,16 @@
 #include "odm_interface.h"
 #include "odm_reg.h"
 
-#if (TEST_CHIP_SUPPORT == 1)
-#include "rtl8188e/HalHWImg8188E_TestChip_MAC.h"
-#include "rtl8188e/HalHWImg8188E_TestChip_RF.h"
-#include "rtl8188e/HalHWImg8188E_TestChip_BB.h"
-#endif
-
 #include "HalHWImg8812A_MAC.h"
 #include "HalHWImg8812A_RF.h"
 #include "HalHWImg8812A_BB.h"
 #include "HalHWImg8812A_FW.h"
 #include "odm_RegConfig8812A.h"
-#if (TEST_CHIP_SUPPORT == 1)
-#include "HalHWImg8812A_TestChip_MAC.h"
-#include "HalHWImg8812A_TestChip_RF.h"
-#include "HalHWImg8812A_TestChip_BB.h"
-#endif
 
 #include "HalHWImg8821A_MAC.h"
 #include "HalHWImg8821A_RF.h"
 #include "HalHWImg8821A_BB.h"
 #include "HalHWImg8821A_FW.h"
 #include "odm_RegConfig8821A.h"
-#if (TEST_CHIP_SUPPORT == 1)
-#include "HalHWImg8821A_TestChip_MAC.h"
-#include "HalHWImg8821A_TestChip_RF.h"
-#include "HalHWImg8821A_TestChip_BB.h"
-#endif
 
 #endif	// __ODM_PRECOMP_H__

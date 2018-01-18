@@ -177,8 +177,6 @@
  * Outsource  Related Config
  */
 
-#define TEST_CHIP_SUPPORT				0
-
 #define RTL8723_FPGA_VERIFICATION		0
 
 #define RATE_ADAPTIVE_SUPPORT		0

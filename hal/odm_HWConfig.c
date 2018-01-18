@@ -21,34 +21,14 @@
 #include "odm_precomp.h"
 
 #define READ_AND_CONFIG_MP(ic, txt) (ODM_ReadAndConfig_MP_##ic##txt(pDM_Odm))
-#define READ_AND_CONFIG_TC(ic, txt) (ODM_ReadAndConfig_TC_##ic##txt(pDM_Odm))
 
 
-#if (TEST_CHIP_SUPPORT == 1)
-#define READ_AND_CONFIG(ic, txt) do {\
-                                            if (pDM_Odm->bIsMPChip)\
-						    READ_AND_CONFIG_MP(ic,txt);\
-                                            else\
-                                                READ_AND_CONFIG_TC(ic,txt);\
-                                    } while(0)
-#else
-  #define READ_AND_CONFIG     READ_AND_CONFIG_MP
-#endif
+#define READ_AND_CONFIG     READ_AND_CONFIG_MP
 
 
 #define READ_FIRMWARE_MP(ic, txt)		(ODM_ReadFirmware_MP_##ic##txt(pDM_Odm, pFirmware, pSize))
-#define READ_FIRMWARE_TC(ic, txt)		(ODM_ReadFirmware_TC_##ic##txt(pDM_Odm, pFirmware, pSize))
 
-#if (TEST_CHIP_SUPPORT == 1)
-#define READ_FIRMWARE(ic, txt) do {\
-						if (pDM_Odm->bIsMPChip)\
-							READ_FIRMWARE_MP(ic,txt);\
-						else\
-							READ_FIRMWARE_TC(ic,txt);\
-					} while(0)
-#else
 #define READ_FIRMWARE     READ_FIRMWARE_MP
-#endif
 
 u1Byte
 odm_QueryRxPwrPercentage(
@@ -1341,25 +1321,17 @@ ODM_ConfigBBWithHeaderFile(
     ODM_RT_TRACE(pDM_Odm, ODM_COMP_INIT, ODM_DBG_LOUD,
 				("pDM_Odm->SupportPlatform: 0x%X, pDM_Odm->SupportInterface: 0x%X, pDM_Odm->BoardType: 0x%X\n",
 				pDM_Odm->SupportPlatform, pDM_Odm->SupportInterface, pDM_Odm->BoardType));
-	if(pDM_Odm->SupportICType == ODM_RTL8812)
-	{
-		if(ConfigType == CONFIG_BB_PHY_REG)
-		{
+	if(pDM_Odm->SupportICType == ODM_RTL8812) {
+		if(ConfigType == CONFIG_BB_PHY_REG) {
 			READ_AND_CONFIG(8812A,_PHY_REG);
-		}
-		else if(ConfigType == CONFIG_BB_AGC_TAB)
-		{
+		} else if(ConfigType == CONFIG_BB_AGC_TAB) {
 			READ_AND_CONFIG(8812A,_AGC_TAB);
-		}
-		else if(ConfigType == CONFIG_BB_PHY_REG_PG)
-		{
+		} else if(ConfigType == CONFIG_BB_PHY_REG_PG) {
 			if (pDM_Odm->RFEType == 3 && pDM_Odm->bIsMPChip)
 				READ_AND_CONFIG_MP(8812A,_PHY_REG_PG_ASUS);
 			else
 				READ_AND_CONFIG(8812A,_PHY_REG_PG);
-		}
-		else if(ConfigType == CONFIG_BB_PHY_REG_MP)
-		{
+		} else if(ConfigType == CONFIG_BB_PHY_REG_MP) {
 			READ_AND_CONFIG_MP(8812A,_PHY_REG_MP);
 		}
 		ODM_RT_TRACE(pDM_Odm,ODM_COMP_INIT, ODM_DBG_LOUD, (" ===> phy_ConfigBBWithHeaderFile() phy:Rtl8812AGCTABArray\n"));
