@@ -224,7 +224,6 @@ struct pwrctrl_priv
 	u8		autopm_cnt;
 #endif
 	u8		bSupportRemoteWakeup;
-#ifdef CONFIG_WOWLAN
 	u8		wowlan_mode;
 	u8		wowlan_pattern;
 	u8		wowlan_magic;
@@ -232,7 +231,6 @@ struct pwrctrl_priv
 	u8		wowlan_pattern_idx;
 	u8		wowlan_wake_reason;
 	u32		wowlan_pattern_context[8][5];
-#endif // CONFIG_WOWLAN
 	_timer	pwr_state_check_timer;
 	int		pwr_state_check_interval;
 	u8		pwr_state_check_cnts;

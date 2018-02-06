@@ -1433,13 +1433,9 @@ void rtw_indicate_disconnect( _adapter *padapter )
 #endif // CONFIG_P2P_PS
 
 #ifdef CONFIG_LPS
-#ifdef CONFIG_WOWLAN
-	if(padapter->pwrctrlpriv.wowlan_mode==false)
-#endif //CONFIG_WOWLAN
-	rtw_lps_ctrl_wk_cmd(padapter, LPS_CTRL_DISCONNECT, 1);
+	if (!padapter->pwrctrlpriv.wowlan_mode)
+		rtw_lps_ctrl_wk_cmd(padapter, LPS_CTRL_DISCONNECT, 1);
 #endif
-
-
 }
 
 inline void rtw_indicate_scan_done( _adapter *padapter, bool aborted)
@@ -2626,19 +2622,14 @@ int rtw_select_and_join_from_scanned_queue(struct mlme_priv *pmlmepriv )
 
 		pmlmepriv->pscanned = get_next(pmlmepriv->pscanned);
 
-		#if 0
-		DBG_871X("MacAddress:"MAC_FMT" ssid:%s\n", MAC_ARG(pnetwork->network.MacAddress), pnetwork->network.Ssid.Ssid);
-		#endif
-
 		rtw_check_join_candidate(pmlmepriv, &candidate, pnetwork);
 
 	}
 
-	if(candidate == NULL) {
+	if (!candidate) {
 		DBG_871X("%s: return _FAIL(candidate == NULL)\n", __FUNCTION__);
-#ifdef CONFIG_WOWLAN
-		_clr_fwstate_(pmlmepriv, _FW_LINKED|_FW_UNDER_LINKING);
-#endif
+		if (adapter->pwrctrlpriv.wowlan_mode)
+			_clr_fwstate_(pmlmepriv, _FW_LINKED|_FW_UNDER_LINKING);
 		ret = _FAIL;
 		goto exit;
 	} else {
@@ -2649,27 +2640,12 @@ int rtw_select_and_join_from_scanned_queue(struct mlme_priv *pmlmepriv )
 
 
 	// check for situation of  _FW_LINKED
-	if (check_fwstate(pmlmepriv, _FW_LINKED) == true)
-	{
+	if (check_fwstate(pmlmepriv, _FW_LINKED)) {
 		DBG_871X("%s: _FW_LINKED while ask_for_joinbss!!!\n", __FUNCTION__);
 
-		#if 0 // for WPA/WPA2 authentication, wpa_supplicant will expect authentication from AP, it is needed to reconnect AP...
-		if(is_same_network(&pmlmepriv->cur_network.network, &candidate->network))
-		{
-			DBG_871X("%s: _FW_LINKED and is same network, it needn't join again\n", __FUNCTION__);
-
-			rtw_indicate_connect(adapter);//rtw_indicate_connect again
-
-			ret = 2;
-			goto exit;
-		}
-		else
-		#endif
-		{
-			rtw_disassoc_cmd(adapter, 0, true);
-			rtw_indicate_disconnect(adapter);
-			rtw_free_assoc_resources(adapter, 0);
-		}
+		rtw_disassoc_cmd(adapter, 0, true);
+		rtw_indicate_disconnect(adapter);
+		rtw_free_assoc_resources(adapter, 0);
 	}
 
 	#ifdef CONFIG_ANTENNA_DIVERSITY

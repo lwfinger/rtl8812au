@@ -32,22 +32,15 @@ static u8 _is_fw_read_cmd_down(_adapter* padapter, u8 msgbox_num)
 
 	u8 valid;
 
-	//DBG_8192C(" _is_fw_read_cmd_down ,reg_1cc(%x),msg_box(%d)...\n",rtw_read8(padapter,REG_HMETFR),msgbox_num);
-
-	do{
+	do {
 		valid = rtw_read8(padapter,REG_HMETFR) & BIT(msgbox_num);
-		if(0 == valid ){
+		if (valid == 0)
 			read_down = true;
-		}
-#ifdef CONFIG_WOWLAN
 		rtw_msleep_os(2);
-#endif
-	}while( (!read_down) && (retry_cnts--));
+	} while (!read_down && retry_cnts--);
 
 	return read_down;
-
 }
-
 
 /*****************************************
 * H2C Msg format :
@@ -1089,8 +1082,7 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 			rtw_write8(padapter,  REG_CR+1, pHalData->RegCR_1);
 		}
 	}
-#ifdef CONFIG_WOWLAN
-	if (padapter->pwrctrlpriv.wowlan_mode){
+	if (padapter->pwrctrlpriv.wowlan_mode) {
 		u16	media_status;
 
 		media_status = mstatus;
@@ -1099,8 +1091,6 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 	} else {
 		DBG_871X_LEVEL(_drv_info_, "%s wowlan_mode is off\n", __func__);
 	}
-#endif //CONFIG_WOWLAN
-
 }
 
 #ifdef CONFIG_P2P_PS
@@ -1247,7 +1237,6 @@ int reset_tsf(PADAPTER Adapter, u8 reset_port )
 
 #endif	// CONFIG_TSF_RESET_OFFLOAD
 
-#ifdef CONFIG_WOWLAN
 void rtl8812_set_wowlan_cmd(_adapter* padapter, u8 enable)
 {
 	u8		res=_SUCCESS;
@@ -1285,7 +1274,7 @@ void rtl8812_set_wowlan_cmd(_adapter* padapter, u8 enable)
 			}
 
 			if(!(padapter->pwrctrlpriv.wowlan_wake_reason & FWDecisionDisconnect))
-				rtl8812a_set_FwJoinBssReport_cmd(padapter, 1);
+				rtl8812_set_FwJoinBssReport_cmd(padapter, 1);
 			else
 				DBG_871X_LEVEL(_drv_always_, "%s, disconnected, no FwJoinBssReport\n",__FUNCTION__);
 			rtw_msleep_os(2);
@@ -1335,4 +1324,3 @@ void rtl8812_set_wowlan_cmd(_adapter* padapter, u8 enable)
 		DBG_871X_LEVEL(_drv_always_, "-%s res:%d-\n", __func__, res);
 		return ;
 }
-#endif  //CONFIG_WOWLAN

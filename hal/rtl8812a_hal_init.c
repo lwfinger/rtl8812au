@@ -592,13 +592,11 @@ bool HalDetectPwrDownMode8812(PADAPTER Adapter)
 	return pHalData->pwrdown;
 }	// HalDetectPwrDownMode
 
-#ifdef CONFIG_WOWLAN
 void Hal_DetectWoWMode(PADAPTER pAdapter)
 {
 	pAdapter->pwrctrlpriv.bSupportRemoteWakeup = true;
 	DBG_871X("%s\n", __func__);
 }
-#endif
 
 //====================================================================================
 //
@@ -890,11 +888,7 @@ extern char *rtw_fw_file_path;
 u8	FwBuffer8812[FW_SIZE_8812];
 #endif //CONFIG_FILE_FWIMG
 
-s32
-FirmwareDownload8812(
-	PADAPTER			Adapter,
-	bool			bUsedWoWLANFw
-)
+s32 FirmwareDownload8812(PADAPTER Adapter, bool bUsedWoWLANFw)
 {
 	s32	rtStatus = _SUCCESS;
 	u8	writeFW_retry = 0;
@@ -911,8 +905,7 @@ FirmwareDownload8812(
 
 	RT_TRACE(_module_hal_init_c_, _drv_info_, ("+%s\n", __FUNCTION__));
 	pFirmware = (PRT_FIRMWARE_8812)rtw_zmalloc(sizeof(RT_FIRMWARE_8812));
-	if(!pFirmware)
-	{
+	if (!pFirmware) {
 		rtStatus = _FAIL;
 		goto Exit;
 	}
@@ -931,8 +924,7 @@ FirmwareDownload8812(
 
 	DBG_871X(" ===> FirmwareDownload8812() fw source from %s.\n", (pFirmware->eFWSource ? "Header": "File"));
 
-	switch(pFirmware->eFWSource)
-	{
+	switch(pFirmware->eFWSource) {
 		case FW_SOURCE_IMG_FILE:
 			#ifdef CONFIG_FILE_FWIMG
 			rtStatus = rtw_retrive_from_file(rtw_fw_file_path, FwBuffer8812, FW_SIZE_8812);
@@ -944,28 +936,22 @@ FirmwareDownload8812(
 			ODM_ConfigFWWithHeaderFile(&pHalData->odmpriv, CONFIG_FW_NIC, (u8 *)&(pFirmware->szFwBuffer), &(pFirmware->ulFwLength));
 			DBG_871X(" ===> FirmwareDownload8812() fw:%s, size: %d\n", "Firmware for NIC", pFirmware->ulFwLength);
 
-#ifdef CONFIG_WOWLAN
 			ODM_ConfigFWWithHeaderFile(&pHalData->odmpriv, CONFIG_FW_WoWLAN, (u8 *)&(pFirmware->szWoWLANFwBuffer), &(pFirmware->ulWoWLANFwLength));
-			DBG_871X(" ===> FirmwareDownload88E() fw:%s, size: %d\n", "Firmware for WoWLAN", pFirmware->ulWoWLANFwLength);
-#endif //CONFIG_WOWLAN
+			DBG_871X(" ===> FirmwareDownload8812() fw:%s, size: %d\n", "Firmware for WoWLAN", pFirmware->ulWoWLANFwLength);
 
 			if (pFirmware->ulFwLength > FW_SIZE_8812) {
 				rtStatus = _FAIL;
 				RT_TRACE(_module_hal_init_c_, _drv_err_, ("Firmware size exceed 0x%X. Check it.\n", FW_SIZE_8812) );
 				goto Exit;
 			}
-
 			break;
 	}
 
-#ifdef CONFIG_WOWLAN
 	if (bUsedWoWLANFw) {
 		pFirmwareBuf = pFirmware->szWoWLANFwBuffer;
 		FirmwareLen = pFirmware->ulWoWLANFwLength;
 		pFwHdr = (u8 *)pFirmware->szWoWLANFwBuffer;
-	} else
-#endif
-	{
+	} else {
 		pFirmwareBuf = pFirmware->szFwBuffer;
 		FirmwareLen = pFirmware->ulFwLength;
 		DBG_871X_LEVEL(_drv_info_, "+%s: !bUsedWoWLANFw, FmrmwareLen:%d+\n", __func__, FirmwareLen);
@@ -980,8 +966,7 @@ FirmwareDownload8812(
 	DBG_871X ("%s: fw_ver=%d fw_subver=%d sig=0x%x\n",
 		  __FUNCTION__, pHalData->FirmwareVersion, pHalData->FirmwareSubVersion, pHalData->FirmwareSignature);
 
-	if (IS_FW_HEADER_EXIST_8812(pFwHdr) || IS_FW_HEADER_EXIST_8821(pFwHdr))
-	{
+	if (IS_FW_HEADER_EXIST_8812(pFwHdr) || IS_FW_HEADER_EXIST_8821(pFwHdr)) {
 		// Shift 32 bytes for FW header
 		pFirmwareBuf = pFirmwareBuf + 32;
 		FirmwareLen = FirmwareLen - 32;
@@ -989,8 +974,7 @@ FirmwareDownload8812(
 
 	// Suggested by Filen. If 8051 is running in RAM code, driver should inform Fw to reset by itself,
 	// or it will cause download Fw fail. 2010.02.01. by tynli.
-	if (rtw_read8(Adapter, REG_MCUFWDL) & BIT7) //8051 RAM code
-	{
+	if (rtw_read8(Adapter, REG_MCUFWDL) & BIT7) { //8051 RAM code
 		rtw_write8(Adapter, REG_MCUFWDL, 0x00);
 		_8051Reset8812(Adapter);
 	}
@@ -1031,15 +1015,12 @@ Exit:
 	if (pFirmware)
 		rtw_mfree((u8*)pFirmware, sizeof(RT_FIRMWARE_8812));
 
-	//RT_TRACE(COMP_INIT, DBG_LOUD, (" <=== FirmwareDownload91C()\n"));
-#ifdef CONFIG_WOWLAN
 	if (Adapter->pwrctrlpriv.wowlan_mode)
 		InitializeFirmwareVars8812(Adapter);
 	else
 		DBG_871X_LEVEL(_drv_always_, "%s: wowland_mode:%d wowlan_wake_reason:%d\n",
 			__func__, Adapter->pwrctrlpriv.wowlan_mode,
 			Adapter->pwrctrlpriv.wowlan_wake_reason);
-#endif
 
 	return rtStatus;
 }
@@ -1057,7 +1038,6 @@ void InitializeFirmwareVars8812(PADAPTER padapter)
 	pHalData->LastHMEBoxNum = 0;
 }
 
-#ifdef CONFIG_WOWLAN
 //===========================================
 //
 // Description: Prepare some information to Fw for WoWLAN.
@@ -1091,7 +1071,6 @@ SetFwRelatedForWoWLAN8812(
 	//
 	InitializeFirmwareVars8812(padapter);
 }
-#endif //CONFIG_WOWLAN
 
 static void rtl8812_free_hal_data(PADAPTER padapter)
 {

@@ -641,7 +641,6 @@ void rtw_unlock_suspend(void)
 	#endif
 }
 
-#ifdef CONFIG_WOWLAN
 void rtw_lock_suspend_timeout(long timeout)
 {
 	#ifdef CONFIG_WAKELOCK
@@ -650,7 +649,6 @@ void rtw_lock_suspend_timeout(long timeout)
 	android_lock_suspend_auto_expire(&rtw_suspend_lock, timeout);
 	#endif
 }
-#endif //CONFIG_WOWLAN
 
 inline void ATOMIC_SET(ATOMIC_T *v, int i)
 {

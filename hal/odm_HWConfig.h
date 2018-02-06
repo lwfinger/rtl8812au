@@ -237,58 +237,20 @@ typedef struct _Phy_Status_Rpt_8812
 } PHY_STATUS_RPT_8812_T,*PPHY_STATUS_RPT_8812_T;
 
 
-void
-odm_Init_RSSIForDM(
-	PDM_ODM_T	pDM_Odm
-	);
+void odm_Init_RSSIForDM(PDM_ODM_T pDM_Odm);
 
-void
-ODM_PhyStatusQuery(
-	PDM_ODM_T					pDM_Odm,
-	PODM_PHY_INFO_T			pPhyInfo,
-	pu1Byte						pPhyStatus,
-	PODM_PACKET_INFO_T			pPktinfo
-	);
+void ODM_PhyStatusQuery(PDM_ODM_T pDM_Odm, PODM_PHY_INFO_T pPhyInfo, pu1Byte pPhyStatus, PODM_PACKET_INFO_T pPktinfo);
 
-void
-ODM_MacStatusQuery(
-	PDM_ODM_T					pDM_Odm,
-	pu1Byte						pMacStatus,
-	u1Byte						MacID,
-	bool						bPacketMatchBSSID,
-	bool						bPacketToSelf,
-	bool						bPacketBeacon
-	);
+void ODM_MacStatusQuery(PDM_ODM_T pDM_Odm, pu1Byte pMacStatus, u1Byte MacID, bool bPacketMatchBSSID, bool bPacketToSelf, bool bPacketBeacon);
 
-HAL_STATUS
-ODM_ConfigRFWithTxPwrTrackHeaderFile(
-	PDM_ODM_T			pDM_Odm
-    );
+HAL_STATUS ODM_ConfigRFWithTxPwrTrackHeaderFile(PDM_ODM_T pDM_Odm);
 
-HAL_STATUS
-ODM_ConfigRFWithHeaderFile(
-	PDM_ODM_T			pDM_Odm,
-	ODM_RF_Config_Type		ConfigType,
-	ODM_RF_RADIO_PATH_E	eRFPath
-	);
+HAL_STATUS ODM_ConfigRFWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_RF_Config_Type ConfigType, ODM_RF_RADIO_PATH_E eRFPath);
 
-HAL_STATUS
-ODM_ConfigBBWithHeaderFile(
-	PDM_ODM_T	                pDM_Odm,
-	ODM_BB_Config_Type		ConfigType
-    );
+HAL_STATUS ODM_ConfigBBWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_BB_Config_Type ConfigType);
 
-HAL_STATUS
-ODM_ConfigMACWithHeaderFile(
-	PDM_ODM_T	pDM_Odm
-    );
+HAL_STATUS ODM_ConfigMACWithHeaderFile(PDM_ODM_T pDM_Odm);
 
-HAL_STATUS
-ODM_ConfigFWWithHeaderFile(
-	PDM_ODM_T			pDM_Odm,
-	ODM_FW_Config_Type	ConfigType,
-	u1Byte				*pFirmware,
-	u4Byte				*pSize
-	);
+HAL_STATUS ODM_ConfigFWWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_FW_Config_Type ConfigType, u1Byte *pFirmware, u4Byte *pSize);
 
 #endif

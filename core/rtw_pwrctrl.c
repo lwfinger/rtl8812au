@@ -465,26 +465,9 @@ u8 PS_RDY_CHECK(_adapter * padapter)
 		(check_fwstate(pmlmepriv, WIFI_ADHOC_MASTER_STATE) == true) ||
 		(check_fwstate(pmlmepriv, WIFI_ADHOC_STATE) == true) )
 		return false;
-#ifdef CONFIG_WOWLAN
-	if(true == pwrpriv->bInSuspend && pwrpriv->wowlan_mode)
+	if (pwrpriv->bInSuspend && pwrpriv->wowlan_mode)
 		return true;
-	else
-		return false;
-#else
-	if(true == pwrpriv->bInSuspend )
-		return false;
-#endif
-	if( (padapter->securitypriv.dot11AuthAlgrthm == dot11AuthAlgrthm_8021X) && (padapter->securitypriv.binstallGrpkey == false) )
-	{
-		DBG_871X("Group handshake still in progress !!!\n");
-		return false;
-	}
-#ifdef CONFIG_IOCTL_CFG80211
-	if (!rtw_cfg80211_pwr_mgmt(padapter))
-		return false;
-#endif
-
-	return true;
+	return false;
 }
 
 void rtw_set_ps_mode(PADAPTER padapter, u8 ps_mode, u8 smart_ps, u8 bcn_ant_mode)

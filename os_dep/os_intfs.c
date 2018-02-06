@@ -39,7 +39,7 @@ static int rtw_preamble = PREAMBLE_LONG;//long, short, auto
 static int rtw_scan_mode = 1;//active, passive
 static int rtw_adhoc_tx_pwr = 1;
 static int rtw_soft_ap = 0;
-//int smart_ps = 1;
+static int enable_wowlan = 0;
 #ifdef CONFIG_POWER_SAVING
 static int rtw_power_mgnt = 1;
 #ifdef CONFIG_IPS_LEVEL_2
@@ -284,6 +284,8 @@ MODULE_PARM_DESC(rtw_btcoex_enable, "Enable BT co-existence mechanism");
 static uint rtw_notch_filter = RTW_NOTCH_FILTER;
 module_param(rtw_notch_filter, uint, 0644);
 MODULE_PARM_DESC(rtw_notch_filter, "0:Disable, 1:Enable, 2:Enable only for P2P");
+module_param(enable_wowlan, int, 0644);
+MODULE_PARM_DESC(enable_wowlan, "1 to enable WOWlan. default 0");
 
 static uint loadparam(PADAPTER padapter, _nic_hdl pnetdev);
 int _netdev_open(struct net_device *pnetdev);
@@ -756,6 +758,7 @@ static uint loadparam( _adapter *padapter,  _nic_hdl	pnetdev)
 	registry_par->lbkmode = (u8)rtw_lbkmode;
 	//registry_par->hci = (u8)hci;
 	registry_par->network_mode  = (u8)rtw_network_mode;
+	registry_par->enable_wowlan = enable_wowlan;
 
 	_rtw_memcpy(registry_par->ssid.Ssid, "ANY", 3);
 	registry_par->ssid.SsidLength = 3;
@@ -1470,13 +1473,11 @@ exit:
 
 }
 
-#ifdef CONFIG_WOWLAN
 void rtw_cancel_dynamic_chk_timer(_adapter *padapter)
 {
 	_cancel_timer_ex(&padapter->mlmepriv.dynamic_chk_timer);
 	RT_TRACE(_module_os_intfs_c_,_drv_info_,("rtw_cancel_all_timer:cancel dynamic_chk_timer! \n"));
 }
-#endif
 
 void rtw_cancel_all_timer(_adapter *padapter)
 {

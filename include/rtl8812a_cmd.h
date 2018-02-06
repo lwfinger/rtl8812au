@@ -134,7 +134,6 @@ void rtl8812_set_FwMediaStatus_cmd(PADAPTER padapter, u16 mstatus_rpt );
 int reset_tsf(PADAPTER Adapter, u8 reset_port );
 #endif	// CONFIG_TSF_RESET_OFFLOAD
 
-#ifdef CONFIG_WOWLAN
 typedef struct _SETWOWLAN_PARM{
 	u8		mode;
 	u8		gpio_index;
@@ -159,5 +158,5 @@ typedef struct _SETWOWLAN_PARM{
 #define FW_REALWOWLAN_EN				BIT(5)
 void rtl8812a_set_wowlan_cmd(_adapter* padapter, u8 enable);
 void SetFwRelatedForWoWLAN8812(_adapter* padapter, u8 bHostIsGoingtoSleep);
-#endif//CONFIG_WOWLAN
+
 #endif//__RTL8188E_CMD_H__

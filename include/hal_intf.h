@@ -99,9 +99,7 @@ typedef enum _HW_VARIABLES{
 	HW_VAR_APFM_ON_MAC, //Auto FSM to Turn On, include clock, isolation, power control for MAC only
 	// The valid upper nav range for the HW updating, if the true value is larger than the upper range, the HW won't update it.
 	// Unit in microsecond. 0 means disable this function.
-#ifdef CONFIG_WOWLAN
 	HW_VAR_WOWLAN,
-#endif
 	HW_VAR_NAV_UPPER,
 	HW_VAR_C2H_HANDLE,
 	HW_VAR_RPT_TIMER_SETTING,
@@ -308,7 +306,6 @@ typedef struct eeprom_priv EEPROM_EFUSE_PRIV, *PEEPROM_EFUSE_PRIV;
 #define GET_EEPROM_EFUSE_PRIV(adapter) (&adapter->eeprompriv)
 #define is_boot_from_eeprom(adapter) (adapter->eeprompriv.EepromOrEfuse)
 
-#ifdef CONFIG_WOWLAN
 typedef enum _wowlan_subcode{
 	WOWLAN_PATTERN_MATCH	= 1,
 	WOWLAN_MAGIC_PACKET		= 2,
@@ -339,7 +336,6 @@ struct wowlan_ioctl_param{
 #define Rx_MagicPkt				0x21
 #define Rx_UnicastPkt			0x22
 #define Rx_PatternPkt			0x23
-#endif // CONFIG_WOWLAN
 
 void rtw_hal_def_value_init(_adapter *padapter);
 

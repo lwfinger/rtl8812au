@@ -144,8 +144,7 @@ struct specific_device_id{
 
 };
 
-struct registry_priv
-{
+struct registry_priv {
 	u8	chip_version;
 	u8	rfintfs;
 	u8	lbkmode;
@@ -285,6 +284,7 @@ struct registry_priv
 	u8	AmplifierType_5G;
 	u8	bEn_RFE;
 	u8	RFE_Type;
+	int	enable_wowlan;
 
 #ifdef CONFIG_MULTI_VIR_IFACES
 	u8 ext_iface_num;//primary/secondary iface is excluded
