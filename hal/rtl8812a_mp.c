@@ -25,7 +25,7 @@ s32 Hal_SetPowerTracking(PADAPTER padapter, u8 enable)
 	PMPT_CONTEXT			pMptCtx = &(padapter->mppriv.MptCtx);
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
-	pHalData->TxPowerTrackControl = (u1Byte)enable;
+	pHalData->TxPowerTrackControl = (u8)enable;
 	if(pHalData->TxPowerTrackControl > 1)
 		pHalData->TxPowerTrackControl = 0;
 	return bResult;
@@ -92,14 +92,14 @@ void Hal_mpt_SwitchRfSetting(PADAPTER pAdapter)
 {
 	//HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 	struct mp_priv	*pmp = &pAdapter->mppriv;
-	u1Byte				ChannelToSw = pmp->channel;
+	u8				ChannelToSw = pmp->channel;
 	u32				ulRateIdx = pmp->rateidx;
 	u32				ulbandwidth = pmp->bandwidth;
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(pAdapter);
 
 	// <20120525, Kordan> Dynamic mechanism for APK, asked by Dennis.
-		pmp->MptCtx.backup0x52_RF_A = (u1Byte)PHY_QueryRFReg(pAdapter, RF_PATH_A, RF_0x52, 0x000F0);
-		pmp->MptCtx.backup0x52_RF_B = (u1Byte)PHY_QueryRFReg(pAdapter, RF_PATH_B, RF_0x52, 0x000F0);
+		pmp->MptCtx.backup0x52_RF_A = (u8)PHY_QueryRFReg(pAdapter, RF_PATH_A, RF_0x52, 0x000F0);
+		pmp->MptCtx.backup0x52_RF_B = (u8)PHY_QueryRFReg(pAdapter, RF_PATH_B, RF_0x52, 0x000F0);
 		PHY_SetRFReg(pAdapter, RF_PATH_A, RF_0x52, 0x000F0, 0xD);
 		PHY_SetRFReg(pAdapter, RF_PATH_B, RF_0x52, 0x000F0, 0xD);
 
@@ -347,10 +347,10 @@ void
 mpt_SetTxPower_8812(
 		PADAPTER		pAdapter,
 		MPT_TXPWR_DEF	Rate,
-		pu1Byte			pTxPower
+		u8 *			pTxPower
 	)
 {
-	u1Byte path = 0;
+	u8 path = 0;
 
 	switch (Rate)
 	{
@@ -438,7 +438,7 @@ void Hal_SetTxPower(PADAPTER pAdapter)
 	{
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(pAdapter);
 	PMPT_CONTEXT		pMptCtx = &(pAdapter->mppriv.MptCtx);
-	u1Byte				path;
+	u8				path;
 	PDM_ODM_T		pDM_Odm = &pHalData->odmpriv;
 
 	path = ( pAdapter->mppriv.antenna_tx == ANTENNA_A) ? (ODM_RF_PATH_A) : (ODM_RF_PATH_B);
@@ -593,7 +593,7 @@ u8 Hal_ReadRFThermalMeter(PADAPTER pAdapter)
 {
 	u32 ThermalValue = 0;
 
-	ThermalValue = (u1Byte)PHY_QueryRFReg(pAdapter, ODM_RF_PATH_A, RF_T_METER_8812A, 0xfc00);	// 0x42: RF Reg[15:10]
+	ThermalValue = (u8)PHY_QueryRFReg(pAdapter, ODM_RF_PATH_A, RF_T_METER_8812A, 0xfc00);	// 0x42: RF Reg[15:10]
 
 //	RT_TRACE(_module_mp_, _drv_alert_, ("ThermalValue = 0x%x\n", ThermalValue));
 	return (u8)ThermalValue;
@@ -697,7 +697,7 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 	{
 		if (IS_HARDWARE_TYPE_JAGUAR(pAdapter))
 		{
-		u1Byte p = ODM_RF_PATH_A;
+		u8 p = ODM_RF_PATH_A;
 
 			regRF0x0 = PHY_QueryRFReg(pAdapter, ODM_RF_PATH_A, RF_AC_Jaguar, bRFRegOffsetMask);
 			reg0xCB0 = PHY_QueryBBReg(pAdapter, rA_RFE_Pinmux_Jaguar, bMaskDWord);

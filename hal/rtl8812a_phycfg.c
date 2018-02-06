@@ -1586,7 +1586,7 @@ phy_PreprocessPGDataFromExactToRelativeValue(
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-	u1Byte			BaseValue = 0;
+	u8			BaseValue = 0;
 
 	if ( RegAddr == rTxAGC_A_Rate54_24 )
 	{
@@ -2874,8 +2874,8 @@ void
 PHY_SetTxPowerIndex_8812A(
 	PADAPTER			Adapter,
 	u4Byte				PowerIndex,
-	u1Byte				RFPath,
-	u1Byte				Rate
+	u8				RFPath,
+	u8				Rate
 	)
 {
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(Adapter);
@@ -3170,21 +3170,21 @@ PHY_SetTxPowerLevelByPath8812(
 	{
 		if(pHalData->CurrentBandType == BAND_ON_2_4G)
 			phy_SetTxPowerIndexByRateArray(Adapter, path, pHalData->CurrentChannelBW, channel,
-									  cckRates, sizeof(cckRates)/sizeof(u1Byte));
+									  cckRates, sizeof(cckRates)/sizeof(u8));
 
 		phy_SetTxPowerIndexByRateArray(Adapter, path, pHalData->CurrentChannelBW, channel,
-									  ofdmRates, sizeof(ofdmRates)/sizeof(u1Byte));
+									  ofdmRates, sizeof(ofdmRates)/sizeof(u8));
 		phy_SetTxPowerIndexByRateArray(Adapter, path, pHalData->CurrentChannelBW, channel,
-									  htRates1T, sizeof(htRates1T)/sizeof(u1Byte));
+									  htRates1T, sizeof(htRates1T)/sizeof(u8));
 		phy_SetTxPowerIndexByRateArray(Adapter, path, pHalData->CurrentChannelBW, channel,
-									  vhtRates1T, sizeof(vhtRates1T)/sizeof(u1Byte));
+									  vhtRates1T, sizeof(vhtRates1T)/sizeof(u8));
 
 		if(pHalData->NumTotalRFPath >= 2)
 		{
 			phy_SetTxPowerIndexByRateArray(Adapter, path, pHalData->CurrentChannelBW, channel,
-								  htRates2T, sizeof(htRates2T)/sizeof(u1Byte));
+								  htRates2T, sizeof(htRates2T)/sizeof(u8));
 			phy_SetTxPowerIndexByRateArray(Adapter, path, pHalData->CurrentChannelBW, channel,
-								  vhtRates2T, sizeof(vhtRates2T)/sizeof(u1Byte));
+								  vhtRates2T, sizeof(vhtRates2T)/sizeof(u8));
 		}
 	}
 	phy_TxPowerTrainingByPath_8812(Adapter, pHalData->CurrentChannelBW, channel, path);
@@ -3375,7 +3375,7 @@ phy_SetRFEReg8812(
 	u8			Band
 )
 {
-	u1Byte			u1tmp = 0;
+	u8			u1tmp = 0;
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
 
 	if(Band == BAND_ON_2_4G)
@@ -3830,7 +3830,7 @@ void
 phy_FixSpur_8812A(
 	PADAPTER	        pAdapter,
 	CHANNEL_WIDTH    Bandwidth,
-	u1Byte			    Channel
+	u8			    Channel
 )
 {
 	// C cut Item12 ADC FIFO CLOCK

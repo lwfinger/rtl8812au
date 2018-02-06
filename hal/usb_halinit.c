@@ -143,7 +143,7 @@ static void rtl8812au_interface_configure(_adapter *padapter)
 static void
 _InitBurstPktLen(PADAPTER Adapter)
 {
-	u1Byte speedvalue, provalue, temp;
+	u8 speedvalue, provalue, temp;
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 
 
@@ -1838,7 +1838,7 @@ static unsigned int rtl8812au_inirp_deinit(PADAPTER Adapter)
 static void
 hal_ReadIDs_8812AU(
 	PADAPTER	Adapter,
-	pu1Byte		PROMContent,
+	u8 *		PROMContent,
 	bool		AutoloadFail
 	)
 {

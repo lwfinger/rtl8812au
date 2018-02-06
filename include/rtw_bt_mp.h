@@ -37,16 +37,16 @@ typedef enum _MP_BT_MODE{
 
 // definition for BT_UP_OP_BT_SET_TX_RX_PARAMETER
 typedef struct _BT_TXRX_PARAMETERS{
-    u1Byte		txrxChannel;
+    u8		txrxChannel;
     u4Byte		txrxTxPktCnt;
-    u1Byte		txrxTxPktInterval;
-	u1Byte		txrxPayloadType;
-	u1Byte		txrxPktType;
+    u8		txrxTxPktInterval;
+	u8		txrxPayloadType;
+	u8		txrxPktType;
 	u2Byte		txrxPayloadLen;
 	u4Byte		txrxPktHeader;
-	u1Byte		txrxWhitenCoeff;
-	u1Byte		txrxBdaddr[6];
-	u1Byte		txrxTxGainIndex;
+	u8		txrxWhitenCoeff;
+	u8		txrxBdaddr[6];
+	u8		txrxTxGainIndex;
 } BT_TXRX_PARAMETERS, *PBT_TXRX_PARAMETERS;
 
 // txrxPktType
@@ -174,10 +174,10 @@ typedef enum _BT_REPORT_TYPE{
 void
 MPTBT_Test(
 	PADAPTER	Adapter,
-	u1Byte		opCode,
-	u1Byte		byte1,
-	u1Byte		byte2,
-	u1Byte		byte3
+	u8		opCode,
+	u8		byte1,
+	u8		byte2,
+	u8		byte3
 	);
 
 uint
@@ -192,8 +192,8 @@ MPTBT_SendOidBT(
 void
 MPTBT_FwC2hBtMpCtrl(
 	PADAPTER	Adapter,
-	pu1Byte		tmpBuf,
-	u1Byte		length
+	u8 *		tmpBuf,
+	u8		length
 	);
 
 void MPh2c_timeout_handle(void *FunctionContext);
@@ -221,21 +221,21 @@ typedef struct _BT_RSP_CMD{
 
 
 typedef struct _BT_H2C{
-	u1Byte	opCodeVer:4;
-	u1Byte	reqNum:4;
-	u1Byte	opCode;
-	u1Byte	buf[100];
+	u8	opCodeVer:4;
+	u8	reqNum:4;
+	u8	opCode;
+	u8	buf[100];
 }BT_H2C, *PBT_H2C;
 
 
 
 typedef struct _BT_EXT_C2H{
-	u1Byte	extendId;
-	u1Byte	statusCode:4;
-	u1Byte	retLen:4;
-	u1Byte	opCodeVer:4;
-	u1Byte	reqNum:4;
-	u1Byte	buf[100];
+	u8	extendId;
+	u8	statusCode:4;
+	u8	retLen:4;
+	u8	opCodeVer:4;
+	u8	reqNum:4;
+	u8	buf[100];
 }BT_EXT_C2H, *PBT_EXT_C2H;
 
 

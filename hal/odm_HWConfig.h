@@ -152,48 +152,48 @@
 typedef struct _Phy_Rx_AGC_Info
 {
 	#ifdef __LITTLE_ENDIAN
-		u1Byte	gain:7,trsw:1;
+		u8	gain:7,trsw:1;
 	#else
-		u1Byte	trsw:1,gain:7;
+		u8	trsw:1,gain:7;
 	#endif
 } PHY_RX_AGC_INFO_T,*pPHY_RX_AGC_INFO_T;
 
 typedef struct _Phy_Status_Rpt_8192cd
 {
 	PHY_RX_AGC_INFO_T path_agc[2];
-	u1Byte	ch_corr[2];
-	u1Byte	cck_sig_qual_ofdm_pwdb_all;
-	u1Byte	cck_agc_rpt_ofdm_cfosho_a;
-	u1Byte	cck_rpt_b_ofdm_cfosho_b;
-	u1Byte	rsvd_1;//ch_corr_msb;
-	u1Byte	noise_power_db_msb;
+	u8	ch_corr[2];
+	u8	cck_sig_qual_ofdm_pwdb_all;
+	u8	cck_agc_rpt_ofdm_cfosho_a;
+	u8	cck_rpt_b_ofdm_cfosho_b;
+	u8	rsvd_1;//ch_corr_msb;
+	u8	noise_power_db_msb;
 	s1Byte	path_cfotail[2];
-	u1Byte	pcts_mask[2];
+	u8	pcts_mask[2];
 	s1Byte	stream_rxevm[2];
-	u1Byte	path_rxsnr[2];
-	u1Byte	noise_power_db_lsb;
-	u1Byte	rsvd_2[3];
-	u1Byte	stream_csi[2];
-	u1Byte	stream_target_csi[2];
+	u8	path_rxsnr[2];
+	u8	noise_power_db_lsb;
+	u8	rsvd_2[3];
+	u8	stream_csi[2];
+	u8	stream_target_csi[2];
 	s1Byte	sig_evm;
-	u1Byte	rsvd_3;
+	u8	rsvd_3;
 
 #ifdef __LITTLE_ENDIAN
-	u1Byte	antsel_rx_keep_2:1;	//ex_intf_flg:1;
-	u1Byte	sgi_en:1;
-	u1Byte	rxsc:2;
-	u1Byte	idle_long:1;
-	u1Byte	r_ant_train_en:1;
-	u1Byte	ant_sel_b:1;
-	u1Byte	ant_sel:1;
+	u8	antsel_rx_keep_2:1;	//ex_intf_flg:1;
+	u8	sgi_en:1;
+	u8	rxsc:2;
+	u8	idle_long:1;
+	u8	r_ant_train_en:1;
+	u8	ant_sel_b:1;
+	u8	ant_sel:1;
 #else	// __BIG_ENDIAN
-	u1Byte	ant_sel:1;
-	u1Byte	ant_sel_b:1;
-	u1Byte	r_ant_train_en:1;
-	u1Byte	idle_long:1;
-	u1Byte	rxsc:2;
-	u1Byte	sgi_en:1;
-	u1Byte	antsel_rx_keep_2:1;	//ex_intf_flg:1;
+	u8	ant_sel:1;
+	u8	ant_sel_b:1;
+	u8	r_ant_train_en:1;
+	u8	idle_long:1;
+	u8	rxsc:2;
+	u8	sgi_en:1;
+	u8	antsel_rx_keep_2:1;	//ex_intf_flg:1;
 #endif
 } PHY_STATUS_RPT_8192CD_T,*PPHY_STATUS_RPT_8192CD_T;
 
@@ -203,14 +203,14 @@ typedef struct _Phy_Status_Rpt_8812
 	//2012.05.24 LukeLee: This structure should take big/little endian in consideration later.....
 
 	//DWORD 0
-	u1Byte			gain_trsw[2];
+	u8			gain_trsw[2];
 	u2Byte			chl_num:10;
 	u2Byte			sub_chnl:4;
 	u2Byte			r_RFMOD:2;
 
 	//DWORD 1
-	u1Byte			pwdb_all;
-	u1Byte			cfosho[4];	// DW 1 byte 1 DW 2 byte 0
+	u8			pwdb_all;
+	u8			cfosho[4];	// DW 1 byte 1 DW 2 byte 0
 
 	//DWORD 2
 	s1Byte			cfotail[4];	// DW 2 byte 1 DW 3 byte 0
@@ -220,28 +220,28 @@ typedef struct _Phy_Status_Rpt_8812
 	s1Byte			rxsnr[2];	// DW 3 byte 3 DW 4 byte 0
 
 	//DWORD 4
-	u1Byte			PCTS_MSK_RPT[2];
-	u1Byte			pdsnr[2];	// DW 4 byte 3 DW 5 Byte 0
+	u8			PCTS_MSK_RPT[2];
+	u8			pdsnr[2];	// DW 4 byte 3 DW 5 Byte 0
 
 	//DWORD 5
-	u1Byte			csi_current[2];
-	u1Byte			rx_gain_c;
+	u8			csi_current[2];
+	u8			rx_gain_c;
 
 	//DWORD 6
-	u1Byte			rx_gain_d;
-	u1Byte			sigevm;
-	u1Byte			resvd_0;
-	u1Byte			antidx_anta:3;
-	u1Byte			antidx_antb:3;
-	u1Byte			resvd_1:2;
+	u8			rx_gain_d;
+	u8			sigevm;
+	u8			resvd_0;
+	u8			antidx_anta:3;
+	u8			antidx_antb:3;
+	u8			resvd_1:2;
 } PHY_STATUS_RPT_8812_T,*PPHY_STATUS_RPT_8812_T;
 
 
 void odm_Init_RSSIForDM(PDM_ODM_T pDM_Odm);
 
-void ODM_PhyStatusQuery(PDM_ODM_T pDM_Odm, PODM_PHY_INFO_T pPhyInfo, pu1Byte pPhyStatus, PODM_PACKET_INFO_T pPktinfo);
+void ODM_PhyStatusQuery(PDM_ODM_T pDM_Odm, PODM_PHY_INFO_T pPhyInfo, u8 * pPhyStatus, PODM_PACKET_INFO_T pPktinfo);
 
-void ODM_MacStatusQuery(PDM_ODM_T pDM_Odm, pu1Byte pMacStatus, u1Byte MacID, bool bPacketMatchBSSID, bool bPacketToSelf, bool bPacketBeacon);
+void ODM_MacStatusQuery(PDM_ODM_T pDM_Odm, u8 * pMacStatus, u8 MacID, bool bPacketMatchBSSID, bool bPacketToSelf, bool bPacketBeacon);
 
 HAL_STATUS ODM_ConfigRFWithTxPwrTrackHeaderFile(PDM_ODM_T pDM_Odm);
 
@@ -251,6 +251,6 @@ HAL_STATUS ODM_ConfigBBWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_BB_Config_Type Conf
 
 HAL_STATUS ODM_ConfigMACWithHeaderFile(PDM_ODM_T pDM_Odm);
 
-HAL_STATUS ODM_ConfigFWWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_FW_Config_Type ConfigType, u1Byte *pFirmware, u4Byte *pSize);
+HAL_STATUS ODM_ConfigFWWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_FW_Config_Type ConfigType, u8 *pFirmware, u4Byte *pSize);
 
 #endif

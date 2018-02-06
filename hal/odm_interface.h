@@ -79,7 +79,7 @@ typedef void (*RT_WORKITEM_CALL_BACK)(void * pContext);
 //
 
 
-u1Byte
+u8
 ODM_Read1Byte(
 	PDM_ODM_T		pDM_Odm,
 	u4Byte			RegAddr
@@ -101,7 +101,7 @@ void
 ODM_Write1Byte(
 	PDM_ODM_T		pDM_Odm,
 	u4Byte			RegAddr,
-	u1Byte			Data
+	u8			Data
 	);
 
 void
@@ -303,13 +303,13 @@ ODM_ReleaseTimer(
 //
 u4Byte
 ODM_FillH2CCmd(
-	pu1Byte		pH2CBuffer,
+	u8 *		pH2CBuffer,
 	u4Byte		H2CBufferLen,
 	u4Byte		CmdNum,
 	pu4Byte		pElementID,
 	pu4Byte		pCmdLen,
-	pu1Byte*		pCmbBuffer,
-	pu1Byte		CmdStartSeq
+	u8 **		pCmbBuffer,
+	u8 *		CmdStartSeq
 	);
 
 #endif	// __ODM_INTERFACE_H__

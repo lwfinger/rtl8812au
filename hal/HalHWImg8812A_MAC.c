@@ -164,9 +164,9 @@ ODM_ReadAndConfig_MP_8812A_MAC_REG(
 	u4Byte     i           = 0;
 	u2Byte     count       = 0;
 	pu4Byte    ptr_array   = NULL;
-	u1Byte     platform    = pDM_Odm->SupportPlatform;
-	u1Byte     _interface   = pDM_Odm->SupportInterface;
-	u1Byte     board       = pDM_Odm->BoardType;
+	u8     platform    = pDM_Odm->SupportPlatform;
+	u8     _interface   = pDM_Odm->SupportInterface;
+	u8     board       = pDM_Odm->BoardType;
 	u4Byte     ArrayLen    = sizeof(Array_MP_8812A_MAC_REG)/sizeof(u4Byte);
 	pu4Byte    Array       = Array_MP_8812A_MAC_REG;
 
@@ -185,7 +185,7 @@ ODM_ReadAndConfig_MP_8812A_MAC_REG(
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
 	    {
-			odm_ConfigMAC_8812A(pDM_Odm, v1, (u1Byte)v2);
+			odm_ConfigMAC_8812A(pDM_Odm, v1, (u8)v2);
 		    continue;
 		}
 		else
@@ -208,7 +208,7 @@ ODM_ReadAndConfig_MP_8812A_MAC_REG(
 		               v2 != 0xCDEF &&
 		               v2 != 0xCDCD && i < ArrayLen -2)
 		        {
-					odm_ConfigMAC_8812A(pDM_Odm, v1, (u1Byte)v2);
+					odm_ConfigMAC_8812A(pDM_Odm, v1, (u8)v2);
 		            READ_NEXT_PAIR(v1, v2, i);
 		        }
 

@@ -76,7 +76,7 @@ void
 odm_ConfigMAC_8812A(
 	PDM_ODM_T	pDM_Odm,
 	u4Byte		Addr,
-	u1Byte		Data
+	u8		Data
 	)
 {
 	ODM_Write1Byte(pDM_Odm, Addr, Data);
@@ -163,13 +163,13 @@ odm_ConfigBB_PHY_8812A(
 void
 odm_ConfigBB_TXPWR_LMT_8812A(
 	PDM_ODM_T	pDM_Odm,
-	const pu1Byte		Regulation,
-	const pu1Byte		Band,
-	const pu1Byte		Bandwidth,
-	const pu1Byte		RateSection,
-	const pu1Byte		RfPath,
-	const pu1Byte		Channel,
-	const pu1Byte		PowerLimit
+	const u8 *		Regulation,
+	const u8 *		Band,
+	const u8 *		Bandwidth,
+	const u8 *		RateSection,
+	const u8 *		RfPath,
+	const u8 *		Channel,
+	const u8 *		PowerLimit
     )
 {
 	PHY_SetPowerLimitTableValue(pDM_Odm, Regulation, Band,

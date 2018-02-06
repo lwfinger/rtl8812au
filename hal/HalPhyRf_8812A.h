@@ -31,25 +31,25 @@ void ConfigureTxpowerTrack_8812A(
 void
 GetDeltaSwingTable_8812A(
 	PDM_ODM_T			pDM_Odm,
-	pu1Byte			*TemperatureUP_A,
-	pu1Byte			*TemperatureDOWN_A,
-	pu1Byte			*TemperatureUP_B,
-	pu1Byte			*TemperatureDOWN_B
+	u8 *			*TemperatureUP_A,
+	u8 *			*TemperatureDOWN_A,
+	u8 *			*TemperatureUP_B,
+	u8 *			*TemperatureDOWN_B
 	);
 
 void DoIQK_8812A(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		DeltaThermalIndex,
-	u1Byte		ThermalValue,
-	u1Byte		Threshold
+	u8		DeltaThermalIndex,
+	u8		ThermalValue,
+	u8		Threshold
 	);
 
 void
 ODM_TxPwrTrackSetPwr8812A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
-	u1Byte				RFPath,
-	u1Byte				ChannelMappedIndex
+	u8				RFPath,
+	u8				ChannelMappedIndex
 	);
 
 //1 7.	IQK

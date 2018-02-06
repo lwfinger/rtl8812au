@@ -31,9 +31,9 @@
 
 void DoIQK_8812A(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		DeltaThermalIndex,
-	u1Byte		ThermalValue,
-	u1Byte		Threshold
+	u8		DeltaThermalIndex,
+	u8		ThermalValue,
+	u8		Threshold
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -66,8 +66,8 @@ void
 ODM_TxPwrTrackSetPwr8812A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
-	u1Byte				RFPath,
-	u1Byte				ChannelMappedIndex
+	u8				RFPath,
+	u8				ChannelMappedIndex
 	)
 {
 	u4Byte	finalBbSwingIdx[2];
@@ -75,11 +75,11 @@ ODM_TxPwrTrackSetPwr8812A(
 	PADAPTER		Adapter = pDM_Odm->Adapter;
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 
-	u1Byte			PwrTrackingLimit = 26; //+1.0dB
-	u1Byte			TxRate = 0xFF;
+	u8			PwrTrackingLimit = 26; //+1.0dB
+	u8			TxRate = 0xFF;
 	s1Byte			Final_OFDM_Swing_Index = 0;
 	s1Byte			Final_CCK_Swing_Index = 0;
-	u1Byte			i = 0;
+	u8			i = 0;
 
 #if 0
 	#if (MP_DRIVER==1)
@@ -96,7 +96,7 @@ ODM_TxPwrTrackSetPwr8812A(
 		}
 		else //force rate
 		{
-			TxRate = (u1Byte) rate;
+			TxRate = (u8) rate;
 		}
 	#endif
 	ODM_RT_TRACE(pDM_Odm,ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD,("===>ODM_TxPwrTrackSetPwr8812A\n"));
@@ -330,17 +330,17 @@ ODM_TxPwrTrackSetPwr8812A(
 void
 GetDeltaSwingTable_8812A(
 	PDM_ODM_T			pDM_Odm,
-	pu1Byte			*TemperatureUP_A,
-	pu1Byte			*TemperatureDOWN_A,
-	pu1Byte			*TemperatureUP_B,
-	pu1Byte			*TemperatureDOWN_B
+	u8 *			*TemperatureUP_A,
+	u8 *			*TemperatureDOWN_A,
+	u8 *			*TemperatureUP_B,
+	u8 *			*TemperatureDOWN_B
 	)
 {
     PADAPTER        Adapter		 = pDM_Odm->Adapter;
 	PODM_RF_CAL_T	pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 	HAL_DATA_TYPE	*pHalData		 = GET_HAL_DATA(Adapter);
 	u2Byte			rate			 = *(pDM_Odm->pForcedDataRate);
-	u1Byte		channel			 = pHalData->CurrentChannel;
+	u8		channel			 = pHalData->CurrentChannel;
 
 	if ( 1 <= channel && channel <= 14) {
 		if (IS_CCK_RATE(rate)) {
@@ -370,10 +370,10 @@ GetDeltaSwingTable_8812A(
         *TemperatureUP_B   = pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P[2];
         *TemperatureDOWN_B = pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N[2];
     } else {
-	    *TemperatureUP_A   = (pu1Byte)DeltaSwingTableIdx_2GA_P_8188E;
-	    *TemperatureDOWN_A = (pu1Byte)DeltaSwingTableIdx_2GA_N_8188E;
-	    *TemperatureUP_B   = (pu1Byte)DeltaSwingTableIdx_2GA_P_8188E;
-	    *TemperatureDOWN_B = (pu1Byte)DeltaSwingTableIdx_2GA_N_8188E;
+	    *TemperatureUP_A   = (u8 *)DeltaSwingTableIdx_2GA_P_8188E;
+	    *TemperatureDOWN_A = (u8 *)DeltaSwingTableIdx_2GA_N_8188E;
+	    *TemperatureUP_B   = (u8 *)DeltaSwingTableIdx_2GA_P_8188E;
+	    *TemperatureDOWN_B = (u8 *)DeltaSwingTableIdx_2GA_N_8188E;
     }
 
 	return;
@@ -639,7 +639,7 @@ static void _IQK_ConfigureMAC_8812A(
 static void _IQK_Tx_8812A(
 	PDM_ODM_T		pDM_Odm,
 	ODM_RF_RADIO_PATH_E Path,
-	u1Byte chnlIdx
+	u8 chnlIdx
 	)
 {
 	u4Byte		TX_fail,RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
@@ -1730,7 +1730,7 @@ static void _IQK_Tx_8812A(
 static void
 phy_IQCalibrate_8812A(
 	PDM_ODM_T		pDM_Odm,
-	u1Byte		Channel
+	u8		Channel
 	)
 {
 	u4Byte	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
@@ -1738,7 +1738,7 @@ phy_IQCalibrate_8812A(
 	u4Byte	Backup_AFE_REG[AFE_REG_NUM] = {0xc5c, 0xc60, 0xc64, 0xc68, 0xcb8, 0xcb0, 0xcb4,
 			                                                   0xe5c, 0xe60, 0xe64, 0xe68, 0xeb8, 0xeb0, 0xeb4};
 	u4Byte	Backup_RF_REG[RF_REG_NUM] = {0x65, 0x8f, 0x0};
-	u1Byte	chnlIdx = ODM_GetRightChnlPlaceforIQK(Channel);
+	u8	chnlIdx = ODM_GetRightChnlPlaceforIQK(Channel);
 
 	_IQK_BackupMacBB_8812A(pDM_Odm, MACBB_backup, Backup_MACBB_REG, MACBB_REG_NUM);
 	_IQK_BackupAFE_8812A(pDM_Odm, AFE_backup, Backup_AFE_REG, AFE_REG_NUM);
@@ -1846,12 +1846,12 @@ phy_LCCalibrate_8812A(
 static void
 phy_ReloadIQKSetting_8812A(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		Channel
+	u8		Channel
 	)
 {
 	PODM_RF_CAL_T  pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 
-	u1Byte chnlIdx = ODM_GetRightChnlPlaceforIQK(Channel);
+	u8 chnlIdx = ODM_GetRightChnlPlaceforIQK(Channel);
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x1); // [31] = 1 --> Page C1
 	ODM_SetBBReg(pDM_Odm, 0xccc, 0x000007ff, pRFCalibrateInfo->IQKMatrixRegSetting[chnlIdx].Value[*pDM_Odm->pBandWidth][0]&0x7ff);
 	ODM_SetBBReg(pDM_Odm, 0xcd4, 0x000007ff, (pRFCalibrateInfo->IQKMatrixRegSetting[chnlIdx].Value[*pDM_Odm->pBandWidth][0]&0x7ff0000)>>16);
@@ -1898,9 +1898,9 @@ phy_IQCalibrate_By_FW_8812A(
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
-	u1Byte			IQKcmd[3] = {pHalData->CurrentChannel, 0x0, 0x0};
-	u1Byte			Buf1 = 0x0;
-	u1Byte			Buf2 = 0x0;
+	u8			IQKcmd[3] = {pHalData->CurrentChannel, 0x0, 0x0};
+	u8			Buf1 = 0x0;
+	u8			Buf2 = 0x0;
 
 //Byte 2, Bit 4 ~ Bit 5 : BandType
 	if(pHalData->CurrentBandType)
@@ -2167,7 +2167,7 @@ _DPK_Globalparaset(
 static void
 _DPK_GetGainLoss(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte path
+	u8 path
 	)
 {
 	u4Byte GL_I=0,GL_Q=0;
@@ -2177,7 +2177,7 @@ _DPK_GetGainLoss(
 	u2Byte Scaler[]={0x4000, 0x41db, 0x43c7, 0x45c3, 0x47cf, 0x49ec, 0x4c19, 0x4e46, 0x5093,0x52f2,  //10
 					 0x5560, 0x57cf, 0x5a7f, 0x5d0e, 0x5fbe
 						};
-	u1Byte sindex=0;
+	u8 sindex=0;
 	u4Byte pagesel = 0,regsel = 0;
 
 	if(path == 0)  //pathA
@@ -2284,7 +2284,7 @@ _DPK_GetGainLoss(
 static void
 _DPK_EnableDP(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte path,
+	u8 path,
 	u4Byte TXindex
 	)
 {
@@ -2294,15 +2294,15 @@ _DPK_EnableDP(
 	//***************************************//
 
 	//PWSF[6] = 0x40 = 0dB, set the address represented TXindex as 0dB
-	u1Byte PWSF[] = {
+	u8 PWSF[] = {
 		0xff, 0xca, 0xa1, 0x80, 0x65, 0x51, 0x40,  //6~0dB
 		0x33, 0x28, 0x20, 0x19, 0x14, 0x10, 0x0d,  //-1~-7dB
 		0x0a, 0x08, 0x06, 0x05, 0x04, 0x03, 0x03,  //-8~-14dB
 		0x02, 0x02, 0x01, 0x01,
 	};
-	u1Byte zeropoint;
+	u8 zeropoint;
 	int pwsf1,pwsf2;
-	u1Byte i;
+	u8 i;
 	u4Byte pagesel = 0,regsel = 0;
 
 	if(path == 0)
@@ -2381,7 +2381,7 @@ _DPK_pathABDPK(
 	)
 {
 	u4Byte TXindex = 0;
-	u1Byte path = 0;
+	u8 path = 0;
 	u4Byte pagesel = 0,regsel = 0;
 	u4Byte i=0,j=0;
 

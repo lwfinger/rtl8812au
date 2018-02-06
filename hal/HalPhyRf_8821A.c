@@ -32,8 +32,8 @@
 
 static void setIqkMatrix_8821A(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		OFDM_index,
-	u1Byte		RFPath,
+	u8		OFDM_index,
+	u8		RFPath,
 	s4Byte		IqkResult_X,
 	s4Byte		IqkResult_Y
 	)
@@ -93,9 +93,9 @@ static void setIqkMatrix_8821A(
 
 void DoIQK_8821A(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		DeltaThermalIndex,
-	u1Byte		ThermalValue,
-	u1Byte		Threshold
+	u8		DeltaThermalIndex,
+	u8		ThermalValue,
+	u8		Threshold
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -111,18 +111,18 @@ void
 ODM_TxPwrTrackSetPwr8821A(
 	PDM_ODM_T			pDM_Odm,
 	PWRTRACK_METHOD		Method,
-	u1Byte				RFPath,
-	u1Byte				ChannelMappedIndex
+	u8				RFPath,
+	u8				ChannelMappedIndex
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
 
-	u1Byte			PwrTrackingLimit = 26; //+1.0dB
-	u1Byte			TxRate = 0xFF;
+	u8			PwrTrackingLimit = 26; //+1.0dB
+	u8			TxRate = 0xFF;
 	s1Byte			Final_OFDM_Swing_Index = 0;
 	s1Byte			Final_CCK_Swing_Index = 0;
-	u1Byte			i = 0;
+	u8			i = 0;
 	u4Byte			finalBbSwingIdx[1];
 
 
@@ -141,7 +141,7 @@ ODM_TxPwrTrackSetPwr8821A(
 	}
 	else //force rate
 	{
-		TxRate = (u1Byte) pMgntInfo->ForcedDataRate;
+		TxRate = (u8) pMgntInfo->ForcedDataRate;
 	}
 #endif
 #endif
@@ -266,10 +266,10 @@ ODM_TxPwrTrackSetPwr8821A(
 void
 GetDeltaSwingTable_8821A(
 	PDM_ODM_T			pDM_Odm,
-	pu1Byte			*TemperatureUP_A,
-	pu1Byte			*TemperatureDOWN_A,
-	pu1Byte			*TemperatureUP_B,
-	pu1Byte			*TemperatureDOWN_B
+	u8 *			*TemperatureUP_A,
+	u8 *			*TemperatureDOWN_A,
+	u8 *			*TemperatureUP_B,
+	u8 *			*TemperatureDOWN_B
 	)
 {
     PADAPTER        Adapter		 = pDM_Odm->Adapter;
@@ -277,7 +277,7 @@ GetDeltaSwingTable_8821A(
 	HAL_DATA_TYPE	*pHalData		 = GET_HAL_DATA(Adapter);
 	//u2Byte		rate			 = pMgntInfo->ForcedDataRate;
 	u2Byte		rate			 = 0;
-	u1Byte		channel			 = pHalData->CurrentChannel;
+	u8		channel			 = pHalData->CurrentChannel;
 
 
 	if ( 1 <= channel && channel <= 14) {
@@ -308,10 +308,10 @@ GetDeltaSwingTable_8821A(
         *TemperatureUP_B   = pRFCalibrateInfo->DeltaSwingTableIdx_5GB_P[2];
         *TemperatureDOWN_B = pRFCalibrateInfo->DeltaSwingTableIdx_5GB_N[2];
     } else {
-	    *TemperatureUP_A   = (pu1Byte)DeltaSwingTableIdx_2GA_P_8188E;
-	    *TemperatureDOWN_A = (pu1Byte)DeltaSwingTableIdx_2GA_N_8188E;
-	    *TemperatureUP_B   = (pu1Byte)DeltaSwingTableIdx_2GA_P_8188E;
-	    *TemperatureDOWN_B = (pu1Byte)DeltaSwingTableIdx_2GA_N_8188E;
+	    *TemperatureUP_A   = (u8 *)DeltaSwingTableIdx_2GA_P_8188E;
+	    *TemperatureDOWN_A = (u8 *)DeltaSwingTableIdx_2GA_N_8188E;
+	    *TemperatureUP_B   = (u8 *)DeltaSwingTableIdx_2GA_P_8188E;
+	    *TemperatureDOWN_B = (u8 *)DeltaSwingTableIdx_2GA_N_8188E;
     }
 
 	return;
@@ -1246,9 +1246,9 @@ static void phy_IQCalibrate_By_FW_8821A(
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
-	u1Byte			IQKcmd[3] = {pHalData->CurrentChannel, 0x0, 0x0};
-	u1Byte			Buf1 = 0x0;
-	u1Byte			Buf2 = 0x0;
+	u8			IQKcmd[3] = {pHalData->CurrentChannel, 0x0, 0x0};
+	u8			Buf1 = 0x0;
+	u8			Buf2 = 0x0;
 
 //Byte 2, Bit 4 ~ Bit 5 : BandType
 	if(pHalData->CurrentBandType)

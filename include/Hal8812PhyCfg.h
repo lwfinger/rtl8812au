@@ -144,8 +144,8 @@ void
 PHY_SetTxPowerIndex_8812A(
 	PADAPTER			Adapter,
 	u4Byte				PowerIndex,
-	u1Byte				RFPath,
-	u1Byte				Rate
+	u8				RFPath,
+	u8				Rate
 	);
 //
 // Switch bandwidth for 8192S

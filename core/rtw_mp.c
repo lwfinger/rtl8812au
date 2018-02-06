@@ -333,9 +333,9 @@ MPT_InitializeAdapter(
 	dm_CheckTXPowerTracking(&pHalData->odmpriv);	//trigger thermal meter
 	PHY_LCCalibrate(pAdapter);
 
-	pMptCtx->backup0xc50 = (u1Byte)PHY_QueryBBReg(pAdapter, rOFDM0_XAAGCCore1, bMaskByte0);
-	pMptCtx->backup0xc58 = (u1Byte)PHY_QueryBBReg(pAdapter, rOFDM0_XBAGCCore1, bMaskByte0);
-	pMptCtx->backup0xc30 = (u1Byte)PHY_QueryBBReg(pAdapter, rOFDM0_RxDetector1, bMaskByte0);
+	pMptCtx->backup0xc50 = (u8)PHY_QueryBBReg(pAdapter, rOFDM0_XAAGCCore1, bMaskByte0);
+	pMptCtx->backup0xc58 = (u8)PHY_QueryBBReg(pAdapter, rOFDM0_XBAGCCore1, bMaskByte0);
+	pMptCtx->backup0xc30 = (u8)PHY_QueryBBReg(pAdapter, rOFDM0_RxDetector1, bMaskByte0);
 
 	//set ant to wifi side in mp mode
 	rtw_write16(pAdapter, 0x870, 0x300);
@@ -670,10 +670,10 @@ void	SetAntennaPathPower(PADAPTER pAdapter)
 int SetTxPower(PADAPTER pAdapter)
 {
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
-	u1Byte			CurrChannel;
+	u8			CurrChannel;
 	bool			bResult = true;
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
-	u1Byte			rf, TxPower[2];
+	u8			rf, TxPower[2];
 
 	u8 u1TxPower = pAdapter->mppriv.txpoweridx;
 	CurrChannel = pMptCtx->MptChannelToSw;
@@ -684,8 +684,8 @@ int SetTxPower(PADAPTER pAdapter)
 		return false;
 	}
 
-	TxPower[ODM_RF_PATH_A] = (u1Byte)(u1TxPower&0xff);
-	TxPower[ODM_RF_PATH_B] = (u1Byte)((u1TxPower&0xff00)>>8);
+	TxPower[ODM_RF_PATH_A] = (u8)(u1TxPower&0xff);
+	TxPower[ODM_RF_PATH_B] = (u8)((u1TxPower&0xff00)>>8);
 	DBG_871X("TxPower(A, B) = (0x%x, 0x%x)\n", TxPower[ODM_RF_PATH_A], TxPower[ODM_RF_PATH_B]);
 
 	for(rf=0; rf<2; rf++)
@@ -1267,7 +1267,7 @@ exit:
 
 static u32 getPowerDiffByRate8188E(
 	PADAPTER	pAdapter,
-	u1Byte		CurrChannel,
+	u8		CurrChannel,
 	u32		RfPath
 	)
 {
@@ -1465,19 +1465,19 @@ static u32 getPowerDiffByRate8188E(
 static	u32
 mpt_ProQueryCalTxPower_8188E(
 	PADAPTER		pAdapter,
-	u1Byte			RfPath
+	u8			RfPath
 	)
 {
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(pAdapter);
-	u1Byte				TxCount=TX_1S, i = 0;	//default set to 1S
+	u8				TxCount=TX_1S, i = 0;	//default set to 1S
 	//PMGNT_INFO			pMgntInfo = &(pAdapter->MgntInfo);
 	u32				TxPower = 1, PwrGroup=0, PowerDiffByRate=0;
 	u32				TxPowerCCK = 1, TxPowerOFDM = 1, TxPowerBW20 = 1, TxPowerBW40 = 1 ;
 	PMPT_CONTEXT		pMptCtx = &(pAdapter->mppriv.MptCtx);
-	u1Byte				CurrChannel = pHalData->CurrentChannel;
-	u1Byte				index = (CurrChannel -1);
-	u1Byte				rf_path=(RfPath), rfPath;
-	u1Byte				limit = 0, rate = 0;
+	u8				CurrChannel = pHalData->CurrentChannel;
+	u8				index = (CurrChannel -1);
+	u8				rf_path=(RfPath), rfPath;
+	u8				limit = 0, rate = 0;
 
 	if(HAL_IsLegalChannel(pAdapter, CurrChannel) == false)
 	{
@@ -1577,7 +1577,7 @@ u32 mpt_ProQueryCalTxPower(
 	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(pAdapter);
 	u32			TxPower = 1, PwrGroup=0, PowerDiffByRate=0;
 	PMPT_CONTEXT	pMptCtx = &(pAdapter->mppriv.MptCtx);
-	u1Byte			limit = 0, rate = 0;
+	u8			limit = 0, rate = 0;
 	rate=pMptCtx->MptRateIndex;
 
 	#ifdef CONFIG_8812A

@@ -67,12 +67,9 @@ struct mp_tx
 
 #define MP_MAX_LINES		1000
 #define MP_MAX_LINES_BYTES	256
-#define u1Byte u8
 #define s1Byte s8
 #define u4Byte u32
 #define s4Byte s32
-#define u1Byte		u8
-#define pu1Byte			u8*
 
 #define u2Byte		u16
 #define pu2Byte			u16*
@@ -194,12 +191,12 @@ typedef struct _MPT_CONTEXT
 	u8		backup0x52_RF_A;
 	u8		backup0x52_RF_B;
 
-	u1Byte			h2cReqNum;
-	u1Byte			c2hBuf[20];
+	u8			h2cReqNum;
+	u8			c2hBuf[20];
 
-    u1Byte          btInBuf[100];
+    u8          btInBuf[100];
 	u32			mptOutLen;
-    u1Byte          mptOutBuf[100];
+    u8          mptOutBuf[100];
 
 }MPT_CONTEXT, *PMPT_CONTEXT;
 //#endif

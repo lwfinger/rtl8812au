@@ -247,7 +247,7 @@ efuse_phymap_to_logical(u8 * phymap, u16 _offset, u16 _size_byte, u8  *pbuf)
 	//
 	// 5. Calculate Efuse utilization.
 	//
-	efuse_usage = (u1Byte)((efuse_utilized*100)/EFUSE_REAL_CONTENT_LEN_JAGUAR);
+	efuse_usage = (u8)((efuse_utilized*100)/EFUSE_REAL_CONTENT_LEN_JAGUAR);
 	//Adapter->HalFunc.SetHwRegHandler(Adapter, HW_VAR_EFUSE_BYTES, (u8 *)&efuse_utilized);
 
 exit:
@@ -1424,7 +1424,7 @@ hal_ReadPowerValueFromPROM8812A(
 void
 Hal_EfuseParseBTCoexistInfo8812A(
 	PADAPTER			Adapter,
-	pu1Byte			hwinfo,
+	u8 *			hwinfo,
 	bool			AutoLoadFail
 	)
 {
@@ -2125,7 +2125,7 @@ rtl8812_EfusePowerSwitch(
 static bool
 Hal_EfuseSwitchToBank8812A(
 	PADAPTER	pAdapter,
-	u1Byte		bank,
+	u8		bank,
 	bool		bPseudoTest
 	)
 {
@@ -2309,7 +2309,7 @@ Hal_EfuseReadEFuse8812A(
 	//
 	// 5. Calculate Efuse utilization.
 	//
-	efuse_usage = (u1Byte)((eFuse_Addr*100)/EFUSE_REAL_CONTENT_LEN_JAGUAR);
+	efuse_usage = (u8)((eFuse_Addr*100)/EFUSE_REAL_CONTENT_LEN_JAGUAR);
 	rtw_hal_set_hwreg(Adapter, HW_VAR_EFUSE_BYTES, (u8 *)&eFuse_Addr);
 
 exit:
@@ -2381,8 +2381,8 @@ exit:
 void
 Hal_EFUSEGetEfuseDefinition8812A(
 	PADAPTER	pAdapter,
-	u1Byte		efuseType,
-	u1Byte		type,
+	u8		efuseType,
+	u8		type,
 	void *		pOut
 	)
 {
@@ -2459,7 +2459,7 @@ Hal_EFUSEGetEfuseDefinition_Pseudo8812A(
 		case TYPE_EFUSE_MAX_SECTION:
 			{
 				u8*		pMax_section;
-				pMax_section = (pu1Byte)pOut;
+				pMax_section = (u8 *)pOut;
 				*pMax_section = EFUSE_MAX_SECTION_JAGUAR;
 			}
 			break;

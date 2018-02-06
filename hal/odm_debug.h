@@ -129,7 +129,7 @@
 			if(((comp) & pDM_Odm->DebugComponents) && (level <= pDM_Odm->DebugLevel))	\
 			{																		\
 				int __i;																\
-				pu1Byte	__ptr = (pu1Byte)ptr;											\
+				u8 *	__ptr = (u8 *)ptr;											\
 				DbgPrint("[ODM] ");													\
 				DbgPrint(title_str);													\
 				DbgPrint(" ");														\
@@ -159,7 +159,7 @@ void ODM_InitDebugSetting(PDM_ODM_T pDM_Odm);
 #define PRINT_DATA(_TitleString, _HexData, _HexDataLen)								\
 			{																		\
 				char			*szTitle = _TitleString;									\
-				pu1Byte		pbtHexData = _HexData;									\
+				u8 *		pbtHexData = _HexData;									\
 				u4Byte		u4bHexDataLen = _HexDataLen;							\
 				u4Byte		__i;														\
 				DbgPrint("%s", szTitle);													\
@@ -180,7 +180,7 @@ void ODM_InitDebugSetting(PDM_ODM_T pDM_Odm);
 			if(((_Comp) & ODM_GlobalDebugComponents) && (_Level <= ODM_GlobalDebugLevel))	\
 			{																		\
 				int __i;																\
-				pu1Byte	ptr = (pu1Byte)_HexData;										\
+				u8 *	ptr = (u8 *)_HexData;										\
 				DbgPrint("Rtl819x: ");													\
 				DbgPrint(_TitleString);												\
 				for( __i=0; __i<(int)_HexDataLen; __i++ )								\
@@ -195,7 +195,7 @@ void ODM_InitDebugSetting(PDM_ODM_T pDM_Odm);
 			if(((_Comp) & ODM_GlobalDebugComponents) && (_Level <= ODM_GlobalDebugLevel))	\
 			{																		\
 				int __i;																\
-				pu1Byte	ptr = (pu1Byte)_Ptr;											\
+				u8 *	ptr = (u8 *)_Ptr;											\
 				DbgPrint("Rtl819x: ");													\
 				DbgPrint(_TitleString);												\
 				DbgPrint(" ");															\
@@ -208,7 +208,7 @@ void ODM_InitDebugSetting(PDM_ODM_T pDM_Odm);
 			if(((_Comp) & ODM_GlobalDebugComponents) && (_Level <= ODM_GlobalDebugLevel))	\
 			{																		\
 				int __i, __j;															\
-				pu1Byte	ptr = (pu1Byte)_Ptr;											\
+				u8 *	ptr = (u8 *)_Ptr;											\
 				DbgPrint("Rtl819x: ");													\
 				DbgPrint(_TitleString);												\
 				DbgPrint("\n");														\
@@ -228,10 +228,10 @@ void ODM_InitDebugSetting(PDM_ODM_T pDM_Odm);
 			if(((_Comp) & ODM_GlobalDebugComponents) && (_Level <= ODM_GlobalDebugLevel))	\
 			{																		\
 				int		__i;															\
-				u1Byte	buffer[MAX_STR_LEN];											\
+				u8	buffer[MAX_STR_LEN];											\
 				int	length = (_Len<MAX_STR_LEN)? _Len : (MAX_STR_LEN-1) ;				\
 				PlatformZeroMemory( buffer, MAX_STR_LEN );							\
-				PlatformMoveMemory( buffer, (pu1Byte)_Ptr, length );						\
+				PlatformMoveMemory( buffer, (u8 *)_Ptr, length );						\
 				for( __i=0; __i<MAX_STR_LEN; __i++ )									\
 				{																	\
 					if( !PRINTABLE(buffer[__i]) )	buffer[__i] = '?';						\
@@ -682,7 +682,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 #define PRINT_DATA(_TitleString, _HexData, _HexDataLen)								\
 			{																		\
 				char			*szTitle = _TitleString;									\
-				pu1Byte		pbtHexData = _HexData;									\
+				u8 *		pbtHexData = _HexData;									\
 				u4Byte		u4bHexDataLen = _HexDataLen;							\
 				u4Byte		__i;														\
 				DbgPrint("%s", szTitle);													\
@@ -703,7 +703,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 			if(((_Comp) & GlobalDebugComponents) && (_Level <= GlobalDebugLevel))	\
 			{																		\
 				int __i;																\
-				pu1Byte	ptr = (pu1Byte)_HexData;										\
+				u8 *	ptr = (u8 *)_HexData;										\
 				DbgPrint("Rtl819x: ");													\
 				DbgPrint(_TitleString);												\
 				for( __i=0; __i<(int)_HexDataLen; __i++ )								\
@@ -718,7 +718,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 			if(((_Comp) & GlobalDebugComponents) && (_Level <= GlobalDebugLevel))	\
 			{																		\
 				int __i;																\
-				pu1Byte	ptr = (pu1Byte)_Ptr;											\
+				u8 *	ptr = (u8 *)_Ptr;											\
 				DbgPrint("Rtl819x: ");													\
 				DbgPrint(_TitleString);												\
 				DbgPrint(" ");															\
@@ -731,7 +731,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 			if(((_Comp) & GlobalDebugComponents) && (_Level <= GlobalDebugLevel))	\
 			{																		\
 				int __i, __j;															\
-				pu1Byte	ptr = (pu1Byte)_Ptr;											\
+				u8 *	ptr = (u8 *)_Ptr;											\
 				DbgPrint("Rtl819x: ");													\
 				DbgPrint(_TitleString);												\
 				DbgPrint("\n");														\
@@ -751,10 +751,10 @@ typedef enum tag_DBGP_Flag_Type_Definition
 			if(((_Comp) & GlobalDebugComponents) && (_Level <= GlobalDebugLevel))	\
 			{																		\
 				int		__i;															\
-				u1Byte	buffer[MAX_STR_LEN];											\
+				u8	buffer[MAX_STR_LEN];											\
 				int	length = (_Len<MAX_STR_LEN)? _Len : (MAX_STR_LEN-1) ;				\
 				PlatformZeroMemory( buffer, MAX_STR_LEN );							\
-				PlatformMoveMemory( buffer, (pu1Byte)_Ptr, length );						\
+				PlatformMoveMemory( buffer, (u8 *)_Ptr, length );						\
 				for( __i=0; __i<MAX_STR_LEN; __i++ )									\
 				{																	\
 					if( !PRINTABLE(buffer[__i]) )	buffer[__i] = '?';						\
@@ -792,7 +792,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 	if (DBGP_Type[dbgtype] & dbgflag)\
 	{\
 				int __i;						\
-				pu1Byte	ptr = (pu1Byte)_Ptr;	\
+				u8 *	ptr = (u8 *)_Ptr;	\
 				DbgPrint printstr;				\
 				DbgPrint(" ");					\
 				for( __i=0; __i<6; __i++ )		\
@@ -806,7 +806,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 	if (DBGP_Type[dbgtype] & dbgflag)\
 	{\
 		int __i;									\
-		pu1Byte	ptr = (pu1Byte)_HexData;			\
+		u8 *	ptr = (u8 *)_HexData;			\
 		DbgPrint(_TitleString);					\
 		for( __i=0; __i<(int)_HexDataLen; __i++ )	\
 		{										\
@@ -844,10 +844,10 @@ extern	DBGP_HEAD_T	DBGP_Head;
 extern	void	DBGP_Flag_Init(void);
 extern	void	DBG_PrintAllFlag(void);
 extern	void	DBG_PrintAllComp(void);
-extern	void	DBG_PrintFlagEvent(u1Byte	DbgFlag);
-extern	void	DBG_DumpMem(const u1Byte DbgComp,
-							const u1Byte DbgLevel,
-							pu1Byte pMem,
+extern	void	DBG_PrintFlagEvent(u8	DbgFlag);
+extern	void	DBG_DumpMem(const u8 DbgComp,
+							const u8 DbgLevel,
+							u8 * pMem,
 							u2Byte Len);
 
 /*--------------------------Exported Function prototype---------------------*/

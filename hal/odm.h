@@ -114,14 +114,14 @@
 // We need to remove to other position???
 //
 typedef		struct rtl8192cd_priv {
-	u1Byte		temp;
+	u8		temp;
 
 }rtl8192cd_priv, *prtl8192cd_priv;
 
 typedef struct _Dynamic_Initial_Gain_Threshold_
 {
-	u1Byte		Dig_Enable_Flag;
-	u1Byte		Dig_Ext_Port_Stage;
+	u8		Dig_Enable_Flag;
+	u8		Dig_Ext_Port_Stage;
 
 	int			RssiLowThresh;
 	int			RssiHighThresh;
@@ -129,33 +129,33 @@ typedef struct _Dynamic_Initial_Gain_Threshold_
 	u4Byte		FALowThresh;
 	u4Byte		FAHighThresh;
 
-	u1Byte		CurSTAConnectState;
-	u1Byte		PreSTAConnectState;
-	u1Byte		CurMultiSTAConnectState;
+	u8		CurSTAConnectState;
+	u8		PreSTAConnectState;
+	u8		CurMultiSTAConnectState;
 
-	u1Byte		PreIGValue;
-	u1Byte		CurIGValue;
-	u1Byte		BT30_CurIGI;
-	u1Byte		BackupIGValue;
+	u8		PreIGValue;
+	u8		CurIGValue;
+	u8		BT30_CurIGI;
+	u8		BackupIGValue;
 
 	s1Byte		BackoffVal;
 	s1Byte		BackoffVal_range_max;
 	s1Byte		BackoffVal_range_min;
-	u1Byte		rx_gain_range_max;
-	u1Byte		rx_gain_range_min;
-	u1Byte		Rssi_val_min;
+	u8		rx_gain_range_max;
+	u8		rx_gain_range_min;
+	u8		Rssi_val_min;
 
-	u1Byte		PreCCK_CCAThres;
-	u1Byte		CurCCK_CCAThres;
-	u1Byte		PreCCKPDState;
-	u1Byte		CurCCKPDState;
+	u8		PreCCK_CCAThres;
+	u8		CurCCK_CCAThres;
+	u8		PreCCKPDState;
+	u8		CurCCKPDState;
 
-	u1Byte		LargeFAHit;
-	u1Byte		ForbiddenIGI;
+	u8		LargeFAHit;
+	u8		ForbiddenIGI;
 	u4Byte		Recover_cnt;
 
-	u1Byte		DIG_Dynamic_MIN_0;
-	u1Byte		DIG_Dynamic_MIN_1;
+	u8		DIG_Dynamic_MIN_0;
+	u8		DIG_Dynamic_MIN_1;
 	bool		bMediaConnect_0;
 	bool		bMediaConnect_1;
 
@@ -165,15 +165,15 @@ typedef struct _Dynamic_Initial_Gain_Threshold_
 
 typedef struct _Dynamic_Power_Saving_
 {
-	u1Byte		PreCCAState;
-	u1Byte		CurCCAState;
+	u8		PreCCAState;
+	u8		CurCCAState;
 
-	u1Byte		PreRFState;
-	u1Byte		CurRFState;
+	u8		PreRFState;
+	u8		CurRFState;
 
 	int		    Rssi_val_min;
 
-	u1Byte		initialize;
+	u8		initialize;
 	u4Byte		Reg874,RegC70,Reg85C,RegA74;
 
 }PS_T,*pPS_T;
@@ -196,27 +196,27 @@ typedef struct false_ALARM_STATISTICS{
 }FALSE_ALARM_STATISTICS, *PFALSE_ALARM_STATISTICS;
 
 typedef struct _Dynamic_Primary_CCA{
-	u1Byte		PriCCA_flag;
-	u1Byte		intf_flag;
-	u1Byte		intf_type;
-	u1Byte		DupRTS_flag;
-	u1Byte		Monitor_flag;
-	u1Byte		CH_offset;
-	u1Byte			MF_state;
+	u8		PriCCA_flag;
+	u8		intf_flag;
+	u8		intf_type;
+	u8		DupRTS_flag;
+	u8		Monitor_flag;
+	u8		CH_offset;
+	u8			MF_state;
 }Pri_CCA_T, *pPri_CCA_T;
 
 typedef struct _RX_High_Power_
 {
-	u1Byte		RXHP_flag;
-	u1Byte		PSD_func_trigger;
-	u1Byte		PSD_bitmap_RXHP[80];
-	u1Byte		Pre_IGI;
-	u1Byte		Cur_IGI;
-	u1Byte		Pre_pw_th;
-	u1Byte		Cur_pw_th;
+	u8		RXHP_flag;
+	u8		PSD_func_trigger;
+	u8		PSD_bitmap_RXHP[80];
+	u8		Pre_IGI;
+	u8		Cur_IGI;
+	u8		Pre_pw_th;
+	u8		Cur_pw_th;
 	bool		First_time_enter;
 	bool		RXHP_enable;
-	u1Byte		TP_Mode;
+	u8		TP_Mode;
 	RT_TIMER	PSDTimer;
 }RXHP_T, *pRXHP_T;
 
@@ -237,18 +237,18 @@ typedef struct _RX_High_Power_
 
 typedef struct _SW_Antenna_Switch_
 {
-	u1Byte		try_flag;
+	u8		try_flag;
 	s4Byte		PreRSSI;
-	u1Byte		CurAntenna;
-	u1Byte		PreAntenna;
-	u1Byte		RSSI_Trying;
-	u1Byte		TestMode;
-	u1Byte		bTriggerAntennaSwitch;
-	u1Byte		SelectAntennaMap;
-	u1Byte		RSSI_target;
+	u8		CurAntenna;
+	u8		PreAntenna;
+	u8		RSSI_Trying;
+	u8		TestMode;
+	u8		bTriggerAntennaSwitch;
+	u8		SelectAntennaMap;
+	u8		RSSI_target;
 
 	// Before link Antenna Switch check
-	u1Byte		SWAS_NoLink_State;
+	u8		SWAS_NoLink_State;
 	u4Byte		SWAS_NoLink_BK_Reg860;
 	bool		ANTA_ON;	//To indicate Ant A is or not
 	bool		ANTB_ON;	//To indicate Ant B is on or not
@@ -264,7 +264,7 @@ typedef struct _SW_Antenna_Switch_
 	u8Byte		TXByteCnt_B;
 	u8Byte		RXByteCnt_A;
 	u8Byte		RXByteCnt_B;
-	u1Byte		TrafficLoad;
+	u8		TrafficLoad;
 	RT_TIMER	SwAntennaSwitchTimer;
 #ifdef CONFIG_HW_ANTENNA_DIVERSITY
 	//Hybrid Antenna Diversity
@@ -274,10 +274,10 @@ typedef struct _SW_Antenna_Switch_
 	u4Byte		OFDM_Ant2_Cnt[ASSOCIATE_ENTRY_NUM+1];
 	u4Byte		RSSI_Ant1_Sum[ASSOCIATE_ENTRY_NUM+1];
 	u4Byte		RSSI_Ant2_Sum[ASSOCIATE_ENTRY_NUM+1];
-	u1Byte		TxAnt[ASSOCIATE_ENTRY_NUM+1];
-	u1Byte		TargetSTA;
-	u1Byte		antsel;
-	u1Byte		RxIdleAnt;
+	u8		TxAnt[ASSOCIATE_ENTRY_NUM+1];
+	u8		TargetSTA;
+	u8		antsel;
+	u8		RxIdleAnt;
 
 #endif
 
@@ -292,13 +292,13 @@ typedef struct _EDCA_TURBO_
 
 typedef struct _ODM_RATE_ADAPTIVE
 {
-	u1Byte				Type;				// DM_Type_ByFW/DM_Type_ByDriver
-	u1Byte				LdpcThres;			// if RSSI > LdpcThres => switch from LPDC to BCC
+	u8				Type;				// DM_Type_ByFW/DM_Type_ByDriver
+	u8				LdpcThres;			// if RSSI > LdpcThres => switch from LPDC to BCC
 	bool				bUseLdpc;
 	bool				bLowerRtsRate;
-	u1Byte				HighRSSIThresh;		// if RSSI > HighRSSIThresh	=> RATRState is DM_RATR_STA_HIGH
-	u1Byte				LowRSSIThresh;		// if RSSI <= LowRSSIThresh	=> RATRState is DM_RATR_STA_LOW
-	u1Byte				RATRState;			// Current RSSI level, DM_RATR_STA_HIGH/DM_RATR_STA_MIDDLE/DM_RATR_STA_LOW
+	u8				HighRSSIThresh;		// if RSSI > HighRSSIThresh	=> RATRState is DM_RATR_STA_HIGH
+	u8				LowRSSIThresh;		// if RSSI <= LowRSSIThresh	=> RATRState is DM_RATR_STA_LOW
+	u8				RATRState;			// Current RSSI level, DM_RATR_STA_HIGH/DM_RATR_STA_MIDDLE/DM_RATR_STA_LOW
 
 } ODM_RATE_ADAPTIVE, *PODM_RATE_ADAPTIVE;
 
@@ -335,34 +335,34 @@ typedef struct _ODM_Phy_Status_Info_
 	// Be care, if you want to add any element please insert between
 	// RxPWDBAll & SignalStrength.
 	//
-	u1Byte		RxPWDBAll;
+	u8		RxPWDBAll;
 
-	u1Byte		SignalQuality;			// in 0-100 index.
+	u8		SignalQuality;			// in 0-100 index.
 	s1Byte		RxMIMOSignalQuality[4];	//per-path's EVM
-	u1Byte		RxMIMOEVMdbm[4];		//per-path's EVM dbm
+	u8		RxMIMOEVMdbm[4];		//per-path's EVM dbm
 
-	u1Byte		RxMIMOSignalStrength[4];// in 0~100 index
+	u8		RxMIMOSignalStrength[4];// in 0~100 index
 
 	u2Byte		Cfo_short[4];			// per-path's Cfo_short
 	u2Byte		Cfo_tail[4];			// per-path's Cfo_tail
 
 	s1Byte		RxPower;				// in dBm Translate from PWdB
 	s1Byte		RecvSignalPower;		// Real power in dBm for this packet, no beautification and aggregation. Keep this raw info to be used for the other procedures.
-	u1Byte		BTRxRSSIPercentage;
-	u1Byte		SignalStrength;			// in 0-100 index.
+	u8		BTRxRSSIPercentage;
+	u8		SignalStrength;			// in 0-100 index.
 
-	u1Byte		RxPwr[4];				//per-path's pwdb
-	u1Byte		RxSNR[4];				//per-path's SNR
-	u1Byte		BandWidth;
-	u1Byte		btCoexPwrAdjust;
+	u8		RxPwr[4];				//per-path's pwdb
+	u8		RxSNR[4];				//per-path's SNR
+	u8		BandWidth;
+	u8		btCoexPwrAdjust;
 }ODM_PHY_INFO_T,*PODM_PHY_INFO_T;
 
 
 typedef struct _ODM_Per_Pkt_Info_
 {
-	//u1Byte		Rate;
-	u1Byte		DataRate;
-	u1Byte		StationID;
+	//u8		Rate;
+	u8		DataRate;
+	u8		StationID;
 	bool		bPacketMatchBSSID;
 	bool		bPacketToSelf;
 	bool		bPacketBeacon;
@@ -376,7 +376,7 @@ typedef struct _ODM_Phy_Dbg_Info_
 	u8Byte		NumQryPhyStatus;
 	u8Byte		NumQryPhyStatusCCK;
 	u8Byte		NumQryPhyStatusOFDM;
-	u1Byte		NumQryBeaconPkt;
+	u8		NumQryBeaconPkt;
 	//Others
 	s4Byte		RxEVM[4];
 
@@ -385,7 +385,7 @@ typedef struct _ODM_Phy_Dbg_Info_
 
 typedef struct _ODM_Mac_Status_Info_
 {
-	u1Byte	test;
+	u8	test;
 
 }ODM_MAC_INFO;
 
@@ -415,31 +415,31 @@ typedef enum tag_Dynamic_ODM_Support_Ability_Type
 typedef		struct _ODM_STA_INFO{
 	// Driver Write
 	bool		bUsed;				// record the sta status link or not?
-	//u1Byte		WirelessMode;		//
-	u1Byte		IOTPeer;			// Enum value.	HT_IOT_PEER_E
+	//u8		WirelessMode;		//
+	u8		IOTPeer;			// Enum value.	HT_IOT_PEER_E
 
 	// ODM Write
 	//1 PHY_STATUS_INFO
-	u1Byte		RSSI_Path[4];		//
-	u1Byte		RSSI_Ave;
-	u1Byte		RXEVM[4];
-	u1Byte		RXSNR[4];
+	u8		RSSI_Path[4];		//
+	u8		RSSI_Ave;
+	u8		RXEVM[4];
+	u8		RXSNR[4];
 
 	// ODM Write
 	//1 TX_INFO (may changed by IC)
 	//TX_INFO_T		pTxInfo;				// Define in IC folder. Move lower layer.
 #if 0
-	u1Byte		ANTSEL_A;			//in Jagar: 4bit; others: 2bit
-	u1Byte		ANTSEL_B;			//in Jagar: 4bit; others: 2bit
-	u1Byte		ANTSEL_C;			//only in Jagar: 4bit
-	u1Byte		ANTSEL_D;			//only in Jagar: 4bit
-	u1Byte		TX_ANTL;			//not in Jagar: 2bit
-	u1Byte		TX_ANT_HT;			//not in Jagar: 2bit
-	u1Byte		TX_ANT_CCK;			//not in Jagar: 2bit
-	u1Byte		TXAGC_A;			//not in Jagar: 4bit
-	u1Byte		TXAGC_B;			//not in Jagar: 4bit
-	u1Byte		TXPWR_OFFSET;		//only in Jagar: 3bit
-	u1Byte		TX_ANT;				//only in Jagar: 4bit for TX_ANTL/TX_ANTHT/TX_ANT_CCK
+	u8		ANTSEL_A;			//in Jagar: 4bit; others: 2bit
+	u8		ANTSEL_B;			//in Jagar: 4bit; others: 2bit
+	u8		ANTSEL_C;			//only in Jagar: 4bit
+	u8		ANTSEL_D;			//only in Jagar: 4bit
+	u8		TX_ANTL;			//not in Jagar: 2bit
+	u8		TX_ANT_HT;			//not in Jagar: 2bit
+	u8		TX_ANT_CCK;			//not in Jagar: 2bit
+	u8		TXAGC_A;			//not in Jagar: 4bit
+	u8		TXAGC_B;			//not in Jagar: 4bit
+	u8		TXPWR_OFFSET;		//only in Jagar: 3bit
+	u8		TX_ANT;				//only in Jagar: 4bit for TX_ANTL/TX_ANTHT/TX_ANT_CCK
 #endif
 
 	//
@@ -450,13 +450,13 @@ typedef		struct _ODM_STA_INFO{
 	//TX_RPT_T		pTxRpt;				// Define in IC folder. Move lower layer.
 #if 0
 	//1 For 88E RA (don't redefine the naming)
-	u1Byte		rate_id;
-	u1Byte		rate_SGI;
-	u1Byte		rssi_sta_ra;
-	u1Byte		SGI_enable;
-	u1Byte		Decision_rate;
-	u1Byte		Pre_rate;
-	u1Byte		Active;
+	u8		rate_id;
+	u8		rate_SGI;
+	u8		rssi_sta_ra;
+	u8		SGI_enable;
+	u8		Decision_rate;
+	u8		Pre_rate;
+	u8		Active;
 
 	// Driver write Wilson handle.
 	//1 TX_RPT (don't redefine the naming)
@@ -548,9 +548,9 @@ typedef enum _ODM_Common_Info_Definition
 	ODM_CMNINFO_RSSI_MIN,
 	ODM_CMNINFO_DBG_COMP,				// u8Byte
 	ODM_CMNINFO_DBG_LEVEL,				// u4Byte
-	ODM_CMNINFO_RA_THRESHOLD_HIGH,		// u1Byte
-	ODM_CMNINFO_RA_THRESHOLD_LOW,		// u1Byte
-	ODM_CMNINFO_RF_ANTENNA_TYPE,		// u1Byte
+	ODM_CMNINFO_RA_THRESHOLD_HIGH,		// u8
+	ODM_CMNINFO_RA_THRESHOLD_LOW,		// u8
+	ODM_CMNINFO_RF_ANTENNA_TYPE,		// u8
 	ODM_CMNINFO_BT_DISABLED,
 	ODM_CMNINFO_BT_HS_CONNECT_PROCESS,
 	ODM_CMNINFO_BT_HS_RSSI,
@@ -810,36 +810,36 @@ typedef enum tag_CCA_Path
 
 typedef struct _ODM_RA_Info_
 {
-	u1Byte RateID;
+	u8 RateID;
 	u4Byte RateMask;
 	u4Byte RAUseRate;
-	u1Byte RateSGI;
-	u1Byte RssiStaRA;
-	u1Byte PreRssiStaRA;
-	u1Byte SGIEnable;
-	u1Byte DecisionRate;
-	u1Byte PreRate;
-	u1Byte HighestRate;
-	u1Byte LowestRate;
+	u8 RateSGI;
+	u8 RssiStaRA;
+	u8 PreRssiStaRA;
+	u8 SGIEnable;
+	u8 DecisionRate;
+	u8 PreRate;
+	u8 HighestRate;
+	u8 LowestRate;
 	u4Byte NscUp;
 	u4Byte NscDown;
 	u2Byte RTY[5];
 	u4Byte TOTAL;
 	u2Byte DROP;
-	u1Byte Active;
+	u8 Active;
 	u2Byte RptTime;
-	u1Byte RAWaitingCounter;
-	u1Byte RAPendingCounter;
+	u8 RAWaitingCounter;
+	u8 RAPendingCounter;
 #if 1 //POWER_TRAINING_ACTIVE == 1 // For compile  pass only~!
-	u1Byte PTActive;  // on or off
-	u1Byte PTTryState;  // 0 trying state, 1 for decision state
-	u1Byte PTStage;  // 0~6
-	u1Byte PTStopCount; //Stop PT counter
-	u1Byte PTPreRate;  // if rate change do PT
-	u1Byte PTPreRssi; // if RSSI change 5% do PT
-	u1Byte PTModeSS;  // decide whitch rate should do PT
-	u1Byte RAstage;  // StageRA, decide how many times RA will be done between PT
-	u1Byte PTSmoothFactor;
+	u8 PTActive;  // on or off
+	u8 PTTryState;  // 0 trying state, 1 for decision state
+	u8 PTStage;  // 0~6
+	u8 PTStopCount; //Stop PT counter
+	u8 PTPreRate;  // if rate change do PT
+	u8 PTPreRssi; // if RSSI change 5% do PT
+	u8 PTModeSS;  // decide whitch rate should do PT
+	u8 RAstage;  // StageRA, decide how many times RA will be done between PT
+	u8 PTSmoothFactor;
 #endif
 } ODM_RA_INFO_T,*PODM_RA_INFO_T;
 
@@ -859,62 +859,62 @@ typedef struct ODM_RF_Calibration_Structure
 	s4Byte	RegEB4;
 	s4Byte	RegEBC;
 
-	u1Byte		TXPowercount;
+	u8		TXPowercount;
 	bool bTXPowerTrackingInit;
 	bool bTXPowerTracking;
-	u1Byte		TxPowerTrackControl; //for mp mode, turn off txpwrtracking as default
-	u1Byte		TM_Trigger;
-	u1Byte		InternalPA5G[2];	//pathA / pathB
+	u8		TxPowerTrackControl; //for mp mode, turn off txpwrtracking as default
+	u8		TM_Trigger;
+	u8		InternalPA5G[2];	//pathA / pathB
 
-	u1Byte		ThermalMeter[2];    // ThermalMeter, index 0 for RFIC0, and 1 for RFIC1
-	u1Byte		ThermalValue;
-	u1Byte		ThermalValue_LCK;
-	u1Byte		ThermalValue_IQK;
-	u1Byte	ThermalValue_DPK;
-	u1Byte	ThermalValue_AVG[AVG_THERMAL_NUM];
-	u1Byte	ThermalValue_AVG_index;
-	u1Byte	ThermalValue_RxGain;
-	u1Byte	ThermalValue_Crystal;
-	u1Byte	ThermalValue_DPKstore;
-	u1Byte	ThermalValue_DPKtrack;
+	u8		ThermalMeter[2];    // ThermalMeter, index 0 for RFIC0, and 1 for RFIC1
+	u8		ThermalValue;
+	u8		ThermalValue_LCK;
+	u8		ThermalValue_IQK;
+	u8	ThermalValue_DPK;
+	u8	ThermalValue_AVG[AVG_THERMAL_NUM];
+	u8	ThermalValue_AVG_index;
+	u8	ThermalValue_RxGain;
+	u8	ThermalValue_Crystal;
+	u8	ThermalValue_DPKstore;
+	u8	ThermalValue_DPKtrack;
 	bool	TxPowerTrackingInProgress;
 	bool	bDPKenable;
 
 	bool	bReloadtxpowerindex;
-	u1Byte	bRfPiEnable;
+	u8	bRfPiEnable;
 	u4Byte	TXPowerTrackingCallbackCnt; //cosa add for debug
 
 
 	//------------------------- Tx power Tracking -------------------------//
-	u1Byte	bCCKinCH14;
-	u1Byte	CCK_index;
-	u1Byte	OFDM_index[MAX_RF_PATH];
+	u8	bCCKinCH14;
+	u8	CCK_index;
+	u8	OFDM_index[MAX_RF_PATH];
 	s1Byte	PowerIndexOffset[MAX_RF_PATH];
 	s1Byte	DeltaPowerIndex[MAX_RF_PATH];
 	s1Byte	DeltaPowerIndexLast[MAX_RF_PATH];
 	bool bTxPowerChanged;
 
-	u1Byte	ThermalValue_HP[HP_THERMAL_NUM];
-	u1Byte	ThermalValue_HP_index;
+	u8	ThermalValue_HP[HP_THERMAL_NUM];
+	u8	ThermalValue_HP_index;
 	IQK_MATRIX_REGS_SETTING IQKMatrixRegSetting[IQK_Matrix_Settings_NUM];
 	bool	bNeedIQK;
-	u1Byte	Delta_IQK;
-	u1Byte	Delta_LCK;
+	u8	Delta_IQK;
+	u8	Delta_LCK;
 	s1Byte  BBSwingDiff2G, BBSwingDiff5G; // Unit: dB
-	u1Byte  DeltaSwingTableIdx_2GCCKA_P[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GCCKA_N[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GCCKB_P[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GCCKB_N[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GA_P[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GA_N[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GB_P[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GB_N[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_5GA_P[BAND_NUM][DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_5GA_N[BAND_NUM][DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_5GB_P[BAND_NUM][DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_5GB_N[BAND_NUM][DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GA_P_8188E[DELTA_SWINGIDX_SIZE];
-	u1Byte  DeltaSwingTableIdx_2GA_N_8188E[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GCCKA_P[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GCCKA_N[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GCCKB_P[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GCCKB_N[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GA_P[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GA_N[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GB_P[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GB_N[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_5GA_P[BAND_NUM][DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_5GA_N[BAND_NUM][DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_5GB_P[BAND_NUM][DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_5GB_N[BAND_NUM][DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GA_P_8188E[DELTA_SWINGIDX_SIZE];
+	u8  DeltaSwingTableIdx_2GA_N_8188E[DELTA_SWINGIDX_SIZE];
 
 	//--------------------------------------------------------------------//
 
@@ -938,11 +938,11 @@ typedef struct ODM_RF_Calibration_Structure
 
 	//for APK
 	u4Byte	APKoutput[2][2]; //path A/B; output1_1a/output1_2a
-	u1Byte	bAPKdone;
-	u1Byte	bAPKThermalMeterIgnore;
-	u1Byte	bDPdone;
-	u1Byte	bDPPathAOK;
-	u1Byte	bDPPathBOK;
+	u8	bAPKdone;
+	u8	bAPKThermalMeterIgnore;
+	u8	bDPdone;
+	u8	bDPPathAOK;
+	u8	bDPPathBOK;
 
 	u4Byte	TxIQC_8723B[2][3][2]; // { {S0: 0xc94, 0xc80, 0xc4c} , {S1: 0xc9c, 0xc88, 0xc4c}}
 	u4Byte	RxIQC_8723B[2][2][2]; // { {S0: 0xc14, 0xca0} , {S1: 0xc1c, 0xc78}}
@@ -954,23 +954,23 @@ typedef struct ODM_RF_Calibration_Structure
 
 typedef struct _FAST_ANTENNA_TRAINNING_
 {
-	u1Byte	Bssid[6];
-	u1Byte	antsel_rx_keep_0;
-	u1Byte	antsel_rx_keep_1;
-	u1Byte	antsel_rx_keep_2;
+	u8	Bssid[6];
+	u8	antsel_rx_keep_0;
+	u8	antsel_rx_keep_1;
+	u8	antsel_rx_keep_2;
 	u4Byte	antSumRSSI[7];
 	u4Byte	antRSSIcnt[7];
 	u4Byte	antAveRSSI[7];
-	u1Byte	FAT_State;
+	u8	FAT_State;
 	u4Byte	TrainIdx;
-	u1Byte	antsel_a[ODM_ASSOCIATE_ENTRY_NUM];
-	u1Byte	antsel_b[ODM_ASSOCIATE_ENTRY_NUM];
-	u1Byte	antsel_c[ODM_ASSOCIATE_ENTRY_NUM];
+	u8	antsel_a[ODM_ASSOCIATE_ENTRY_NUM];
+	u8	antsel_b[ODM_ASSOCIATE_ENTRY_NUM];
+	u8	antsel_c[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	MainAnt_Sum[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	AuxAnt_Sum[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	MainAnt_Cnt[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	AuxAnt_Cnt[ODM_ASSOCIATE_ENTRY_NUM];
-	u1Byte	RxIdleAnt;
+	u8	RxIdleAnt;
 	bool		bBecomeLinked;
 
 }FAT_T,*pFAT_T;
@@ -994,8 +994,8 @@ typedef enum _ANT_DIV_TYPE
 
 typedef struct _ODM_PATH_DIVERSITY_
 {
-	u1Byte	RespTxPath;
-	u1Byte	PathSel[ODM_ASSOCIATE_ENTRY_NUM];
+	u8	RespTxPath;
+	u8	PathSel[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	PathA_Sum[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	PathB_Sum[ODM_ASSOCIATE_ENTRY_NUM];
 	u4Byte	PathA_Cnt[ODM_ASSOCIATE_ENTRY_NUM];
@@ -1044,19 +1044,19 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	u8Byte			RxPWDBAve;
 	u8Byte			RxPWDBAve_final;
 	bool			MPDIG_2G;		//off MPDIG
-	u1Byte			Times_2G;
+	u8			Times_2G;
 
 //------ ODM HANDLE, DRIVER NEEDS NOT TO HOOK------//
 	bool			bCckHighPower;
-	u1Byte			RFPathRxEnable;		// ODM_CMNINFO_RFPATH_ENABLE
-	u1Byte			ControlChannel;
+	u8			RFPathRxEnable;		// ODM_CMNINFO_RFPATH_ENABLE
+	u8			ControlChannel;
 //------ ODM HANDLE, DRIVER NEEDS NOT TO HOOK------//
 
 //--------REMOVED COMMON INFO----------//
-	//u1Byte				PseudoMacPhyMode;
+	//u8				PseudoMacPhyMode;
 	//bool			*BTCoexist;
 	//bool			PseudoBtCoexist;
-	//u1Byte				OPMode;
+	//u8				OPMode;
 	//bool			bAPMode;
 	//bool			bClientMode;
 	//bool			bAdHocMode;
@@ -1071,37 +1071,37 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	//
 //-----------HOOK BEFORE REG INIT-----------//
 	// ODM Platform info AP/ADSL/CE/MP = 1/2/3/4
-	u1Byte			SupportPlatform;
+	u8			SupportPlatform;
 	// ODM Support Ability DIG/RATR/TX_PWR_TRACK/ ¡K¡K = 1/2/3/¡K
 	u4Byte			SupportAbility;
 	// ODM PCIE/USB/SDIO = 1/2/3
-	u1Byte			SupportInterface;
+	u8			SupportInterface;
 	// ODM composite or independent. Bit oriented/ 92C+92D+ .... or any other type = 1/2/3/...
 	u4Byte			SupportICType;
 	// Cut Version TestChip/A-cut/B-cut... = 0/1/2/3/...
-	u1Byte			CutVersion;
+	u8			CutVersion;
 	// Fab Version TSMC/UMC = 0/1
-	u1Byte			FabVersion;
+	u8			FabVersion;
 	// RF Type 4T4R/3T3R/2T2R/1T2R/1T1R/...
-	u1Byte			RFType;
-	u1Byte			RFEType;
+	u8			RFType;
+	u8			RFEType;
 	// Board Type Normal/HighPower/MiniCard/SLIM/Combo/... = 0/1/2/3/4/...
-	u1Byte			BoardType;
+	u8			BoardType;
 	// with external LNA  NO/Yes = 0/1
-	u1Byte			ExtLNA;
-	u1Byte			ExtLNA5G;
+	u8			ExtLNA;
+	u8			ExtLNA5G;
 	// with external PA  NO/Yes = 0/1
-	u1Byte			ExtPA;
-	u1Byte			ExtPA5G;
+	u8			ExtPA;
+	u8			ExtPA5G;
 	// with external TRSW  NO/Yes = 0/1
-	u1Byte			ExtTRSW;
-	u1Byte			PatchID; //Customer ID
+	u8			ExtTRSW;
+	u8			PatchID; //Customer ID
 	bool			bInHctTest;
 	bool			bWIFITest;
 
 	bool			bDualMacSmartConcurrent;
 	u4Byte			BK_SupportAbility;
-	u1Byte			AntDivType;
+	u8			AntDivType;
 //-----------HOOK BEFORE REG INIT-----------//
 
 	//
@@ -1109,28 +1109,28 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	//
 //--------- POINTER REFERENCE-----------//
 
-	u1Byte			u1Byte_temp;
+	u8			u8_temp;
 	bool			bool_temp;
 	PADAPTER		PADAPTER_temp;
 
 	// MAC PHY Mode SMSP/DMSP/DMDP = 0/1/2
-	u1Byte			*pMacPhyMode;
+	u8			*pMacPhyMode;
 	//TX Unicast byte count
 	u8Byte			*pNumTxBytesUnicast;
 	//RX Unicast byte count
 	u8Byte			*pNumRxBytesUnicast;
 	// Wireless mode B/G/A/N = BIT0/BIT1/BIT2/BIT3
-	u1Byte			*pWirelessMode; //ODM_WIRELESS_MODE_E
+	u8			*pWirelessMode; //ODM_WIRELESS_MODE_E
 	// Frequence band 2.4G/5G = 0/1
-	u1Byte			*pBandType;
+	u8			*pBandType;
 	// Secondary channel offset don't_care/below/above = 0/1/2
-	u1Byte			*pSecChOffset;
+	u8			*pSecChOffset;
 	// Security mode Open/WEP/AES/TKIP = 0/1/2/3
-	u1Byte			*pSecurity;
+	u8			*pSecurity;
 	// BW info 20M/40M/80M = 0/1/2
-	u1Byte			*pBandWidth;
+	u8			*pBandWidth;
 	// Central channel location Ch1/Ch2/....
-	u1Byte			*pChannel;	//central channel number
+	u8			*pChannel;	//central channel number
 	// Common info for 92D DMSP
 
 	bool			*pbGetValueFromOtherMac;
@@ -1140,12 +1140,12 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	bool			*pbScanInProcess;
 	bool			*pbPowerSaving;
 	// CCA Path 2-path/path-A/path-B = 0/1/2; using ODM_CCA_PATH_E.
-	u1Byte			*pOnePathCCA;
+	u8			*pOnePathCCA;
 	//pMgntInfo->AntennaTest
-	u1Byte			*pAntennaTest;
+	u8			*pAntennaTest;
 	bool			*pbNet_closed;
-	u1Byte			*mp_mode;
-	//u1Byte			*pAidMap;
+	u8			*mp_mode;
+	//u8			*pAidMap;
 //--------- POINTER REFERENCE-----------//
 	pu2Byte			pForcedDataRate;
 //------------CALL BY VALUE-------------//
@@ -1153,31 +1153,31 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	bool			bWIFI_Direct;
 	bool			bWIFI_Display;
 	bool			bLinked;
-	u1Byte			RSSI_Min;
-	u1Byte          InterfaceIndex; // Add for 92D  dual MAC: 0--Mac0 1--Mac1
+	u8			RSSI_Min;
+	u8          InterfaceIndex; // Add for 92D  dual MAC: 0--Mac0 1--Mac1
 	bool         bIsMPChip;
 	bool			bOneEntryOnly;
 	// Common info for BTDM
 	bool			bBtDisabled;			// BT is disabled
 	bool			bBtConnectProcess;	// BT HS is under connection progress.
-	u1Byte			btHsRssi;				// BT HS mode wifi rssi value.
+	u8			btHsRssi;				// BT HS mode wifi rssi value.
 	bool			bBtHsOperation;		// BT HS mode is under progress
 	bool			bBtDisableEdcaTurbo;	// Under some condition, don't enable the EDCA Turbo
 	bool			bBtLimitedDig;			// BT is busy.
 //------------CALL BY VALUE-------------//
-	u1Byte			RSSI_A;
-	u1Byte			RSSI_B;
+	u8			RSSI_A;
+	u8			RSSI_B;
 	u8Byte			RSSI_TRSW;
 	u8Byte			RSSI_TRSW_H;
 	u8Byte			RSSI_TRSW_L;
 	u8Byte			RSSI_TRSW_iso;
 
-	u1Byte			RxRate;
+	u8			RxRate;
 	bool			StopDIG;
-	u1Byte			TxRate;
-	u1Byte			LinkedInterval;
-	u1Byte			preChannel;
-	u1Byte			AntType;
+	u8			TxRate;
+	u8			LinkedInterval;
+	u8			preChannel;
+	u8			AntType;
 	u4Byte			TxagcOffsetValueA;
 	bool			IsTxagcOffsetPositiveA;
 	u4Byte			TxagcOffsetValueB;
@@ -1193,7 +1193,7 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	u4Byte			IGI_Base;
 	u4Byte			IGI_target;
 	bool			ForceEDCCA;
-	u1Byte			AdapEn_RSSI;
+	u8			AdapEn_RSSI;
 	bool			bForceThresh;
 	u4Byte			Force_TH_H;
 	u4Byte			Force_TH_L;
@@ -1252,12 +1252,12 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	//
 
 	//common
-	//u1Byte		DM_Type;
-	//u1Byte    PSD_Report_RXHP[80];   // Add By Gary
-	//u1Byte    PSD_func_flag;               // Add By Gary
+	//u8		DM_Type;
+	//u8    PSD_Report_RXHP[80];   // Add By Gary
+	//u8    PSD_func_flag;               // Add By Gary
 	//for DIG
-	//u1Byte		bDMInitialGainEnable;
-	//u1Byte		binitialized; // for dm_initial_gain_Multi_STA use.
+	//u8		bDMInitialGainEnable;
+	//u8		binitialized; // for dm_initial_gain_Multi_STA use.
 	//for Antenna diversity
 	//u8	AntDivCfg;// 0:OFF , 1:ON, 2:by efuse
 	//PSTA_INFO_T RSSI_target;
@@ -1269,7 +1269,7 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	//PSD
 	bool			bUserAssignLevel;
 	RT_TIMER		PSDTimer;
-	u1Byte			RSSI_BT;			//come from BT
+	u8			RSSI_BT;			//come from BT
 	bool			bPSDinProcess;
 	bool			bPSDactive;
 	bool			bDMInitialGainEnable;
@@ -1278,7 +1278,7 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	RT_TIMER		MPT_DIGTimer;
 
 	//for rate adaptive, in fact,  88c/92c fw will handle this
-	u1Byte			bUseRAMask;
+	u8			bUseRAMask;
 
 	ODM_RATE_ADAPTIVE	RateAdaptive;
 
@@ -1289,15 +1289,15 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	//
 	// TX power tracking
 	//
-	u1Byte			BbSwingIdxOfdm[MAX_RF_PATH];
-	u1Byte			BbSwingIdxOfdmCurrent;
-	u1Byte			BbSwingIdxOfdmBase[MAX_RF_PATH];
+	u8			BbSwingIdxOfdm[MAX_RF_PATH];
+	u8			BbSwingIdxOfdmCurrent;
+	u8			BbSwingIdxOfdmBase[MAX_RF_PATH];
 	bool			BbSwingFlagOfdm;
-	u1Byte			BbSwingIdxCck;
-	u1Byte			BbSwingIdxCckCurrent;
-	u1Byte			BbSwingIdxCckBase;
-	u1Byte			DefaultOfdmIndex;
-	u1Byte			DefaultCckIndex;
+	u8			BbSwingIdxCck;
+	u8			BbSwingIdxCckCurrent;
+	u8			BbSwingIdxCckBase;
+	u8			DefaultOfdmIndex;
+	u8			DefaultCckIndex;
 	bool			BbSwingFlagCck;
 
 	s1Byte			Aboslute_OFDMSwingIdx[MAX_RF_PATH];
@@ -1316,7 +1316,7 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	int				CFO_tail[2];
 	int				CFO_ave_pre;
 	int				CrystalCap;
-	u1Byte			CFOThreshold;
+	u8			CFOThreshold;
 	u4Byte			packetCount;
 	u4Byte			packetCount_pre;
 
@@ -1576,18 +1576,18 @@ typedef enum tag_SW_Antenna_Switch_Definition
 // Extern Global Variables.
 //
 extern	u4Byte OFDMSwingTable[OFDM_TABLE_SIZE_92D];
-extern	u1Byte CCKSwingTable_Ch1_Ch13[CCK_TABLE_SIZE][8];
-extern	u1Byte CCKSwingTable_Ch14 [CCK_TABLE_SIZE][8];
+extern	u8 CCKSwingTable_Ch1_Ch13[CCK_TABLE_SIZE][8];
+extern	u8 CCKSwingTable_Ch14 [CCK_TABLE_SIZE][8];
 
 extern	u4Byte OFDMSwingTable_New[OFDM_TABLE_SIZE_92D];
-extern	u1Byte CCKSwingTable_Ch1_Ch13_New[CCK_TABLE_SIZE][8];
-extern	u1Byte CCKSwingTable_Ch14_New [CCK_TABLE_SIZE][8];
+extern	u8 CCKSwingTable_Ch1_Ch13_New[CCK_TABLE_SIZE][8];
+extern	u8 CCKSwingTable_Ch14_New [CCK_TABLE_SIZE][8];
 
 extern  u4Byte TxScalingTable_Jaguar[TXSCALE_TABLE_SIZE];
 
 // <20121018, Kordan> In case fail to read TxPowerTrack.txt, we use the table of 88E as the default table.
-static u1Byte DeltaSwingTableIdx_2GA_P_8188E[] = {0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 4,  4,  4,  4,  4,  4,  5,  5,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9};
-static u1Byte DeltaSwingTableIdx_2GA_N_8188E[] = {0, 0, 0, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5,  6,  6,  7,  7,  7,  7,  8,  8,  9,  9, 10, 10, 10, 11, 11, 11, 11};
+static u8 DeltaSwingTableIdx_2GA_P_8188E[] = {0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 4,  4,  4,  4,  4,  4,  5,  5,  7,  7,  8,  8,  8,  9,  9,  9,  9,  9};
+static u8 DeltaSwingTableIdx_2GA_N_8188E[] = {0, 0, 0, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5,  6,  6,  7,  7,  7,  7,  8,  8,  9,  9, 10, 10, 10, 11, 11, 11, 11};
 
 //
 // check Sta pointer valid or not
@@ -1601,18 +1601,18 @@ static u1Byte DeltaSwingTableIdx_2GA_N_8188E[] = {0, 0, 0, 2, 2, 3, 3, 4, 4, 4, 
 #define SWAW_STEP_PEAK		0
 #define SWAW_STEP_DETERMINE	1
 
-void ODM_Write_DIG(PDM_ODM_T	pDM_Odm, u1Byte	CurrentIGI);
-void ODM_Write_CCK_CCA_Thres(PDM_ODM_T	pDM_Odm, u1Byte	CurCCK_CCAThres);
+void ODM_Write_DIG(PDM_ODM_T	pDM_Odm, u8	CurrentIGI);
+void ODM_Write_CCK_CCA_Thres(PDM_ODM_T	pDM_Odm, u8	CurCCK_CCAThres);
 
 void
 ODM_SetAntenna(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		Antenna);
+	u8		Antenna);
 
 
 #define dm_RF_Saving	ODM_RF_Saving
 void ODM_RF_Saving(PDM_ODM_T	pDM_Odm,
-		u1Byte		bForceInNormal );
+		u8		bForceInNormal );
 
 #define SwAntDivRestAfterLink	ODM_SwAntDivRestAfterLink
 void ODM_SwAntDivRestAfterLink(PDM_ODM_T	pDM_Odm);
@@ -1628,13 +1628,13 @@ ODM_RAStateCheck(
 	PDM_ODM_T		pDM_Odm,
 	s4Byte			RSSI,
 	bool			bForceUpdate,
-	pu1Byte			pRATRState
+	u8 *			pRATRState
 	);
 
 #define dm_SWAW_RSSI_Check	ODM_SwAntDivChkPerPktRssi
 void ODM_SwAntDivChkPerPktRssi(
 	PDM_ODM_T		pDM_Odm,
-	u1Byte			StationID,
+	u8			StationID,
 	PODM_PHY_INFO_T pPhyInfo
 	);
 
@@ -1644,7 +1644,7 @@ u4Byte
 GetPSDData(
 	PDM_ODM_T	pDM_Odm,
 	unsigned int	point,
-	u1Byte initial_gain_psd);
+	u8 initial_gain_psd);
 
 void
 odm_DIGbyRSSI_LPS(
@@ -1655,13 +1655,13 @@ u4Byte ODM_Get_Rate_Bitmap(
 	PDM_ODM_T	pDM_Odm,
 	u4Byte		macid,
 	u4Byte		ra_mask,
-	u1Byte		rssi_level);
+	u8		rssi_level);
 
 #if (BEAMFORMING_SUPPORT == 1)
 BEAMFORMING_CAP
 Beamforming_GetEntryBeamCapByMacId(
  PMGNT_INFO pMgntInfo,
- u1Byte  MacId
+ u8  MacId
  );
 #endif
 
@@ -1724,7 +1724,7 @@ ODM_ResetIQKResult(
 void
 ODM_AntselStatistics_88C(
 	PDM_ODM_T		pDM_Odm,
-	u1Byte			MacId,
+	u8			MacId,
 	u4Byte			PWDBAll,
 	bool			isCCKrate
 );
@@ -1737,13 +1737,13 @@ ODM_SingleDualAntennaDefaultSetting(
 bool
 ODM_SingleDualAntennaDetection(
 	PDM_ODM_T		pDM_Odm,
-	u1Byte			mode
+	u8			mode
 	);
 
 void
 ODM_UpdateInitRate(
 	PDM_ODM_T	pDM_Odm,
-	u1Byte		Rate
+	u8		Rate
 	);
 void odm_dtc(PDM_ODM_T pDM_Odm);
 
