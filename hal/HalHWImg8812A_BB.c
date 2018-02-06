@@ -459,7 +459,7 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -655,7 +655,7 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -960,7 +960,7 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -1041,7 +1041,7 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_MP(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -1153,7 +1153,7 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_PG(
 {
 	u4Byte     hex = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -1253,7 +1253,7 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_ASUS(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -1367,7 +1367,7 @@ ODM_ReadAndConfig_MP_8812A_PHY_REG_PG_NEC(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;

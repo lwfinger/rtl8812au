@@ -38,8 +38,7 @@ typedef enum _RT_SPINLOCK_TYPE{
 
 	#include <drv_types.h>
 
-	#define u2Byte		u16
-	#define	pu2Byte		u16*
+	#define u16		u16
 
 	#define u4Byte		u32
 	#define	pu4Byte		u32*

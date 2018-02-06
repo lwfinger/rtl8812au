@@ -71,9 +71,6 @@ struct mp_tx
 #define u4Byte u32
 #define s4Byte s32
 
-#define u2Byte		u16
-#define pu2Byte			u16*
-
 #define u4Byte		u32
 #define pu4Byte			u32*
 
@@ -92,10 +89,6 @@ struct mp_tx
 #define s8Byte		s64
 #define ps8Byte			s64*
 
-#define u8 u8
-#define u16 u16
-#define u32 u32
-#define u32 u32
 #define Pu32 u32*
 
 typedef void (*MPT_WORK_ITEM_HANDLER)(void * Adapter);

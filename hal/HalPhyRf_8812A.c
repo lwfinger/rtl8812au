@@ -87,7 +87,7 @@ ODM_TxPwrTrackSetPwr8812A(
 
 		TxRate = MptToMgntRate(pMptCtx->MptRateIndex);
 	#else
-		u2Byte			rate	 = *(pDM_Odm->pForcedDataRate);
+		u16			rate	 = *(pDM_Odm->pForcedDataRate);
 
 		if(!rate) //auto rate
 		{
@@ -339,7 +339,7 @@ GetDeltaSwingTable_8812A(
     PADAPTER        Adapter		 = pDM_Odm->Adapter;
 	PODM_RF_CAL_T	pRFCalibrateInfo = &(pDM_Odm->RFCalibrateInfo);
 	HAL_DATA_TYPE	*pHalData		 = GET_HAL_DATA(Adapter);
-	u2Byte			rate			 = *(pDM_Odm->pForcedDataRate);
+	u16			rate			 = *(pDM_Odm->pForcedDataRate);
 	u8		channel			 = pHalData->CurrentChannel;
 
 	if ( 1 <= channel && channel <= 14) {
@@ -2174,7 +2174,7 @@ _DPK_GetGainLoss(
 	u4Byte GL_I_tmp=0,GL_Q_tmp=0;
 
 	u4Byte Power_GL;
-	u2Byte Scaler[]={0x4000, 0x41db, 0x43c7, 0x45c3, 0x47cf, 0x49ec, 0x4c19, 0x4e46, 0x5093,0x52f2,  //10
+	u16 Scaler[]={0x4000, 0x41db, 0x43c7, 0x45c3, 0x47cf, 0x49ec, 0x4c19, 0x4e46, 0x5093,0x52f2,  //10
 					 0x5560, 0x57cf, 0x5a7f, 0x5d0e, 0x5fbe
 						};
 	u8 sindex=0;

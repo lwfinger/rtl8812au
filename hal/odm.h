@@ -343,8 +343,8 @@ typedef struct _ODM_Phy_Status_Info_
 
 	u8		RxMIMOSignalStrength[4];// in 0~100 index
 
-	u2Byte		Cfo_short[4];			// per-path's Cfo_short
-	u2Byte		Cfo_tail[4];			// per-path's Cfo_tail
+	u16		Cfo_short[4];			// per-path's Cfo_short
+	u16		Cfo_tail[4];			// per-path's Cfo_tail
 
 	s1Byte		RxPower;				// in dBm Translate from PWdB
 	s1Byte		RecvSignalPower;		// Real power in dBm for this packet, no beautification and aggregation. Keep this raw info to be used for the other procedures.
@@ -460,9 +460,9 @@ typedef		struct _ODM_STA_INFO{
 
 	// Driver write Wilson handle.
 	//1 TX_RPT (don't redefine the naming)
-	u2Byte		RTY[4];				// ???
-	u2Byte		TOTAL;				// ???
-	u2Byte		DROP;				// ???
+	u16		RTY[4];				// ???
+	u16		TOTAL;				// ???
+	u16		DROP;				// ???
 	//
 	// Please use compile flag to disabe the strcutrue for other IC except 88E.
 	//
@@ -823,11 +823,11 @@ typedef struct _ODM_RA_Info_
 	u8 LowestRate;
 	u4Byte NscUp;
 	u4Byte NscDown;
-	u2Byte RTY[5];
+	u16 RTY[5];
 	u4Byte TOTAL;
-	u2Byte DROP;
+	u16 DROP;
 	u8 Active;
-	u2Byte RptTime;
+	u16 RptTime;
 	u8 RAWaitingCounter;
 	u8 RAPendingCounter;
 #if 1 //POWER_TRAINING_ACTIVE == 1 // For compile  pass only~!
@@ -1147,7 +1147,7 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	u8			*mp_mode;
 	//u8			*pAidMap;
 //--------- POINTER REFERENCE-----------//
-	pu2Byte			pForcedDataRate;
+	u16 *			pForcedDataRate;
 //------------CALL BY VALUE-------------//
 	bool			bLinkInProcess;
 	bool			bWIFI_Direct;
@@ -1204,7 +1204,7 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	PSTA_INFO_T		pODM_StaInfo[ODM_ASSOCIATE_ENTRY_NUM];
 
 #if (RATE_ADAPTIVE_SUPPORT == 1)
-	u2Byte			CurrminRptTime;
+	u16			CurrminRptTime;
 	ODM_RA_INFO_T   RAInfo[ODM_ASSOCIATE_ENTRY_NUM]; //See HalMacID support
 #endif
 	//
@@ -1690,7 +1690,7 @@ void
 ODM_CmnInfoPtrArrayHook(
 	PDM_ODM_T		pDM_Odm,
 	ODM_CMNINFO_E	CmnInfo,
-	u2Byte			Index,
+	u16			Index,
 	void *			pValue
 	);
 

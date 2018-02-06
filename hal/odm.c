@@ -20,7 +20,7 @@
 #include "odm_precomp.h"
 
 
-const u2Byte dB_Invert_Table[8][12] = {
+const u16 dB_Invert_Table[8][12] = {
 	{	1,		1,		1,		2,		2,		2,		2,		3,		3,		3,		4,		4},
 	{	4,		5,		6,		6,		7,		8,		9,		10,		11,		13,		14,		16},
 	{	18,		20,		22,		25,		28,		32,		35,		40,		45,		50,		56,		63},
@@ -1088,7 +1088,7 @@ ODM_CmnInfoHook(
 			break;
 
 		case	ODM_CMNINFO_FORCED_RATE:
-			pDM_Odm->pForcedDataRate = (pu2Byte)pValue;
+			pDM_Odm->pForcedDataRate = (u16 *)pValue;
 			break;
 
 		case	ODM_CMNINFO_MP_MODE:
@@ -1127,7 +1127,7 @@ void
 ODM_CmnInfoPtrArrayHook(
 		PDM_ODM_T		pDM_Odm,
 		ODM_CMNINFO_E	CmnInfo,
-		u2Byte			Index,
+		u16			Index,
 		void *			pValue
 	)
 {

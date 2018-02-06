@@ -529,7 +529,7 @@ ODM_ReadAndConfig_MP_8812A_RadioA(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
@@ -1058,7 +1058,7 @@ ODM_ReadAndConfig_MP_8812A_RadioB(
 
 	u4Byte     hex         = 0;
 	u4Byte     i           = 0;
-	u2Byte     count       = 0;
+	u16     count       = 0;
 	pu4Byte    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
