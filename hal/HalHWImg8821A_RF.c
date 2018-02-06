@@ -18,14 +18,14 @@
 
 static bool
 CheckCondition(
-    const u4Byte  Condition,
-    const u4Byte  Hex
+    const u32  Condition,
+    const u32  Hex
     )
 {
-    u4Byte _board     = (Hex & 0x000000FF);
-    u4Byte _interface = (Hex & 0x0000FF00) >> 8;
-    u4Byte _platform  = (Hex & 0x00FF0000) >> 16;
-    u4Byte cond = Condition;
+    u32 _board     = (Hex & 0x000000FF);
+    u32 _interface = (Hex & 0x0000FF00) >> 8;
+    u32 _platform  = (Hex & 0x00FF0000) >> 16;
+    u32 cond = Condition;
 
     if ( Condition == 0xCDCDCDCD )
         return true;
@@ -51,7 +51,7 @@ CheckCondition(
 *                           RadioA.TXT
 ******************************************************************************/
 
-static const u4Byte Array_MP_8821A_RadioA[] = {
+static const u32 Array_MP_8821A_RadioA[] = {
 		0x018, 0x0001712A,
 		0x056, 0x00051CF2,
 		0x066, 0x00040000,
@@ -661,15 +661,15 @@ ODM_ReadAndConfig_MP_8821A_RadioA(
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
-	u4Byte     hex         = 0;
-	u4Byte     i           = 0;
+	u32     hex         = 0;
+	u32     i           = 0;
 	u16     count       = 0;
-	pu4Byte    ptr_array   = NULL;
+	u32 *    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
 	u8     board       = pDM_Odm->BoardType;
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_RadioA)/sizeof(u4Byte);
-	const pu4Byte    Array       = Array_MP_8821A_RadioA;
+	u32     ArrayLen    = sizeof(Array_MP_8821A_RadioA)/sizeof(u32);
+	const u32 *    Array       = Array_MP_8821A_RadioA;
 
 
 	hex += board;
@@ -680,8 +680,8 @@ ODM_ReadAndConfig_MP_8821A_RadioA(
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
-	    u4Byte v1 = Array[i];
-	    u4Byte v2 = Array[i+1];
+	    u32 v1 = Array[i];
+	    u32 v2 = Array[i+1];
 
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
@@ -1477,8 +1477,8 @@ ODM_ReadAndConfig_MP_8821A_TXPWR_LMT(
 	PDM_ODM_T  pDM_Odm
 	)
 {
-	u4Byte     i           = 0;
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_TXPWR_LMT)/sizeof(u8 *);
+	u32     i           = 0;
+	u32     ArrayLen    = sizeof(Array_MP_8821A_TXPWR_LMT)/sizeof(u8 *);
 	const u8 *    *Array      = Array_MP_8821A_TXPWR_LMT;
 
 

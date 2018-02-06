@@ -160,8 +160,8 @@ void ODM_InitDebugSetting(PDM_ODM_T pDM_Odm);
 			{																		\
 				char			*szTitle = _TitleString;									\
 				u8 *		pbtHexData = _HexData;									\
-				u4Byte		u4bHexDataLen = _HexDataLen;							\
-				u4Byte		__i;														\
+				u32		u4bHexDataLen = _HexDataLen;							\
+				u32		__i;														\
 				DbgPrint("%s", szTitle);													\
 				for (__i=0;__i<u4bHexDataLen;__i++)									\
 				{																	\
@@ -318,7 +318,7 @@ typedef enum tag_ODM_DBGP_Flag_Type_Definition
 
 
 
-extern	u4Byte ODM_GlobalDebugLevel;
+extern	u32 ODM_GlobalDebugLevel;
 
 
 #if DBG
@@ -458,10 +458,10 @@ extern	u8Byte ODM_GlobalDebugComponents;
      is a u3232 integer and you can assign 32 different events. */
 typedef struct tag_DBGP_Debug_Flag_Structure
 {
-	u4Byte	Mans;			/* Main Scheduler module. */
-	u4Byte	Rtos;			/* RTOS module. */
-	u4Byte	Alarm;		/* Alarm module. */
-	u4Byte	Pm;			/* Performance monitor module. */
+	u32	Mans;			/* Main Scheduler module. */
+	u32	Rtos;			/* RTOS module. */
+	u32	Alarm;		/* Alarm module. */
+	u32	Pm;			/* Performance monitor module. */
 }DBGP_FLAG_T;
 
 /* Define debug print header for every service module.*/
@@ -683,8 +683,8 @@ typedef enum tag_DBGP_Flag_Type_Definition
 			{																		\
 				char			*szTitle = _TitleString;									\
 				u8 *		pbtHexData = _HexData;									\
-				u4Byte		u4bHexDataLen = _HexDataLen;							\
-				u4Byte		__i;														\
+				u32		u4bHexDataLen = _HexDataLen;							\
+				u32		__i;														\
 				DbgPrint("%s", szTitle);													\
 				for (__i=0;__i<u4bHexDataLen;__i++)									\
 				{																	\
@@ -834,7 +834,7 @@ typedef enum tag_DBGP_Flag_Type_Definition
 
 
 /*------------------------Export global variable----------------------------*/
-extern	u4Byte			DBGP_Type[DBGP_TYPE_MAX];
+extern	u32			DBGP_Type[DBGP_TYPE_MAX];
 extern	DBGP_HEAD_T	DBGP_Head;
 
 /*------------------------Export global variable----------------------------*/
@@ -860,7 +860,7 @@ extern	void	DBG_DumpMem(const u8 DbgComp,
 
 
 
-extern u4Byte GlobalDebugLevel;
+extern u32 GlobalDebugLevel;
 extern u8Byte GlobalDebugComponents;
 
 

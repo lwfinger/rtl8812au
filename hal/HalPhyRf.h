@@ -38,7 +38,7 @@ typedef struct _TXPWRTRACK_CFG {
 	u8		Threshold_IQK;
 	u8		AverageThermalNum;
 	u8		RfPathCount;
-	u4Byte		ThermalRegAddr;
+	u32		ThermalRegAddr;
 	FuncSetPwr	ODM_TxPwrTrackSetPwr;
 	FuncIQK		DoIQK;
 	FuncLCK		PHY_LCCalibrate;

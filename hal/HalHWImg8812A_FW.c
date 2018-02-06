@@ -1980,14 +1980,14 @@ u8 Array_MP_8812A_FW_NIC[] = {
 0xFD, 0x11, 0xF0, 0xAF, 0x03, 0x74, 0x00, 0x2F, 0xF5, 0x82, 0xE4, 0x34, 0xFB, 0xF5, 0x83, 0xE0,
 0xFF, 0x22, 0xE3, 0xAC,
 };
-u4Byte ArrayLength_MP_8812A_FW_NIC = 31396;
+u32 ArrayLength_MP_8812A_FW_NIC = 31396;
 
 
 void
 ODM_ReadFirmware_MP_8812A_FW_NIC(
      PDM_ODM_T    pDM_Odm,
      u8       *pFirmware,
-     u4Byte       *pFirmwareSize
+     u32       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8812A_FW_NIC;
@@ -3986,14 +3986,14 @@ u8 Array_MP_8812A_FW_NIC_BT[] = {
 0xF0, 0xAF, 0x03, 0x74, 0x00, 0x2F, 0xF5, 0x82, 0xE4, 0x34, 0xFB, 0xF5, 0x83, 0xE0, 0xFF, 0x22,
 0x24, 0xCF,
 };
-u4Byte ArrayLength_MP_8812A_FW_NIC_BT = 31826;
+u32 ArrayLength_MP_8812A_FW_NIC_BT = 31826;
 
 
 void
 ODM_ReadFirmware_MP_8812A_FW_NIC_BT(
      PDM_ODM_T    pDM_Odm,
      u8       *pFirmware,
-     u4Byte       *pFirmwareSize
+     u32       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8812A_FW_NIC_BT;
@@ -5288,14 +5288,14 @@ u8 Array_MP_8812A_FW_WoWLAN[] = {
 0x03, 0xD0, 0x75, 0x40, 0x01, 0x75, 0x41, 0x90, 0x75, 0x42, 0xAB, 0x75, 0x43, 0x03, 0x90, 0x90,
 0xA7, 0x12, 0x48, 0x4A, 0x12, 0x34, 0x2C, 0x22, 0x09, 0xD8,
 };
-u4Byte ArrayLength_MP_8812A_FW_WoWLAN = 20570;
+u32 ArrayLength_MP_8812A_FW_WoWLAN = 20570;
 
 
 void
 ODM_ReadFirmware_MP_8812A_FW_WoWLAN(
      PDM_ODM_T    pDM_Odm,
      u8       *pFirmware,
-     u4Byte       *pFirmwareSize
+     u32       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8812A_FW_WoWLAN;

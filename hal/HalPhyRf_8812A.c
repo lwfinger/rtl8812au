@@ -70,7 +70,7 @@ ODM_TxPwrTrackSetPwr8812A(
 	u8				ChannelMappedIndex
 	)
 {
-	u4Byte	finalBbSwingIdx[2];
+	u32	finalBbSwingIdx[2];
 
 	PADAPTER		Adapter = pDM_Odm->Adapter;
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
@@ -496,12 +496,12 @@ static void _IQK_TX_FillIQC_8812A(
 
 static void _IQK_BackupMacBB_8812A(
 	PDM_ODM_T	pDM_Odm,
-	pu4Byte		MACBB_backup,
-	pu4Byte		Backup_MACBB_REG,
-	u4Byte		MACBB_NUM
+	u32 *		MACBB_backup,
+	u32 *		Backup_MACBB_REG,
+	u32		MACBB_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	 //save MACBB default value
 	for (i = 0; i < MACBB_NUM; i++){
@@ -513,14 +513,14 @@ static void _IQK_BackupMacBB_8812A(
 
 static void _IQK_BackupRF_8812A(
 	PDM_ODM_T	pDM_Odm,
-	pu4Byte		RFA_backup,
-	pu4Byte		RFB_backup,
-	pu4Byte		Backup_RF_REG,
-	u4Byte		RF_NUM
+	u32 *		RFA_backup,
+	u32 *		RFB_backup,
+	u32 *		Backup_RF_REG,
+	u32		RF_NUM
 	)
 {
 
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Save RF Parameters
 	for (i = 0; i < RF_NUM; i++){
@@ -532,12 +532,12 @@ static void _IQK_BackupRF_8812A(
 
 static void _IQK_BackupAFE_8812A(
 	PDM_ODM_T		pDM_Odm,
-	pu4Byte		AFE_backup,
-	pu4Byte		Backup_AFE_REG,
-	u4Byte		AFE_NUM
+	u32 *		AFE_backup,
+	u32 *		Backup_AFE_REG,
+	u32		AFE_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Save AFE Parameters
 	for (i = 0; i < AFE_NUM; i++){
@@ -548,12 +548,12 @@ static void _IQK_BackupAFE_8812A(
 
 static void _IQK_RestoreMacBB_8812A(
 	PDM_ODM_T		pDM_Odm,
-	pu4Byte		MACBB_backup,
-	pu4Byte		Backup_MACBB_REG,
-	u4Byte		MACBB_NUM
+	u32 *		MACBB_backup,
+	u32 *		Backup_MACBB_REG,
+	u32		MACBB_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Reload MacBB Parameters
 	for (i = 0; i < MACBB_NUM; i++){
@@ -565,12 +565,12 @@ static void _IQK_RestoreMacBB_8812A(
 static void _IQK_RestoreRF_8812A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
-	pu4Byte			Backup_RF_REG,
-	pu4Byte			RF_backup,
-	u4Byte			RF_REG_NUM
+	u32 *			Backup_RF_REG,
+	u32 *			RF_backup,
+	u32			RF_REG_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	for (i = 0; i < RF_REG_NUM; i++)
@@ -596,12 +596,12 @@ static void _IQK_RestoreRF_8812A(
 
 static void _IQK_RestoreAFE_8812A(
 	PDM_ODM_T		pDM_Odm,
-	pu4Byte		AFE_backup,
-	pu4Byte		Backup_AFE_REG,
-	u4Byte		AFE_NUM
+	u32 *		AFE_backup,
+	u32 *		Backup_AFE_REG,
+	u32		AFE_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Reload AFE Parameters
 	for (i = 0; i < AFE_NUM; i++){
@@ -642,7 +642,7 @@ static void _IQK_Tx_8812A(
 	u8 chnlIdx
 	)
 {
-	u4Byte		TX_fail,RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
+	u32		TX_fail,RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
 	int		TX_X = 0, TX_Y = 0, RX_X = 0, RX_Y = 0, TX_Average = 0, RX_Average = 0;
 	int		TX_X0[cal_num], TX_Y0[cal_num], RX_X0[cal_num], RX_Y0[cal_num];
 	bool		TX0IQKOK = false, RX0IQKOK = false;
@@ -1733,11 +1733,11 @@ phy_IQCalibrate_8812A(
 	u8		Channel
 	)
 {
-	u4Byte	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
-	u4Byte	Backup_MACBB_REG[MACBB_REG_NUM] = {0xb00, 0x520, 0x550, 0x808, 0x90c, 0xc00, 0xe00, 0x8c4,0x838,  0x82c};
-	u4Byte	Backup_AFE_REG[AFE_REG_NUM] = {0xc5c, 0xc60, 0xc64, 0xc68, 0xcb8, 0xcb0, 0xcb4,
+	u32	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
+	u32	Backup_MACBB_REG[MACBB_REG_NUM] = {0xb00, 0x520, 0x550, 0x808, 0x90c, 0xc00, 0xe00, 0x8c4,0x838,  0x82c};
+	u32	Backup_AFE_REG[AFE_REG_NUM] = {0xc5c, 0xc60, 0xc64, 0xc68, 0xcb8, 0xcb0, 0xcb4,
 			                                                   0xe5c, 0xe60, 0xe64, 0xe68, 0xeb8, 0xeb0, 0xeb4};
-	u4Byte	Backup_RF_REG[RF_REG_NUM] = {0x65, 0x8f, 0x0};
+	u32	Backup_RF_REG[RF_REG_NUM] = {0x65, 0x8f, 0x0};
 	u8	chnlIdx = ODM_GetRightChnlPlaceforIQK(Channel);
 
 	_IQK_BackupMacBB_8812A(pDM_Odm, MACBB_backup, Backup_MACBB_REG, MACBB_REG_NUM);
@@ -1764,10 +1764,10 @@ phy_LCCalibrate_8812A(
 	bool		is2T
 	)
 {
-	u4Byte	/*RF_Amode=0, RF_Bmode=0,*/ LC_Cal = 0, tmp = 0;
+	u32	/*RF_Amode=0, RF_Bmode=0,*/ LC_Cal = 0, tmp = 0;
 
 	//Check continuous TX and Packet TX
-	u4Byte	reg0x914 = ODM_Read4Byte(pDM_Odm, rSingleTone_ContTx_Jaguar);;
+	u32	reg0x914 = ODM_Read4Byte(pDM_Odm, rSingleTone_ContTx_Jaguar);;
 
 	// Backup RF reg18.
 	LC_Cal = ODM_GetRFReg(pDM_Odm, ODM_RF_PATH_A, RF_CHNLBW, bRFRegOffsetMask);
@@ -2041,12 +2041,12 @@ _DPK_ThermalCompensation(
 static void
 _DPK_parareload(
 	PDM_ODM_T	pDM_Odm,
-	pu4Byte		MACBB_backup,
-	pu4Byte		Backup_MACBB_REG,
-	u4Byte		MACBB_NUM
+	u32 *		MACBB_backup,
+	u32 *		Backup_MACBB_REG,
+	u32		MACBB_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	 //save MACBB default value
@@ -2059,14 +2059,14 @@ _DPK_parareload(
 static void
 _DPK_parabackup(
 	PDM_ODM_T	pDM_Odm,
-	pu4Byte		MACBB_backup,
-	pu4Byte		Backup_MACBB_REG,
-	u4Byte		MACBB_NUM
+	u32 *		MACBB_backup,
+	u32 *		Backup_MACBB_REG,
+	u32		MACBB_NUM
 
 
 	)
 {
-	u4Byte i;
+	u32 i;
 
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	 //save MACBB default value
@@ -2170,15 +2170,15 @@ _DPK_GetGainLoss(
 	u8 path
 	)
 {
-	u4Byte GL_I=0,GL_Q=0;
-	u4Byte GL_I_tmp=0,GL_Q_tmp=0;
+	u32 GL_I=0,GL_Q=0;
+	u32 GL_I_tmp=0,GL_Q_tmp=0;
 
-	u4Byte Power_GL;
+	u32 Power_GL;
 	u16 Scaler[]={0x4000, 0x41db, 0x43c7, 0x45c3, 0x47cf, 0x49ec, 0x4c19, 0x4e46, 0x5093,0x52f2,  //10
 					 0x5560, 0x57cf, 0x5a7f, 0x5d0e, 0x5fbe
 						};
 	u8 sindex=0;
-	u4Byte pagesel = 0,regsel = 0;
+	u32 pagesel = 0,regsel = 0;
 
 	if(path == 0)  //pathA
 		{
@@ -2285,7 +2285,7 @@ static void
 _DPK_EnableDP(
 	PDM_ODM_T	pDM_Odm,
 	u8 path,
-	u4Byte TXindex
+	u32 TXindex
 	)
 {
 
@@ -2303,7 +2303,7 @@ _DPK_EnableDP(
 	u8 zeropoint;
 	int pwsf1,pwsf2;
 	u8 i;
-	u4Byte pagesel = 0,regsel = 0;
+	u32 pagesel = 0,regsel = 0;
 
 	if(path == 0)
 		{
@@ -2380,10 +2380,10 @@ _DPK_pathABDPK(
 	PDM_ODM_T	pDM_Odm
 	)
 {
-	u4Byte TXindex = 0;
+	u32 TXindex = 0;
 	u8 path = 0;
-	u4Byte pagesel = 0,regsel = 0;
-	u4Byte i=0,j=0;
+	u32 pagesel = 0,regsel = 0;
+	u32 i=0,j=0;
 
 	for(path=0;path<2;path ++)	//path A = 0; path B = 1;
 		{
@@ -2641,7 +2641,7 @@ phy_DPCalibrate_8812A(
 	PDM_ODM_T	pDM_Odm
 	)
 {
-    u4Byte backupRegAddrs[] = {
+    u32 backupRegAddrs[] = {
         0x970, 0xcb8, 0x838, 0xc00, 0x90c, 0xb00, 0xc94, 0x82c, 0x520, 0xc60, // 10
         0xc64, 0xc68, 0xc6c, 0xc70, 0xc74, 0xc78, 0xc7c, 0xc80, 0xc84, 0xc50, // 20
         0xc20, 0xc24, 0xc28, 0xc2c, 0xc30, 0xc34, 0xc38, 0xc3c, 0xc40, 0xc44, // 30
@@ -2650,12 +2650,12 @@ phy_DPCalibrate_8812A(
         0xe68, 0xe6c, 0xe70, 0xe74, 0xe78, 0xe7c, 0xe80, 0xe84
     };
 
-    u4Byte backupRegData[sizeof(backupRegAddrs)/sizeof(u4Byte)];
+    u32 backupRegData[sizeof(backupRegAddrs)/sizeof(u32)];
 
 
 	//backup BB&MAC default value
 
-	_DPK_parabackup(pDM_Odm,backupRegAddrs, backupRegData, sizeof(backupRegAddrs)/sizeof(u4Byte));
+	_DPK_parabackup(pDM_Odm,backupRegAddrs, backupRegData, sizeof(backupRegAddrs)/sizeof(u32));
 
 	//set global parameters
 	_DPK_Globalparaset(pDM_Odm);
@@ -2667,7 +2667,7 @@ phy_DPCalibrate_8812A(
 
 
 	//reload BB&MAC defaul value;
-	_DPK_parareload(pDM_Odm,backupRegAddrs, backupRegData, sizeof(backupRegAddrs)/sizeof(u4Byte));
+	_DPK_parareload(pDM_Odm,backupRegAddrs, backupRegData, sizeof(backupRegAddrs)/sizeof(u32));
 
 }
 

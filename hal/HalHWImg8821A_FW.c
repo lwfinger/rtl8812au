@@ -549,14 +549,14 @@ static const u8 Array_MP_8821A_FW_BT[] = {
 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 0x51, 0x47, 0x2E, 0x80,
 };
-static const u4Byte ArrayLength_MP_8821A_FW_BT = 8484;
+static const u32 ArrayLength_MP_8821A_FW_BT = 8484;
 
 
 void
 ODM_ReadFirmware_MP_8821A_FW_BT(
      PDM_ODM_T    pDM_Odm,
      u8       *pFirmware,
-     u4Byte       *pFirmwareSize
+     u32       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8821A_FW_BT;
@@ -2565,14 +2565,14 @@ static const u8 Array_MP_8821A_FW_NIC[] = {
 0x11, 0xF0, 0xAF, 0x03, 0x74, 0x00, 0x2F, 0xF5, 0x82, 0xE4, 0x34, 0xFB, 0xF5, 0x83, 0xE0, 0xFF,
 0x22, 0x00, 0xD4, 0x15,
 };
-static const u4Byte ArrayLength_MP_8821A_FW_NIC = 31972;
+static const u32 ArrayLength_MP_8821A_FW_NIC = 31972;
 
 
 void
 ODM_ReadFirmware_MP_8821A_FW_NIC(
      PDM_ODM_T    pDM_Odm,
      u8       *pFirmware,
-     u4Byte       *pFirmwareSize
+     u32       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8821A_FW_NIC;
@@ -3694,14 +3694,14 @@ static const u8 Array_MP_8821A_FW_WoWLAN[] = {
 0x0F, 0xEF, 0xB4, 0x03, 0xD0, 0x75, 0x40, 0x01, 0x75, 0x41, 0x90, 0x75, 0x42, 0xE0, 0x75, 0x43,
 0x03, 0x90, 0x90, 0xDC, 0x12, 0x48, 0xEB, 0x12, 0x34, 0x62, 0x22, 0x00, 0x9D, 0x91,
 };
-static const u4Byte ArrayLength_MP_8821A_FW_WoWLAN = 17806;
+static const u32 ArrayLength_MP_8821A_FW_WoWLAN = 17806;
 
 
 void
 ODM_ReadFirmware_MP_8821A_FW_WoWLAN(
      PDM_ODM_T    pDM_Odm,
      u8       *pFirmware,
-     u4Byte       *pFirmwareSize
+     u32       *pFirmwareSize
 )
 {
 	*((SIZE_PTR *)pFirmware) = (SIZE_PTR)Array_MP_8821A_FW_WoWLAN;

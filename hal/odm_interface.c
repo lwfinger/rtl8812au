@@ -25,7 +25,7 @@
 u8
 ODM_Read1Byte(
 	PDM_ODM_T		pDM_Odm,
-	u4Byte			RegAddr
+	u32			RegAddr
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -37,7 +37,7 @@ ODM_Read1Byte(
 u16
 ODM_Read2Byte(
 	PDM_ODM_T		pDM_Odm,
-	u4Byte			RegAddr
+	u32			RegAddr
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -45,10 +45,10 @@ ODM_Read2Byte(
 	return rtw_read16(Adapter,RegAddr);
 }
 
-u4Byte
+u32
 ODM_Read4Byte(
 	PDM_ODM_T		pDM_Odm,
-	u4Byte			RegAddr
+	u32			RegAddr
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -60,7 +60,7 @@ ODM_Read4Byte(
 void
 ODM_Write1Byte(
 	PDM_ODM_T		pDM_Odm,
-	u4Byte			RegAddr,
+	u32			RegAddr,
 	u8			Data
 	)
 {
@@ -73,7 +73,7 @@ ODM_Write1Byte(
 void
 ODM_Write2Byte(
 	PDM_ODM_T		pDM_Odm,
-	u4Byte			RegAddr,
+	u32			RegAddr,
 	u16			Data
 	)
 {
@@ -86,8 +86,8 @@ ODM_Write2Byte(
 void
 ODM_Write4Byte(
 	PDM_ODM_T		pDM_Odm,
-	u4Byte			RegAddr,
-	u4Byte			Data
+	u32			RegAddr,
+	u32			Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -98,9 +98,9 @@ ODM_Write4Byte(
 void
 ODM_SetMACReg(
 	PDM_ODM_T	pDM_Odm,
-	u4Byte		RegAddr,
-	u4Byte		BitMask,
-	u4Byte		Data
+	u32		RegAddr,
+	u32		BitMask,
+	u32		Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -108,11 +108,11 @@ ODM_SetMACReg(
 	PHY_SetBBReg(Adapter, RegAddr, BitMask, Data);
 }
 
-u4Byte
+u32
 ODM_GetMACReg(
 	PDM_ODM_T	pDM_Odm,
-	u4Byte		RegAddr,
-	u4Byte		BitMask
+	u32		RegAddr,
+	u32		BitMask
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -123,9 +123,9 @@ ODM_GetMACReg(
 void
 ODM_SetBBReg(
 	PDM_ODM_T	pDM_Odm,
-	u4Byte		RegAddr,
-	u4Byte		BitMask,
-	u4Byte		Data
+	u32		RegAddr,
+	u32		BitMask,
+	u32		Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -133,11 +133,11 @@ ODM_SetBBReg(
 	PHY_SetBBReg(Adapter, RegAddr, BitMask, Data);
 }
 
-u4Byte
+u32
 ODM_GetBBReg(
 	PDM_ODM_T	pDM_Odm,
-	u4Byte		RegAddr,
-	u4Byte		BitMask
+	u32		RegAddr,
+	u32		BitMask
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -150,9 +150,9 @@ void
 ODM_SetRFReg(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	eRFPath,
-	u4Byte				RegAddr,
-	u4Byte				BitMask,
-	u4Byte				Data
+	u32				RegAddr,
+	u32				BitMask,
+	u32				Data
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -161,12 +161,12 @@ ODM_SetRFReg(
 }
 
 
-u4Byte
+u32
 ODM_GetRFReg(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	eRFPath,
-	u4Byte				RegAddr,
-	u4Byte				BitMask
+	u32				RegAddr,
+	u32				BitMask
 	)
 {
 	PADAPTER		Adapter = pDM_Odm->Adapter;
@@ -181,7 +181,7 @@ void
 ODM_AllocateMemory(
 	PDM_ODM_T	pDM_Odm,
 	void *		*pPtr,
-	u4Byte		length
+	u32		length
 	)
 {
 	*pPtr = rtw_zvmalloc(length);
@@ -192,7 +192,7 @@ void
 ODM_FreeMemory(
 	PDM_ODM_T	pDM_Odm,
 	void *		pPtr,
-	u4Byte		length
+	u32		length
 	)
 {
 	rtw_vmfree(pPtr, length);
@@ -203,7 +203,7 @@ ODM_MoveMemory(
 	PDM_ODM_T	pDM_Odm,
 	void *		pDest,
 	const void *		pSrc,
-	u4Byte		Length
+	u32		Length
 	)
 {
 	_rtw_memcpy(pDest, (void *)pSrc, Length);
@@ -213,7 +213,7 @@ s4Byte ODM_CompareMemory(
 	PDM_ODM_T	pDM_Odm,
 	void *           pBuf1,
       void *           pBuf2,
-      u4Byte          length
+      u32          length
        )
 {
 	return _rtw_memcmp(pBuf1,pBuf2,length);
@@ -293,32 +293,32 @@ ODM_IsWorkItemScheduled(
 //
 void
 ODM_StallExecution(
-	u4Byte	usDelay
+	u32	usDelay
 	)
 {
 	rtw_udelay_os(usDelay);
 }
 
 void
-ODM_delay_ms(u4Byte	ms)
+ODM_delay_ms(u32	ms)
 {
 	rtw_mdelay_os(ms);
 }
 
 void
-ODM_delay_us(u4Byte	us)
+ODM_delay_us(u32	us)
 {
 	rtw_udelay_os(us);
 }
 
 void
-ODM_sleep_ms(u4Byte	ms)
+ODM_sleep_ms(u32	ms)
 {
 	rtw_msleep_os(ms);
 }
 
 void
-ODM_sleep_us(u4Byte	us)
+ODM_sleep_us(u32	us)
 {
 	rtw_usleep_os(us);
 }
@@ -327,7 +327,7 @@ void
 ODM_SetTimer(
 	PDM_ODM_T		pDM_Odm,
 	PRT_TIMER		pTimer,
-	u4Byte			msDelay
+	u32			msDelay
 	)
 {
 	_set_timer(pTimer,msDelay ); //ms
@@ -369,13 +369,13 @@ ODM_ReleaseTimer(
 //
 // ODM FW relative API.
 //
-u4Byte
+u32
 ODM_FillH2CCmd(
 	u8 *		pH2CBuffer,
-	u4Byte		H2CBufferLen,
-	u4Byte		CmdNum,
-	pu4Byte		pElementID,
-	pu4Byte		pCmdLen,
+	u32		H2CBufferLen,
+	u32		CmdNum,
+	u32 *		pElementID,
+	u32 *		pCmdLen,
 	u8 **		pCmbBuffer,
 	u8 *		CmdStartSeq
 	)

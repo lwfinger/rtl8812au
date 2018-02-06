@@ -98,7 +98,7 @@ ODM_TXPowerTrackingCallback_ThermalMeter(
 
 	u8			ThermalValue = 0, delta, delta_LCK, delta_IQK, p = 0, i = 0;
 	u8			ThermalValue_AVG_count = 0;
-	u4Byte			ThermalValue_AVG = 0;
+	u32			ThermalValue_AVG = 0;
 
 	u8			OFDM_min_index = 0;  // OFDM BB Swing should be less than +3.0dB, which is required by Arthur
 	u8			Indexforchannel = 0; // GetRightChnlPlaceforIQK(pHalData->CurrentChannel)

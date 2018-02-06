@@ -65,12 +65,12 @@ PHY_QueryBBReg8812(
 void
 PHY_SetBBReg8812(
 	PADAPTER	Adapter,
-	u4Byte		RegAddr,
-	u4Byte		BitMask,
-	u4Byte		Data
+	u32		RegAddr,
+	u32		BitMask,
+	u32		Data
 	)
 {
-	u4Byte			OriginalValue, BitShift;
+	u32			OriginalValue, BitShift;
 
 #if (DISABLE_BB_RF == 1)
 	return;
@@ -1580,9 +1580,9 @@ void phy_PreprocessVHTPGDataFromExactToRelativeValue(
 void
 phy_PreprocessPGDataFromExactToRelativeValue(
 	PADAPTER	Adapter,
-	u4Byte		RegAddr,
-	u4Byte		BitMask,
-	pu4Byte		pData
+	u32		RegAddr,
+	u32		BitMask,
+	u32 *		pData
 	)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2873,14 +2873,14 @@ PHY_GetTxPowerIndex_8812A(
 void
 PHY_SetTxPowerIndex_8812A(
 	PADAPTER			Adapter,
-	u4Byte				PowerIndex,
+	u32				PowerIndex,
 	u8				RFPath,
 	u8				Rate
 	)
 {
 	HAL_DATA_TYPE		*pHalData	= GET_HAL_DATA(Adapter);
 	bool				Direction = false;
-	u4Byte				TxagcOffset = 0;
+	u32				TxagcOffset = 0;
 
 	// <20120928, Kordan> A workaround in 8812A/8821A testchip, to fix the bug of odd Tx power indexes.
 	if ( (PowerIndex % 2 == 1) && IS_HARDWARE_TYPE_JAGUAR(Adapter) && IS_TEST_CHIP(pHalData->VersionID) )

@@ -16,7 +16,7 @@
 #ifndef __INC_MP_MAC_HW_IMG_8812A_H
 #define __INC_MP_MAC_HW_IMG_8812A_H
 
-static bool CheckCondition(const u4Byte Condition, const u4Byte Hex);
+static bool CheckCondition(const u32 Condition, const u32 Hex);
 
 /******************************************************************************
 *                           MAC_REG.TXT

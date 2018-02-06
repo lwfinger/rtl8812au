@@ -18,14 +18,14 @@
 
 static bool
 CheckCondition(
-    const u4Byte  Condition,
-    const u4Byte  Hex
+    const u32  Condition,
+    const u32  Hex
     )
 {
-    u4Byte _board     = (Hex & 0x000000FF);
-    u4Byte _interface = (Hex & 0x0000FF00) >> 8;
-    u4Byte _platform  = (Hex & 0x00FF0000) >> 16;
-    u4Byte cond = Condition;
+    u32 _board     = (Hex & 0x000000FF);
+    u32 _interface = (Hex & 0x0000FF00) >> 8;
+    u32 _platform  = (Hex & 0x00FF0000) >> 16;
+    u32 cond = Condition;
 
     if ( Condition == 0xCDCDCDCD )
         return true;
@@ -51,7 +51,7 @@ CheckCondition(
 *                           AGC_TAB.TXT
 ******************************************************************************/
 
-static const u4Byte Array_MP_8821A_AGC_TAB[] = {
+static const u32 Array_MP_8821A_AGC_TAB[] = {
 		0x81C, 0xBF000001,
 		0x81C, 0xBF020001,
 		0x81C, 0xBF040001,
@@ -253,15 +253,15 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
-	u4Byte     hex         = 0;
-	u4Byte     i           = 0;
+	u32     hex         = 0;
+	u32     i           = 0;
 	u16     count       = 0;
-	pu4Byte    ptr_array   = NULL;
+	u32 *    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
 	u8     board       = pDM_Odm->BoardType;
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_AGC_TAB)/sizeof(u4Byte);
-	const pu4Byte    Array       = Array_MP_8821A_AGC_TAB;
+	u32     ArrayLen    = sizeof(Array_MP_8821A_AGC_TAB)/sizeof(u32);
+	const u32 *    Array       = Array_MP_8821A_AGC_TAB;
 
 
 	hex += board;
@@ -272,8 +272,8 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
-	    u4Byte v1 = Array[i];
-	    u4Byte v2 = Array[i+1];
+	    u32 v1 = Array[i];
+	    u32 v2 = Array[i+1];
 
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
@@ -320,7 +320,7 @@ ODM_ReadAndConfig_MP_8821A_AGC_TAB(
 *                           PHY_REG.TXT
 ******************************************************************************/
 
-static const u4Byte Array_MP_8821A_PHY_REG[] = {
+static const u32 Array_MP_8821A_PHY_REG[] = {
 		0x800, 0x0020D090,
 		0x804, 0x080112E0,
 		0x808, 0x0E028211,
@@ -498,15 +498,15 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 {
 	#define READ_NEXT_PAIR(v1, v2, i) do { i += 2; v1 = Array[i]; v2 = Array[i+1]; } while(0)
 
-	u4Byte     hex         = 0;
-	u4Byte     i           = 0;
+	u32     hex         = 0;
+	u32     i           = 0;
 	u16     count       = 0;
-	pu4Byte    ptr_array   = NULL;
+	u32 *    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
 	u8     board       = pDM_Odm->BoardType;
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_PHY_REG)/sizeof(u4Byte);
-	const pu4Byte    Array       = Array_MP_8821A_PHY_REG;
+	u32     ArrayLen    = sizeof(Array_MP_8821A_PHY_REG)/sizeof(u32);
+	const u32 *    Array       = Array_MP_8821A_PHY_REG;
 
 
 	hex += board;
@@ -517,8 +517,8 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 
 	for (i = 0; i < ArrayLen; i += 2 )
 	{
-	    u4Byte v1 = Array[i];
-	    u4Byte v2 = Array[i+1];
+	    u32 v1 = Array[i];
+	    u32 v2 = Array[i+1];
 
 	    // This (offset, data) pair meets the condition.
 	    if ( v1 < 0xCDCDCDCD )
@@ -565,7 +565,7 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG(
 *                           PHY_REG_PG.TXT
 ******************************************************************************/
 
-static const u4Byte Array_MP_8821A_PHY_REG_PG[] = {
+static const u32 Array_MP_8821A_PHY_REG_PG[] = {
 		0xC20, 0x00000000, 0x32343638,
 		0xC24, 0x00000000, 0x36363838,
 		0xC28, 0x00000000, 0x28303234,
@@ -610,15 +610,15 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG_PG(
 	PDM_ODM_T  pDM_Odm
 	)
 {
-	u4Byte     hex = 0;
-	u4Byte     i           = 0;
+	u32     hex = 0;
+	u32     i           = 0;
 	u16     count       = 0;
-	pu4Byte    ptr_array   = NULL;
+	u32 *    ptr_array   = NULL;
 	u8     platform    = pDM_Odm->SupportPlatform;
 	u8     _interface   = pDM_Odm->SupportInterface;
 	u8     board       = pDM_Odm->BoardType;
-	u4Byte     ArrayLen    = sizeof(Array_MP_8821A_PHY_REG_PG)/sizeof(u4Byte);
-	const pu4Byte    Array       = Array_MP_8821A_PHY_REG_PG;
+	u32     ArrayLen    = sizeof(Array_MP_8821A_PHY_REG_PG)/sizeof(u32);
+	const u32 *    Array       = Array_MP_8821A_PHY_REG_PG;
 
 	pDM_Odm->PhyRegPgValueType = PHY_REG_PG_EXACT_VALUE;
 	hex += board;
@@ -627,9 +627,9 @@ ODM_ReadAndConfig_MP_8821A_PHY_REG_PG(
 	hex += 0xFF000000;
 	for (i = 0; i < ArrayLen; i += 3 )
 	{
-	    u4Byte v1 = Array[i];
-	    u4Byte v2 = Array[i+1];
-	    u4Byte v3 = Array[i+2];
+	    u32 v1 = Array[i];
+	    u32 v2 = Array[i+1];
+	    u32 v3 = Array[i+2];
 
 	    // this line is a line of pure_body
 	    if ( v1 < 0xCDCDCDCD )

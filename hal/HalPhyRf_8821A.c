@@ -88,7 +88,7 @@ static void setIqkMatrix_8821A(
 	}
 
     ODM_RT_TRACE(pDM_Odm,ODM_COMP_TX_PWR_TRACK, ODM_DBG_LOUD, ("TxPwrTracking path B: X = 0x%x, Y = 0x%x ele_A = 0x%x ele_C = 0x%x ele_D = 0x%x 0xeb4 = 0x%x 0xebc = 0x%x\n",
-    (u4Byte)IqkResult_X, (u4Byte)IqkResult_Y, (u4Byte)ele_A, (u4Byte)ele_C, (u4Byte)ele_D, (u4Byte)IqkResult_X, (u4Byte)IqkResult_Y));
+    (u32)IqkResult_X, (u32)IqkResult_Y, (u32)ele_A, (u32)ele_C, (u32)ele_D, (u32)IqkResult_X, (u32)IqkResult_Y));
 }
 
 void DoIQK_8821A(
@@ -123,7 +123,7 @@ ODM_TxPwrTrackSetPwr8821A(
 	s1Byte			Final_OFDM_Swing_Index = 0;
 	s1Byte			Final_CCK_Swing_Index = 0;
 	u8			i = 0;
-	u4Byte			finalBbSwingIdx[1];
+	u32			finalBbSwingIdx[1];
 
 
 #if 0 //gtemp
@@ -387,12 +387,12 @@ static void _IQK_TX_FillIQC_8821A(
 
 static void _IQK_BackupMacBB_8821A(
 	PDM_ODM_T	pDM_Odm,
-	pu4Byte		MACBB_backup,
-	pu4Byte		Backup_MACBB_REG,
-	u4Byte		MACBB_NUM
+	u32 *		MACBB_backup,
+	u32 *		Backup_MACBB_REG,
+	u32		MACBB_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	 //save MACBB default value
 	for (i = 0; i < MACBB_NUM; i++){
@@ -404,14 +404,14 @@ static void _IQK_BackupMacBB_8821A(
 
 static void _IQK_BackupRF_8821A(
 	PDM_ODM_T	pDM_Odm,
-	pu4Byte		RFA_backup,
-	pu4Byte		RFB_backup,
-	pu4Byte		Backup_RF_REG,
-	u4Byte		RF_NUM
+	u32 *		RFA_backup,
+	u32 *		RFB_backup,
+	u32 *		Backup_RF_REG,
+	u32		RF_NUM
 	)
 {
 
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Save RF Parameters
 	for (i = 0; i < RF_NUM; i++){
@@ -422,12 +422,12 @@ static void _IQK_BackupRF_8821A(
 
 static void _IQK_BackupAFE_8821A(
 	PDM_ODM_T		pDM_Odm,
-	pu4Byte		AFE_backup,
-	pu4Byte		Backup_AFE_REG,
-	u4Byte		AFE_NUM
+	u32 *		AFE_backup,
+	u32 *		Backup_AFE_REG,
+	u32		AFE_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Save AFE Parameters
 	for (i = 0; i < AFE_NUM; i++){
@@ -438,12 +438,12 @@ static void _IQK_BackupAFE_8821A(
 
 static void _IQK_RestoreMacBB_8821A(
 	PDM_ODM_T		pDM_Odm,
-	pu4Byte		MACBB_backup,
-	pu4Byte		Backup_MACBB_REG,
-	u4Byte		MACBB_NUM
+	u32 *		MACBB_backup,
+	u32 *		Backup_MACBB_REG,
+	u32		MACBB_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Reload MacBB Parameters
 	for (i = 0; i < MACBB_NUM; i++){
@@ -455,12 +455,12 @@ static void _IQK_RestoreMacBB_8821A(
 static void _IQK_RestoreRF_8821A(
 	PDM_ODM_T			pDM_Odm,
 	ODM_RF_RADIO_PATH_E	Path,
-	pu4Byte			Backup_RF_REG,
-	pu4Byte			RF_backup,
-	u4Byte			RF_REG_NUM
+	u32 *			Backup_RF_REG,
+	u32 *			RF_backup,
+	u32			RF_REG_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	for (i = 0; i < RF_REG_NUM; i++)
@@ -479,12 +479,12 @@ static void _IQK_RestoreRF_8821A(
 
 static void _IQK_RestoreAFE_8821A(
 	PDM_ODM_T		pDM_Odm,
-	pu4Byte		AFE_backup,
-	pu4Byte		Backup_AFE_REG,
-	u4Byte		AFE_NUM
+	u32 *		AFE_backup,
+	u32 *		Backup_AFE_REG,
+	u32		AFE_NUM
 	)
 {
-	u4Byte i;
+	u32 i;
 	ODM_SetBBReg(pDM_Odm, 0x82c, BIT(31), 0x0); // [31] = 0 --> Page C
 	//Reload AFE Parameters
 	for (i = 0; i < AFE_NUM; i++){
@@ -520,7 +520,7 @@ static void _IQK_Tx_8821A(
 	ODM_RF_RADIO_PATH_E Path
 	)
 {
-	u4Byte		TX_fail, RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
+	u32		TX_fail, RX_fail, delay_count, IQK_ready, cal_retry, cal = 0, temp_reg65;
 	int		TX_X = 0, TX_Y = 0, RX_X = 0, RX_Y = 0, TX_Average = 0, RX_Average = 0;
 	int		TX_X0[cal_num], TX_Y0[cal_num], TX_X0_RXK[cal_num], TX_Y0_RXK[cal_num], RX_X0[cal_num], RX_Y0[cal_num];
 	bool		TX0IQKOK = false, RX0IQKOK = false;
@@ -1280,10 +1280,10 @@ static void phy_IQCalibrate_8821A(
 	PDM_ODM_T		pDM_Odm
 	)
 {
-	u4Byte	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
-	u4Byte	Backup_MACBB_REG[MACBB_REG_NUM] = {0xb00, 0x520, 0x550, 0x808, 0x90c, 0xc00, 0xc50, 0xe00, 0xe50, 0x838, 0x82c};
-	u4Byte	Backup_AFE_REG[AFE_REG_NUM] = {0xc5c, 0xc60, 0xc64, 0xc68, 0xc6c, 0xc70, 0xc74, 0xc78, 0xc7c, 0xc80, 0xc84, 0xcb8};
-	u4Byte	Backup_RF_REG[RF_REG_NUM] = {0x65, 0x8f, 0x0};
+	u32	MACBB_backup[MACBB_REG_NUM], AFE_backup[AFE_REG_NUM], RFA_backup[RF_REG_NUM], RFB_backup[RF_REG_NUM];
+	u32	Backup_MACBB_REG[MACBB_REG_NUM] = {0xb00, 0x520, 0x550, 0x808, 0x90c, 0xc00, 0xc50, 0xe00, 0xe50, 0x838, 0x82c};
+	u32	Backup_AFE_REG[AFE_REG_NUM] = {0xc5c, 0xc60, 0xc64, 0xc68, 0xc6c, 0xc70, 0xc74, 0xc78, 0xc7c, 0xc80, 0xc84, 0xcb8};
+	u32	Backup_RF_REG[RF_REG_NUM] = {0x65, 0x8f, 0x0};
 
 	_IQK_BackupMacBB_8821A(pDM_Odm, MACBB_backup, Backup_MACBB_REG, MACBB_REG_NUM);
 	_IQK_BackupAFE_8821A(pDM_Odm, AFE_backup, Backup_AFE_REG, AFE_REG_NUM);

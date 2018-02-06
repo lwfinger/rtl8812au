@@ -143,7 +143,7 @@ u32 PHY_GetTxBBSwing_8812A(
 void
 PHY_SetTxPowerIndex_8812A(
 	PADAPTER			Adapter,
-	u4Byte				PowerIndex,
+	u32				PowerIndex,
 	u8				RFPath,
 	u8				Rate
 	);

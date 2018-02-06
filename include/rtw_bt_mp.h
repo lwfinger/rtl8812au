@@ -38,12 +38,12 @@ typedef enum _MP_BT_MODE{
 // definition for BT_UP_OP_BT_SET_TX_RX_PARAMETER
 typedef struct _BT_TXRX_PARAMETERS{
     u8		txrxChannel;
-    u4Byte		txrxTxPktCnt;
+    u32		txrxTxPktCnt;
     u8		txrxTxPktInterval;
 	u8		txrxPayloadType;
 	u8		txrxPktType;
 	u16		txrxPayloadLen;
-	u4Byte		txrxPktHeader;
+	u32		txrxPktHeader;
 	u8		txrxWhitenCoeff;
 	u8		txrxBdaddr[6];
 	u8		txrxTxGainIndex;
@@ -185,8 +185,8 @@ MPTBT_SendOidBT(
 	PADAPTER		pAdapter,
 	void *			InformationBuffer,
 	u32			InformationBufferLength,
-	Pu32			BytesRead,
-	Pu32			BytesNeeded
+	u32 *			BytesRead,
+	u32 *			BytesNeeded
 	);
 
 void

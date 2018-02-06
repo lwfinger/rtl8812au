@@ -18,55 +18,55 @@
 void
 odm_ConfigRFReg_8812A(
 	PDM_ODM_T				pDM_Odm,
-	u4Byte					Addr,
-	u4Byte					Data,
+	u32					Addr,
+	u32					Data,
 	ODM_RF_RADIO_PATH_E     RF_PATH,
-	u4Byte				    RegAddr
+	u32				    RegAddr
 	);
 
 void
 odm_ConfigRF_RadioA_8812A(
 	PDM_ODM_T				pDM_Odm,
-	u4Byte					Addr,
-	u4Byte					Data
+	u32					Addr,
+	u32					Data
 	);
 
 void
 odm_ConfigRF_RadioB_8812A(
 	PDM_ODM_T				pDM_Odm,
-	u4Byte					Addr,
-	u4Byte					Data
+	u32					Addr,
+	u32					Data
 	);
 
 void
 odm_ConfigMAC_8812A(
 	PDM_ODM_T	pDM_Odm,
-	u4Byte		Addr,
+	u32		Addr,
 	u8		Data
 	);
 
 void
 odm_ConfigBB_AGC_8812A(
     PDM_ODM_T	pDM_Odm,
-    u4Byte		Addr,
-    u4Byte		Bitmask,
-    u4Byte		Data
+    u32		Addr,
+    u32		Bitmask,
+    u32		Data
     );
 
 void
 odm_ConfigBB_PHY_REG_PG_8812A(
 	PDM_ODM_T	pDM_Odm,
-    u4Byte		Addr,
-    u4Byte		Bitmask,
-    u4Byte		Data
+    u32		Addr,
+    u32		Bitmask,
+    u32		Data
     );
 
 void
 odm_ConfigBB_PHY_8812A(
 	PDM_ODM_T	pDM_Odm,
-    u4Byte		Addr,
-    u4Byte		Bitmask,
-    u4Byte		Data
+    u32		Addr,
+    u32		Bitmask,
+    u32		Data
     );
 
 void

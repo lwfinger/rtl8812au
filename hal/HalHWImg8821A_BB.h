@@ -16,7 +16,7 @@
 #ifndef __INC_MP_BB_HW_IMG_8821A_H
 #define __INC_MP_BB_HW_IMG_8821A_H
 
-static bool CheckCondition(const u4Byte Condition, const u4Byte Hex);
+static bool CheckCondition(const u32 Condition, const u32 Hex);
 
 /******************************************************************************
 *                           AGC_TAB.TXT

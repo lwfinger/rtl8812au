@@ -68,11 +68,7 @@ struct mp_tx
 #define MP_MAX_LINES		1000
 #define MP_MAX_LINES_BYTES	256
 #define s1Byte s8
-#define u4Byte u32
 #define s4Byte s32
-
-#define u4Byte		u32
-#define pu4Byte			u32*
 
 #define u8Byte		u64
 #define pu8Byte			u64*
@@ -88,8 +84,6 @@ struct mp_tx
 
 #define s8Byte		s64
 #define ps8Byte			s64*
-
-#define Pu32 u32*
 
 typedef void (*MPT_WORK_ITEM_HANDLER)(void * Adapter);
 typedef struct _MPT_CONTEXT

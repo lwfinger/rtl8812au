@@ -18,10 +18,10 @@
 void
 odm_ConfigRFReg_8812A(
 	PDM_ODM_T				pDM_Odm,
-	u4Byte					Addr,
-	u4Byte					Data,
+	u32					Addr,
+	u32					Data,
 	ODM_RF_RADIO_PATH_E     RF_PATH,
-	u4Byte				    RegAddr
+	u32				    RegAddr
 	)
 {
 	if(Addr == 0xfe || Addr == 0xffe)
@@ -44,12 +44,12 @@ odm_ConfigRFReg_8812A(
 void
 odm_ConfigRF_RadioA_8812A(
 	PDM_ODM_T				pDM_Odm,
-	u4Byte					Addr,
-	u4Byte					Data
+	u32					Addr,
+	u32					Data
 	)
 {
-	u4Byte  content = 0x1000; // RF_Content: radioa_txt
-	u4Byte	maskforPhySet= (u4Byte)(content&0xE000);
+	u32  content = 0x1000; // RF_Content: radioa_txt
+	u32	maskforPhySet= (u32)(content&0xE000);
 
     odm_ConfigRFReg_8812A(pDM_Odm, Addr, Data, ODM_RF_PATH_A, Addr|maskforPhySet);
 
@@ -59,12 +59,12 @@ odm_ConfigRF_RadioA_8812A(
 void
 odm_ConfigRF_RadioB_8812A(
 	PDM_ODM_T				pDM_Odm,
-	u4Byte					Addr,
-	u4Byte					Data
+	u32					Addr,
+	u32					Data
 	)
 {
-	u4Byte  content = 0x1001; // RF_Content: radiob_txt
-	u4Byte	maskforPhySet= (u4Byte)(content&0xE000);
+	u32  content = 0x1001; // RF_Content: radiob_txt
+	u32	maskforPhySet= (u32)(content&0xE000);
 
     odm_ConfigRFReg_8812A(pDM_Odm, Addr, Data, ODM_RF_PATH_B, Addr|maskforPhySet);
 
@@ -75,7 +75,7 @@ odm_ConfigRF_RadioB_8812A(
 void
 odm_ConfigMAC_8812A(
 	PDM_ODM_T	pDM_Odm,
-	u4Byte		Addr,
+	u32		Addr,
 	u8		Data
 	)
 {
@@ -86,9 +86,9 @@ odm_ConfigMAC_8812A(
 void
 odm_ConfigBB_AGC_8812A(
     PDM_ODM_T	pDM_Odm,
-    u4Byte		Addr,
-    u4Byte		Bitmask,
-    u4Byte		Data
+    u32		Addr,
+    u32		Bitmask,
+    u32		Data
     )
 {
 	ODM_SetBBReg(pDM_Odm, Addr, Bitmask, Data);
@@ -101,9 +101,9 @@ odm_ConfigBB_AGC_8812A(
 void
 odm_ConfigBB_PHY_REG_PG_8812A(
 	PDM_ODM_T	pDM_Odm,
-    u4Byte		Addr,
-    u4Byte		Bitmask,
-    u4Byte		Data
+    u32		Addr,
+    u32		Bitmask,
+    u32		Data
     )
 {
 	if (Addr == 0xfe || Addr == 0xffe) {
@@ -123,9 +123,9 @@ odm_ConfigBB_PHY_REG_PG_8812A(
 void
 odm_ConfigBB_PHY_8812A(
 	PDM_ODM_T	pDM_Odm,
-    u4Byte		Addr,
-    u4Byte		Bitmask,
-    u4Byte		Data
+    u32		Addr,
+    u32		Bitmask,
+    u32		Data
     )
 {
 	if (Addr == 0xfe) {

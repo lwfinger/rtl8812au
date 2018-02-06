@@ -745,8 +745,8 @@ void odm_Process_RSSIForDM(PDM_ODM_T pDM_Odm, PODM_PHY_INFO_T pPhyInfo, PODM_PAC
 	s4Byte			UndecoratedSmoothedPWDB, UndecoratedSmoothedCCK, UndecoratedSmoothedOFDM, RSSI_Ave;
 	u8			isCCKrate=0;
 	u8			RSSI_max, RSSI_min, i;
-	u4Byte			OFDM_pkt=0;
-	u4Byte			Weighting=0;
+	u32			OFDM_pkt=0;
+	u32			Weighting=0;
 
 	PSTA_INFO_T	pEntry;
 
@@ -815,7 +815,7 @@ void odm_Process_RSSIForDM(PDM_ODM_T pDM_Odm, PODM_PHY_INFO_T pPhyInfo, PODM_PAC
 			if (UndecoratedSmoothedOFDM <= 0) {	// initialize
 				UndecoratedSmoothedOFDM = pPhyInfo->RxPWDBAll;
 			} else {
-				if (pPhyInfo->RxPWDBAll > (u4Byte)UndecoratedSmoothedOFDM) {
+				if (pPhyInfo->RxPWDBAll > (u32)UndecoratedSmoothedOFDM) {
 					UndecoratedSmoothedOFDM =
 							( ((UndecoratedSmoothedOFDM)*(Rx_Smooth_Factor-1)) +
 							(RSSI_Ave)) /(Rx_Smooth_Factor);
@@ -836,7 +836,7 @@ void odm_Process_RSSIForDM(PDM_ODM_T pDM_Odm, PODM_PHY_INFO_T pPhyInfo, PODM_PAC
 			if (UndecoratedSmoothedCCK <= 0) {	// initialize
 				UndecoratedSmoothedCCK = pPhyInfo->RxPWDBAll;
 			} else {
-				if (pPhyInfo->RxPWDBAll > (u4Byte)UndecoratedSmoothedCCK) {
+				if (pPhyInfo->RxPWDBAll > (u32)UndecoratedSmoothedCCK) {
 					UndecoratedSmoothedCCK =
 							(((UndecoratedSmoothedCCK)*(Rx_Smooth_Factor-1)) +
 							(pPhyInfo->RxPWDBAll)) /(Rx_Smooth_Factor);
@@ -1033,7 +1033,7 @@ HAL_STATUS ODM_ConfigMACWithHeaderFile(PDM_ODM_T pDM_Odm)
 	return result;
 }
 
-HAL_STATUS ODM_ConfigFWWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_FW_Config_Type ConfigType, u8 *pFirmware, u4Byte *pSize)
+HAL_STATUS ODM_ConfigFWWithHeaderFile(PDM_ODM_T pDM_Odm, ODM_FW_Config_Type ConfigType, u8 *pFirmware, u32 *pSize)
 {
 	if (pDM_Odm->SupportICType == ODM_RTL8812) {
 		if (ConfigType == CONFIG_FW_NIC) {

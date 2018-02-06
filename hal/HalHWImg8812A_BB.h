@@ -16,7 +16,7 @@
 #ifndef __INC_MP_BB_HW_IMG_8812A_H
 #define __INC_MP_BB_HW_IMG_8812A_H
 
-static bool CheckCondition(const u4Byte Condition, const u4Byte Hex);
+static bool CheckCondition(const u32 Condition, const u32 Hex);
 
 /******************************************************************************
 *                           AGC_TAB.TXT
@@ -31,13 +31,13 @@ ODM_ReadAndConfig_MP_8812A_AGC_TAB( // TC: Test Chip, MP: MP Chip
 *                           AGC_TAB_DIFF.TXT
 ******************************************************************************/
 
-extern u4Byte Array_MP_8812A_AGC_TAB_DIFF_LB[116];
-extern u4Byte Array_MP_8812A_AGC_TAB_DIFF_HB[116];
+extern u32 Array_MP_8812A_AGC_TAB_DIFF_LB[116];
+extern u32 Array_MP_8812A_AGC_TAB_DIFF_HB[116];
 void
 ODM_ReadAndConfig_MP_8812A_AGC_TAB_DIFF(
 	PDM_ODM_T    pDM_Odm,
-	u4Byte	   Array[],
-	u4Byte	   ArrayLen
+	u32	   Array[],
+	u32	   ArrayLen
 );
 
 /******************************************************************************
