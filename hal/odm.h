@@ -258,12 +258,12 @@ typedef struct _SW_Antenna_Switch_
 	s4Byte		RSSI_cnt_A;
 	s4Byte		RSSI_cnt_B;
 
-	u8Byte		lastTxOkCnt;
-	u8Byte		lastRxOkCnt;
-	u8Byte		TXByteCnt_A;
-	u8Byte		TXByteCnt_B;
-	u8Byte		RXByteCnt_A;
-	u8Byte		RXByteCnt_B;
+	u64		lastTxOkCnt;
+	u64		lastRxOkCnt;
+	u64		TXByteCnt_A;
+	u64		TXByteCnt_B;
+	u64		RXByteCnt_A;
+	u64		RXByteCnt_B;
 	u8		TrafficLoad;
 	RT_TIMER	SwAntennaSwitchTimer;
 #ifdef CONFIG_HW_ANTENNA_DIVERSITY
@@ -373,9 +373,9 @@ typedef struct _ODM_Phy_Dbg_Info_
 {
 	//ODM Write,debug info
 	s1Byte		RxSNRdB[4];
-	u8Byte		NumQryPhyStatus;
-	u8Byte		NumQryPhyStatusCCK;
-	u8Byte		NumQryPhyStatusOFDM;
+	u64		NumQryPhyStatus;
+	u64		NumQryPhyStatusCCK;
+	u64		NumQryPhyStatusOFDM;
 	u8		NumQryBeaconPkt;
 	//Others
 	s4Byte		RxEVM[4];
@@ -546,7 +546,7 @@ typedef enum _ODM_Common_Info_Definition
 	ODM_CMNINFO_LINK_IN_PROGRESS,
 	ODM_CMNINFO_LINK,
 	ODM_CMNINFO_RSSI_MIN,
-	ODM_CMNINFO_DBG_COMP,				// u8Byte
+	ODM_CMNINFO_DBG_COMP,				// u64
 	ODM_CMNINFO_DBG_LEVEL,				// u32
 	ODM_CMNINFO_RA_THRESHOLD_HIGH,		// u8
 	ODM_CMNINFO_RA_THRESHOLD_LOW,		// u8
@@ -1036,13 +1036,13 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	rtl8192cd_priv		fake_priv;
 	PHY_REG_PG_TYPE		PhyRegPgValueType;
 
-	u8Byte			DebugComponents;
+	u64			DebugComponents;
 	u32			DebugLevel;
 
-	u8Byte			NumQryPhyStatusAll;	//CCK + OFDM
-	u8Byte			LastNumQryPhyStatusAll;
-	u8Byte			RxPWDBAve;
-	u8Byte			RxPWDBAve_final;
+	u64			NumQryPhyStatusAll;	//CCK + OFDM
+	u64			LastNumQryPhyStatusAll;
+	u64			RxPWDBAve;
+	u64			RxPWDBAve_final;
 	bool			MPDIG_2G;		//off MPDIG
 	u8			Times_2G;
 
@@ -1116,9 +1116,9 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	// MAC PHY Mode SMSP/DMSP/DMDP = 0/1/2
 	u8			*pMacPhyMode;
 	//TX Unicast byte count
-	u8Byte			*pNumTxBytesUnicast;
+	u64			*pNumTxBytesUnicast;
 	//RX Unicast byte count
-	u8Byte			*pNumRxBytesUnicast;
+	u64			*pNumRxBytesUnicast;
 	// Wireless mode B/G/A/N = BIT0/BIT1/BIT2/BIT3
 	u8			*pWirelessMode; //ODM_WIRELESS_MODE_E
 	// Frequence band 2.4G/5G = 0/1
@@ -1167,10 +1167,10 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 //------------CALL BY VALUE-------------//
 	u8			RSSI_A;
 	u8			RSSI_B;
-	u8Byte			RSSI_TRSW;
-	u8Byte			RSSI_TRSW_H;
-	u8Byte			RSSI_TRSW_L;
-	u8Byte			RSSI_TRSW_iso;
+	u64			RSSI_TRSW;
+	u64			RSSI_TRSW_H;
+	u64			RSSI_TRSW_L;
+	u64			RSSI_TRSW_iso;
 
 	u8			RxRate;
 	bool			StopDIG;
@@ -1182,8 +1182,8 @@ typedef  struct DM_Out_Source_Dynamic_Mechanism_Structure
 	bool			IsTxagcOffsetPositiveA;
 	u32			TxagcOffsetValueB;
 	bool			IsTxagcOffsetPositiveB;
-	u8Byte			lastTxOkCnt;
-	u8Byte			lastRxOkCnt;
+	u64			lastTxOkCnt;
+	u64			lastRxOkCnt;
 	u32			BbSwingOffsetA;
 	bool			IsBbSwingOffsetPositiveA;
 	u32			BbSwingOffsetB;
@@ -1698,7 +1698,7 @@ void
 ODM_CmnInfoUpdate(
 	PDM_ODM_T		pDM_Odm,
 	u32			CmnInfo,
-	u8Byte			Value
+	u64			Value
 	);
 
 void

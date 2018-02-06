@@ -67,11 +67,6 @@ struct mp_tx
 
 #define MP_MAX_LINES		1000
 #define MP_MAX_LINES_BYTES	256
-#define s1Byte s8
-#define s4Byte s32
-
-#define u8Byte		u64
-#define pu8Byte			u64*
 
 #define s1Byte		s8
 #define ps1Byte			s8*

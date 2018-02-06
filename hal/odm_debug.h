@@ -322,7 +322,7 @@ extern	u32 ODM_GlobalDebugLevel;
 
 
 #if DBG
-extern	u8Byte ODM_GlobalDebugComponents;
+extern	u64 ODM_GlobalDebugComponents;
 #endif
 #endif
 #if 0
@@ -861,7 +861,7 @@ extern	void	DBG_DumpMem(const u8 DbgComp,
 
 
 extern u32 GlobalDebugLevel;
-extern u8Byte GlobalDebugComponents;
+extern u64 GlobalDebugComponents;
 
 
 #endif
