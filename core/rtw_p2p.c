@@ -3534,9 +3534,17 @@ static void ro_ch_handler(_adapter *padapter)
 
 }
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 static void ro_ch_timer_process (void *FunctionContext)
+#else
+static void ro_ch_timer_process(struct timer_list *t)
+#endif
 {
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 	_adapter *adapter = (_adapter *)FunctionContext;
+#else
+	_adapter *adapter = from_timer(adapter, t, cfg80211_wdinfo.remain_on_ch_timer);
+#endif
 	struct rtw_wdev_priv *pwdev_priv = wdev_to_priv(adapter->rtw_wdev);
 
 	//printk("%s \n", __FUNCTION__);
@@ -4222,7 +4230,11 @@ void rtw_init_cfg80211_wifidirect_info( _adapter*	padapter)
 
 	_rtw_memset(pcfg80211_wdinfo, 0x00, sizeof(struct cfg80211_wifidirect_info) );
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 	_init_timer( &pcfg80211_wdinfo->remain_on_ch_timer, padapter->pnetdev, ro_ch_timer_process, padapter );
+#else
+	timer_setup(&pcfg80211_wdinfo->remain_on_ch_timer, ro_ch_timer_process, 0);
+#endif
 }
 #endif //CONFIG_IOCTL_CFG80211
 
@@ -4762,9 +4774,9 @@ void rtw_init_wifidirect_timers(_adapter* padapter)
 	timer_setup(&pwdinfo->pre_tx_scan_timer, pre_tx_scan_timer_process, 0);
 	timer_setup(&pwdinfo->reset_ch_sitesurvey, reset_ch_sitesurvey_timer_process, 0);
 	timer_setup(&pwdinfo->reset_ch_sitesurvey2, reset_ch_sitesurvey_timer_process2, 0);
-#endif
 #ifdef CONFIG_CONCURRENT_MODE
 	timer_setup(&pwdinfo->ap_p2p_switch_timer, ap_p2p_switch_timer_process, 0);
+#endif
 #endif
 }
 
