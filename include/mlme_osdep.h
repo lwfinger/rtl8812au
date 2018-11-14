@@ -11,18 +11,26 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+ *
+ *
  ******************************************************************************/
 #ifndef	__MLME_OSDEP_H_
 #define __MLME_OSDEP_H_
 
+
+#if defined(PLATFORM_WINDOWS) || defined(PLATFORM_MPIXEL)
+	extern int time_after(u32 now, u32 old);
+#endif
+
 extern void rtw_init_mlme_timer(_adapter *padapter);
-extern void rtw_os_indicate_disconnect( _adapter *adapter );
-extern void rtw_os_indicate_connect( _adapter *adapter );
-void rtw_os_indicate_scan_done( _adapter *padapter, bool aborted);
-extern void rtw_report_sec_ie(_adapter *adapter,u8 authmode,u8 *sec_ie);
+extern void rtw_os_indicate_disconnect(_adapter *adapter, u16 reason, u8 locally_generated);
+extern void rtw_os_indicate_connect(_adapter *adapter);
+void rtw_os_indicate_scan_done(_adapter *padapter, bool aborted);
+extern void rtw_report_sec_ie(_adapter *adapter, u8 authmode, u8 *sec_ie);
 
-void rtw_reset_securitypriv( _adapter *adapter );
+void rtw_reset_securitypriv(_adapter *adapter);
 
-u8 rtw_handle_tkip_countermeasure(_adapter* padapter);
-
-#endif	//_MLME_OSDEP_H_
+#endif /* _MLME_OSDEP_H_ */

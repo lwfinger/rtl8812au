@@ -11,31 +11,23 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+ *
+ *
  ******************************************************************************/
 #ifndef __RTL8812A_RF_H__
 #define __RTL8812A_RF_H__
 
-void
+VOID
 PHY_RF6052SetBandwidth8812(
-	PADAPTER				Adapter,
-	CHANNEL_WIDTH		Bandwidth);
+	IN	PADAPTER				Adapter,
+	IN	CHANNEL_WIDTH		Bandwidth);
 
 
 int
 PHY_RF6052_Config_8812(
-	PADAPTER	Adapter	);
+	IN	PADAPTER	Adapter);
 
-void
-PHY_RF6052SetCckTxPower8812(
-	PADAPTER	Adapter,
-	u8*			pPowerlevel);
-
-void
-PHY_RF6052SetOFDMTxPower8812(
-	PADAPTER	Adapter,
-	u8*			pPowerLevelOFDM,
-	u8*			pPowerLevelBW20,
-	u8*			pPowerLevelBW40,
-	u8			Channel);
-
-#endif//__RTL8188E_RF_H__
+#endif/* __RTL8188E_RF_H__ */

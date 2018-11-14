@@ -11,19 +11,21 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+ *
+ *
  ******************************************************************************/
 #ifndef __USB_OSINTF_H
 #define __USB_OSINTF_H
 
 #include <usb_vendor_req.h>
 
-#define USBD_HALTED(Status) ((u32)(Status) >> 30 == 3)
+#define USBD_HALTED(Status) ((ULONG)(Status) >> 30 == 3)
 
 
-//uint usb_dvobj_init(_adapter * adapter);
-//void usb_dvobj_deinit(_adapter * adapter);
-
-u8 usbvendorrequest(struct dvobj_priv *pdvobjpriv, RT_USB_BREQUEST brequest, RT_USB_WVALUE wvalue, u8 windex, void* data, u8 datalen, u8 isdirectionin);
+u8 usbvendorrequest(struct dvobj_priv *pdvobjpriv, RT_USB_BREQUEST brequest, RT_USB_WVALUE wvalue, u8 windex, void *data, u8 datalen, u8 isdirectionin);
 
 
 #endif

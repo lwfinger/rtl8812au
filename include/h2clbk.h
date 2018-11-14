@@ -11,6 +11,11 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+ *
+ *
  ******************************************************************************/
 
 
@@ -21,6 +26,6 @@ void _lbk_cmd(PADAPTER Adapter);
 
 void _lbk_rsp(PADAPTER Adapter);
 
-void _lbk_evt(PADAPTER Adapter);
+void _lbk_evt(IN PADAPTER Adapter);
 
 void h2c_event_callback(unsigned char *dev, unsigned char *pbuf);

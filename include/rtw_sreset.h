@@ -11,11 +11,16 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+ *
+ *
  ******************************************************************************/
 #ifndef _RTW_SRESET_H_
 #define _RTW_SRESET_H_
 
-//#include <drv_types.h>
+/* #include <drv_types.h> */
 
 enum {
 	SRESET_TGP_NULL = 0,
@@ -42,7 +47,7 @@ struct sreset_priv {
 #define	WIFI_MAC_TXDMA_ERROR	BIT3
 #define   WIFI_TX_HANG				BIT4
 #define	WIFI_RX_HANG				BIT5
-#define		WIFI_IF_NOT_EXIST			BIT6
+#define	WIFI_IF_NOT_EXIST			BIT6
 
 void sreset_init_value(_adapter *padapter);
 void sreset_reset_value(_adapter *padapter);
