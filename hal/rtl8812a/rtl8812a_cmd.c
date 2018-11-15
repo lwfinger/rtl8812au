@@ -446,7 +446,7 @@ void rtl8812_set_BcnEarly_C2H_Rpt_cmd(PADAPTER padapter, u8 enable)
 void ConstructBeacon(_adapter *padapter, u8 *pframe, u32 *pLength)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16					*fctrl;
+	__le16	*fctrl;
 	u32					rate_len, pktlen;
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
@@ -543,7 +543,7 @@ _ConstructBeacon:
 void ConstructPSPoll(_adapter *padapter, u8 *pframe, u32 *pLength)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16					*fctrl;
+	__le16 *fctrl;
 	u32					pktlen;
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
@@ -581,7 +581,7 @@ void ConstructNullFunctionData(
 	u8		bForcePowerSave)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16						*fctrl;
+	__le16 *fctrl;
 	u32						pktlen;
 	struct mlme_priv		*pmlmepriv = &padapter->mlmepriv;
 	struct wlan_network		*cur_network = &pmlmepriv->cur_network;
@@ -648,7 +648,7 @@ static void ConstructGTKResponse(
 )
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16						*fctrl;
+	__le16 *fctrl;
 	u32						pktlen;
 	struct mlme_priv		*pmlmepriv = &padapter->mlmepriv;
 	struct wlan_network		*cur_network = &pmlmepriv->cur_network;
@@ -1425,7 +1425,7 @@ void ConstructBtNullFunctionData(
 	u8		bForcePowerSave)
 {
 	struct rtw_ieee80211_hdr	*pwlanhdr;
-	u16						*fctrl;
+	__le16 *fctrl;
 	u32						pktlen;
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);

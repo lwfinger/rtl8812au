@@ -2190,7 +2190,7 @@ BOOLEAN	issue_ht_sw_ndpa_packet(PADAPTER Adapter, u8 *ra, CHANNEL_WIDTH bw, u8 q
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	u8	ActionHdr[4] = {ACT_CAT_VENDOR, 0x00, 0xe0, 0x4c};
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	u8	aSifsTime = 0;
 	u8	NDPTxRate = 0;
@@ -2269,7 +2269,7 @@ BOOLEAN	issue_ht_ndpa_packet(PADAPTER Adapter, u8 *ra, CHANNEL_WIDTH bw, u8 qidx
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	u8	ActionHdr[4] = {ACT_CAT_VENDOR, 0x00, 0xe0, 0x4c};
 	u8	*pframe;
-	u16	*fctrl;
+	__le16 *fctrl;
 	u16	duration = 0;
 	u8	aSifsTime = 0;
 
@@ -2352,7 +2352,7 @@ BOOLEAN	issue_vht_sw_ndpa_packet(PADAPTER Adapter, u8 *ra, u16 aid, CHANNEL_WIDT
 	u8		 NDPTxRate = 0;
 
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	u8	sequence = 0, aSifsTime = 0;
 
@@ -2444,7 +2444,7 @@ BOOLEAN	issue_vht_ndpa_packet(PADAPTER Adapter, u8 *ra, u16 aid, CHANNEL_WIDTH b
 	struct beamforming_info	*pBeamInfo = GET_BEAMFORM_INFO(pmlmepriv);
 	struct rtw_ndpa_sta_info	sta_info;
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	u8	sequence = 0, aSifsTime = 0;
 

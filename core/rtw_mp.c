@@ -1792,7 +1792,7 @@ static void Rtw_MPSetMacTxEDCA(PADAPTER padapter)
 
 void SetPacketTx(PADAPTER padapter)
 {
-	u8 *ptr, *pkt_start, *pkt_end, *fctrl;
+	u8 *ptr, *pkt_start, *pkt_end;
 	u32 pkt_size, offset, startPlace, i;
 	struct rtw_ieee80211_hdr *hdr;
 	u8 payload;

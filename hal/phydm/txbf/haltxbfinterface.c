@@ -1041,7 +1041,7 @@ send_fw_ht_ndpa_packet(
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	u8	action_hdr[4] = {ACT_CAT_VENDOR, 0x00, 0xe0, 0x4c};
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	u8	a_sifs_time = 0, ndp_tx_rate = 0, idx = 0;
 	struct _RT_BEAMFORMING_INFO	*p_beam_info = &(p_dm_odm->beamforming_info);
@@ -1129,7 +1129,7 @@ send_sw_ht_ndpa_packet(
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	u8	action_hdr[4] = {ACT_CAT_VENDOR, 0x00, 0xe0, 0x4c};
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	u8	a_sifs_time = 0, ndp_tx_rate = 0, idx = 0;
 	struct _RT_BEAMFORMING_INFO	*p_beam_info = &(p_dm_odm->beamforming_info);
@@ -1217,7 +1217,7 @@ send_fw_vht_ndpa_packet(
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	struct mlme_priv		*pmlmepriv = &(adapter->mlmepriv);
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	u8	sequence = 0, a_sifs_time = 0, ndp_tx_rate = 0, idx = 0;
 	struct _RT_BEAMFORMING_INFO	*p_beam_info = &(p_dm_odm->beamforming_info);
@@ -1321,7 +1321,7 @@ send_sw_vht_ndpa_packet(
 	struct _RT_NDPA_STA_INFO	ndpa_sta_info;
 	u8	ndp_tx_rate = 0, sequence = 0, a_sifs_time = 0, idx = 0;
 	u8	*pframe;
-	u16	*fctrl;
+	__le16	*fctrl;
 	u16	duration = 0;
 	struct _RT_BEAMFORMING_INFO	*p_beam_info = &(p_dm_odm->beamforming_info);
 	struct _RT_BEAMFORMEE_ENTRY	*p_beamform_entry = phydm_beamforming_get_bfee_entry_by_addr(p_dm_odm, RA, &idx);
