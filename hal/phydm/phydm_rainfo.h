@@ -533,15 +533,6 @@ odm_refresh_ldpc_rts_mp(
 	s32				undecorated_smoothed_pwdb
 );
 
-#if 0
-void
-odm_dynamic_arfb_select(
-	void		*p_dm_void,
-	u8		rate,
-	boolean		collision_state
-);
-#endif
-
 void
 odm_rate_adaptive_state_ap_init(
 	void			*PADAPTER_void,

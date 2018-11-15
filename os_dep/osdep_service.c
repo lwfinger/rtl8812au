@@ -947,13 +947,7 @@ void _rtw_memset(void *pbuf, int c, u32 sz)
 #endif
 
 #ifdef PLATFORM_WINDOWS
-#if 0
-	NdisZeroMemory(pbuf, sz);
-	if (c != 0)
-		memset(pbuf, c, sz);
-#else
 	NdisFillMemory(pbuf, sz, c);
-#endif
 #endif
 
 }
@@ -1529,14 +1523,6 @@ void rtw_usleep_os(int us)
 #ifdef DBG_DELAY_OS
 void _rtw_mdelay_os(int ms, const char *func, const int line)
 {
-#if 0
-	if (ms > 10)
-		RTW_INFO("%s:%d %s(%d)\n", func, line, __FUNCTION__, ms);
-	rtw_msleep_os(ms);
-	return;
-#endif
-
-
 	RTW_INFO("%s:%d %s(%d)\n", func, line, __FUNCTION__, ms);
 
 #if defined(PLATFORM_LINUX)
@@ -1553,18 +1539,7 @@ void _rtw_mdelay_os(int ms, const char *func, const int line)
 }
 void _rtw_udelay_os(int us, const char *func, const int line)
 {
-
-#if 0
-	if (us > 1000) {
-		RTW_INFO("%s:%d %s(%d)\n", func, line, __FUNCTION__, us);
-		rtw_usleep_os(us);
-		return;
-	}
-#endif
-
-
 	RTW_INFO("%s:%d %s(%d)\n", func, line, __FUNCTION__, us);
-
 
 #if defined(PLATFORM_LINUX)
 

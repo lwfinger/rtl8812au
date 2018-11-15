@@ -1097,10 +1097,6 @@ static void init_channel_list(_adapter *padapter, RT_CHANNEL_INFO *channel_set,
 	struct p2p_oper_class_map op_class[] = {
 		{ IEEE80211G,  81,   1,  13,  1, BW20 },
 		{ IEEE80211G,  82,  14,  14,  1, BW20 },
-#if 0 /* Do not enable HT40 on 2 GHz */
-		{ IEEE80211G,  83,   1,   9,  1, BW40PLUS },
-		{ IEEE80211G,  84,   5,  13,  1, BW40MINUS },
-#endif
 		{ IEEE80211A, 115,  36,  48,  4, BW20 },
 		{ IEEE80211A, 116,  36,  44,  8, BW40PLUS },
 		{ IEEE80211A, 117,  40,  48,  8, BW40MINUS },
@@ -1376,19 +1372,6 @@ void mgt_dispatcher(_adapter *padapter, union recv_frame *precv_frame)
 	struct sta_info *psta = rtw_get_stainfo(&padapter->stapriv, get_addr2_ptr(pframe));
 	struct dvobj_priv *psdpriv = padapter->dvobj;
 	struct debug_priv *pdbgpriv = &psdpriv->drv_dbg;
-
-
-#if 0
-	{
-		u8 *pbuf;
-		pbuf = GetAddr1Ptr(pframe);
-		RTW_INFO("A1-%x:%x:%x:%x:%x:%x\n", *pbuf, *(pbuf + 1), *(pbuf + 2), *(pbuf + 3), *(pbuf + 4), *(pbuf + 5));
-		pbuf = get_addr2_ptr(pframe);
-		RTW_INFO("A2-%x:%x:%x:%x:%x:%x\n", *pbuf, *(pbuf + 1), *(pbuf + 2), *(pbuf + 3), *(pbuf + 4), *(pbuf + 5));
-		pbuf = GetAddr3Ptr(pframe);
-		RTW_INFO("A3-%x:%x:%x:%x:%x:%x\n", *pbuf, *(pbuf + 1), *(pbuf + 2), *(pbuf + 3), *(pbuf + 4), *(pbuf + 5));
-	}
-#endif
 
 	if (GetFrameType(pframe) != WIFI_MGT_TYPE) {
 		return;
@@ -1843,16 +1826,6 @@ unsigned int OnProbeRsp(_adapter *padapter, union recv_frame *precv_frame)
 		return _SUCCESS;
 	}
 
-#if 0 /* move to validate_recv_mgnt_frame */
-	if (_rtw_memcmp(GetAddr3Ptr(pframe), get_my_bssid(&pmlmeinfo->network), ETH_ALEN)) {
-		if (pmlmeinfo->state & WIFI_FW_ASSOC_SUCCESS) {
-			psta = rtw_get_stainfo(pstapriv, get_addr2_ptr(pframe));
-			if (psta != NULL)
-				psta->sta_stats.rx_mgnt_pkts++;
-		}
-	}
-#endif
-
 	return _SUCCESS;
 
 }
@@ -2065,12 +2038,7 @@ unsigned int OnBeacon(_adapter *padapter, union recv_frame *precv_frame)
 
 				if (pmlmeext->en_hw_update_tsf)
 					rtw_enable_hw_update_tsf_cmd(padapter);
-
-#if 0 /* move to validate_recv_mgnt_frame */
-				psta->sta_stats.rx_mgnt_pkts++;
-#endif
 			}
-
 		} else if ((pmlmeinfo->state & 0x03) == WIFI_FW_ADHOC_STATE) {
 			_irqL irqL;
 			u8 rate_set[16];
@@ -2566,29 +2534,7 @@ unsigned int OnAssocReq(_adapter *padapter, union recv_frame *precv_frame)
 		pstat->state |= WIFI_FW_ASSOC_STATE;
 	}
 
-
-#if 0/* todo:tkip_countermeasures */
-	if (hapd->tkip_countermeasures) {
-		resp = WLAN_REASON_MICHAEL_MIC_FAILURE;
-		goto fail;
-	}
-#endif
-
 	pstat->capability = capab_info;
-
-#if 0/* todo: */
-	/* check listen_interval */
-	if (listen_interval > hapd->conf->max_listen_interval) {
-		hostapd_logger(hapd, mgmt->sa, HOSTAPD_MODULE_IEEE80211,
-			       HOSTAPD_LEVEL_DEBUG,
-			       "Too large Listen Interval (%d)",
-			       listen_interval);
-		resp = WLAN_STATUS_ASSOC_DENIED_LISTEN_INT_TOO_LARGE;
-		goto fail;
-	}
-
-	pstat->listen_interval = listen_interval;
-#endif
 
 	/* now parse all ieee802_11 ie to point to elems */
 	if (rtw_ieee802_11_parse_elems(pos, left, &elems, 1) == ParseFailed ||
@@ -3853,12 +3799,6 @@ unsigned int OnAction_back(_adapter *padapter, union recv_frame *precv_frame)
 	/* check RA matches or not	 */
 	if (!_rtw_memcmp(adapter_mac_addr(padapter), GetAddr1Ptr(pframe), ETH_ALEN))
 		return _SUCCESS;
-
-#if 0
-	/* check A1 matches or not */
-	if (!_rtw_memcmp(adapter_mac_addr(padapter), get_da(pframe), ETH_ALEN))
-		return _SUCCESS;
-#endif
 
 	if ((pmlmeinfo->state & 0x03) != WIFI_FW_AP_STATE)
 		if (!(pmlmeinfo->state & WIFI_FW_ASSOC_SUCCESS))
@@ -8867,7 +8807,6 @@ void _issue_assocreq(_adapter *padapter, u8 is_reassoc)
 
 	/* supported rate & extended supported rate */
 
-#if 1	/* Check if the AP's supported rates are also supported by STA. */
 	get_rate_set(padapter, sta_bssrate, &sta_bssrate_len);
 	/* RTW_INFO("sta_bssrate_len=%d\n", sta_bssrate_len); */
 
@@ -8914,22 +8853,6 @@ void _issue_assocreq(_adapter *padapter, u8 is_reassoc)
 
 	bssrate_len = index;
 	RTW_INFO("bssrate_len = %d\n", bssrate_len);
-
-#else	/* Check if the AP's supported rates are also supported by STA. */
-#if 0
-	get_rate_set(padapter, bssrate, &bssrate_len);
-#else
-	for (bssrate_len = 0; bssrate_len < NumRates; bssrate_len++) {
-		if (pmlmeinfo->network.SupportedRates[bssrate_len] == 0)
-			break;
-
-		if (pmlmeinfo->network.SupportedRates[bssrate_len] == 0x2C) /* Avoid the proprietary data rate (22Mbps) of Handlink WSG-4000 AP */
-			break;
-
-		bssrate[bssrate_len] = pmlmeinfo->network.SupportedRates[bssrate_len];
-	}
-#endif
-#endif /* Check if the AP's supported rates are also supported by STA. */
 
 	if ((bssrate_len == 0) && (pmlmeinfo->network.SupportedRates[0] != 0)) {
 		rtw_free_xmitbuf(pxmitpriv, pmgntframe->pxmitbuf);
@@ -10551,12 +10474,6 @@ unsigned int send_delba(_adapter *padapter, u8 initiator, u8 *addr)
 	if (psta == NULL)
 		return _SUCCESS;
 
-#if 0
-	RTW_INFO("%s:%s\n", __func__, (initiator == 0) ? "RX_DIR" : "TX_DIR");
-	if (initiator == 1) /* originator */
-		RTW_INFO("tx agg_enable_bitmap(0x%08x)\n", psta->htpriv.agg_enable_bitmap);
-#endif
-
 	for (tid = 0; tid < TID_NUM; tid++)
 		send_delba_sta_tid(padapter, initiator, psta, tid, 0);
 
@@ -10751,15 +10668,7 @@ u8 collect_bss_info(_adapter *padapter, union recv_frame *precv_frame, WLAN_BSSI
 		_rtw_memcpy(bssid->SupportedRates + i, (p + 2), len);
 	}
 
-	/* todo: */
-#if 0
-	if (judge_network_type(bssid->SupportedRates, (len + i)) == WIRELESS_11B)
-		bssid->NetworkTypeInUse = Ndis802_11DS;
-	else
-#endif
-	{
-		bssid->NetworkTypeInUse = Ndis802_11OFDM24;
-	}
+	bssid->NetworkTypeInUse = Ndis802_11OFDM24;
 
 #ifdef CONFIG_P2P
 	if (subtype == WIFI_PROBEREQ) {
@@ -11235,11 +11144,7 @@ static void process_80211d(PADAPTER padapter, WLAN_BSSID_EX *bssid)
 					k++;
 				} else if (chplan_sta[i].ChannelNum < chplan_ap.Channel[j]) {
 					chplan_new[k].ChannelNum = chplan_sta[i].ChannelNum;
-#if 0
-					chplan_new[k].ScanType = chplan_sta[i].ScanType;
-#else
 					chplan_new[k].ScanType = SCAN_PASSIVE;
-#endif
 					i++;
 					k++;
 				} else if (chplan_sta[i].ChannelNum > chplan_ap.Channel[j]) {
@@ -11255,11 +11160,7 @@ static void process_80211d(PADAPTER padapter, WLAN_BSSID_EX *bssid)
 			       && (chplan_sta[i].ChannelNum != 0)
 			       && (chplan_sta[i].ChannelNum <= 14)) {
 				chplan_new[k].ChannelNum = chplan_sta[i].ChannelNum;
-#if 0
-				chplan_new[k].ScanType = chplan_sta[i].ScanType;
-#else
 				chplan_new[k].ScanType = SCAN_PASSIVE;
-#endif
 				i++;
 				k++;
 			}
@@ -11304,11 +11205,7 @@ static void process_80211d(PADAPTER padapter, WLAN_BSSID_EX *bssid)
 					k++;
 				} else if (chplan_sta[i].ChannelNum < chplan_ap.Channel[j]) {
 					chplan_new[k].ChannelNum = chplan_sta[i].ChannelNum;
-#if 0
-					chplan_new[k].ScanType = chplan_sta[i].ScanType;
-#else
 					chplan_new[k].ScanType = SCAN_PASSIVE;
-#endif
 					i++;
 					k++;
 				} else if (chplan_sta[i].ChannelNum > chplan_ap.Channel[j]) {
@@ -11322,11 +11219,7 @@ static void process_80211d(PADAPTER padapter, WLAN_BSSID_EX *bssid)
 			/* change AP not support channel to Passive scan */
 			while ((i < MAX_CHANNEL_NUM) && (chplan_sta[i].ChannelNum != 0)) {
 				chplan_new[k].ChannelNum = chplan_sta[i].ChannelNum;
-#if 0
-				chplan_new[k].ScanType = chplan_sta[i].ScanType;
-#else
 				chplan_new[k].ScanType = SCAN_PASSIVE;
-#endif
 				i++;
 				k++;
 			}
@@ -11360,20 +11253,6 @@ static void process_80211d(PADAPTER padapter, WLAN_BSSID_EX *bssid)
 		_RTW_INFO("}\n");
 #endif
 
-#if 0
-		/* recover the right channel index */
-		channel = chplan_sta[pmlmeext->sitesurvey_res.channel_idx].ChannelNum;
-		k = 0;
-		while ((k < MAX_CHANNEL_NUM) && (chplan_new[k].ChannelNum != 0)) {
-			if (chplan_new[k].ChannelNum == channel) {
-				RTW_INFO("%s: change mlme_ext sitesurvey channel index from %d to %d\n",
-					__FUNCTION__, pmlmeext->sitesurvey_res.channel_idx, k);
-				pmlmeext->sitesurvey_res.channel_idx = k;
-				break;
-			}
-			k++;
-		}
-#endif
 	}
 
 	/* If channel is used by AP, set channel scan type to active */
@@ -13406,35 +13285,6 @@ u8 join_cmd_hdl(_adapter *padapter, u8 *pbuf)
 
 	rtw_adjust_chbw(padapter, pmlmeext->cur_channel, &pmlmeext->cur_bwmode, &pmlmeext->cur_ch_offset);
 
-#if 0
-	if (padapter->registrypriv.wifi_spec) {
-		/* for WiFi test, follow WMM test plan spec */
-		acparm = 0x002F431C; /* VO */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_VO, (u8 *)(&acparm));
-		acparm = 0x005E541C; /* VI */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_VI, (u8 *)(&acparm));
-		acparm = 0x0000A525; /* BE */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_BE, (u8 *)(&acparm));
-		acparm = 0x0000A549; /* BK */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_BK, (u8 *)(&acparm));
-
-		/* for WiFi test, mixed mode with intel STA under bg mode throughput issue */
-		if (padapter->mlmepriv.htpriv.ht_option == _FALSE) {
-			acparm = 0x00004320;
-			rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_BE, (u8 *)(&acparm));
-		}
-	} else {
-		acparm = 0x002F3217; /* VO */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_VO, (u8 *)(&acparm));
-		acparm = 0x005E4317; /* VI */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_VI, (u8 *)(&acparm));
-		acparm = 0x00105320; /* BE */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_BE, (u8 *)(&acparm));
-		acparm = 0x0000A444; /* BK */
-		rtw_hal_set_hwreg(padapter, HW_VAR_AC_PARAM_BK, (u8 *)(&acparm));
-	}
-#endif
-
 	/* check channel, bandwidth, offset and switch */
 	if (rtw_chk_start_clnt_join(padapter, &u_ch, &u_bw, &u_offset) == _FAIL) {
 		report_join_res(padapter, (-4));
@@ -15023,12 +14873,6 @@ u8 chk_bmc_sleepq_hdl(_adapter *padapter, unsigned char *pbuf)
 			if (xmitframe_hiq_filter(pxmitframe) == _TRUE)
 				pxmitframe->attrib.qsel = QSLT_HIGH;/* HIQ */
 
-#if 0
-			_exit_critical_bh(&psta_bmc->sleep_q.lock, &irqL);
-			if (rtw_hal_xmit(padapter, pxmitframe) == _TRUE)
-				rtw_os_xmit_complete(padapter, pxmitframe);
-			_enter_critical_bh(&psta_bmc->sleep_q.lock, &irqL);
-#endif
 			rtw_hal_xmitframe_enqueue(padapter, pxmitframe);
 		}
 
@@ -15644,10 +15488,6 @@ u8 tdls_hdl(_adapter *padapter, unsigned char *pbuf)
 		_cancel_timer_ex(&ptdls_sta->ch_sw_timer);
 		_cancel_timer_ex(&ptdls_sta->stay_on_base_chnl_timer);
 		_cancel_timer_ex(&ptdls_sta->ch_sw_monitor_timer);
-#if 0
-		_rtw_memset(pHalData->tdls_ch_sw_iqk_info_base_chnl, 0x00, sizeof(pHalData->tdls_ch_sw_iqk_info_base_chnl));
-		_rtw_memset(pHalData->tdls_ch_sw_iqk_info_off_chnl, 0x00, sizeof(pHalData->tdls_ch_sw_iqk_info_off_chnl));
-#endif
 
 		if (option == TDLS_CH_SW_END_TO_BASE_CHNL)
 			rtw_tdls_cmd(padapter, ptdls_sta->hwaddr, TDLS_CH_SW_TO_BASE_CHNL);

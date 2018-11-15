@@ -1909,41 +1909,10 @@ odm_cmn_info_update(
 		break;
 #endif
 
-#if 0
-	case	ODM_CMNINFO_OP_MODE:
-		p_dm_odm->op_mode = (u8)value;
-		break;
-
-	case	ODM_CMNINFO_WM_MODE:
-		p_dm_odm->wireless_mode = (u8)value;
-		break;
-
-	case	ODM_CMNINFO_BAND:
-		p_dm_odm->band_type = (u8)value;
-		break;
-
-	case	ODM_CMNINFO_SEC_CHNL_OFFSET:
-		p_dm_odm->sec_ch_offset = (u8)value;
-		break;
-
-	case	ODM_CMNINFO_SEC_MODE:
-		p_dm_odm->security = (u8)value;
-		break;
-
-	case	ODM_CMNINFO_BW:
-		p_dm_odm->band_width = (u8)value;
-		break;
-
-	case	ODM_CMNINFO_CHNL:
-		p_dm_odm->channel = (u8)value;
-		break;
-#endif
 	default:
 		/* do nothing */
 		break;
 	}
-
-
 }
 
 u32
@@ -2234,47 +2203,6 @@ odm_free_all_work_items(struct PHY_DM_STRUCT	*p_dm_odm)
 }
 #endif /*#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)*/
 
-#if 0
-void
-odm_FindMinimumRSSI(
-	struct PHY_DM_STRUCT		*p_dm_odm
-)
-{
-	u32	i;
-	u8	rssi_min = 0xFF;
-
-	for (i = 0; i < ODM_ASSOCIATE_ENTRY_NUM; i++) {
-		/*		if(p_dm_odm->p_odm_sta_info[i] != NULL) */
-		if (IS_STA_VALID(p_dm_odm->p_odm_sta_info[i])) {
-			if (p_dm_odm->p_odm_sta_info[i]->rssi_ave < rssi_min)
-				rssi_min = p_dm_odm->p_odm_sta_info[i]->rssi_ave;
-		}
-	}
-
-	p_dm_odm->rssi_min = rssi_min;
-
-}
-
-void
-odm_IsLinked(
-	struct PHY_DM_STRUCT		*p_dm_odm
-)
-{
-	u32 i;
-	boolean Linked = false;
-
-	for (i = 0; i < ODM_ASSOCIATE_ENTRY_NUM; i++) {
-		if (IS_STA_VALID(p_dm_odm->p_odm_sta_info[i])) {
-			Linked = true;
-			break;
-		}
-
-	}
-
-	p_dm_odm->is_linked = Linked;
-}
-#endif
-
 void odm_init_all_timers(struct PHY_DM_STRUCT *p_dm_odm)
 {
 #if (defined(CONFIG_PHYDM_ANTENNA_DIVERSITY))
@@ -2450,28 +2378,6 @@ boolean
 odm_check_power_status(
 	struct _ADAPTER		*adapter)
 {
-#if 0
-	/* HAL_DATA_TYPE		*p_hal_data = GET_HAL_DATA(adapter); */
-	struct PHY_DM_STRUCT			*p_dm_odm = &p_hal_data->DM_OutSrc;
-	RT_RF_POWER_STATE	rt_state;
-	PMGNT_INFO			p_mgnt_info	= &(adapter->MgntInfo);
-
-	/*  2011/07/27 MH We are not testing ready~~!! We may fail to get correct value when init sequence. */
-	if (p_mgnt_info->init_adpt_in_progress == true) {
-		ODM_RT_TRACE(p_dm_odm, COMP_INIT, DBG_LOUD, ("odm_check_power_status Return true, due to initadapter"));
-		return	true;
-	}
-
-	/* */
-	/*	2011/07/19 MH We can not execute tx pwoer tracking/ LLC calibrate or IQK. */
-	/* */
-	phydm_get_hw_reg_interface(p_dm_odm, HW_VAR_RF_STATE, (u8 *)(&rt_state));
-	if (adapter->is_driver_stopped || adapter->is_driver_is_going_to_pnp_set_power_sleep || rt_state == eRfOff) {
-		ODM_RT_TRACE(p_dm_odm, COMP_INIT, DBG_LOUD, ("odm_check_power_status Return false, due to %d/%d/%d\n",
-			adapter->is_driver_stopped, adapter->is_driver_is_going_to_pnp_set_power_sleep, rt_state));
-		return	false;
-	}
-#endif
 	return	true;
 }
 #endif
@@ -2614,12 +2520,6 @@ void odm_dtc(struct PHY_DM_STRUCT *p_dm_odm)
 	u8 sign;
 	u8 resp_txagc = 0;
 
-#if 0
-	/* As DIG is disabled, DTC is also disable */
-	if (!(p_dm_odm->support_ability & ODM_XXXXXX))
-		return;
-#endif
-
 	if (DTC_BASE < p_dm_odm->rssi_min) {
 		/* need to decade the CTS TX power */
 		sign = 1;
@@ -2629,21 +2529,7 @@ void odm_dtc(struct PHY_DM_STRUCT *p_dm_odm)
 			else
 				dtc_steps++;
 		}
-	}
-#if 0
-	else if (DTC_DWN_BASE > p_dm_odm->rssi_min) {
-		/* needs to increase the CTS TX power */
-		sign = 0;
-		dtc_steps = 1;
-		for (i = 0; i < ARRAY_SIZE(dtc_table_up); i++) {
-			if ((dtc_table_up[i] <= p_dm_odm->rssi_min) || (dtc_steps >= 10))
-				break;
-			else
-				dtc_steps++;
-		}
-	}
-#endif
-	else {
+	} else {
 		sign = 0;
 		dtc_steps = 0;
 	}
@@ -2800,30 +2686,6 @@ phydm_noisy_detection(
 	total_cca_cnt = p_dm_odm->false_alm_cnt.cnt_cca_all;
 	total_fa_cnt  = p_dm_odm->false_alm_cnt.cnt_all;
 
-#if 0
-	if (total_fa_cnt * 16 >= total_cca_cnt * 14)    /*  87.5 */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 12) /*  75 */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 10) /*  56.25 */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 8) /*  50 */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 7) /*  43.75 */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 6) /*  37.5 */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 5) /*  31.25% */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 4) /*  25% */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 3) /*  18.75% */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 2) /*  12.5% */
-		;
-	else if (total_fa_cnt * 16 >= total_cca_cnt * 1) /*  6.25% */
-		;
-#endif
 	for (i = 0; i <= 16; i++) {
 		if (total_fa_cnt * 16 >= total_cca_cnt * (16 - i)) {
 			score = 16 - i;
@@ -2838,85 +2700,9 @@ phydm_noisy_detection(
 	score_smooth = (total_cca_cnt >= 300) ? ((p_dm_odm->noisy_decision_smooth + 3) >> 3) : 0;
 
 	p_dm_odm->noisy_decision = (score_smooth >= 3) ? 1 : 0;
-#if 0
-	switch (score_smooth) {
-	case 0:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=0%%\n"));
-		break;
-	case 1:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=6.25%%\n"));
-		break;
-	case 2:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=12.5%%\n"));
-		break;
-	case 3:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=18.75%%\n"));
-		break;
-	case 4:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=25%%\n"));
-		break;
-	case 5:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=31.25%%\n"));
-		break;
-	case 6:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=37.5%%\n"));
-		break;
-	case 7:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=43.75%%\n"));
-		break;
-	case 8:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=50%%\n"));
-		break;
-	case 9:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=56.25%%\n"));
-		break;
-	case 10:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=62.5%%\n"));
-		break;
-	case 11:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=68.75%%\n"));
-		break;
-	case 12:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=75%%\n"));
-		break;
-	case 13:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=81.25%%\n"));
-		break;
-	case 14:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=87.5%%\n"));
-		break;
-	case 15:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=93.75%%\n"));
-		break;
-	case 16:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] total_fa_cnt/total_cca_cnt=100%%\n"));
-		break;
-	default:
-		ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD,
-			("[NoisyDetection] Unknown value!! Need Check!!\n"));
-	}
-#endif
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_NOISY_DETECT, ODM_DBG_LOUD,
 		("[NoisyDetection] total_cca_cnt=%d, total_fa_cnt=%d, noisy_decision_smooth=%d, score=%d, score_smooth=%d, p_dm_odm->noisy_decision=%d\n",
 		total_cca_cnt, total_fa_cnt, p_dm_odm->noisy_decision_smooth, score, score_smooth, p_dm_odm->noisy_decision));
-
 }
 
 void
@@ -3507,22 +3293,11 @@ phydm_dc_cancellation(
 	
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, (" DC cancellation Begin!!!"));
 	
-#if 0
 
-	odm_set_bb_reg(p_dm_odm, 0x87c, BIT(31), 0x1);	/*stop ck320*/
-	offset_i_hex = odm_get_bb_reg(p_dm_odm, 0xDF4, 0xffc0000);
-	offset_q_hex = odm_get_bb_reg(p_dm_odm, 0xDF4, 0x3ff00);
-	odm_set_bb_reg(p_dm_odm, 0x87c, BIT(31), 0x0);	/*start ck320*/
-	
-#else
-	
 	phydm_stop_ck320(p_dm_odm, true);	/*stop ck320*/
 	reg_value32 = phydm_get_bb_dbg_port_value(p_dm_odm);
 	phydm_stop_ck320(p_dm_odm, false);	/*start ck320*/
 
-#endif
-
-	
 	if (p_dm_odm->support_ic_type & ODM_IC_11N_SERIES)
 		odm_set_bb_reg(p_dm_odm, 0x88c, BIT(21)|BIT(20), 0x0);
 	else

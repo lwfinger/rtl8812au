@@ -2885,30 +2885,6 @@ void halbtc8812a2ant_tdma_duration_adjust_for_wifi_rssi_low(
 	BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
 		"[BTCoex], halbtc8812a2ant_tdma_duration_adjust_for_wifi_rssi_low()\n");
 	BTC_TRACE(trace_buf);
-#if 0
-	if ((BT_8812A_2ANT_WIFI_STATUS_NON_CONNECTED_ASSO_AUTH_SCAN ==
-	     wifi_status) ||
-	    (BT_8812A_2ANT_WIFI_STATUS_CONNECTED_SCAN == wifi_status) ||
-	    (BT_8812A_2ANT_WIFI_STATUS_CONNECTED_SPECIAL_PKT ==
-	     wifi_status)) {
-		if (coex_dm->cur_ps_tdma != 81 &&
-		    coex_dm->cur_ps_tdma != 82 &&
-		    coex_dm->cur_ps_tdma != 83 &&
-		    coex_dm->cur_ps_tdma != 84) {
-			halbtc8812a2ant_ps_tdma(btcoexist, NORMAL_EXEC, true,
-						82);
-			coex_dm->ps_tdma_du_adj_type = 82;
-
-			up = 0;
-			dn = 0;
-			m = 1;
-			n = 3;
-			result = 0;
-			wait_count = 0;
-		}
-		return;
-	}
-#endif
 	coex_dm->auto_tdma_adjust = false;
 
 	retry_count = coex_sta->bt_retry_cnt;
@@ -4857,12 +4833,6 @@ void ex_halbtc8812a2ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   "Ant PG number/ Ant mechanism:",
 		   board_info->pg_ant_num, board_info->btdm_ant_num);
 	CL_PRINTF(cli_buf);
-
-#if 0
-	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %d", "Antenna type:",
-		   board_info->ant_type);
-	CL_PRINTF(cli_buf);
-#endif
 
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %s / %d",
 		   "BT stack/ hci ext ver",

@@ -44,215 +44,164 @@ enum rt_channel_domain_new {
 };
 
 
-#if 0
-#define DOMAIN_CODE_2G_WORLD \
-	{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, 13
-#define DOMAIN_CODE_2G_ETSI1 \
-	{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, 13
-#define DOMAIN_CODE_2G_ETSI2 \
-	{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, 11
-#define DOMAIN_CODE_2G_FCC1 \
-	{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, 14
-#define DOMAIN_CODE_2G_MKK1 \
-	{10, 11, 12, 13}, 4
-
-#define DOMAIN_CODE_5G_ETSI1 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140}, 19
-#define DOMAIN_CODE_5G_ETSI2 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 149, 153, 157, 161, 165}, 24
-#define DOMAIN_CODE_5G_ETSI3 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 149, 153, 157, 161, 165}, 22
-#define DOMAIN_CODE_5G_FCC1 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 149, 153, 157, 161, 165}, 24
-#define DOMAIN_CODE_5G_FCC2 \
-	{36, 40, 44, 48, 149, 153, 157, 161, 165}, 9
-#define DOMAIN_CODE_5G_FCC3 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 149, 153, 157, 161, 165}, 13
-#define DOMAIN_CODE_5G_FCC4 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 149, 153, 157, 161}, 12
-#define DOMAIN_CODE_5G_FCC5 \
-	{149, 153, 157, 161, 165}, 5
-#define DOMAIN_CODE_5G_FCC6 \
-	{36, 40, 44, 48, 52, 56, 60, 64}, 8
-#define DOMAIN_CODE_5G_FCC7 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 136, 140, 149, 153, 157, 161, 165}, 20
-#define DOMAIN_CODE_5G_IC1 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 136, 140, 149, 153, 157, 161, 165}, 20
-#define DOMAIN_CODE_5G_KCC1 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 149, 153, 157, 161, 165}, 20
-#define DOMAIN_CODE_5G_MKK1 \
-	{36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140}, 19
-#define DOMAIN_CODE_5G_MKK2 \
-	{36, 40, 44, 48, 52, 56, 60, 64}, 8
-#define DOMAIN_CODE_5G_MKK3 \
-	{100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140}, 11
-#define DOMAIN_CODE_5G_NCC1 \
-	{56, 60, 64, 100, 104, 108, 112, 116, 136, 140, 149, 153, 157, 161, 165}, 24
-#define DOMAIN_CODE_5G_NCC2 \
-	{56, 60, 64, 149, 153, 157, 161, 165}, 8
-#define UNDEFINED \
-	{0}, 0
-#endif
-
 /*
  *
  *
  *
 
-Countries							"Country Abbreviation"	Domain Code					SKU's	Ch# of 20MHz
+Countries			"Country Abbreviation"	Domain Code		SKU's	Ch# of 20MHz
 															2G			5G						Ch# of 40MHz
-"Albania阿爾巴尼亞"					AL													Local Test
+"Albania阿爾巴尼亞"			AL													Local Test
 
-"Algeria阿爾及利亞"					DZ									CE TCF
+"Algeria阿爾及利亞"			DZ									CE TCF
 
 "Antigua & Barbuda安提瓜島&巴布達"	AG						2G_WORLD					FCC TCF
 
-"Argentina阿根廷"					AR						2G_WORLD					Local Test
+"Argentina阿根廷"			AR						2G_WORLD					Local Test
 
-"Armenia亞美尼亞"					AM						2G_WORLD					ETSI
+"Armenia亞美尼亞"			AM						2G_WORLD					ETSI
 
-"Aruba阿魯巴島"						AW						2G_WORLD					FCC TCF
+"Aruba阿魯巴島"				AW						2G_WORLD					FCC TCF
 
-"Australia澳洲"						AU						2G_WORLD		5G_ETSI2
+"Australia澳洲"				AU						2G_WORLD		5G_ETSI2
 
-"Austria奧地利"						AT						2G_WORLD		5G_ETSI1	CE
+"Austria奧地利"				AT						2G_WORLD		5G_ETSI1	CE
 
-"Azerbaijan阿塞拜彊"				AZ						2G_WORLD					CE TCF
+"Azerbaijan阿塞拜彊"			AZ						2G_WORLD					CE TCF
 
-"Bahamas巴哈馬"						BS						2G_WORLD
+"Bahamas巴哈馬"				BS						2G_WORLD
 
-"Barbados巴巴多斯"					BB						2G_WORLD					FCC TCF
+"Barbados巴巴多斯"			BB						2G_WORLD					FCC TCF
 
-"Belgium比利時"						BE						2G_WORLD		5G_ETSI1	CE
+"Belgium比利時"				BE						2G_WORLD		5G_ETSI1	CE
 
-"Bermuda百慕達"						BM						2G_WORLD					FCC TCF
+"Bermuda百慕達"				BM						2G_WORLD					FCC TCF
 
-"Brazil巴西"						BR						2G_WORLD					Local Test
+"Brazil巴西"				BR						2G_WORLD					Local Test
 
-"Bulgaria保加利亞"					BG						2G_WORLD		5G_ETSI1	CE
+"Bulgaria保加利亞"			BG						2G_WORLD		5G_ETSI1	CE
 
-"Canada加拿大"						CA						2G_FCC1			5G_FCC7		IC / FCC	IC / FCC
+"Canada加拿大"				CA						2G_FCC1			5G_FCC7		IC / FCC	IC / FCC
 
-"Cayman Islands開曼群島"			KY						2G_WORLD		5G_ETSI1	CE
+"Cayman Islands開曼群島"		KY						2G_WORLD		5G_ETSI1	CE
 
-"Chile智利"							CL						2G_WORLD					FCC TCF
+"Chile智利"				CL						2G_WORLD					FCC TCF
 
-"China中國"							CN						2G_WORLD		5G_FCC5		信部?【2002】353?
+"China中國"				CN						2G_WORLD		5G_FCC5		信部?【2002】353?
 
-"Columbia哥倫比亞"					CO						2G_WORLD					Voluntary
+"Columbia哥倫比亞"			CO						2G_WORLD					Voluntary
 
-"Costa Rica哥斯達黎加"				CR						2G_WORLD					FCC TCF
+"Costa Rica哥斯達黎加"			CR						2G_WORLD					FCC TCF
 
-"Cyprus塞浦路斯"					CY						2G_WORLD		5G_ETSI1	CE
+"Cyprus塞浦路斯"			CY						2G_WORLD		5G_ETSI1	CE
 
-"Czech 捷克"						CZ						2G_WORLD		5G_ETSI1	CE
+"Czech 捷克"				CZ						2G_WORLD		5G_ETSI1	CE
 
-"Denmark丹麥"						DK						2G_WORLD		5G_ETSI1	CE
+"Denmark丹麥"				DK						2G_WORLD		5G_ETSI1	CE
 
 "Dominican Republic多明尼加共和國"	DO						2G_WORLD					FCC TCF
 
-"Egypt埃及"	EG	2G_WORLD			CE T												CF
+"Egypt埃及"				EG	2G_WORLD	CE T												CF
 
-"El Salvador薩爾瓦多"				SV						2G_WORLD					Voluntary
+"El Salvador薩爾瓦多"			SV						2G_WORLD					Voluntary
 
-"Estonia愛沙尼亞"					EE						2G_WORLD		5G_ETSI1	CE
+"Estonia愛沙尼亞"			EE						2G_WORLD		5G_ETSI1	CE
 
-"Finland芬蘭"						FI						2G_WORLD		5G_ETSI1	CE
+"Finland芬蘭"				FI						2G_WORLD		5G_ETSI1	CE
 
-"France法國"						FR										5G_E		TSI1	CE
+"France法國"				FR										5G_E		TSI1	CE
 
-"Germany德國"						DE						2G_WORLD		5G_ETSI1	CE
+"Germany德國"				DE						2G_WORLD		5G_ETSI1	CE
 
-"Greece 希臘"						GR						2G_WORLD		5G_ETSI1	CE
+"Greece 希臘"				GR						2G_WORLD		5G_ETSI1	CE
 
-"Guam關島"							GU						2G_WORLD
+"Guam關島"				GU						2G_WORLD
 
-"Guatemala瓜地馬拉"					GT						2G_WORLD
+"Guatemala瓜地馬拉"			GT						2G_WORLD
 
-"Haiti海地"							HT						2G_WORLD					FCC TCF
+"Haiti海地"				HT						2G_WORLD					FCC TCF
 
-"Honduras宏都拉斯"					HN						2G_WORLD					FCC TCF
+"Honduras宏都拉斯"			HN						2G_WORLD					FCC TCF
 
-"Hungary匈牙利"						HU						2G_WORLD		5G_ETSI1	CE
+"Hungary匈牙利"				HU						2G_WORLD		5G_ETSI1	CE
 
-"Iceland冰島"						IS						2G_WORLD		5G_ETSI1	CE
+"Iceland冰島"				IS						2G_WORLD		5G_ETSI1	CE
 
-"India印度"												2G_WORLD		5G_FCC3		FCC/CE TCF
+"India印度"										2G_WORLD		5G_FCC3		FCC/CE TCF
 
-"Ireland愛爾蘭"						IE						2G_WORLD		5G_ETSI1	CE
+"Ireland愛爾蘭"				IE						2G_WORLD		5G_ETSI1	CE
 
-"Israel以色列"						IL										5G_F		CC6	CE TCF
+"Israel以色列"				IL										5G_F		CC6	CE TCF
 
-"Italy義大利"						IT						2G_WORLD		5G_ETSI1	CE
+"Italy義大利"				IT						2G_WORLD		5G_ETSI1	CE
 
-"Japan日本"							JP						2G_MKK1			5G_MKK1		MKK	MKK
+"Japan日本"				JP						2G_MKK1			5G_MKK1		MKK	MKK
 
-"Korea韓國"							KR						2G_WORLD		5G_KCC1		KCC	KCC
+"Korea韓國"				KR						2G_WORLD		5G_KCC1		KCC	KCC
 
-"Latvia拉脫維亞"					LV						2G_WORLD		5G_ETSI1	CE
+"Latvia拉脫維亞"			LV						2G_WORLD		5G_ETSI1	CE
 
-"Lithuania立陶宛"					LT						2G_WORLD		5G_ETSI1	CE
+"Lithuania立陶宛"			LT						2G_WORLD		5G_ETSI1	CE
 
-"Luxembourg盧森堡"					LU						2G_WORLD		5G_ETSI1	CE
+"Luxembourg盧森堡"			LU						2G_WORLD		5G_ETSI1	CE
 
-"Malaysia馬來西亞"					MY						2G_WORLD					Local Test
+"Malaysia馬來西亞"			MY						2G_WORLD					Local Test
 
-"Malta馬爾他"						MT						2G_WORLD		5G_ETSI1	CE
+"Malta馬爾他"				MT						2G_WORLD		5G_ETSI1	CE
 
-"Mexico墨西哥"						MX						2G_WORLD		5G_FCC3		Local Test
+"Mexico墨西哥"				MX						2G_WORLD		5G_FCC3		Local Test
 
-"Morocco摩洛哥"						MA													CE TCF
+"Morocco摩洛哥"				MA													CE TCF
 
-"Netherlands荷蘭"					NL						2G_WORLD		5G_ETSI1	CE
+"Netherlands荷蘭"			NL						2G_WORLD		5G_ETSI1	CE
 
-"New Zealand紐西蘭"					NZ						2G_WORLD		5G_ETSI2
+"New Zealand紐西蘭"			NZ						2G_WORLD		5G_ETSI2
 
-"Norway挪威"						NO						2G_WORLD		5G_ETSI1	CE
+"Norway挪威"				NO						2G_WORLD		5G_ETSI1	CE
 
-"Panama巴拿馬 "						PA						2G_FCC1						Voluntary
+"Panama巴拿馬 "				PA						2G_FCC1						Voluntary
 
-"Philippines菲律賓"					PH						2G_WORLD					FCC TCF
+"Philippines菲律賓"			PH						2G_WORLD					FCC TCF
 
-"Poland波蘭"						PL						2G_WORLD		5G_ETSI1	CE
+"Poland波蘭"				PL						2G_WORLD		5G_ETSI1	CE
 
-"Portugal葡萄牙"					PT						2G_WORLD		5G_ETSI1	CE
+"Portugal葡萄牙"			PT						2G_WORLD		5G_ETSI1	CE
 
-"Romania羅馬尼亞"					RO						2G_WORLD		5G_ETSI1	CE
+"Romania羅馬尼亞"			RO						2G_WORLD		5G_ETSI1	CE
 
-"Russia俄羅斯"						RU						2G_WORLD		5G_ETSI3	CE TCF
+"Russia俄羅斯"				RU						2G_WORLD		5G_ETSI3	CE TCF
 
-"Saudi Arabia沙地阿拉伯"			SA						2G_WORLD					CE TCF
+"Saudi Arabia沙地阿拉伯"		SA						2G_WORLD					CE TCF
 
-"Singapore新加坡"					SG						2G_WORLD
+"Singapore新加坡"			SG						2G_WORLD
 
-"Slovakia斯洛伐克"					SK						2G_WORLD		5G_ETSI1	CE
+"Slovakia斯洛伐克"			SK						2G_WORLD		5G_ETSI1	CE
 
-"Slovenia斯洛維尼亞"				SI						2G_WORLD		5G_ETSI1	CE
+"Slovenia斯洛維尼亞"			SI						2G_WORLD		5G_ETSI1	CE
 
-"South Africa南非"					ZA						2G_WORLD					CE TCF
+"South Africa南非"			ZA						2G_WORLD					CE TCF
 
-"Spain西班牙"						ES										5G_ETSI1	CE
+"Spain西班牙"				ES										5G_ETSI1	CE
 
-"Sweden瑞典"						SE						2G_WORLD		5G_ETSI1	CE
+"Sweden瑞典"				SE						2G_WORLD		5G_ETSI1	CE
 
-"Switzerland瑞士"					CH						2G_WORLD		5G_ETSI1	CE
+"Switzerland瑞士"			CH						2G_WORLD		5G_ETSI1	CE
 
-"Taiwan臺灣"						TW						2G_FCC1			5G_NCC1	NCC
+"Taiwan臺灣"				TW						2G_FCC1			5G_NCC1	NCC
 
-"Thailand泰國"						TH						2G_WORLD					FCC/CE TCF
+"Thailand泰國"				TH						2G_WORLD					FCC/CE TCF
 
-"Turkey土耳其"						TR						2G_WORLD
+"Turkey土耳其"				TR						2G_WORLD
 
-"Ukraine烏克蘭"						UA						2G_WORLD					Local Test
+"Ukraine烏克蘭"				UA						2G_WORLD					Local Test
 
-"United Kingdom英國"				GB						2G_WORLD		5G_ETSI1	CE	ETSI
+"United Kingdom英國"			GB						2G_WORLD		5G_ETSI1	CE	ETSI
 
-"United States美國"					US						2G_FCC1			5G_FCC7		FCC	FCC
+"United States美國"			US						2G_FCC1			5G_FCC7		FCC	FCC
 
-"Venezuela委內瑞拉"					VE						2G_WORLD		5G_FCC4		FCC TCF
+"Venezuela委內瑞拉"			VE						2G_WORLD		5G_FCC4		FCC TCF
 
-"Vietnam越南"						VN						2G_WORLD					FCC/CE TCF
-
+"Vietnam越南"				VN						2G_WORLD					FCC/CE TCF
 
 
 */

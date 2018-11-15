@@ -672,18 +672,8 @@ odm_txpowertracking_thermal_meter_init(
 }
 
 
-void
-odm_txpowertracking_check(
-	void		*p_dm_void
-)
+void odm_txpowertracking_check(void *p_dm_void)
 {
-
-#if 0
-	/* 2011/09/29 MH In HW integration first stage, we provide 4 different handle to operate */
-	/*  at the same time. In the stage2/3, we need to prive universal interface and merge all */
-	/* HW dynamic mechanism. */
-#endif
-
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
 	switch	(p_dm_odm->support_platform) {
 	case	ODM_WIN:

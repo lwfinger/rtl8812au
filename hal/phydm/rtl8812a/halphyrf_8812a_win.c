@@ -1163,20 +1163,6 @@ _phy_lc_calibrate_8812a(
 	else							/* If packet Tx-ing, pause Tx. */
 		odm_write_1byte(p_dm_odm, REG_TXPAUSE_8812A, 0xFF);
 
-
-#if 0
-	/* 3 1. Read original RF mode */
-	rf_amode = odm_get_rf_reg(p_dm_odm, ODM_RF_PATH_A, RF_AC, RFREGOFFSETMASK);
-	if (is2T)
-		rf_bmode = odm_get_rf_reg(p_dm_odm, ODM_RF_PATH_B, RF_AC, RFREGOFFSETMASK);
-
-
-	/* 3 2. Set RF mode = standby mode */
-	odm_set_rf_reg(p_dm_odm, ODM_RF_PATH_A, RF_AC, RFREGOFFSETMASK, (rf_amode & 0x8FFFF) | 0x10000);
-	if (is2T)
-		odm_set_rf_reg(p_dm_odm, ODM_RF_PATH_B, RF_AC, RFREGOFFSETMASK, (rf_bmode & 0x8FFFF) | 0x10000);
-#endif
-
 	/* Enter LCK mode */
 	tmp = odm_get_rf_reg(p_dm_odm, ODM_RF_PATH_A, RF_LCK, RFREGOFFSETMASK);
 	odm_set_rf_reg(p_dm_odm, ODM_RF_PATH_A, RF_LCK, RFREGOFFSETMASK, tmp | BIT(14));

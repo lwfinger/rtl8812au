@@ -108,26 +108,7 @@ struct recv_reorder_ctrl {
 
 struct	stainfo_rxcache	{
 	u16	tid_rxseq[16];
-#if 0
-	unsigned short	tid0_rxseq;
-	unsigned short	tid1_rxseq;
-	unsigned short	tid2_rxseq;
-	unsigned short	tid3_rxseq;
-	unsigned short	tid4_rxseq;
-	unsigned short	tid5_rxseq;
-	unsigned short	tid6_rxseq;
-	unsigned short	tid7_rxseq;
-	unsigned short	tid8_rxseq;
-	unsigned short	tid9_rxseq;
-	unsigned short	tid10_rxseq;
-	unsigned short	tid11_rxseq;
-	unsigned short	tid12_rxseq;
-	unsigned short	tid13_rxseq;
-	unsigned short	tid14_rxseq;
-	unsigned short	tid15_rxseq;
-#endif
 };
-
 
 struct smooth_rssi_data {
 	u32	elements[100];	/* array to store values */
@@ -142,41 +123,6 @@ struct signal_stat {
 	u32	total_num;		/* num of valid elements */
 	u32	total_val;		/* sum of valid elements	 */
 };
-#if 0
-typedef struct _ODM_Phy_Status_Info_ {
-	/* */
-	/*  Be care, if you want to add any element please insert between */
-	/*  RxPWDBAll & SignalStrength. */
-	/* */
-#if (DM_ODM_SUPPORT_TYPE &  (ODM_WIN))
-	u4Byte		RxPWDBAll;
-#else
-	u1Byte		RxPWDBAll;
-#endif
-
-	u1Byte		SignalQuality;	 		/*  in 0-100 index. */
-	s1Byte		RxMIMOSignalQuality[4];	/* per-path's EVM */
-	u1Byte		RxMIMOEVMdbm[4]; 		/* per-path's EVM dbm */
-
-	u1Byte		RxMIMOSignalStrength[4];/*  in 0~100 index */
-
-	u2Byte		Cfo_short[4]; 			/*  per-path's Cfo_short */
-	u2Byte		Cfo_tail[4];			/*  per-path's Cfo_tail */
-
-#if (DM_ODM_SUPPORT_TYPE &  (ODM_WIN|ODM_CE))
-	s1Byte		RxPower;				/*  in dBm Translate from PWdB */
-	s1Byte		RecvSignalPower;		/*  Real power in dBm for this packet, no beautification and aggregation. Keep this raw info to be used for the other procedures. */
-	u1Byte		BTRxRSSIPercentage;
-	u1Byte		SignalStrength; 		/*  in 0-100 index. */
-
-	u1Byte		RxPwr[4];				/* per-path's pwdb */
-#endif
-	u1Byte		RxSNR[4];				/* per-path's SNR	 */
-	u1Byte		BandWidth;
-	u1Byte		btCoexPwrAdjust;
-} ODM_PHY_INFO_T, *PODM_PHY_INFO_T;
-#endif
-
 struct phy_info {
 	u8			RxPWDBAll;
 	u8			SignalQuality;				/* in 0-100 index. */
@@ -269,14 +215,6 @@ struct rx_pkt_attrib	{
 	u8	pkt_rpt_type;
 	u32 tsfl;
 	u32	MacIDValidEntry[2];	/* 64 bits present 64 entry. */
-
-#if 0
-	u8	signal_qual;
-	s8	rx_mimo_signal_qual[2];
-	u8	signal_strength;
-	u32	RxPWDBAll;
-	s32	RecvSignalPower;
-#endif
 	struct phy_info phy_info;
 };
 

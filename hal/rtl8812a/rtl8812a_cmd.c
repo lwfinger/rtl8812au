@@ -686,21 +686,10 @@ static void ConstructGTKResponse(
 #endif /* CONFIG_WAPI_SUPPORT */
 
 	/* YJ,del,120503 */
-#if 0
-	/* ------------------------------------------------------------------------- */
-	/* Qos Header: leave space for it if necessary. */
-	/* ------------------------------------------------------------------------- */
-	if (pStaQos->CurrentQosMode > QOS_DISABLE) {
-		SET_80211_HDR_QOS_EN(pGTKRspPkt, 1);
-		PlatformZeroMemory(&(Buffer[*pLength]), sQoSCtlLng);
-		*pLength += sQoSCtlLng;
-	}
-#endif /* 0 */
 	/* ------------------------------------------------------------------------- */
 	/* Security Header: leave space for it if necessary. */
 	/* ------------------------------------------------------------------------- */
 
-#if 1
 	switch (psecuritypriv->dot11PrivacyAlgrthm) {
 	case _WEP40_:
 	case _WEP104_:
@@ -728,7 +717,6 @@ static void ConstructGTKResponse(
 		/* GTK's privacy bit is done by FW */
 		/* SetPrivacy(fctrl); */
 	}
-#endif /* 1 */
 	/* ------------------------------------------------------------------------- */
 	/* Frame Body. */
 	/* ------------------------------------------------------------------------- */

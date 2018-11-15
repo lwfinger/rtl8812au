@@ -1738,34 +1738,6 @@ void halbtc8723b2ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		}
 	}
 }
-#if 0
-boolean halbtc8723b2ant_CoexSwitchThresCheck(IN struct btc_coexist *btcoexist)
-{
-	static u8	prewifi_rssi_state = BTC_RSSI_STATE_LOW;
-	static u8	pre_bt_rssi_state = BTC_RSSI_STATE_LOW;
-	u8 wifi_rssi_state1, bt_rssi_state;
-	u32 vendor;
-	u8 offset = 0;
-
-	btcoexist->btc_get(btcoexist, BTC_GET_U4_VENDOR, &vendor);
-
-	/* if (vendor == BTC_VENDOR_LENOVO) */
-	/*	offset = 20; */
-
-	wifi_rssi_state1 = halbtc8723b2ant_wifi_rssi_state(btcoexist,
-		&prewifi_rssi_state, 2, BT_8723B_2ANT_WIFI_RSSI_COEXSWITCH_THRES
-			   - coex_dm->switch_thres_offset, 0);
-	bt_rssi_state = halbtc8723b2ant_bt_rssi_state(&pre_bt_rssi_state, 2,
-			BT_8723B_2ANT_BT_RSSI_COEXSWITCH_THRES -
-			coex_dm->switch_thres_offset, 0);
-
-	if (BTC_RSSI_LOW(wifi_rssi_state1) || BTC_RSSI_LOW(bt_rssi_state))
-		return true;
-
-	return false;
-}
-#endif
-
 
 void halbtc8723b2ant_coex_all_off(IN struct btc_coexist *btcoexist)
 {
@@ -4730,13 +4702,6 @@ void ex_halbtc8723b2ant_bt_info_notify(IN struct btc_coexist *btcoexist,
 			BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
 				"############# [BTCoex], BT TRx Mask off for BT Info Notify\n");
 			BTC_TRACE(trace_buf);
-#if 0
-			BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-				"[BTCoex], Switch BT TRx Mask since BT RF REG 0x3C != 0x01\n");
-			BTC_TRACE(trace_buf);
-			btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF,
-						  0x3c, 0x01);
-#endif
 		}
 
 		/* Here we need to resend some wifi info to BT */

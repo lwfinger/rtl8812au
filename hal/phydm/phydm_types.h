@@ -184,41 +184,6 @@ enum rt_spinlock_type {
 
 #elif (DM_ODM_SUPPORT_TYPE == ODM_CE)
 	#include <drv_types.h>
-	#if 0
-		typedef u8					u8, *u8 *;
-		typedef u16					u16, *u16 *;
-		typedef u32					u32, *u32 *;
-		typedef u64					u64, *u64 *;
-		typedef s8					s8, *s8 *;
-		typedef s16					s16, *s16 *;
-		typedef s32					s32, *s32 *;
-		typedef s64					s64, *s64 *;
-	#elif 0
-		#define u8		u8
-		#define	u8 *u8*
-
-		#define u16		u16
-		#define	u16 *u16*
-
-		#define u32		u32
-		#define	u32 *u32*
-
-		#define u64		u64
-		#define	u64*	u64*
-
-		#define s8		s8
-		#define	s8*	s8*
-
-		#define s16		s16
-		#define	s16*	s16*
-
-		#define s32		s32
-		#define	s32*	s32*
-
-		#define s64		s64
-		#define	s64*	s64*
-
-	#endif
 	#ifdef CONFIG_USB_HCI
 		#define DEV_BUS_TYPE	RT_USB_INTERFACE
 	#elif defined(CONFIG_PCI_HCI)

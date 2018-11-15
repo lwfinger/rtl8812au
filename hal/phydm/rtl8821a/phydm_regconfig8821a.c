@@ -71,25 +71,6 @@ odm_config_rf_radio_a_8821a(
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> odm_config_rf_with_header_file: [RadioA] %08X %08X\n", addr, data));
 }
 
-/* 8821 no RF B */
-#if 0
-void
-odm_config_rf_radio_b_8821a(
-	struct PHY_DM_STRUCT				*p_dm_odm,
-	u32					addr,
-	u32					data
-)
-{
-	u32  content = 0x1001; /*  RF_Content: radiob_txt */
-	u32	maskfor_phy_set = (u32)(content & 0xE000);
-
-	odm_config_rf_reg_8812a(p_dm_odm, addr, data, ODM_RF_PATH_B, addr | maskfor_phy_set);
-
-	ODM_RT_TRACE(p_dm_odm, ODM_COMP_INIT, ODM_DBG_TRACE, ("===> odm_config_rf_with_header_file: [RadioB] %08X %08X\n", addr, data));
-
-}
-#endif
-
 void
 odm_config_mac_8821a(
 	struct PHY_DM_STRUCT	*p_dm_odm,

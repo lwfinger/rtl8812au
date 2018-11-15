@@ -815,19 +815,6 @@ static void update_attrib_vcs_info(_adapter *padapter, struct xmit_frame *pxmitf
 		}
 	} else {
 		while (_TRUE) {
-#if 0 /* Todo */
-			/* check IOT action */
-			if (pHTInfo->IOTAction & HT_IOT_ACT_FORCED_CTS2SELF) {
-				pattrib->vcs_mode = CTS_TO_SELF;
-				pattrib->rts_rate = MGN_24M;
-				break;
-			} else if (pHTInfo->IOTAction & (HT_IOT_ACT_FORCED_RTS | HT_IOT_ACT_PURE_N_MODE)) {
-				pattrib->vcs_mode = RTS_CTS;
-				pattrib->rts_rate = MGN_24M;
-				break;
-			}
-#endif
-
 			/* IOT action */
 			if ((pmlmeinfo->assoc_AP_vendor == HT_IOT_PEER_ATHEROS) && (pattrib->ampdu_en == _TRUE) &&
 			    (padapter->securitypriv.dot11PrivacyAlgrthm == _AES_)) {
@@ -1159,26 +1146,12 @@ u8 rtw_check_tdls_established(_adapter *padapter, struct pkt_attrib *pattrib)
 	pattrib->direct_link = _FALSE;
 	if (padapter->tdlsinfo.link_established == _TRUE) {
 		pattrib->ptdls_sta = rtw_get_stainfo(&padapter->stapriv, pattrib->dst);
-#if 1
 		if ((pattrib->ptdls_sta != NULL) &&
 		    (pattrib->ptdls_sta->tdls_sta_state & TDLS_LINKED_STATE) &&
 		    (pattrib->ether_type != 0x0806)) {
 			pattrib->direct_link = _TRUE;
 			/* RTW_INFO("send ptk to "MAC_FMT" using direct link\n", MAC_ARG(pattrib->dst)); */
 		}
-#else
-		if (pattrib->ptdls_sta != NULL &&
-		    pattrib->ptdls_sta->tdls_sta_state & TDLS_LINKED_STATE) {
-			pattrib->direct_link = _TRUE;
-#if 0
-			RTW_INFO("send ptk to "MAC_FMT" using direct link\n", MAC_ARG(pattrib->dst));
-#endif
-		}
-
-		/* ARP frame may be helped by AP*/
-		if (pattrib->ether_type != 0x0806)
-			pattrib->direct_link = _FALSE;
-#endif
 	}
 
 	return pattrib->direct_link;
@@ -1408,14 +1381,9 @@ static s32 update_attrib(_adapter *padapter, _pkt *pkt, struct pkt_attrib *pattr
 #ifdef CONFIG_WAPI_SUPPORT
 	if ((pattrib->ether_type == 0x88B4) || (pattrib->ether_type == 0x0806) || (pattrib->ether_type == 0x888e) || (pattrib->dhcp_pkt == 1))
 #else /* !CONFIG_WAPI_SUPPORT */
-#if 0
-	if ((pattrib->ether_type == 0x0806) || (pattrib->ether_type == 0x888e) || (pattrib->dhcp_pkt == 1))
-#else /* only ICMP/DHCP packets is as SPECIAL_PACKET, and leave LPS when tx IMCP/DHCP packets. */
-	/* if ((pattrib->ether_type == 0x888e) || (pattrib->dhcp_pkt == 1) ) */
 	if (pattrib->icmp_pkt == 1)
 		rtw_lps_ctrl_wk_cmd(padapter, LPS_CTRL_LEAVE, 1);
 	else if (pattrib->dhcp_pkt == 1)
-#endif
 #endif
 	{
 		DBG_COUNTER(padapter->tx_logs.core_tx_upd_attrib_active);
@@ -2482,40 +2450,7 @@ s32 rtw_xmitframe_coalesce(_adapter *padapter, _pkt *pkt, struct xmit_frame *pxm
 
 		/* adding icv, if necessary... */
 		if (pattrib->iv_len) {
-#if 0
-			/* if (check_fwstate(pmlmepriv, WIFI_MP_STATE)) */
-			/*	psta = rtw_get_stainfo(pstapriv, get_bssid(pmlmepriv)); */
-			/* else */
-			/*	psta = rtw_get_stainfo(pstapriv, pattrib->ra); */
-
-			if (psta != NULL) {
-				switch (pattrib->encrypt) {
-				case _WEP40_:
-				case _WEP104_:
-					WEP_IV(pattrib->iv, psta->dot11txpn, pattrib->key_idx);
-					break;
-				case _TKIP_:
-					if (bmcst)
-						TKIP_IV(pattrib->iv, psta->dot11txpn, pattrib->key_idx);
-					else
-						TKIP_IV(pattrib->iv, psta->dot11txpn, 0);
-					break;
-				case _AES_:
-					if (bmcst)
-						AES_IV(pattrib->iv, psta->dot11txpn, pattrib->key_idx);
-					else
-						AES_IV(pattrib->iv, psta->dot11txpn, 0);
-					break;
-#ifdef CONFIG_WAPI_SUPPORT
-				case _SMS4_:
-					rtw_wapi_get_iv(padapter, pattrib->ra, pattrib->iv);
-					break;
-#endif
-				}
-			}
-#endif
 			_rtw_memcpy(pframe, pattrib->iv, pattrib->iv_len);
-
 
 			pframe += pattrib->iv_len;
 
@@ -2663,31 +2598,11 @@ s32 rtw_mgmt_xmitframe_coalesce(_adapter *padapter, _pkt *pkt, struct xmit_frame
 		_rtw_memcpy(BIP_AAD + 2, pwlanhdr->addr1, 18);
 		/* copy management fram body */
 		_rtw_memcpy(BIP_AAD + BIP_AAD_SIZE, MGMT_body, frame_body_len);
-#if 0
-		/* dump total packet include MME with zero MIC */
-		{
-			int i;
-			printk("Total packet: ");
-			for (i = 0; i < BIP_AAD_SIZE + frame_body_len; i++)
-				printk(" %02x ", BIP_AAD[i]);
-			printk("\n");
-		}
-#endif
 		/* calculate mic */
 		if (omac1_aes_128(padapter->securitypriv.dot11wBIPKey[padapter->securitypriv.dot11wBIPKeyid].skey
 			  , BIP_AAD, BIP_AAD_SIZE + frame_body_len, mic))
 			goto xmitframe_coalesce_fail;
 
-#if 0
-		/* dump calculated mic result */
-		{
-			int i;
-			printk("Calculated mic result: ");
-			for (i = 0; i < 16; i++)
-				printk(" %02x ", mic[i]);
-			printk("\n");
-		}
-#endif
 		/* copy right BIP mic value, total is 128bits, we use the 0~63 bits */
 		_rtw_memcpy(pframe - 8, mic, 8);
 		/*/dump all packet after mic ok
@@ -2771,17 +2686,6 @@ s32 rtw_mgmt_xmitframe_coalesce(_adapter *padapter, _pkt *pkt, struct xmit_frame
 			pframe += pattrib->pktlen - pattrib->hdrlen;
 			/* add 8 bytes CCMP IV header to length */
 			pattrib->pktlen += pattrib->iv_len;
-#if 0
-			/* dump management packet include AES IV header */
-			{
-				int i;
-				printk("Management pkt + IV: ");
-				/* for(i=0; i<pattrib->pktlen; i++) */
-
-				printk("@@@@@@@@@@@@@\n");
-			}
-#endif
-
 			if ((pattrib->icv_len > 0) && (pattrib->bswenc)) {
 				_rtw_memcpy(pframe, pattrib->icv, pattrib->icv_len);
 				pframe += pattrib->icv_len;
@@ -2793,16 +2697,6 @@ s32 rtw_mgmt_xmitframe_coalesce(_adapter *padapter, _pkt *pkt, struct xmit_frame
 
 			/* set protected bit must be beofre SW encrypt */
 			SetPrivacy(mem_start);
-#if 0
-			/* dump management packet include AES header */
-			{
-				int i;
-				printk("prepare to enc Management pkt + IV: ");
-				for (i = 0; i < pattrib->pktlen; i++)
-					printk(" %02x ", mem_start[i]);
-				printk("@@@@@@@@@@@@@\n");
-			}
-#endif
 			/* software encrypt */
 			xmitframe_swencrypt(padapter, pxmitframe);
 		}
@@ -3571,13 +3465,6 @@ struct xmit_frame *rtw_dequeue_xframe(struct xmit_priv *pxmitpriv, struct hw_xmi
 
 	if (pregpriv->wifi_spec == 1) {
 		int j, tmp, acirp_cnt[4];
-#if 0
-		if (flags < XMIT_QUEUE_ENTRY) {
-			/* priority exchange according to the completed xmitbuf flags. */
-			inx[flags] = 0;
-			inx[0] = flags;
-		}
-#endif
 
 #if defined(CONFIG_USB_HCI) || defined(CONFIG_SDIO_HCI) || defined(CONFIG_PCI_HCI)
 		for (j = 0; j < 4; j++)
@@ -4025,21 +3912,6 @@ int rtw_br_client_tx(_adapter *padapter, struct sk_buff **pskb)
 				*((unsigned short *)(skb->data + MACADDRLEN * 2 + 2)) = vlan_hdr;
 			}
 		}
-#if 0
-		else {
-			if (*((unsigned short *)(skb->data + MACADDRLEN * 2)) == __constant_htons(ETH_P_8021Q))
-				is_vlan_tag = 1;
-
-			if (is_vlan_tag) {
-				if (ICMPV6_MCAST_MAC(skb->data) && ICMPV6_PROTO1A_VALN(skb->data))
-					memcpy(skb->data + MACADDRLEN, GET_MY_HWADDR(padapter), MACADDRLEN);
-			} else {
-				if (ICMPV6_MCAST_MAC(skb->data) && ICMPV6_PROTO1A(skb->data))
-					memcpy(skb->data + MACADDRLEN, GET_MY_HWADDR(padapter), MACADDRLEN);
-			}
-		}
-#endif /* 0 */
-
 		/* check if SA is equal to our MAC */
 		if (memcmp(skb->data + MACADDRLEN, GET_MY_HWADDR(padapter), MACADDRLEN)) {
 			/* priv->ext_stats.tx_drops++; */

@@ -52,10 +52,6 @@ struct async_context {
 extern void sdio_set_intf_ops(_adapter *padapter, struct _io_ops *pops);
 void dump_sdio_card_info(void *sel, struct dvobj_priv *dvobj);
 
-#if 0
-extern void sdio_func1cmd52_read(struct intf_hdl *pintfhdl, u32 addr, u32 cnt, u8 *rmem);
-extern void sdio_func1cmd52_write(struct intf_hdl *pintfhdl, u32 addr, u32 cnt, u8 *wmem);
-#endif
 extern u8 SdioLocalCmd52Read1Byte(PADAPTER padapter, u32 addr);
 extern void SdioLocalCmd52Write1Byte(PADAPTER padapter, u32 addr, u8 v);
 extern s32 _sdio_local_read(PADAPTER padapter, u32 addr, u32 cnt, u8 *pbuf);

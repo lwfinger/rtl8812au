@@ -424,29 +424,7 @@ void halbtc8822b1ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 			num_of_bt_counter_chk = 0;
 		}
 	}
-#if 0
-	/* Add Hi-Pri Tx/Rx counter to avoid false detection */
-	if (((coex_sta->hid_exist) || (coex_sta->sco_exist)) &&
-	    (coex_sta->high_priority_tx + coex_sta->high_priority_rx
-	     >= 160)
-	    && (!coex_sta->c2h_bt_inquiry_page))
-		coex_sta->bt_hi_pri_link_exist = true;
-	else
-		coex_sta->bt_hi_pri_link_exist = false;
-
-	if ((coex_sta->acl_busy) &&
-	    (coex_sta->num_of_profile == 0)) {
-		if (coex_sta->low_priority_tx +
-		    coex_sta->low_priority_rx >= 160) {
-			coex_sta->pan_exist = true;
-			coex_sta->num_of_profile++;
-			coex_sta->wrong_profile_notification++;
-		}
-	}
-#endif
-
 }
-
 
 void halbtc8822b1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
@@ -1034,29 +1012,10 @@ void halbtc8822b1ant_monitor_bt_enable_disable(IN struct btc_coexist *btcoexist)
 				wifi_under_5g = false;
 	u16		u16tmp;
 
-	/* This function check if bt is disabled */
-#if 0
-	if (coex_sta->high_priority_tx == 0 &&
-	    coex_sta->high_priority_rx == 0 &&
-	    coex_sta->low_priority_tx == 0 &&
-	    coex_sta->low_priority_rx == 0)
-		bt_active = false;
-	if (coex_sta->high_priority_tx == 0xffff &&
-	    coex_sta->high_priority_rx == 0xffff &&
-	    coex_sta->low_priority_tx == 0xffff &&
-	    coex_sta->low_priority_rx == 0xffff)
-		bt_active = false;
-
-
-#else
-
 	/* Read BT on/off status from scoreboard[1], enable this only if BT patch support this feature */
 	halbtc8822b1ant_read_score_board(btcoexist, &u16tmp);
 
 	bt_active = u16tmp & BIT(1);
-
-
-#endif
 
 	if (bt_active) {
 		bt_disable_cnt = 0;
@@ -5872,25 +5831,6 @@ void ex_halbtc8822b1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		u32tmp[0], u8tmp[0], (u8tmp[1] & 0x2) ? "On" : "Off", u8tmp[2]);
 	CL_PRINTF(cli_buf);
 
-#if 0 /* phydm v008 doesn't support this feature */
-	fa_ofdm = btcoexist->btc_phydm_query_PHY_counter(btcoexist,
-			PHYDM_INFO_FA_OFDM);
-	fa_cck = btcoexist->btc_phydm_query_PHY_counter(btcoexist,
-			PHYDM_INFO_FA_CCK);
-	cca_ofdm = btcoexist->btc_phydm_query_PHY_counter(btcoexist,
-			PHYDM_INFO_CCA_OFDM);
-	cca_cck = btcoexist->btc_phydm_query_PHY_counter(btcoexist,
-			PHYDM_INFO_CCA_CCK);
-
-	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE,
-		   "\r\n %-35s = 0x%x/ 0x%x/ 0x%x/ 0x%x",
-		   "CCK-CCA/CCK-FA/OFDM-CCA/OFDM-FA",
-		   cca_cck, fa_cck, cca_ofdm, fa_ofdm);
-	CL_PRINTF(cli_buf);
-#endif
-
-
-#if 1
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %d/ %d/ %d/ %d",
 		   "CRC_OK CCK/11g/11n/11ac",
 		   coex_sta->crc_ok_cck, coex_sta->crc_ok_11g,
@@ -5902,7 +5842,6 @@ void ex_halbtc8822b1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   coex_sta->crc_err_cck, coex_sta->crc_err_11g,
 		   coex_sta->crc_err_11n, coex_sta->crc_err_11n_vht);
 	CL_PRINTF(cli_buf);
-#endif
 
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %s/ %s/ %s",
 		   "Wifi-HiPri/ Ccklock/ CckEverLock",

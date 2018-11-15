@@ -1394,15 +1394,6 @@ odm_false_alarm_counter_statistics(
 #endif
 	u32						ret_value;
 
-#if (DM_ODM_SUPPORT_TYPE == ODM_AP)
-	/* Mark there, and check this in odm_DMWatchDog */
-#if 0 /* (DM_ODM_SUPPORT_TYPE == ODM_AP) */
-	struct rtl8192cd_priv *priv		= p_dm_odm->priv;
-	if ((priv->auto_channel != 0) && (priv->auto_channel != 2))
-		return;
-#endif
-#endif
-
 	if (!(p_dm_odm->support_ability & ODM_BB_FA_CNT))
 		return;
 
@@ -1614,15 +1605,6 @@ odm_false_alarm_counter_statistics(
 		if (adc_smp->adc_smp_state == ADCSMP_STATE_IDLE)
 #endif
 		{
-		#if 0
-			/* Get debug port 0 */
-			odm_set_bb_reg(p_dm_odm, ODM_REG_DBG_RPT_11AC, MASKDWORD, 0x0);
-			false_alm_cnt->dbg_port0 = odm_get_bb_reg(p_dm_odm, ODM_REG_RPT_11AC, MASKDWORD);
-			/* Get EDCCA flag */
-			odm_set_bb_reg(p_dm_odm, ODM_REG_DBG_RPT_11AC, MASKDWORD, 0x209);
-			false_alm_cnt->edcca_flag = (boolean)odm_get_bb_reg(p_dm_odm, ODM_REG_RPT_11AC, BIT(30));		
-		#else
-
 			if (phydm_set_bb_dbg_port(p_dm_odm, BB_DBGPORT_PRIORITY_1, 0x0)) {/*set debug port to 0x0*/
 				false_alm_cnt->dbg_port0 = phydm_get_bb_dbg_port_value(p_dm_odm);
 				phydm_release_bb_dbg_port(p_dm_odm);
@@ -1632,12 +1614,8 @@ odm_false_alarm_counter_statistics(
 				false_alm_cnt->edcca_flag = (boolean)((phydm_get_bb_dbg_port_value(p_dm_odm) & BIT(30))>>30);
 				phydm_release_bb_dbg_port(p_dm_odm);
 			}
-		
-		#endif
-
 
 		}
-
 	}
 #endif
 
@@ -1822,57 +1800,18 @@ odm_cck_packet_detection_thresh(
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_DIG, ODM_DBG_LOUD, ("CCK_PD: CCK FA moving average = %d\n", p_dm_dig_table->cck_fa_ma));
 
 	if (p_dm_odm->is_linked) {
-#if (DM_ODM_SUPPORT_TYPE & (ODM_WIN | ODM_CE))
-
-		#if 0 /*for [PCIE-1596]*/
-		if (p_dm_odm->rssi_min > (RSSI_thd + 14))
-			cur_cck_cca_thres = 0xed;
-		else if (p_dm_odm->rssi_min > (RSSI_thd + 6))
-			cur_cck_cca_thres = 0xdd;
-		else
-		#endif
-
-		#if 0 /*for LPS power consumption issue*/
-		if (p_dm_odm->traffic_load == TRAFFIC_ULTRA_LOW)
-			cur_cck_cca_thres = 0x40;
-		else 
-		#endif
-		{
-			if (p_dm_odm->rssi_min > RSSI_thd)
-				cur_cck_cca_thres = 0xcd;
-			else if (p_dm_odm->rssi_min > 20) {
-				if (p_dm_dig_table->cck_fa_ma > ((DM_DIG_FA_TH1 >> 1) + (DM_DIG_FA_TH1 >> 3)))
-					cur_cck_cca_thres = 0xcd;
-				else if (p_dm_dig_table->cck_fa_ma < (DM_DIG_FA_TH0 >> 1))
-					cur_cck_cca_thres = 0x83;
-			} else if (p_dm_odm->rssi_min > 7)
-				cur_cck_cca_thres = 0x83;
-			else
-				cur_cck_cca_thres = 0x40;
-		}
-			
-#else	/*ODM_AP*/
-
-		if (p_dm_dig_table->cur_ig_value > (0x24 + 14))
-			cur_cck_cca_thres = 0xed;
-		else if (p_dm_dig_table->cur_ig_value > (0x24 + 6))
-			cur_cck_cca_thres = 0xdd;
-		else if (p_dm_dig_table->cur_ig_value > 0x24)
+		if (p_dm_odm->rssi_min > RSSI_thd)
 			cur_cck_cca_thres = 0xcd;
-		else {
-			#if 0
-			if (p_dm_dig_table->cck_fa_ma > 0x400)
+		else if (p_dm_odm->rssi_min > 20) {
+			if (p_dm_dig_table->cck_fa_ma > ((DM_DIG_FA_TH1 >> 1) + (DM_DIG_FA_TH1 >> 3)))
+				cur_cck_cca_thres = 0xcd;
+			else if (p_dm_dig_table->cck_fa_ma < (DM_DIG_FA_TH0 >> 1))
 				cur_cck_cca_thres = 0x83;
-			else if (p_dm_dig_table->cck_fa_ma < 0x200)
-				cur_cck_cca_thres = 0x40;
-			#else
-				cur_cck_cca_thres = 0x83;
-			#endif
-		}
-
-#endif
+		} else if (p_dm_odm->rssi_min > 7)
+			cur_cck_cca_thres = 0x83;
+		else
+			cur_cck_cca_thres = 0x40;
 	} else {
-	
 		if (p_dm_dig_table->cck_fa_ma > 0x400)
 			cur_cck_cca_thres = 0x83;
 		else if (p_dm_dig_table->cck_fa_ma < 0x200)

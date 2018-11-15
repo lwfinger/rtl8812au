@@ -831,10 +831,6 @@ void halbtc8192e2ant_dec_bt_pwr(IN struct btc_coexist *btcoexist,
 	coex_dm->cur_bt_dec_pwr_lvl = dec_bt_pwr_lvl;
 
 	if (!force_exec) {
-#if 0	/* work around, avoid h2c command fail. */
-		if (coex_dm->pre_bt_dec_pwr_lvl == coex_dm->cur_bt_dec_pwr_lvl)
-			return;
-#endif
 	}
 	halbtc8192e2ant_set_fw_dec_bt_pwr(btcoexist,
 					  coex_dm->cur_bt_dec_pwr_lvl);

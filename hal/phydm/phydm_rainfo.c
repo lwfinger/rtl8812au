@@ -223,19 +223,6 @@ odm_ra_para_adjust_init(
 	u8			ra_para_pool_u8[3] = { RADBG_RTY_PENALTY,  RADBG_RATE_UP_RTY_RATIO, RADBG_RATE_DOWN_RTY_RATIO};
 	u8			rate_size_ht_1ss = 20, rate_size_ht_2ss = 28, rate_size_ht_3ss = 36;	 /*4+8+8+8+8 =36*/
 	u8			rate_size_vht_1ss = 10, rate_size_vht_2ss = 20, rate_size_vht_3ss = 30;	 /*10 + 10 +10 =30*/
-#if 0
-	/* RTY_PENALTY		=	1,   u8 */
-	/* N_HIGH 				=	2, */
-	/* N_LOW				=	3, */
-	/* RATE_UP_TABLE		=	4, */
-	/* RATE_DOWN_TABLE	=	5, */
-	/* TRYING_NECESSARY	=	6, */
-	/* DROPING_NECESSARY =	7, */
-	/* RATE_UP_RTY_RATIO	=	8,  u8 */
-	/* RATE_DOWN_RTY_RATIO=	9,  u8 */
-	/* ALL_PARA		=	0xff */
-
-#endif
 	ODM_RT_TRACE(p_dm_odm, PHYDM_COMP_RA_DBG, ODM_DBG_LOUD, ("odm_ra_para_adjust_init\n"));
 
 /* JJ ADD 20161014 */
@@ -2721,19 +2708,6 @@ odm_set_ra_dm_arfb_by_noisy(
 	struct PHY_DM_STRUCT	*p_dm_odm
 )
 {
-#if 0
-
-	/*dbg_print("DM_ARFB ====>\n");*/
-	if (p_dm_odm->is_noisy_state) {
-		odm_write_4byte(p_dm_odm, 0x430, 0x00000000);
-		odm_write_4byte(p_dm_odm, 0x434, 0x05040200);
-		/*dbg_print("DM_ARFB ====> Noisy state\n");*/
-	} else {
-		odm_write_4byte(p_dm_odm, 0x430, 0x02010000);
-		odm_write_4byte(p_dm_odm, 0x434, 0x07050403);
-		/*dbg_print("DM_ARFB ====> Clean state\n");*/
-	}
-#endif
 }
 
 void
@@ -2956,112 +2930,6 @@ odm_refresh_ldpc_rts_mp(
 	else if (undecorated_smoothed_pwdb > p_ra->rts_thres)
 		p_ra->is_lower_rts_rate = false;
 }
-
-#if 0
-void
-odm_dynamic_arfb_select(
-	void		*p_dm_void,
-	u8			rate,
-	boolean			collision_state
-)
-{
-	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
-	struct _rate_adaptive_table_			*p_ra_table = &p_dm_odm->dm_ra_table;
-
-	if (p_dm_odm->support_ic_type != ODM_RTL8192E)
-		return;
-
-	if (collision_state == p_ra_table->PT_collision_pre)
-		return;
-
-	if (rate >= DESC_RATEMCS8  && rate <= DESC_RATEMCS12) {
-		if (collision_state == 1) {
-			if (rate == DESC_RATEMCS12) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x0);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x07060501);
-			} else if (rate == DESC_RATEMCS11) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x0);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x07070605);
-			} else if (rate == DESC_RATEMCS10) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x0);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x08080706);
-			} else if (rate == DESC_RATEMCS9) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x0);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x08080707);
-			} else {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x0);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x09090808);
-			}
-		} else { /* collision_state == 0*/
-			if (rate == DESC_RATEMCS12) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x05010000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x09080706);
-			} else if (rate == DESC_RATEMCS11) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x06050000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x09080807);
-			} else if (rate == DESC_RATEMCS10) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x07060000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x0a090908);
-			} else if (rate == DESC_RATEMCS9) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x07070000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x0a090808);
-			} else {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x08080000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x0b0a0909);
-			}
-		}
-	} else { /* MCS13~MCS15,  1SS, G-mode*/
-		if (collision_state == 1) {
-			if (rate == DESC_RATEMCS15) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x00000000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x05040302);
-			} else if (rate == DESC_RATEMCS14) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x00000000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x06050302);
-			} else if (rate == DESC_RATEMCS13) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x00000000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x07060502);
-			} else {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x00000000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x06050402);
-			}
-		} else { /* collision_state == 0 */
-			if (rate == DESC_RATEMCS15) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x03020000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x07060504);
-			} else if (rate == DESC_RATEMCS14) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x03020000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x08070605);
-			} else if (rate == DESC_RATEMCS13) {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x05020000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x09080706);
-			} else {
-
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E, 0x04020000);
-				odm_write_4byte(p_dm_odm, REG_DARFRC_8192E+4, 0x08070605);
-			}
-		}
-	}
-	p_ra_table->PT_collision_pre = collision_state;
-}
-#endif
 
 void
 odm_rate_adaptive_state_ap_init(

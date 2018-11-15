@@ -326,16 +326,7 @@ void halbtc8821a1ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 {
 	u32			reg_hp_txrx, reg_lp_txrx, u32tmp;
 	u32			reg_hp_tx = 0, reg_hp_rx = 0, reg_lp_tx = 0, reg_lp_rx = 0;
-#if 0
-	/* to avoid 0x76e[3] = 1 (WLAN_Act control by PTA) during IPS */
-	if (!(btcoexist->btc_read_1byte(btcoexist, 0x76e) & 0x8)) {
-		coex_sta->high_priority_tx = 65535;
-		coex_sta->high_priority_rx = 65535;
-		coex_sta->low_priority_tx = 65535;
-		coex_sta->low_priority_rx = 65535;
-		return;
-	}
-#endif
+
 	reg_hp_txrx = 0x770;
 	reg_lp_txrx = 0x774;
 

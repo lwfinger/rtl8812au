@@ -317,103 +317,6 @@ void halbtc8822b2ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 
 void halbtc8822b2ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
-#if 0
-	s32 wifi_rssi = 0;
-	boolean wifi_busy = false, wifi_under_b_mode = false;
-	static u8 cck_lock_counter = 0;
-	u32 total_cnt, reg_val1, reg_val2;
-
-	btcoexist->btc_get(btcoexist, BTC_GET_BL_WIFI_BUSY, &wifi_busy);
-	btcoexist->btc_get(btcoexist, BTC_GET_S4_WIFI_RSSI, &wifi_rssi);
-	btcoexist->btc_get(btcoexist, BTC_GET_BL_WIFI_UNDER_B_MODE,
-			   &wifi_under_b_mode);
-
-	if (coex_sta->under_ips) {
-		coex_sta->crc_ok_cck = 0;
-		coex_sta->crc_ok_11g = 0;
-		coex_sta->crc_ok_11n = 0;
-		coex_sta->crc_ok_11n_agg = 0;
-
-		coex_sta->crc_err_cck = 0;
-		coex_sta->crc_err_11g = 0;
-		coex_sta->crc_err_11n = 0;
-		coex_sta->crc_err_11n_agg = 0;
-	} else {
-
-		reg_val1 = btcoexist->btc_read_4byte(btcoexist, 0xf00);
-		reg_val2 = btcoexist->btc_read_4byte(btcoexist, 0xf04);
-		coex_sta->crc_ok_cck = reg_val2 & 0xffff;
-		coex_sta->crc_err_cck = (reg_val1 & 0xffff) + ((reg_val2
-					& 0xffff0000) >> 16);
-
-		reg_val1 = btcoexist->btc_read_4byte(btcoexist, 0xf0c);
-		coex_sta->crc_ok_11n_agg = reg_val1 & 0xffff;
-		coex_sta->crc_err_11n_agg = (reg_val1 & 0xffff0000) >>
-					    16;
-
-		reg_val1 = btcoexist->btc_read_4byte(btcoexist, 0xf10);
-		coex_sta->crc_ok_11n = reg_val1 & 0xffff;
-		coex_sta->crc_err_11n = (reg_val1 & 0xffff0000) >> 16;
-
-		reg_val1 = btcoexist->btc_read_4byte(btcoexist, 0xf14);
-		coex_sta->crc_ok_11g = reg_val1 & 0xffff;
-		coex_sta->crc_err_11n = (reg_val1 & 0xffff0000) >> 16;
-	}
-
-
-	/* reset counter */
-	/*btcoexist->btc_write_1byte_bitmask(btcoexist, 0xb58, 0x1, 0x1);*/
-	/*btcoexist->btc_write_1byte_bitmask(btcoexist, 0xb58, 0x1, 0x0);*/
-
-	if ((wifi_busy) && (wifi_rssi >= 30) && (!wifi_under_b_mode)) {
-		total_cnt = coex_sta->crc_ok_cck + coex_sta->crc_ok_11g
-			    +
-			    coex_sta->crc_ok_11n +
-			    coex_sta->crc_ok_11n_agg;
-
-		if ((coex_dm->bt_status ==
-		     BT_8822B_2ANT_BT_STATUS_ACL_BUSY) ||
-		    (coex_dm->bt_status ==
-		     BT_8822B_2ANT_BT_STATUS_ACL_SCO_BUSY) ||
-		    (coex_dm->bt_status ==
-		     BT_8822B_2ANT_BT_STATUS_SCO_BUSY)) {
-			if (coex_sta->crc_ok_cck > (total_cnt -
-						    coex_sta->crc_ok_cck)) {
-				if (cck_lock_counter < 3)
-					cck_lock_counter++;
-			} else {
-				if (cck_lock_counter > 0)
-					cck_lock_counter--;
-			}
-
-		} else {
-			if (cck_lock_counter > 0)
-				cck_lock_counter--;
-		}
-	} else {
-		if (cck_lock_counter > 0)
-			cck_lock_counter--;
-	}
-
-	if (!coex_sta->pre_ccklock) {
-
-		if (cck_lock_counter >= 3)
-			coex_sta->cck_lock = true;
-		else
-			coex_sta->cck_lock = false;
-	} else {
-		if (cck_lock_counter == 0)
-			coex_sta->cck_lock = false;
-		else
-			coex_sta->cck_lock = true;
-	}
-
-	if (coex_sta->cck_lock)
-		coex_sta->cck_ever_lock = true;
-
-	coex_sta->pre_ccklock =  coex_sta->cck_lock;
-
-#endif
 }
 
 boolean halbtc8822b2ant_is_wifibt_status_changed(IN struct btc_coexist
@@ -830,28 +733,10 @@ void halbtc8822b2ant_monitor_bt_enable_disable(IN struct btc_coexist *btcoexist)
 	u16			u16tmp;
 
 	/* This function check if bt is disabled */
-#if 0
-	if (coex_sta->high_priority_tx == 0 &&
-	    coex_sta->high_priority_rx == 0 &&
-	    coex_sta->low_priority_tx == 0 &&
-	    coex_sta->low_priority_rx == 0)
-		bt_active = false;
-	if (coex_sta->high_priority_tx == 0xffff &&
-	    coex_sta->high_priority_rx == 0xffff &&
-	    coex_sta->low_priority_tx == 0xffff &&
-	    coex_sta->low_priority_rx == 0xffff)
-		bt_active = false;
-
-
-#else
-
 	/* Read BT on/off status from scoreboard[1], enable this only if BT patch support this feature */
 	halbtc8822b2ant_read_score_board(btcoexist,	&u16tmp);
 
 	bt_active = u16tmp & BIT(1);
-
-
-#endif
 
 	if (bt_active) {
 		bt_disable_cnt = 0;
@@ -1648,53 +1533,6 @@ void halbtc8822b2ant_ps_tdma(IN struct btc_coexist *btcoexist,
 void halbtc8822b2ant_set_ext_band_switch(IN struct btc_coexist *btcoexist,
 		IN boolean force_exec, IN u8 pos_type)
 {
-
-#if 0
-	boolean	switch_polatiry_inverse = false;
-	u8		regval_0xcb6;
-	u32		u32tmp1 = 0, u32tmp2 = 0;
-
-	if (!rfe_type->ext_band_switch_exist)
-		return;
-
-	coex_dm->cur_ext_band_switch_status = pos_type;
-
-	if (!force_exec) {
-		if (coex_dm->pre_ext_band_switch_status ==
-		    coex_dm->cur_ext_band_switch_status)
-			return;
-	}
-
-	coex_dm->pre_ext_band_switch_status =
-		coex_dm->cur_ext_band_switch_status;
-
-	/* swap control polarity if use different switch control polarity*/
-	switch_polatiry_inverse = (rfe_type->ext_band_switch_ctrl_polarity == 1
-		   ? ~switch_polatiry_inverse : switch_polatiry_inverse);
-
-	/*swap control polarity for WL_A, default polarity 0xcb4[21] = 0 && 0xcb4[23] = 1 is for WL_G */
-	switch_polatiry_inverse = (pos_type ==
-		BT_8822B_2ANT_EXT_BAND_SWITCH_TO_WLA ? ~switch_polatiry_inverse
-				   : switch_polatiry_inverse);
-
-	regval_0xcb6 =  btcoexist->btc_read_1byte(btcoexist, 0xcb6);
-
-	/* for normal switch polrity, 0xcb4[21] =1 && 0xcb4[23] = 0 for WL_A, vice versa */
-	regval_0xcb6 = (switch_polatiry_inverse == 1 ? ((regval_0xcb6 & (~(BIT(
-		7)))) | BIT(5)) : ((regval_0xcb6 & (~(BIT(5)))) | BIT(7)));
-
-	btcoexist->btc_write_1byte_bitmask(btcoexist, 0xcb6, 0xff,
-					   regval_0xcb6);
-
-	u32tmp1 = btcoexist->btc_read_4byte(btcoexist, 0xcb0);
-	u32tmp2 = btcoexist->btc_read_4byte(btcoexist, 0xcb4);
-
-	BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-		"[BTCoex], ********** (After Ext Band switch setup) 0xcb0 = 0x%08x, 0xcb4 = 0x%08x**********\n",
-		    u32tmp1, u32tmp2);
-	BTC_TRACE(trace_buf);
-#endif
-
 }
 
 /*anttenna control by bb mac bt antdiv pta to write 0x4c 0xcb4,0xcbd*/
@@ -1718,18 +1556,6 @@ void halbtc8822b2ant_set_ext_ant_switch(IN struct btc_coexist *btcoexist,
 			return;
 }
 	coex_dm->pre_ext_ant_switch_status = coex_dm->cur_ext_ant_switch_status;
-	/*
-	switch (pos_type) {
-	default:
-	case BT_8822B_2ANT_EXT_ANT_SWITCH_MAIN_TO_BT:
-	case BT_8822B_2ANT_EXT_ANT_SWITCH_MAIN_TO_NOCARE:
-		break;
-	case BT_8822B_2ANT_EXT_ANT_SWITCH_MAIN_TO_WLG:
-		break;
-	case BT_8822B_2ANT_EXT_ANT_SWITCH_MAIN_TO_WLA:
-		break;
-	}
-*/
 	if (board_info->ant_div_cfg)
 		/*ctrl_type = BT_8822B_2ANT_EXT_ANT_SWITCH_CTRL_BY_ANTDIV;*/
 
@@ -1891,17 +1717,6 @@ void halbtc8822b2ant_set_rfe_type(IN struct btc_coexist *btcoexist)
 rfe_type->ext_ant_switch_type = BT_8822B_2ANT_EXT_ANT_SWITCH_USE_SPDT;
 		break;
 	}
-
-#if 0
-
-	if (rfe_type->wlg_Locate_at_btg)
-		halbtc8822b2ant_set_int_block(btcoexist, FORCE_EXEC,
-			      BT_8822B_2ANT_INT_BLOCK_SWITCH_TO_WLG_OF_BTG);
-	else
-		halbtc8822b2ant_set_int_block(btcoexist, FORCE_EXEC,
-			      BT_8822B_2ANT_INT_BLOCK_SWITCH_TO_WLG_OF_WLAG);
-#endif
-
 }
 
 /*set gnt_wl gnt_bt control by sw high low , or hwpta while in power on,ini,wlan off,wlan only ,wl2g non-currrent ,wl2g current,wl5g*/
@@ -2927,21 +2742,6 @@ void halbtc8822b2ant_action_pan_edr(IN struct btc_coexist *btcoexist)
 	bt_rssi_state2 = halbtc8822b2ant_bt_rssi_state(&pre_bt_rssi_state2, 2,
 			 coex_sta->bt_coex_thres2 , 0);
 
-#if 0
-	halbtc8822b2ant_fw_dac_swing_lvl(btcoexist, NORMAL_EXEC, 0xd8);
-	halbtc8822b2ant_dec_bt_pwr(btcoexist, NORMAL_EXEC, 0);
-
-	coex_dm->is_switch_to_1dot5_ant = false;
-
-	halbtc8822b2ant_coex_table_with_type(btcoexist, NORMAL_EXEC, 0);
-	halbtc8822b2ant_set_ant_path(btcoexist, BTC_ANT_PATH_AUTO, FORCE_EXEC,
-				     BT_8822B_2ANT_PHASE_2G_RUNTIME_CONCURRENT);
-
-	halbtc8822b2ant_ps_tdma(btcoexist, NORMAL_EXEC, false, 0);
-#endif
-
-
-#if 1
 	if (BTC_RSSI_HIGH(wifi_rssi_state) &&
 	    BTC_RSSI_HIGH(bt_rssi_state)) {
 
@@ -3000,11 +2800,7 @@ void halbtc8822b2ant_action_pan_edr(IN struct btc_coexist *btcoexist)
 						104);
 
 	}
-
-#endif
-
 }
-
 
 /* PAN(HS) only */
 void halbtc8822b2ant_action_pan_hs(IN struct btc_coexist *btcoexist)
@@ -5387,160 +5183,12 @@ void ex_halbtc8822b2ant_periodical(IN struct btc_coexist *btcoexist)
 void ex_halbtc8822b2ant_antenna_detection(IN struct btc_coexist *btcoexist,
 		IN u32 cent_freq, IN u32 offset, IN u32 span, IN u32 seconds)
 {
-#if 0
-	static u32 ant_det_count = 0, ant_det_fail_count = 0;
-	struct  btc_board_info	*board_info = &btcoexist->board_info;
-	u16		u16tmp;
-	u8			AntDetval = 0;
-
-	BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-		    "xxxxxxxxxxxxxxxx Ext Call AntennaDetect()!!\n");
-	BTC_TRACE(trace_buf);
-
-#if BT_8822B_2ANT_ANTDET_ENABLE
-
-	BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-		    "xxxxxxxxxxxxxxxx Call AntennaDetect()!!\n");
-	BTC_TRACE(trace_buf);
-
-	if (seconds == 0) {
-		psd_scan->ant_det_try_count	= 0;
-		psd_scan->ant_det_fail_count	= 0;
-		ant_det_count = 0;
-		ant_det_fail_count = 0;
-		board_info->btdm_ant_det_finish = false;
-		board_info->btdm_ant_num_by_ant_det = 1;
-		return;
-	}
-
-	if (!board_info->btdm_ant_det_finish) {
-		psd_scan->ant_det_inteval_count =
-			psd_scan->ant_det_inteval_count + 2;
-
-		if (psd_scan->ant_det_inteval_count >=
-		    BT_8822B_2ANT_ANTDET_RETRY_INTERVAL) {
-			BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-				"xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Timer is up, Try Detect!!\n");
-			BTC_TRACE(trace_buf);
-
-			psd_scan->is_AntDet_running = true;
-
-			halbtc8822b2ant_read_score_board(btcoexist,	&u16tmp);
-
-			if (u16tmp & BIT(
-				2)) { /* Antenna detection is already done before last WL power on   */
-				board_info->btdm_ant_det_finish = true;
-				psd_scan->ant_det_try_count = 1;
-				psd_scan->ant_det_fail_count = 0;
-				board_info->btdm_ant_num_by_ant_det = (u16tmp &
-							       BIT(3)) ? 1 : 2;
-				psd_scan->ant_det_result = 12;
-
-				psd_scan->ant_det_psd_scan_peak_val =
-					btcoexist->btc_get_ant_det_val_from_bt(
-						btcoexist) * 100;
-
-				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-					"xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Result from BT (%d-Ant)\n",
-					board_info->btdm_ant_num_by_ant_det);
-				BTC_TRACE(trace_buf);
-			} else
-				board_info->btdm_ant_det_finish =
-					halbtc8822b2ant_psd_antenna_detection_check(
-						btcoexist);
-
-			btcoexist->bdontenterLPS = false;
-
-			if (board_info->btdm_ant_det_finish) {
-				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-					"xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Success!!\n");
-				BTC_TRACE(trace_buf);
-
-				/*for 8822b, btc_set_bt_trx_mask is just used to
-				notify BT stop le tx and Ant Det Result , not set BT RF TRx Mask  */
-				if (psd_scan->ant_det_result != 12) {
-
-					AntDetval = (u8)((
-						psd_scan->ant_det_psd_scan_peak_val
-								 / 100) & 0x7f);
-
-					AntDetval =
-						(board_info->btdm_ant_num_by_ant_det
-						 == 1) ? (AntDetval | 0x80) :
-						AntDetval;
-
-					BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-						"xxxxxx AntennaDetect(), Ant Count = %d, PSD Val = %d\n",
-						    ((AntDetval &
-						      0x80) ? 1
-						     : 2), AntDetval
-						    & 0x7f);
-					BTC_TRACE(trace_buf);
-
-					if (btcoexist->btc_set_bt_trx_mask(
-						    btcoexist, AntDetval))
-						BTC_SPRINTF(trace_buf,
-							    BT_TMP_BUF_SIZE,
-							"xxxxxx AntennaDetect(), Notify BT stop le tx by set_bt_trx_mask ok!\n");
-					else
-						BTC_SPRINTF(trace_buf,
-							    BT_TMP_BUF_SIZE,
-							"xxxxxx AntennaDetect(), Notify BT stop le tx by set_bt_trx_mask fail!\n");
-
-					BTC_TRACE(trace_buf);
-				}
-
-			} else {
-				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-					"xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Fail!!\n");
-				BTC_TRACE(trace_buf);
-			}
-
-			psd_scan->ant_det_inteval_count = 0;
-			psd_scan->is_AntDet_running = false;
-
-			/* stimulate coex running */
-			halbtc8822b2ant_run_coexist_mechanism(
-				btcoexist);
-			BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-				"xxxxxxxxxxxxxxxx AntennaDetect(), Stimulate Coex running\n!!");
-			BTC_TRACE(trace_buf);
-		} else {
-			BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-				"xxxxxxxxxxxxxxxx AntennaDetect(), Antenna Det Timer is not up! (%d)\n",
-				    psd_scan->ant_det_inteval_count);
-			BTC_TRACE(trace_buf);
-
-			if (psd_scan->ant_det_inteval_count == 8)
-				btcoexist->bdontenterLPS = true;
-			else
-				btcoexist->bdontenterLPS = false;
-		}
-
-	}
-#endif
-#endif
-
 }
 
 
 void ex_halbtc8822b2ant_display_ant_detection(IN struct btc_coexist *btcoexist)
 {
-#if 0
-#if BT_8822B_2ANT_ANTDET_ENABLE
-	struct  btc_board_info	*board_info = &btcoexist->board_info;
-
-	if (psd_scan->ant_det_try_count != 0)	{
-		halbtc8822b2ant_psd_show_antenna_detect_result(btcoexist);
-
-		if (board_info->btdm_ant_det_finish)
-			halbtc8822b2ant_psd_showdata(btcoexist);
-	}
-#endif
-#endif
 }
-
-
 #endif
 
 #endif	/*  #if (RTL8822B_SUPPORT == 1) */

@@ -1355,11 +1355,6 @@ void halbtc8723b1ant_ps_tdma(IN struct btc_coexist *btcoexist,
 		ps_tdma_byte3_val = 0x10; /* tx-pause at BT-slot */
 		ps_tdma_byte4_val =
 			0x10; /* 0x778 = d/1 toggle, no dynamic slot */
-#if 0
-		if (!wifi_busy)
-			ps_tdma_byte4_val = ps_tdma_byte4_val |
-				0x1;  /* 0x778 = 0x1 at wifi slot (no blocking BT Low-Pri pkts) */
-#endif
 	} else { /* native power save case */
 		ps_tdma_byte0_val = 0x61;  /* no null-pkt */
 		ps_tdma_byte3_val = 0x11; /* no tx-pause at BT-slot */
@@ -2522,50 +2517,6 @@ void halbtc8723b1ant_mechanism_switch(IN struct btc_coexist *btcoexist,
 	}
 
 
-#if 0
-	if (bSwitchTo2Antenna) { /* 1-Ant -> 2-Ant */
-		/* un-lock TRx Mask setup for 8723b f-cut */
-		btcoexist->btc_set_rf_reg(btcoexist, BTC_RF_A, 0xdd, 0x80, 0x1);
-		btcoexist->btc_set_rf_reg(btcoexist, BTC_RF_A, 0xdf, 0x1, 0x1);
-		/* WiFi TRx Mask on				 */
-		btcoexist->btc_set_rf_reg(btcoexist, BTC_RF_A, 0x1, 0xfffff,
-					  0x0);
-
-		/* BT TRx Mask un-lock 0x2c[0], 0x30[0] = 1 */
-		btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF, 0x2c,
-					  0x7c45);
-		btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF, 0x30,
-					  0x7c45);
-
-		/* BT TRx Mask on */
-		btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF, 0x3c, 0x1);
-
-		halbtc8723b1ant_set_ant_path(btcoexist, BTC_ANT_PATH_BT,
-					     FORCE_EXEC, false, false);
-	} else {
-		/* WiFi TRx Mask on				 */
-		btcoexist->btc_set_rf_reg(btcoexist, BTC_RF_A, 0x1, 0xfffff,
-					  0x780);
-
-		/* lock TRx Mask setup for 8723b f-cut */
-		btcoexist->btc_set_rf_reg(btcoexist, BTC_RF_A, 0xdd, 0x80, 0x0);
-		btcoexist->btc_set_rf_reg(btcoexist, BTC_RF_A, 0xdf, 0x1, 0x0);
-
-		/* BT TRx Mask on */
-		btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF, 0x3c, 0x15);
-
-		/* BT TRx Mask ock 0x2c[0], 0x30[0]  = 0 */
-		btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF, 0x2c,
-					  0x7c44);
-		btcoexist->btc_set_bt_reg(btcoexist, BTC_BT_REG_RF, 0x30,
-					  0x7c44);
-
-
-		halbtc8723b1ant_set_ant_path(btcoexist, BTC_ANT_PATH_PTA,
-					     FORCE_EXEC, false, false);
-	}
-
-#endif
 }
 
 u32 halbtc8723b1ant_psd_log2base(IN struct btc_coexist *btcoexist, IN u32 val)
@@ -4633,21 +4584,6 @@ void ex_halbtc8723b1ant_bt_info_notify(IN struct btc_coexist *btcoexist,
 				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
 					"############# [BTCoex], BT TRx Mask off for BT Info Notify\n");
 				BTC_TRACE(trace_buf);
-#if 0
-				/* BT into is responded by BT FW and BT RF REG 0x3C != 0x15 => Need to switch BT TRx Mask */
-				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-					"[BTCoex], Switch BT TRx Mask since BT RF REG 0x3C != 0x1\n");
-				BTC_TRACE(trace_buf);
-
-				/* BT TRx Mask un-lock 0x2c[0], 0x30[0] = 1 */
-				btcoexist->btc_set_bt_reg(btcoexist,
-						  BTC_BT_REG_RF, 0x2c, 0x7c45);
-				btcoexist->btc_set_bt_reg(btcoexist,
-						  BTC_BT_REG_RF, 0x30, 0x7c45);
-
-				btcoexist->btc_set_bt_reg(btcoexist,
-						  BTC_BT_REG_RF, 0x3c, 0x1);
-#endif
 			}
 		} else
 #endif
@@ -4662,23 +4598,6 @@ void ex_halbtc8723b1ant_bt_info_notify(IN struct btc_coexist *btcoexist,
 				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
 					"############# [BTCoex], BT TRx Mask on for  BT Info Notify\n");
 				BTC_TRACE(trace_buf);
-#if 0
-				/* BT into is responded by BT FW and BT RF REG 0x3C != 0x15 => Need to switch BT TRx Mask */
-				BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
-					"[BTCoex], Switch BT TRx Mask since BT RF REG 0x3C != 0x15\n");
-				BTC_TRACE(trace_buf);
-				btcoexist->btc_set_bt_reg(btcoexist,
-							  BTC_BT_REG_RF,
-							  0x3c, 0x15);
-
-				/* BT TRx Mask lock 0x2c[0], 0x30[0] = 0 */
-				btcoexist->btc_set_bt_reg(btcoexist,
-							  BTC_BT_REG_RF,
-							  0x2c, 0x7c44);
-				btcoexist->btc_set_bt_reg(btcoexist,
-							  BTC_BT_REG_RF,
-							  0x30, 0x7c44);
-#endif
 			}
 		}
 

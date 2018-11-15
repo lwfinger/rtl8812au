@@ -1119,73 +1119,6 @@ USB_AggModeSwitch(
 	IN	PADAPTER			Adapter
 )
 {
-#if 0
-	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-	PMGNT_INFO		pMgntInfo = &(Adapter->MgntInfo);
-
-	/* pHalData->UsbRxHighSpeedMode = FALSE; */
-	/* How to measure the RX speed? We assume that when traffic is more than */
-	if (pMgntInfo->bRegAggDMEnable == FALSE) {
-		return;	/* Inf not support. */
-	}
-
-
-	if (pMgntInfo->LinkDetectInfo.bHigherBusyRxTraffic == TRUE &&
-	    pHalData->UsbRxHighSpeedMode == FALSE) {
-		pHalData->UsbRxHighSpeedMode = TRUE;
-	} else if (pMgntInfo->LinkDetectInfo.bHigherBusyRxTraffic == FALSE &&
-		   pHalData->UsbRxHighSpeedMode == TRUE) {
-		pHalData->UsbRxHighSpeedMode = FALSE;
-	} else
-		return;
-
-
-#if USB_RX_AGGREGATION_92C
-	if (pHalData->UsbRxHighSpeedMode == TRUE) {
-		/* 2010/12/10 MH The parameter is tested by SD1 engineer and SD3 channel emulator. */
-		/* USB mode */
-#if (RT_PLATFORM == PLATFORM_LINUX)
-		if (pMgntInfo->LinkDetectInfo.bTxBusyTraffic) {
-			pHalData->RxAggBlockCount	= 16;
-			pHalData->RxAggBlockTimeout	= 7;
-		} else
-#endif
-		{
-			pHalData->RxAggBlockCount	= 40;
-			pHalData->RxAggBlockTimeout	= 5;
-		}
-		/* Mix mode */
-		pHalData->RxAggPageCount	= 72;
-		pHalData->RxAggPageTimeout	= 6;
-	} else {
-		/* USB mode */
-		pHalData->RxAggBlockCount	= pMgntInfo->RegRxAggBlockCount;
-		pHalData->RxAggBlockTimeout	= pMgntInfo->RegRxAggBlockTimeout;
-		/* Mix mode */
-		pHalData->RxAggPageCount		= pMgntInfo->RegRxAggPageCount;
-		pHalData->RxAggPageTimeout	= pMgntInfo->RegRxAggPageTimeout;
-	}
-
-	if (pHalData->RxAggBlockCount > MAX_RX_AGG_BLKCNT)
-		pHalData->RxAggBlockCount = MAX_RX_AGG_BLKCNT;
-#if (OS_WIN_FROM_VISTA(OS_VERSION)) || (RT_PLATFORM == PLATFORM_LINUX)	/* do not support WINXP to prevent usbehci.sys BSOD */
-	if (IS_WIRELESS_MODE_N_24G(Adapter) || IS_WIRELESS_MODE_N_5G(Adapter)) {
-		/*  */
-		/* 2010/12/24 MH According to V1012 QC IOT test, XP BSOD happen when running chariot test */
-		/* with the aggregation dynamic change!! We need to disable the function to prevent it is broken */
-		/* in usbehci.sys. */
-		/*  */
-		usb_AggSettingRxUpdate_8188E(Adapter);
-
-		/* 2010/12/27 MH According to designer's suggstion, we can only modify Timeout value. Otheriwse */
-		/* there might many HW incorrect behavior, the XP BSOD at usbehci.sys may be relative to the */
-		/* issue. Base on the newest test, we can not enable block cnt > 30, otherwise XP usbehci.sys may */
-		/* BSOD. */
-	}
-#endif
-
-#endif
-#endif
 }	/* USB_AggModeSwitch */
 
 static void
@@ -1193,64 +1126,6 @@ _InitOperationMode_8812A(
 	IN	PADAPTER			Adapter
 )
 {
-#if 0/* gtest */
-	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
-	u1Byte				regBwOpMode = 0;
-	u4Byte				regRATR = 0, regRRSR = 0;
-
-
-	/* 1 This part need to modified according to the rate set we filtered!! */
-	/*  */
-	/* Set RRSR, RATR, and REG_BWOPMODE registers */
-	/*  */
-	switch (Adapter->RegWirelessMode) {
-	case WIRELESS_MODE_B:
-		regBwOpMode = BW_OPMODE_20MHZ;
-		regRATR = RATE_ALL_CCK;
-		regRRSR = RATE_ALL_CCK;
-		break;
-	case WIRELESS_MODE_A:
-		regBwOpMode = BW_OPMODE_5G | BW_OPMODE_20MHZ;
-		regRATR = RATE_ALL_OFDM_AG;
-		regRRSR = RATE_ALL_OFDM_AG;
-		break;
-	case WIRELESS_MODE_G:
-		regBwOpMode = BW_OPMODE_20MHZ;
-		regRATR = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
-		regRRSR = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
-		break;
-	case WIRELESS_MODE_AUTO:
-		if (Adapter->bInHctTest) {
-			regBwOpMode = BW_OPMODE_20MHZ;
-			regRATR = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
-			regRRSR = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
-		} else {
-			regBwOpMode = BW_OPMODE_20MHZ;
-			regRATR = RATE_ALL_CCK | RATE_ALL_OFDM_AG | RATE_ALL_OFDM_1SS | RATE_ALL_OFDM_2SS;
-			regRRSR = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
-		}
-		break;
-	case WIRELESS_MODE_N_24G:
-		/* It support CCK rate by default. */
-		/* CCK rate will be filtered out only when associated AP does not support it. */
-		regBwOpMode = BW_OPMODE_20MHZ;
-		regRATR = RATE_ALL_CCK | RATE_ALL_OFDM_AG | RATE_ALL_OFDM_1SS | RATE_ALL_OFDM_2SS;
-		regRRSR = RATE_ALL_CCK | RATE_ALL_OFDM_AG;
-		break;
-	case WIRELESS_MODE_N_5G:
-		regBwOpMode = BW_OPMODE_5G;
-		regRATR = RATE_ALL_OFDM_AG | RATE_ALL_OFDM_1SS | RATE_ALL_OFDM_2SS;
-		regRRSR = RATE_ALL_OFDM_AG;
-		break;
-
-	default: /* for MacOSX compiler warning. */
-		break;
-	}
-
-	/* Ziv ???????? */
-	/* PlatformEFIOWrite4Byte(Adapter, REG_INIRTS_RATE_SEL, regRRSR); */
-	PlatformEFIOWrite1Byte(Adapter, REG_BWOPMODE, regBwOpMode);
-#endif
 }
 
 
@@ -1271,29 +1146,6 @@ static void _RfPowerSave(
 	IN	PADAPTER		Adapter
 )
 {
-#if 0
-	HAL_DATA_TYPE	*pHalData	= GET_HAL_DATA(Adapter);
-	PMGNT_INFO		pMgntInfo	= &(Adapter->MgntInfo);
-	u1Byte			eRFPath;
-
-#if (DISABLE_BB_RF)
-	return;
-#endif
-
-	if (pMgntInfo->RegRfOff == TRUE) { /* User disable RF via registry. */
-		MgntActSet_RF_State(Adapter, eRfOff, RF_CHANGE_BY_SW);
-		/* Those action will be discard in MgntActSet_RF_State because off the same state */
-		for (eRFPath = 0; eRFPath < pHalData->NumTotalRFPath; eRFPath++)
-			phy_set_rf_reg(Adapter, eRFPath, 0x4, 0xC00, 0x0);
-	} else if (pMgntInfo->RfOffReason > RF_CHANGE_BY_PS) { /* H/W or S/W RF OFF before sleep. */
-		MgntActSet_RF_State(Adapter, eRfOff, pMgntInfo->RfOffReason);
-	} else {
-		pHalData->eRFPowerState = eRfOn;
-		pMgntInfo->RfOffReason = 0;
-		if (Adapter->bInSetPower || Adapter->bResetInProgress)
-			PlatformUsbEnableInPipes(Adapter);
-	}
-#endif
 }
 
 enum {
@@ -1311,34 +1163,6 @@ HalDetectSelectiveSuspendMode(
 	IN PADAPTER				Adapter
 )
 {
-#if 0
-	u8	tmpvalue;
-	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(Adapter);
-
-	/* If support HW radio detect, we need to enable WOL ability, otherwise, we */
-	/* can not use FW to notify host the power state switch. */
-
-	EFUSE_ShadowRead(Adapter, 1, EEPROM_USB_OPTIONAL1, (u32 *)&tmpvalue);
-
-	RTW_INFO("HalDetectSelectiveSuspendMode(): SS ");
-	if (tmpvalue & BIT1)
-		RTW_INFO("Enable\n");
-	else {
-		RTW_INFO("Disable\n");
-		pdvobjpriv->RegUsbSS = _FALSE;
-	}
-
-	/* 2010/09/01 MH According to Dongle Selective Suspend INF. We can switch SS mode. */
-	if (pdvobjpriv->RegUsbSS && !SUPPORT_HW_RADIO_DETECT(pHalData)) {
-		/* PMGNT_INFO				pMgntInfo = &(Adapter->MgntInfo); */
-
-		/* if (!pMgntInfo->bRegDongleSS)	 */
-		/* { */
-		pdvobjpriv->RegUsbSS = _FALSE;
-		/* } */
-	}
-#endif
 }	/* HalDetectSelectiveSuspendMode */
 
 rt_rf_power_state RfOnOffDetect(IN	PADAPTER pAdapter)

@@ -2911,20 +2911,6 @@ void ex_halbtc8812a1ant_media_status_notify(IN struct btc_coexist *btcoexist,
 					     FORCE_EXEC, false, false);
 		btcoexist->btc_get(btcoexist, BTC_GET_BL_WIFI_UNDER_B_MODE,
 				   &wifi_under_b_mode);
-#if 0
-		/* Set CCK Tx/Rx high Pri except 11b mode */
-		if (wifi_under_b_mode) {
-			btcoexist->btc_write_1byte(btcoexist, 0x6cd,
-						   0x00); /* CCK Tx */
-			btcoexist->btc_write_1byte(btcoexist, 0x6cf,
-						   0x00); /* CCK Rx */
-		} else {
-			btcoexist->btc_write_1byte(btcoexist, 0x6cd,
-						   0x10); /* CCK Tx */
-			btcoexist->btc_write_1byte(btcoexist, 0x6cf,
-						   0x10); /* CCK Rx */
-		}
-#endif
 		coex_dm->backup_arfr_cnt1 = btcoexist->btc_read_4byte(btcoexist,
 					    0x430);
 		coex_dm->backup_arfr_cnt2 = btcoexist->btc_read_4byte(btcoexist,
