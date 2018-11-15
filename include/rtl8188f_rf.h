@@ -22,7 +22,7 @@
 
 int	PHY_RF6052_Config8188F(IN	PADAPTER		Adapter);
 
-VOID
+void
 PHY_RF6052SetBandwidth8188F(
 	IN	PADAPTER				Adapter,
 	IN	CHANNEL_WIDTH		Bandwidth);

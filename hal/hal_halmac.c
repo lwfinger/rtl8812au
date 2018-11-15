@@ -2289,7 +2289,7 @@ int rtw_halmac_set_bandwidth(struct dvobj_priv *d, u8 channel, u8 pri_ch_idx, u8
 	return 0;
 }
 
-int rtw_halmac_get_hw_value(struct dvobj_priv *d, HALMAC_HW_ID hw_id, VOID *pvalue)
+int rtw_halmac_get_hw_value(struct dvobj_priv *d, HALMAC_HW_ID hw_id, void *pvalue)
 {
 	PHALMAC_ADAPTER mac;
 	PHALMAC_API api;

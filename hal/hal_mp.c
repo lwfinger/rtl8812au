@@ -574,7 +574,7 @@ void hal_mpt_SetDataRate(PADAPTER pAdapter)
 #define RF_PATH_AB	22
 
 #ifdef CONFIG_RTL8814A
-VOID mpt_ToggleIG_8814A(PADAPTER	pAdapter)
+void mpt_ToggleIG_8814A(PADAPTER	pAdapter)
 {
 	u1Byte Path = 0;
 	u4Byte IGReg = rA_IGI_Jaguar, IGvalue = 0;
@@ -601,7 +601,7 @@ VOID mpt_ToggleIG_8814A(PADAPTER	pAdapter)
 	}
 }
 
-VOID mpt_SetRFPath_8814A(PADAPTER	pAdapter)
+void mpt_SetRFPath_8814A(PADAPTER	pAdapter)
 {
 
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
@@ -842,7 +842,7 @@ VOID mpt_SetRFPath_8814A(PADAPTER	pAdapter)
 }
 #endif /* CONFIG_RTL8814A */
 #if defined(CONFIG_RTL8814A) || defined(CONFIG_RTL8822B) || defined(CONFIG_RTL8821C)
-VOID
+void
 mpt_SetSingleTone_8814A(
 	IN	PADAPTER	pAdapter,
 	IN	BOOLEAN	bSingleTone,
@@ -1263,7 +1263,7 @@ void mpt_SetRFPath_8723D(PADAPTER pAdapter)
 }
 #endif
 
-VOID mpt_SetRFPath_819X(PADAPTER	pAdapter)
+void mpt_SetRFPath_819X(PADAPTER	pAdapter)
 {
 	HAL_DATA_TYPE			*pHalData	= GET_HAL_DATA(pAdapter);
 	PMPT_CONTEXT		pMptCtx = &(pAdapter->mppriv.mpt_ctx);
@@ -1858,7 +1858,7 @@ u32 hal_mpt_query_phytxok(PADAPTER	pAdapter)
 
 }
 
-static	VOID mpt_StopCckContTx(
+static	void mpt_StopCckContTx(
 	PADAPTER	pAdapter
 )
 {
@@ -1891,7 +1891,7 @@ static	VOID mpt_StopCckContTx(
 }	/* mpt_StopCckContTx */
 
 
-static	VOID mpt_StopOfdmContTx(
+static	void mpt_StopOfdmContTx(
 	PADAPTER	pAdapter
 )
 {
@@ -1924,7 +1924,7 @@ static	VOID mpt_StopOfdmContTx(
 }	/* mpt_StopOfdmContTx */
 
 
-static	VOID mpt_StartCckContTx(
+static	void mpt_StartCckContTx(
 	PADAPTER		pAdapter
 )
 {
@@ -1966,7 +1966,7 @@ static	VOID mpt_StartCckContTx(
 }	/* mpt_StartCckContTx */
 
 
-static	VOID mpt_StartOfdmContTx(
+static	void mpt_StartOfdmContTx(
 	PADAPTER		pAdapter
 )
 {

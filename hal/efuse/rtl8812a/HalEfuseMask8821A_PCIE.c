@@ -65,12 +65,12 @@ u1Byte Array_MP_8821A_MPCIE[] = {
 };
 
 u2Byte
-EFUSE_GetArrayLen_MP_8821A_MPCIE(VOID)
+EFUSE_GetArrayLen_MP_8821A_MPCIE(void)
 {
 	return sizeof(Array_MP_8821A_MPCIE) / sizeof(u1Byte);
 }
 
-VOID
+void
 EFUSE_GetMaskArray_MP_8821A_MPCIE(
 	IN	OUT pu1Byte Array
 )

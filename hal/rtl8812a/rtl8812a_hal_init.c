@@ -178,7 +178,7 @@ void SetBcnCtrlReg(
 	rtw_write8(padapter, REG_BCN_CTRL, (u8)pHalData->RegBcnCtrlVal);
 }
 
-static VOID
+static void
 _FWDownloadEnable_8812(
 	IN	PADAPTER		padapter,
 	IN	BOOLEAN			enable
@@ -205,7 +205,7 @@ _FWDownloadEnable_8812(
 static int
 _BlockWrite_8812(
 	IN		PADAPTER		padapter,
-	IN		PVOID		buffer,
+	IN		void *		buffer,
 	IN		u32			buffSize
 )
 {
@@ -305,7 +305,7 @@ static int
 _PageWrite_8812(
 	IN		PADAPTER	padapter,
 	IN		u32			page,
-	IN		PVOID		buffer,
+	IN		void *		buffer,
 	IN		u32			size
 )
 {
@@ -318,7 +318,7 @@ _PageWrite_8812(
 	return _BlockWrite_8812(padapter, buffer, size);
 }
 
-static VOID
+static void
 _FillDummy_8812(
 	u8		*pFwBuf,
 	u32	*pFwLen
@@ -340,7 +340,7 @@ _FillDummy_8812(
 static int
 _WriteFW_8812(
 	IN		PADAPTER		padapter,
-	IN		PVOID			buffer,
+	IN		void *			buffer,
 	IN		u32			size
 )
 {
@@ -699,7 +699,7 @@ void InitializeFirmwareVars8812(PADAPTER padapter)
  * 2013.01.23 by tynli
  * Porting from 8723B. 2013.04.01
  *   */
-VOID
+void
 SetFwBTFwPatchCmd_8821(
 	IN PADAPTER Adapter,
 	IN u2Byte		FwSize
@@ -786,7 +786,7 @@ int _CheckWLANFwPatchBTFwReady_8821A(PADAPTER	Adapter)
 
 int _WriteBTFWtoTxPktBuf8812(
 	PADAPTER		Adapter,
-	PVOID			buffer,
+	void *			buffer,
 	u4Byte			FwBufLen,
 	u1Byte			times
 )
@@ -1082,7 +1082,7 @@ int ReservedPage_Compare(PADAPTER Adapter, PRT_MP_FIRMWARE pFirmware, u32 BTPatc
 /* ***********************************************************
  *				Efuse related code
  * *********************************************************** */
-VOID
+void
 Hal_EfuseParseBTCoexistInfo8812A(
 	IN PADAPTER			Adapter,
 	IN u8				*hwinfo,
@@ -1202,7 +1202,7 @@ Hal_EfuseParseIDCode8812A(
 	RTW_INFO("EEPROM ID=0x%04x\n", EEPROMId);
 }
 
-VOID
+void
 Hal_ReadPROMVersion8812A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1253,7 +1253,7 @@ Hal_ReadTxPowerInfo8812A(
 
 }
 
-VOID
+void
 Hal_ReadBoardType8812A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1272,7 +1272,7 @@ Hal_ReadBoardType8812A(
 
 }
 
-VOID
+void
 Hal_ReadThermalMeter_8812A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1327,7 +1327,7 @@ void Hal_ReadRemoteWakeup_8812A(
 	}
 }
 
-VOID
+void
 Hal_ReadChannelPlan8812A(
 	IN	PADAPTER		padapter,
 	IN	u8				*hwinfo,
@@ -1345,7 +1345,7 @@ Hal_ReadChannelPlan8812A(
 					 );
 }
 
-VOID
+void
 Hal_EfuseParseXtal_8812A(
 	IN	PADAPTER	pAdapter,
 	IN	u8			*hwinfo,
@@ -1364,7 +1364,7 @@ Hal_EfuseParseXtal_8812A(
 }
 
 /* for both 8812A and 8821A */
-VOID
+void
 Hal_ReadAntennaDiversity8812A(
 	IN	PADAPTER		pAdapter,
 	IN	u8				*PROMContent,
@@ -1408,7 +1408,7 @@ Hal_ReadAntennaDiversity8812A(
 #endif
 }
 
-VOID
+void
 hal_ReadPAType_8812A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1474,7 +1474,7 @@ hal_ReadPAType_8812A(
 	RTW_INFO("pHalData->LNAType_5G is 0x%x, pHalData->external_lna_5g = %d\n", pHalData->LNAType_5G, pHalData->external_lna_5g);
 }
 
-VOID
+void
 Hal_ReadAmplifierType_8812A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1512,7 +1512,7 @@ Hal_ReadAmplifierType_8812A(
 	RTW_INFO("pHalData->TypeALNA = 0x%X\n", pHalData->TypeALNA);
 }
 
-VOID
+void
 Hal_ReadPAType_8821A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1578,7 +1578,7 @@ Hal_ReadPAType_8821A(
 	RTW_INFO("pHalData->LNAType_5G is 0x%x, pHalData->external_lna_5g = %d\n", pHalData->LNAType_5G, pHalData->external_lna_5g);
 }
 
-VOID
+void
 Hal_ReadRFEType_8812A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1719,7 +1719,7 @@ void Hal_EfuseParseKFreeData_8821A(
 /*
  * 2013/04/15 MH Add 8812AU- VL/VS/VN for different board type.
  *   */
-VOID
+void
 hal_ReadUsbType_8812AU(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -1807,7 +1807,7 @@ enum {
 	LDOE25_SHIFT						= 28 ,
 };
 
-static VOID
+static void
 Hal_EfusePowerSwitch8812A(
 	IN	PADAPTER	pAdapter,
 	IN	u8		bWrite,
@@ -1870,7 +1870,7 @@ Hal_EfuseSwitchToBank8812A(
 	return _FALSE;
 }
 
-static VOID
+static void
 Hal_EfuseReadEFuse8812A(
 	PADAPTER		Adapter,
 	u16			_offset,
@@ -2106,7 +2106,7 @@ hal_EfuseSwitchToBank(
 }
 
 
-static VOID
+static void
 hal_ReadEFuse_BT(
 	PADAPTER	padapter,
 	u16			_offset,
@@ -2247,7 +2247,7 @@ exit:
 }
 
 
-static VOID
+static void
 rtl8812_ReadEFuse(
 	PADAPTER	Adapter,
 	u8		efuseType,
@@ -2264,12 +2264,12 @@ rtl8812_ReadEFuse(
 }
 
 /* Do not support BT */
-VOID
+void
 Hal_EFUSEGetEfuseDefinition8812A(
 	IN		PADAPTER	pAdapter,
 	IN		u1Byte		efuseType,
 	IN		u1Byte		type,
-	OUT		PVOID		pOut
+	OUT		void *		pOut
 )
 {
 	switch (type) {
@@ -2345,12 +2345,12 @@ Hal_EFUSEGetEfuseDefinition8812A(
 		break;
 	}
 }
-VOID
+void
 Hal_EFUSEGetEfuseDefinition_Pseudo8812A(
 	IN		PADAPTER	pAdapter,
 	IN		u8			efuseType,
 	IN		u8			type,
-	OUT		PVOID		pOut
+	OUT		void *		pOut
 )
 {
 	switch (type) {
@@ -2406,7 +2406,7 @@ Hal_EFUSEGetEfuseDefinition_Pseudo8812A(
 }
 
 
-static VOID
+static void
 rtl8812_EFUSE_GetEfuseDefinition(
 	IN		PADAPTER	pAdapter,
 	IN		u8		efuseType,
@@ -2433,7 +2433,7 @@ Hal_EfuseWordEnableDataWrite8812A(IN	PADAPTER	pAdapter,
 	u8	badworden = 0x0F;
 	u8	tmpdata[8];
 
-	_rtw_memset((PVOID)tmpdata, 0xff, PGPKT_DATA_SIZE);
+	_rtw_memset((void *)tmpdata, 0xff, PGPKT_DATA_SIZE);
 
 	if (!(word_en & BIT0)) {
 		tmpaddr = start_addr;
@@ -2690,8 +2690,8 @@ hal_EfusePgPacketRead_8812A(
 	if (offset > EFUSE_MAX_SECTION_JAGUAR)
 		return _FALSE;
 
-	_rtw_memset((PVOID)data, 0xff, sizeof(u8) * PGPKT_DATA_SIZE);
-	_rtw_memset((PVOID)tmpdata, 0xff, sizeof(u8) * PGPKT_DATA_SIZE);
+	_rtw_memset((void *)data, 0xff, sizeof(u8) * PGPKT_DATA_SIZE);
+	_rtw_memset((void *)tmpdata, 0xff, sizeof(u8) * PGPKT_DATA_SIZE);
 
 
 	/*  */
@@ -2788,7 +2788,7 @@ hal_EfuseFixHeaderProcess(
 	u16	efuse_addr = *pAddr;
 	u32	PgWriteSuccess = 0;
 
-	_rtw_memset((PVOID)originaldata, 0xff, 8);
+	_rtw_memset((void *)originaldata, 0xff, 8);
 
 	if (Efuse_PgPacketRead(pAdapter, pFixPkt->offset, originaldata, bPseudoTest)) {
 		/* check if data exist */
@@ -2993,7 +2993,7 @@ BOOLEAN efuse_PgPacketCheck(
 }
 
 
-VOID
+void
 efuse_PgPacketConstruct(
 	IN	    u8			offset,
 	IN	    u8			word_en,
@@ -3001,7 +3001,7 @@ efuse_PgPacketConstruct(
 	IN OUT	PPGPKT_STRUCT	pTargetPkt
 )
 {
-	_rtw_memset((PVOID)pTargetPkt->data, 0xFF, sizeof(u8) * 8);
+	_rtw_memset((void *)pTargetPkt->data, 0xFF, sizeof(u8) * 8);
 	pTargetPkt->offset = offset;
 	pTargetPkt->word_en = word_en;
 	efuse_WordEnableDataRead(word_en, pData, pTargetPkt->data);
@@ -3359,7 +3359,7 @@ hal_EfusePgPacketWrite_8812A(IN	PADAPTER	pAdapter,
 	return _TRUE;
 }
 
-static VOID
+static void
 rtl8812_EfusePowerSwitch(
 	IN	PADAPTER	pAdapter,
 	IN	u8		bWrite,
@@ -3715,7 +3715,7 @@ static void read_chip_version_8812a(PADAPTER Adapter)
 
 }
 
-VOID
+void
 Hal_PatchwithJaguar_8812(
 	IN PADAPTER				Adapter,
 	IN RT_MEDIA_STATUS		MediaStatus
@@ -3844,7 +3844,7 @@ void InitDefaultValue8821A(PADAPTER padapter)
 	_rtw_memset(pHalData->EfuseHal.fakeEfuseModifiedMap, 0xFF, EFUSE_MAX_MAP_LEN);
 }
 
-VOID
+void
 _InitBeaconParameters_8812A(
 	IN  PADAPTER Adapter
 )
@@ -3888,7 +3888,7 @@ _InitBeaconParameters_8812A(
 	pHalData->RegCR_1 = rtw_read8(Adapter, REG_CR + 1);
 }
 
-static VOID
+static void
 _BeaconFunctionEnable(
 	IN	PADAPTER		Adapter,
 	IN	BOOLEAN			Enable,
@@ -3961,7 +3961,7 @@ void SetBeaconRelatedRegisters8812A(PADAPTER padapter)
 #ifdef CONFIG_BEAMFORMING
 
 #if (BEAMFORMING_SUPPORT == 0)
-VOID
+void
 SetBeamformingCLK_8812(
 	IN	PADAPTER			Adapter
 )
@@ -4048,7 +4048,7 @@ SetBeamformingCLK_8812(
 	RTW_INFO("<==%s\n", __FUNCTION__);
 }
 
-VOID
+void
 SetBeamformRfMode_8812(
 	IN PADAPTER				Adapter,
 	IN struct beamforming_info	*pBeamInfo
@@ -4105,7 +4105,7 @@ SetBeamformRfMode_8812(
 
 
 
-VOID
+void
 SetBeamformEnter_8812(
 	IN PADAPTER				Adapter,
 	IN u8					Idx
@@ -4191,7 +4191,7 @@ SetBeamformEnter_8812(
 }
 
 
-VOID
+void
 SetBeamformLeave_8812(
 	IN PADAPTER				Adapter,
 	IN u8					Idx
@@ -4226,7 +4226,7 @@ SetBeamformLeave_8812(
 }
 
 
-VOID
+void
 SetBeamformStatus_8812(
 	IN PADAPTER				Adapter,
 	IN u8					Idx
@@ -4266,7 +4266,7 @@ SetBeamformStatus_8812(
 }
 
 
-VOID
+void
 SetBeamformFwTxBFCmd_8812(
 	IN	PADAPTER	Adapter
 )
@@ -4306,7 +4306,7 @@ SetBeamformFwTxBFCmd_8812(
 }
 
 
-VOID
+void
 SetBeamformDownloadNDPA_8812(
 	IN	PADAPTER			Adapter,
 	IN	u8					Idx
@@ -4394,7 +4394,7 @@ SetBeamformDownloadNDPA_8812(
 	/* pHalData->bFwDwRsvdPageInProgress = _FALSE; */
 }
 
-VOID
+void
 SetBeamformFwTxBF_8812(
 	IN	PADAPTER			Adapter,
 	IN	u8					Idx
@@ -4410,7 +4410,7 @@ SetBeamformFwTxBF_8812(
 }
 
 
-VOID
+void
 SetBeamformPatch_8812(
 	IN	PADAPTER			Adapter,
 	IN	u8					Operation

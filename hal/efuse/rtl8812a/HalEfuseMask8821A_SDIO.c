@@ -68,12 +68,12 @@ u1Byte Array_MP_8821A_MSDIO[] = {
 };
 
 u2Byte
-EFUSE_GetArrayLen_MP_8821A_MSDIO(VOID)
+EFUSE_GetArrayLen_MP_8821A_MSDIO(void)
 {
 	return sizeof(Array_MP_8821A_MSDIO) / sizeof(u1Byte);
 }
 
-VOID
+void
 EFUSE_GetMaskArray_MP_8821A_MSDIO(
 	IN	OUT pu1Byte Array
 )

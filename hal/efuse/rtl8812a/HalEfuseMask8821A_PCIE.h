@@ -25,9 +25,9 @@
 
 
 u2Byte
-EFUSE_GetArrayLen_MP_8821A_MPCIE(VOID);
+EFUSE_GetArrayLen_MP_8821A_MPCIE(void);
 
-VOID
+void
 EFUSE_GetMaskArray_MP_8821A_MPCIE(
 	IN	OUT pu1Byte Array
 );

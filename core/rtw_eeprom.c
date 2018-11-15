@@ -366,7 +366,7 @@ u8 eeprom_read(_adapter *padapter, u32 addr_off, u8 sz, u8 *rbuf)
 
 
 
-VOID read_eeprom_content(_adapter	*padapter)
+void read_eeprom_content(_adapter	*padapter)
 {
 
 

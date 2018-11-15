@@ -56,7 +56,7 @@ PHY_QueryBBReg8812(
 }
 
 
-VOID
+void
 PHY_SetBBReg8812(
 	IN	PADAPTER	Adapter,
 	IN	u4Byte		RegAddr,
@@ -142,7 +142,7 @@ phy_RFSerialRead(
 }
 
 
-static	VOID
+static	void
 phy_RFSerialWrite(
 	IN	PADAPTER		Adapter,
 	IN	u8				eRFPath,
@@ -198,7 +198,7 @@ PHY_QueryRFReg8812(
 	return Readback_Value;
 }
 
-VOID
+void
 PHY_SetRFReg8812(
 	IN	PADAPTER		Adapter,
 	IN	u8				eRFPath,
@@ -253,7 +253,7 @@ s32 PHY_MACConfig8812(PADAPTER Adapter)
 }
 
 
-static	VOID
+static	void
 phy_InitBBRFRegisterDefinition(
 	IN	PADAPTER		Adapter
 )
@@ -285,7 +285,7 @@ phy_InitBBRFRegisterDefinition(
 	pHalData->PHYRegDef[ODM_RF_PATH_B].rfLSSIReadBackPi = rB_PIRead_Jaguar;
 }
 
-VOID
+void
 PHY_BB8812_Config_1T(
 	IN PADAPTER Adapter
 )
@@ -437,7 +437,7 @@ PHY_RFConfig8812(
 	return rtStatus;
 }
 
-VOID
+void
 PHY_TxPowerTrainingByPath_8812(
 	IN	PADAPTER			Adapter,
 	IN	CHANNEL_WIDTH		BandWidth,
@@ -475,7 +475,7 @@ PHY_TxPowerTrainingByPath_8812(
 	phy_set_bb_reg(Adapter, writeOffset, 0xffffff, writeData);
 }
 
-VOID
+void
 PHY_GetTxPowerLevel8812(
 	IN	PADAPTER		Adapter,
 	OUT s32		*powerlevel
@@ -496,7 +496,7 @@ PHY_GetTxPowerLevel8812(
 /* create new definition of PHY_SetTxPowerLevel8812 by YP.
  * Page revised on 20121106
  * the new way to set tx power by rate, NByte access, here N byte shall be 4 byte(DWord) or NByte(N>4) access. by page/YP, 20121106 */
-VOID
+void
 PHY_SetTxPowerLevel8812(
 	IN	PADAPTER		Adapter,
 	IN	u8				Channel
@@ -610,7 +610,7 @@ PHY_GetTxPowerIndex_8812A(
  *                                                                                    <20120830, Kordan>
  **************************************************************************************************************/
 
-VOID
+void
 PHY_SetTxPowerIndex_8812A(
 	IN	PADAPTER		Adapter,
 	IN	u32				PowerIndex,
@@ -1092,7 +1092,7 @@ u32 phy_get_tx_bb_swing_8812a(
 	return out;
 }
 
-VOID
+void
 phy_SetRFEReg8812(
 	IN PADAPTER		Adapter,
 	IN u8			Band
@@ -1243,7 +1243,7 @@ void phy_SetBBSwingByBand_8812A(
 }
 
 
-VOID
+void
 phy_SetRFEReg8821(
 	IN PADAPTER	Adapter,
 	IN u1Byte		Band
@@ -1512,7 +1512,7 @@ phy_GetSecondaryChnl_8812(
 	return (SCSettingOf40 << 4) | SCSettingOf20;
 }
 
-VOID
+void
 phy_SetRegBW_8812(
 	IN	PADAPTER		Adapter,
 	CHANNEL_WIDTH	CurrentBW
@@ -1586,7 +1586,7 @@ phy_FixSpur_8812A(
 
 }
 
-VOID
+void
 phy_PostSetBwMode8812(
 	IN	PADAPTER	Adapter
 )
@@ -1679,7 +1679,7 @@ phy_PostSetBwMode8812(
 }
 
 /* <20130207, Kordan> The variales initialized here are used in odm_LNAPowerControl(). */
-VOID phy_InitRssiTRSW(
+void phy_InitRssiTRSW(
 	IN	PADAPTER					pAdapter
 )
 {
@@ -1702,7 +1702,7 @@ VOID phy_InitRssiTRSW(
 }
 
 /*Referenced from "WB-20130801-YN-RL6286 Settings for Spur Issues R02.xls"*/
-VOID
+void
 phy_SpurCalibration_8812A(
 	IN	PADAPTER	pAdapter,
 	IN	u8			Channel,
@@ -1749,7 +1749,7 @@ phy_SpurCalibration_8812A(
 
 }
 
-VOID
+void
 phy_SwChnl8812(
 	IN	PADAPTER	pAdapter
 )
@@ -1837,7 +1837,7 @@ phy_SwChnl8812(
 		phy_SpurCalibration_8812A(pAdapter, channelToSW, bandwidthToSw);
 }
 
-VOID
+void
 phy_SwChnlAndSetBwMode8812(
 	IN  PADAPTER		Adapter
 )
@@ -1892,7 +1892,7 @@ phy_SwChnlAndSetBwMode8812(
 	}
 }
 
-VOID
+void
 PHY_HandleSwChnlAndSetBW8812(
 	IN	PADAPTER			Adapter,
 	IN	BOOLEAN				bSwitchChannel,
@@ -2002,7 +2002,7 @@ PHY_HandleSwChnlAndSetBW8812(
 
 }
 
-VOID
+void
 PHY_SetSwChnlBWMode8812(
 	IN	PADAPTER			Adapter,
 	IN	u8					channel,

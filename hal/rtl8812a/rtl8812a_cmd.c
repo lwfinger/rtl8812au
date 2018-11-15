@@ -754,7 +754,7 @@ static void ConstructGTKResponse(
 
 /* To check if reserved page content is destroyed by beacon beacuse beacon is too large.
  * 2010.06.23. Added by tynli. */
-VOID
+void
 CheckFwRsvdPageContent(
 	IN	PADAPTER		Adapter
 )
@@ -1342,7 +1342,7 @@ void rtl8812_set_FwJoinBssReport_cmd(PADAPTER padapter, u8 mstatus)
 
 }
 
-static VOID
+static void
 C2HTxBeamformingHandler_8812(
 	IN	PADAPTER		Adapter,
 	IN	u8				*CmdBuf,
@@ -1376,7 +1376,7 @@ C2HTxBeamformingHandler_8812(
 #endif /*#ifdef CONFIG_BEAMFORMING*/
 }
 
-static VOID
+static void
 C2HTxFeedbackHandler_8812(
 	IN	PADAPTER	Adapter,
 	IN	u8			*CmdBuf,

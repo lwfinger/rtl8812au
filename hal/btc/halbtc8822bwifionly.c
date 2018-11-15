@@ -1,7 +1,7 @@
 #include "mp_precomp.h"
 
 
-VOID
+void
 ex_hal8822b_wifi_only_hw_config(
 	IN struct wifi_only_cfg *pwifionlycfg
 	)
@@ -23,7 +23,7 @@ ex_hal8822b_wifi_only_hw_config(
 	halwifionly_phy_set_bb_reg(pwifionlycfg, 0x1700, 0xffffffff, 0xc00f0038);
 }
 
-VOID
+void
 ex_hal8822b_wifi_only_scannotify(
 	IN struct wifi_only_cfg *pwifionlycfg,
 	IN u1Byte  is_5g
@@ -32,7 +32,7 @@ ex_hal8822b_wifi_only_scannotify(
 	hal8822b_wifi_only_switch_antenna(pwifionlycfg, is_5g);
 }
 
-VOID
+void
 ex_hal8822b_wifi_only_switchbandnotify(
 	IN struct wifi_only_cfg *pwifionlycfg,
 	IN u1Byte  is_5g
@@ -41,7 +41,7 @@ ex_hal8822b_wifi_only_switchbandnotify(
 	hal8822b_wifi_only_switch_antenna(pwifionlycfg, is_5g);
 }
 
-VOID
+void
 hal8822b_wifi_only_switch_antenna(IN struct wifi_only_cfg *pwifionlycfg,
 	IN u1Byte  is_5g
 	)

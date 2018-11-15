@@ -84,16 +84,10 @@
 	#include <linux/utsname.h>
 	#define IN
 	#define OUT
-	#define VOID void
 	#define NDIS_OID uint
 	#define NDIS_STATUS uint
 
 	typedef	signed int sint;
-
-	#ifndef	PVOID
-		typedef void *PVOID;
-		/* #define PVOID	(void *) */
-	#endif
 
 	#define UCHAR u8
 	#define USHORT u16
@@ -132,14 +126,9 @@
 	typedef unsigned long long u64;
 	#define IN
 	#define OUT
-	#define VOID void
 	#define NDIS_OID uint
 	#define NDIS_STATUS uint
 
-	#ifndef	PVOID
-		typedef void *PVOID;
-		/* #define PVOID	(void *) */
-	#endif
 	typedef u32 dma_addr_t;
 	#define UCHAR u8
 	#define USHORT u16

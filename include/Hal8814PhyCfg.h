@@ -65,7 +65,7 @@ PHY_QueryBBReg8814A(IN	PADAPTER	Adapter,
 		    IN	u32		BitMask);
 
 
-VOID
+void
 PHY_SetBBReg8814A(IN	PADAPTER	Adapter,
 		  IN	u32		RegAddr,
 		  IN	u32		BitMask,
@@ -92,13 +92,13 @@ phy_BB8814A_Config_ParaFile(
 	IN	PADAPTER	Adapter
 );
 
-VOID
+void
 PHY_ConfigBB_8814A(
 	IN	PADAPTER	Adapter
 );
 
 
-VOID
+void
 phy_ADC_CLK_8814A(
 	IN	PADAPTER	Adapter
 );
@@ -115,13 +115,13 @@ PHY_RFConfig8814A(
 
 /* 1 5. Tx  Power setting API */
 
-VOID
+void
 PHY_GetTxPowerLevel8814(
 	IN	PADAPTER		Adapter,
 	OUT ps4Byte			powerlevel
 );
 
-VOID
+void
 PHY_SetTxPowerLevel8814(
 	IN	PADAPTER		Adapter,
 	IN	u8			Channel
@@ -146,7 +146,7 @@ PHY_GetTxPowerIndex8814A(
 	struct txpwr_idx_comp *tic
 );
 
-VOID
+void
 PHY_SetTxPowerIndex_8814A(
 	IN	PADAPTER			Adapter,
 	IN	u32				PowerIndex,
@@ -173,32 +173,32 @@ PHY_GetTxBBSwing_8814A(
 
 /* 1 6. Channel setting API */
 
-VOID
+void
 PHY_SwChnlTimerCallback8814A(
 	IN	struct timer_list		*p_timer
 );
 
-VOID
+void
 PHY_SwChnlWorkItemCallback8814A(
-	IN PVOID            pContext
+	IN void *            pContext
 );
 
 
-VOID
+void
 HAL_HandleSwChnl8814A(
 	IN	PADAPTER	pAdapter,
 	IN	u8		channel
 );
 
-VOID
+void
 PHY_SwChnlSynchronously8814A(IN	PADAPTER		pAdapter,
 			     IN	u8			channel);
 
-VOID
-PHY_SwChnlAndSetBWModeCallback8814A(IN PVOID            pContext);
+void
+PHY_SwChnlAndSetBWModeCallback8814A(IN void *            pContext);
 
 
-VOID
+void
 PHY_HandleSwChnlAndSetBW8814A(
 	IN	PADAPTER			Adapter,
 	IN	BOOLEAN				bSwitchChannel,
@@ -217,9 +217,9 @@ PHY_QueryRFPathSwitch_8814A(IN	PADAPTER	pAdapter);
 
 
 #if (USE_WORKITEM)
-VOID
+void
 RtCheckForHangWorkItemCallback8814A(
-	IN PVOID   pContext
+	IN void *   pContext
 );
 #endif
 
@@ -229,7 +229,7 @@ SetAntennaConfig8814A(
 	IN	u8		DefaultAnt
 );
 
-VOID
+void
 PHY_SetRFEReg8814A(
 	IN PADAPTER		Adapter,
 	IN BOOLEAN		bInit,
@@ -243,12 +243,12 @@ PHY_SwitchWirelessBand8814A(
 	IN u8		Band
 );
 
-VOID
+void
 PHY_SetIO_8814A(
 	PADAPTER		pAdapter
 );
 
-VOID
+void
 PHY_SetSwChnlBWMode8814(
 	IN	PADAPTER			Adapter,
 	IN	u8					channel,
@@ -259,7 +259,7 @@ PHY_SetSwChnlBWMode8814(
 
 s32 PHY_MACConfig8814(PADAPTER Adapter);
 int PHY_BBConfig8814(PADAPTER	Adapter);
-VOID PHY_Set_SecCCATH_by_RXANT_8814A(PADAPTER	pAdapter, u4Byte ulAntennaRx);
+void PHY_Set_SecCCATH_by_RXANT_8814A(PADAPTER	pAdapter, u4Byte ulAntennaRx);
 
 
 

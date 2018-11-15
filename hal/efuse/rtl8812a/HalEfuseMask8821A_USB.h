@@ -23,9 +23,9 @@
 ******************************************************************************/
 
 u2Byte
-EFUSE_GetArrayLen_MP_8821A_MUSB(VOID);
+EFUSE_GetArrayLen_MP_8821A_MUSB(void);
 
-VOID
+void
 EFUSE_GetMaskArray_MP_8821A_MUSB(
 	IN	OUT pu1Byte Array
 );

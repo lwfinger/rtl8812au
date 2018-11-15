@@ -49,7 +49,7 @@ PHY_QueryBBReg_8703B(
 	IN	u32		BitMask
 );
 
-VOID
+void
 PHY_SetBBReg_8703B(
 	IN	PADAPTER	Adapter,
 	IN	u32		RegAddr,
@@ -65,7 +65,7 @@ PHY_QueryRFReg_8703B(
 	IN	u32				BitMask
 );
 
-VOID
+void
 PHY_SetRFReg_8703B(
 	IN	PADAPTER			Adapter,
 	IN	u8				eRFPath,
@@ -88,7 +88,7 @@ PHY_ConfigRFWithParaFile_8703B(
 	RF_PATH				eRFPath
 );
 
-VOID
+void
 PHY_SetTxPowerIndex_8703B(
 	IN	PADAPTER			Adapter,
 	IN	u32					PowerIndex,
@@ -106,19 +106,19 @@ PHY_GetTxPowerIndex_8703B(
 	struct txpwr_idx_comp *tic
 );
 
-VOID
+void
 PHY_GetTxPowerLevel8703B(
 	IN	PADAPTER		Adapter,
 	OUT s32				*powerlevel
 );
 
-VOID
+void
 PHY_SetTxPowerLevel8703B(
 	IN	PADAPTER		Adapter,
 	IN	u8			channel
 );
 
-VOID
+void
 PHY_SetSwChnlBWMode8703B(
 	IN	PADAPTER			Adapter,
 	IN	u8					channel,
@@ -127,7 +127,7 @@ PHY_SetSwChnlBWMode8703B(
 	IN	u8					Offset80
 );
 
-VOID phy_set_rf_path_switch_8703b(
+void phy_set_rf_path_switch_8703b(
 	IN	PADAPTER	pAdapter,
 	IN	bool		bMain
 );

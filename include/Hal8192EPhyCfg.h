@@ -91,7 +91,7 @@ void	PHY_GetTxPowerLevel8192E(IN PADAPTER	Adapter, OUT s32	*powerlevel);
 void	PHY_SetTxPowerLevel8192E(IN PADAPTER	Adapter, IN u8	channel);
 BOOLEAN	PHY_UpdateTxPowerDbm8192E(IN PADAPTER	Adapter, IN int	powerInDbm);
 
-VOID
+void
 PHY_SetTxPowerIndex_8192E(
 	IN	PADAPTER			Adapter,
 	IN	u32					PowerIndex,
@@ -112,7 +112,7 @@ PHY_GetTxPowerIndex_8192E(
 /*
  * channel switch related funciton
  *   */
-VOID
+void
 PHY_SetSwChnlBWMode8192E(
 	IN	PADAPTER			Adapter,
 	IN	u8					channel,
@@ -121,7 +121,7 @@ PHY_SetSwChnlBWMode8192E(
 	IN	u8					Offset80
 );
 
-VOID
+void
 PHY_SetRFEReg_8192E(
 	IN PADAPTER		Adapter
 );
@@ -143,7 +143,7 @@ phy_SpurCalibration_8192E_NBI(
  * BB/MAC/RF other monitor API
  *   */
 
-VOID
+void
 phy_set_rf_path_switch_8192e(
 	IN	PADAPTER	pAdapter,
 	IN	bool		bMain

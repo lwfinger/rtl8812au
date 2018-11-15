@@ -3065,11 +3065,11 @@ odm_dynamic_arfb_select(
 
 void
 odm_rate_adaptive_state_ap_init(
-	void		*PADAPTER_VOID,
+	void		*PADAPTER_void,
 	struct sta_info	*p_entry
 )
 {
-	struct _ADAPTER		*adapter = (struct _ADAPTER *)PADAPTER_VOID;
+	struct _ADAPTER		*adapter = (struct _ADAPTER *)PADAPTER_void;
 	p_entry->Ratr_State = DM_RATR_STA_INIT;
 }
 #elif (DM_ODM_SUPPORT_TYPE == ODM_CE) /*#if (DM_ODM_SUPPORT_TYPE == ODM_WIN)*/

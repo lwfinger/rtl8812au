@@ -97,7 +97,7 @@ int rtw_halmac_set_bssid(struct dvobj_priv *, enum _hw_port hwport, u8 *addr);
 int rtw_halmac_set_bandwidth(struct dvobj_priv *, u8 channel, u8 pri_ch_idx, u8 bw);
 int rtw_halmac_dump_fifo(struct dvobj_priv *d, u8 fifo_sel, u32 addr, u32 size, u8 *buffer);
 int rtw_halmac_rx_agg_switch(struct dvobj_priv *, u8 enable);
-int rtw_halmac_get_hw_value(struct dvobj_priv *, HALMAC_HW_ID hw_id, VOID *pvalue);
+int rtw_halmac_get_hw_value(struct dvobj_priv *, HALMAC_HW_ID hw_id, void *pvalue);
 int rtw_halmac_get_wow_reason(struct dvobj_priv *, u8 *reason);
 int rtw_halmac_get_drv_info_sz(struct dvobj_priv *, u8 *sz);
 int rtw_halmac_get_rsvd_drv_pg_bndy(struct dvobj_priv *dvobj, u16 *drv_pg);

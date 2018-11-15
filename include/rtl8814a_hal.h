@@ -226,7 +226,7 @@ Chip specific
 s32 FirmwareDownload8814A(PADAPTER	Adapter, BOOLEAN bUsedWoWLANFw);
 void	InitializeFirmwareVars8814(PADAPTER padapter);
 
-VOID
+void
 Hal_InitEfuseVars_8814A(
 	IN	PADAPTER	Adapter
 );
@@ -242,7 +242,7 @@ void InitRDGSetting8814A(PADAPTER padapter);
 
 /* EFuse */
 u8	GetEEPROMSize8814A(PADAPTER padapter);
-VOID hal_InitPGData_8814A(
+void hal_InitPGData_8814A(
  IN PADAPTER  padapter,
  IN OUT u8   *PROMContent
 );
@@ -255,10 +255,10 @@ void	hal_ReadChannelPlan8814A(PADAPTER padapter, u8 *hwinfo, BOOLEAN AutoLoadFai
 void	hal_EfuseParseXtal_8814A(PADAPTER pAdapter, u8 *hwinfo, BOOLEAN AutoLoadFail);
 void	hal_ReadAntennaDiversity8814A(PADAPTER pAdapter, u8 *PROMContent, BOOLEAN AutoLoadFail);
 void	hal_Read_TRX_antenna_8814A(PADAPTER	Adapter, u8 *PROMContent, BOOLEAN AutoloadFail);
-VOID hal_ReadAmplifierType_8814A(
+void hal_ReadAmplifierType_8814A(
 	IN	PADAPTER		Adapter
 );
-VOID hal_ReadPAType_8814A(
+void hal_ReadPAType_8814A(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
 	IN	BOOLEAN		AutoloadFail,
@@ -313,7 +313,7 @@ void rtl8814_stop_thread(PADAPTER padapter);
 
 #ifdef CONFIG_PCI_HCI
 	BOOLEAN	InterruptRecognized8814AE(PADAPTER Adapter);
-	VOID	UpdateInterruptMask8814AE(PADAPTER Adapter, u32 AddMSR, u32 AddMSR1, u32 RemoveMSR, u32 RemoveMSR1);
+	void	UpdateInterruptMask8814AE(PADAPTER Adapter, u32 AddMSR, u32 AddMSR1, u32 RemoveMSR, u32 RemoveMSR1);
 	u16	get_txbd_idx_addr(u16 ff_hwaddr);
 #endif
 

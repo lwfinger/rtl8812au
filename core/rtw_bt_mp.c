@@ -460,7 +460,7 @@ mptbt_BtSetMode(
 }
 
 
-VOID
+void
 MPTBT_FwC2hBtMpCtrl(
 	PADAPTER	Adapter,
 	pu1Byte	tmpBuf,
@@ -1504,10 +1504,10 @@ mptbt_TestBT(
 	return paraLen;
 }
 
-VOID
+void
 mptbt_BtControlProcess(
 	PADAPTER	Adapter,
-	PVOID		pInBuf
+	void *		pInBuf
 )
 {
 	u1Byte			H2C_Parameter[6] = {0};

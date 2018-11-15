@@ -2999,7 +2999,7 @@ phydm_query_is_mu_api(
 	
 }
 
-VOID
+void
 phydm_rx_statistic_cal(
 	struct PHY_DM_STRUCT *p_phydm,
 	u8 *p_phy_status,

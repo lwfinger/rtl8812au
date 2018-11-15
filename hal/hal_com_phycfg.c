@@ -1333,7 +1333,7 @@ PHY_GetTxPowerByRateBase(
 	return value;
 }
 
-VOID
+void
 phy_SetTxPowerByRateBase(
 	IN	PADAPTER		Adapter,
 	IN	u8				Band,
@@ -1456,7 +1456,7 @@ static void phy_txpwr_by_rate_chk_for_path_dup(_adapter *adapter)
 	}
 }
 
-VOID
+void
 phy_StoreTxPowerByRateBase(
 	IN	PADAPTER	pAdapter
 )
@@ -1508,7 +1508,7 @@ phy_StoreTxPowerByRateBase(
 	}
 }
 
-VOID
+void
 PHY_GetRateValuesOfTxPowerByRate(
 	IN	PADAPTER pAdapter,
 	IN	u32 RegAddr,
@@ -1946,7 +1946,7 @@ PHY_StoreTxPowerByRateNew(
 	}
 }
 
-VOID
+void
 PHY_InitTxPowerByRate(
 	IN	PADAPTER	pAdapter
 )
@@ -1961,7 +1961,7 @@ PHY_InitTxPowerByRate(
 					pHalData->TxPwrByRateOffset[band][rfPath][TxNum][rate] = 0;
 }
 
-VOID
+void
 phy_store_tx_power_by_rate(
 	IN	PADAPTER	pAdapter,
 	IN	u32			Band,
@@ -1982,7 +1982,7 @@ phy_store_tx_power_by_rate(
 
 }
 
-VOID
+void
 phy_ConvertTxPowerByRateInDbmToRelativeValues(
 	IN	PADAPTER	pAdapter
 )
@@ -2076,7 +2076,7 @@ phy_ConvertTxPowerByRateInDbmToRelativeValues(
   * This function must be called if the value in the PHY_REG_PG.txt(or header)
   * is exact dBm values
   */
-VOID
+void
 PHY_TxPowerByRateConfiguration(
 	IN  PADAPTER			pAdapter
 )
@@ -2088,7 +2088,7 @@ PHY_TxPowerByRateConfiguration(
 	phy_ConvertTxPowerByRateInDbmToRelativeValues(pAdapter);
 }
 
-VOID
+void
 phy_set_tx_power_index_by_rate_section(
 	IN	PADAPTER		pAdapter,
 	IN	u8				RFPath,
@@ -2690,7 +2690,7 @@ PHY_GetTxPowerByRateOriginal(
 #endif
 
 
-VOID
+void
 PHY_SetTxPowerByRate(
 	IN	PADAPTER	pAdapter,
 	IN	u8			Band,
@@ -2723,7 +2723,7 @@ PHY_SetTxPowerByRate(
 	pHalData->TxPwrByRateOffset[Band][RFPath][TxNum][rateIndex] = Value;
 }
 
-VOID
+void
 phy_set_tx_power_level_by_path(
 	IN	PADAPTER	Adapter,
 	IN	u8			channel,
@@ -2762,7 +2762,7 @@ phy_set_tx_power_level_by_path(
 #define DBG_TX_POWER_IDX 0
 #endif
 
-VOID
+void
 PHY_SetTxPowerIndexByRateArray(
 	IN	PADAPTER			pAdapter,
 	IN	u8					RFPath,
@@ -3293,7 +3293,7 @@ PHY_GetTxPowerLimitOriginal(
 #endif
 
 
-VOID
+void
 phy_CrossReferenceHTAndVHTTxPowerLimit(
 	IN	PADAPTER			pAdapter
 )
@@ -3382,7 +3382,7 @@ phy_CrossReferenceHTAndVHTTxPowerLimit(
 		pHalData->tx_pwr_lmt_5g_20_40_ref |= TX_PWR_LMT_REF_VHT_FROM_HT;
 }
 
-VOID
+void
 PHY_ConvertTxPowerLimitToPowerIndex(
 	IN	PADAPTER			Adapter
 )
@@ -3451,7 +3451,7 @@ PHY_ConvertTxPowerLimitToPowerIndex(
 /*
 * PHY_InitTxPowerLimit - Set all hal_data.TxPwrLimit_2_4G, TxPwrLimit_5G array to MAX_POWER_INDEX
 */
-VOID
+void
 PHY_InitTxPowerLimit(
 	IN	PADAPTER		Adapter
 )
@@ -3477,7 +3477,7 @@ PHY_InitTxPowerLimit(
 /*
 * phy_set_tx_power_limit - Parsing TX power limit from phydm array, called by odm_ConfigBB_TXPWR_LMT_XXX in phydm
 */
-VOID
+void
 phy_set_tx_power_limit(
 	IN	struct PHY_DM_STRUCT		*pDM_Odm,
 	IN	u8				*Regulation,
@@ -3620,7 +3620,7 @@ phy_get_tx_power_index(
 	return rtw_hal_get_tx_power_index(pAdapter, RFPath, Rate, BandWidth, Channel, NULL);
 }
 
-VOID
+void
 PHY_SetTxPowerIndex(
 	IN	PADAPTER		pAdapter,
 	IN	u32				PowerIndex,
@@ -4373,7 +4373,7 @@ phy_ConfigBBWithParaFile(
 	return rtStatus;
 }
 
-VOID
+void
 phy_DecryptBBPgParaFile(
 	PADAPTER		Adapter,
 	char			*buffer
@@ -4921,7 +4921,7 @@ PHY_ConfigRFWithParaFile(
 	return rtStatus;
 }
 
-VOID
+void
 initDeltaSwingIndexTables(
 	PADAPTER	Adapter,
 	char		*Band,
@@ -5141,12 +5141,12 @@ phy_ParsePowerLimitTableFile(
 
 		if (loadingStage == 0) {
 			for (forCnt = 0; forCnt < TXPWR_LMT_MAX_REGULATION_NUM; ++forCnt)
-				_rtw_memset((PVOID) regulation[forCnt], 0, 10);
-			_rtw_memset((PVOID) band, 0, 10);
-			_rtw_memset((PVOID) bandwidth, 0, 10);
-			_rtw_memset((PVOID) rateSection, 0, 10);
-			_rtw_memset((PVOID) rfPath, 0, 10);
-			_rtw_memset((PVOID) colNumBuf, 0, 10);
+				_rtw_memset((void *) regulation[forCnt], 0, 10);
+			_rtw_memset((void *) band, 0, 10);
+			_rtw_memset((void *) bandwidth, 0, 10);
+			_rtw_memset((void *) rateSection, 0, 10);
+			_rtw_memset((void *) rfPath, 0, 10);
+			_rtw_memset((void *) colNumBuf, 0, 10);
 
 			if (szLine[0] != '#' || szLine[1] != '#')
 				continue;
@@ -5277,7 +5277,7 @@ phy_ParsePowerLimitTableFile(
 				/* load the power limit value */
 				cnt = 0;
 				fraction = 0;
-				_rtw_memset((PVOID) powerLimit, 0, 10);
+				_rtw_memset((void *) powerLimit, 0, 10);
 				while ((szLine[i] >= '0' && szLine[i] <= '9') || szLine[i] == '.') {
 					if (szLine[i] == '.') {
 						if ((szLine[i + 1] >= '0' && szLine[i + 1] <= '9')) {

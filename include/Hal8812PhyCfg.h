@@ -114,7 +114,7 @@ u32 phy_get_tx_bb_swing_8812a(
 	IN	u8			RFPath
 );
 
-VOID
+void
 PHY_SetTxPowerIndex_8812A(
 	IN	PADAPTER			Adapter,
 	IN	u4Byte				PowerIndex,
@@ -125,7 +125,7 @@ PHY_SetTxPowerIndex_8812A(
 /*
  * channel switch related funciton
  *   */
-VOID
+void
 PHY_SetSwChnlBWMode8812(
 	IN	PADAPTER			Adapter,
 	IN	u8					channel,
@@ -138,7 +138,7 @@ PHY_SetSwChnlBWMode8812(
  * BB/MAC/RF other monitor API
  *   */
 
-VOID
+void
 phy_set_rf_path_switch_8812a(
 	IN	PADAPTER	pAdapter,
 	IN	bool		bMain

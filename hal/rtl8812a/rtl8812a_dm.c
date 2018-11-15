@@ -37,7 +37,7 @@
  * ************************************************************ */
 
 
-static VOID
+static void
 dm_CheckProtection(
 	IN	PADAPTER	Adapter
 )
@@ -61,7 +61,7 @@ dm_CheckProtection(
 #endif
 }
 
-static VOID
+static void
 dm_CheckStatistics(
 	IN	PADAPTER	Adapter
 )
@@ -155,7 +155,7 @@ static void dm_CheckPbcGPIO(_adapter *padapter)
  *
  *	Created by Roger, 2010.03.05.
  *   */
-VOID
+void
 dm_InterruptMigration(
 	IN	PADAPTER	Adapter
 )
@@ -350,7 +350,7 @@ rtl8812_InitHalDm(
 }
 
 
-VOID
+void
 rtl8812_HalDmWatchDog(
 	IN	PADAPTER	Adapter
 )

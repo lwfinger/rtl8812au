@@ -170,7 +170,7 @@ static void _init_mp_priv_(struct mp_priv *pmp_priv)
 #if 0
 void mp_wi_callback(
 	IN NDIS_WORK_ITEM	*pwk_item,
-	IN PVOID			cntx
+	IN void *			cntx
 )
 {
 	_adapter *padapter = (_adapter *)cntx;
@@ -368,7 +368,7 @@ void free_mp_priv(struct mp_priv *pmp_priv)
 }
 
 
-static VOID PHY_IQCalibrate_default(
+static void PHY_IQCalibrate_default(
 	IN	PADAPTER	pAdapter,
 	IN	BOOLEAN	bReCovery
 )
@@ -376,14 +376,14 @@ static VOID PHY_IQCalibrate_default(
 	RTW_INFO("%s\n", __func__);
 }
 
-static VOID PHY_LCCalibrate_default(
+static void PHY_LCCalibrate_default(
 	IN	PADAPTER	pAdapter
 )
 {
 	RTW_INFO("%s\n", __func__);
 }
 
-static VOID PHY_SetRFPathSwitch_default(
+static void PHY_SetRFPathSwitch_default(
 	IN	PADAPTER	pAdapter,
 	IN	BOOLEAN		bMain
 )
@@ -751,7 +751,7 @@ MPT_InitializeAdapter(
  *	05/18/2007	MHC		Add normal driver MPHalt code.
  *
  *---------------------------------------------------------------------------*/
-VOID
+void
 MPT_DeInitAdapter(
 	IN	PADAPTER	pAdapter
 )
@@ -1143,7 +1143,7 @@ end_of_mp_stop_test:
 /*---------------------------hal\rtl8192c\MPT_Phy.c---------------------------*/
 #if 0
 /* #ifdef CONFIG_USB_HCI */
-static VOID mpt_AdjustRFRegByRateByChan92CU(PADAPTER pAdapter, u8 RateIdx, u8 Channel, u8 BandWidthID)
+static void mpt_AdjustRFRegByRateByChan92CU(PADAPTER pAdapter, u8 RateIdx, u8 Channel, u8 BandWidthID)
 {
 	u8		eRFPath;
 	u32		rfReg0x26;

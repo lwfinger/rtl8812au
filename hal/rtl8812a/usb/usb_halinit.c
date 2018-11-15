@@ -41,7 +41,7 @@ static void _dbg_dump_macreg(_adapter *padapter)
 	}
 }
 
-static VOID
+static void
 _ConfigChipOutEP_8812(
 	IN	PADAPTER	pAdapter,
 	IN	u8		NumOutPipe
@@ -78,7 +78,7 @@ _ConfigChipOutEP_8812(
 
 }
 
-static VOID _FourOutPipeMapping88212AU(
+static void _FourOutPipeMapping88212AU(
 	IN	PADAPTER	pAdapter,
 	IN	BOOLEAN		bWIFICfg
 )
@@ -226,7 +226,7 @@ void rtl8812au_interface_configure(_adapter *padapter)
 
 }
 
-static VOID
+static void
 _InitBurstPktLen(IN PADAPTER Adapter)
 {
 	u1Byte speedvalue, provalue, temp;
@@ -395,7 +395,7 @@ static u32 _InitPowerOn_8812AU(_adapter *padapter)
  * --------------------------------------------------------------- */
 
 /* Shall USB interface init this? */
-static VOID
+static void
 _InitInterrupt_8812AU(
 	IN  PADAPTER Adapter
 )
@@ -430,7 +430,7 @@ _InitInterrupt_8812AU(
 #endif/*CONFIG_SUPPORT_USB_INT*/
 }
 
-static VOID
+static void
 _InitQueueReservedPage_8821AUsb(
 	IN  PADAPTER Adapter
 )
@@ -486,7 +486,7 @@ _InitQueueReservedPage_8821AUsb(
 	rtw_write32(Adapter, REG_RQPN, value32);
 }
 
-static VOID
+static void
 _InitQueueReservedPage_8812AUsb(
 	IN  PADAPTER Adapter
 )
@@ -534,7 +534,7 @@ _InitQueueReservedPage_8812AUsb(
 	rtw_write32(Adapter, REG_RQPN, value32);
 }
 
-static VOID
+static void
 _InitTxBufferBoundary_8821AUsb(
 	IN PADAPTER Adapter
 )
@@ -564,7 +564,7 @@ _InitTxBufferBoundary_8821AUsb(
 
 }
 
-static VOID
+static void
 _InitTxBufferBoundary_8812AUsb(
 	IN PADAPTER Adapter
 )
@@ -587,7 +587,7 @@ _InitTxBufferBoundary_8812AUsb(
 
 }
 
-static VOID
+static void
 _InitPageBoundary_8812AUsb(
 	IN  PADAPTER Adapter
 )
@@ -611,7 +611,7 @@ _InitPageBoundary_8812AUsb(
 }
 
 
-static VOID
+static void
 _InitNormalChipRegPriority_8812AUsb(
 	IN	PADAPTER	Adapter,
 	IN	u16		beQ,
@@ -631,7 +631,7 @@ _InitNormalChipRegPriority_8812AUsb(
 	rtw_write16(Adapter, REG_TRXDMA_CTRL, value16);
 }
 
-static VOID
+static void
 _InitNormalChipTwoOutEpPriority_8812AUsb(
 	IN	PADAPTER Adapter
 )
@@ -683,7 +683,7 @@ _InitNormalChipTwoOutEpPriority_8812AUsb(
 
 }
 
-static VOID
+static void
 _InitNormalChipThreeOutEpPriority_8812AUsb(
 	IN	PADAPTER Adapter
 )
@@ -709,7 +709,7 @@ _InitNormalChipThreeOutEpPriority_8812AUsb(
 	_InitNormalChipRegPriority_8812AUsb(Adapter, beQ, bkQ, viQ, voQ, mgtQ, hiQ);
 }
 
-static VOID
+static void
 _InitNormalChipFourOutEpPriority_8812AUsb(
 	IN	PADAPTER Adapter
 )
@@ -735,7 +735,7 @@ _InitNormalChipFourOutEpPriority_8812AUsb(
 	_InitNormalChipRegPriority_8812AUsb(Adapter, beQ, bkQ, viQ, voQ, mgtQ, hiQ);
 }
 
-static VOID
+static void
 _InitQueuePriority_8812AUsb(
 	IN	PADAPTER Adapter
 )
@@ -760,7 +760,7 @@ _InitQueuePriority_8812AUsb(
 
 
 
-static VOID
+static void
 _InitHardwareDropIncorrectBulkOut_8812A(
 	IN  PADAPTER Adapter
 )
@@ -772,7 +772,7 @@ _InitHardwareDropIncorrectBulkOut_8812A(
 #endif
 }
 
-static VOID
+static void
 _InitNetworkType_8812A(
 	IN  PADAPTER Adapter
 )
@@ -786,7 +786,7 @@ _InitNetworkType_8812A(
 	rtw_write32(Adapter, REG_CR, value32);
 }
 
-static VOID
+static void
 _InitTransferPageSize_8812AUsb(
 	IN  PADAPTER Adapter
 )
@@ -798,7 +798,7 @@ _InitTransferPageSize_8812AUsb(
 	PlatformEFIOWrite1Byte(Adapter, REG_PBP, value8);
 }
 
-static VOID
+static void
 _InitDriverInfoSize_8812A(
 	IN  PADAPTER	Adapter,
 	IN	u8		drvInfoSize
@@ -807,7 +807,7 @@ _InitDriverInfoSize_8812A(
 	rtw_write8(Adapter, REG_RX_DRVINFO_SZ, drvInfoSize);
 }
 
-static VOID
+static void
 _InitWMACSetting_8812A(
 	IN  PADAPTER Adapter
 )
@@ -862,7 +862,7 @@ _InitWMACSetting_8812A(
 
 }
 
-static VOID
+static void
 _InitAdaptiveCtrl_8812AUsb(
 	IN  PADAPTER Adapter
 )
@@ -895,7 +895,7 @@ _InitAdaptiveCtrl_8812AUsb(
 
 }
 
-static VOID
+static void
 _InitEDCA_8812AUsb(
 	IN  PADAPTER Adapter
 )
@@ -922,7 +922,7 @@ _InitEDCA_8812AUsb(
 }
 
 
-static VOID
+static void
 _InitBeaconMaxError_8812A(
 	IN  PADAPTER	Adapter,
 	IN	BOOLEAN		InfraMode
@@ -951,7 +951,7 @@ static void _InitHWLed(PADAPTER Adapter)
 }
 #endif /* CONFIG_LED */
 
-static VOID
+static void
 _InitRDGSetting_8812A(
 	IN	PADAPTER Adapter
 )
@@ -961,7 +961,7 @@ _InitRDGSetting_8812A(
 	rtw_write8(Adapter, REG_RD_RESP_PKT_TH, 0x05);
 }
 
-static VOID
+static void
 _InitRetryFunction_8812A(
 	IN  PADAPTER Adapter
 )
@@ -992,7 +992,7 @@ _InitRetryFunction_8812A(
  *	12/10/2010	MHC		Seperate to smaller function.
  *
  *---------------------------------------------------------------------------*/
-static VOID
+static void
 usb_AggSettingTxUpdate_8812A(
 	IN	PADAPTER			Adapter
 )
@@ -1033,7 +1033,7 @@ usb_AggSettingTxUpdate_8812A(
  *	12/10/2010	MHC		Seperate to smaller function.
  *
  *---------------------------------------------------------------------------*/
-static VOID
+static void
 usb_AggSettingRxUpdate_8812A(
 	IN	PADAPTER			Adapter
 )
@@ -1078,7 +1078,7 @@ usb_AggSettingRxUpdate_8812A(
 #endif
 }	/* usb_AggSettingRxUpdate */
 
-static VOID
+static void
 init_UsbAggregationSetting_8812A(
 	IN  PADAPTER Adapter
 )
@@ -1114,7 +1114,7 @@ init_UsbAggregationSetting_8812A(
  *	12/10/2010	MHC		Create Version 0.
  *
  *---------------------------------------------------------------------------*/
-VOID
+void
 USB_AggModeSwitch(
 	IN	PADAPTER			Adapter
 )
@@ -1188,7 +1188,7 @@ USB_AggModeSwitch(
 #endif
 }	/* USB_AggModeSwitch */
 
-static VOID
+static void
 _InitOperationMode_8812A(
 	IN	PADAPTER			Adapter
 )
@@ -1255,7 +1255,7 @@ _InitOperationMode_8812A(
 
 
 /* Set CCK and OFDM Block "ON" */
-static VOID _BBTurnOnBlock(
+static void _BBTurnOnBlock(
 	IN	PADAPTER		Adapter
 )
 {
@@ -1267,7 +1267,7 @@ static VOID _BBTurnOnBlock(
 	phy_set_bb_reg(Adapter, rFPGA0_RFMOD, bOFDMEn, 0x1);
 }
 
-static VOID _RfPowerSave(
+static void _RfPowerSave(
 	IN	PADAPTER		Adapter
 )
 {
@@ -1306,7 +1306,7 @@ enum {
  * If Efuse 0x0e bit1 is not enabled, we can not support selective suspend for Minicard and
  * slim card.
  *   */
-static VOID
+static void
 HalDetectSelectiveSuspendMode(
 	IN PADAPTER				Adapter
 )
@@ -1867,7 +1867,7 @@ exit:
 	return status;
 }
 
-VOID
+void
 hal_poweroff_8812au(
 	IN	PADAPTER			Adapter
 )
@@ -2053,7 +2053,7 @@ unsigned int rtl8812au_inirp_deinit(PADAPTER Adapter)
  *	EEPROM/EFUSE Content Parsing
  *
  * ------------------------------------------------------------------- */
-VOID
+void
 hal_ReadIDs_8812AU(
 	IN	PADAPTER	Adapter,
 	IN	pu1Byte		PROMContent,
@@ -2112,7 +2112,7 @@ hal_ReadIDs_8812AU(
 	RTW_INFO("Customer ID: 0x%02X, SubCustomer ID: 0x%02X\n", pHalData->EEPROMCustomerID, pHalData->EEPROMSubCustomerID);
 }
 
-VOID
+void
 hal_InitPGData_8812A(
 	IN	PADAPTER		padapter,
 	IN	OUT	u8			*PROMContent
@@ -2190,7 +2190,7 @@ hal_InitPGData_8812A(
 
 }
 
-VOID
+void
 hal_CustomizedBehavior_8812AU(
 	IN	PADAPTER	Adapter
 )
@@ -2327,7 +2327,7 @@ hal_CustomizeByCustomerID_8812AU(
 	hal_CustomizedBehavior_8812AU(pAdapter);
 }
 
-VOID
+void
 hal_ReadUsbModeSwitch_8812AU(
 	IN	PADAPTER	Adapter,
 	IN	u8			*PROMContent,
@@ -2345,7 +2345,7 @@ hal_ReadUsbModeSwitch_8812AU(
 	RTW_INFO("Usb Switch: %d\n", pHalData->EEPROMUsbSwitch);
 }
 
-static VOID
+static void
 ReadLEDSetting_8812AU(
 	IN	PADAPTER	Adapter,
 	IN	u8		*PROMContent,
@@ -2361,7 +2361,7 @@ ReadLEDSetting_8812AU(
 #endif /* CONFIG_SW_LED */
 }
 
-VOID
+void
 InitAdapterVariablesByPROM_8812AU(
 	IN	PADAPTER	Adapter
 )
@@ -2588,7 +2588,7 @@ u8
 SetHalDefVar8812AUsb(
 	IN	PADAPTER				Adapter,
 	IN	HAL_DEF_VARIABLE		eVariable,
-	IN	PVOID					pValue
+	IN	void *					pValue
 )
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -2611,7 +2611,7 @@ u8
 GetHalDefVar8812AUsb(
 	IN	PADAPTER				Adapter,
 	IN	HAL_DEF_VARIABLE		eVariable,
-	IN	PVOID					pValue
+	IN	void *					pValue
 )
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);

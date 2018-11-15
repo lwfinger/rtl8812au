@@ -196,13 +196,13 @@ typedef struct _LED_PCIE {
 typedef struct _LED_PCIE	LED_DATA, *PLED_DATA;
 typedef enum _LED_STRATEGY_PCIE	LED_STRATEGY, *PLED_STRATEGY;
 
-VOID
+void
 LedControlPCIE(
 	IN	PADAPTER		Adapter,
 	IN	LED_CTL_MODE		LedAction
 );
 
-VOID
+void
 gen_RefreshLedState(
 	IN	PADAPTER		Adapter);
 
@@ -270,7 +270,7 @@ typedef struct _LED_USB {
 typedef struct _LED_USB	LED_DATA, *PLED_DATA;
 typedef enum _LED_STRATEGY_USB	LED_STRATEGY, *PLED_STRATEGY;
 
-VOID
+void
 LedControlUSB(
 	IN	PADAPTER		Adapter,
 	IN	LED_CTL_MODE		LedAction
@@ -330,7 +330,7 @@ typedef struct _LED_SDIO {
 typedef struct _LED_SDIO	LED_DATA, *PLED_DATA;
 typedef enum _LED_STRATEGY_SDIO	LED_STRATEGY, *PLED_STRATEGY;
 
-VOID
+void
 LedControlSDIO(
 	IN	PADAPTER		Adapter,
 	IN	LED_CTL_MODE		LedAction
