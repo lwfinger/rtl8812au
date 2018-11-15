@@ -904,7 +904,7 @@ void rtw_join_timeout_handler(void *FunctionContext);
 void rtw_join_timeout_handler(struct timer_list *t);
 #endif
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
-void _rtw_scan_timeout_handler(void *FunctionContext)l
+void _rtw_scan_timeout_handler(void *FunctionContext);
 #else
 void _rtw_scan_timeout_handler(struct timer_list *t);
 #endif
