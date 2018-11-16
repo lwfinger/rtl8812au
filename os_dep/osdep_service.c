@@ -180,6 +180,13 @@ u8 *_rtw_malloc(u32 sz)
 
 }
 
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0))
+void rtw_init_timer(_timer *ptimer, void *padapter, void *pfunc)
+{
+	_adapter *adapter = (_adapter *)padapter;
+	_init_timer(ptimer, adapter->pnetdev, pfunc, adapter);
+}
+#endif
 
 u8 *_rtw_zmalloc(u32 sz)
 {
