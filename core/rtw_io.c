@@ -633,11 +633,6 @@ u8 dbg_rtw_sd_f0_read8(_adapter *adapter, u32 addr, const char *caller, const in
 {
 	u8 val = _rtw_sd_f0_read8(adapter, addr);
 
-#if 0
-	if (match_read_sniff_ranges(addr, 1))
-		RTW_INFO("DBG_IO %s:%d rtw_sd_f0_read8(0x%04x) return 0x%02x\n", caller, line, addr, val);
-#endif
-
 	return val;
 }
 

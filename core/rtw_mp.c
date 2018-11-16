@@ -167,40 +167,6 @@ static void _init_mp_priv_(struct mp_priv *pmp_priv)
 }
 
 #ifdef PLATFORM_WINDOWS
-#if 0
-void mp_wi_callback(
-	IN NDIS_WORK_ITEM	*pwk_item,
-	IN void *			cntx
-)
-{
-	_adapter *padapter = (_adapter *)cntx;
-	struct mp_priv *pmppriv = &padapter->mppriv;
-	struct mp_wi_cntx	*pmp_wi_cntx = &pmppriv->wi_cntx;
-
-	/*  Execute specified action. */
-	if (pmp_wi_cntx->curractfunc != NULL) {
-		LARGE_INTEGER	cur_time;
-		ULONGLONG start_time, end_time;
-		NdisGetCurrentSystemTime(&cur_time);	/*  driver version */
-		start_time = cur_time.QuadPart / 10; /*  The return value is in microsecond */
-
-		pmp_wi_cntx->curractfunc(padapter);
-
-		NdisGetCurrentSystemTime(&cur_time);	/*  driver version */
-		end_time = cur_time.QuadPart / 10; /*  The return value is in microsecond */
-
-	}
-
-	NdisAcquireSpinLock(&(pmp_wi_cntx->mp_wi_lock));
-	pmp_wi_cntx->bmp_wi_progress = _FALSE;
-	NdisReleaseSpinLock(&(pmp_wi_cntx->mp_wi_lock));
-
-	if (pmp_wi_cntx->bmpdrv_unload)
-		NdisSetEvent(&(pmp_wi_cntx->mp_wi_evt));
-
-}
-#endif
-
 static int init_mp_priv_by_os(struct mp_priv *pmp_priv)
 {
 	struct mp_wi_cntx *pmp_wi_cntx;
@@ -279,21 +245,13 @@ static void mp_init_xmit_attrib(struct mp_tx *pmptx, PADAPTER padapter)
 	_rtw_memset(pmptx->desc, 0, TXDESC_SIZE);
 
 	pattrib->ether_type = 0x8712;
-#if 0
-	_rtw_memcpy(pattrib->src, adapter_mac_addr(padapter), ETH_ALEN);
-	_rtw_memcpy(pattrib->ta, pattrib->src, ETH_ALEN);
-#endif
 	_rtw_memset(pattrib->dst, 0xFF, ETH_ALEN);
 
-	/*	pattrib->dhcp_pkt = 0;
-	 *	pattrib->pktlen = 0; */
 	pattrib->ack_policy = 0;
-	/*	pattrib->pkt_hdrlen = ETH_HLEN; */
 	pattrib->hdrlen = WLAN_HDR_A3_LEN;
 	pattrib->subtype = WIFI_DATA;
 	pattrib->priority = 0;
 	pattrib->qsel = pattrib->priority;
-	/*	do_queue_select(padapter, pattrib); */
 	pattrib->nr_frags = 1;
 	pattrib->encrypt = 0;
 	pattrib->bswenc = _FALSE;
@@ -766,15 +724,6 @@ MPT_DeInitAdapter(
 #if	defined(CONFIG_RTL8723B)
 	phy_set_bb_reg(pAdapter, 0xA01, BIT0, 1); /* /suggestion  by jerry for MP Rx. */
 #endif
-#if 0 /* for Windows */
-	PlatformFreeWorkItem(&(pMptCtx->MptWorkItem));
-
-	while (pMptCtx->bMptWorkItemInProgress) {
-		if (NdisWaitEvent(&(pMptCtx->MptWorkItemEvent), 50))
-			break;
-	}
-	NdisFreeSpinLock(&(pMptCtx->MptWorkItemSpinLock));
-#endif
 }
 
 static u8 mpt_ProStartTest(PADAPTER padapter)
@@ -1141,48 +1090,6 @@ end_of_mp_stop_test:
 	}
 }
 /*---------------------------hal\rtl8192c\MPT_Phy.c---------------------------*/
-#if 0
-/* #ifdef CONFIG_USB_HCI */
-static void mpt_AdjustRFRegByRateByChan92CU(PADAPTER pAdapter, u8 RateIdx, u8 Channel, u8 BandWidthID)
-{
-	u8		eRFPath;
-	u32		rfReg0x26;
-	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
-
-
-	if (RateIdx < MPT_RATE_6M) 	/* CCK rate,for 88cu */
-		rfReg0x26 = 0xf400;
-	else if ((RateIdx >= MPT_RATE_6M) && (RateIdx <= MPT_RATE_54M)) {/* OFDM rate,for 88cu */
-		if ((4 == Channel) || (8 == Channel) || (12 == Channel))
-			rfReg0x26 = 0xf000;
-		else if ((5 == Channel) || (7 == Channel) || (13 == Channel) || (14 == Channel))
-			rfReg0x26 = 0xf400;
-		else
-			rfReg0x26 = 0x4f200;
-	} else if ((RateIdx >= MPT_RATE_MCS0) && (RateIdx <= MPT_RATE_MCS15)) {
-		/* MCS 20M ,for 88cu */ /* MCS40M rate,for 88cu */
-
-		if (CHANNEL_WIDTH_20 == BandWidthID) {
-			if ((4 == Channel) || (8 == Channel))
-				rfReg0x26 = 0xf000;
-			else if ((5 == Channel) || (7 == Channel) || (13 == Channel) || (14 == Channel))
-				rfReg0x26 = 0xf400;
-			else
-				rfReg0x26 = 0x4f200;
-		} else {
-			if ((4 == Channel) || (8 == Channel))
-				rfReg0x26 = 0xf000;
-			else if ((5 == Channel) || (7 == Channel))
-				rfReg0x26 = 0xf400;
-			else
-				rfReg0x26 = 0x4f200;
-		}
-	}
-
-	for (eRFPath = 0; eRFPath < pHalData->NumTotalRFPath; eRFPath++)
-		write_rfreg(pAdapter, eRFPath, RF_SYN_G2, rfReg0x26);
-}
-#endif
 /*-----------------------------------------------------------------------------
  * Function:	mpt_SwitchRfSetting
  *
@@ -2137,92 +2044,6 @@ u32 mp_query_psd(PADAPTER pAdapter, u8 *data)
 
 	return strlen(data) + 1;
 }
-
-
-#if 0
-void _rtw_mp_xmit_priv(struct xmit_priv *pxmitpriv)
-{
-	int i, res;
-	_adapter *padapter = pxmitpriv->adapter;
-	struct xmit_frame	*pxmitframe = (struct xmit_frame *) pxmitpriv->pxmit_frame_buf;
-	struct xmit_buf *pxmitbuf = (struct xmit_buf *)pxmitpriv->pxmitbuf;
-
-	u32 max_xmit_extbuf_size = MAX_XMIT_EXTBUF_SZ;
-	u32 num_xmit_extbuf = NR_XMIT_EXTBUFF;
-	if (padapter->registrypriv.mp_mode == 0) {
-		max_xmit_extbuf_size = MAX_XMIT_EXTBUF_SZ;
-		num_xmit_extbuf = NR_XMIT_EXTBUFF;
-	} else {
-		max_xmit_extbuf_size = 6000;
-		num_xmit_extbuf = 8;
-	}
-
-	pxmitbuf = (struct xmit_buf *)pxmitpriv->pxmit_extbuf;
-	for (i = 0; i < num_xmit_extbuf; i++) {
-		rtw_os_xmit_resource_free(padapter, pxmitbuf, (max_xmit_extbuf_size + XMITBUF_ALIGN_SZ), _FALSE);
-
-		pxmitbuf++;
-	}
-
-	if (pxmitpriv->pallocated_xmit_extbuf)
-		rtw_vmfree(pxmitpriv->pallocated_xmit_extbuf, num_xmit_extbuf * sizeof(struct xmit_buf) + 4);
-
-	if (padapter->registrypriv.mp_mode == 0) {
-		max_xmit_extbuf_size = 6000;
-		num_xmit_extbuf = 8;
-	} else {
-		max_xmit_extbuf_size = MAX_XMIT_EXTBUF_SZ;
-		num_xmit_extbuf = NR_XMIT_EXTBUFF;
-	}
-
-	/* Init xmit extension buff */
-	_rtw_init_queue(&pxmitpriv->free_xmit_extbuf_queue);
-
-	pxmitpriv->pallocated_xmit_extbuf = rtw_zvmalloc(num_xmit_extbuf * sizeof(struct xmit_buf) + 4);
-
-	if (pxmitpriv->pallocated_xmit_extbuf  == NULL) {
-		res = _FAIL;
-		goto exit;
-	}
-
-	pxmitpriv->pxmit_extbuf = (u8 *)N_BYTE_ALIGMENT((SIZE_PTR)(pxmitpriv->pallocated_xmit_extbuf), 4);
-
-	pxmitbuf = (struct xmit_buf *)pxmitpriv->pxmit_extbuf;
-
-	for (i = 0; i < num_xmit_extbuf; i++) {
-		_rtw_init_listhead(&pxmitbuf->list);
-
-		pxmitbuf->priv_data = NULL;
-		pxmitbuf->padapter = padapter;
-		pxmitbuf->buf_tag = XMITBUF_MGNT;
-
-		res = rtw_os_xmit_resource_alloc(padapter, pxmitbuf, max_xmit_extbuf_size + XMITBUF_ALIGN_SZ, _TRUE);
-		if (res == _FAIL) {
-			res = _FAIL;
-			goto exit;
-		}
-
-#if defined(CONFIG_SDIO_HCI) || defined(CONFIG_GSPI_HCI)
-		pxmitbuf->phead = pxmitbuf->pbuf;
-		pxmitbuf->pend = pxmitbuf->pbuf + max_xmit_extbuf_size;
-		pxmitbuf->len = 0;
-		pxmitbuf->pdata = pxmitbuf->ptail = pxmitbuf->phead;
-#endif
-
-		rtw_list_insert_tail(&pxmitbuf->list, &(pxmitpriv->free_xmit_extbuf_queue.queue));
-#ifdef DBG_XMIT_BUF_EXT
-		pxmitbuf->no = i;
-#endif
-		pxmitbuf++;
-
-	}
-
-	pxmitpriv->free_xmit_extbuf_cnt = num_xmit_extbuf;
-
-exit:
-	;
-}
-#endif
 
 u8
 mpt_to_mgnt_rate(

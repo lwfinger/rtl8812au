@@ -231,20 +231,6 @@ int issue_nulldata_to_TDLS_peer_STA(_adapter *padapter, unsigned char *da, unsig
 	struct mlme_ext_priv	*pmlmeext = &(padapter->mlmeextpriv);
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 
-#if 0
-	psta = rtw_get_stainfo(&padapter->stapriv, da);
-	if (psta) {
-		if (power_mode)
-			rtw_hal_macid_sleep(padapter, psta->mac_id);
-		else
-			rtw_hal_macid_wakeup(padapter, psta->mac_id);
-	} else {
-		RTW_INFO(FUNC_ADPT_FMT ": Can't find sta info for " MAC_FMT ", skip macid %s!!\n",
-			FUNC_ADPT_ARG(padapter), MAC_ARG(da), power_mode ? "sleep" : "wakeup");
-		rtw_warn_on(1);
-	}
-#endif
-
 	do {
 		ret = _issue_nulldata_to_TDLS_peer_STA(padapter, da, power_mode, wait_ms > 0 ? _TRUE : _FALSE);
 
@@ -437,14 +423,7 @@ void rtw_tdls_process_vht_cap(_adapter *padapter, struct sta_info *ptdls_sta, u8
 
 		_rtw_memcpy(ptdls_sta->vhtpriv.vht_cap, data, 12);
 
-#if 0
-		if (elems.vht_op_mode_notify && elems.vht_op_mode_notify_len == 1)
-			_rtw_memcpy(&pstat->vhtpriv.vht_op_mode_notify, elems.vht_op_mode_notify, 1);
-		else /* for Frame without Operating Mode notify ie; default: 80M */
-			pstat->vhtpriv.vht_op_mode_notify = CHANNEL_WIDTH_80;
-#else
 		ptdls_sta->vhtpriv.vht_op_mode_notify = CHANNEL_WIDTH_80;
-#endif
 	} else
 		ptdls_sta->flags &= ~WLAN_STA_VHT;
 
@@ -2220,20 +2199,6 @@ int On_TDLS_Teardown(_adapter *padapter, union recv_frame *precv_frame)
 	return _SUCCESS;
 
 }
-
-#if 0
-u8 TDLS_check_ch_state(uint state)
-{
-	if (state & TDLS_CH_SWITCH_ON_STATE &&
-	    state & TDLS_PEER_AT_OFF_STATE) {
-		if (state & TDLS_PEER_SLEEP_STATE)
-			return 2;	/* U-APSD + ch. switch */
-		else
-			return 1;	/* ch. switch */
-	} else
-		return 0;
-}
-#endif
 
 int On_TDLS_Peer_Traffic_Indication(_adapter *padapter, union recv_frame *precv_frame)
 {
