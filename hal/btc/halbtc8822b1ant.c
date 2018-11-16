@@ -947,7 +947,6 @@ void halbtc8822b1ant_set_sw_penalty_tx_rate_adaptive(IN struct btc_coexist
 void halbtc8822b1ant_low_penalty_ra(IN struct btc_coexist *btcoexist,
 			    IN boolean force_exec, IN boolean low_penalty_ra)
 {
-#if 1
 	coex_dm->cur_low_penalty_ra = low_penalty_ra;
 
 	if (!force_exec) {
@@ -962,8 +961,6 @@ void halbtc8822b1ant_low_penalty_ra(IN struct btc_coexist *btcoexist,
 		btcoexist->btc_phydm_modify_RA_PCR_threshold(btcoexist, 0, 0);
 
 	coex_dm->pre_low_penalty_ra = coex_dm->cur_low_penalty_ra;
-
-#endif
 }
 
 void halbtc8822b1ant_write_score_board(
@@ -2173,7 +2170,6 @@ void halbtc8822b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 
 	coex_dm->pre_ant_pos_type = coex_dm->cur_ant_pos_type;
 
-#if 1
 	u32tmp1 = halbtc8822b1ant_ltecoex_indirect_read_reg(btcoexist,
 			0x38);
 	u32tmp2 = halbtc8822b1ant_ltecoex_indirect_read_reg(btcoexist,
@@ -2186,8 +2182,6 @@ void halbtc8822b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		"[BTCoex], ********** (Before Ant Setup) 0xcb4 = 0x%x, 0x73 = 0x%x, 0x38= 0x%x, 0x54= 0x%x**********\n",
 		    u32tmp3, u8tmp, u32tmp1, u32tmp2);
 	BTC_TRACE(trace_buf);
-#endif
-
 	switch (phase) {
 	case BT_8822B_1ANT_PHASE_COEX_INIT:
 		BTC_SPRINTF(trace_buf, BT_TMP_BUF_SIZE,
@@ -2428,7 +2422,6 @@ void halbtc8822b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		}
 
 	}
-#if 1
 	u32tmp1 = halbtc8822b1ant_ltecoex_indirect_read_reg(btcoexist, 0x38);
 	u32tmp2 = halbtc8822b1ant_ltecoex_indirect_read_reg(btcoexist, 0x54);
 	u32tmp3 = btcoexist->btc_read_4byte(btcoexist, 0xcb4);
@@ -2439,9 +2432,6 @@ void halbtc8822b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		"[BTCoex], ********** (After Ant Setup) 0xcb4 = 0x%x, 0x73 = 0x%x, 0x38= 0x%x, 0x54= 0x%x**********\n",
 		    u32tmp3, u8tmp, u32tmp1, u32tmp2);
 	BTC_TRACE(trace_buf);
-
-#endif
-
 }
 
 

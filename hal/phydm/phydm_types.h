@@ -153,13 +153,9 @@ enum rt_spinlock_type {
 		typedef unsigned short			u16, *u16 *;
 		typedef unsigned int			u32, *u32 *;
 		typedef unsigned long long		u64, *u64 *;
-		#if 1
-			/* In ARM platform, system would use the type -- "char" as "unsigned char"
-			* And we only use s8/s8* as INT8 now, so changes the type of s8.*/
-			typedef signed char				s8, *s8 *;
-		#else
-			typedef char					s8, *s8 *;
-		#endif
+		/* In ARM platform, system would use the type -- "char" as "unsigned char"
+		* And we only use s8/s8* as INT8 now, so changes the type of s8.*/
+		typedef signed char				s8, *s8 *;
 		typedef short					s16, *s16 *;
 		typedef long					s32, *s32 *;
 		typedef long long				s64, *s64 *;

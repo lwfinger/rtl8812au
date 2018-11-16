@@ -2392,7 +2392,6 @@ _phy_ap_calibrate_8812a(
 				continue;
 
 			tmp_reg = APK_RF_init_value[path][index];
-#if 1
 			if (!p_dm_odm->rf_calibrate_info.is_apk_thermal_meter_ignore) {
 				BB_offset = (tmp_reg & 0xF0000) >> 16;
 
@@ -2412,7 +2411,6 @@ _phy_ap_calibrate_8812a(
 					tmp_reg = tmp_reg | BIT(15);
 				tmp_reg = (tmp_reg & 0xFFF0FFFF) | (BB_offset << 16);
 			}
-#endif
 
 			odm_set_rf_reg(p_dm_odm, (enum odm_rf_radio_path_e)path, RF_IPA_A, MASKDWORD, 0x8992e);
 #if !(DM_ODM_SUPPORT_TYPE & ODM_AP)

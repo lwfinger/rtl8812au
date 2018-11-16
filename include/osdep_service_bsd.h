@@ -74,7 +74,6 @@
 #define	USB_DEBUG_VAR rum_debug
 #include <dev/usb/usb_debug.h>
 
-#if 1 //Baron porting from linux, it's all temp solution, needs to check again
 #include <sys/sema.h>
 #include <sys/pcpu.h> /* XXX for PCPU_GET */
 //	typedef struct 	semaphore _sema;
@@ -472,10 +471,8 @@ unsigned long copy_to_user(void *to, const void *from, unsigned long n);
 struct sk_buff * dev_alloc_skb(unsigned int size);
 struct sk_buff *skb_clone(const struct sk_buff *skb);
 void dev_kfree_skb_any(struct sk_buff *skb);
-#endif //Baron porting from linux, it's all temp solution, needs to check again
 
 
-#if 1 // kenny add Linux compatibility code for Linux USB driver
 #include <dev/usb/usb_compat_linux.h>
 
 #define __init		// __attribute ((constructor))
@@ -595,9 +592,6 @@ typedef unsigned gfp_t;
 #define GFP_USER        (__GFP_WAIT | __GFP_IO | __GFP_FS | __GFP_HARDWALL)
 #define GFP_HIGHUSER    (__GFP_WAIT | __GFP_IO | __GFP_FS | __GFP_HARDWALL | \
                          __GFP_HIGHMEM)
-
-
-#endif // kenny add Linux compatibility code for Linux USB
 
 __inline static _list *get_next(_list	*list)
 {

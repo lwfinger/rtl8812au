@@ -616,14 +616,12 @@ odm_set_tx_ant_by_tx_info(
 	unsigned short			aid
 );
 
-#if 1/*def def CONFIG_WLAN_HAL*/
 void
 odm_set_tx_ant_by_tx_info_hal(
 	struct	rtl8192cd_priv		*priv,
 	void	*pdesc_data,
 	u16		aid
 );
-#endif	/*#ifdef CONFIG_WLAN_HAL*/
 #endif
 
 

@@ -456,7 +456,6 @@ void halbtc8723d1ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 
 void halbtc8723d1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
-#if 1
 		s32 wifi_rssi = 0;
 		boolean wifi_busy = false, wifi_under_b_mode = false,
 			    wifi_scan = false;
@@ -567,8 +566,6 @@ void halbtc8723d1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 			coex_sta->cck_ever_lock = true;
 
 		coex_sta->pre_ccklock =  coex_sta->cck_lock;
-
-#endif
 }
 
 void halbtc8723d1ant_update_bt_link_info(IN struct btc_coexist *btcoexist)
@@ -979,7 +976,6 @@ void halbtc8723d1ant_bt_auto_report(IN struct btc_coexist *btcoexist,
 void halbtc8723d1ant_set_fw_low_penalty_ra(IN struct btc_coexist
 		*btcoexist, IN boolean low_penalty_ra)
 {
-#if 1
 	u8			h2c_parameter[6] = {0};
 
 	h2c_parameter[0] = 0x6;	/* op_code, 0x6= Retry_Penalty */
@@ -994,7 +990,6 @@ void halbtc8723d1ant_set_fw_low_penalty_ra(IN struct btc_coexist
 	}
 
 	btcoexist->btc_fill_h2c(btcoexist, 0x69, 6, h2c_parameter);
-#endif
 }
 
 void halbtc8723d1ant_low_penalty_ra(IN struct btc_coexist *btcoexist,
@@ -2759,10 +2754,8 @@ void halbtc8723d1ant_action_wifi_connected_bt_acl_busy(IN struct btc_coexist
 		    coex_sta->scan_ap_num, coex_sta->wl_noisy_level);
 	BTC_TRACE(trace_buf);
 
-#if 1
 	if ((wifi_busy) && (coex_sta->wl_noisy_level == 0))
 		wifi_turbo = true;
-#endif
 
 	if ((coex_sta->bt_relink_downcount != 0)
 			&& (!bt_link_info->pan_exist) && (wifi_busy)) {
@@ -4406,10 +4399,8 @@ boolean halbtc8723d1ant_psd_antenna_detection(IN struct btc_coexist
 				break;
 			}
 
-#if 1
 			psd_scan->ant_det_psd_scan_peak_val =
 				psd_scan->psd_max_value;
-#endif
 			psd_scan->ant_det_psd_scan_peak_freq =
 				psd_scan->psd_max_value_point;
 			state = 4;
@@ -5181,7 +5172,6 @@ void ex_halbtc8723d1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   cca_cck, fa_cck, cca_ofdm, fa_ofdm);
 	CL_PRINTF(cli_buf);
 
-#if 1
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %d/ %d/ %d/ %d",
 		   "CRC_OK CCK/11g/11n/11n-agg",
 		   coex_sta->crc_ok_cck, coex_sta->crc_ok_11g,
@@ -5193,7 +5183,6 @@ void ex_halbtc8723d1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   coex_sta->crc_err_cck, coex_sta->crc_err_11g,
 		   coex_sta->crc_err_11n, coex_sta->crc_err_11n_vht);
 	CL_PRINTF(cli_buf);
-#endif
 
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %s/ %s/ %s/ %d",
 		   "WlHiPri/ Locking/ Locked/ Noisy",

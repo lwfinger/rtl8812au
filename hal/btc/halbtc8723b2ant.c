@@ -280,8 +280,6 @@ void halbtc8723b2ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 
 void halbtc8723b2ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
-#if 1
-
 	coex_sta->crc_ok_cck = btcoexist->btc_phydm_query_PHY_counter(
 				       btcoexist,
 				       PHYDM_INFO_CRC32_OK_CCK);
@@ -309,8 +307,6 @@ void halbtc8723b2ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 		btcoexist->btc_phydm_query_PHY_counter(
 			btcoexist,
 			PHYDM_INFO_CRC32_ERROR_VHT);
-
-#endif
 }
 
 void halbtc8723b2ant_query_bt_info(IN struct btc_coexist *btcoexist)

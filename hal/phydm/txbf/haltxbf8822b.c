@@ -373,7 +373,6 @@ hal_txbf_8822b_enter(
 #endif
 
 		phydm_beamforming_notify(p_dm_odm);
-#if 1
 		{
 			u32 ctrl_info_offset, index;
 			/*Set Ctrl Info*/
@@ -389,9 +388,7 @@ hal_txbf_8822b_enter(
 			ODM_RT_TRACE(p_dm_odm, PHYDM_COMP_TXBF, ODM_DBG_LOUD, ("@%s, mac_id = %d, ctrl_info_offset = 0x%x, mu_reg_index = %x\n",
 				__func__, p_beamformee_entry->mac_id, ctrl_info_offset, p_beamformee_entry->mu_reg_index));
 		}
-#endif
 	}
-
 }
 
 

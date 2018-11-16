@@ -1102,7 +1102,6 @@ u8 rtw_hal_init_phy(PADAPTER adapter)
 u8 rtw_hal_ops_check(_adapter *padapter)
 {
 	u8 ret = _SUCCESS;
-#if 1
 	/*** initialize section ***/
 	if (NULL == padapter->hal_func.read_chip_version) {
 		rtw_hal_error_msg("read_chip_version");
@@ -1402,6 +1401,5 @@ u8 rtw_hal_ops_check(_adapter *padapter)
 		ret = _FAIL;
 	}
 #endif /* RTW_HALMAC */
-#endif
 	return  ret;
 }

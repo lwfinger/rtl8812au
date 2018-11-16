@@ -286,7 +286,6 @@ void halbtc8723b1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 	btcoexist->btc_get(btcoexist, BTC_GET_BL_WIFI_UNDER_B_MODE,
 			   &wifi_under_b_mode);
 
-#if 1
 
 	coex_sta->crc_ok_cck = btcoexist->btc_phydm_query_PHY_counter(
 				       btcoexist,
@@ -316,7 +315,6 @@ void halbtc8723b1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 			btcoexist,
 			PHYDM_INFO_CRC32_ERROR_VHT);
 
-#endif
 
 	if ((wifi_busy) && (wifi_rssi >= 30) && (!wifi_under_b_mode)) {
 		total_cnt = coex_sta->crc_ok_cck + coex_sta->crc_ok_11g +
@@ -4919,14 +4917,12 @@ void ex_halbtc8723b1ant_antenna_detection(IN struct btc_coexist *btcoexist,
 				BTC_TRACE(trace_buf);
 
 
-#if 1
 				if (board_info->btdm_ant_num_by_ant_det == 2)
 					halbtc8723b1ant_mechanism_switch(
 						btcoexist, true);
 				else
 					halbtc8723b1ant_mechanism_switch(
 						btcoexist, false);
-#endif
 
 				board_info->btdm_ant_det_complete_fail = false;
 

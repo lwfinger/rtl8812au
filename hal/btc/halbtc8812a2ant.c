@@ -423,8 +423,6 @@ void halbtc8812a2ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 
 void halbtc8812a2ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
-#if 1
-
 	coex_sta->crc_ok_cck =
 		btcoexist->btc_phydm_query_PHY_counter(
 			btcoexist,
@@ -458,7 +456,6 @@ void halbtc8812a2ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 		btcoexist->btc_phydm_query_PHY_counter(
 			btcoexist,
 			PHYDM_INFO_CRC32_ERROR_VHT);
-#endif
 }
 
 
@@ -521,7 +518,6 @@ void halbtc8812a2ant_update_bt_link_info(IN struct btc_coexist *btcoexist)
 	struct  btc_bt_link_info	*bt_link_info = &btcoexist->bt_link_info;
 	boolean				bt_hs_on = false;
 
-#if 1/* (BT_AUTO_REPORT_ONLY_8812A_2ANT == 1)	/ profile from bt patch */
 	btcoexist->btc_get(btcoexist, BTC_GET_BL_HS_OPERATION, &bt_hs_on);
 
 	bt_link_info->bt_link_exist = coex_sta->bt_link_exist;
@@ -536,21 +532,6 @@ void halbtc8812a2ant_update_bt_link_info(IN struct btc_coexist *btcoexist)
 		bt_link_info->pan_exist = true;
 		bt_link_info->bt_link_exist = true;
 	}
-#else	/* profile from bt stack */
-	bt_link_info->bt_link_exist = stack_info->bt_link_exist;
-	bt_link_info->sco_exist = stack_info->sco_exist;
-	bt_link_info->a2dp_exist = stack_info->a2dp_exist;
-	bt_link_info->pan_exist = stack_info->pan_exist;
-	bt_link_info->hid_exist = stack_info->hid_exist;
-
-	/* for win-8 stack HID report error */
-	if (!stack_info->hid_exist)
-		stack_info->hid_exist =
-			coex_sta->hid_exist;  /* sync  BTInfo with BT firmware and stack */
-	/* when stack HID report error, here we use the info from bt fw. */
-	if (!stack_info->bt_link_exist)
-		stack_info->bt_link_exist = coex_sta->bt_link_exist;
-#endif
 	/* check if Sco only */
 	if (bt_link_info->sco_exist &&
 	    !bt_link_info->a2dp_exist &&

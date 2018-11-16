@@ -329,7 +329,6 @@ odm_txpowertracking_callback_thermal_meter_jaguar_series3(
 #endif
 )
 {
-#if 1
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
 	u8			thermal_value = 0, delta, delta_LCK, delta_IQK, channel, is_increase;
 	u8			thermal_value_avg_count = 0, p = 0, i = 0;
@@ -561,8 +560,6 @@ odm_txpowertracking_callback_thermal_meter_jaguar_series3(
 		p_dm_odm->rf_calibrate_info.thermal_value =  thermal_value;
 
 	}
-
-#endif
 }
 #endif
 
@@ -2139,7 +2136,6 @@ _phy_ap_calibrate_8192c(
 				continue;
 
 			tmp_reg = APK_RF_init_value[path][index];
-#if 1
 			if (!p_hal_data->is_apk_thermal_meter_ignore) {
 				BB_offset = (tmp_reg & 0xF0000) >> 16;
 
@@ -2159,7 +2155,6 @@ _phy_ap_calibrate_8192c(
 					tmp_reg = tmp_reg | BIT(15);
 				tmp_reg = (tmp_reg & 0xFFF0FFFF) | (BB_offset << 16);
 			}
-#endif
 
 #if DEV_BUS_TYPE == RT_PCI_INTERFACE
 			if (IS_81xxC_VENDOR_UMC_B_CUT(p_hal_data->version_id))
@@ -2505,7 +2500,6 @@ odm_reset_iqk_result(
 {
 	return;
 }
-#if 1/* !(DM_ODM_SUPPORT_TYPE & ODM_AP) */
 u8 odm_get_right_chnl_place_for_iqk(u8 chnl)
 {
 	u8	channel_all[ODM_TARGET_CHNL_NUM_2G_5G] = {
@@ -2523,7 +2517,6 @@ u8 odm_get_right_chnl_place_for_iqk(u8 chnl)
 	return 0;
 
 }
-#endif
 
 void
 odm_iq_calibrate(

@@ -459,7 +459,6 @@ void halbtc8821c1ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 
 void halbtc8821c1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
-#if 1
 	s32	wifi_rssi = 0;
 	boolean wifi_busy = false, wifi_under_b_mode = false,
 		wifi_scan = false;
@@ -573,8 +572,6 @@ void halbtc8821c1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 		coex_sta->cck_ever_lock = true;
 
 	coex_sta->pre_ccklock =  coex_sta->cck_lock;
-
-#endif
 }
 
 void halbtc8821c1ant_update_bt_link_info(IN struct btc_coexist *btcoexist)
@@ -985,8 +982,6 @@ void halbtc8821c1ant_bt_auto_report(IN struct btc_coexist *btcoexist,
 void halbtc8821c1ant_low_penalty_ra(IN struct btc_coexist *btcoexist,
 			    IN boolean force_exec, IN boolean low_penalty_ra)
 {
-
-#if 1
 	coex_dm->cur_low_penalty_ra = low_penalty_ra;
 
 	if (!force_exec) {
@@ -1001,9 +996,6 @@ void halbtc8821c1ant_low_penalty_ra(IN struct btc_coexist *btcoexist,
 		btcoexist->btc_phydm_modify_RA_PCR_threshold(btcoexist, 0, 0);
 
 	coex_dm->pre_low_penalty_ra = coex_dm->cur_low_penalty_ra;
-
-#endif
-
 }
 
 void halbtc8821c1ant_write_score_board(
@@ -3047,11 +3039,8 @@ void halbtc8821c1ant_action_wifi_connected_bt_acl_busy(IN struct btc_coexist
 		    coex_sta->scan_ap_num, coex_sta->wl_noisy_level);
 	BTC_TRACE(trace_buf);
 
-#if 1
-
 	if ((wifi_busy) && (coex_sta->wl_noisy_level == 0))
 		wifi_turbo = true;
-#endif
 
 	if ((coex_sta->bt_relink_downcount != 0)
 			&& (!bt_link_info->pan_exist) && (wifi_busy)) {
@@ -4244,8 +4233,6 @@ void ex_halbtc8821c1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   cca_cck, fa_cck, cca_ofdm, fa_ofdm);
 	CL_PRINTF(cli_buf);
 
-
-#if 1
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %d/ %d/ %d/ %d",
 		   "CRC_OK CCK/11g/11n/11ac",
 		   coex_sta->crc_ok_cck, coex_sta->crc_ok_11g,
@@ -4257,7 +4244,6 @@ void ex_halbtc8821c1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   coex_sta->crc_err_cck, coex_sta->crc_err_11g,
 		   coex_sta->crc_err_11n, coex_sta->crc_err_11n_vht);
 	CL_PRINTF(cli_buf);
-#endif
 
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %s/ %s/ %s/ %d",
 		   "WlHiPri/ Locking/ Locked/ Noisy",

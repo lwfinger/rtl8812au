@@ -803,11 +803,7 @@ int _WriteBTFWtoTxPktBuf8812(
 	u8			txdesc_offset = TXDESC_OFFSET;
 	u8			val8;
 
-#if 1/* (DEV_BUS_TYPE == RT_PCI_INTERFACE) */
 	TotalPktLen = FwBufLen;
-#else
-	TotalPktLen = FwBufLen + pHalData->HWDescHeadLength;
-#endif
 	if ((TotalPktLen + TXDESC_OFFSET) > MAX_CMDBUF_SZ) {
 		RTW_INFO(" WARNING %s => Total packet len = %d over MAX_CMDBUF_SZ:%d\n"
 			, __FUNCTION__, (TotalPktLen + TXDESC_OFFSET), MAX_CMDBUF_SZ);
@@ -821,12 +817,7 @@ int _WriteBTFWtoTxPktBuf8812(
 
 	_rtw_memset(ReservedPagePacket, 0, TotalPktLen);
 
-#if 1/* (DEV_BUS_TYPE == RT_PCI_INTERFACE) */
 	_rtw_memcpy(ReservedPagePacket, FwbufferPtr, FwBufLen);
-
-#else
-	PlatformMoveMemory(ReservedPagePacket + Adapter->HWDescHeadLength , FwbufferPtr, FwBufLen);
-#endif
 
 	/* --------------------------------------------------------- */
 	/* 1. Pause BCN */
@@ -3651,10 +3642,7 @@ static void read_chip_version_8812a(PADAPTER Adapter)
 	pHalData->PolarityCtl = ((value32 & WL_HWPDN_SL) ? RT_POLARITY_HIGH_ACT : RT_POLARITY_LOW_ACT);
 
 	rtw_hal_config_rftype(Adapter);
-#if 1
 	dump_chip_info(pHalData->version_id);
-#endif
-
 }
 
 void

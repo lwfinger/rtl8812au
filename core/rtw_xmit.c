@@ -3517,7 +3517,6 @@ exit:
 	return pxmitframe;
 }
 
-#if 1
 struct tx_servq *rtw_get_sta_pending(_adapter *padapter, struct sta_info *psta, sint up, u8 *ac)
 {
 	struct tx_servq *ptxservq = NULL;
@@ -3554,60 +3553,6 @@ struct tx_servq *rtw_get_sta_pending(_adapter *padapter, struct sta_info *psta, 
 
 	return ptxservq;
 }
-#else
-__inline static struct tx_servq *rtw_get_sta_pending
-(_adapter *padapter, _queue **ppstapending, struct sta_info *psta, sint up)
-{
-	struct tx_servq *ptxservq;
-	struct hw_xmit *phwxmits =  padapter->xmitpriv.hwxmits;
-
-
-#ifdef CONFIG_RTL8711
-
-	if (IS_MCAST(psta->hwaddr)) {
-		ptxservq = &(psta->sta_xmitpriv.be_q); /* we will use be_q to queue bc/mc frames in BCMC_stainfo */
-		*ppstapending = &padapter->xmitpriv.bm_pending;
-	} else
-#endif
-	{
-		switch (up) {
-		case 1:
-		case 2:
-			ptxservq = &(psta->sta_xmitpriv.bk_q);
-			*ppstapending = &padapter->xmitpriv.bk_pending;
-			(phwxmits + 3)->accnt++;
-			break;
-
-		case 4:
-		case 5:
-			ptxservq = &(psta->sta_xmitpriv.vi_q);
-			*ppstapending = &padapter->xmitpriv.vi_pending;
-			(phwxmits + 1)->accnt++;
-			break;
-
-		case 6:
-		case 7:
-			ptxservq = &(psta->sta_xmitpriv.vo_q);
-			*ppstapending = &padapter->xmitpriv.vo_pending;
-			(phwxmits + 0)->accnt++;
-			break;
-
-		case 0:
-		case 3:
-		default:
-			ptxservq = &(psta->sta_xmitpriv.be_q);
-			*ppstapending = &padapter->xmitpriv.be_pending;
-			(phwxmits + 2)->accnt++;
-			break;
-
-		}
-
-	}
-
-
-	return ptxservq;
-}
-#endif
 
 /*
  * Will enqueue pxmitframe to the proper queue,
@@ -3801,7 +3746,6 @@ int rtw_br_client_tx(_adapter *padapter, struct sk_buff **pskb)
 		{
 			/*			if (priv->dev->br_port &&
 			 *				 !memcmp(skb->data+MACADDRLEN, priv->br_mac, MACADDRLEN)) { */
-#if 1
 			if (*((unsigned short *)(skb->data + MACADDRLEN * 2)) == __constant_htons(ETH_P_8021Q)) {
 				is_vlan_tag = 1;
 				vlan_hdr = *((unsigned short *)(skb->data + MACADDRLEN * 2 + 2));
@@ -3837,7 +3781,6 @@ int rtw_br_client_tx(_adapter *padapter, struct sk_buff **pskb)
 				}
 			}
 			_exit_critical_bh(&padapter->br_ext_lock, &irqL);
-#endif /* 1 */
 			if (do_nat25) {
 				int nat25_db_handle(_adapter *priv, struct sk_buff *skb, int method);
 				if (nat25_db_handle(padapter, skb, NAT25_CHECK) == 0) {

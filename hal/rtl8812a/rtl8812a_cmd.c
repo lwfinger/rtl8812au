@@ -966,8 +966,6 @@ void rtl8812_set_p2p_ps_offload_cmd(_adapter *padapter, u8 p2p_ps_state)
 	u8	*p2p_ps_offload = (u8 *)&pHalData->p2p_ps_offload;
 	u8	i;
 
-
-#if 1
 	switch (p2p_ps_state) {
 	case P2P_PS_DISABLE:
 		RTW_INFO("P2P_PS_DISABLE\n");
@@ -1037,9 +1035,6 @@ void rtl8812_set_p2p_ps_offload_cmd(_adapter *padapter, u8 p2p_ps_state)
 
 	RTW_INFO("P2P_PS_OFFLOAD : %x\n", p2p_ps_offload[0]);
 	fill_h2c_cmd_8812(padapter, H2C_8812_P2P_PS_OFFLOAD, 1, p2p_ps_offload);
-#endif
-
-
 }
 #endif /* CONFIG_P2P */
 

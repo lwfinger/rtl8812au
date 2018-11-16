@@ -281,7 +281,6 @@ struct _odm_phy_dbg_info_ {
 /*2011/20/20 MH For MP driver RT_WLAN_STA =  struct sta_info*/
 /*Please declare below ODM relative info in your STA info structure.*/
 
-#if 1
 struct _ODM_STA_INFO {
 	/*Driver Write*/
 	boolean		is_used;			/*record the sta status link or not?*/
@@ -295,7 +294,6 @@ struct _ODM_STA_INFO {
 	u8		RXSNR[4];
 
 };
-#endif
 
 enum odm_cmninfo_e {
 	/*Fixed value*/

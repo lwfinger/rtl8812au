@@ -623,14 +623,12 @@ odm_bd_ccoex_bfee_rx_div_arbitration(
 			}
 		}
 
-#if 1
 		if (p_dm_odm->bdc_holdstate == 0xff) {
 			p_dm_bdc_table->BDC_state = BDC_DIV_HOLD_STATE;
 			odm_bd_ccoex_type_with_bfer_client(p_dm_odm, DIVON_CSIOFF);
 			ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("Force in [ DIV STATE]\n"));
 			return;
 		}
-#endif
 
 		/* Does Client number changed ? ------------------------------- */
 		if (p_dm_bdc_table->num_client != p_dm_bdc_table->pre_num_client) {
@@ -3208,7 +3206,6 @@ phydm_update_beam_pattern_type2(
 	for (i = 0; i <= (codeword_length - 1); i++) {
 		beam_ctrl_signal = (boolean)((codeword & BIT(i)) >> i);
 		
-		#if 1
 		if (p_dm_odm->debug_components & ODM_COMP_ANT_DIV) {
 
 			if (i == (codeword_length - 1)) {
@@ -3225,7 +3222,6 @@ phydm_update_beam_pattern_type2(
 				/**/
 			}
 		}
-		#endif
 		
 		if (p_dm_odm->support_ic_type == ODM_RTL8821) {
 			#if (RTL8821A_SUPPORT == 1)
@@ -5173,11 +5169,7 @@ odm_process_rssi_for_ant_div(
 				pdm_sat_table->pkt_rssi_cnt[p_dm_fat_table->antsel_rx_keep_0][pdm_sat_table->fast_training_beam_num]++;
 				pdm_sat_table->pkt_counter++;
 
-				#if 1
 				train_pkt_number = pdm_sat_table->beam_train_cnt[p_dm_fat_table->rx_idle_ant - 1][pdm_sat_table->fast_training_beam_num];
-				#else
-				train_pkt_number =  pdm_sat_table->per_beam_training_pkt_num;
-				#endif
 
 				/*Swich Antenna erery N pkts*/
 				if (pdm_sat_table->pkt_counter == train_pkt_number) {
@@ -5415,7 +5407,6 @@ odm_set_tx_ant_by_tx_info(
 }
 
 
-#if 1 /*def CONFIG_WLAN_HAL*/
 void
 odm_set_tx_ant_by_tx_info_hal(
 	struct	rtl8192cd_priv		*priv,
@@ -5440,7 +5431,6 @@ odm_set_tx_ant_by_tx_info_hal(
 		pdescdata->ant_sel_a = p_dm_fat_table->antsel_a[aid];
 	}
 }
-#endif	/*#ifdef CONFIG_WLAN_HAL*/
 
 #endif
 

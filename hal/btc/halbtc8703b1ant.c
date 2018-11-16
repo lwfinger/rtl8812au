@@ -435,7 +435,6 @@ void halbtc8703b1ant_monitor_bt_ctr(IN struct btc_coexist *btcoexist)
 
 void halbtc8703b1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 {
-#if 1
 		s32 wifi_rssi = 0;
 		boolean wifi_busy = false, wifi_under_b_mode = false,
 				wifi_scan = false;
@@ -557,8 +556,6 @@ void halbtc8703b1ant_monitor_wifi_ctr(IN struct btc_coexist *btcoexist)
 			coex_sta->cck_ever_lock = true;
 
 		coex_sta->pre_ccklock =  coex_sta->cck_lock;
-
-#endif
 }
 
 void halbtc8703b1ant_update_bt_link_info(IN struct btc_coexist *btcoexist)
@@ -927,7 +924,6 @@ void halbtc8703b1ant_monitor_bt_enable_disable(IN struct btc_coexist *btcoexist)
 	u16			u16tmp;
 
 	/* This function check if bt is disabled */
-#if 1
 	if (coex_sta->high_priority_tx == 0 &&
 	    coex_sta->high_priority_rx == 0 &&
 	    coex_sta->low_priority_tx == 0 &&
@@ -938,16 +934,6 @@ void halbtc8703b1ant_monitor_bt_enable_disable(IN struct btc_coexist *btcoexist)
 	    coex_sta->low_priority_tx == 0xffff &&
 	    coex_sta->low_priority_rx == 0xffff)
 		bt_active = false;
-
-
-#else   /*  8703b BT can't show correct on/off status in scoreboard[1] 2015/11/26 */
-
-	halbtc8703b1ant_read_score_board(btcoexist,	&u16tmp);
-
-	bt_active = u16tmp & BIT(1);
-
-
-#endif
 
 	if (bt_active) {
 		bt_disable_cnt = 0;
@@ -1790,7 +1776,6 @@ void halbtc8703b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		coex_sta->gnt_error_cnt++;
 	}
 
-#if 1
 	u32tmp2 = halbtc8703b1ant_ltecoex_indirect_read_reg(btcoexist,
 			0x54);
 	u8tmp  = btcoexist->btc_read_1byte(btcoexist, 0x73);
@@ -1799,7 +1784,6 @@ void halbtc8703b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		"[BTCoex], ********** (Before Ant Setup) 0x73 = 0x%x, 0x38= 0x%x, 0x54= 0x%x**********\n",
 		    u8tmp, u32tmp1, u32tmp2);
 	BTC_TRACE(trace_buf);
-#endif
 
 	coex_dm->cur_ant_pos_type = ant_pos_type;
 
@@ -1974,7 +1958,6 @@ void halbtc8703b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 	}
 
 
-#if 1
 	u32tmp1 = halbtc8703b1ant_ltecoex_indirect_read_reg(btcoexist, 0x38);
 	u32tmp2 = halbtc8703b1ant_ltecoex_indirect_read_reg(btcoexist, 0x54);
 	u8tmp  = btcoexist->btc_read_1byte(btcoexist, 0x73);
@@ -1984,8 +1967,6 @@ void halbtc8703b1ant_set_ant_path(IN struct btc_coexist *btcoexist,
 		"[BTCoex], ********** (After Ant-Setup) 0x73 = 0x%x, 0x38= 0x%x, 0x54= 0x%x**********\n",
 		    u8tmp, u32tmp1, u32tmp2);
 	BTC_TRACE(trace_buf);
-
-#endif
 }
 
 
@@ -2496,10 +2477,8 @@ void halbtc8703b1ant_action_wifi_connected_bt_acl_busy(IN struct btc_coexist
 			coex_sta->scan_ap_num, coex_sta->wl_noisy_level);
 	BTC_TRACE(trace_buf);
 
-#if 1
 	if ((wifi_busy) && (coex_sta->wl_noisy_level == 0))
 		wifi_turbo = true;
-#endif
 
 	if (bt_link_info->a2dp_only) { /* A2DP		 */
 		if (!wifi_busy) {
@@ -3487,7 +3466,6 @@ void ex_halbtc8703b1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   cca_cck, fa_cck, cca_ofdm, fa_ofdm);
 	CL_PRINTF(cli_buf);
 
-#if 1
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %d/ %d/ %d/ %d",
 		   "CRC_OK CCK/11g/11n/11n-agg",
 		   coex_sta->crc_ok_cck, coex_sta->crc_ok_11g,
@@ -3499,7 +3477,6 @@ void ex_halbtc8703b1ant_display_coex_info(IN struct btc_coexist *btcoexist)
 		   coex_sta->crc_err_cck, coex_sta->crc_err_11g,
 		   coex_sta->crc_err_11n, coex_sta->crc_err_11n_vht);
 	CL_PRINTF(cli_buf);
-#endif
 
 	CL_SPRINTF(cli_buf, BT_TMP_BUF_SIZE, "\r\n %-35s = %s/ %s/ %s/ %d",
 			   "WlHiPri/ Locking/ Locked/ Noisy",

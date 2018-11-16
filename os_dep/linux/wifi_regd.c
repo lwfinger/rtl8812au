@@ -173,7 +173,6 @@ static void _rtw_reg_apply_radar_flags(struct wiphy *wiphy)
 
 static void _rtw_reg_apply_flags(struct wiphy *wiphy)
 {
-#if 1				/* by channel plan */
 	_adapter *padapter = wiphy_to_adapter(wiphy);
 	u8 channel_plan = padapter->mlmepriv.ChannelPlan;
 	struct mlme_ext_priv *pmlmeext = &padapter->mlmeextpriv;
@@ -222,45 +221,6 @@ static void _rtw_reg_apply_flags(struct wiphy *wiphy)
 		}
 	}
 
-#else
-	struct ieee80211_supported_band *sband;
-	struct ieee80211_channel *ch;
-	unsigned int i, j;
-	u16 channels[37] = {
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 36, 40, 44, 48, 52, 56,
-		60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140,
-		149, 153,
-		157, 161, 165
-	};
-	u16 channel;
-	u32 freq;
-
-	for (i = 0; i < NUM_NL80211_BANDS; i++) {
-		sband = wiphy->bands[i];
-
-		if (sband)
-			for (j = 0; j < sband->n_channels; j++) {
-				ch = &sband->channels[j];
-
-				if (ch)
-					ch->flags = IEEE80211_CHAN_DISABLED;
-			}
-	}
-
-	for (i = 0; i < 37; i++) {
-		channel = channels[i];
-		freq = rtw_ch2freq(channel);
-
-		ch = ieee80211_get_channel(wiphy, freq);
-		if (ch) {
-			if (channel <= 11)
-				ch->flags = 0;
-			else
-				ch->flags = 0;	/* IEEE80211_CHAN_PASSIVE_SCAN; */
-		}
-		/* printk("%s: freq %d(%d) flag 0x%02X\n", __func__, freq, channel, ch->flags); */
-	}
-#endif
 }
 
 static void _rtw_reg_apply_world_flags(struct wiphy *wiphy,
