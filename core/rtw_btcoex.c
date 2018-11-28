@@ -23,7 +23,6 @@
 #include <hal_btcoex.h>
 #include <hal_data.h>
 
-
 void rtw_btcoex_Initialize(PADAPTER padapter)
 {
 	hal_btcoex_Initialize(padapter);
@@ -395,7 +394,6 @@ void rtw_btcoex_LPS_Enter(PADAPTER padapter)
 	struct pwrctrl_priv *pwrpriv;
 	u8 lpsVal;
 
-
 	pwrpriv = adapter_to_pwrctl(padapter);
 
 	pwrpriv->bpower_saving = _TRUE;
@@ -406,7 +404,6 @@ void rtw_btcoex_LPS_Enter(PADAPTER padapter)
 void rtw_btcoex_LPS_Leave(PADAPTER padapter)
 {
 	struct pwrctrl_priv *pwrpriv;
-
 
 	pwrpriv = adapter_to_pwrctl(padapter);
 
@@ -572,7 +569,6 @@ Bluetooth 3.0 + HS V1.4 2013/02/07
 Window team code & BT team code
  */
 
-
 u8 rtw_btcoex_parse_BT_info_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 {
 #define BT_INFO_LENGTH 8
@@ -651,17 +647,14 @@ u8 rtw_btcoex_parse_BT_patch_ver_info_cmd(_adapter *padapter, u8 *pcmd, u16 cmdl
 	btHciVer = pcmd[0] | pcmd[1] << 8;
 	btPatchVer = pcmd[2] | pcmd[3] << 8;
 
-
 	RTW_INFO("%s, cmd:%02x %02x %02x %02x\n", __func__, pcmd[0] , pcmd[1] , pcmd[2] , pcmd[3]);
 	RTW_INFO("%s, HCI Ver:%d, Patch Ver:%d\n", __func__, btHciVer, btPatchVer);
 
 	rtw_btcoex_SetBtPatchVersion(padapter, btHciVer, btPatchVer);
 
-
 	/* send complete event to BT */
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
-
 
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
@@ -707,7 +700,6 @@ u8 rtw_btcoex_parse_HCI_Ver_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
 
-
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
 		pEvent->Data[1] = HCIOPCODELOW(HCI_EXTENSION_VERSION_NOTIFY, OGF_EXTENSION);
@@ -748,7 +740,6 @@ u8 rtw_btcoex_parse_WIFI_scan_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdle
 	/* send complete event to BT */
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
-
 
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
@@ -852,7 +843,6 @@ u8 rtw_btcoex_parse_HCI_link_status_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
 
-
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
 		pEvent->Data[1] = HCIOPCODELOW(HCI_LINK_STATUS_NOTIFY, OGF_EXTENSION);
@@ -874,7 +864,6 @@ u8 rtw_btcoex_parse_HCI_link_status_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 		/* bthci_IndicateEvent(Adapter, PPacketIrpEvent, len+2); */
 	}
 
-
 }
 
 u8 rtw_btcoex_parse_HCI_BT_coex_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdlen)
@@ -887,7 +876,6 @@ u8 rtw_btcoex_parse_HCI_BT_coex_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmd
 
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
-
 
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
@@ -961,7 +949,6 @@ u8 rtw_btcoex_parse_HCI_BT_operation_notify_cmd(_adapter *padapter, u8 *pcmd, u1
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
 
-
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
 		pEvent->Data[1] = HCIOPCODELOW(HCI_BT_OPERATION_NOTIFY, OGF_EXTENSION);
@@ -994,7 +981,6 @@ u8 rtw_btcoex_parse_BT_AFH_MAP_notify_cmd(_adapter *padapter, u8 *pcmd, u16 cmdl
 
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
-
 
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
@@ -1030,7 +1016,6 @@ u8 rtw_btcoex_parse_BT_register_val_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
 
-
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
 		pEvent->Data[1] = HCIOPCODELOW(HCI_BT_REGISTER_VALUE_NOTIFY, OGF_EXTENSION);
@@ -1064,7 +1049,6 @@ u8 rtw_btcoex_parse_HCI_BT_abnormal_notify_cmd(_adapter *padapter, u8 *pcmd, u16
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
 
-
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */
 		pEvent->Data[1] = HCIOPCODELOW(HCI_BT_ABNORMAL_NOTIFY, OGF_EXTENSION);
@@ -1097,7 +1081,6 @@ u8 rtw_btcoex_parse_HCI_query_RF_status_cmd(_adapter *padapter, u8 *pcmd, u16 cm
 
 	{
 		pEvent = (rtw_HCI_event *)(&localBuf[0]);
-
 
 		pEvent->EventCode = HCI_EVENT_COMMAND_COMPLETE;
 		pEvent->Data[0] = 0x1;	/* packet # */

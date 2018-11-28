@@ -101,7 +101,6 @@ void dump_drv_cfg(void *sel)
 	RTW_PRINT_SEL(sel, "CONFIG_TXPWR_BY_RATE_EN=%d\n", CONFIG_TXPWR_BY_RATE_EN);
 	RTW_PRINT_SEL(sel, "CONFIG_TXPWR_LIMIT_EN=%d\n", CONFIG_TXPWR_LIMIT_EN);
 
-
 #ifdef CONFIG_DISABLE_ODM
 	RTW_PRINT_SEL(sel, "CONFIG_DISABLE_ODM\n");
 #endif
@@ -248,7 +247,6 @@ void mac_reg_dump(void *sel, _adapter *adapter)
 		}
 	}
 #endif /* CONFIG_RTL8814A */
-
 
 #if defined(CONFIG_RTL8822B) || defined(CONFIG_RTL8821C)
 	for (i = 0x1000; i < 0x1800; i += 4) {
@@ -2276,13 +2274,11 @@ int proc_get_trx_info_debug(struct seq_file *m, void *v)
 
 	int i;
 
-
 	/*============  tx info ============	*/
 	rtw_hal_get_def_var(padapter, HW_DEF_RA_INFO_DUMP, m);
 
 	/*============  rx info ============	*/
 	rtw_hal_set_odm_var(padapter, HAL_ODM_RX_INFO_DUMP, m, _FALSE);
-
 
 	return 0;
 }
@@ -2611,7 +2607,6 @@ int proc_get_rx_ampdu_factor(struct seq_file *m, void *v)
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
-
 	if (padapter)
 		RTW_PRINT_SEL(m, "rx ampdu factor = %x\n", padapter->driver_rx_ampdu_factor);
 
@@ -2656,7 +2651,6 @@ int proc_get_tx_max_agg_num(struct seq_file *m, void *v)
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
 
-
 	if (padapter)
 		RTW_PRINT_SEL(m, "tx max AMPDU num = 0x%02x\n", padapter->driver_tx_max_agg_num);
 
@@ -2697,7 +2691,6 @@ int proc_get_rx_ampdu_density(struct seq_file *m, void *v)
 {
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-
 
 	if (padapter)
 		RTW_PRINT_SEL(m, "rx ampdu densityg = %x\n", padapter->driver_rx_ampdu_spacing);
@@ -2741,7 +2734,6 @@ int proc_get_tx_ampdu_density(struct seq_file *m, void *v)
 {
 	struct net_device *dev = m->private;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-
 
 	if (padapter)
 		RTW_PRINT_SEL(m, "tx ampdu density = %x\n", padapter->driver_ampdu_spacing);
@@ -4628,7 +4620,6 @@ ssize_t proc_set_tx_deauth(struct file *file, const char __user *buffer, size_t 
 	u32 key_type;
 	u8 index;
 
-
 	if (count > 2) {
 		RTW_INFO("argument size is more than 2\n");
 		return -EFAULT;
@@ -4732,7 +4723,6 @@ ssize_t proc_set_tx_auth(struct file *file, const char __user *buffer, size_t co
 	u8 bc_addr[ETH_ALEN] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
 	u32 tx_auth;
 	u8 index;
-
 
 	if (count > 2) {
 		RTW_INFO("argument size is more than 2\n");
@@ -4944,12 +4934,10 @@ ssize_t proc_set_mcc_single_tx_criteria(struct file *file, const char __user *bu
 			iface->registrypriv.rtw_mcc_single_tx_cri = mcc_single_tx_criteria;
 		}
 
-
 	}
 
 	return count;
 }
-
 
 ssize_t proc_set_mcc_ap_bw20_target_tp(struct file *file, const char __user *buffer, size_t count, loff_t *pos, void *data)
 {
@@ -4985,7 +4973,6 @@ ssize_t proc_set_mcc_ap_bw20_target_tp(struct file *file, const char __user *buf
 		RTW_INFO("%s: mcc_ap_bw20_target_tp = %d\n", __func__, mcc_ap_bw20_target_tp);
 
 		padapter->registrypriv.rtw_mcc_ap_bw20_target_tx_tp = mcc_ap_bw20_target_tp;
-
 
 	}
 
@@ -5027,7 +5014,6 @@ ssize_t proc_set_mcc_ap_bw40_target_tp(struct file *file, const char __user *buf
 
 		padapter->registrypriv.rtw_mcc_ap_bw40_target_tx_tp = mcc_ap_bw40_target_tp;
 
-
 	}
 
 	return count;
@@ -5067,7 +5053,6 @@ ssize_t proc_set_mcc_ap_bw80_target_tp(struct file *file, const char __user *buf
 		RTW_INFO("%s: mcc_ap_bw80_target_tp = %d\n", __func__, mcc_ap_bw80_target_tp);
 
 		padapter->registrypriv.rtw_mcc_ap_bw80_target_tx_tp = mcc_ap_bw80_target_tp;
-
 
 	}
 
@@ -5109,7 +5094,6 @@ ssize_t proc_set_mcc_sta_bw20_target_tp(struct file *file, const char __user *bu
 
 		padapter->registrypriv.rtw_mcc_sta_bw20_target_tx_tp = mcc_sta_bw20_target_tp;
 
-
 	}
 
 	return count;
@@ -5150,7 +5134,6 @@ ssize_t proc_set_mcc_sta_bw40_target_tp(struct file *file, const char __user *bu
 
 		padapter->registrypriv.rtw_mcc_sta_bw40_target_tx_tp = mcc_sta_bw40_target_tp;
 
-
 	}
 
 	return count;
@@ -5190,7 +5173,6 @@ ssize_t proc_set_mcc_sta_bw80_target_tp(struct file *file, const char __user *bu
 		RTW_INFO("%s: mcc_sta_bw80_target_tp = %d\n", __func__, mcc_sta_bw80_target_tp);
 
 		padapter->registrypriv.rtw_mcc_sta_bw80_target_tx_tp = mcc_sta_bw80_target_tp;
-
 
 	}
 

@@ -18,7 +18,6 @@
  *
  ******************************************************************************/
 
-
 #include <drv_types.h>
 #include <rtw_bt_mp.h>
 
@@ -31,7 +30,6 @@ void MPh2c_timeout_handle(void *FunctionContext)
 {
 	PADAPTER pAdapter;
 	PMPT_CONTEXT pMptCtx;
-
 
 	RTW_INFO("[MPT], MPh2c_timeout_handle\n");
 
@@ -156,8 +154,6 @@ mptbt_SendH2c(
 	return h2cStatus;
 }
 
-
-
 BT_CTRL_STATUS
 mptbt_CheckBtRspStatus(
 	PADAPTER			Adapter,
@@ -191,8 +187,6 @@ mptbt_CheckBtRspStatus(
 
 	return retStatus;
 }
-
-
 
 BT_CTRL_STATUS
 mptbt_BtFwOpCodeProcess(
@@ -249,9 +243,6 @@ mptbt_BtFwOpCodeProcess(
 
 	return retStatus;
 }
-
-
-
 
 u2Byte
 mptbt_BtReady(
@@ -459,7 +450,6 @@ mptbt_BtSetMode(
 	return paraLen;
 }
 
-
 void
 MPTBT_FwC2hBtMpCtrl(
 	PADAPTER	Adapter,
@@ -520,10 +510,7 @@ MPTBT_FwC2hBtMpCtrl(
 		break;
 	}
 
-
-
 }
-
 
 u2Byte
 mptbt_BtGetGeneral(
@@ -827,8 +814,6 @@ mptbt_BtGetGeneral(
 	return paraLen;
 }
 
-
-
 u2Byte
 mptbt_BtSetGeneral(
 	IN	PADAPTER		Adapter,
@@ -1114,8 +1099,6 @@ mptbt_BtSetGeneral(
 	return paraLen;
 }
 
-
-
 u2Byte
 mptbt_BtSetTxRxPars(
 	IN	PADAPTER		Adapter,
@@ -1314,7 +1297,6 @@ mptbt_BtSetTxRxPars(
 		return paraLen;
 	}
 
-
 	/* fill h2c parameters */
 	btOpcode = BT_LO_OP_SET_CHNL_TX_GAIN;
 	if ((pTxRxPars->txrxChannel > 78) ||
@@ -1393,8 +1375,6 @@ mptbt_BtSetTxRxPars(
 	return paraLen;
 }
 
-
-
 u2Byte
 mptbt_BtTestCtrl(
 	IN	PADAPTER		Adapter,
@@ -1459,7 +1439,6 @@ mptbt_BtTestCtrl(
 	return paraLen;
 }
 
-
 u2Byte
 mptbt_TestBT(
 	IN	PADAPTER		Adapter,
@@ -1487,7 +1466,6 @@ mptbt_TestBT(
 	/*	retStatus = mptbt_BtFwOpCodeProcess(Adapter, btOpcode, btOpcodeVer, &h2cParaBuf[0], h2cParaLen); */
 	retStatus = mptbt_BtFwOpCodeProcess(Adapter, btOpcode, btOpcodeVer, h2cParaBuf, h2cParaLen);
 
-
 	/* 3. construct respond status code and data. */
 	if (BT_STATUS_BT_OP_SUCCESS != retStatus) {
 		pBtRsp->status = ((btOpcode << 8) | retStatus);
@@ -1511,7 +1489,6 @@ mptbt_BtControlProcess(
 	PBT_REQ_CMD	pBtReq = (PBT_REQ_CMD)pInBuf;
 	PBT_RSP_CMD	pBtRsp;
 	u1Byte			i;
-
 
 	RTW_INFO("[MPT], mptbt_BtControlProcess()=========>\n");
 

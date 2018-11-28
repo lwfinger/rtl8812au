@@ -29,7 +29,6 @@ void up_clk(_adapter	*padapter,	 u16 *x)
 	rtw_write8(padapter, EE_9346CR, (u8)*x);
 	rtw_udelay_os(CLOCK_RATE);
 
-
 }
 
 void down_clk(_adapter	*padapter, u16 *x)
@@ -201,7 +200,6 @@ void eeprom_write16(_adapter *padapter, u16 reg, u16 data)
  *		return;
  *	} */
 
-
 	standby(padapter);
 
 	/* write the new word to the EEPROM */
@@ -288,11 +286,7 @@ out:
 #endif
 	return data;
 
-
 }
-
-
-
 
 /* From even offset */
 void eeprom_read_sz(_adapter *padapter, u16 reg, u8 *data, u32 sz)
@@ -319,7 +313,6 @@ void eeprom_read_sz(_adapter *padapter, u16 reg, u8 *data, u32 sz)
 	shift_out_bits(padapter, EEPROM_READ_OPCODE, 3);
 	shift_out_bits(padapter, reg, padapter->EepromAddressSize);
 
-
 	for (i = 0; i < sz; i += 2) {
 		data16 = shift_in_bits(padapter);
 		data[i] = data16 & 0xff;
@@ -330,7 +323,6 @@ void eeprom_read_sz(_adapter *padapter, u16 reg, u8 *data, u32 sz)
 out:
 	return;
 }
-
 
 /* addr_off : address offset of the entry in eeprom (not the tuple number of eeprom (reg); that is addr_off !=reg) */
 u8 eeprom_read(_adapter *padapter, u32 addr_off, u8 sz, u8 *rbuf)
@@ -364,11 +356,7 @@ u8 eeprom_read(_adapter *padapter, u32 addr_off, u8 sz, u8 *rbuf)
 	return _TRUE;
 }
 
-
-
 void read_eeprom_content(_adapter	*padapter)
 {
-
-
 
 }
