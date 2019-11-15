@@ -2046,8 +2046,7 @@ static int rtw_ap_set_key(_adapter *padapter, u8 *key, u8 alg, int keyid, u8 set
 
 	psetkeyparm->set_tx = set_tx;
 
-	switch(alg)
-	{
+	switch(alg) {
 		case _WEP40_:
 			keylen = 5;
 			break;
@@ -2057,7 +2056,6 @@ static int rtw_ap_set_key(_adapter *padapter, u8 *key, u8 alg, int keyid, u8 set
 		case _TKIP_:
 		case _TKIP_WTMIC_:
 		case _AES_:
-			keylen = 16;
 		default:
 			keylen = 16;
 	}
