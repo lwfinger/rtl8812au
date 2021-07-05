@@ -82,10 +82,10 @@ typedef enum _RT_AMPDU_BRUST_MODE{
 #define MAX_REGULATION_NUM						3
 #define MAX_RF_PATH_NUM_IN_POWER_LIMIT_TABLE	4
 #define MAX_2_4G_BANDWITH_NUM					2
-#define MAX_2_4G_RATE_SECTION_NUM				3
+#define MAX_2_4G_RATE_SECTION_NUM				6
 #define MAX_2_4G_CHANNEL_NUM						5 // adopt channel group instead of individual channel
 #define MAX_5G_BANDWITH_NUM						4
-#define MAX_5G_RATE_SECTION_NUM					4
+#define MAX_5G_RATE_SECTION_NUM					6
 #define MAX_5G_CHANNEL_NUM						14 // adopt channel group instead of individual channel
 
 #define MAX_BASE_NUM_IN_PHY_REG_PG_2_4G			4 //  CCK:1,OFDM:2, HT:2
