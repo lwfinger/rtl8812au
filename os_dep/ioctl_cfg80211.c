@@ -4694,8 +4694,7 @@ static void cfg80211_rtw_mgmt_frame_register(struct wiphy *wiphy,
 {
 	_adapter *adapter = wiphy_to_adapter(wiphy);
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 8, 0))
-	u16 frame_type = BIT(upd->global_stypes << 4);
-	bool reg = false;
+	u16 frame_type = upd->global_stypes << 4;
 #endif
 
 #ifdef CONFIG_DEBUG_CFG80211
