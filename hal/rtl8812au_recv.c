@@ -47,7 +47,7 @@ int	rtl8812au_init_recv_priv(_adapter *padapter)
 #endif
 
 	tasklet_init(&precvpriv->recv_tasklet,
-	     (void(*)(unsigned long))rtl8812au_recv_tasklet,
+	     (void *)rtl8812au_recv_tasklet,
 	     (unsigned long)padapter);
 
 #ifdef CONFIG_USB_INTERRUPT_IN_PIPE

@@ -9784,9 +9784,15 @@ static int rtw_mp_ant_tx(struct net_device *dev,
 			struct iw_point *wrqu, char *extra)
 {
 	u8 i;
-	u8		input[wrqu->length];
+	u8	*input;
 	u16 antenna = 0;
 	PADAPTER padapter = rtw_netdev_priv(dev);
+
+	if (wrqu->length > 128)
+		return -EINVAL;
+	input = kmalloc(wrqu->length, GFP_KERNEL);
+	if (!input)
+		return -ENOMEM;
 
 	if (copy_from_user(input, wrqu->pointer, wrqu->length))
 			return -EFAULT;
@@ -9815,6 +9821,7 @@ static int rtw_mp_ant_tx(struct net_device *dev,
 	Hal_SetAntenna(padapter);
 
 	wrqu->length = strlen(extra) + 1;
+	kfree(input);
 	return 0;
 }
 
