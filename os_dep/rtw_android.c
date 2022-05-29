@@ -284,7 +284,7 @@ int rtw_android_get_p2p_dev_addr(struct net_device *net, char *command, int tota
 	int bytes_written = 0;
 
 	//We use the same address as our HW MAC address
-	_rtw_memcpy(command, net->dev_addr, ETH_ALEN);
+	_rtw_memcpy(command, (void *)net->dev_addr, ETH_ALEN);
 
 	bytes_written = ETH_ALEN;
 	return bytes_written;
@@ -348,7 +348,7 @@ int rtw_android_priv_cmd(struct net_device *net, struct ifreq *ifr, int cmd)
 	}
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 0, 0))
-	if (!access_ok(priv_cmd.buf, priv_cmd.total_len)) {
+	if (!access_ok(&priv_cmd.buf, priv_cmd.total_len)) {
 #else
 	if (!access_ok(VERIFY_READ, priv_cmd.buf, priv_cmd.total_len)) {
 #endif
