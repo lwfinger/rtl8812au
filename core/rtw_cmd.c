@@ -142,6 +142,7 @@ void _rtw_free_evt_priv (struct	evt_priv *pevtpriv)
 			rtw_mfree(c2h, 16);
 		}
 	}
+	rtw_cbuf_free(pevtpriv->c2h_queue);
 #endif
 
 	RT_TRACE(_module_rtl871x_cmd_c_,_drv_info_,("-_rtw_free_evt_priv \n"));
