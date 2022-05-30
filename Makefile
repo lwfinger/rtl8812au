@@ -42,6 +42,10 @@ CONFIG_FTP_PROTECT = n
 
 CONFIG_DRVEXT_MODULE = n
 
+ifeq ("","$(wildcard MOK.der)")
+NO_SKIP_SIGN := y
+endif
+
 export TopDIR ?= $(shell pwd)
 
 ########### COMMON  #################################
@@ -265,4 +269,15 @@ clean:
 	rm -fr *.mod.c *.mod *.o .*.cmd *.ko *~
 	rm -fr .tmp_versions
 endif
+
+sign:
+ifeq ($(NO_SKIP_SIGN), y)
+	@openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=Custom MOK/"
+	@mokutil --import MOK.der
+else
+	echo "Skipping key creation"
+endif
+	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8812au.ko
+
+sign-install: all sign install
 
