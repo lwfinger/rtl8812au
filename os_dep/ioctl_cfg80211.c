@@ -1843,11 +1843,8 @@ if (padapter->registrypriv.mp_mode == 1)
 	#ifdef CONFIG_P2P
 	if( pwdinfo->driver_interface == DRIVER_CFG80211 )
 	{
-		if(ssids->ssid != NULL
-			&& _rtw_memcmp(ssids->ssid, "DIRECT-", 7)
-			&& rtw_get_p2p_ie((u8 *)request->ie, request->ie_len, NULL, NULL)
-		)
-		{
+		if(_rtw_memcmp(ssids->ssid, "DIRECT-", 7) &&
+		   rtw_get_p2p_ie((u8 *)request->ie, request->ie_len, NULL, NULL)) {
 			if(rtw_p2p_chk_state(pwdinfo, P2P_STATE_NONE))
 			{
 				rtw_p2p_enable(padapter, P2P_ROLE_DEVICE);
