@@ -60,11 +60,6 @@ int usbctrl_vendorreq(struct intf_hdl *pintfhdl, u8 request, u16 value, u16 inde
 		goto exit;
 	}
 
-	#ifdef CONFIG_USB_VENDOR_REQ_MUTEX
-	_enter_critical_mutex(&pdvobjpriv->usb_vendor_req_mutex, NULL);
-	#endif
-
-
 	// Acquire IO memory for vendorreq
 #ifdef CONFIG_USB_VENDOR_REQ_BUFFER_PREALLOC
 	pIo_buf = pdvobjpriv->usb_vendor_req_buf;
@@ -84,8 +79,7 @@ int usbctrl_vendorreq(struct intf_hdl *pintfhdl, u8 request, u16 value, u16 inde
 
 	if ( pIo_buf== NULL) {
 		DBG_8192C( "[%s] pIo_buf == NULL \n", __FUNCTION__ );
-		status = -ENOMEM;
-		goto release_mutex;
+		return -ENOMEM;
 	}
 
 	while(++vendorreq_times<= MAX_USBCTRL_VENDORREQ_TIMES)
@@ -158,14 +152,8 @@ int usbctrl_vendorreq(struct intf_hdl *pintfhdl, u8 request, u16 value, u16 inde
 	#ifdef CONFIG_USB_VENDOR_REQ_BUFFER_DYNAMIC_ALLOCATE
 	rtw_mfree(tmp_buf, tmp_buflen);
 	#endif
-
-release_mutex:
-	#ifdef CONFIG_USB_VENDOR_REQ_MUTEX
-	_exit_critical_mutex(&pdvobjpriv->usb_vendor_req_mutex, NULL);
-	#endif
 exit:
 	return status;
-
 }
 
 #ifdef CONFIG_USB_SUPPORT_ASYNC_VDN_REQ
