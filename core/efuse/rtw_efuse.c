@@ -400,41 +400,45 @@ EFUSE_Write1Byte(
 
 
 /*  11/16/2008 MH Read one byte from real Efuse. */
-u8
-efuse_OneByteRead(
-	PADAPTER	pAdapter, 
-	u16			addr,
-	u8			*data,
-	bool		bPseudoTest)
+u8 efuse_OneByteRead(PADAPTER pAdapter, u16 addr, u8 *data, bool bPseudoTest)
 {
 	u8	tmpidx = 0;
 	u8	bResult;
+	u8 tmp, readbyte;
+	static int count;
 
-	//DBG_871X("===> EFUSE_OneByteRead(), addr = %x\n", addr);
-	//DBG_871X("===> EFUSE_OneByteRead() start, 0x34 = 0x%X\n", rtw_read32(pAdapter, EFUSE_TEST));
-
-	if(bPseudoTest)
-	{
+	if (bPseudoTest) {
 		bResult = Efuse_Read1ByteFromFakeContent(pAdapter, addr, data);
 		return bResult;
 	}
 
-	// <20130227, Kordan> 8192E MP chip A-cut had better not set 0x34[11] until B-Cut.	
-/*
-	if ( IS_HARDWARE_TYPE_8723B(pAdapter))
-	{
-		// <20130121, Kordan> For SMIC EFUSE specificatoin.
-		//0x34[11]: SW force PGMEN input of efuse to high. (for the bank selected by 0x34[9:8])	
-		//PHY_SetMacReg(pAdapter, 0x34, BIT11, 0);
-		rtw_write16(pAdapter, 0x34, rtw_read16(pAdapter,0x34)& (~BIT11) ); 
-	}
-*/
 	// -----------------e-fuse reg ctrl ---------------------------------
 	//address			
-	rtw_write8(pAdapter, EFUSE_CTRL+1, (u8)(addr&0xff));		
-	rtw_write8(pAdapter, EFUSE_CTRL+2, ((u8)((addr>>8) &0x03) ) |
-	(rtw_read8(pAdapter, EFUSE_CTRL+2)&0xFC ));	
+	if (!count++) {
+		tmp =  (u8)(addr & 0xff);
+		rtw_write8(pAdapter, EFUSE_CTRL + 1, tmp);
+		pr_info("*************** wrote 0x%x to EFUSE_CTRL + 1\n", tmp);
+		tmp = (u8)((addr >> 8) & 0x03) | (rtw_read8(pAdapter, EFUSE_CTRL + 2) & 0xFC);
+		rtw_write8(pAdapter, EFUSE_CTRL + 2, tmp);
+		pr_info("*************** wrote 0x%x to EFUSE_CTRL + 2\n", tmp);
 
+		readbyte = rtw_read8(pAdapter, EFUSE_CTRL + 3);
+		tmp = readbyte & 0x7f;
+
+		rtw_write8(pAdapter, EFUSE_CTRL + 3, tmp);
+		pr_info("*************** wrote 0x%x to EFUSE_CTRL + 3, readbyte 0x%x\n", tmp, readbyte);
+		dump_stack();
+	} else {
+		tmp =  (u8)(addr & 0xff);
+		rtw_write8(pAdapter, EFUSE_CTRL + 1, tmp);
+		tmp = (u8)((addr >> 8) & 0x03) | (rtw_read8(pAdapter, EFUSE_CTRL + 2) & 0xFC);
+		rtw_write8(pAdapter, EFUSE_CTRL + 2, tmp);
+
+		readbyte = rtw_read8(pAdapter, EFUSE_CTRL + 3);
+		tmp = readbyte & 0x7f;
+
+		rtw_write8(pAdapter, EFUSE_CTRL + 3, tmp);
+	}
 	rtw_write8(pAdapter, EFUSE_CTRL+3,  0x72);//read cmd	
 
 	while(!(0x80 &rtw_read8(pAdapter, EFUSE_CTRL+3))&&(tmpidx<1000))
